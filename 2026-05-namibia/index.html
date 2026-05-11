@@ -1088,6 +1088,51 @@
             margin-top: 40px;
         }
 
+        /* WEATHER WIDGET */
+        .section-weather {
+            background-color: rgba(20, 45, 70, 0.2);
+        }
+
+        body.light-mode .section-weather {
+            background-color: rgba(74, 138, 181, 0.08);
+        }
+
+        .weather-sun-row {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .weather-chart-container { width: 100%; }
+
+        .weather-loading, .weather-error {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 12px;
+            padding: 16px 0;
+        }
+
+        .weather-chart-container svg .wx-temp { fill: var(--text-primary); }
+        .weather-chart-container svg .wx-time  { fill: var(--text-secondary); }
+
+        .weather-refresh {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 14px;
+            cursor: pointer;
+            margin-left: auto;
+            padding: 2px 6px;
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .weather-refresh:hover { color: var(--accent-gold); }
+
         /* MOBILE */
         @media (max-width: 640px) {
             .container {
@@ -2062,6 +2107,7 @@
                 .map(day => `<div class="day-view" id="day${day.dayNumber}">${renderDayContent(day)}</div>`)
                 .join("");
             attachCollapsibleHandlers();
+            TRIP_DATA.days.forEach(day => loadWeatherWidget(day.dayNumber));
         }
 
         function attachCollapsibleHandlers() {
@@ -2187,6 +2233,20 @@
                     </div>
                 `;
             }
+
+            html += `
+                <div class="collapsible-section">
+                    <div class="section-header">
+                        <h3>🌤 Weather</h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content section-weather">
+                        <div id="wx-${day.dayNumber}" style="padding: 12px 16px;">
+                            <div class="weather-loading">Loading forecast…</div>
+                        </div>
+                    </div>
+                </div>
+            `;
 
             return html;
         }
@@ -2390,6 +2450,134 @@
             setSelectedRestaurant(dayNum, mealType, restaurantName);
             renderDayViews();
             switchView(`day${dayNum}`);
+        }
+
+        // ============================================================
+        // WEATHER — Open-Meteo (free, no API key required)
+        // Coordinates per day: where the group sleeps / main location
+        // ============================================================
+
+        const DAY_WEATHER = {
+            1:  { lat:  9.0247, lon: 38.7468, isoDate: "2026-05-16" }, // Addis Ababa
+            2:  { lat:  9.0247, lon: 38.7468, isoDate: "2026-05-17" }, // Addis Ababa
+            3:  { lat: -24.5167, lon: 15.7500, isoDate: "2026-05-18" }, // Sesriem/Sossusvlei
+            4:  { lat: -24.7591, lon: 15.3297, isoDate: "2026-05-19" }, // Dead Vlei
+            5:  { lat: -22.6827, lon: 14.5268, isoDate: "2026-05-20" }, // Swakopmund
+            6:  { lat: -22.6827, lon: 14.5268, isoDate: "2026-05-21" }, // Swakopmund
+            7:  { lat: -22.6827, lon: 14.5268, isoDate: "2026-05-22" }, // Swakopmund
+            8:  { lat: -22.6827, lon: 14.5268, isoDate: "2026-05-23" }, // Swakopmund
+            9:  { lat: -20.5960, lon: 14.3743, isoDate: "2026-05-24" }, // Twyfelfontein/Damaraland
+            10: { lat: -19.6819, lon: 13.8919, isoDate: "2026-05-25" }, // Grootberg
+            11: { lat: -19.7804, lon: 15.9104, isoDate: "2026-05-26" }, // Etosha South
+            12: { lat: -18.8667, lon: 16.4833, isoDate: "2026-05-27" }, // Etosha Central
+            13: { lat: -18.7958, lon: 17.0047, isoDate: "2026-05-28" }, // Etosha East/Mokuti
+            14: { lat: -22.5608, lon: 17.0658, isoDate: "2026-05-29" }, // Windhoek
+            15: { lat: -22.5608, lon: 17.0658, isoDate: "2026-05-30" }, // Windhoek
+            16: { lat:  9.0247, lon: 38.7468, isoDate: "2026-05-31" }, // Addis Ababa
+        };
+
+        const WX_CACHE_TTL = 3 * 60 * 60 * 1000; // 3 hours
+
+        async function fetchWeather(dayNumber) {
+            const info = DAY_WEATHER[dayNumber];
+            if (!info) return null;
+            const cacheKey = `wx_${info.isoDate}_${info.lat}`;
+            try {
+                const cached = localStorage.getItem(cacheKey);
+                if (cached) {
+                    const { d, ts } = JSON.parse(cached);
+                    if (Date.now() - ts < WX_CACHE_TTL) return d;
+                }
+            } catch(e) {}
+            try {
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${info.lat}&longitude=${info.lon}&hourly=temperature_2m&daily=sunrise,sunset&timezone=auto&forecast_days=16&start_date=${info.isoDate}&end_date=${info.isoDate}`;
+                const resp = await fetch(url);
+                if (!resp.ok) return null;
+                const json = await resp.json();
+                const times = json.hourly?.time || [];
+                const temps = json.hourly?.temperature_2m || [];
+                const getT = h => {
+                    const idx = times.indexOf(`${info.isoDate}T${String(h).padStart(2,'0')}:00`);
+                    return idx !== -1 ? temps[idx] : null;
+                };
+                const d = {
+                    sunrise: (json.daily?.sunrise?.[0] || '').split('T')[1] || null,
+                    sunset:  (json.daily?.sunset?.[0]  || '').split('T')[1] || null,
+                    t8: getT(8), t13: getT(13), t20: getT(20),
+                };
+                try { localStorage.setItem(cacheKey, JSON.stringify({ d, ts: Date.now() })); } catch(e) {}
+                return d;
+            } catch(e) { return null; }
+        }
+
+        function weatherChartSVG(t8, t13, t20, dayNum) {
+            const vals = [t8, t13, t20];
+            const labs = ['8 AM', '1 PM', '8 PM'];
+            const W = 300, pL = 16, pR = 16, pT = 28, pB = 22, cH = 50;
+            const tH = pT + cH + pB, cW = W - pL - pR;
+            const minV = Math.min(...vals) - 2, maxV = Math.max(...vals) + 2;
+            const toY = v => pT + cH - ((v - minV) / (maxV - minV)) * cH;
+            const xs = [pL, pL + cW / 2, pL + cW];
+            const pts = vals.map((v, i) => ({ x: xs[i], y: toY(v) }));
+            // Catmull-Rom spline → cubic bezier (passes exactly through all 3 points)
+            const ext = [
+                { x: 2*pts[0].x - pts[1].x, y: 2*pts[0].y - pts[1].y },
+                ...pts,
+                { x: 2*pts[2].x - pts[1].x, y: 2*pts[2].y - pts[1].y }
+            ];
+            let curve = `M ${pts[0].x},${pts[0].y.toFixed(1)}`;
+            for (let i = 1; i < 3; i++) {
+                const [p0, p1, p2, p3] = [ext[i-1], ext[i], ext[i+1], ext[i+2]];
+                const cp1 = { x: p1.x + (p2.x-p0.x)/6, y: p1.y + (p2.y-p0.y)/6 };
+                const cp2 = { x: p2.x - (p3.x-p1.x)/6, y: p2.y - (p3.y-p1.y)/6 };
+                curve += ` C ${cp1.x.toFixed(1)},${cp1.y.toFixed(1)} ${cp2.x.toFixed(1)},${cp2.y.toFixed(1)} ${p2.x},${p2.y.toFixed(1)}`;
+            }
+            const fillPath = `${curve} L ${pts[2].x},${pT+cH} L ${pts[0].x},${pT+cH} Z`;
+            const gid = `wxg${dayNum}`;
+            return `<svg width="100%" viewBox="0 0 ${W} ${tH}" style="display:block;overflow:visible;">
+                <defs><linearGradient id="${gid}" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#C9966A" stop-opacity="0.3"/>
+                    <stop offset="100%" stop-color="#C9966A" stop-opacity="0.03"/>
+                </linearGradient></defs>
+                <path d="${fillPath}" fill="url(#${gid})"/>
+                <path d="${curve}" fill="none" stroke="#C9966A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                ${pts.map((p, i) => `
+                    <circle cx="${p.x}" cy="${p.y.toFixed(1)}" r="4" fill="#C9966A" stroke="var(--bg-secondary)" stroke-width="1.5"/>
+                    <text class="wx-temp" x="${p.x}" y="${(p.y-10).toFixed(1)}" text-anchor="middle" font-size="11" font-weight="600" font-family="DM Sans,sans-serif">${Math.round(vals[i])}°C</text>
+                    <text class="wx-time" x="${p.x}" y="${pT+cH+16}" text-anchor="middle" font-size="10" font-family="DM Sans,sans-serif">${labs[i]}</text>
+                `).join('')}
+            </svg>`;
+        }
+
+        async function loadWeatherWidget(dayNumber) {
+            const el = document.getElementById(`wx-${dayNumber}`);
+            if (!el) return;
+            const data = await fetchWeather(dayNumber);
+            if (!data || (data.t8 === null && data.t13 === null && data.t20 === null)) {
+                el.innerHTML = `<div class="weather-error">Forecast not yet available for this date</div>`;
+                return;
+            }
+            const now = new Date();
+            const updated = `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
+            const chart = (data.t8 !== null && data.t13 !== null && data.t20 !== null)
+                ? weatherChartSVG(data.t8, data.t13, data.t20, dayNumber) : '';
+            el.innerHTML = `
+                <div class="weather-sun-row">
+                    ${data.sunrise ? `<span>☀️ ${data.sunrise}</span>` : ''}
+                    ${data.sunset  ? `<span>🌅 ${data.sunset}</span>`  : ''}
+                    <button class="weather-refresh" title="Refresh forecast" onclick="refreshWeather(${dayNumber})">↻</button>
+                    <span style="font-size:10px;color:var(--text-muted);">as of ${updated}</span>
+                </div>
+                <div class="weather-chart-container">${chart}</div>
+            `;
+        }
+
+        function refreshWeather(dayNumber) {
+            const info = DAY_WEATHER[dayNumber];
+            if (info) { try { localStorage.removeItem(`wx_${info.isoDate}_${info.lat}`); } catch(e) {} }
+            const el = document.getElementById(`wx-${dayNumber}`);
+            if (el) el.innerHTML = `<div class="weather-loading">Refreshing…</div>`;
+            loadWeatherWidget(dayNumber);
         }
 
         initializePage();
