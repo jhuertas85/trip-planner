@@ -2490,7 +2490,7 @@
                 }
             } catch(e) {}
             try {
-                const url = `https://api.open-meteo.com/v1/forecast?latitude=${info.lat}&longitude=${info.lon}&hourly=temperature_2m&daily=sunrise,sunset&timezone=auto&forecast_days=16&start_date=${info.isoDate}&end_date=${info.isoDate}`;
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${info.lat}&longitude=${info.lon}&hourly=temperature_2m&daily=sunrise,sunset&timezone=auto&start_date=${info.isoDate}&end_date=${info.isoDate}`;
                 const resp = await fetch(url);
                 if (!resp.ok) return null;
                 const json = await resp.json();
