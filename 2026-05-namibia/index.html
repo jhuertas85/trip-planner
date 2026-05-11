@@ -1,0 +1,2379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namibia 2026 - Group Trip Itinerary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0D0B08;
+            --bg-secondary: #211C16;
+            --bg-tertiary: #2a241a;
+            --border-color: #352D22;
+            --text-primary: #EDE4D3;
+            --text-secondary: #7A6E5E;
+            --text-muted: #8A7E6E;
+            --accent-gold: #C9966A;
+            --accent-terracotta: #C4511A;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.6;
+        }
+
+        body.light-mode {
+            --bg-primary: #F5F0E8;
+            --bg-secondary: #FFFFFF;
+            --bg-tertiary: #F9F5F0;
+            --border-color: #E0D5C5;
+            --text-primary: #2A2318;
+            --text-secondary: #8A7E6E;
+            --text-muted: #8A7E6E;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            border-bottom: 2px solid var(--border-color);
+            padding: 16px 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+            background-color: rgba(33, 28, 22, 0.95);
+            transition: var(--transition);
+        }
+
+        body.light-mode header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .header-content {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            flex: 1;
+            text-align: center;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            border-radius: 4px;
+        }
+
+        .theme-toggle:hover {
+            color: var(--accent-gold);
+            transform: scale(1.1);
+        }
+
+        .day-tabs {
+            display: flex;
+            overflow-x: auto;
+            gap: 8px;
+            padding-bottom: 8px;
+            scroll-behavior: smooth;
+            margin-top: 12px;
+        }
+
+        .day-tabs::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .day-tabs::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+
+        .day-tabs::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+            border-radius: 2px;
+        }
+
+        .day-tab {
+            padding: 8px 12px;
+            background-color: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .day-tab:hover {
+            border-color: var(--text-secondary);
+            color: var(--accent-gold);
+        }
+
+        .day-tab.active {
+            background-color: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: var(--bg-primary);
+            font-weight: 600;
+        }
+
+        .day-tab.has-missing {
+            border-color: #8A3A3A;
+        }
+
+        /* MAIN CONTENT */
+        main {
+            padding: 24px 0;
+        }
+
+        .day-view {
+            display: none;
+            animation: fadeIn 0.4s ease-in;
+        }
+
+        .day-view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 32px 20px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-day-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            opacity: 0.6;
+            position: absolute;
+            top: 16px;
+            left: 20px;
+            z-index: 2;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9), 0 0 50px rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 4px 12px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .hero-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-location {
+            font-size: 16px;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-location::before {
+            content: '📍';
+        }
+
+        /* CARDS */
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: var(--transition);
+        }
+
+        body.light-mode .card {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .card:hover {
+            border-color: var(--accent-gold);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        /* SECTION COLLAPSIBLE */
+        .collapsible-section {
+            margin-bottom: 16px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 12px 16px;
+            background-color: var(--bg-tertiary);
+            border-radius: 6px 6px 0 0;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+
+        .section-header:hover {
+            background-color: rgba(201, 150, 106, 0.1);
+        }
+
+        .section-header h3 {
+            flex: 1;
+            font-size: 16px;
+            color: var(--accent-gold);
+            margin: 0;
+        }
+
+        .chevron {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .chevron::after {
+            content: '▼';
+            font-size: 12px;
+            color: var(--accent-gold);
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .section-header.collapsed .chevron::after {
+            transform: rotate(-90deg);
+        }
+
+        .section-content {
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 1;
+            padding: 0;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .section-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+            padding: 0;
+        }
+
+        .section-content > div {
+            padding: 16px;
+        }
+
+        .section-flight {
+            background-color: rgba(30, 60, 100, 0.25);
+            border-left: 3px solid #4A8AB5;
+        }
+
+        .section-flight .section-header {
+            border-left: 3px solid #4A8AB5;
+        }
+
+        .section-hotel {
+            background-color: rgba(80, 55, 30, 0.25);
+            border-left: 3px solid #8B6D45;
+        }
+
+        .section-hotel .section-header {
+            border-left: 3px solid #8B6D45;
+        }
+
+        .section-activities {
+            background-color: rgba(60, 75, 40, 0.2);
+            border-left: 3px solid #7A8A50;
+        }
+
+        .section-activities .section-header {
+            border-left: 3px solid #7A8A50;
+        }
+
+        .section-meals {
+            background-color: rgba(55, 65, 45, 0.25);
+            border-left: 3px solid #7A8550;
+        }
+
+        .section-meals .section-header {
+            border-left: 3px solid #7A8550;
+        }
+
+        .section-warnings {
+            background-color: rgba(100, 35, 35, 0.2);
+            border-left: 3px solid #AA4444;
+        }
+
+        .section-warnings .section-header {
+            border-left: 3px solid #AA4444;
+        }
+
+        .section-gems {
+            background-color: rgba(100, 80, 30, 0.2);
+            border-left: 3px solid #B89030;
+        }
+
+        .section-gems .section-header {
+            border-left: 3px solid #B89030;
+        }
+
+        body.light-mode .section-flight {
+            background-color: rgba(74, 138, 181, 0.15);
+        }
+
+        body.light-mode .section-hotel {
+            background-color: rgba(139, 109, 69, 0.15);
+        }
+
+        body.light-mode .section-activities {
+            background-color: rgba(122, 138, 80, 0.12);
+        }
+
+        body.light-mode .section-meals {
+            background-color: rgba(122, 133, 80, 0.15);
+        }
+
+        body.light-mode .section-warnings {
+            background-color: rgba(170, 68, 68, 0.12);
+        }
+
+        body.light-mode .section-gems {
+            background-color: rgba(184, 144, 48, 0.12);
+        }
+
+        .expand-all-container {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .btn-expand-all, .btn-collapse-all {
+            flex: 1;
+            padding: 6px 10px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-expand-all:hover, .btn-collapse-all:hover {
+            background-color: rgba(201, 150, 106, 0.1);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        /* BADGES */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            transition: var(--transition);
+        }
+
+        .badge.ready {
+            background-color: #4A8050;
+            color: #8DC87E;
+        }
+
+        .badge.missing {
+            background-color: #8A3A3A;
+            color: #FF6B6B;
+        }
+
+        .badge.need-booking {
+            background-color: #9A7A30;
+            color: #E8C66E;
+        }
+
+        .badge.confirmed {
+            background-color: #4A8050;
+            color: #8DC87E;
+        }
+
+        .badge.pending {
+            background-color: #9A7A30;
+            color: #E8C66E;
+        }
+
+        .badge.to-book {
+            background-color: #C4511A;
+            color: #FFB366;
+        }
+
+        .badge.included {
+            background-color: #3A6878;
+            color: #7FBFD4;
+        }
+
+        .badge.options {
+            background-color: #4a4440;
+            color: #9A8E7E;
+        }
+
+        /* DRIVE BANNER */
+        .drive-banner {
+            background-color: var(--bg-tertiary);
+            border-left: 4px solid var(--accent-gold);
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .drive-banner::before {
+            content: '🚗';
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .drive-info {
+            flex: 1;
+        }
+
+        .drive-route {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .drive-duration {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* FLIGHT BANNER */
+        .flight-banner {
+            background-color: var(--bg-tertiary);
+            border-left: 4px solid #3A7DA0;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .flight-banner::before {
+            content: '✈️';
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .flight-info {
+            flex: 1;
+        }
+
+        .flight-route {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .flight-details {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid var(--border-color);
+        }
+
+        .timeline-item {
+            padding-bottom: 16px;
+            padding-left: 20px;
+            margin-left: -20px;
+        }
+
+        .timeline-time-group-header {
+            font-weight: 600;
+            color: var(--accent-gold);
+            font-size: 15px;
+            margin-bottom: 8px;
+            margin-top: 12px;
+            margin-left: -20px;
+            padding-left: 20px;
+        }
+
+        .timeline-item-bullet {
+            padding-bottom: 8px;
+            margin-left: -20px;
+            padding-left: 20px;
+        }
+
+        .timeline-item-bullet::before {
+            content: '•';
+            margin-right: 8px;
+            color: var(--accent-gold);
+        }
+
+        .timeline-time {
+            font-weight: 600;
+            color: var(--accent-gold);
+            font-size: 14px;
+        }
+
+        .timeline-text {
+            color: var(--text-primary);
+            margin-top: 4px;
+            font-size: 14px;
+        }
+
+        .timeline-note {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .timeline-tag {
+            display: inline-block;
+            background-color: #8A3A3A;
+            color: #FF9999;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        /* MEALS SECTION */
+        .meals-section {
+            margin-bottom: 24px;
+            padding: 0;
+        }
+
+        .meal-type {
+            font-weight: 600;
+            color: var(--accent-gold);
+            font-size: 15px;
+            margin-bottom: 8px;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meal-type::before {
+            content: '•';
+        }
+
+        .meal-type:first-child {
+            margin-top: 0;
+        }
+
+        .meal-note {
+            font-size: 14px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            padding-left: 16px;
+        }
+
+        .restaurant-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+            margin-bottom: 12px;
+            padding-left: 16px;
+        }
+
+        .restaurant-card {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .restaurant-card:hover {
+            border-color: var(--text-secondary);
+            background-color: rgba(201, 150, 106, 0.05);
+        }
+
+        .restaurant-card.selected {
+            background-color: #4A8050;
+            border-color: #7FB06F;
+        }
+
+        .restaurant-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .restaurant-card.selected .restaurant-name {
+            color: #8DC87E;
+        }
+
+        .restaurant-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .restaurant-card.selected .restaurant-desc {
+            color: #B8D5AF;
+        }
+
+        .restaurant-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        .restaurant-rating {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .restaurant-buttons {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .btn-select, .btn-maps {
+            flex: 1;
+            padding: 6px 8px;
+            border: 1px solid var(--border-color);
+            background-color: transparent;
+            color: var(--accent-gold);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-select {
+            background-color: var(--bg-tertiary);
+        }
+
+        .btn-select:hover {
+            background-color: rgba(201, 150, 106, 0.1);
+            border-color: var(--text-secondary);
+        }
+
+        .restaurant-card.selected .btn-select {
+            background-color: #7FB06F;
+            color: var(--bg-primary);
+            border-color: #7FB06F;
+        }
+
+        .btn-maps:hover {
+            border-color: var(--text-secondary);
+            color: #E8C66E;
+        }
+
+        /* WARNINGS & GEMS */
+        .warnings-title, .gems-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+            margin-top: 12px;
+        }
+
+        .warning {
+            background-color: #3a2020;
+            border: 1px solid #6a3a3a;
+            border-left: 4px solid #8A3A3A;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #FFB3B3;
+        }
+
+        .gem {
+            background-color: #3a3020;
+            border: 1px solid #6a5a3a;
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #E8C66E;
+        }
+
+        /* HOTEL INFO */
+        .hotel-info {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 14px;
+            margin-bottom: 8px;
+            transition: var(--transition);
+        }
+
+        .hotel-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+
+        .hotel-note {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .hotel-status-badges {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .hotel-meta {
+            display: flex;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .hotel-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn-maps {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        /* NO HOTEL CARD */
+        .no-hotel-card {
+            background-color: rgba(201, 150, 106, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        /* ACCOMMODATION TABLE */
+        .accommodation-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .accommodation-table th {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+
+        .accommodation-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            color: var(--text-primary);
+        }
+
+        .accommodation-table tr:nth-child(even) {
+            background-color: rgba(50, 40, 30, 0.3);
+        }
+
+        body.light-mode .accommodation-table tr:nth-child(even) {
+            background-color: rgba(201, 150, 106, 0.03);
+        }
+
+        /* FLIGHTS SECTION */
+        .flights-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+
+        .flights-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .flights-scroll::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+
+        .flights-scroll::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+        }
+
+        .flight-card {
+            flex-shrink: 0;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+            min-width: 240px;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .flight-card:hover {
+            border-color: #3A7DA0;
+        }
+
+        .flight-day {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .flight-route {
+            font-weight: 600;
+            color: #3A7DA0;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .flight-times {
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .flight-terminal {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .flight-checkin {
+            margin-top: 8px;
+        }
+
+        .flight-checkin a {
+            display: inline-block;
+            padding: 6px 10px;
+            background-color: #3A7DA0;
+            color: var(--text-primary);
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .flight-checkin a:hover {
+            background-color: #4a9dc0;
+        }
+
+        /* TRAVELERS & CAR RENTAL */
+        .travelers-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .traveler-chip {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-size: 13px;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .traveler-chip:hover {
+            border-color: var(--accent-gold);
+            background-color: rgba(201, 150, 106, 0.05);
+        }
+
+        .car-rental-info {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* SPOTIFY LINK IN OVERVIEW */
+        .spotify-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #1DB954;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .spotify-link:hover {
+            background-color: #1ed760;
+            transform: scale(1.05);
+        }
+
+        .spotify-icon {
+            font-size: 16px;
+        }
+
+        .overview-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .tricount-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #4A90D9;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .tricount-link:hover {
+            background-color: #5DA0E9;
+            transform: scale(1.05);
+        }
+
+        .accommodation-table tr[data-day] {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .accommodation-table tr[data-day]:hover {
+            background-color: rgba(201, 150, 106, 0.15) !important;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 32px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 12px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        /* MOBILE */
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 12px;
+            }
+
+            .hero {
+                padding: 24px 16px;
+            }
+
+            .hero-title {
+                font-size: 26px;
+            }
+
+            .card {
+                padding: 16px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .header-title {
+                font-size: 24px;
+            }
+
+            .day-tab {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // ============================================================
+        // TRIP_DATA - ALL TRIP INFORMATION IN ONE OBJECT
+        // ============================================================
+        const TRIP_DATA = {
+            title: "Namibia 2026",
+            travelers: ["Juan Carlos", "Maria", "Ada", "Felix"],
+            carRental: {
+                company: "Namibia2Go powered by Gondwana Collection Namibia",
+                phone: "+264 61 427 271",
+                website: "namibia2go.com"
+            },
+            spotifyPlaylist: "https://open.spotify.com/playlist/1XtR7v67SZOgz1DzVsDOAx",
+            flights: [
+                {
+                    date: "May 16",
+                    dayOfWeek: "Sat",
+                    airline: "ET 601",
+                    from: "DXB",
+                    to: "ADD",
+                    departTime: "04:25",
+                    arriveTime: "07:40",
+                    terminal: "Terminal DXB T1",
+                    passengers: ["Juan Carlos", "Maria", "Ada", "Felix"]
+                },
+                {
+                    date: "May 18",
+                    dayOfWeek: "Mon",
+                    airline: "ET 835",
+                    from: "ADD",
+                    to: "WDH",
+                    departTime: "08:35",
+                    arriveTime: "13:20",
+                    terminal: "Terminal ADD T2",
+                    passengers: ["Juan Carlos", "Maria", "Ada", "Felix"]
+                },
+                {
+                    date: "May 30",
+                    dayOfWeek: "Sat",
+                    airline: "ET 834",
+                    from: "WDH",
+                    to: "ADD",
+                    departTime: "14:30",
+                    arriveTime: "21:20",
+                    terminal: "N/A",
+                    passengers: ["Juan Carlos", "Maria", "Ada", "Felix"]
+                },
+                {
+                    date: "May 31",
+                    dayOfWeek: "Sun",
+                    airline: "ET 602",
+                    from: "ADD",
+                    to: "DXB",
+                    departTime: "10:30",
+                    arriveTime: "15:45",
+                    terminal: "Terminal ADD T2",
+                    passengers: ["Juan Carlos", "Maria", "Ada", "Felix"]
+                }
+            ],
+            days: [
+                {
+                    dayNumber: 1,
+                    date: "May 16",
+                    dayOfWeek: "Sat",
+                    title: "Departure",
+                    location: "Dubai / Addis Ababa",
+                    backgroundImage: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800",
+                    flight: {
+                        date: "May 16",
+                        dayOfWeek: "Sat",
+                        airline: "ET 601",
+                        from: "DXB",
+                        to: "ADD",
+                        departTime: "04:25",
+                        arriveTime: "07:40",
+                        terminal: "Terminal DXB T1"
+                    },
+                    hotel: {
+                        name: "Addis Ababa",
+                        status: "missing",
+                        note: "2-night stopover not specified — confirm hotel ASAP",
+                        bookedBy: null,
+                        mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "04:25", text: "ET 601 departs DXB Terminal 1", subNote: "✈️", needsBooking: false },
+                        { time: "07:40", text: "Arrive Addis Ababa (ADD)", subNote: "layover begins (~48hrs before Namibia leg)", needsBooking: false },
+                        { time: "Day", text: "Explore Addis or rest", subNote: "", needsBooking: false },
+                        { time: "Evening", text: "Early night", subNote: "08:35 flight Monday from Terminal 2", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "in-flight / On ET 601", restaurants: [] },
+                        lunch: { status: "missing", note: "", restaurants: [
+                            { name: "Kategna", desc: "Ethiopian · Injera tibs honey wine", rating: "4.7★", mapsUrl: "maps.google.com/?q=Kategna+Addis+Ababa" },
+                            { name: "Lucy Restaurant", desc: "Ethiopian · Near National Museum", rating: "4.5★", mapsUrl: "maps.google.com/?q=Lucy+Restaurant+Addis+Ababa" }
+                        ] },
+                        dinner: { status: "missing", note: "", restaurants: [
+                            { name: "Yod Abyssinia", desc: "Cultural dinner + live music & dance — the best in Addis", rating: "4.5★", mapsUrl: "maps.google.com/?q=Yod+Abyssinia+Addis+Ababa" }
+                        ] }
+                    },
+                    route: null,
+                    warnings: ["⚠️ Addis hotel NOT booked — action required before May 16"],
+                    gems: []
+                },
+                {
+                    dayNumber: 2,
+                    date: "May 17",
+                    dayOfWeek: "Sun",
+                    title: "Addis Ababa",
+                    location: "Layover Day · Ethiopia",
+                    backgroundImage: "https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Addis Ababa",
+                        status: "missing",
+                        note: "2-night stopover not specified",
+                        bookedBy: null,
+                        mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "National Museum of Ethiopia", subNote: "see Lucy the 3.2M-year-old fossil (~2hr)", needsBooking: false },
+                        { time: "Afternoon", text: "Merkato", subNote: "largest open-air market in Africa (go with hotel guide recommended)", needsBooking: false },
+                        { time: "Evening", text: "Cultural dinner + early night", subNote: "08:35 flight tomorrow from ADD Terminal 2", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "hotel or nearby café", restaurants: [] },
+                        lunch: { status: "missing", note: "", restaurants: [
+                            { name: "Habesha 2000", desc: "Traditional Ethiopian + cultural music show", rating: "4.6★", mapsUrl: "maps.google.com/?q=Habesha+2000+Addis+Ababa" }
+                        ] },
+                        dinner: { status: "missing", note: "", restaurants: [
+                            { name: "Yod Abyssinia", desc: "Best cultural dining in Addis · Book ahead!", rating: "4.5★", mapsUrl: "maps.google.com/?q=Yod+Abyssinia+Addis+Ababa" }
+                        ] }
+                    },
+                    route: null,
+                    warnings: ["⏰ ALARM SET — ET 835 departs 08:35 from ADD Terminal 2"],
+                    gems: ["Book Yod Abyssinia in advance — popular and worth it for the full cultural experience"]
+                },
+                {
+                    dayNumber: 3,
+                    date: "May 18",
+                    dayOfWeek: "Mon",
+                    title: "Arrival",
+                    location: "Land in Namibia · Drive to the Dunes",
+                    backgroundImage: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800",
+                    flight: {
+                        date: "May 18",
+                        dayOfWeek: "Mon",
+                        airline: "ET 835",
+                        from: "ADD",
+                        to: "WDH",
+                        departTime: "08:35",
+                        arriveTime: "13:20",
+                        terminal: "Terminal ADD T2"
+                    },
+                    hotel: {
+                        name: "Sossusvlei Lodge",
+                        status: "confirmed",
+                        note: "Dinner & breakfast included. Booked by Ada (ENBD).",
+                        bookedBy: "Ada",
+                        mapsUrl: "maps.app.goo.gl/MTJY5zCFzGJcEsc88"
+                    },
+                    drive: {
+                        from: "WDH Airport",
+                        to: "Sesriem",
+                        duration: "~4h 40min",
+                        distance: "~350 km"
+                    },
+                    activities: [
+                        { time: "08:35", text: "ET 835 departs ADD Terminal 2", subNote: "✈️", needsBooking: false },
+                        { time: "13:20", text: "Land at Hosea Kutako Airport (WDH)", subNote: "Collect Namibia2Go rental car", needsBooking: false },
+                        { time: "~14:00", text: "McGregor's Bakery", subNote: "Africa's best apple pie! (~30 min · roughly en route)", needsBooking: false },
+                        { time: "~18:00", text: "Arrive Sesriem", subNote: "Check in to Sossusvlei Lodge", needsBooking: false },
+                        { time: "Evening", text: "Dinner at lodge (included)", subNote: "Namibian night sky", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "in-flight / On ET 835", restaurants: [] },
+                        lunch: { status: "flexible", note: "en-route / McGregor's Bakery stop or WDH airport snacks", restaurants: [] },
+                        dinner: { status: "included", note: "Included at Sossusvlei Lodge", restaurants: [] }
+                    },
+                    route: "maps.google.com/maps/dir/Windhoek+Airport+Namibia/Sesriem+Namibia",
+                    warnings: [
+                        "⛽ Fill up in Windhoek — limited petrol stations en route",
+                        "Don't skip McGregor's Bakery — it's legendary and on the route"
+                    ],
+                    gems: ["🌌 Sossusvlei has some of Africa's darkest skies — ask lodge about stargazing"]
+                },
+                {
+                    dayNumber: 4,
+                    date: "May 19",
+                    dayOfWeek: "Tue",
+                    title: "Sossusvlei",
+                    location: "Big Daddy · Dead Vlei · Sesriem Canyon",
+                    backgroundImage: "https://images.unsplash.com/photo-1503755450-28d4fdd8177d?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Elegant Desert Lodge",
+                        status: "confirmed",
+                        note: "Booked by Maria.",
+                        bookedBy: "Maria",
+                        mapsUrl: "maps.app.goo.gl/NreYT7qNK1jwf17M9"
+                    },
+                    drive: {
+                        from: "Sesriem Gate",
+                        to: "Dead Vlei car park",
+                        duration: "~45 min",
+                        distance: "Deflate tyres to 22 psi!"
+                    },
+                    activities: [
+                        { time: "Sunrise", text: "Sesriem Gate opens at sunrise", subNote: "be there early! (Drive 45 min to 2WD car park)", needsBooking: false },
+                        { time: "Early AM", text: "Big Daddy Dune", subNote: "1hr up & down. Bring loads of water!", needsBooking: false },
+                        { time: "Morning", text: "Dead Vlei", subNote: "white clay pan with 900-year-old dead trees (THE iconic Namibia shot)", needsBooking: false },
+                        { time: "Late AM", text: "Sossusvlei", subNote: "red dune valley + photography", needsBooking: false },
+                        { time: "Afternoon", text: "Sesriem Canyon", subNote: "30m gorge, 30 min visit near the gate", needsBooking: false },
+                        { time: "Sunset", text: "Elim Dune", subNote: "easy walk, incredible amber light", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "Eat before sunrise departure — ask lodge for packed breakfast", restaurants: [] },
+                        lunch: { status: "pending", note: "Pack a picnic from the lodge — very limited in the park", restaurants: [] },
+                        dinner: { status: "included", note: "Included at Elegant Desert Lodge", restaurants: [] }
+                    },
+                    route: "maps.google.com/?q=Sossusvlei+Namibia",
+                    warnings: [
+                        "⚠️ Deflate tyres to 22 psi for sand road to Dead Vlei — re-inflate at car park compressor",
+                        "🌡️ Extremely hot after 10 AM — complete Big Daddy before heat peaks",
+                        "🚌 Alt: Shuttle from Sesriem gate (no booking, first come first served, sunrise–sunset)"
+                    ],
+                    gems: [
+                        "Hidden Vlei — quieter than Dead Vlei, 45-min walk from car park",
+                        "Prep video: youtu.be/rG9OQ0UILVU (tyre deflation + what to expect)"
+                    ]
+                },
+                {
+                    dayNumber: 5,
+                    date: "May 20",
+                    dayOfWeek: "Wed",
+                    title: "To Swakopmund",
+                    location: "Desert highway to the Atlantic coast",
+                    backgroundImage: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Schweizerhaus Hotel / Café Anton",
+                        status: "confirmed",
+                        note: "4 nights (May 20–23). Booked by Maria.",
+                        bookedBy: "Maria",
+                        mapsUrl: "maps.app.goo.gl/FWvKDmagbnq6b5ia7"
+                    },
+                    drive: {
+                        from: "Sossusvlei",
+                        to: "Swakopmund",
+                        duration: "~4h 45min",
+                        distance: "~360 km"
+                    },
+                    activities: [
+                        { time: "Early AM", text: "Breakfast at lodge · pack · depart", subNote: "", needsBooking: false },
+                        { time: "Drive", text: "Scenic Namib desert highway through Kuiseb Canyon", subNote: "", needsBooking: false },
+                        { time: "~14:00", text: "Arrive Swakopmund", subNote: "Check in Schweizerhaus", needsBooking: false },
+                        { time: "Afternoon", text: "First walk: The Jetty", subNote: "beachfront · German colonial buildings", needsBooking: false },
+                        { time: "Evening", text: "First Atlantic dinner", subNote: "German-Namibian café culture", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "Included at Elegant Desert Lodge", restaurants: [] },
+                        lunch: { status: "flexible", note: "en-route / Pack snacks / petrol station stop", restaurants: [] },
+                        dinner: { status: "options", note: "", restaurants: [
+                            { name: "The Tug", desc: "Seafood · Dining inside a converted tugboat — iconic first dinner!", rating: "4.3★", mapsUrl: "maps.google.com/?q=The+Tug+Restaurant+Swakopmund" },
+                            { name: "Jetty 1905", desc: "Upscale seafood · Stunning sea views from the old pier", rating: "4.5★", mapsUrl: "maps.google.com/?q=Jetty+1905+Swakopmund" },
+                            { name: "Restaurant Altstadt", desc: "German-Namibian classics · Colonial building", rating: "4.4★", mapsUrl: "maps.google.com/?q=Restaurant+Altstadt+Swakopmund" }
+                        ] }
+                    },
+                    route: "maps.google.com/maps/dir/Sossusvlei/Swakopmund",
+                    warnings: ["⛽ Fill up before leaving Sesriem — long stretch with very little en route"],
+                    gems: []
+                },
+                {
+                    dayNumber: 6,
+                    date: "May 21",
+                    dayOfWeek: "Thu",
+                    title: "Swakopmund",
+                    location: "Ocean Adventures · Seals · Sandwich Harbour",
+                    backgroundImage: "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Schweizerhaus / Café Anton",
+                        status: "confirmed",
+                        note: "Night 2 of 4. Booked by Maria.",
+                        bookedBy: "Maria",
+                        mapsUrl: "maps.app.goo.gl/FWvKDmagbnq6b5ia7"
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Early AM", text: "Kayak with Seals", subNote: "Walvis Bay + Flamingo Lagoon option (ecomarinekayak.com · ~3hrs)", needsBooking: true },
+                        { time: "Afternoon", text: "Sandwich Harbour 4x4 tour", subNote: "dunes touching the Atlantic (sandwichharbourtours.com or charlysdeserttours.com)", needsBooking: true },
+                        { time: "Late PM", text: "Moon Landscape at Goanikontes", subNote: "Martian terrain (~40 min from town)", needsBooking: false },
+                        { time: "Evening", text: "Swakopmund Brauhaus", subNote: "craft beer · German colonial atmosphere", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "Café Anton — famous for its pastries", restaurants: [] },
+                        lunch: { status: "options", note: "", restaurants: [
+                            { name: "Ocean Cellar", desc: "Seafood · Fresh catch · Local favourite", rating: "4.4★", mapsUrl: "maps.google.com/?q=Ocean+Cellar+Swakopmund" },
+                            { name: "Village Café", desc: "All-day brunch · Best coffee in Swakopmund", rating: "4.5★", mapsUrl: "maps.google.com/?q=Village+Cafe+Swakopmund" }
+                        ] },
+                        dinner: { status: "options", note: "", restaurants: [
+                            { name: "Jetty 1905", desc: "Best upscale dining · Book ahead!", rating: "4.5★", mapsUrl: "maps.google.com/?q=Jetty+1905+Swakopmund" },
+                            { name: "Tiger Reed Beach Bar", desc: "Casual · Beach vibes · Sunset drinks", rating: "4.3★", mapsUrl: "maps.google.com/?q=Tiger+Reed+Beach+Bar+Swakopmund" }
+                        ] }
+                    },
+                    route: null,
+                    warnings: [
+                        "⚠️ Sandwich Harbour books out DAYS in advance — book now",
+                        "⚠️ Kayak with seals must be booked ahead — limited boats per day"
+                    ],
+                    gems: ["Combo deals available: Sandwich Harbour + quad bike + fat bike + Little 5"]
+                },
+                {
+                    dayNumber: 7,
+                    date: "May 22",
+                    dayOfWeek: "Fri",
+                    title: "Swakopmund",
+                    location: "Township Tour · Helicopter · Architecture",
+                    backgroundImage: "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Schweizerhaus / Café Anton",
+                        status: "confirmed",
+                        note: "Night 3 of 4. Booked by Maria.",
+                        bookedBy: "Maria",
+                        mapsUrl: "maps.app.goo.gl/FWvKDmagbnq6b5ia7"
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Mondesa Township Tour + Genocide Museum", subNote: "namibiadreamsafaris.com · Essential Namibia context", needsBooking: true },
+                        { time: "Afternoon", text: "Helicopter tour (1–2 hrs)", subNote: "over dunes + coastline (Sossusfly or Scenic Air)", needsBooking: true },
+                        { time: "Late PM", text: "Walking tour: Lighthouse · Mole · German colonial streets", subNote: "", needsBooking: false },
+                        { time: "Evening", text: "Brewer & Butcher or Kücki's Pub", subNote: "craft beers", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "Café Anton", restaurants: [] },
+                        lunch: { status: "options", note: "", restaurants: [
+                            { name: "Village Café", desc: "All-day brunch · Best coffee", rating: "4.5★", mapsUrl: "maps.google.com/?q=Village+Cafe+Swakopmund" }
+                        ] },
+                        dinner: { status: "options", note: "", restaurants: [
+                            { name: "The Tug", desc: "Seafood · Tugboat", rating: "4.3★", mapsUrl: "maps.google.com/?q=The+Tug+Restaurant+Swakopmund" },
+                            { name: "Restaurant Altstadt", desc: "German-Namibian", rating: "4.4★", mapsUrl: "maps.google.com/?q=Restaurant+Altstadt+Swakopmund" }
+                        ] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: ["Mondesa Township Tour gives crucial historical context for Namibia's colonial period — don't skip"]
+                },
+                {
+                    dayNumber: 8,
+                    date: "May 23",
+                    dayOfWeek: "Sat",
+                    title: "Swakopmund",
+                    location: "Catamaran · Last Day on the Coast",
+                    backgroundImage: "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Schweizerhaus / Café Anton",
+                        status: "confirmed",
+                        note: "Night 4 of 4. Booked by Maria.",
+                        bookedBy: "Maria",
+                        mapsUrl: "maps.app.goo.gl/FWvKDmagbnq6b5ia7"
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Catamaran cruise", subNote: "seals · dolphins · pelicans (swakopadventures.com/cruises)", needsBooking: true },
+                        { time: "Afternoon", text: "Free time", subNote: "beach walk · craft market · last shopping", needsBooking: false },
+                        { time: "Sunset", text: "Sunset at the Jetty or Tiger Reed Beach Bar", subNote: "last Atlantic sunset", needsBooking: false },
+                        { time: "Evening", text: "Last dinner in Swakopmund", subNote: "make it count", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "Café Anton", restaurants: [] },
+                        lunch: { status: "options", note: "", restaurants: [
+                            { name: "Ocean Cellar", desc: "Seafood · Best value for fresh fish", rating: "4.4★", mapsUrl: "maps.google.com/?q=Ocean+Cellar+Swakopmund" }
+                        ] },
+                        dinner: { status: "options", note: "", restaurants: [
+                            { name: "Jetty 1905", desc: "Farewell dinner — book ahead! Elevated seafood on the pier", rating: "4.5★", mapsUrl: "maps.google.com/?q=Jetty+1905+Swakopmund" }
+                        ] }
+                    },
+                    route: null,
+                    warnings: ["Pack tonight — early departure tomorrow for Damaraland (~5hr drive)"],
+                    gems: []
+                },
+                {
+                    dayNumber: 9,
+                    date: "May 24",
+                    dayOfWeek: "Sun",
+                    title: "Damaraland",
+                    location: "Spitzkoppe · Bushman's Paradise · Mopane Lodge",
+                    backgroundImage: "https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Gondwana Damara Mopane Lodge",
+                        status: "confirmed",
+                        note: "Booked by Maria. Check-in from 14:00. Breakfast 7–9AM · Lunch 12–2PM · Dinner 7–9PM.",
+                        bookedBy: "Maria",
+                        mapsUrl: "maps.app.goo.gl/KWYe65qRNWz5Bq4J8"
+                    },
+                    drive: {
+                        from: "Swakopmund",
+                        to: "Damaraland",
+                        duration: "~5 hrs total",
+                        distance: "via Spitzkoppe"
+                    },
+                    activities: [
+                        { time: "08:00", text: "Depart Swakopmund", subNote: "early start", needsBooking: false },
+                        { time: "~10:30", text: "Spitzkoppe", subNote: "'Matterhorn of Africa' · Hike to Bushman's Paradise (San rock art!) + The Rock Arch (~2hr stop)", needsBooking: false },
+                        { time: "~13:00", text: "Continue drive to Damaraland", subNote: "", needsBooking: false },
+                        { time: "Alt", text: "Cape Cross Seal Colony instead of Spitzkoppe", subNote: "(~45 min off-route) · 200,000+ seals! Choose one — hard to do both", needsBooking: false },
+                        { time: "~15:00", text: "Arrive Damara Mopane Lodge", subNote: "check in", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "Last Schweizerhaus breakfast or Café Anton pastry to go", restaurants: [] },
+                        lunch: { status: "flexible", note: "en-route / Picnic at Spitzkoppe or arrive in time for lodge lunch (12–2PM)", restaurants: [] },
+                        dinner: { status: "included", note: "Dinner buffet 19:00–21:00 at Damara Mopane Lodge", restaurants: [] }
+                    },
+                    route: "maps.google.com/maps/dir/Swakopmund/Spitzkoppe+Namibia/Damaraland+Namibia",
+                    warnings: [],
+                    gems: [
+                        "Spitzkoppe Bushman's Paradise has genuine San rock art — some of the most accessible in Namibia",
+                        "Keep eyes open for desert-adapted rhino in Damaraland — rarer than Etosha"
+                    ]
+                },
+                {
+                    dayNumber: 10,
+                    date: "May 25",
+                    dayOfWeek: "Mon",
+                    title: "Grootberg",
+                    location: "Twyfelfontein · Rock Engravings · Highland Lodge",
+                    backgroundImage: "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Grootberg Lodge",
+                        status: "confirmed",
+                        note: "Booked by Felix (ADCB). Perched on Grootberg plateau — panoramic valley views.",
+                        bookedBy: "Felix",
+                        mapsUrl: "maps.app.goo.gl/Ehb4G1ubxB4teypR6"
+                    },
+                    drive: {
+                        from: "Damara Mopane Lodge",
+                        to: "Grootberg Lodge",
+                        duration: "~3 hrs",
+                        distance: "with Twyfelfontein stop"
+                    },
+                    activities: [
+                        { time: "07:00", text: "Breakfast 7–9AM at Mopane Lodge", subNote: "depart by 9", needsBooking: false },
+                        { time: "~10:30", text: "Twyfelfontein UNESCO World Heritage Site", subNote: "2,500-yr-old rock engravings (guided tour ~1hr)", needsBooking: false },
+                        { time: "En route", text: "Watch for: desert elephants · lions · rhinos · Brandberg Mountains · Mars-like terrain", subNote: "", needsBooking: false },
+                        { time: "~13:00", text: "Arrive Grootberg Lodge", subNote: "check in · explore the plateau", needsBooking: false },
+                        { time: "Sunset", text: "Sundowner at lodge", subNote: "unobstructed views over Klip River Valley", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "Damara Mopane Lodge (7–9 AM)", restaurants: [] },
+                        lunch: { status: "missing", note: "Confirm if available at Twyfelfontein area or arrange with Grootberg Lodge", restaurants: [
+                            { name: "Grootberg Lodge Restaurant", desc: "Ask if early lunch can be arranged on arrival · Verify with lodge", rating: "", mapsUrl: "maps.app.goo.gl/Ehb4G1ubxB4teypR6" }
+                        ] },
+                        dinner: { status: "missing", note: "⚠️ Confirm if dinner included at Grootberg Lodge — check with Felix/booking", restaurants: [] }
+                    },
+                    route: "maps.google.com/maps/dir/Damaraland/Twyfelfontein+Namibia/Grootberg+Lodge+Namibia",
+                    warnings: ["⚠️ Confirm if meals (lunch/dinner) are included at Grootberg Lodge"],
+                    gems: [
+                        "Palmwag Conservancy nearby — world's highest density of desert-adapted black rhino",
+                        "Burnt Mountain near Twyfelfontein — volcanic rock field that glows orange at sunset"
+                    ]
+                },
+                {
+                    dayNumber: 11,
+                    date: "May 26",
+                    dayOfWeek: "Tue",
+                    title: "Rhino Tracking",
+                    location: "On Foot in the Wild · Drive to Etosha",
+                    backgroundImage: "https://images.unsplash.com/photo-1535338454528-1b5c8e9b3e94?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Mondjila Safari Camp",
+                        status: "confirmed",
+                        note: "Dinner & breakfast included. Booked by Felix (WIO).",
+                        bookedBy: "Felix",
+                        mapsUrl: "maps.app.goo.gl/ai8fhyRY6WVdENhf6"
+                    },
+                    drive: {
+                        from: "Grootberg Lodge",
+                        to: "Etosha Anderson Gate (South)",
+                        duration: "~3h 30min",
+                        distance: ""
+                    },
+                    activities: [
+                        { time: "Dawn", text: "Rhino Tracking", subNote: "open vehicle + walking with trackers (ends ~4PM) OR Elephant Tracking (ends ~2PM) — choose one!", needsBooking: true },
+                        { time: "Note", text: "BOOK TRACKING at Grootberg Lodge on arrival May 25 evening", subNote: "", needsBooking: true },
+                        { time: "After", text: "Drive to Etosha Anderson/South Gate", subNote: "~3h 30min", needsBooking: false },
+                        { time: "~19:00", text: "Arrive Mondjila Safari Camp", subNote: "dinner included", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "At Grootberg Lodge", restaurants: [] },
+                        lunch: { status: "flexible", note: "en-route / Pack from lodge or grab en route — long drive after tracking", restaurants: [] },
+                        dinner: { status: "included", note: "Included at Mondjila Safari Camp", restaurants: [] }
+                    },
+                    route: "maps.google.com/maps/dir/Grootberg+Namibia/Etosha+National+Park+Anderson+Gate",
+                    warnings: [
+                        "⚠️ Book rhino/elephant tracking AT Grootberg Lodge on evening of May 25",
+                        "🐘 Elephant ends 2PM · Rhino ends 4PM — factor into drive timing",
+                        "⛽ Fill up before entering Etosha — fuel inside the park is limited"
+                    ],
+                    gems: []
+                },
+                {
+                    dayNumber: 12,
+                    date: "May 27",
+                    dayOfWeek: "Wed",
+                    title: "Etosha",
+                    location: "South Gate → East Gate · Game Drive Loop",
+                    backgroundImage: "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Mokuti Etosha Lodge",
+                        status: "confirmed",
+                        note: "Dinner & breakfast included. Booked by Ada (ENBD).",
+                        bookedBy: "Ada",
+                        mapsUrl: "maps.app.goo.gl/ywZ6wDdNzdWoZy2e9",
+                        altHotel: {
+                            name: "Fort Onguma",
+                            status: "pending",
+                            note: "Ada awaiting confirmation (ENBD · all-inclusive incl. game drives)",
+                            mapsUrl: "maps.app.goo.gl/8KFd9Mpy2YpdJpCx5"
+                        }
+                    },
+                    drive: {
+                        from: "Anderson Gate (South)",
+                        to: "East Gate (Namutoni)",
+                        duration: "~3–4hrs",
+                        distance: "+ waterhole stops · 60 km/h limit"
+                    },
+                    activities: [
+                        { time: "Dawn", text: "Fill up at Okaukuejo camp or before entering", subNote: "", needsBooking: false },
+                        { time: "Morning", text: "Drive Etosha South → East", subNote: "STOP AT EVERY WATERHOLE", needsBooking: false },
+                        { time: "Key stops", text: "Okaukuejo waterhole · Halali camp · Namutoni Fort", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Continue game driving east towards Mokuti Lodge", subNote: "", needsBooking: false },
+                        { time: "Sundowner", text: "Game drive if Fort Onguma confirmed", subNote: "(already included all-incl.)", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "Mondjila Safari Camp", restaurants: [] },
+                        lunch: { status: "pending", note: "Pack from camp — eat at a shaded waterhole. No restaurants inside the park.", restaurants: [] },
+                        dinner: { status: "included", note: "Mokuti Etosha Lodge (or Fort Onguma if confirmed)", restaurants: [] }
+                    },
+                    route: "maps.google.com/maps/dir/Etosha+Anderson+Gate/Etosha+East+Gate",
+                    warnings: [
+                        "60 km/h speed limit strictly enforced inside Etosha",
+                        "Do NOT exit vehicle except at designated rest camps",
+                        "Best wildlife: early AM and late afternoon at waterholes"
+                    ],
+                    gems: [
+                        "Okaukuejo waterhole: one of the best rhino-viewing spots in Africa — floodlit at night",
+                        "Namutoni Fort: beautiful German colonial fort inside the park"
+                    ]
+                },
+                {
+                    dayNumber: 13,
+                    date: "May 28",
+                    dayOfWeek: "Thu",
+                    title: "Etosha",
+                    location: "Full Game Drive Day",
+                    backgroundImage: "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Mokuti Etosha Lodge",
+                        status: "confirmed",
+                        note: "Booked by Ada (ENBD).",
+                        bookedBy: "Ada",
+                        mapsUrl: "maps.app.goo.gl/ywZ6wDdNzdWoZy2e9",
+                        altHotel: {
+                            name: "Fort Onguma",
+                            status: "pending",
+                            note: "Ada awaiting confirmation",
+                            mapsUrl: "maps.app.goo.gl/8KFd9Mpy2YpdJpCx5"
+                        }
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "05:30", text: "Sunrise game drive", subNote: "east section around Namutoni", needsBooking: true },
+                        { time: "~10:00", text: "Return to lodge: late breakfast", subNote: "pool · rest", needsBooking: false },
+                        { time: "Afternoon", text: "Second game drive", subNote: "midday waterholes, predators active", needsBooking: false },
+                        { time: "Sundowner", text: "Sundowner drive", subNote: "(included Fort Onguma; extra cost at Mokuti)", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "Mokuti or Fort Onguma", restaurants: [] },
+                        lunch: { status: "pending", note: "Lunch box from lodge for the drive", restaurants: [] },
+                        dinner: { status: "included", note: "Included at lodge", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: [
+                        "Fisher's Pan near Namutoni — huge pan, often flamingos and wildebeest in season",
+                        "Onguma offers guided night game drives — self-drive visitors cannot do this"
+                    ]
+                },
+                {
+                    dayNumber: 14,
+                    date: "May 29",
+                    dayOfWeek: "Fri",
+                    title: "To Windhoek",
+                    location: "Crocodile Farm · Capital City · Final Dinner",
+                    backgroundImage: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Tenbergen Pension",
+                        status: "confirmed",
+                        note: "Booked by Maria.",
+                        bookedBy: "Maria",
+                        mapsUrl: "maps.app.goo.gl/KTr8yspDMX6yMnRRA"
+                    },
+                    drive: {
+                        from: "Etosha East Gate",
+                        to: "Windhoek",
+                        duration: "~5h 15min",
+                        distance: "with stops"
+                    },
+                    activities: [
+                        { time: "06:00", text: "Final early game drive before leaving Etosha", subNote: "", needsBooking: false },
+                        { time: "09:00", text: "Depart Etosha East Gate", subNote: "", needsBooking: false },
+                        { time: "~11:30", text: "Otjiwarongo Crocodile Farm", subNote: "50,000+ Nile crocs · unique lunch stop! (halfway point · try the croc biltong!)", needsBooking: false },
+                        { time: "~15:00", text: "Arrive Windhoek", subNote: "Check in Tenbergen Pension", needsBooking: false },
+                        { time: "Afternoon", text: "Last souvenirs: Namibia Craft Centre · Wernhil Park", subNote: "", needsBooking: false },
+                        { time: "Evening", text: "Final dinner", subNote: "game meat is mandatory", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "Last lodge breakfast at Mokuti/Onguma", restaurants: [] },
+                        lunch: { status: "confirmed", note: "Otjiwarongo Crocodile Farm restaurant — unique halfway stop!", restaurants: [] },
+                        dinner: { status: "options", note: "", restaurants: [
+                            { name: "Joe's Beerhouse", desc: "ICONIC — Game meat: kudu, oryx, croc! Legendary Namibian institution. Huge outdoor garden. A MUST.", rating: "4.5★", mapsUrl: "maps.google.com/?q=Joe%27s+Beerhouse+Windhoek" },
+                            { name: "The Stellenbosch Wine Bistro", desc: "Upscale · South African wines · Great steaks", rating: "4.4★", mapsUrl: "maps.google.com/?q=Stellenbosch+Wine+Bistro+Windhoek" },
+                            { name: "The Butcher Block", desc: "Premium cuts of game + beef", rating: "4.3★", mapsUrl: "maps.google.com/?q=Butcher+Block+Windhoek" },
+                            { name: "Hilton Skybar", desc: "Rooftop bar · City views · Pre-dinner cocktails first!", rating: "4.2★", mapsUrl: "maps.google.com/?q=Hilton+Skybar+Windhoek" }
+                        ] }
+                    },
+                    route: "maps.google.com/maps/dir/Etosha+East+Gate/Otjiwarongo+Namibia/Windhoek",
+                    warnings: ["⏰ Don't leave Etosha too late — 5h+ drive ahead"],
+                    gems: ["Eros Meat Market in Windhoek — stock up on biltong for the plane tomorrow"]
+                },
+                {
+                    dayNumber: 15,
+                    date: "May 30",
+                    dayOfWeek: "Sat",
+                    title: "Windhoek",
+                    location: "Last morning · Fly Home to Addis",
+                    backgroundImage: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800",
+                    flight: {
+                        date: "May 30",
+                        dayOfWeek: "Sat",
+                        airline: "ET 834",
+                        from: "WDH",
+                        to: "ADD",
+                        departTime: "14:30",
+                        arriveTime: "21:20",
+                        terminal: "N/A"
+                    },
+                    hotel: {
+                        name: "Addis Ababa Hotel",
+                        status: "missing",
+                        note: "Need hotel near airport — arrive 21:20, depart 10:30 next morning",
+                        bookedBy: null,
+                        mapsUrl: null
+                    },
+                    drive: {
+                        from: "Tenbergen Pension",
+                        to: "WDH Airport",
+                        duration: "~35 min",
+                        distance: ""
+                    },
+                    activities: [
+                        { time: "Morning", text: "Christuskirche (1910)", subNote: "beautiful German Lutheran church, free entry", needsBooking: false },
+                        { time: "Morning", text: "Namibia Craft Centre", subNote: "last chance for curios, gemstones, local art", needsBooking: false },
+                        { time: "Morning", text: "Independence Memorial Museum", subNote: "Namibian history + liberation struggle", needsBooking: false },
+                        { time: "Morning", text: "Eros Meat Market", subNote: "stock up on biltong for the plane!", needsBooking: false },
+                        { time: "12:00 ⚠️", text: "HEAD TO AIRPORT", subNote: "35 min drive from hotel (ET 834 WDH→ADD departs 14:30)", needsBooking: false },
+                        { time: "14:30", text: "ET 834 WDH → ADD", subNote: "Arrives 21:20", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "missing", note: "Confirm if included at Tenbergen Pension", restaurants: [
+                            { name: "The Social", desc: "Brunch café · Central Windhoek · Good coffee", rating: "4.4★", mapsUrl: "maps.google.com/?q=The+Social+Windhoek" },
+                            { name: "The Wolfshack", desc: "Café · Relaxed · Quick send-off breakfast", rating: "4.3★", mapsUrl: "maps.google.com/?q=The+Wolfshack+Windhoek" }
+                        ] },
+                        lunch: { status: "flexible", note: "en-route / Airport or biltong en route", restaurants: [] },
+                        dinner: { status: "flexible", note: "in-flight / On ET 834 or at ADD airport", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [
+                        "⚠️ CRITICAL: Leave hotel by 12:00 noon for 14:30 flight",
+                        "🚗 Return rental car at WDH airport before check-in"
+                    ],
+                    gems: []
+                },
+                {
+                    dayNumber: 16,
+                    date: "May 31",
+                    dayOfWeek: "Sun",
+                    title: "Home",
+                    location: "Addis → Dubai · Trip Complete",
+                    backgroundImage: "https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=800",
+                    flight: {
+                        date: "May 31",
+                        dayOfWeek: "Sun",
+                        airline: "ET 602",
+                        from: "ADD",
+                        to: "DXB",
+                        departTime: "10:30",
+                        arriveTime: "15:45",
+                        terminal: "Terminal ADD T2"
+                    },
+                    hotel: {
+                        name: "Dubai — Home",
+                        status: "confirmed",
+                        note: "ET 602 ADD→DXB · Departs 10:30 · Arrives 15:45 · Terminal 2 Addis",
+                        bookedBy: null,
+                        mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "10:30", text: "ET 602 departs ADD Terminal 2", subNote: "✈️", needsBooking: false },
+                        { time: "15:45", text: "Land in Dubai", subNote: "Trip complete 🎉", needsBooking: false },
+                        { time: "After", text: "Share photos · Write lodge reviews · Plan the next one", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "in-flight / ADD airport or in-flight", restaurants: [] },
+                        lunch: { status: "flexible", note: "in-flight / On ET 602", restaurants: [] },
+                        dinner: { status: "flexible", note: "home / Welcome home!", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: ["Please leave Google Reviews for the lodges — they genuinely rely on them"]
+                }
+            ]
+        };
+    </script>
+
+    <header>
+        <div class="header-content">
+            <div class="header-title">Namibia 2026</div>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
+        </div>
+        <div class="day-tabs" id="dayTabs"></div>
+    </header>
+
+    <main class="container">
+        <!-- OVERVIEW TAB -->
+        <div class="day-view active" id="overview">
+            <div class="card">
+                <div class="card-title">Itinerary</div>
+                <table class="accommodation-table" id="accommodationTable"></table>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Flights</div>
+                <div class="flights-scroll" id="flightsList"></div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Travellers</div>
+                <div class="travelers-list" id="travelersListView"></div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Car Rental</div>
+                <div class="car-rental-info" id="carRentalInfo"></div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Relevant Links</div>
+                <div class="overview-links">
+                    <a href="https://open.spotify.com/playlist/1XtR7v67SZOgz1DzVsDOAx" target="_blank" class="spotify-link">
+                        <span class="spotify-icon">♪</span>
+                        <span>Trip Playlist</span>
+                    </a>
+                    <a href="https://tricount.com/tQidftYrYcWVIVqrxy" target="_blank" class="tricount-link">
+                        <span>💰</span>
+                        <span>Trip Expenses</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY VIEWS -->
+        <div id="dayViewsContainer"></div>
+    </main>
+
+    <footer>
+        <p>Namibia 2026 Group Trip Planner</p>
+    </footer>
+
+    <script>
+        // ============================================================
+        // RENDERING ENGINE
+        // ============================================================
+
+        const STATUS_STYLES = {
+            confirmed: { badge: "confirmed", label: "Confirmed" },
+            pending: { badge: "pending", label: "Pending" },
+            missing: { badge: "missing", label: "Missing" },
+            "to-book": { badge: "to-book", label: "To Book" },
+            included: { badge: "included", label: "Included" },
+            flexible: { badge: "options", label: "Flexible" },
+            options: { badge: "options", label: "Options" }
+        };
+
+        // Session storage for restaurant selections
+        const getSelectedRestaurants = (dayNum, mealType) => {
+            const key = `selected_${dayNum}_${mealType}`;
+            return JSON.parse(sessionStorage.getItem(key) || "[]");
+        };
+
+        const setSelectedRestaurant = (dayNum, mealType, restaurantName) => {
+            const key = `selected_${dayNum}_${mealType}`;
+            const selected = getSelectedRestaurants(dayNum, mealType);
+            const index = selected.indexOf(restaurantName);
+            if (index > -1) {
+                selected.splice(index, 1);
+            } else {
+                selected.push(restaurantName);
+            }
+            sessionStorage.setItem(key, JSON.stringify(selected));
+        };
+
+        const isRestaurantSelected = (dayNum, mealType, restaurantName) => {
+            return getSelectedRestaurants(dayNum, mealType).includes(restaurantName);
+        };
+
+        // Theme management
+        function initializeTheme() {
+            const saved = localStorage.getItem('theme-mode');
+            if (saved === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('themeToggle').textContent = '☀️';
+            } else {
+                document.body.classList.remove('light-mode');
+                document.getElementById('themeToggle').textContent = '🌙';
+            }
+        }
+
+        function toggleTheme() {
+            const isLight = document.body.classList.toggle('light-mode');
+            document.getElementById('themeToggle').textContent = isLight ? '☀️' : '🌙';
+            localStorage.setItem('theme-mode', isLight ? 'light' : 'dark');
+        }
+
+        function initializePage() {
+            initializeTheme();
+            renderOverviewTab();
+            renderDayTabs();
+            renderDayViews();
+        }
+
+        function renderOverviewTab() {
+            const flightsList = document.getElementById("flightsList");
+            flightsList.innerHTML = TRIP_DATA.flights
+                .map(f => `
+                    <div class="flight-card">
+                        <div class="flight-day">${f.dayOfWeek} ${f.date}</div>
+                        <div class="flight-route">${f.airline}</div>
+                        <div class="flight-times">${f.from} → ${f.to}</div>
+                        <div class="flight-times">${f.departTime}–${f.arriveTime}</div>
+                        <div class="flight-terminal">${f.terminal}</div>
+                        <div class="flight-checkin">
+                            <a href="https://www.ethiopianairlines.com/book/check-in/web-check-in" target="_blank">Online Check-in</a>
+                        </div>
+                    </div>
+                `)
+                .join("");
+
+            const travelersView = document.getElementById("travelersListView");
+            travelersView.innerHTML = TRIP_DATA.travelers
+                .map(t => `<div class="traveler-chip">${t}</div>`)
+                .join("");
+
+            const carInfo = document.getElementById("carRentalInfo");
+            carInfo.innerHTML = `
+                <strong>${TRIP_DATA.carRental.company}</strong><br>
+                📞 ${TRIP_DATA.carRental.phone}<br>
+                🌐 ${TRIP_DATA.carRental.website}
+            `;
+
+            const accTable = document.getElementById("accommodationTable");
+            let tableHTML = `
+                <tr>
+                    <th>Day</th>
+                    <th>Date</th>
+                    <th>Plan</th>
+                    <th>Status</th>
+                </tr>
+            `;
+
+            TRIP_DATA.days.forEach((day, i) => {
+                const hotelStatusData = STATUS_STYLES[day.hotel.status];
+                const hotelBadge = day.hotel.status === 'confirmed' ? 'ready' : day.hotel.status === 'missing' ? 'missing' : 'need-booking';
+                const hasToBook = day.activities && day.activities.some(a => a.needsBooking);
+                const actBadge = hasToBook ? 'need-booking' : (day.activities && day.activities.length > 0 ? 'ready' : 'missing');
+
+                tableHTML += `
+                    <tr data-day="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">
+                        <td>${day.dayNumber}</td>
+                        <td style="white-space: nowrap;">${day.dayOfWeek}<br>${day.date.split(' ')[1]}</td>
+                        <td>
+                            <div style="font-weight: 600; color: var(--accent-gold); font-size: 13px;">${day.title}</div>
+                            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">${day.location}</div>
+                        </td>
+                        <td>
+                            <span class="badge ${hotelBadge}" style="font-size: 10px; padding: 2px 6px; margin: 0 0 4px 0; display: block; text-align: center;">🏨 ${hotelBadge === 'ready' ? '✓' : '✗'}</span>
+                            <span class="badge ${actBadge}" style="font-size: 10px; padding: 2px 6px; margin: 0; display: block; text-align: center;">📋 ${actBadge === 'ready' ? '✓' : '!'}</span>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            accTable.innerHTML = tableHTML;
+        }
+
+        function renderDayTabs() {
+            const dayTabs = document.getElementById("dayTabs");
+            let tabsHTML = '<div class="day-tab active" data-view="overview" onclick="switchView(\'overview\')">Overview</div>';
+
+            TRIP_DATA.days.forEach(day => {
+                const hasMissing = day.hotel.status === "missing" ||
+                                   day.meals.breakfast.status === "missing" ||
+                                   day.meals.lunch.status === "missing" ||
+                                   day.meals.dinner.status === "missing";
+
+                const className = `day-tab ${hasMissing ? 'has-missing' : ''}`;
+                const datePartials = day.date.split(' ');
+                tabsHTML += `
+                    <div class="${className}" data-view="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">
+                        Day ${day.dayNumber}<br>${datePartials[1]} ${datePartials[0]}
+                    </div>
+                `;
+            });
+
+            dayTabs.innerHTML = tabsHTML;
+        }
+
+        function renderDayViews() {
+            const container = document.getElementById("dayViewsContainer");
+            container.innerHTML = TRIP_DATA.days
+                .map(day => `<div class="day-view" id="day${day.dayNumber}">${renderDayContent(day)}</div>`)
+                .join("");
+            attachCollapsibleHandlers();
+        }
+
+        function attachCollapsibleHandlers() {
+            document.querySelectorAll('.section-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    this.classList.toggle('collapsed');
+                    this.nextElementSibling.classList.toggle('collapsed');
+                });
+            });
+
+            document.querySelectorAll('.btn-expand-all').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const dayView = this.closest('.day-view');
+                    dayView.querySelectorAll('.section-header').forEach(h => h.classList.remove('collapsed'));
+                    dayView.querySelectorAll('.section-content').forEach(c => c.classList.remove('collapsed'));
+                });
+            });
+
+            document.querySelectorAll('.btn-collapse-all').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const dayView = this.closest('.day-view');
+                    dayView.querySelectorAll('.section-header').forEach(h => h.classList.add('collapsed'));
+                    dayView.querySelectorAll('.section-content').forEach(c => c.classList.add('collapsed'));
+                });
+            });
+        }
+
+        function renderDayContent(day) {
+            let html = `
+                <div class="hero" style="background-image: url('${day.backgroundImage}')">
+                    <div class="hero-day-number">${day.dayNumber}</div>
+                    <div class="hero-title">${day.title}</div>
+                    <div class="hero-location">${day.location}</div>
+                </div>
+                <div class="expand-all-container">
+                    <button class="btn-expand-all">Expand All</button>
+                    <button class="btn-collapse-all">Collapse All</button>
+                </div>
+            `;
+
+            // Flight section on flight days (FIRST, before hotel)
+            if (day.flight) {
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header">
+                            <h3>✈️ Flight</h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-flight">
+                            <div>
+                                <div style="margin-bottom: 12px;">
+                                    <div style="font-weight: 600; color: var(--accent-gold); font-size: 15px; margin-bottom: 8px;">${day.flight.airline}</div>
+                                    <div style="color: var(--text-primary); margin-bottom: 4px;"><strong>${day.flight.from} → ${day.flight.to}</strong></div>
+                                    <div style="color: var(--text-secondary); font-size: 13px; margin-bottom: 6px;">Depart: ${day.flight.departTime} · Arrive: ${day.flight.arriveTime}</div>
+                                    <div style="color: var(--text-secondary); font-size: 12px; margin-bottom: 12px;">${day.flight.terminal}</div>
+                                    <a href="https://www.ethiopianairlines.com/book/check-in/web-check-in" target="_blank" style="display: inline-block; padding: 8px 14px; background-color: #3A7DA0; color: white; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; transition: var(--transition);" onmouseover="this.style.backgroundColor='#4a9dc0'" onmouseout="this.style.backgroundColor='#3A7DA0'">Online Check-in</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (day.drive) {
+                html += `
+                    <div class="drive-banner">
+                        <div class="drive-info">
+                            <div class="drive-route">${day.drive.from} → ${day.drive.to}</div>
+                            <div class="drive-duration">${day.drive.duration} · ${day.drive.distance}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            html += renderHotelCard(day);
+
+            if (day.activities.length > 0) {
+                html += renderActivitiesSection(day);
+            }
+
+            if (Object.values(day.meals).some(m => m.restaurants.length > 0 || m.status !== 'flexible')) {
+                html += renderMealsSection(day);
+            }
+
+            if (day.route) {
+                html += `
+                    <div class="card">
+                        <a href="https://${day.route}" target="_blank" style="color: var(--accent-gold); text-decoration: none;">
+                            📍 View Route on Google Maps →
+                        </a>
+                    </div>
+                `;
+            }
+
+            if (day.warnings.length > 0) {
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header">
+                            <h3>⚠️ Warnings</h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-warnings">
+                            <div style="padding: 16px;">
+                                ${day.warnings.map(w => `<div class="warning" style="margin-bottom: 12px; display: block;">${w}</div>`).join("")}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (day.gems.length > 0) {
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header">
+                            <h3>💎 Hidden Gems</h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-gems">
+                            <div style="padding: 16px;">
+                                ${day.gems.map(g => `<div class="gem" style="margin-bottom: 12px; display: block;">${g}</div>`).join("")}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            return html;
+        }
+
+        function renderActivitiesSection(day) {
+            // Group activities by time
+            const groupedActivities = {};
+            const activityOrder = [];
+
+            day.activities.forEach(a => {
+                if (!groupedActivities[a.time]) {
+                    groupedActivities[a.time] = [];
+                    activityOrder.push(a.time);
+                }
+                groupedActivities[a.time].push(a);
+            });
+
+            let html = `
+                <div class="collapsible-section">
+                    <div class="section-header">
+                        <h3>Activities</h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content section-activities">
+                        <div style="padding: 16px;">
+                            <div class="timeline">
+            `;
+
+            activityOrder.forEach(timeLabel => {
+                const activities = groupedActivities[timeLabel];
+
+                // Check if this is a specific time (HH:MM format) or a period (Morning, Afternoon, etc.)
+                const isSpecificTime = /^\d{1,2}:\d{2}/.test(timeLabel);
+
+                if (!isSpecificTime) {
+                    // Time period (Morning, Afternoon, etc.)
+                    html += `<div class="timeline-time-group-header">${timeLabel}</div>`;
+                    activities.forEach(a => {
+                        const isAlternative = a.time.toLowerCase() === 'alt' || (a.text && a.text.toLowerCase().includes('instead of')) || (a.text && a.text.toLowerCase().includes('alternative'));
+                        html += `
+                            <div class="timeline-item-bullet ${isAlternative ? 'alternative' : ''}">
+                                <span${isAlternative ? ' style="color: #E8C66E;"' : ''}>${a.text}</span>
+                                ${a.subNote ? `<div class="timeline-note">${a.subNote}</div>` : ""}
+                                ${a.needsBooking ? '<div class="timeline-tag">⚠ Book in advance</div>' : ""}
+                            </div>
+                        `;
+                    });
+                } else {
+                    // Specific time
+                    activities.forEach(a => {
+                        const isAlternative = a.text && a.text.toLowerCase().includes('alternative');
+                        html += `
+                            <div class="timeline-item">
+                                <div class="timeline-time">${timeLabel}</div>
+                                <div class="timeline-text">${a.text}</div>
+                                ${a.subNote ? `<div class="timeline-note">${a.subNote}</div>` : ""}
+                                ${a.needsBooking ? '<div class="timeline-tag">⚠ Book in advance</div>' : ""}
+                            </div>
+                        `;
+                    });
+                }
+            });
+
+            html += `
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            return html;
+        }
+
+        function renderHotelCard(day) {
+            let html = `<div class="collapsible-section">
+                <div class="section-header">
+                    <h3>Hotel</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content section-hotel">
+                    <div style="padding: 16px;">`;
+
+            const statusData = STATUS_STYLES[day.hotel.status];
+            const hotelReady = day.hotel.status === 'confirmed' ? 'ready' : day.hotel.status === 'missing' ? 'missing' : 'need-booking';
+
+            html += `
+                <div class="hotel-info">
+                    <div class="hotel-name">${day.hotel.name}</div>
+                    <div class="hotel-status-badges">
+                        <span class="badge ${hotelReady === 'ready' ? 'ready' : 'missing'}">Hotel: ${hotelReady === 'ready' ? 'Ready' : 'Missing'}</span>
+                    </div>
+                    ${day.hotel.note ? `<div class="hotel-note">${day.hotel.note}</div>` : ""}
+                    ${day.hotel.mapsUrl ? `
+                        <div class="hotel-buttons">
+                            <a href="https://${day.hotel.mapsUrl}" target="_blank" class="btn-maps">Maps</a>
+                        </div>
+                    ` : ""}
+                </div>
+            `;
+
+            if (day.hotel.altHotel) {
+                const altStatus = STATUS_STYLES[day.hotel.altHotel.status];
+                const altReady = day.hotel.altHotel.status === 'confirmed' ? 'ready' : day.hotel.altHotel.status === 'missing' ? 'missing' : 'need-booking';
+                html += `
+                    <div class="hotel-info" style="border-left: 4px solid #9A7A30; margin-top: 12px;">
+                        <div class="hotel-name">${day.hotel.altHotel.name}</div>
+                        <div class="hotel-status-badges">
+                            <span class="badge ${altReady === 'ready' ? 'ready' : 'need-booking'}">Hotel: ${altReady === 'ready' ? 'Ready' : 'Pending'}</span>
+                        </div>
+                        ${day.hotel.altHotel.note ? `<div class="hotel-note">${day.hotel.altHotel.note}</div>` : ""}
+                        ${day.hotel.altHotel.mapsUrl ? `
+                            <div class="hotel-buttons">
+                                <a href="https://${day.hotel.altHotel.mapsUrl}" target="_blank" class="btn-maps">Maps</a>
+                            </div>
+                        ` : ""}
+                    </div>
+                `;
+            }
+
+            html += `</div></div></div>`;
+            return html;
+        }
+
+        function renderMealsSection(day) {
+            let html = `
+                <div class="collapsible-section">
+                    <div class="section-header">
+                        <h3>Meals</h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content section-meals">
+                        <div class="meals-section">
+            `;
+
+            const mealTypes = ['breakfast', 'lunch', 'dinner'];
+            const mealLabels = { breakfast: 'Breakfast', lunch: 'Lunch', dinner: 'Dinner' };
+
+            mealTypes.forEach((mealType, idx) => {
+                const meal = day.meals[mealType];
+                const statusData = STATUS_STYLES[meal.status];
+
+                html += `
+                    <div style="margin-bottom: 16px; padding-bottom: 12px; ${idx < mealTypes.length - 1 ? 'border-bottom: 1px solid var(--border-color);' : ''}">
+                        <div class="meal-type">${mealLabels[mealType]}</div>
+                        <span class="badge ${statusData.badge}">${statusData.label}</span>
+                `;
+
+                if (meal.note) {
+                    html += `<div class="meal-note">${meal.note}</div>`;
+                }
+
+                if (meal.restaurants.length > 0) {
+                    html += `<div class="restaurant-cards">`;
+                    meal.restaurants.forEach(rest => {
+                        const isSelected = isRestaurantSelected(day.dayNumber, mealType, rest.name);
+                        html += `
+                            <div class="restaurant-card ${isSelected ? 'selected' : ''}">
+                                <div class="restaurant-name">${rest.name}</div>
+                                <div class="restaurant-desc">${rest.desc}</div>
+                                <div class="restaurant-meta">
+                                    <span class="restaurant-rating">${rest.rating}</span>
+                                </div>
+                                <div class="restaurant-buttons">
+                                    <button class="btn-select" onclick="toggleRestaurant(${day.dayNumber}, '${mealType}', '${rest.name.replace(/'/g, "\\'")}')">
+                                        ${isSelected ? '✓ Selected' : 'Select'}
+                                    </button>
+                                    <a href="https://${rest.mapsUrl}" target="_blank" class="btn-maps">Maps</a>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += `</div>`;
+                }
+
+                html += `</div>`;
+            });
+
+            html += `
+                        </div>
+                    </div>
+                </div>
+            `;
+            return html;
+        }
+
+        function switchView(viewId) {
+            document.querySelectorAll('.day-view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+
+            document.getElementById(viewId).classList.add('active');
+            document.querySelector(`[data-view="${viewId}"]`).classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            const activeTab = document.querySelector(`[data-view="${viewId}"]`);
+            if (activeTab) {
+                activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+        }
+
+        function toggleRestaurant(dayNum, mealType, restaurantName) {
+            setSelectedRestaurant(dayNum, mealType, restaurantName);
+            renderDayViews();
+            switchView(`day${dayNum}`);
+        }
+
+        initializePage();
+    </script>
+</body>
+</html>
