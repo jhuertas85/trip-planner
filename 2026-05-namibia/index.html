@@ -2036,9 +2036,9 @@
                     </a>
                 </div>
             </div>
-        </div>
 
-        <div id="budgetCard"></div>
+            <div id="budgetCard"></div>
+        </div>
 
         <!-- DAY VIEWS -->
         <div id="dayViewsContainer"></div>
@@ -2349,7 +2349,7 @@
                 const total = dc.hotel + dc.activities + dc.food + (dc.other || 0);
                 const parts = [];
                 if (dc.hotel)      parts.push(`🏨 $${dc.hotel}`);
-                if (dc.activities) parts.push(`🎯 $${dc.activities}`);
+                if (dc.activities) parts.push(`🗺️ $${dc.activities}`);
                 if (dc.food)       parts.push(`🍽️ $${dc.food}`);
                 if (dc.other)      parts.push(`⛽ $${dc.other}`);
                 const flightNote = day.flight ? ' · excl. flights' : '';
