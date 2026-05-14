@@ -1133,6 +1133,92 @@
 
         .weather-refresh:hover { color: var(--accent-gold); }
 
+        /* BUDGET */
+        .day-cost-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid #7A6E5E;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .day-cost-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .day-cost-items {
+            font-size: 11px;
+            color: var(--text-secondary);
+            flex: 1;
+        }
+
+        .day-cost-total {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            white-space: nowrap;
+            margin-left: auto;
+        }
+
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .budget-table td {
+            padding: 9px 10px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        .budget-table tr:last-child td { border-bottom: none; }
+
+        .budget-amount {
+            text-align: right;
+            font-weight: 600;
+            color: var(--accent-gold);
+            white-space: nowrap;
+        }
+
+        .budget-note {
+            font-size: 11px;
+            color: var(--text-secondary);
+            padding-top: 2px;
+        }
+
+        .budget-total-row td {
+            font-weight: 700;
+            font-size: 14px;
+            border-top: 2px solid var(--border-color) !important;
+            border-bottom: none !important;
+        }
+
+        .budget-perperson {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        .budget-disclaimer {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-style: italic;
+            text-align: center;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-color);
+        }
+
         /* MOBILE */
         @media (max-width: 640px) {
             .container {
@@ -1952,6 +2038,8 @@
             </div>
         </div>
 
+        <div id="budgetCard"></div>
+
         <!-- DAY VIEWS -->
         <div id="dayViewsContainer"></div>
     </main>
@@ -2018,6 +2106,7 @@
         function initializePage() {
             initializeTheme();
             renderOverviewTab();
+            renderBudgetCard();
             renderDayTabs();
             renderDayViews();
         }
@@ -2255,6 +2344,24 @@
                 </div>
             `;
 
+            const dc = COST_DATA.days[day.dayNumber];
+            if (dc) {
+                const total = dc.hotel + dc.activities + dc.food + (dc.other || 0);
+                const parts = [];
+                if (dc.hotel)      parts.push(`🏨 $${dc.hotel}`);
+                if (dc.activities) parts.push(`🎯 $${dc.activities}`);
+                if (dc.food)       parts.push(`🍽️ $${dc.food}`);
+                if (dc.other)      parts.push(`⛽ $${dc.other}`);
+                const flightNote = day.flight ? ' · excl. flights' : '';
+                html += `
+                    <div class="day-cost-bar">
+                        <span class="day-cost-label">💰 Est. group cost${flightNote}</span>
+                        <span class="day-cost-items">${parts.join(' · ')}</span>
+                        <span class="day-cost-total">~$${total}</span>
+                    </div>
+                `;
+            }
+
             return html;
         }
 
@@ -2457,6 +2564,72 @@
             setSelectedRestaurant(dayNum, mealType, restaurantName);
             renderDayViews();
             switchView(`day${dayNum}`);
+        }
+
+        // ============================================================
+        // ESTIMATED BUDGET — figures are estimates, not confirmed prices
+        // Known: Ethiopia tour $480. All others based on typical rates.
+        // ============================================================
+
+        const COST_DATA = {
+            disclaimer: "These are estimates based on typical rates for Namibia & Ethiopia. Confirmed: Ethiopia tour $480. All other figures are projections.",
+            summary: [
+                { cat: "✈️ Flights",             amount: 3600, note: "4 pax · round-trip DXB↔ADD↔WDH · est. ~$900/pp" },
+                { cat: "🏨 Accommodation",        amount: 5500, note: "16 nights · 2 rooms throughout" },
+                { cat: "🚗 Car Rental",            amount: 1800, note: "Namibia2Go 4WD · ~12 days" },
+                { cat: "🦁 Activities & Tours",   amount: 2500, note: "Ethiopia tour $480 confirmed + Etosha, tracking, kayak, helicopter, etc." },
+                { cat: "🍽️ Food & Drinks",        amount: 2000, note: "Lunches & dinners not included in lodges" },
+                { cat: "⛽ Fuel",                  amount:  600, note: "~3,500 km total driving in Namibia" },
+                { cat: "💡 Tips, Souvenirs & Misc",amount:  800, note: "Personal expenses" },
+            ],
+            // Per day: hotel (night) + activities + food + other (fuel etc.)
+            days: {
+                1:  { hotel: 250, activities: 240, food: 120, other:   0 },
+                2:  { hotel: 250, activities: 240, food: 100, other:   0 },
+                3:  { hotel: 400, activities:   0, food:  80, other:  60 },
+                4:  { hotel: 500, activities:  80, food: 120, other:   0 },
+                5:  { hotel: 200, activities:   0, food: 120, other:  60 },
+                6:  { hotel: 200, activities: 360, food: 120, other:   0 },
+                7:  { hotel: 200, activities: 520, food: 120, other:   0 },
+                8:  { hotel: 200, activities: 160, food: 120, other:   0 },
+                9:  { hotel: 400, activities:  40, food: 100, other:  80 },
+                10: { hotel: 600, activities:  40, food: 100, other:  60 },
+                11: { hotel: 500, activities: 400, food:  80, other:  80 },
+                12: { hotel: 400, activities: 100, food:  80, other:  40 },
+                13: { hotel: 400, activities: 100, food:  80, other:   0 },
+                14: { hotel: 160, activities:  40, food: 120, other: 100 },
+                15: { hotel: 300, activities:   0, food:  80, other:   0 },
+                16: { hotel:   0, activities:   0, food:  60, other:   0 },
+            }
+        };
+
+        function renderBudgetCard() {
+            const el = document.getElementById('budgetCard');
+            if (!el) return;
+            const total = COST_DATA.summary.reduce((s, r) => s + r.amount, 0);
+            const pp = Math.round(total / 4);
+            el.innerHTML = `
+                <div class="card">
+                    <div class="card-title">💰 Estimated Trip Budget</div>
+                    <table class="budget-table">
+                        ${COST_DATA.summary.map(r => `
+                            <tr>
+                                <td>
+                                    <div>${r.cat}</div>
+                                    <div class="budget-note">${r.note}</div>
+                                </td>
+                                <td class="budget-amount">$${r.amount.toLocaleString()}</td>
+                            </tr>
+                        `).join('')}
+                        <tr class="budget-total-row">
+                            <td>Total · 4 people</td>
+                            <td class="budget-amount">~$${total.toLocaleString()}</td>
+                        </tr>
+                    </table>
+                    <div class="budget-perperson">~$${pp.toLocaleString()} per person</div>
+                    <div class="budget-disclaimer">${COST_DATA.disclaimer}</div>
+                </div>
+            `;
         }
 
         // ============================================================
