@@ -871,6 +871,28 @@
             margin-bottom: 8px;
         }
 
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .download-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            background-color: rgba(201, 150, 106, 0.08);
+        }
+
         /* FOOTER */
         footer {
             padding: 32px 0;
@@ -1253,6 +1275,7 @@
             <div class="card">
                 <div class="card-title">Trip Overview</div>
                 <div class="overview-links" id="overviewLinks"></div>
+                <button class="download-btn" onclick="downloadPage()">⬇ Download Offline</button>
             </div>
 
             <div class="card">
@@ -1926,6 +1949,18 @@
             const el = document.getElementById(`wx-${dayNumber}`);
             if (el) el.innerHTML = `<div class="weather-loading">Refreshing…</div>`;
             loadWeatherWidget(dayNumber);
+        }
+
+        function downloadPage() {
+            const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = (TRIP_DATA.title || 'trip').toLowerCase().replace(/\s+/g, '-') + '-itinerary.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
 
         initializePage();
