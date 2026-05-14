@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trip Itinerary Planner</title>
+    <title>Trip Planner</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <style>
         * {
@@ -58,7 +58,7 @@
             position: sticky;
             top: 0;
             border-bottom: 2px solid var(--border-color);
-            padding: 16px 0;
+            padding: 10px 0;
             z-index: 100;
             backdrop-filter: blur(8px);
             background-color: rgba(33, 28, 22, 0.95);
@@ -77,28 +77,52 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 8px;
         }
 
         .header-title {
-            font-size: 28px;
+            font-size: 20px;
             font-weight: 700;
             color: var(--accent-gold);
             flex: 1;
             text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .overview-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 5px 8px;
+            border-radius: 4px;
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .overview-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
         }
 
         .theme-toggle {
             background: none;
             border: none;
             color: var(--text-primary);
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
-            padding: 8px;
+            padding: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: var(--transition);
             border-radius: 4px;
+            flex-shrink: 0;
         }
 
         .theme-toggle:hover {
@@ -498,154 +522,115 @@
         /* DRIVE BANNER */
         .drive-banner {
             background-color: var(--bg-tertiary);
-            border-radius: 8px;
+            border-left: 4px solid var(--accent-gold);
             padding: 16px;
             margin-bottom: 16px;
-            border-left: 4px solid #7A8550;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .drive-banner::before {
+            content: '🚗';
+            font-size: 20px;
+            flex-shrink: 0;
         }
 
         .drive-info {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
+            flex: 1;
         }
 
         .drive-route {
             font-weight: 600;
-            color: var(--accent-gold);
+            color: var(--text-primary);
+            margin-bottom: 4px;
         }
 
         .drive-duration {
-            color: var(--text-secondary);
             font-size: 13px;
+            color: var(--text-secondary);
         }
 
-        /* FLIGHT CARDS */
-        .flights-scroll {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .flight-card {
-            background-color: rgba(74, 138, 181, 0.1);
-            border-left: 3px solid #4A8AB5;
-            padding: 12px;
+        /* FLIGHT BANNER */
+        .flight-banner {
+            background-color: var(--bg-tertiary);
+            border-left: 4px solid #3A7DA0;
+            padding: 16px;
+            margin-bottom: 16px;
             border-radius: 4px;
             display: flex;
-            flex-direction: column;
-            gap: 4px;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
         }
 
-        .flight-day {
-            font-weight: 600;
-            color: var(--accent-gold);
-            font-size: 12px;
+        .flight-banner::before {
+            content: '✈️';
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .flight-info {
+            flex: 1;
         }
 
         .flight-route {
             font-weight: 600;
             color: var(--text-primary);
+            margin-bottom: 4px;
         }
 
-        .flight-times {
-            color: var(--text-secondary);
-            font-size: 12px;
-        }
-
-        .flight-terminal {
-            color: var(--text-muted);
-            font-size: 11px;
-        }
-
-        .flight-checkin {
-            margin-top: 6px;
-        }
-
-        .flight-checkin a {
-            color: #3A7DA0;
-            text-decoration: none;
-            font-size: 11px;
-            font-weight: 600;
-        }
-
-        .flight-checkin a:hover {
-            color: #4a9dc0;
-        }
-
-        /* TRAVELERS */
-        .travelers-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .traveler-chip {
-            background-color: var(--bg-tertiary);
-            padding: 8px 12px;
-            border-radius: 20px;
+        .flight-details {
             font-size: 13px;
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-
-        /* CAR RENTAL */
-        .car-rental-info {
-            color: var(--text-secondary);
-            font-size: 14px;
-            line-height: 1.8;
-        }
-
-        /* ACCOMMODATION TABLE */
-        .accommodation-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-        }
-
-        .accommodation-table th {
-            background-color: var(--bg-tertiary);
-            color: var(--accent-gold);
-            font-weight: 600;
-            padding: 8px;
-            text-align: left;
-        }
-
-        .accommodation-table td {
-            padding: 8px;
-            border-bottom: 1px solid var(--border-color);
             color: var(--text-secondary);
         }
 
-        .accommodation-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        /* ACTIVITY TIMELINE */
+        /* TIMELINE */
         .timeline {
             position: relative;
-            padding: 0 0 0 20px;
+            padding-left: 20px;
+            border-left: 2px solid var(--border-color);
         }
 
         .timeline-item {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 16px;
-            padding-left: 8px;
+            padding-bottom: 16px;
+            padding-left: 20px;
+            margin-left: -20px;
+        }
+
+        .timeline-time-group-header {
+            font-weight: 600;
+            color: var(--accent-gold);
+            font-size: 15px;
+            margin-bottom: 8px;
+            margin-top: 12px;
+            margin-left: -20px;
+            padding-left: 20px;
+        }
+
+        .timeline-item-bullet {
+            padding-bottom: 8px;
+            margin-left: -20px;
+            padding-left: 20px;
+        }
+
+        .timeline-item-bullet::before {
+            content: '•';
+            margin-right: 8px;
+            color: var(--accent-gold);
         }
 
         .timeline-time {
             font-weight: 600;
             color: var(--accent-gold);
-            min-width: 80px;
-            font-size: 13px;
+            font-size: 14px;
         }
 
         .timeline-text {
-            flex: 1;
             color: var(--text-primary);
+            margin-top: 4px;
             font-size: 14px;
         }
 
@@ -653,168 +638,204 @@
             font-size: 12px;
             color: var(--text-secondary);
             margin-top: 4px;
-            font-style: italic;
         }
 
         .timeline-tag {
             display: inline-block;
-            background-color: #9A7A30;
-            color: #E8C66E;
+            background-color: #8A3A3A;
+            color: #FF9999;
             padding: 2px 8px;
             border-radius: 3px;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 600;
-            margin-top: 4px;
-        }
-
-        .timeline-time-group-header {
-            font-weight: 600;
-            color: var(--accent-gold);
-            margin-top: 12px;
-            margin-bottom: 8px;
-            font-size: 13px;
-        }
-
-        .timeline-item-bullet {
-            margin-bottom: 10px;
-            padding-left: 12px;
-            position: relative;
-            color: var(--text-primary);
-            font-size: 14px;
-        }
-
-        .timeline-item-bullet.alternative {
-            color: #E8C66E;
-        }
-
-        .timeline-item-bullet::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--accent-gold);
-            font-weight: bold;
+            margin-top: 6px;
         }
 
         /* MEALS SECTION */
         .meals-section {
-            padding: 16px;
+            margin-bottom: 24px;
+            padding: 0;
         }
 
         .meal-type {
             font-weight: 600;
             color: var(--accent-gold);
+            font-size: 15px;
             margin-bottom: 8px;
-            font-size: 14px;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meal-type::before {
+            content: '•';
+        }
+
+        .meal-type:first-child {
+            margin-top: 0;
         }
 
         .meal-note {
-            color: var(--text-secondary);
-            font-size: 12px;
-            margin-top: 4px;
+            font-size: 14px;
+            color: var(--text-primary);
             margin-bottom: 12px;
+            padding-left: 16px;
         }
 
         .restaurant-cards {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            margin-top: 12px;
+            margin-top: 8px;
+            margin-bottom: 12px;
+            padding-left: 16px;
         }
 
         .restaurant-card {
-            background-color: rgba(122, 133, 80, 0.2);
-            border: 1px solid rgba(122, 133, 80, 0.4);
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
             border-radius: 6px;
             padding: 12px;
+            cursor: pointer;
             transition: var(--transition);
         }
 
-        .restaurant-card.selected {
-            background-color: rgba(74, 128, 80, 0.3);
-            border-color: #7A8A50;
+        .restaurant-card:hover {
+            border-color: var(--text-secondary);
+            background-color: rgba(201, 150, 106, 0.05);
         }
 
-        .restaurant-card:hover {
-            border-color: var(--accent-gold);
+        .restaurant-card.selected {
+            background-color: #4A8050;
+            border-color: #7FB06F;
         }
 
         .restaurant-name {
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .restaurant-card.selected .restaurant-name {
+            color: #8DC87E;
         }
 
         .restaurant-desc {
+            font-size: 12px;
             color: var(--text-secondary);
-            font-size: 13px;
-            margin-bottom: 8px;
+            margin-top: 4px;
+        }
+
+        .restaurant-card.selected .restaurant-desc {
+            color: #B8D5AF;
         }
 
         .restaurant-meta {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 10px;
+            margin-top: 8px;
+            font-size: 12px;
         }
 
         .restaurant-rating {
-            font-size: 12px;
-            color: var(--text-secondary);
+            color: var(--accent-gold);
+            font-weight: 600;
         }
 
         .restaurant-buttons {
             display: flex;
-            gap: 8px;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .btn-select, .btn-maps {
+            flex: 1;
+            padding: 6px 8px;
+            border: 1px solid var(--border-color);
+            background-color: transparent;
+            color: var(--accent-gold);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            transition: var(--transition);
         }
 
         .btn-select {
-            flex: 1;
-            padding: 6px 10px;
-            background-color: rgba(122, 133, 80, 0.3);
-            border: 1px solid #7A8550;
-            border-radius: 4px;
-            color: var(--text-primary);
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: 600;
-            transition: var(--transition);
+            background-color: var(--bg-tertiary);
         }
 
         .btn-select:hover {
-            background-color: rgba(122, 133, 80, 0.5);
+            background-color: rgba(201, 150, 106, 0.1);
+            border-color: var(--text-secondary);
         }
 
-        .btn-maps {
-            flex: 1;
-            padding: 6px 10px;
-            background-color: #3A7DA0;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: 600;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
+        .restaurant-card.selected .btn-select {
+            background-color: #7FB06F;
+            color: var(--bg-primary);
+            border-color: #7FB06F;
         }
 
         .btn-maps:hover {
-            background-color: #4a9dc0;
+            border-color: var(--text-secondary);
+            color: #E8C66E;
         }
 
-        /* HOTEL CARD */
+        /* WARNINGS & GEMS */
+        .warnings-title, .gems-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+            margin-top: 12px;
+        }
+
+        .warning {
+            background-color: #3a2020;
+            border: 1px solid #6a3a3a;
+            border-left: 4px solid #8A3A3A;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #FFB3B3;
+        }
+
+        .gem {
+            background-color: #3a3020;
+            border: 1px solid #6a5a3a;
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #E8C66E;
+        }
+
+        /* HOTEL INFO */
         .hotel-info {
-            padding-bottom: 12px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 14px;
+            margin-bottom: 8px;
+            transition: var(--transition);
         }
 
         .hotel-name {
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-size: 15px;
+        }
+
+        .hotel-note {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            line-height: 1.5;
         }
 
         .hotel-status-badges {
@@ -824,20 +845,212 @@
             flex-wrap: wrap;
         }
 
-        .hotel-note {
-            color: var(--text-secondary);
+        .hotel-meta {
+            display: flex;
+            gap: 8px;
             font-size: 12px;
-            margin-top: 6px;
+            color: var(--text-secondary);
         }
 
         .hotel-buttons {
             display: flex;
             gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn-maps {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        /* NO HOTEL CARD */
+        .no-hotel-card {
+            background-color: rgba(201, 150, 106, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        /* ACCOMMODATION TABLE */
+        .accommodation-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .accommodation-table th {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+
+        .accommodation-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            color: var(--text-primary);
+        }
+
+        .accommodation-table tr:nth-child(even) {
+            background-color: rgba(50, 40, 30, 0.3);
+        }
+
+        body.light-mode .accommodation-table tr:nth-child(even) {
+            background-color: rgba(201, 150, 106, 0.03);
+        }
+
+        /* FLIGHTS SECTION */
+        .flights-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+
+        .flights-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .flights-scroll::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+
+        .flights-scroll::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+        }
+
+        .flight-card {
+            flex-shrink: 0;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+            min-width: 240px;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .flight-card:hover {
+            border-color: #3A7DA0;
+        }
+
+        .flight-day {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .flight-route {
+            font-weight: 600;
+            color: #3A7DA0;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .flight-times {
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .flight-terminal {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .flight-checkin {
             margin-top: 8px;
         }
 
-        /* GENERIC LINK BUTTON */
-        .generic-link {
+        .flight-checkin a {
+            display: inline-block;
+            padding: 6px 10px;
+            background-color: #3A7DA0;
+            color: var(--text-primary);
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .flight-checkin a:hover {
+            background-color: #4a9dc0;
+        }
+
+        /* TRAVELERS & CAR RENTAL */
+        .travelers-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .traveler-chip {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-size: 13px;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .traveler-chip:hover {
+            border-color: var(--accent-gold);
+            background-color: rgba(201, 150, 106, 0.05);
+        }
+
+        .car-rental-info {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* SPOTIFY / TRICOUNT LINKS IN OVERVIEW */
+        .spotify-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #1DB954;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .spotify-link:hover {
+            background-color: #1ed760;
+            transform: scale(1.05);
+        }
+
+        .spotify-icon {
+            font-size: 16px;
+        }
+
+        .overview-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .tricount-link {
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -851,24 +1064,40 @@
             transition: var(--transition);
         }
 
-        .generic-link:hover {
+        .tricount-link:hover {
             background-color: #5DA0E9;
             transform: scale(1.05);
         }
 
-        .generic-link.spotify {
-            background-color: #1DB954;
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'DM Sans', sans-serif;
         }
 
-        .generic-link.spotify:hover {
-            background-color: #1ed760;
+        .download-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            background-color: rgba(201, 150, 106, 0.08);
         }
 
-        .overview-links {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 8px;
+        .accommodation-table tr[data-day] {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .accommodation-table tr[data-day]:hover {
+            background-color: rgba(201, 150, 106, 0.15) !important;
         }
 
         /* FOOTER */
@@ -926,6 +1155,92 @@
 
         .weather-refresh:hover { color: var(--accent-gold); }
 
+        /* BUDGET */
+        .day-cost-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid #7A6E5E;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .day-cost-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .day-cost-items {
+            font-size: 11px;
+            color: var(--text-secondary);
+            flex: 1;
+        }
+
+        .day-cost-total {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            white-space: nowrap;
+            margin-left: auto;
+        }
+
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .budget-table td {
+            padding: 9px 10px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        .budget-table tr:last-child td { border-bottom: none; }
+
+        .budget-amount {
+            text-align: right;
+            font-weight: 600;
+            color: var(--accent-gold);
+            white-space: nowrap;
+        }
+
+        .budget-note {
+            font-size: 11px;
+            color: var(--text-secondary);
+            padding-top: 2px;
+        }
+
+        .budget-total-row td {
+            font-weight: 700;
+            font-size: 14px;
+            border-top: 2px solid var(--border-color) !important;
+            border-bottom: none !important;
+        }
+
+        .budget-perperson {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        .budget-disclaimer {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-style: italic;
+            text-align: center;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-color);
+        }
+
         /* MOBILE */
         @media (max-width: 640px) {
             .container {
@@ -944,13 +1259,8 @@
                 padding: 16px;
             }
 
-            .header-content {
-                flex-direction: column;
-                gap: 12px;
-            }
-
             .header-title {
-                font-size: 24px;
+                font-size: 18px;
             }
 
             .day-tab {
@@ -959,289 +1269,125 @@
             }
         }
     </style>
-
+</head>
+<body>
     <script>
         // ============================================================
-        // TRIP DATA - EXAMPLE / TEMPLATE
+        // TRIP_DATA — Edit this section to customise your trip
         // ============================================================
-        // Replace with your own trip data. Each field is explained below:
-        //
-        // title (string): Trip name/destination that appears in header
-        // travelers (array of strings): Names of people on the trip
-        // carRental (object): Car rental company details
-        //   - company: Company name
-        //   - phone: Phone number
-        //   - website: Website URL
-        // links (array of objects): Custom links in overview (e.g., playlists, expense tracking)
-        //   - label: Display text for the link
-        //   - url: Full URL
-        //   - icon: Single emoji or character (e.g., "♪", "💰")
-        //   - className: CSS class for styling (e.g., "spotify", "default")
-        // flights (array of objects): Flight information
-        //   - date: Date (e.g., "May 16")
-        //   - dayOfWeek: Day name (e.g., "Sat")
-        //   - airline: Airline code/name (e.g., "ET 601")
-        //   - from: Departure airport code (e.g., "DXB")
-        //   - to: Arrival airport code (e.g., "ADD")
-        //   - departTime: Departure time (HH:MM format)
-        //   - arriveTime: Arrival time (HH:MM format)
-        //   - terminal: Terminal info (e.g., "Terminal DXB T1")
-        //   - passengers: Array of traveler names on this flight
-        // days (array of objects): One per day of trip
-        //   - dayNumber: Day count (1, 2, 3...)
-        //   - date: Full date (e.g., "May 16")
-        //   - dayOfWeek: Day name (e.g., "Sat")
-        //   - title: Day title (e.g., "Arrival")
-        //   - location: Location/subtitle
-        //   - backgroundImage: Image URL for hero section
-        //   - flight: Flight object if applicable, else null
-        //   - hotel: Hotel info object
-        //     * name: Hotel name
-        //     * status: "confirmed", "pending", "missing"
-        //     * note: Additional info
-        //     * bookedBy: Name of person who booked
-        //     * mapsUrl: Google Maps URL
-        //     * altHotel (optional): Alternative hotel with same structure
-        //   - drive: Driving info if applicable, else null
-        //     * from: Starting point
-        //     * to: Destination
-        //     * duration: Estimated duration
-        //     * distance: Distance or notes
-        //   - activities: Array of activity objects
-        //     * time: Time label (e.g., "Morning", "08:30", "Afternoon")
-        //     * text: Activity description
-        //     * subNote: Additional details
-        //     * needsBooking: Boolean flag
-        //   - meals: Object with breakfast, lunch, dinner
-        //     * Each meal has: status, note, restaurants array
-        //       - status: "included", "flexible", "options", "pending", "missing"
-        //       - note: Details
-        //       - restaurants: Array of restaurant objects
-        //         * name, desc, rating, mapsUrl
-        //   - route: Google Maps route URL, or null
-        //   - warnings: Array of warning strings
-        //   - gems: Array of tip/hidden gem strings
-
         const TRIP_DATA = {
-            title: "My Trip",
-            travelers: ["Traveler 1"],
-            carRental: {
-                company: "Car Rental Company",
-                phone: "+1 (555) 123-4567",
-                website: "example.com"
-            },
-            links: [
-                {
-                    label: "Trip Playlist",
-                    url: "https://open.spotify.com/playlist/YOUR_PLAYLIST_ID",
-                    icon: "♪",
-                    className: "spotify"
-                },
-                {
-                    label: "Trip Expenses",
-                    url: "https://example.com/expense-tracker",
-                    icon: "💰",
-                    className: "default"
-                }
-            ],
+            title: "Trip Name 2027",
+            travelers: ["Person 1", "Person 2"],
+
+            // Optional sections — set to null to hide
+            carRental: null,
+            // carRental: { company: "Rental Co.", phone: "+1 234 567 890", website: "example.com" },
+
+            spotifyPlaylist: null,
+            // spotifyPlaylist: "https://open.spotify.com/playlist/YOUR_ID",
+
+            tricountUrl: null,
+            // tricountUrl: "https://tricount.com/YOUR_ID",
+
+            checkInUrl: null,
+            // checkInUrl: "https://airline.com/check-in",
+
             flights: [
                 {
-                    date: "May 1",
-                    dayOfWeek: "Mon",
-                    airline: "AA 100",
-                    from: "JFK",
-                    to: "LAX",
-                    departTime: "09:00",
-                    arriveTime: "12:30",
-                    terminal: "Terminal 4",
-                    passengers: ["Traveler 1"]
+                    date: "Jan 1", dayOfWeek: "Mon", airline: "XX 001",
+                    from: "AAA", to: "BBB", departTime: "10:00", arriveTime: "14:00",
+                    terminal: "Terminal 1", passengers: ["Person 1", "Person 2"]
                 }
             ],
             days: [
                 {
-                    dayNumber: 1,
-                    date: "May 1",
-                    dayOfWeek: "Mon",
-                    title: "Departure",
-                    location: "Travel Day",
+                    dayNumber: 1, date: "Jan 1", dayOfWeek: "Mon",
+                    title: "Arrival", location: "City, Country",
                     backgroundImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800",
                     flight: {
-                        date: "May 1",
-                        dayOfWeek: "Mon",
-                        airline: "AA 100",
-                        from: "JFK",
-                        to: "LAX",
-                        departTime: "09:00",
-                        arriveTime: "12:30",
-                        terminal: "Terminal 4"
+                        date: "Jan 1", dayOfWeek: "Mon", airline: "XX 001",
+                        from: "AAA", to: "BBB", departTime: "10:00", arriveTime: "14:00",
+                        terminal: "Terminal 1"
                     },
                     hotel: {
-                        name: "Hotel Name",
-                        status: "confirmed",
-                        note: "Check-in at 3 PM",
-                        bookedBy: "Traveler 1",
-                        mapsUrl: "maps.google.com/?q=Hotel+Name"
-                    },
-                    drive: {
-                        from: "Airport",
-                        to: "Hotel",
-                        duration: "~45 min",
-                        distance: "~30 km"
-                    },
-                    activities: [
-                        {
-                            time: "09:00",
-                            text: "Depart for airport",
-                            subNote: "Allow extra time for parking/check-in",
-                            needsBooking: false
-                        },
-                        {
-                            time: "12:30",
-                            text: "Arrive at destination",
-                            subNote: "Collect rental car if applicable",
-                            needsBooking: false
-                        },
-                        {
-                            time: "Afternoon",
-                            text: "Check into hotel",
-                            subNote: "Settle in and explore nearby area",
-                            needsBooking: false
-                        }
-                    ],
-                    meals: {
-                        breakfast: {
-                            status: "flexible",
-                            note: "At home before departure",
-                            restaurants: []
-                        },
-                        lunch: {
-                            status: "flexible",
-                            note: "In-flight or at airport",
-                            restaurants: [
-                                {
-                                    name: "Example Restaurant",
-                                    desc: "Local cuisine",
-                                    rating: "4.5★",
-                                    mapsUrl: "maps.google.com/?q=Example+Restaurant"
-                                }
-                            ]
-                        },
-                        dinner: {
-                            status: "options",
-                            note: "First evening",
-                            restaurants: [
-                                {
-                                    name: "Dinner Option 1",
-                                    desc: "Upscale dining",
-                                    rating: "4.6★",
-                                    mapsUrl: "maps.google.com/?q=Dinner+Option+1"
-                                },
-                                {
-                                    name: "Dinner Option 2",
-                                    desc: "Casual dining",
-                                    rating: "4.3★",
-                                    mapsUrl: "maps.google.com/?q=Dinner+Option+2"
-                                }
-                            ]
-                        }
-                    },
-                    route: "maps.google.com/maps/dir/Airport/Hotel",
-                    warnings: [
-                        "Check flight status before departing home",
-                        "Arrive 2-3 hours before international flight"
-                    ],
-                    gems: [
-                        "Download offline maps before traveling",
-                        "Check weather and pack accordingly"
-                    ]
-                },
-                {
-                    dayNumber: 2,
-                    date: "May 2",
-                    dayOfWeek: "Tue",
-                    title: "Exploration",
-                    location: "First Full Day",
-                    backgroundImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800",
-                    flight: null,
-                    hotel: {
-                        name: "Hotel Name",
-                        status: "confirmed",
-                        note: "Continue stay",
-                        bookedBy: "Traveler 1",
-                        mapsUrl: "maps.google.com/?q=Hotel+Name"
+                        name: "Hotel Name", status: "confirmed",
+                        note: "Check-in from 15:00", bookedBy: null, mapsUrl: null
                     },
                     drive: null,
                     activities: [
-                        {
-                            time: "Morning",
-                            text: "Breakfast at hotel or nearby café",
-                            subNote: "Ask concierge for recommendations",
-                            needsBooking: false
-                        },
-                        {
-                            time: "10:00",
-                            text: "Visit local attraction",
-                            subNote: "Popular spot, arrive early",
-                            needsBooking: true
-                        },
-                        {
-                            time: "Afternoon",
-                            text: "Lunch and shopping",
-                            subNote: "Local markets and shops",
-                            needsBooking: false
-                        },
-                        {
-                            time: "Evening",
-                            text: "Rest at hotel",
-                            subNote: "Prepare for next day",
-                            needsBooking: false
-                        }
+                        { time: "14:00", text: "Check in to hotel", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Explore the area", subNote: "", needsBooking: false }
                     ],
                     meals: {
-                        breakfast: {
-                            status: "included",
-                            note: "Hotel breakfast included",
-                            restaurants: []
-                        },
-                        lunch: {
-                            status: "options",
-                            note: "Try local cuisine",
-                            restaurants: [
-                                {
-                                    name: "Local Lunch Spot",
-                                    desc: "Traditional food",
-                                    rating: "4.4★",
-                                    mapsUrl: "maps.google.com/?q=Local+Lunch+Spot"
-                                }
-                            ]
-                        },
-                        dinner: {
-                            status: "options",
-                            note: "Evening dining",
-                            restaurants: [
-                                {
-                                    name: "Fine Dining Restaurant",
-                                    desc: "Premium experience",
-                                    rating: "4.7★",
-                                    mapsUrl: "maps.google.com/?q=Fine+Dining"
-                                }
-                            ]
-                        }
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "options", note: "", restaurants: [
+                            { name: "Restaurant Name", desc: "Local cuisine · Great views", rating: "4.5★", mapsUrl: "maps.google.com/?q=Restaurant+Name" }
+                        ]},
+                        dinner: { status: "options", note: "", restaurants: [] }
                     },
                     route: null,
                     warnings: [],
-                    gems: [
-                        "Visit local bookstore for city guides",
-                        "Ask hotel staff for insider tips"
-                    ]
+                    gems: []
+                },
+                {
+                    dayNumber: 2, date: "Jan 2", dayOfWeek: "Tue",
+                    title: "Day Title", location: "City, Country",
+                    backgroundImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Hotel Name", status: "pending",
+                        note: "Awaiting confirmation", bookedBy: null, mapsUrl: null
+                    },
+                    drive: { from: "City A", to: "City B", duration: "2h", distance: "150 km" },
+                    activities: [
+                        { time: "Morning", text: "Activity 1", subNote: "Book in advance", needsBooking: true },
+                        { time: "Afternoon", text: "Activity 2", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "At hotel", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "missing", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: ["⚠️ Warning example — something to watch out for"],
+                    gems: ["💡 Hidden gem — insider tip goes here"]
                 }
             ]
+        };
+
+        // ============================================================
+        // DAY_WEATHER — Add coordinates per day to enable forecasts
+        // Uses Open-Meteo (free, no API key required)
+        // ============================================================
+        const DAY_WEATHER = {
+            // Add coords per day: dayNumber: { lat: 0.0, lon: 0.0, isoDate: "YYYY-MM-DD" }
+            // Example: 1: { lat: 48.8566, lon: 2.3522, isoDate: "2027-01-01" },
+        };
+
+        // ============================================================
+        // COST_DATA — Update with actual amounts as bookings are made
+        // ============================================================
+        const COST_DATA = {
+            disclaimer: "All figures are estimates. Update with confirmed prices as bookings are made.",
+            summary: [
+                { cat: "✈️ Flights",               amount: 0, note: "X pax · round-trip" },
+                { cat: "🏨 Accommodation",           amount: 0, note: "X nights · X rooms" },
+                { cat: "🚗 Car Rental",              amount: 0, note: "If applicable" },
+                { cat: "🗺️ Activities & Tours",      amount: 0, note: "Tours, entrance fees, etc." },
+                { cat: "🍽️ Food & Drinks",           amount: 0, note: "Meals not included in stays" },
+                { cat: "⛽ Fuel",                    amount: 0, note: "If self-driving" },
+                { cat: "💡 Tips, Souvenirs & Misc",  amount: 0, note: "Personal expenses" },
+            ],
+            days: {
+                // 1: { hotel: 0, activities: 0, food: 0, other: 0 },
+            }
         };
     </script>
 
     <header>
         <div class="header-content">
-            <div class="header-title" id="headerTitle">My Trip</div>
+            <button class="overview-btn" onclick="switchView('overview')">← Overview</button>
+            <div class="header-title" id="headerTitle">Trip Planner</div>
             <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
         </div>
         <div class="day-tabs" id="dayTabs"></div>
@@ -1251,8 +1397,8 @@
         <!-- OVERVIEW TAB -->
         <div class="day-view active" id="overview">
             <div class="card">
-                <div class="card-title">Trip Overview</div>
-                <div class="overview-links" id="overviewLinks"></div>
+                <div class="card-title">Itinerary</div>
+                <table class="accommodation-table" id="accommodationTable"></table>
             </div>
 
             <div class="card">
@@ -1265,15 +1411,11 @@
                 <div class="travelers-list" id="travelersListView"></div>
             </div>
 
-            <div class="card">
-                <div class="card-title">Car Rental</div>
-                <div class="car-rental-info" id="carRentalInfo"></div>
-            </div>
+            <div id="carRentalCard"></div>
 
-            <div class="card">
-                <div class="card-title">Accommodation Status</div>
-                <table class="accommodation-table" id="accommodationTable"></table>
-            </div>
+            <div id="overviewLinks"></div>
+
+            <div id="budgetCard"></div>
         </div>
 
         <!-- DAY VIEWS -->
@@ -1281,7 +1423,7 @@
     </main>
 
     <footer>
-        <p>Trip Itinerary Planner</p>
+        <p id="footerText">Trip Planner</p>
     </footer>
 
     <script>
@@ -1342,23 +1484,15 @@
         function initializePage() {
             initializeTheme();
             document.getElementById('headerTitle').textContent = TRIP_DATA.title;
+            document.getElementById('footerText').textContent = TRIP_DATA.title + ' Trip Planner';
             renderOverviewTab();
+            renderBudgetCard();
             renderDayTabs();
             renderDayViews();
         }
 
         function renderOverviewTab() {
-            // Render dynamic links from TRIP_DATA.links
-            const overviewLinksContainer = document.getElementById("overviewLinks");
-            overviewLinksContainer.innerHTML = TRIP_DATA.links
-                .map(link => `
-                    <a href="${link.url}" target="_blank" class="generic-link ${link.className}">
-                        <span>${link.icon}</span>
-                        <span>${link.label}</span>
-                    </a>
-                `)
-                .join("");
-
+            // Flights
             const flightsList = document.getElementById("flightsList");
             flightsList.innerHTML = TRIP_DATA.flights
                 .map(f => `
@@ -1368,74 +1502,78 @@
                         <div class="flight-times">${f.from} → ${f.to}</div>
                         <div class="flight-times">${f.departTime}–${f.arriveTime}</div>
                         <div class="flight-terminal">${f.terminal}</div>
+                        ${TRIP_DATA.checkInUrl ? `
                         <div class="flight-checkin">
-                            <a href="https://www.google.com" target="_blank">Online Check-in</a>
-                        </div>
+                            <a href="${TRIP_DATA.checkInUrl}" target="_blank">Online Check-in</a>
+                        </div>` : ''}
                     </div>
                 `)
                 .join("");
 
+            // Travellers
             const travelersView = document.getElementById("travelersListView");
             travelersView.innerHTML = TRIP_DATA.travelers
                 .map(t => `<div class="traveler-chip">${t}</div>`)
                 .join("");
 
-            const carInfo = document.getElementById("carRentalInfo");
-            carInfo.innerHTML = `
-                <strong>${TRIP_DATA.carRental.company}</strong><br>
-                📞 ${TRIP_DATA.carRental.phone}<br>
-                🌐 ${TRIP_DATA.carRental.website}
+            // Car rental (conditional)
+            const carRentalCard = document.getElementById("carRentalCard");
+            if (TRIP_DATA.carRental) {
+                carRentalCard.innerHTML = `
+                    <div class="card">
+                        <div class="card-title">Car Rental</div>
+                        <div class="car-rental-info">
+                            <strong>${TRIP_DATA.carRental.company}</strong><br>
+                            📞 ${TRIP_DATA.carRental.phone}<br>
+                            🌐 ${TRIP_DATA.carRental.website}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Links (Spotify, Tricount, Download)
+            const linksDiv = document.getElementById('overviewLinks');
+            const links = [];
+            if (TRIP_DATA.spotifyPlaylist) links.push(`<a href="${TRIP_DATA.spotifyPlaylist}" target="_blank" class="spotify-link"><span class="spotify-icon">♪</span><span>Trip Playlist</span></a>`);
+            if (TRIP_DATA.tricountUrl) links.push(`<a href="${TRIP_DATA.tricountUrl}" target="_blank" class="tricount-link"><span>💰</span><span>Trip Expenses</span></a>`);
+            linksDiv.innerHTML = `
+                <div class="card">
+                    <div class="card-title">Links</div>
+                    <div class="overview-links">
+                        ${links.join('')}
+                        <button class="download-btn" onclick="downloadPage()">⬇ Download Offline</button>
+                    </div>
+                </div>
             `;
 
+            // Accommodation / itinerary table
             const accTable = document.getElementById("accommodationTable");
             let tableHTML = `
                 <tr>
                     <th>Day</th>
                     <th>Date</th>
-                    <th>Hotel</th>
-                    <th>Hotel Status</th>
-                    <th>Activities Status</th>
+                    <th>Plan</th>
+                    <th>Status</th>
                 </tr>
             `;
 
-            const nights = [];
-            for (let i = 0; i < TRIP_DATA.days.length - 1; i++) {
-                const day = TRIP_DATA.days[i];
+            TRIP_DATA.days.forEach((day, i) => {
+                const hotelBadge = day.hotel.status === 'confirmed' ? 'ready' : day.hotel.status === 'missing' ? 'missing' : 'need-booking';
+                const hasToBook = day.activities && day.activities.some(a => a.needsBooking);
+                const actBadge = hasToBook ? 'need-booking' : (day.activities && day.activities.length > 0 ? 'ready' : 'missing');
 
-                // Determine activities status
-                let activitiesStatus = "missing";
-                let activitiesBadge = "missing";
-
-                if (day.activities && day.activities.length > 0) {
-                    const hasToBook = day.activities.some(a => a.needsBooking);
-                    if (hasToBook) {
-                        activitiesStatus = "Need Booking";
-                        activitiesBadge = "need-booking";
-                    } else {
-                        activitiesStatus = "Ready";
-                        activitiesBadge = "ready";
-                    }
-                }
-
-                nights.push({
-                    day: i + 1,
-                    date: day.date,
-                    hotel: day.hotel.name,
-                    hotelStatus: day.hotel.status,
-                    activitiesStatus: activitiesStatus,
-                    activitiesBadge: activitiesBadge
-                });
-            }
-
-            nights.forEach(n => {
-                const hotelStatusData = STATUS_STYLES[n.hotelStatus];
                 tableHTML += `
-                    <tr data-day="day${n.day}" onclick="switchView('day${n.day}')">
-                        <td>${n.day}</td>
-                        <td>${n.date}</td>
-                        <td>${n.hotel}</td>
-                        <td><span class="badge ${hotelStatusData.badge === 'confirmed' ? 'ready' : hotelStatusData.badge === 'missing' ? 'missing' : 'need-booking'}">${hotelStatusData.badge === 'confirmed' ? 'Ready' : hotelStatusData.badge === 'missing' ? 'Missing' : hotelStatusData.label}</span></td>
-                        <td><span class="badge ${n.activitiesBadge}">${n.activitiesStatus}</span></td>
+                    <tr data-day="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">
+                        <td>${day.dayNumber}</td>
+                        <td style="white-space: nowrap;">${day.dayOfWeek}<br>${day.date.split(' ')[1] || day.date}</td>
+                        <td>
+                            <div style="font-weight: 600; color: var(--accent-gold); font-size: 13px;">${day.title}</div>
+                            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">${day.location}</div>
+                        </td>
+                        <td>
+                            <span class="badge ${hotelBadge}" style="font-size: 10px; padding: 2px 6px; margin: 0 0 4px 0; display: block; text-align: center;">🏨 ${hotelBadge === 'ready' ? '✓' : '✗'}</span>
+                            <span class="badge ${actBadge}" style="font-size: 10px; padding: 2px 6px; margin: 0; display: block; text-align: center;">📋 ${actBadge === 'ready' ? '✓' : '!'}</span>
+                        </td>
                     </tr>
                 `;
             });
@@ -1457,7 +1595,7 @@
                 const datePartials = day.date.split(' ');
                 tabsHTML += `
                     <div class="${className}" data-view="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">
-                        Day ${day.dayNumber}<br>${datePartials[1]} ${datePartials[0]}
+                        Day ${day.dayNumber}<br>${datePartials[1] || ''} ${datePartials[0]}
                     </div>
                 `;
             });
@@ -1527,7 +1665,7 @@
                                     <div style="color: var(--text-primary); margin-bottom: 4px;"><strong>${day.flight.from} → ${day.flight.to}</strong></div>
                                     <div style="color: var(--text-secondary); font-size: 13px; margin-bottom: 6px;">Depart: ${day.flight.departTime} · Arrive: ${day.flight.arriveTime}</div>
                                     <div style="color: var(--text-secondary); font-size: 12px; margin-bottom: 12px;">${day.flight.terminal}</div>
-                                    <a href="https://www.google.com" target="_blank" style="display: inline-block; padding: 8px 14px; background-color: #3A7DA0; color: white; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; transition: var(--transition);" onmouseover="this.style.backgroundColor='#4a9dc0'" onmouseout="this.style.backgroundColor='#3A7DA0'">Online Check-in</a>
+                                    ${TRIP_DATA.checkInUrl ? `<a href="${TRIP_DATA.checkInUrl}" target="_blank" style="display: inline-block; padding: 8px 14px; background-color: #3A7DA0; color: white; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; transition: var(--transition);" onmouseover="this.style.backgroundColor='#4a9dc0'" onmouseout="this.style.backgroundColor='#3A7DA0'">Online Check-in</a>` : ''}
                                 </div>
                             </div>
                         </div>
@@ -1611,6 +1749,24 @@
                     </div>
                 </div>
             `;
+
+            const dc = COST_DATA.days[day.dayNumber];
+            if (dc) {
+                const total = dc.hotel + dc.activities + dc.food + (dc.other || 0);
+                const parts = [];
+                if (dc.hotel)      parts.push(`🏨 $${dc.hotel}`);
+                if (dc.activities) parts.push(`🗺️ $${dc.activities}`);
+                if (dc.food)       parts.push(`🍽️ $${dc.food}`);
+                if (dc.other)      parts.push(`⛽ $${dc.other}`);
+                const flightNote = day.flight ? ' · excl. flights' : '';
+                html += `
+                    <div class="day-cost-bar">
+                        <span class="day-cost-label">💰 Est. group cost${flightNote}</span>
+                        <span class="day-cost-items">${parts.join(' · ')}</span>
+                        <span class="day-cost-total">~$${total}</span>
+                    </div>
+                `;
+            }
 
             return html;
         }
@@ -1711,7 +1867,6 @@
             `;
 
             if (day.hotel.altHotel) {
-                const altStatus = STATUS_STYLES[day.hotel.altHotel.status];
                 const altReady = day.hotel.altHotel.status === 'confirmed' ? 'ready' : day.hotel.altHotel.status === 'missing' ? 'missing' : 'need-booking';
                 html += `
                     <div class="hotel-info" style="border-left: 4px solid #9A7A30; margin-top: 12px;">
@@ -1816,14 +1971,52 @@
             switchView(`day${dayNum}`);
         }
 
+        function downloadPage() {
+            const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = (TRIP_DATA.title || 'trip').toLowerCase().replace(/\s+/g, '-') + '-itinerary.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function renderBudgetCard() {
+            const el = document.getElementById('budgetCard');
+            if (!el) return;
+            const total = COST_DATA.summary.reduce((s, r) => s + r.amount, 0);
+            const numPeople = TRIP_DATA.travelers.length || 1;
+            const pp = Math.round(total / numPeople);
+            el.innerHTML = `
+                <div class="card">
+                    <div class="card-title">💰 Estimated Trip Budget</div>
+                    <table class="budget-table">
+                        ${COST_DATA.summary.map(r => `
+                            <tr>
+                                <td>
+                                    <div>${r.cat}</div>
+                                    <div class="budget-note">${r.note}</div>
+                                </td>
+                                <td class="budget-amount">$${r.amount.toLocaleString()}</td>
+                            </tr>
+                        `).join('')}
+                        <tr class="budget-total-row">
+                            <td>Total · ${numPeople} ${numPeople === 1 ? 'person' : 'people'}</td>
+                            <td class="budget-amount">~$${total.toLocaleString()}</td>
+                        </tr>
+                    </table>
+                    <div class="budget-perperson">~$${pp.toLocaleString()} per person</div>
+                    <div class="budget-disclaimer">${COST_DATA.disclaimer}</div>
+                </div>
+            `;
+        }
+
         // ============================================================
         // WEATHER — Open-Meteo (free, no API key required)
-        // For new trips: populate DAY_WEATHER with lat/lon per day number
+        // Populate DAY_WEATHER above with lat/lon per day number
         // ============================================================
-
-        const DAY_WEATHER = {
-            // Example: 1: { lat: 48.8566, lon: 2.3522, isoDate: "2027-03-01" },
-        };
 
         const WX_CACHE_TTL = 3 * 60 * 60 * 1000; // 3 hours
 
