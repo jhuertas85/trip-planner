@@ -962,54 +962,586 @@
 
     <script>
         // ============================================================
-        // TRIP DATA — Germany · Switzerland · Madrid  |  July 2026
+        // TRIP DATA — Germany · Switzerland · Madrid  |  Jun 27 – Jul 8, 2026
         // ============================================================
 
         const TRIP_DATA = {
             title: "Germany · Switzerland · Madrid",
-            travelers: ["Juan Carlos", "Maria"],
+            travelers: ["Juan Carlos"],
             carRental: {
-                company: "TBD",
+                company: "No car rental — rail and metro throughout",
                 phone: "—",
                 website: "—"
             },
-            links: [
+            links: [],
+            flights: [
                 {
-                    label: "Trip Playlist",
-                    url: "https://open.spotify.com/",
-                    icon: "♪",
-                    className: "spotify"
+                    date: "Jun 27", dayOfWeek: "Sat", airline: "EK 0049",
+                    from: "DXB", to: "MUC", departTime: "08:50", arriveTime: "13:15",
+                    terminal: "DXB T3 → MUC T1", passengers: ["Juan Carlos"]
+                },
+                {
+                    date: "Jul 4", dayOfWeek: "Sat", airline: "IB 0616",
+                    from: "GVA", to: "MAD", departTime: "14:10", arriveTime: "16:15",
+                    terminal: "GVA T1 → MAD", passengers: ["Juan Carlos"]
+                },
+                {
+                    date: "Jul 8", dayOfWeek: "Wed", airline: "IB 381",
+                    from: "MAD", to: "SJU", departTime: "12:45", arriveTime: "15:25",
+                    terminal: "MAD T4S → SJU", passengers: ["Juan Carlos"]
                 }
             ],
-            flights: [
-                // flights will be added once itinerary is confirmed
-            ],
             days: [
+                // ── DAY 1 ── Jun 27 Sat ── Dubai → Munich ──────────────────
                 {
-                    dayNumber: 1,
-                    date: "Jul 1",
-                    dayOfWeek: "Wed",
-                    title: "Departure",
-                    location: "TBD",
+                    dayNumber: 1, date: "Jun 27", dayOfWeek: "Sat",
+                    title: "Departure", location: "Dubai → Munich",
+                    backgroundImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800",
+                    flight: {
+                        airline: "EK 0049", from: "DXB", to: "MUC",
+                        departTime: "08:50", arriveTime: "13:15", terminal: "DXB T3 · MUC T1"
+                    },
+                    hotel: {
+                        name: "myMINGA4 Hotel & Serviced Apartments",
+                        status: "confirmed",
+                        note: "Fliegenstrasse 4, Ludwigsvorstadt · AED 1,582 (3 nights)",
+                        bookedBy: "Juan Carlos",
+                        mapsUrl: "maps.google.com/?q=myMINGA4+Hotel+Munich+Fliegenstrasse+4"
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "13:15", text: "Arrive MUC T1 — S1/S8 S-Bahn to city centre", subNote: "~40 min, ~AED 50. Taxi option ~AED 65.", needsBooking: false },
+                        { time: "Afternoon", text: "Check in, short walk to Viktualienmarkt", subNote: "Pretzel from Rischart bakery — orient yourself", needsBooking: false },
+                        { time: "Evening", text: "Dinner at Gasthaus Isarthor", subNote: "Roast pork, locals only, ~€25 — must book ahead", needsBooking: true },
+                        { time: "Evening", text: "One beer at Hofbräuhaus", subNote: "45 min max — bucket list, then early night. Long travel day.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "On board EK0049 or at DXB before departure", restaurants: [] },
+                        lunch: { status: "flexible", note: "In-flight or grab something on arrival", restaurants: [] },
+                        dinner: {
+                            status: "options",
+                            note: "Book Gasthaus Isarthor before you fly",
+                            restaurants: [
+                                { name: "Gasthaus Isarthor", desc: "Traditional Bavarian roast pork, beloved by locals. Book ahead.", rating: "4.4★", mapsUrl: "maps.google.com/?q=Gasthaus+Isarthor+Munich" },
+                                { name: "Hofbräuhaus", desc: "Legendary beer hall — one beer, then move on", rating: "4.2★", mapsUrl: "maps.google.com/?q=Hofbrauhaus+Munich" }
+                            ]
+                        }
+                    },
+                    route: null,
+                    warnings: [
+                        "Book Gasthaus Isarthor before you fly — fills up fast on weekends",
+                        "S-Bahn from T1: take S1 (Ostbahnhof) or S8 (Herrsching) — both reach city centre in ~40 min"
+                    ],
+                    gems: [
+                        "Rischart bakery at Viktualienmarkt — best pretzels in Munich, grab one on your first afternoon walk"
+                    ]
+                },
+
+                // ── DAY 2 ── Jun 28 Sun ── Munich free day ──────────────────
+                {
+                    dayNumber: 2, date: "Jun 28", dayOfWeek: "Sun",
+                    title: "Munich — Free Day", location: "Munich",
+                    backgroundImage: "https://images.unsplash.com/photo-1555993539-1732b0258235?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "myMINGA4 Hotel & Serviced Apartments",
+                        status: "confirmed", note: "Continuing stay",
+                        bookedBy: "Juan Carlos",
+                        mapsUrl: "maps.google.com/?q=myMINGA4+Hotel+Munich+Fliegenstrasse+4"
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Viktualienmarkt — coffee, pretzel, wander stalls", subNote: "10 min walk from hotel", needsBooking: false },
+                        { time: "Morning", text: "Asamkirche", subNote: "5 min from Marienplatz, free — most ornate Baroque church in Munich, almost no tourists", needsBooking: false },
+                        { time: "Afternoon", text: "English Garden + Eisbach river surfers", subNote: "20 min walk or U4/U5. Watch people surf a standing wave in a city park — year-round, genuinely bizarre.", needsBooking: false },
+                        { time: "Afternoon", text: "Lunch at Chinesischer Turm beer garden", subNote: "Maß of Augustiner + Schweinshaxn ~€22. In the English Garden.", needsBooking: false },
+                        { time: "Afternoon", text: "Monopteros temple", subNote: "5 min walk from beer garden — hilltop views, locals drink wine on the steps at golden hour", needsBooking: false },
+                        { time: "Evening", text: "Dinner at Augustiner Klosterwirt", subNote: "Best Schweinsbraten in the city centre, ~€25-30", needsBooking: false },
+                        { time: "Evening", text: "Nightcap walk through Maxvorstadt or Lehel", subNote: "Beautiful neighbourhoods, no plan needed", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: {
+                            status: "options", note: "Coffee and pretzel at Viktualienmarkt",
+                            restaurants: [
+                                { name: "Rischart — Viktualienmarkt", desc: "Best pretzels and pastries, outdoor tables, morning market atmosphere", rating: "4.5★", mapsUrl: "maps.google.com/?q=Rischart+Viktualienmarkt+Munich" }
+                            ]
+                        },
+                        lunch: {
+                            status: "options", note: "Beer garden lunch in the English Garden",
+                            restaurants: [
+                                { name: "Chinesischer Turm Beer Garden", desc: "Maß of Augustiner + Schweinshaxn ~€22. Iconic, no reservation needed.", rating: "4.3★", mapsUrl: "maps.google.com/?q=Chinesischer+Turm+Biergarten+Munich" }
+                            ]
+                        },
+                        dinner: {
+                            status: "options", note: "Best Schweinsbraten in the centre",
+                            restaurants: [
+                                { name: "Augustiner Klosterwirt", desc: "Roast pork, Bavarian classics, ~€25-30. Excellent quality.", rating: "4.6★", mapsUrl: "maps.google.com/?q=Augustiner+Klosterwirt+Munich" }
+                            ]
+                        }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: [
+                        "Asamkirche: jaw-dropping Baroque interior, 5 min from Marienplatz, free, almost always empty",
+                        "Eisbach surfers: people surf a standing river wave in a city park — year-round, completely surreal",
+                        "Monopteros at golden hour: most underrated view in Munich, locals drink wine on the steps"
+                    ]
+                },
+
+                // ── DAY 3 ── Jun 29 Mon ── Munich last day ──────────────────
+                {
+                    dayNumber: 3, date: "Jun 29", dayOfWeek: "Mon",
+                    title: "Munich — Last Day", location: "Munich",
+                    backgroundImage: "https://images.unsplash.com/photo-1555993539-1732b0258235?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "myMINGA4 Hotel & Serviced Apartments",
+                        status: "confirmed", note: "Last night — check out tomorrow Jun 30. Pack tonight.",
+                        bookedBy: "Juan Carlos",
+                        mapsUrl: "maps.google.com/?q=myMINGA4+Hotel+Munich+Fliegenstrasse+4"
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Nymphenburg Palace and gardens", subNote: "~20 min by tram. Free gardens, €8 interior. Go early before crowds.", needsBooking: false },
+                        { time: "Afternoon", text: "NS-Dokumentationszentrum (Nazi Documentation Centre)", subNote: "Built on exact site of Nazi party HQ — one of the most important historical museums in Germany. €7 (free Sundays).", needsBooking: false },
+                        { time: "Afternoon", text: "OPTION: Dachau Concentration Camp", subNote: "30 min by S-Bahn from Hauptbahnhof. Most significant memorial site in Germany. Half-day — consider this OR the Dokuzentrum.", needsBooking: false },
+                        { time: "Afternoon", text: "OPTION: Deutsches Museum", subNote: "World's largest science museum, Museumsinsel, ~€15. Best if skipping Dachau.", needsBooking: false },
+                        { time: "Evening", text: "Last Munich dinner: Görreshof Wirtshaus (Maxvorstadt)", subNote: "Local beer garden, zero tourists, excellent food", needsBooking: false },
+                        { time: "Evening", text: "Pack for departure — early train tomorrow 06:48", subNote: "München Hbf is ~10 min walk from myMINGA4. Set your alarm.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Hotel or nearby café", restaurants: [] },
+                        lunch: { status: "flexible", note: "Near whichever afternoon activity you choose", restaurants: [] },
+                        dinner: {
+                            status: "options", note: "Last Munich dinner — local, no tourists",
+                            restaurants: [
+                                { name: "Görreshof Wirtshaus", desc: "Maxvorstadt local beer garden, no tourists, excellent Bavarian food", rating: "4.4★", mapsUrl: "maps.google.com/?q=Gorreshof+Wirtshaus+Munich" }
+                            ]
+                        }
+                    },
+                    route: null,
+                    warnings: [
+                        "Pack tonight — train Munich → Zurich departs 06:48. München Hbf is ~10 min walk.",
+                        "Book Munich → Zurich Sparpreis NOW if not done (~€22-30 2nd class)"
+                    ],
+                    gems: [
+                        "NS-Dokumentationszentrum: built on the exact site of Nazi party HQ — sobering and essential",
+                        "Nymphenburg on a Monday morning: arrive early and you may have the baroque gardens almost to yourself"
+                    ]
+                },
+
+                // ── DAY 4 ── Jun 30 Tue ── Munich → Zurich + LINKIN PARK ───
+                {
+                    dayNumber: 4, date: "Jun 30", dayOfWeek: "Tue",
+                    title: "Zurich — Linkin Park Night", location: "Munich → Zurich",
+                    backgroundImage: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Best Western Plus Hotel Zürcherhof",
+                        status: "confirmed",
+                        note: "Zähringerstrasse 21, Niederdorf · AED 992 (1 night) · Breakfast included",
+                        bookedBy: "Juan Carlos",
+                        mapsUrl: "maps.google.com/?q=Best+Western+Plus+Hotel+Zurcherhof+Zurich"
+                    },
+                    drive: {
+                        from: "München Hbf", to: "Zürich HB",
+                        duration: "~3h 32m", distance: "Dep 06:48 · Arr 10:20 · Book Sparpreis ~€22-30"
+                    },
+                    activities: [
+                        { time: "06:48", text: "Train München Hbf → Zürich HB", subNote: "Scenic route through Bavaria into Switzerland. Arrive ~10:20. Book Sparpreis in advance.", needsBooking: true },
+                        { time: "Morning", text: "Arrive Zurich, check in Zürcherhof (Niederdorf)", subNote: "Hotel is in the old town — you're already in the heart of it", needsBooking: false },
+                        { time: "Afternoon", text: "Zurich Altstadt — Niederdorf medieval lanes, Grossmünster church", subNote: "Walk straight from the hotel", needsBooking: false },
+                        { time: "Afternoon", text: "Fraumünster — Chagall stained glass windows", subNote: "~€5. Some of the finest stained glass in the world.", needsBooking: false },
+                        { time: "Afternoon", text: "Bahnhofstrasse + Limmat river waterfront", subNote: "Europe's most expensive shopping street — window shop, then enjoy the river", needsBooking: false },
+                        { time: "17:00", text: "Eat a proper meal before the concert", subNote: "Don't rely on stadium food. Early dinner, then head out.", needsBooking: false },
+                        { time: "18:00", text: "Tram 2 or 3 → Stadion Letzigrund (~15 min)", subNote: "Doors open 15:30 — arrive when suits you", needsBooking: false },
+                        { time: "18:25", text: "Phantogram", subNote: "Stadion Letzigrund", needsBooking: false },
+                        { time: "19:10", text: "Clipse", subNote: "Stadion Letzigrund", needsBooking: false },
+                        { time: "20:25", text: "🎸 LINKIN PARK", subNote: "Concert ends ~22:30-23:00", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Grab something at München Hbf before the 06:48 train", restaurants: [] },
+                        lunch: {
+                            status: "options", note: "Arrive Zurich ~10:20 — lunch in old town",
+                            restaurants: [
+                                { name: "Kronenhalle", desc: "Zurich institution with original Picasso on the walls. ~€40-50. Splurge-worthy.", rating: "4.6★", mapsUrl: "maps.google.com/?q=Kronenhalle+Zurich" },
+                                { name: "Zeughauskeller", desc: "Medieval armory turned restaurant — sausages, schnitzel, ~€25-30. Atmospheric.", rating: "4.4★", mapsUrl: "maps.google.com/?q=Zeughauskeller+Zurich" }
+                            ]
+                        },
+                        dinner: { status: "flexible", note: "Eat before the concert ~17:00 — stadium food is not the move", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [
+                        "⚠️ Book Munich → Zurich Sparpreis NOW — fares rise as the date approaches",
+                        "Doors open 15:30, but support acts start 18:25 — no need to rush there early"
+                    ],
+                    gems: [
+                        "Fraumünster's Chagall windows are genuinely one of the greatest things in any church in Europe",
+                        "Niederdorf neighbourhood: Zurich at its most medieval and walkable — explore on foot from the hotel"
+                    ]
+                },
+
+                // ── DAY 5 ── Jul 1 Wed ── Zurich → Liechtenstein → Bern ────
+                {
+                    dayNumber: 5, date: "Jul 1", dayOfWeek: "Wed",
+                    title: "Liechtenstein → Bern", location: "Zurich → Vaduz → Bern",
                     backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
                     flight: null,
                     hotel: {
-                        name: "TBD",
+                        name: "Prize by Radisson Bern City",
+                        status: "confirmed",
+                        note: "Viktoriastrasse 21, Breitenrain · AED 1,615 (3 nights) · Breakfast included",
+                        bookedBy: "Juan Carlos",
+                        mapsUrl: "maps.google.com/?q=Prize+by+Radisson+Bern+City+Viktoriastrasse"
+                    },
+                    drive: {
+                        from: "Zürich HB", to: "Vaduz, Liechtenstein",
+                        duration: "~1h 45m", distance: "Via Buchs SG · hourly trains · no reservation needed"
+                    },
+                    activities: [
+                        { time: "Morning", text: "Sleep in — concert recovery. Late hotel breakfast.", subNote: "Breakfast included at Zürcherhof", needsBooking: false },
+                        { time: "Morning", text: "Check out, store luggage if needed", subNote: "Hotel can hold bags", needsBooking: false },
+                        { time: "Afternoon", text: "Train Zurich → Vaduz (via Buchs SG)", subNote: "~1h 45m. Hourly. No reservation required.", needsBooking: false },
+                        { time: "Afternoon", text: "Vaduz: passport stamp at tourist office", subNote: "Official Liechtenstein tourist stamp — walk-in, Städtle main street. Genuinely unique.", needsBooking: false },
+                        { time: "Afternoon", text: "Vaduz Castle — exterior only, Rhine Valley views", subNote: "Walk up from town. Great views over the Rhine into Switzerland.", needsBooking: false },
+                        { time: "Afternoon", text: "Liechtenstein National Museum", subNote: "~€8 — history of one of the world's smallest and strangest countries", needsBooking: false },
+                        { time: "Evening", text: "Train Vaduz → Bern (~2h via Sargans or Zürich)", subNote: "Check in Prize by Radisson", needsBooking: false },
+                        { time: "Evening", text: "Walk Bern Altstadt — Zytglogge clock tower, Bärengraben bear park", subNote: "Bear park free and open late. Time the clock tower on the hour.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "Hotel breakfast at Zürcherhof — sleep in, eat well", restaurants: [] },
+                        lunch: {
+                            status: "options", note: "Lunch in Vaduz — local wine and cold cuts",
+                            restaurants: [
+                                { name: "Restaurant Torkel", desc: "Winery restaurant in Vaduz — local Liechtenstein wine, cold cuts and cheese. Unique experience.", rating: "4.3★", mapsUrl: "maps.google.com/?q=Restaurant+Torkel+Vaduz+Liechtenstein" }
+                            ]
+                        },
+                        dinner: { status: "flexible", note: "Simple dinner near hotel in Bern — recover from two big days", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [
+                        "Liechtenstein is doubly landlocked — one of only two such countries in the world",
+                        "Tourist office for passport stamp is on Städtle (the main pedestrian street) — easy to find"
+                    ],
+                    gems: [
+                        "Liechtenstein passport stamp: official tourist stamp in your passport from a micro-nation — one of the most unusual souvenirs in Europe",
+                        "Vaduz is tiny — you can do all the main sights in 2-3 hours, leaving time for Bern in the evening"
+                    ]
+                },
+
+                // ── DAY 6 ── Jul 2 Thu ── Bern WFH + Lucerne day trip ───────
+                {
+                    dayNumber: 6, date: "Jul 2", dayOfWeek: "Thu",
+                    title: "WFH + Lucerne", location: "Bern → Lucerne (day trip)",
+                    backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Prize by Radisson Bern City",
+                        status: "confirmed", note: "WFH morning — breakfast included, fast WiFi",
+                        bookedBy: "Juan Carlos",
+                        mapsUrl: "maps.google.com/?q=Prize+by+Radisson+Bern+City+Viktoriastrasse"
+                    },
+                    drive: {
+                        from: "Bern", to: "Lucerne",
+                        duration: "~1h direct", distance: "Depart ~13:00 after work · regular trains"
+                    },
+                    activities: [
+                        { time: "Morning", text: "Work from hotel — WFH 🖥️", subNote: "Breakfast included. Fast WiFi. Protect mornings for calls.", needsBooking: false },
+                        { time: "13:00", text: "Train Bern → Lucerne (~1h direct)", subNote: "Regular direct trains. Depart after work.", needsBooking: false },
+                        { time: "Afternoon", text: "Chapel Bridge (Kapellbrücke)", subNote: "14th century covered wooden bridge — most photographed structure in Switzerland. Look up at the painted panels.", needsBooking: false },
+                        { time: "Afternoon", text: "Lion Monument (Löwendenkmal)", subNote: "Carved into a cliff face. Mark Twain called it the most mournful piece of rock in the world. Free.", needsBooking: false },
+                        { time: "Afternoon", text: "Lucerne old town wander", subNote: "Medieval streets and painted building facades", needsBooking: false },
+                        { time: "Evening", text: "OPTION: Mt Pilatus gondola", subNote: "~CHF 72-82 · 2,132m · staggering Alpine views · book online in advance · allow 2-3 hrs", needsBooking: true },
+                        { time: "Evening", text: "OPTION: Lake Lucerne boat cruise", subNote: "~1.5 hrs, ~CHF 30. No booking needed. Beautiful evening on the water.", needsBooking: false },
+                        { time: "Evening", text: "Train back Lucerne → Bern (~1h)", subNote: "Regular direct trains", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "Hotel breakfast — eat before work starts", restaurants: [] },
+                        lunch: { status: "flexible", note: "Working lunch at hotel or quick bite before train", restaurants: [] },
+                        dinner: {
+                            status: "options", note: "Dinner back in Bern after Lucerne",
+                            restaurants: [
+                                { name: "Lötschberg", desc: "Classic Bernese cuisine — fondue, cheese dishes, local wines. ~€30-35.", rating: "4.5★", mapsUrl: "maps.google.com/?q=Lotschberg+Restaurant+Bern" }
+                            ]
+                        }
+                    },
+                    route: null,
+                    warnings: [
+                        "⚠️ Book Mt Pilatus gondola online in advance — popular and can sell out on sunny days",
+                        "Check weather for Pilatus morning of — gondola closes in bad weather"
+                    ],
+                    gems: [
+                        "Lion Monument: carved into a cliff face, completely free, and one of the most unexpectedly moving sculptures in Europe",
+                        "Kapellbrücke interior: look up while crossing — 17th century painted panels overhead"
+                    ]
+                },
+
+                // ── DAY 7 ── Jul 3 Fri ── Bern WFH + Interlaken day trip ───
+                {
+                    dayNumber: 7, date: "Jul 3", dayOfWeek: "Fri",
+                    title: "WFH + Interlaken", location: "Bern → Interlaken (day trip)",
+                    backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Prize by Radisson Bern City",
+                        status: "confirmed", note: "Last Bern night — check out tomorrow Jul 4",
+                        bookedBy: "Juan Carlos",
+                        mapsUrl: "maps.google.com/?q=Prize+by+Radisson+Bern+City+Viktoriastrasse"
+                    },
+                    drive: {
+                        from: "Bern", to: "Interlaken Ost",
+                        duration: "~50 min direct", distance: "Depart ~13:00 after work"
+                    },
+                    activities: [
+                        { time: "Morning", text: "Work from hotel — WFH 🖥️", subNote: "Breakfast included. Last full Bern morning.", needsBooking: false },
+                        { time: "13:00", text: "Train Bern → Interlaken Ost (~50 min direct)", subNote: "Scenic Alpine approach. Depart after work.", needsBooking: false },
+                        { time: "Afternoon", text: "Harder Kulm funicular — summit 1,322m", subNote: "Two Lakes Bridge platform — panoramic Alps and both lakes. Book online ~CHF 32 return.", needsBooking: true },
+                        { time: "Afternoon", text: "Walk along Lake Brienz or Lake Thun shoreline", subNote: "Two glacial lakes, one town between them — genuinely alpine landscape", needsBooking: false },
+                        { time: "Evening", text: "Train back Interlaken → Bern (~50 min)", subNote: "Last evening in Switzerland", needsBooking: false },
+                        { time: "Evening", text: "Walk Aare river bend from Nydeggbrücke", subNote: "Bern's entire medieval Altstadt appears to float on a river peninsula. Most underrated view in Switzerland.", needsBooking: false },
+                        { time: "Evening", text: "Dinner at Restaurant Rosengarten", subNote: "Rose garden hill, views over Bern, Swiss-French cuisine ~€35-45. Book ahead.", needsBooking: true }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "Hotel breakfast — eat before work", restaurants: [] },
+                        lunch: {
+                            status: "options", note: "Lunch in Interlaken with lake views",
+                            restaurants: [
+                                { name: "Restaurant Schuh", desc: "Swiss classics and lake views in Interlaken. ~€25-35.", rating: "4.3★", mapsUrl: "maps.google.com/?q=Restaurant+Schuh+Interlaken" }
+                            ]
+                        },
+                        dinner: {
+                            status: "options", note: "Last Swiss dinner — book ahead",
+                            restaurants: [
+                                { name: "Restaurant Rosengarten", desc: "Rose garden hill above Bern, views over the city, Swiss-French cuisine. ~€35-45. Reserve.", rating: "4.4★", mapsUrl: "maps.google.com/?q=Restaurant+Rosengarten+Bern" }
+                            ]
+                        }
+                    },
+                    route: null,
+                    warnings: [
+                        "⚠️ Book Harder Kulm funicular online — sells out on fair-weather Fridays",
+                        "⚠️ Reserve Restaurant Rosengarten tonight — popular and worth it",
+                        "Pack tonight — train Bern → Geneva Airport departs ~12:00-12:15 tomorrow"
+                    ],
+                    gems: [
+                        "Aare river bend from Nydeggbrücke: Bern's Altstadt floats on a river peninsula — one of the best urban views in Europe",
+                        "Harder Kulm Two Lakes Bridge: standing between the Alps and two glacial lakes at 1,322m"
+                    ]
+                },
+
+                // ── DAY 8 ── Jul 4 Sat ── Bern → Geneva → Madrid ───────────
+                {
+                    dayNumber: 8, date: "Jul 4", dayOfWeek: "Sat",
+                    title: "Bern → Geneva → Madrid", location: "Bern → Geneva → Madrid",
+                    backgroundImage: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800",
+                    flight: {
+                        airline: "IB 0616", from: "GVA", to: "MAD",
+                        departTime: "14:10", arriveTime: "16:15", terminal: "GVA T1 → MAD"
+                    },
+                    hotel: {
+                        name: "Madrid Hotel — TO BE BOOKED",
                         status: "missing",
-                        note: "To be filled in",
+                        note: "4 nights Jul 4–8 · Barrio de las Letras or La Latina · Fast WiFi (WFH) · ~AED 1,500-2,000 est",
+                        bookedBy: "",
+                        mapsUrl: ""
+                    },
+                    drive: {
+                        from: "Bern", to: "Geneva Airport (GVA)",
+                        duration: "~1h 45m direct", distance: "Depart ~12:00-12:15 · Arrive GVA ~13:45"
+                    },
+                    activities: [
+                        { time: "Morning", text: "Final Bern wander — Bundesplatz, Kramgasse, morning coffee", subNote: "Late checkout or store luggage at reception", needsBooking: false },
+                        { time: "Morning", text: "Long relaxed lunch — last Swiss meal", subNote: "Savour it", needsBooking: false },
+                        { time: "12:00", text: "Pick up luggage, train Bern → Geneva Airport", subNote: "~1h 45m direct. Arrive GVA ~13:45.", needsBooking: false },
+                        { time: "14:10", text: "✈️ IB0616 Geneva → Madrid", subNote: "Dep 14:10 GVA T1 → Arr 16:15 MAD (~2h 05m)", needsBooking: false },
+                        { time: "17:00", text: "Metro/taxi to hotel (~30-40 min)", subNote: "Arrive hotel ~17:00-17:30", needsBooking: false },
+                        { time: "Evening", text: "First Madrid evening — walk to Plaza Mayor or Puerta del Sol", subNote: "Get your bearings — Madrid is electric on a Saturday night", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "Last hotel breakfast in Bern", restaurants: [] },
+                        lunch: { status: "flexible", note: "Long relaxed final Swiss lunch in Bern", restaurants: [] },
+                        dinner: {
+                            status: "options", note: "First Madrid dinner — tapas grazing then sit-down. Book Casa Lucio ahead.",
+                            restaurants: [
+                                { name: "Mercado de San Miguel", desc: "Historic iron-and-glass market — tapas, jamón, seafood. Perfect first Madrid experience.", rating: "4.3★", mapsUrl: "maps.google.com/?q=Mercado+de+San+Miguel+Madrid" },
+                                { name: "Casa Lucio", desc: "Madrid institution since 1974 — huevos rotos, bull tail stew, ~€35-45. Book ahead.", rating: "4.5★", mapsUrl: "maps.google.com/?q=Casa+Lucio+Madrid" }
+                            ]
+                        }
+                    },
+                    route: null,
+                    warnings: [
+                        "⚠️ Madrid hotel STILL TO BOOK — 4 nights Jul 4–8, fast WiFi needed",
+                        "⚠️ Book Casa Lucio reservation before leaving Switzerland",
+                        "Check in online for IB0616 before going to Geneva airport"
+                    ],
+                    gems: [
+                        "Madrid eats at 21:00-22:00 — don't fight it, embrace it",
+                        "Plaza Mayor at dusk on a Saturday: the city at its most alive"
+                    ]
+                },
+
+                // ── DAY 9 ── Jul 5 Sun ── Madrid → Pamplona ────────────────
+                {
+                    dayNumber: 9, date: "Jul 5", dayOfWeek: "Sun",
+                    title: "Madrid → Pamplona — Eve of San Fermín", location: "Madrid → Pamplona",
+                    backgroundImage: "https://images.unsplash.com/photo-1565329921943-7e537b7a1d06?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Friend's accommodation in Pamplona",
+                        status: "confirmed", note: "Confirmed with friend. Return to Madrid hotel evening of Jul 6.",
+                        bookedBy: "Friend",
+                        mapsUrl: "maps.google.com/?q=Pamplona+City+Centre"
+                    },
+                    drive: {
+                        from: "Madrid Atocha", to: "Pamplona",
+                        duration: "~3h 38m", distance: "ALVIA 00613 · Dep 17:32 · Arr 21:10 · Seat 15B Car 001"
+                    },
+                    activities: [
+                        { time: "Morning", text: "Free morning — sleep in, long brunch", subNote: "Last relaxed morning before the chaos of Pamplona", needsBooking: false },
+                        { time: "Morning", text: "Retiro Park — rowboat on the lake, Crystal Palace", subNote: "~20 min walk from centre. Beautiful Sunday morning.", needsBooking: false },
+                        { time: "Afternoon", text: "Lunch near Atocha before train", subNote: "Eat well — it'll be a late and lively evening in Pamplona", needsBooking: false },
+                        { time: "17:32", text: "🚆 Renfe ALVIA 00613 — Madrid Atocha → Pamplona", subNote: "Seat 15B Car 001. Arrives 21:10. Already booked.", needsBooking: false },
+                        { time: "21:10", text: "Arrive Pamplona — met by friend", subNote: "Jul 5 is the eve of San Fermín opening. City is electric. Head out immediately.", needsBooking: false },
+                        { time: "Evening", text: "Walk Calle Estafeta — the bull run street", subNote: "Get your bearings tonight. This is the exact route you'll watch tomorrow at 08:00.", needsBooking: false },
+                        { time: "Evening", text: "Pintxos and txakoli wine around Plaza del Castillo", subNote: "Bar Gaucho, Bar Txoko, Bodegon Sarria. Sleep by 02:00 — up at 05:30.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Slow Sunday brunch in Madrid", restaurants: [] },
+                        lunch: { status: "flexible", note: "Near Atocha before 17:32 train", restaurants: [] },
+                        dinner: { status: "flexible", note: "Pintxos crawl around Plaza del Castillo on the festival eve", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [
+                        "Sleep by 02:00 at the latest — up at 05:30 for the bull run",
+                        "Do NOT run in the encierro unless you've done serious research — viewing from the fence is safer and just as spectacular"
+                    ],
+                    gems: [
+                        "The eve of San Fermín (Jul 5) is almost as electric as the day itself — the whole city stays up and the streets are already packed",
+                        "Walk Calle Estafeta at night: understanding the route before 08:00 the next morning makes the run make sense"
+                    ]
+                },
+
+                // ── DAY 10 ── Jul 6 Mon ── Pamplona San Fermín → Madrid ────
+                {
+                    dayNumber: 10, date: "Jul 6", dayOfWeek: "Mon",
+                    title: "San Fermín — Encierro", location: "Pamplona → Madrid",
+                    backgroundImage: "https://images.unsplash.com/photo-1565329921943-7e537b7a1d06?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Madrid Hotel (TBD — returning this evening)",
+                        status: "missing",
+                        note: "Return to Madrid on evening train. Multiple Renfe trains ~18:00-21:00.",
+                        bookedBy: "",
+                        mapsUrl: ""
+                    },
+                    drive: {
+                        from: "Pamplona", to: "Madrid",
+                        duration: "~3.5 hrs", distance: "Multiple Renfe trains from ~18:00 — book return in advance"
+                    },
+                    activities: [
+                        { time: "05:30", text: "Wake up — walk to Calle Estafeta", subNote: "Find your viewing spot by 07:00. It fills up fast.", needsBooking: false },
+                        { time: "07:00", text: "Position on Calle Estafeta or Ayuntamiento corner", subNote: "Best spots: fenced balconies on Estafeta. Stay in position once placed.", needsBooking: false },
+                        { time: "08:00", text: "🐂 ENCIERRO — The Bull Run", subNote: "Rockets fired to signal start. Lasts ~3 minutes. This is the moment.", needsBooking: false },
+                        { time: "Morning", text: "Post-run atmosphere — bars open, music, giants parade", subNote: "Txistu music, Plaza del Castillo. Pamplona pintxos are among the best in Spain.", needsBooking: false },
+                        { time: "Afternoon", text: "Festival day — explore, eat well, rest if you can", subNote: "Giants parade, street bands, the whole city is one big party", needsBooking: false },
+                        { time: "18:00", text: "Return train Pamplona → Madrid (~3.5 hrs)", subNote: "Multiple Renfe trains from ~18:00. Book return before leaving Madrid.", needsBooking: true },
+                        { time: "Evening", text: "Arrive Madrid — quiet evening, early rest", subNote: "Two very big days back to back", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Bars open at 06:00 for San Fermín — coffee before the run", restaurants: [] },
+                        lunch: { status: "flexible", note: "Pintxos in Pamplona after the encierro — excellent quality", restaurants: [] },
+                        dinner: { status: "flexible", note: "On the train or light meal back in Madrid", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [
+                        "⚠️ Book Pamplona → Madrid return train before you leave Madrid on Jul 5",
+                        "The first rocket = gates open, the second = all bulls running. Listen for both.",
+                        "Do NOT enter the bull run route — fence viewing is safer and equally spectacular"
+                    ],
+                    gems: [
+                        "The encierro lasts exactly ~3 minutes — position early, stay put, don't try to move once placed",
+                        "Post-encierro Pamplona is as good as the run itself — the whole city celebrates for hours"
+                    ]
+                },
+
+                // ── DAY 11 ── Jul 7 Tue ── Madrid free day ──────────────────
+                {
+                    dayNumber: 11, date: "Jul 7", dayOfWeek: "Tue",
+                    title: "Madrid — Free Day", location: "Madrid",
+                    backgroundImage: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Madrid Hotel (TBD)",
+                        status: "missing", note: "Book ASAP — fast WiFi needed. 4 nights Jul 4–8.",
                         bookedBy: "",
                         mapsUrl: ""
                     },
                     drive: null,
-                    activities: [],
+                    activities: [
+                        { time: "Morning", text: "Slow start — good coffee, wander the neighbourhood", subNote: "Recovery day after Pamplona. Take your time.", needsBooking: false },
+                        { time: "Afternoon", text: "El Prado Museum", subNote: "Velázquez, Goya, El Greco. ~€15, free after 18:00.", needsBooking: false },
+                        { time: "Afternoon", text: "OPTION: Retiro Park", subNote: "Rowboat on the lake, Crystal Palace, rose garden", needsBooking: false },
+                        { time: "Evening", text: "Dinner at Taberna La Bola", subNote: "Madrid's best cocido madrileño, family-run since 1870, ~€30-35. Book ahead.", needsBooking: true },
+                        { time: "Evening", text: "Rooftop drinks: Azotea del Círculo de Bellas Artes", subNote: "Best rooftop view in Madrid. €5 entry. Open until late.", needsBooking: false },
+                        { time: "Evening", text: "Walk Malasaña neighbourhood", subNote: "Bohemian bars, independent shops — wander after 22:00", needsBooking: false }
+                    ],
                     meals: {
-                        breakfast: { status: "flexible", note: "", restaurants: [] },
-                        lunch:     { status: "flexible", note: "", restaurants: [] },
-                        dinner:    { status: "flexible", note: "", restaurants: [] }
+                        breakfast: { status: "flexible", note: "Slow café breakfast — Madrid has excellent coffee culture", restaurants: [] },
+                        lunch: { status: "flexible", note: "El Prado area or Retiro Park neighbourhood", restaurants: [] },
+                        dinner: {
+                            status: "options", note: "Madrid eats at 22:00 — book La Bola, then rooftop drinks",
+                            restaurants: [
+                                { name: "Taberna La Bola", desc: "Family-run since 1870. Madrid's best cocido madrileño. No tourists. ~€30-35. Reserve.", rating: "4.6★", mapsUrl: "maps.google.com/?q=Taberna+La+Bola+Madrid" }
+                            ]
+                        }
                     },
                     route: null,
-                    warnings: [],
-                    gems: []
+                    warnings: [
+                        "⚠️ Book Taberna La Bola reservation — essential, they fill up",
+                        "El Prado is free after 18:00 if you want to save €15"
+                    ],
+                    gems: [
+                        "Taberna La Bola: 150-year-old tavern, no English menus, zero tourists — the real Madrid",
+                        "Azotea del Círculo de Bellas Artes: €5 entry for the best rooftop view in the city, open until midnight",
+                        "Malasaña: wander without a plan after 22:00 — Madrid's best neighbourhood for a late night"
+                    ]
+                },
+
+                // ── DAY 12 ── Jul 8 Wed ── Madrid → San Juan ────────────────
+                {
+                    dayNumber: 12, date: "Jul 8", dayOfWeek: "Wed",
+                    title: "Madrid → San Juan", location: "Madrid → Puerto Rico",
+                    backgroundImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800",
+                    flight: {
+                        airline: "IB 381", from: "MAD", to: "SJU",
+                        departTime: "12:45", arriveTime: "15:25", terminal: "MAD T4S → SJU"
+                    },
+                    hotel: {
+                        name: "Puerto Rico — separate planning",
+                        status: "confirmed", note: "Puerto Rico Jul 9–12 planned separately",
+                        bookedBy: "",
+                        mapsUrl: ""
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Slow last breakfast, final walk", subNote: "Check out by 10:30 latest. Store luggage if needed.", needsBooking: false },
+                        { time: "10:30", text: "Leave hotel — head to MAD T4", subNote: "Metro Line 8: Nuevos Ministerios → T4 (~25 min, ~AED 25 incl. airport supplement). Taxi ~AED 110 fixed.", needsBooking: false },
+                        { time: "11:15", text: "Be at MAD T4S by 11:15", subNote: "IB381 departs 12:45 — 90 min minimum for T4S check-in", needsBooking: false },
+                        { time: "12:45", text: "✈️ IB381 Madrid → San Juan", subNote: "Dep 12:45 MAD T4S → Arr 15:25 SJU (~9h 40m)", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Last Madrid café breakfast", restaurants: [] },
+                        lunch: { status: "flexible", note: "Airport or in-flight", restaurants: [] },
+                        dinner: { status: "flexible", note: "Arrive San Juan 15:25 — Puerto Rico planning separate", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [
+                        "⚠️ CRITICAL: No free checked baggage on IB381 — add bag online BEFORE check-in closes",
+                        "⚠️ Leave hotel by 10:30 sharp — do not miss this flight",
+                        "T4S is different from T4 — IB uses T4S, follow the signs carefully at the airport"
+                    ],
+                    gems: [
+                        "Metro Line 8 from Nuevos Ministerios: remember to buy ticket with the airport supplement (~AED 25 total, not the normal ~AED 5)"
+                    ]
                 }
             ]
         };
@@ -1590,7 +2122,18 @@
         // ============================================================
 
         const DAY_WEATHER = {
-            // Example: 1: { lat: 47.3769, lon: 8.5417, isoDate: "2026-07-01" },
+            1:  { lat: 48.1351, lon: 11.5820, isoDate: "2026-06-27" }, // Munich
+            2:  { lat: 48.1351, lon: 11.5820, isoDate: "2026-06-28" }, // Munich
+            3:  { lat: 48.1351, lon: 11.5820, isoDate: "2026-06-29" }, // Munich
+            4:  { lat: 47.3769, lon:  8.5417, isoDate: "2026-06-30" }, // Zurich
+            5:  { lat: 46.9481, lon:  7.4474, isoDate: "2026-07-01" }, // Bern
+            6:  { lat: 47.0502, lon:  8.3093, isoDate: "2026-07-02" }, // Lucerne
+            7:  { lat: 46.6863, lon:  7.8632, isoDate: "2026-07-03" }, // Interlaken
+            8:  { lat: 40.4168, lon: -3.7038, isoDate: "2026-07-04" }, // Madrid
+            9:  { lat: 42.8188, lon: -1.6440, isoDate: "2026-07-05" }, // Pamplona
+            10: { lat: 42.8188, lon: -1.6440, isoDate: "2026-07-06" }, // Pamplona
+            11: { lat: 40.4168, lon: -3.7038, isoDate: "2026-07-07" }, // Madrid
+            12: { lat: 40.4168, lon: -3.7038, isoDate: "2026-07-08" }, // Madrid
         };
 
         const WX_CACHE_TTL = 3 * 60 * 60 * 1000;
