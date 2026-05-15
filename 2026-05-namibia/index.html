@@ -2182,7 +2182,7 @@
                 tableHTML += `
                     <tr data-day="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">
                         <td>${day.dayNumber}</td>
-                        <td style="white-space: nowrap;">${day.dayOfWeek}<br>${day.date.split(' ')[1]}</td>
+                        <td style="white-space: nowrap; font-size: 12px;">${day.dayOfWeek} ${day.date.split(' ')[1]} ${day.date.split(' ')[0]}</td>
                         <td>
                             <div style="font-weight: 600; color: var(--accent-gold); font-size: 13px;">${day.title}</div>
                             <div style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">${day.location}</div>
@@ -2212,7 +2212,7 @@
                 const datePartials = day.date.split(' ');
                 tabsHTML += `
                     <div class="${className}" data-view="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">
-                        Day ${day.dayNumber}<br>${datePartials[1]} ${datePartials[0]}
+                        Day ${day.dayNumber}<br><span style="font-size:10px;opacity:0.8;">${day.dayOfWeek} ${datePartials[1]} ${datePartials[0]}</span>
                     </div>
                 `;
             });
