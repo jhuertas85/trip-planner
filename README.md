@@ -1,17 +1,17 @@
 # Trip Planner
 
-A static [GitHub Pages](https://jhuertas85.github.io/trip-planner/) site for family trip itineraries — no build step, no framework, just pure HTML served directly.
+A static GitHub Pages site for family trip itineraries — no build step, no framework, just pure HTML served directly.
 
-**Live site:** https://jhuertas85.github.io/trip-planner/
+**Site index:** https://jhuertas85.github.io/trip-planner/
 
 ---
 
 ## Trips
 
-| Trip | Dates | Travelers |
-|------|-------|-----------|
-| [Namibia 2026](./2026-05-namibia/) | May 16–31, 2026 | Juan Carlos, Maria, Ada, Felix |
-| [Germany · Switzerland · Madrid 2026](./2026-07-switzerland/) | July 2026 | Juan Carlos |
+| Trip | Dates | Travelers | Live page |
+|------|-------|-----------|-----------|
+| Namibia 2026 | May 16–31, 2026 | Juan Carlos, Maria, Ada, Felix | [Open](https://jhuertas85.github.io/trip-planner/2026-05-namibia/) |
+| Germany · Switzerland · Madrid 2026 | July 2026 | Juan Carlos | [Open](https://jhuertas85.github.io/trip-planner/2026-07-switzerland/) |
 
 ---
 
@@ -32,7 +32,8 @@ A static [GitHub Pages](https://jhuertas85.github.io/trip-planner/) site for fam
 1. Copy `template.html` into a new folder, e.g. `2027-03-japan/index.html`
 2. Fill in `TRIP_DATA`, `DAY_WEATHER`, and `COST_DATA` near the top of the file
 3. Update `CLAUDE.md` with the new trip summary
-4. Commit and push — the page is live immediately via GitHub Pages
+4. Update this README — add a row to the Trips table with the live page URL
+5. Commit and push — the page is live immediately via GitHub Pages
 
 > **Never copy an existing trip file** — always start from `template.html` to get the latest features.
 
