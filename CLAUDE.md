@@ -3,6 +3,7 @@
 ## What this repo is
 A static GitHub Pages site for trip itineraries. No build step, no framework — pure HTML files served directly.
 
+**GitHub repo:** https://github.com/jhuertas85/trip-planner
 **Live site:** https://jhuertas85.github.io/trip-planner/
 
 ## File structure
