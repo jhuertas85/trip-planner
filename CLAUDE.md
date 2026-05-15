@@ -12,6 +12,8 @@ trip-planner/
 ├── template.html              # Master template — copy this for every new trip
 ├── 2026-05-namibia/
 │   └── index.html             # Namibia May 2026 (Juan Carlos, Maria, Ada, Felix)
+├── 2026-07-switzerland/
+│   └── index.html             # Germany · Switzerland · Madrid July 2026 (Juan Carlos)
 └── CLAUDE.md                  # This file
 ```
 
