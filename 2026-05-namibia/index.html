@@ -1091,6 +1091,93 @@
             background-color: rgba(201, 150, 106, 0.08);
         }
 
+        /* CURRENCY CALCULATOR */
+        .calc-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 14px 20px;
+            margin: -20px -20px 0 -20px;
+            border-radius: 8px 8px 0 0;
+            user-select: none;
+        }
+        .calc-header:hover { background-color: rgba(201,150,106,0.07); }
+        .calc-header-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .calc-header-sub {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        .calc-chevron {
+            font-size: 11px;
+            color: var(--text-secondary);
+            transition: transform 0.25s ease;
+        }
+        .calc-body {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.25s ease;
+            opacity: 0;
+            padding-top: 0;
+        }
+        .calc-body.open {
+            max-height: 300px;
+            opacity: 1;
+            padding-top: 16px;
+        }
+        .calc-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .calc-row:last-of-type { margin-bottom: 0; }
+        .calc-label {
+            width: 110px;
+            flex-shrink: 0;
+        }
+        .calc-label-code {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .calc-label-name {
+            font-size: 10px;
+            color: var(--text-secondary);
+            margin-top: 1px;
+        }
+        .calc-input {
+            flex: 1;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 9px 12px;
+            color: var(--text-primary);
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .calc-input:focus { border-color: var(--accent-gold); }
+        .calc-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+        .calc-rates-note { font-size: 10px; color: var(--text-secondary); }
+        .calc-refresh { font-size: 11px; color: var(--accent-gold); cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; }
+
         .accommodation-table tr[data-day] {
             cursor: pointer;
             transition: background-color 0.2s ease;
@@ -2025,6 +2112,44 @@
     <main class="container">
         <!-- OVERVIEW TAB -->
         <div class="day-view active" id="overview">
+
+            <div class="card" id="currencyCard">
+                <div class="calc-header" onclick="toggleCurrencyCalc()">
+                    <div class="calc-header-title">
+                        💱 Currency Calculator
+                        <span class="calc-header-sub" id="calcHeaderSub"></span>
+                    </div>
+                    <span class="calc-chevron" id="calcChevron">▶</span>
+                </div>
+                <div class="calc-body" id="calcBody">
+                    <div class="calc-row">
+                        <div class="calc-label">
+                            <div class="calc-label-code" id="calcCode0"></div>
+                            <div class="calc-label-name" id="calcName0"></div>
+                        </div>
+                        <input class="calc-input" id="calcInput0" type="number" placeholder="0" oninput="calcConvert(0)">
+                    </div>
+                    <div class="calc-row">
+                        <div class="calc-label">
+                            <div class="calc-label-code">AED</div>
+                            <div class="calc-label-name">UAE Dirham</div>
+                        </div>
+                        <input class="calc-input" id="calcInput1" type="number" placeholder="0" oninput="calcConvert(1)">
+                    </div>
+                    <div class="calc-row">
+                        <div class="calc-label">
+                            <div class="calc-label-code">USD</div>
+                            <div class="calc-label-name">US Dollar</div>
+                        </div>
+                        <input class="calc-input" id="calcInput2" type="number" placeholder="0" oninput="calcConvert(2)">
+                    </div>
+                    <div class="calc-footer">
+                        <span class="calc-rates-note" id="calcRatesNote">Loading rates…</span>
+                        <button class="calc-refresh" onclick="fetchCalcRates(true)">↻ Refresh</button>
+                    </div>
+                </div>
+            </div>
+
             <div class="card">
                 <div class="card-title">Itinerary</div>
                 <table class="accommodation-table" id="accommodationTable"></table>
@@ -2796,6 +2921,118 @@
         }
 
         initializePage();
+
+        /* ── CURRENCY CALCULATOR ── */
+        const DAY_CURRENCY = {
+            1:  { code: 'ETB', name: 'Ethiopian Birr',   symbol: 'Br'  },
+            2:  { code: 'ETB', name: 'Ethiopian Birr',   symbol: 'Br'  },
+            3:  { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            4:  { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            5:  { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            6:  { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            7:  { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            8:  { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            9:  { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            10: { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            11: { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            12: { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            13: { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            14: { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            15: { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            16: { code: 'ETB', name: 'Ethiopian Birr',   symbol: 'Br'  },
+        };
+
+        let calcRates = null; // { primary_code: rate_vs_usd, aed: rate, usd: 1 }
+        let calcPrimary = { code: 'NAD', name: 'Namibian Dollar', symbol: 'N$' };
+
+        function getTodayTripDay() {
+            const today = new Date().toISOString().split('T')[0];
+            for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
+                if (w.isoDate === today) return parseInt(dayNum);
+            }
+            return null;
+        }
+
+        async function fetchCalcRates(force) {
+            const cacheKey = 'calc_rates_v1';
+            if (!force) {
+                const cached = localStorage.getItem(cacheKey);
+                if (cached) {
+                    const { data, ts } = JSON.parse(cached);
+                    if (Date.now() - ts < 24 * 3600 * 1000) { calcRates = data; updateCalcUI(); return; }
+                }
+            }
+            document.getElementById('calcRatesNote').textContent = 'Fetching rates…';
+            try {
+                const res = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json');
+                const json = await res.json();
+                calcRates = { usd: 1, aed: json.usd.aed, etb: json.usd.etb, nad: json.usd.nad };
+                localStorage.setItem(cacheKey, JSON.stringify({ data: calcRates, ts: Date.now() }));
+            } catch {
+                calcRates = { usd: 1, aed: 3.6725, etb: 132.5, nad: 18.5 };
+                document.getElementById('calcRatesNote').textContent = 'Offline rates (approx)';
+                return;
+            }
+            updateCalcUI();
+        }
+
+        function updateCalcUI() {
+            if (!calcRates) return;
+            const todayDay = getTodayTripDay();
+            calcPrimary = (todayDay && DAY_CURRENCY[todayDay]) ? DAY_CURRENCY[todayDay] : { code: 'NAD', name: 'Namibian Dollar', symbol: 'N$' };
+            document.getElementById('calcCode0').textContent = calcPrimary.code;
+            document.getElementById('calcName0').textContent = calcPrimary.name;
+            document.getElementById('calcHeaderSub').textContent = calcPrimary.code + ' · AED · USD';
+            const ts = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('calcRatesNote').textContent = `Rates updated ${ts}`;
+        }
+
+        function calcConvert(sourceIdx) {
+            if (!calcRates) return;
+            const inputs = [document.getElementById('calcInput0'), document.getElementById('calcInput1'), document.getElementById('calcInput2')];
+            const codes = [calcPrimary.code.toLowerCase(), 'aed', 'usd'];
+            const val = parseFloat(inputs[sourceIdx].value);
+            if (isNaN(val) || val === '') { inputs.forEach((inp, i) => { if (i !== sourceIdx) inp.value = ''; }); return; }
+            const sourceRate = calcRates[codes[sourceIdx]] || 1;
+            const valInUsd = val / sourceRate;
+            inputs.forEach((inp, i) => {
+                if (i === sourceIdx) return;
+                const rate = calcRates[codes[i]] || 1;
+                inp.value = (valInUsd * rate).toFixed(2);
+            });
+        }
+
+        function toggleCurrencyCalc() {
+            const body = document.getElementById('calcBody');
+            const chevron = document.getElementById('calcChevron');
+            const open = body.classList.toggle('open');
+            chevron.textContent = open ? '▼' : '▶';
+            if (open && !calcRates) fetchCalcRates(false);
+        }
+
+        fetchCalcRates(false);
+
+        /* ── SWIPE NAVIGATION ── */
+        (function () {
+            let startX = 0, startY = 0;
+            const views = ['overview', ...TRIP_DATA.days.map(d => `day${d.dayNumber}`)];
+
+            document.addEventListener('touchstart', e => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+            }, { passive: true });
+
+            document.addEventListener('touchend', e => {
+                const dx = e.changedTouches[0].clientX - startX;
+                const dy = e.changedTouches[0].clientY - startY;
+                if (Math.abs(dx) < 60 || Math.abs(dy) > Math.abs(dx) * 0.8) return;
+                const current = document.querySelector('.day-view.active');
+                if (!current) return;
+                const idx = views.indexOf(current.id);
+                if (dx < 0 && idx < views.length - 1) switchView(views[idx + 1]);
+                else if (dx > 0 && idx > 0) switchView(views[idx - 1]);
+            }, { passive: true });
+        })();
     </script>
 </body>
 </html>
