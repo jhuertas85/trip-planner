@@ -1242,6 +1242,23 @@
 
         .weather-refresh:hover { color: var(--accent-gold); }
 
+        .wx-preview {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-left: 6px;
+        }
+        .section-header:not(.collapsed) .wx-preview { display: none; }
+
+        .wx-condition-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px 0;
+        }
+        .wx-condition-icon { font-size: 28px; line-height: 1; }
+        .wx-condition-label { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+
         /* BUDGET */
         .day-cost-bar {
             display: flex;
@@ -2257,6 +2274,12 @@
             renderBudgetCard();
             renderDayTabs();
             renderDayViews();
+
+            // Auto-open today's day if within the trip
+            const today = new Date().toISOString().split('T')[0];
+            for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
+                if (w.isoDate === today) { switchView(`day${dayNum}`); break; }
+            }
         }
 
         function renderOverviewTab() {
@@ -2392,6 +2415,23 @@
                 </div>
             `;
 
+            // Weather — collapsed by default, preview updates async
+            if (DAY_WEATHER[day.dayNumber]) {
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header collapsed" id="wx-header-${day.dayNumber}">
+                            <h3>🌤 Weather<span class="wx-preview" id="wx-preview-${day.dayNumber}"></span></h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-weather collapsed">
+                            <div id="wx-${day.dayNumber}" style="padding: 12px 16px;">
+                                <div class="weather-loading">Loading forecast…</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
             // Flight section on flight days (FIRST, before hotel)
             if (day.flight) {
                 html += `
@@ -2478,19 +2518,6 @@
                 `;
             }
 
-            html += `
-                <div class="collapsible-section">
-                    <div class="section-header">
-                        <h3>🌤 Weather</h3>
-                        <div class="chevron"></div>
-                    </div>
-                    <div class="section-content section-weather">
-                        <div id="wx-${day.dayNumber}" style="padding: 12px 16px;">
-                            <div class="weather-loading">Loading forecast…</div>
-                        </div>
-                    </div>
-                </div>
-            `;
 
             const dc = COST_DATA.days[day.dayNumber];
             if (dc) {
@@ -2830,20 +2857,26 @@
                 }
             } catch(e) {}
             try {
-                const url = `https://api.open-meteo.com/v1/forecast?latitude=${info.lat}&longitude=${info.lon}&hourly=temperature_2m&daily=sunrise,sunset&timezone=auto&start_date=${info.isoDate}&end_date=${info.isoDate}`;
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${info.lat}&longitude=${info.lon}&hourly=temperature_2m,weathercode&daily=sunrise,sunset&timezone=auto&start_date=${info.isoDate}&end_date=${info.isoDate}`;
                 const resp = await fetch(url);
                 if (!resp.ok) return null;
                 const json = await resp.json();
                 const times = json.hourly?.time || [];
                 const temps = json.hourly?.temperature_2m || [];
+                const codes = json.hourly?.weathercode || [];
                 const getT = h => {
                     const idx = times.indexOf(`${info.isoDate}T${String(h).padStart(2,'0')}:00`);
                     return idx !== -1 ? temps[idx] : null;
+                };
+                const getC = h => {
+                    const idx = times.indexOf(`${info.isoDate}T${String(h).padStart(2,'0')}:00`);
+                    return idx !== -1 ? codes[idx] : null;
                 };
                 const d = {
                     sunrise: (json.daily?.sunrise?.[0] || '').split('T')[1] || null,
                     sunset:  (json.daily?.sunset?.[0]  || '').split('T')[1] || null,
                     t8: getT(8), t13: getT(13), t20: getT(20),
+                    wcode: getC(13) ?? getC(12) ?? getC(11),
                 };
                 try { localStorage.setItem(cacheKey, JSON.stringify({ d, ts: Date.now() })); } catch(e) {}
                 return d;
@@ -2889,6 +2922,20 @@
             </svg>`;
         }
 
+        function wmoIcon(code) {
+            if (code === null || code === undefined) return { emoji: '🌤️', label: 'Weather' };
+            if (code === 0)              return { emoji: '☀️',  label: 'Clear sky' };
+            if (code <= 2)              return { emoji: '🌤️', label: 'Partly cloudy' };
+            if (code === 3)             return { emoji: '☁️',  label: 'Overcast' };
+            if (code <= 48)             return { emoji: '🌫️', label: 'Fog' };
+            if (code <= 55)             return { emoji: '🌦️', label: 'Drizzle' };
+            if (code <= 65)             return { emoji: '🌧️', label: 'Rain' };
+            if (code <= 77)             return { emoji: '❄️',  label: 'Snow' };
+            if (code <= 82)             return { emoji: '🌧️', label: 'Rain showers' };
+            if (code <= 94)             return { emoji: '⛈️',  label: 'Thunderstorm' };
+            return { emoji: '⛈️', label: 'Thunderstorm with hail' };
+        }
+
         async function loadWeatherWidget(dayNumber) {
             const el = document.getElementById(`wx-${dayNumber}`);
             if (!el) return;
@@ -2901,15 +2948,24 @@
             const updated = `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
             const chart = (data.t8 !== null && data.t13 !== null && data.t20 !== null)
                 ? weatherChartSVG(data.t8, data.t13, data.t20, dayNumber) : '';
+            const wx = wmoIcon(data.wcode);
+            const midTemp = data.t13 !== null ? `${Math.round(data.t13)}°C` : '';
             el.innerHTML = `
-                <div class="weather-sun-row">
-                    ${data.sunrise ? `<span>☀️ ${data.sunrise}</span>` : ''}
-                    ${data.sunset  ? `<span>🌅 ${data.sunset}</span>`  : ''}
+                <div class="wx-condition-row">
+                    <span class="wx-condition-icon">${wx.emoji}</span>
+                    <span class="wx-condition-label">${wx.label}${midTemp ? ' · ' + midTemp : ''}</span>
+                </div>
+                <div class="weather-sun-row" style="margin-top:10px;">
+                    ${data.sunrise ? `<span>🌅 ${data.sunrise}</span>` : ''}
+                    ${data.sunset  ? `<span>🌇 ${data.sunset}</span>`  : ''}
                     <button class="weather-refresh" title="Refresh forecast" onclick="refreshWeather(${dayNumber})">↻</button>
                     <span style="font-size:10px;color:var(--text-muted);">as of ${updated}</span>
                 </div>
                 <div class="weather-chart-container">${chart}</div>
             `;
+            // Update collapsed header preview
+            const preview = document.getElementById(`wx-preview-${dayNumber}`);
+            if (preview) preview.textContent = `${wx.emoji} ${midTemp}`;
         }
 
         function refreshWeather(dayNumber) {
