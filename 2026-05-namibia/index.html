@@ -1628,8 +1628,8 @@
                     dayNumber: 5,
                     date: "May 20",
                     dayOfWeek: "Wed",
-                    title: "To Swakopmund",
-                    location: "Desert highway to the Atlantic coast",
+                    title: "Drive to Swakopmund",
+                    location: "Sesriem → Solitaire → C14 → Atlantic Coast",
                     backgroundImage: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800",
                     flight: null,
                     hotel: {
@@ -1640,30 +1640,39 @@
                         mapsUrl: "maps.app.goo.gl/FWvKDmagbnq6b5ia7"
                     },
                     drive: {
-                        from: "Sossusvlei",
+                        from: "Elegant Desert Lodge",
                         to: "Swakopmund",
-                        duration: "~4h 45min",
-                        distance: "~360 km"
+                        duration: "~4h 30min",
+                        distance: "~350 km via C19 → C14"
                     },
                     activities: [
-                        { time: "Early AM", text: "Breakfast at lodge · pack · depart", subNote: "", needsBooking: false },
-                        { time: "Drive", text: "Scenic Namib desert highway through Kuiseb Canyon", subNote: "", needsBooking: false },
-                        { time: "~14:00", text: "Arrive Swakopmund", subNote: "Check in Schweizerhaus", needsBooking: false },
-                        { time: "Afternoon", text: "First walk: The Jetty", subNote: "beachfront · German colonial buildings", needsBooking: false },
-                        { time: "Evening", text: "First Atlantic dinner", subNote: "German-Namibian café culture", needsBooking: false }
+                        { time: "09:00", text: "Depart Elegant Desert Lodge", subNote: "Re-inflate tyres if you deflated for sand yesterday", needsBooking: false },
+                        { time: "~10:30", text: "Solitaire — fuel stop", subNote: "Last reliable fuel before Walvis Bay · ~230 km ahead", needsBooking: false, mapsUrl: "https://maps.app.goo.gl/hnXCrEJsD3mNeVF88" },
+                        { time: "~10:40", text: "McGregor's Bakery — apple pie", subNote: "Namibia's most famous roadside stop · get the pie!", needsBooking: false, mapsUrl: "https://www.google.com/maps/search/?api=1&query=McGregor%27s+Bakery+Solitaire+Namibia" },
+                        { time: "~12:30", text: "Kuiseb Canyon viewpoint", subNote: "30 min stop · dramatic gorge · marks where the Namib dunes end · great photos", needsBooking: false },
+                        { time: "~13:30", text: "Walvis Bay Lagoon — flamingo stop", subNote: "Thousands of flamingos & pelicans · 20 min detour off C14 · worth every minute", needsBooking: false, mapsUrl: "https://www.google.com/maps/search/?api=1&query=Walvis+Bay+Lagoon+Namibia" },
+                        { time: "~15:00", text: "Arrive Swakopmund · Check in Schweizerhaus", subNote: "Unpack · freshen up · walk the beachfront", needsBooking: false }
                     ],
                     meals: {
-                        breakfast: { status: "included", note: "Included at Elegant Desert Lodge", restaurants: [] },
-                        lunch: { status: "flexible", note: "en-route / Pack snacks / petrol station stop", restaurants: [] },
-                        dinner: { status: "options", note: "", restaurants: [
-                            { name: "The Tug", desc: "Seafood · Dining inside a converted tugboat — iconic first dinner!", rating: "4.3★", mapsUrl: "maps.google.com/?q=The+Tug+Restaurant+Swakopmund" },
-                            { name: "Jetty 1905", desc: "Upscale seafood · Stunning sea views from the old pier", rating: "4.5★", mapsUrl: "maps.google.com/?q=Jetty+1905+Swakopmund" },
-                            { name: "Restaurant Altstadt", desc: "German-Namibian classics · Colonial building", rating: "4.4★", mapsUrl: "maps.google.com/?q=Restaurant+Altstadt+Swakopmund" }
-                        ] }
+                        breakfast: { status: "included", note: "Included at Elegant Desert Lodge before 09:00 departure", restaurants: [] },
+                        lunch: { status: "options", note: "McGregor's Bakery in Solitaire — pie, coffee & snacks on the road", restaurants: [
+                            { name: "McGregor's Bakery", desc: "Solitaire · World-famous apple pie · roadside institution", rating: "4.5★", mapsUrl: "www.google.com/maps/search/?api=1&query=McGregor%27s+Bakery+Solitaire+Namibia" }
+                        ]},
+                        dinner: { status: "options", note: "Dinner in Swakopmund after check-in", restaurants: [
+                            { name: "Dinner reservation", desc: "Confirmed restaurant — see Maps link", rating: "", mapsUrl: "maps.app.goo.gl/mGWSN1qLrPJoTb2r8" },
+                            { name: "The Tug", desc: "Seafood · Inside a converted tugboat — Swakopmund icon", rating: "4.3★", mapsUrl: "maps.google.com/?q=The+Tug+Restaurant+Swakopmund" },
+                            { name: "Jetty 1905", desc: "Upscale seafood · Stunning sea views from the old pier", rating: "4.5★", mapsUrl: "maps.google.com/?q=Jetty+1905+Swakopmund" }
+                        ]}
                     },
-                    route: "maps.google.com/maps/dir/Sossusvlei/Swakopmund",
-                    warnings: ["⛽ Fill up before leaving Sesriem — long stretch with very little en route"],
-                    gems: []
+                    route: "maps.google.com/maps/dir/Elegant+Desert+Lodge+Namibia/Solitaire+Namibia/Walvis+Bay+Namibia/Swakopmund+Namibia",
+                    warnings: [
+                        "⛽ Fill up at Solitaire — next reliable fuel is Walvis Bay (~230 km away)",
+                        "🌅 C14 gravel coastal section can be corrugated — take it steady"
+                    ],
+                    gems: [
+                        "Kuiseb Canyon is the natural wall where Namib dunes stop — fascinating geology",
+                        "Walvis Bay flamingos are one of Africa's great surprises — barely off the route"
+                    ]
                 },
                 {
                     dayNumber: 6,
