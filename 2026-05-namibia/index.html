@@ -1755,8 +1755,8 @@
                     dayNumber: 8,
                     date: "May 23",
                     dayOfWeek: "Sat",
-                    title: "Swakopmund",
-                    location: "Catamaran · Last Day on the Coast",
+                    title: "Cape Cross & Shipwreck",
+                    location: "Cape Cross Seal Colony · Zeila Shipwreck",
                     backgroundImage: "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=800",
                     flight: null,
                     hotel: {
@@ -1766,25 +1766,29 @@
                         bookedBy: "Maria",
                         mapsUrl: "maps.app.goo.gl/FWvKDmagbnq6b5ia7"
                     },
-                    drive: null,
+                    drive: { from: "Swakopmund", to: "Cape Cross", duration: "~1h 30min", distance: "~120 km north on C34" },
                     activities: [
-                        { time: "Morning", text: "Catamaran cruise", subNote: "seals · dolphins · pelicans (swakopadventures.com/cruises)", needsBooking: true },
-                        { time: "Afternoon", text: "Free time", subNote: "beach walk · craft market · last shopping", needsBooking: false },
-                        { time: "Sunset", text: "Sunset at the Jetty or Tiger Reed Beach Bar", subNote: "last Atlantic sunset", needsBooking: false },
-                        { time: "Evening", text: "Last dinner in Swakopmund", subNote: "make it count", needsBooking: false }
+                        { time: "Morning", text: "Drive to Cape Cross Seal Reserve", subNote: "~1.5hr north · largest Cape fur seal colony in the world · 80,000–100,000 seals", needsBooking: false, mapsUrl: "https://www.google.com/maps/search/?api=1&query=Cape+Cross+Seal+Reserve+Namibia" },
+                        { time: "Late AM", text: "Zeila Shipwreck", subNote: "Grounded cargo ship just off the beach · eerie & photogenic · on the way back", needsBooking: false, mapsUrl: "https://www.google.com/maps/search/?api=1&query=Zeila+Shipwreck+Namibia" },
+                        { time: "Afternoon", text: "Free afternoon in Swakopmund", subNote: "beach walk · craft market · last shopping · relax", needsBooking: false },
+                        { time: "Sunset", text: "Tiger Reed Beach Bar", subNote: "great spot for a last Atlantic sundowner", needsBooking: false, mapsUrl: "https://www.google.com/maps/search/?api=1&query=Tiger+Reed+Beach+Bar+Swakopmund" }
                     ],
                     meals: {
-                        breakfast: { status: "included", note: "Café Anton", restaurants: [] },
-                        lunch: { status: "options", note: "", restaurants: [
-                            { name: "Ocean Cellar", desc: "Seafood · Best value for fresh fish", rating: "4.4★", mapsUrl: "maps.google.com/?q=Ocean+Cellar+Swakopmund" }
-                        ] },
-                        dinner: { status: "options", note: "", restaurants: [
-                            { name: "Jetty 1905", desc: "Farewell dinner — book ahead! Elevated seafood on the pier", rating: "4.5★", mapsUrl: "maps.google.com/?q=Jetty+1905+Swakopmund" }
-                        ] }
+                        breakfast: { status: "included", note: "Café Anton — early start", restaurants: [] },
+                        lunch: { status: "flexible", note: "Pack snacks for the road or eat back in Swakopmund on return", restaurants: [] },
+                        dinner: { status: "options", note: "Last dinner in Swakopmund — something different", restaurants: [
+                            { name: "Restaurant Altstadt", desc: "German-Namibian classics · cosy colonial building · great schnitzel", rating: "4.4★", mapsUrl: "maps.google.com/?q=Restaurant+Altstadt+Swakopmund" },
+                            { name: "Kücki's Pub", desc: "Casual · local favourite · big portions · lively atmosphere", rating: "4.3★", mapsUrl: "maps.google.com/?q=Kucki%27s+Pub+Swakopmund" },
+                            { name: "The Swakopmund Brauhaus", desc: "Craft beers · hearty food · best beer selection in town", rating: "4.2★", mapsUrl: "maps.google.com/?q=Swakopmund+Brauhaus+Namibia" },
+                            { name: "Village Café", desc: "Relaxed · all-day menu · great coffee · good for lighter meals", rating: "4.5★", mapsUrl: "maps.google.com/?q=Village+Cafe+Swakopmund" }
+                        ]}
                     },
-                    route: null,
-                    warnings: ["Pack tonight — early departure tomorrow for Damaraland (~5hr drive)"],
-                    gems: []
+                    route: "maps.google.com/maps/dir/Swakopmund/Cape+Cross+Seal+Reserve+Namibia",
+                    warnings: ["🐟 Cape Cross smells strongly — it's the seals! Completely normal, totally worth it", "Pack tonight — early departure tomorrow for Damaraland (~5hr drive)"],
+                    gems: [
+                        "Cape Cross is where Diego Cão planted a cross in 1486 — first European landing on the Namibian coast",
+                        "The Zeila ran aground in 2008 while being towed — it's now one of Namibia's most photographed wrecks"
+                    ]
                 },
                 {
                     dayNumber: 9,
@@ -2188,7 +2192,10 @@
             </div>
 
             <div class="card">
-                <div class="card-title">Itinerary</div>
+                <div class="card-title" style="display:flex;align-items:center;justify-content:space-between;">
+                    Itinerary
+                    <button onclick="goToToday()" style="font-size:11px;padding:4px 10px;background:var(--accent-gold);color:var(--bg-primary);border:none;border-radius:5px;cursor:pointer;font-weight:600;font-family:inherit;">Today</button>
+                </div>
                 <table class="accommodation-table" id="accommodationTable"></table>
             </div>
 
@@ -2743,6 +2750,14 @@
             return html;
         }
 
+        function goToToday() {
+            const today = new Date().toISOString().split('T')[0];
+            for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
+                if (w.isoDate === today) { switchView(`day${dayNum}`); return; }
+            }
+            switchView('overview');
+        }
+
         function switchView(viewId) {
             document.querySelectorAll('.day-view').forEach(v => v.classList.remove('active'));
             document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
@@ -2983,6 +2998,7 @@
                     ${data.sunset  ? `<span>🌇 ${data.sunset}</span>`  : ''}
                     <button class="weather-refresh" title="Refresh forecast" onclick="refreshWeather(${dayNumber})">↻</button>
                     <span style="font-size:10px;color:var(--text-muted);">as of ${updated}</span>
+                    <a href="https://open-meteo.com/en/docs#latitude=${DAY_WEATHER[dayNumber]?.lat}&longitude=${DAY_WEATHER[dayNumber]?.lon}" target="_blank" style="font-size:10px;color:var(--accent-gold);text-decoration:none;margin-left:auto;">More details ↗</a>
                 </div>
                 <div class="weather-chart-container">${chart}</div>
             `;
