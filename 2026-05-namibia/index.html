@@ -1205,20 +1205,7 @@
             font-family: 'DM Sans', sans-serif;
             cursor: pointer;
         }
-        .map-flight-marker {
-            background: #5A8FB0;
-            color: #fff;
-            font-size: 13px;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid rgba(255,255,255,0.4);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-        }
-        .leaflet-popup-content-wrapper {
+.leaflet-popup-content-wrapper {
             background: var(--bg-secondary) !important;
             color: var(--text-primary) !important;
             border: 1px solid var(--border-color) !important;
@@ -2270,12 +2257,21 @@
             <div id="budgetCard"></div>
 
             <div class="card" id="tripRouteCard">
-                <div class="card-title">Trip Route</div>
-                <div id="tripMapContainer" style="height:420px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);"></div>
-                <div style="display:flex;gap:20px;margin-top:10px;font-size:12px;color:var(--text-secondary);align-items:center;">
-                    <span style="display:flex;align-items:center;gap:5px;">✈️ <span style="display:inline-block;width:28px;border-bottom:2px dashed #7BAFD4;"></span> Flight</span>
-                    <span style="display:flex;align-items:center;gap:5px;">🚗 <span style="display:inline-block;width:28px;border-bottom:2.5px solid #C9966A;"></span> Drive</span>
+                <div class="card-title" style="font-size:15px;">🇪🇹 Addis Ababa — Days 1 & 2</div>
+                <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">
+                    <span style="color:#E05C5C;font-weight:600;">——</span> Day 1 city tour &nbsp;
+                    <span style="color:#E0956A;font-weight:600;">——</span> Day 2 Bishoftu lakes
                 </div>
+                <div id="mapAddis" style="height:320px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);"></div>
+            </div>
+
+            <div class="card">
+                <div class="card-title" style="font-size:15px;">🇳🇦 Namibia — Days 3–15</div>
+                <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">
+                    <span style="color:#C9966A;font-weight:600;">——</span> Main route &nbsp;
+                    <span style="color:#C9966A;font-weight:600;">- - -</span> Cape Cross detour
+                </div>
+                <div id="mapNamibia" style="height:460px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);"></div>
             </div>
         </div>
 
@@ -3064,109 +3060,143 @@
 
         initializePage();
 
-        /* ── TRIP ROUTE MAP ── */
-        function arcPoints(from, to, n) {
-            n = n || 40;
-            const pts = [];
-            const lat1 = from[0] * Math.PI / 180, lng1 = from[1] * Math.PI / 180;
-            const lat2 = to[0] * Math.PI / 180,   lng2 = to[1] * Math.PI / 180;
-            const d = 2 * Math.asin(Math.sqrt(
-                Math.pow(Math.sin((lat2-lat1)/2), 2) +
-                Math.cos(lat1)*Math.cos(lat2)*Math.pow(Math.sin((lng2-lng1)/2), 2)
-            ));
-            if (d < 0.001) return [from, to];
-            for (let i = 0; i <= n; i++) {
-                const f = i / n;
-                const A = Math.sin((1-f)*d) / Math.sin(d);
-                const B = Math.sin(f*d) / Math.sin(d);
-                const x = A*Math.cos(lat1)*Math.cos(lng1) + B*Math.cos(lat2)*Math.cos(lng2);
-                const y = A*Math.cos(lat1)*Math.sin(lng1) + B*Math.cos(lat2)*Math.sin(lng2);
-                const z = A*Math.sin(lat1) + B*Math.sin(lat2);
-                pts.push([
-                    Math.atan2(z, Math.sqrt(x*x+y*y)) * 180/Math.PI,
-                    Math.atan2(y, x) * 180/Math.PI
-                ]);
-            }
-            return pts;
-        }
-
-        function renderTripMap() {
-            const container = document.getElementById('tripMapContainer');
-            if (!container || container._leaflet_id) return;
-
+        /* ── TRIP ROUTE MAPS ── */
+        function makeTile(map) {
             const isLight = document.body.classList.contains('light-mode');
-            const tile = isLight
+            const url = isLight
                 ? 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
                 : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+            L.tileLayer(url, { attribution: '© OpenStreetMap © CARTO', subdomains: 'abcd', maxZoom: 16 }).addTo(map);
+        }
 
-            const map = L.map('tripMapContainer', { scrollWheelZoom: false, zoomControl: true });
-            L.tileLayer(tile, { attribution: '© OpenStreetMap © CARTO', subdomains: 'abcd', maxZoom: 14 }).addTo(map);
-
-            // Flight segments: Dubai→Addis, Addis→WDH, WDH→Addis, Addis→Dubai
-            const DXB = [25.2048, 55.2708];
-            const ADD = [9.0247, 38.7468];
-            const WDH = [-22.5608, 17.0658];
-            [[DXB, ADD], [ADD, WDH], [WDH, ADD], [ADD, DXB]].forEach(function(seg) {
-                L.polyline(arcPoints(seg[0], seg[1]), {
-                    color: '#7BAFD4', weight: 1.8, dashArray: '7 5', opacity: 0.85
-                }).addTo(map);
-            });
-
-            // Driving route: Day 3 through Day 15 in order, using DAY_WEATHER coords
-            const driveCoords = [];
-            for (let d = 3; d <= 15; d++) {
-                const w = DAY_WEATHER[d];
-                if (w) driveCoords.push([w.lat, w.lon]);
-            }
-            L.polyline(driveCoords, { color: '#C9966A', weight: 3, opacity: 0.9, lineJoin: 'round' }).addTo(map);
-
-            // Cape Cross detour for Day 8
-            const CAPE_CROSS = [-21.7833, 13.9833];
-            L.polyline([[-22.6827, 14.5268], CAPE_CROSS, [-22.6827, 14.5268]], {
-                color: '#C9966A', weight: 2, opacity: 0.6, dashArray: '5 4'
-            }).addTo(map);
-
-            // Group days by location
-            const groups = {};
-            Object.entries(DAY_WEATHER).forEach(function(entry) {
-                const num = parseInt(entry[0]), w = entry[1];
-                const key = w.lat.toFixed(3) + ',' + w.lon.toFixed(3);
-                if (!groups[key]) groups[key] = { lat: w.lat, lon: w.lon, days: [] };
-                groups[key].days.push(num);
-            });
-
-            Object.values(groups).forEach(function(g) {
-                const days = g.days.sort(function(a,b){return a-b;});
-                const label = days.length === 1 ? '' + days[0] : days[0] + '-' + days[days.length-1];
-                const dayObj = TRIP_DATA.days.find(function(d){ return d.dayNumber === days[0]; });
-                const icon = L.divIcon({
-                    html: '<div class="map-day-marker">' + label + '</div>',
-                    className: '', iconSize: [26, 26], iconAnchor: [13, 13], popupAnchor: [0, -16]
-                });
-                const popup = '<strong>Day ' + label + '</strong>' + (dayObj ? '<br><span style="font-size:12px">' + dayObj.title + '</span>' : '');
-                L.marker([g.lat, g.lon], { icon: icon }).bindPopup(popup).addTo(map);
-            });
-
-            // Dubai marker
-            const dubaiIcon = L.divIcon({
-                html: '<div class="map-flight-marker">✈</div>',
+        function pin(label, color) {
+            color = color || '#C9966A';
+            return L.divIcon({
+                html: '<div class="map-day-marker" style="background:' + color + ';font-size:' + (label.length > 2 ? '9' : '11') + 'px;">' + label + '</div>',
                 className: '', iconSize: [26, 26], iconAnchor: [13, 13], popupAnchor: [0, -16]
             });
-            L.marker(DXB, { icon: dubaiIcon }).bindPopup('<strong>Dubai</strong><br><span style="font-size:12px">Home base</span>').addTo(map);
+        }
 
-            // Cape Cross marker
-            const ccIcon = L.divIcon({
-                html: '<div class="map-day-marker" style="font-size:13px;background:#7BAFD4;">🦭</div>',
-                className: '', iconSize: [26, 26], iconAnchor: [13, 13], popupAnchor: [0, -16]
+        async function osrmRoute(waypoints) {
+            try {
+                const coords = waypoints.map(function(w){ return w[1].toFixed(5)+','+w[0].toFixed(5); }).join(';');
+                const r = await fetch('https://router.project-osrm.org/route/v1/driving/'+coords+'?overview=full&geometries=geojson');
+                const j = await r.json();
+                if (j.code !== 'Ok' || !j.routes[0]) return null;
+                return j.routes[0].geometry.coordinates.map(function(c){ return [c[1], c[0]]; });
+            } catch(e) { return null; }
+        }
+
+        function drawRoute(map, pts, color, dash) {
+            L.polyline(pts, { color: color||'#C9966A', weight: 3, opacity: 0.9, dashArray: dash||null, lineJoin:'round' }).addTo(map);
+        }
+
+        async function renderAddisMap() {
+            const el = document.getElementById('mapAddis');
+            if (!el || el._leaflet_id) return;
+            const map = L.map('mapAddis', { scrollWheelZoom: false });
+            makeTile(map);
+
+            // Day 1: Airport → Hotel → National Museum → Holy Trinity → Entoto Hills → Merkato → Yod Abyssinia → Hotel
+            const d1 = [
+                [8.9779, 38.7993],   // ADD Airport
+                [9.0047, 38.7813],   // Marriott Bole
+                [9.0234, 38.7541],   // National Museum of Ethiopia
+                [9.0306, 38.7654],   // Holy Trinity Cathedral
+                [9.0718, 38.7472],   // Entoto Hills
+                [9.0403, 38.7329],   // Merkato
+                [9.0198, 38.7613],   // Yod Abyssinia
+                [9.0047, 38.7813],   // Hotel (return)
+            ];
+            // Day 2: Hotel → Bishoftu → Lake Hora → Lake Babogaya → back
+            const d2 = [
+                [9.0047, 38.7813],   // Hotel
+                [8.7510, 38.9847],   // Bishoftu / Lake Hora
+                [8.7325, 38.9886],   // Lake Babogaya
+                [8.7456, 38.9812],   // Kuriftu Resort
+                [9.0047, 38.7813],   // Return to hotel
+            ];
+
+            const [r1, r2] = await Promise.all([osrmRoute(d1), osrmRoute(d2)]);
+            drawRoute(map, r1||d1, '#E05C5C');
+            drawRoute(map, r2||d2, '#E0956A');
+
+            // Markers
+            [
+                { pos:[8.9779,38.7993], label:'✈', title:'ADD Airport', color:'#7BAFD4' },
+                { pos:[9.0047,38.7813], label:'H',  title:'Marriott Hotel' },
+                { pos:[9.0234,38.7541], label:'1',  title:'National Museum of Ethiopia' },
+                { pos:[9.0306,38.7654], label:'2',  title:'Holy Trinity Cathedral' },
+                { pos:[9.0718,38.7472], label:'3',  title:'Entoto Hills' },
+                { pos:[9.0403,38.7329], label:'4',  title:'Merkato' },
+                { pos:[9.0198,38.7613], label:'5',  title:'Yod Abyssinia' },
+                { pos:[8.7510,38.9847], label:'D2', title:'Bishoftu · Lake Hora', color:'#E0956A' },
+                { pos:[8.7325,38.9886], label:'D2', title:'Lake Babogaya', color:'#E0956A' },
+            ].forEach(function(m){
+                L.marker(m.pos, { icon: pin(m.label, m.color) }).bindPopup('<strong>'+m.title+'</strong>').addTo(map);
             });
-            L.marker(CAPE_CROSS, { icon: ccIcon }).bindPopup('<strong>Day 8 detour</strong><br><span style="font-size:12px">Cape Cross Seals</span>').addTo(map);
 
-            // Fit map to all points
-            const allPts = [DXB, ADD, WDH, ...driveCoords, CAPE_CROSS];
+            map.fitBounds(L.latLngBounds([...d1, ...d2]), { padding: [24, 24] });
+        }
+
+        async function renderNamibiaMap() {
+            const el = document.getElementById('mapNamibia');
+            if (!el || el._leaflet_id) return;
+            const map = L.map('mapNamibia', { scrollWheelZoom: false });
+            makeTile(map);
+
+            // Main route waypoints in order
+            const main = [
+                [-22.0000, 17.0500],  // WDH Airport (Day 3 arrival)
+                [-24.5167, 15.7500],  // Sesriem (Days 3-4)
+                [-22.6827, 14.5268],  // Swakopmund (Days 5-8)
+                [-21.8307, 15.7219],  // Spitzkoppe (Day 9 stop)
+                [-20.5960, 14.3743],  // Damaraland/Mopane Lodge (Day 9)
+                [-19.6819, 13.8919],  // Grootberg (Day 10)
+                [-19.7804, 15.9104],  // Etosha Anderson Gate (Day 11)
+                [-18.8667, 16.4833],  // Etosha Central (Day 12)
+                [-18.7958, 17.0047],  // Etosha East (Day 13)
+                [-22.5608, 17.0658],  // Windhoek (Days 14-15)
+            ];
+            // Cape Cross detour from Swakopmund and back
+            const capeLoop = [
+                [-22.6827, 14.5268],  // Swakopmund
+                [-21.7833, 13.9833],  // Cape Cross
+                [-22.6827, 14.5268],  // Back
+            ];
+
+            // OSRM can't do very long multi-stop routes well in one shot — split at Swakopmund
+            const [rA, rB, rCape] = await Promise.all([
+                osrmRoute(main.slice(0, 5)),   // WDH → Sesriem → Swakopmund → Spitzkoppe → Damaraland
+                osrmRoute(main.slice(4)),       // Damaraland → Grootberg → Etosha → Windhoek
+                osrmRoute(capeLoop),
+            ]);
+            drawRoute(map, rA || main.slice(0, 5), '#C9966A');
+            drawRoute(map, rB || main.slice(4),    '#C9966A');
+            drawRoute(map, rCape || capeLoop,      '#C9966A', '6 5');
+
+            // Markers
+            [
+                { pos:[-22.0000,17.0500], label:'3↓',  title:'Day 3 — Arrival WDH Airport' },
+                { pos:[-24.5167,15.7500], label:'3-4',  title:'Days 3-4 — Sesriem / Sossusvlei' },
+                { pos:[-22.6827,14.5268], label:'5-8',  title:'Days 5-8 — Swakopmund' },
+                { pos:[-21.7833,13.9833], label:'🦭',  title:'Day 8 — Cape Cross Seals', color:'#7BAFD4' },
+                { pos:[-21.8307,15.7219], label:'9→',  title:'Day 9 stop — Spitzkoppe' },
+                { pos:[-20.5960,14.3743], label:'9',   title:'Day 9 — Damaraland / Mopane Lodge' },
+                { pos:[-19.6819,13.8919], label:'10',  title:'Day 10 — Grootberg' },
+                { pos:[-19.7804,15.9104], label:'11',  title:'Day 11 — Etosha (south)' },
+                { pos:[-18.8667,16.4833], label:'12',  title:'Day 12 — Etosha Central' },
+                { pos:[-18.7958,17.0047], label:'13',  title:'Day 13 — Etosha East' },
+                { pos:[-22.5608,17.0658], label:'14-15',title:'Days 14-15 — Windhoek' },
+            ].forEach(function(m){
+                L.marker(m.pos, { icon: pin(m.label, m.color) }).bindPopup('<strong>'+m.title+'</strong>').addTo(map);
+            });
+
+            const allPts = [...main, ...capeLoop];
             map.fitBounds(L.latLngBounds(allPts), { padding: [28, 28] });
         }
 
-        // Load Leaflet then render map
+        // Load Leaflet then render both maps
         (function() {
             const link = document.createElement('link');
             link.rel = 'stylesheet';
@@ -3174,7 +3204,7 @@
             document.head.appendChild(link);
             const s = document.createElement('script');
             s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-            s.onload = renderTripMap;
+            s.onload = function() { renderAddisMap(); renderNamibiaMap(); };
             document.head.appendChild(s);
         })();
 
