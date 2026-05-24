@@ -3136,7 +3136,8 @@
                 L.marker(m.pos, { icon: pin(m.label, m.color) }).bindPopup('<strong>'+m.title+'</strong>').addTo(map);
             });
 
-            map.fitBounds(L.latLngBounds([...d1, ...d2]), { padding: [24, 24] });
+            map.invalidateSize();
+            map.fitBounds(L.latLngBounds([...d1, ...d2]), { padding: [28, 28], maxZoom: 12 });
         }
 
         async function renderNamibiaMap() {
@@ -3193,7 +3194,8 @@
             });
 
             const allPts = [...main, ...capeLoop];
-            map.fitBounds(L.latLngBounds(allPts), { padding: [28, 28] });
+            map.invalidateSize();
+            map.fitBounds(L.latLngBounds(allPts), { padding: [28, 28], maxZoom: 8 });
         }
 
         // Load Leaflet then render both maps
@@ -3204,7 +3206,7 @@
             document.head.appendChild(link);
             const s = document.createElement('script');
             s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-            s.onload = function() { renderAddisMap(); renderNamibiaMap(); };
+            s.onload = function() { setTimeout(function() { renderAddisMap(); renderNamibiaMap(); }, 300); };
             document.head.appendChild(s);
         })();
 
