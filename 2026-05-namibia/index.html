@@ -2179,6 +2179,7 @@
         <!-- OVERVIEW TAB -->
         <div class="day-view active" id="overview">
 
+            <!-- Currency — collapsed by default (custom toggle) -->
             <div class="card" id="currencyCard">
                 <div class="calc-header" onclick="toggleCurrencyCalc()">
                     <div class="calc-header-title">
@@ -2216,63 +2217,124 @@
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-title" style="display:flex;align-items:center;justify-content:space-between;">
-                    Itinerary
-                    <button onclick="goToToday()" style="font-size:11px;padding:4px 10px;background:var(--accent-gold);color:var(--bg-primary);border:none;border-radius:5px;cursor:pointer;font-weight:600;font-family:inherit;">Today</button>
+            <!-- Weather for today's location — collapsed by default -->
+            <div class="collapsible-section">
+                <div class="section-header collapsed" id="overview-wx-header">
+                    <h3>🌤 Weather<span class="wx-preview" id="wx-preview-overview"></span></h3>
+                    <div class="chevron"></div>
                 </div>
-                <table class="accommodation-table" id="accommodationTable"></table>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Flights</div>
-                <div class="flights-scroll" id="flightsList"></div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Travellers</div>
-                <div class="travelers-list" id="travelersListView"></div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Car Rental</div>
-                <div class="car-rental-info" id="carRentalInfo"></div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Relevant Links</div>
-                <div class="overview-links">
-                    <a href="https://open.spotify.com/playlist/1XtR7v67SZOgz1DzVsDOAx" target="_blank" class="spotify-link">
-                        <span class="spotify-icon">♪</span>
-                        <span>Trip Playlist</span>
-                    </a>
-                    <a href="https://tricount.com/tQidftYrYcWVIVqrxy" target="_blank" class="tricount-link">
-                        <span>💰</span>
-                        <span>Trip Expenses</span>
-                    </a>
-                    <button class="download-btn" onclick="downloadPage()">⬇ Download Offline</button>
+                <div class="section-content section-weather collapsed">
+                    <div id="wx-overview" style="padding: 12px 16px;">
+                        <div class="weather-loading">Loading forecast…</div>
+                    </div>
                 </div>
             </div>
 
-            <div id="budgetCard"></div>
-
-            <div class="card" id="tripRouteCard">
-                <div class="card-title" style="font-size:15px;">🇪🇹 Addis Ababa — Days 1 & 2</div>
-                <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">
-                    <span style="color:#E05C5C;font-weight:600;">——</span> Day 1 city tour &nbsp;
-                    <span style="color:#E0956A;font-weight:600;">——</span> Day 2 Bishoftu lakes
+            <!-- Itinerary — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>📋 Itinerary</h3>
+                    <div class="chevron"></div>
                 </div>
-                <div id="mapAddis" style="height:320px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);"></div>
+                <div class="section-content">
+                    <div>
+                        <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:8px;">
+                            <button onclick="goToToday()" style="font-size:11px;padding:4px 10px;background:var(--accent-gold);color:var(--bg-primary);border:none;border-radius:5px;cursor:pointer;font-weight:600;font-family:inherit;">Today</button>
+                        </div>
+                        <table class="accommodation-table" id="accommodationTable"></table>
+                    </div>
+                </div>
             </div>
 
-            <div class="card">
-                <div class="card-title" style="font-size:15px;">🇳🇦 Namibia — Days 3–15</div>
-                <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">
-                    <span style="color:#C9966A;font-weight:600;">——</span> Main route &nbsp;
-                    <span style="color:#C9966A;font-weight:600;">- - -</span> Cape Cross detour
+            <!-- Maps — expanded by default, placed after itinerary -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>🗺️ Maps</h3>
+                    <div class="chevron"></div>
                 </div>
-                <div id="mapNamibia" style="height:460px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);"></div>
+                <div class="section-content">
+                    <div>
+                        <div style="font-size:13px;font-weight:600;color:var(--accent-gold);margin-bottom:6px;">🇪🇹 Addis Ababa — Days 1 & 2</div>
+                        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">
+                            <span style="color:#E05C5C;font-weight:600;">——</span> Day 1 city tour &nbsp;
+                            <span style="color:#E0956A;font-weight:600;">——</span> Day 2 Bishoftu lakes
+                        </div>
+                        <div id="mapAddis" style="height:320px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);margin-bottom:20px;"></div>
+                        <div style="font-size:13px;font-weight:600;color:var(--accent-gold);margin-bottom:6px;">🇳🇦 Namibia — Days 3–15</div>
+                        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">
+                            <span style="color:#C9966A;font-weight:600;">——</span> Main route &nbsp;
+                            <span style="color:#C9966A;font-weight:600;">- - -</span> Cape Cross detour
+                        </div>
+                        <div id="mapNamibia" style="height:460px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);"></div>
+                    </div>
+                </div>
             </div>
+
+            <!-- Flights — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>✈️ Flights</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content section-flight">
+                    <div class="flights-scroll" id="flightsList"></div>
+                </div>
+            </div>
+
+            <!-- Car Rental — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>🚗 Car Rental</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div class="car-rental-info" id="carRentalInfo"></div>
+                </div>
+            </div>
+
+            <!-- Relevant Links — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>🔗 Relevant Links</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div class="overview-links">
+                        <a href="https://open.spotify.com/playlist/1XtR7v67SZOgz1DzVsDOAx" target="_blank" class="spotify-link">
+                            <span class="spotify-icon">♪</span>
+                            <span>Trip Playlist</span>
+                        </a>
+                        <a href="https://tricount.com/tQidftYrYcWVIVqrxy" target="_blank" class="tricount-link">
+                            <span>💰</span>
+                            <span>Trip Expenses</span>
+                        </a>
+                        <button class="download-btn" onclick="downloadPage()">⬇ Download Offline</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Budget — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>💰 Budget</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div id="budgetCard"></div>
+                </div>
+            </div>
+
+            <!-- Travellers — expanded by default, moved to end -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>👥 Travellers</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div class="travelers-list" id="travelersListView"></div>
+                </div>
+            </div>
+
         </div>
 
         <!-- DAY VIEWS -->
@@ -2345,10 +2407,14 @@
             renderDayTabs();
             renderDayViews();
 
-            // Auto-open today's day if within the trip
+            // Auto-open today's day if within the trip; also load overview weather
             const today = new Date().toISOString().split('T')[0];
             for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
-                if (w.isoDate === today) { switchView(`day${dayNum}`); break; }
+                if (w.isoDate === today) {
+                    switchView(`day${dayNum}`);
+                    loadOverviewWeather(parseInt(dayNum));
+                    break;
+                }
             }
         }
 
@@ -2877,26 +2943,23 @@
             const total = COST_DATA.summary.reduce((s, r) => s + r.amount, 0);
             const pp = Math.round(total / 4);
             el.innerHTML = `
-                <div class="card">
-                    <div class="card-title">💰 Estimated Trip Budget</div>
-                    <table class="budget-table">
-                        ${COST_DATA.summary.map(r => `
-                            <tr>
-                                <td>
-                                    <div>${r.cat}</div>
-                                    <div class="budget-note">${r.note}</div>
-                                </td>
-                                <td class="budget-amount">$${r.amount.toLocaleString()}</td>
-                            </tr>
-                        `).join('')}
-                        <tr class="budget-total-row">
-                            <td>Total · 4 people</td>
-                            <td class="budget-amount">~$${total.toLocaleString()}</td>
+                <table class="budget-table">
+                    ${COST_DATA.summary.map(r => `
+                        <tr>
+                            <td>
+                                <div>${r.cat}</div>
+                                <div class="budget-note">${r.note}</div>
+                            </td>
+                            <td class="budget-amount">$${r.amount.toLocaleString()}</td>
                         </tr>
-                    </table>
-                    <div class="budget-perperson">~$${pp.toLocaleString()} per person</div>
-                    <div class="budget-disclaimer">${COST_DATA.disclaimer}</div>
-                </div>
+                    `).join('')}
+                    <tr class="budget-total-row">
+                        <td>Total · 4 people</td>
+                        <td class="budget-amount">~$${total.toLocaleString()}</td>
+                    </tr>
+                </table>
+                <div class="budget-perperson">~$${pp.toLocaleString()} per person</div>
+                <div class="budget-disclaimer">${COST_DATA.disclaimer}</div>
             `;
         }
 
@@ -3056,6 +3119,59 @@
             const el = document.getElementById(`wx-${dayNumber}`);
             if (el) el.innerHTML = `<div class="weather-loading">Refreshing…</div>`;
             loadWeatherWidget(dayNumber);
+        }
+
+        async function loadOverviewWeather(dayNumber) {
+            const el = document.getElementById('wx-overview');
+            if (!el || !DAY_WEATHER[dayNumber]) return;
+            const w = DAY_WEATHER[dayNumber];
+            // Update header to show location
+            const day = TRIP_DATA.days.find(d => d.dayNumber === dayNumber);
+            const locLabel = day ? ` · Day ${dayNumber} – ${day.location}` : '';
+            const header = document.getElementById('overview-wx-header');
+            if (header) {
+                const h3 = header.querySelector('h3');
+                if (h3) {
+                    const preview = document.getElementById('wx-preview-overview');
+                    h3.innerHTML = `🌤 Today's Weather<small style="font-size:11px;opacity:0.7;font-weight:400;">${locLabel}</small>`;
+                    if (preview) h3.appendChild(preview);
+                }
+            }
+            const data = await fetchWeather(dayNumber);
+            if (!data || (data.t8 === null && data.t13 === null && data.t20 === null)) {
+                el.innerHTML = `<div class="weather-error">Forecast not yet available for this date</div>`;
+                return;
+            }
+            const now = new Date();
+            const updated = `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
+            const chart = (data.t8 !== null && data.t13 !== null && data.t20 !== null)
+                ? weatherChartSVG(data.t8, data.t13, data.t20, dayNumber) : '';
+            const wx = wmoIcon(data.wcode);
+            const midTemp = data.t13 !== null ? `${Math.round(data.t13)}°C` : '';
+            el.innerHTML = `
+                <div class="wx-condition-row">
+                    <span class="wx-condition-icon">${wx.emoji}</span>
+                    <span class="wx-condition-label">${wx.label}${midTemp ? ' · ' + midTemp : ''}</span>
+                </div>
+                <div class="weather-sun-row" style="margin-top:10px;">
+                    ${data.sunrise ? `<span>🌅 ${data.sunrise}</span>` : ''}
+                    ${data.sunset  ? `<span>🌇 ${data.sunset}</span>`  : ''}
+                    <button class="weather-refresh" title="Refresh forecast" onclick="refreshOverviewWeather(${dayNumber})">↻</button>
+                    <span style="font-size:10px;color:var(--text-muted);">as of ${updated}</span>
+                    <a href="https://www.google.com/search?q=hourly+weather+forecast+${w.lat},${w.lon}" target="_blank" style="font-size:10px;color:var(--accent-gold);text-decoration:none;margin-left:auto;">More details ↗</a>
+                </div>
+                <div class="weather-chart-container">${chart}</div>
+            `;
+            const preview = document.getElementById('wx-preview-overview');
+            if (preview) preview.textContent = `${wx.emoji} ${midTemp}`;
+        }
+
+        function refreshOverviewWeather(dayNumber) {
+            const info = DAY_WEATHER[dayNumber];
+            if (info) { try { localStorage.removeItem(`wx_${info.isoDate}_${info.lat}`); } catch(e) {} }
+            const el = document.getElementById('wx-overview');
+            if (el) el.innerHTML = `<div class="weather-loading">Refreshing…</div>`;
+            loadOverviewWeather(dayNumber);
         }
 
         initializePage();
