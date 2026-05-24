@@ -3041,7 +3041,7 @@
                     ${data.sunset  ? `<span>🌇 ${data.sunset}</span>`  : ''}
                     <button class="weather-refresh" title="Refresh forecast" onclick="refreshWeather(${dayNumber})">↻</button>
                     <span style="font-size:10px;color:var(--text-muted);">as of ${updated}</span>
-                    <a href="https://open-meteo.com/en/docs#latitude=${DAY_WEATHER[dayNumber]?.lat}&longitude=${DAY_WEATHER[dayNumber]?.lon}" target="_blank" style="font-size:10px;color:var(--accent-gold);text-decoration:none;margin-left:auto;">More details ↗</a>
+                    <a href="https://www.google.com/search?q=hourly+weather+forecast+${DAY_WEATHER[dayNumber]?.lat},${DAY_WEATHER[dayNumber]?.lon}" target="_blank" style="font-size:10px;color:var(--accent-gold);text-decoration:none;margin-left:auto;">More details ↗</a>
                 </div>
                 <div class="weather-chart-container">${chart}</div>
             `;
