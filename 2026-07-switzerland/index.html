@@ -254,6 +254,25 @@
         .weather-refresh { background: none; border: none; color: var(--text-muted); font-size: 14px; cursor: pointer; margin-left: auto; padding: 2px 6px; border-radius: 3px; transition: var(--transition); }
         .weather-refresh:hover { color: var(--accent-gold); }
 
+        /* CURRENCY CALCULATOR */
+        .calc-header { display: flex; align-items: center; justify-content: space-between; cursor: pointer; padding: 14px 20px; margin: -20px -20px 0 -20px; border-radius: 8px 8px 0 0; user-select: none; }
+        .calc-header:hover { background-color: rgba(201,150,106,0.07); }
+        .calc-header-title { font-size: 15px; font-weight: 600; color: var(--accent-gold); display: flex; align-items: center; gap: 8px; }
+        .calc-header-sub { font-size: 11px; color: var(--text-secondary); font-weight: 400; }
+        .calc-chevron { font-size: 11px; color: var(--text-secondary); transition: transform 0.25s ease; }
+        .calc-body { overflow: hidden; max-height: 0; transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.25s ease; opacity: 0; padding-top: 0; }
+        .calc-body.open { max-height: 300px; opacity: 1; padding-top: 16px; }
+        .calc-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .calc-row:last-of-type { margin-bottom: 0; }
+        .calc-label { width: 110px; flex-shrink: 0; }
+        .calc-label-code { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+        .calc-label-name { font-size: 10px; color: var(--text-secondary); margin-top: 1px; }
+        .calc-input { flex: 1; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 6px; padding: 9px 12px; color: var(--text-primary); font-size: 15px; font-family: inherit; outline: none; transition: border-color 0.2s; }
+        .calc-input:focus { border-color: var(--accent-gold); }
+        .calc-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border-color); }
+        .calc-rates-note { font-size: 10px; color: var(--text-secondary); }
+        .calc-refresh { font-size: 11px; color: var(--accent-gold); cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; }
+
         .day-cost-bar { display: flex; align-items: center; gap: 10px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-left: 3px solid #7A6E5E; border-radius: 6px; padding: 10px 14px; margin-bottom: 16px; flex-wrap: wrap; }
         .day-cost-label { font-size: 11px; color: var(--text-muted); font-weight: 500; white-space: nowrap; }
         .day-cost-items { font-size: 11px; color: var(--text-secondary); flex: 1; }
@@ -761,6 +780,44 @@
 
     <main class="container">
         <div class="day-view active" id="overview">
+            <!-- Currency Calculator — collapsed by default -->
+            <div class="card" id="currencyCard">
+                <div class="calc-header" onclick="toggleCurrencyCalc()">
+                    <div class="calc-header-title">
+                        💱 Currency Calculator
+                        <span class="calc-header-sub" id="calcHeaderSub"></span>
+                    </div>
+                    <span class="calc-chevron" id="calcChevron">▶</span>
+                </div>
+                <div class="calc-body" id="calcBody">
+                    <div class="calc-row">
+                        <div class="calc-label">
+                            <div class="calc-label-code" id="calcCode0"></div>
+                            <div class="calc-label-name" id="calcName0"></div>
+                        </div>
+                        <input class="calc-input" id="calcInput0" type="number" placeholder="0" oninput="calcConvert(0)">
+                    </div>
+                    <div class="calc-row">
+                        <div class="calc-label">
+                            <div class="calc-label-code">AED</div>
+                            <div class="calc-label-name">UAE Dirham</div>
+                        </div>
+                        <input class="calc-input" id="calcInput1" type="number" placeholder="0" oninput="calcConvert(1)">
+                    </div>
+                    <div class="calc-row">
+                        <div class="calc-label">
+                            <div class="calc-label-code">USD</div>
+                            <div class="calc-label-name">US Dollar</div>
+                        </div>
+                        <input class="calc-input" id="calcInput2" type="number" placeholder="0" oninput="calcConvert(2)">
+                    </div>
+                    <div class="calc-footer">
+                        <span class="calc-rates-note" id="calcRatesNote">Loading rates…</span>
+                        <button class="calc-refresh" onclick="fetchCalcRates(true)">↻ Refresh</button>
+                    </div>
+                </div>
+            </div>
+
             <div class="collapsible-section" id="overviewWeatherSection" style="display:none;">
                 <div class="section-header collapsed" id="overview-wx-header">
                     <h3>🌤 Weather<span class="wx-preview" id="wx-preview-overview"></span></h3>
@@ -1431,6 +1488,132 @@
                 if (w.isoDate === today) { switchView(`day${dayNum}`); return; }
             }
         }
+
+        // ============================================================
+        // CURRENCY CALCULATOR
+        // DAY_CURRENCY: map day number → { code, name, symbol } for the
+        // local currency on that day. The calculator always shows
+        // local currency / AED / USD.
+        // ============================================================
+        const DAY_CURRENCY = {
+            1:  { code: 'EUR', name: 'Euro', symbol: '€' }, // Munich
+            2:  { code: 'EUR', name: 'Euro', symbol: '€' },
+            3:  { code: 'EUR', name: 'Euro', symbol: '€' },
+            4:  { code: 'CHF', name: 'Swiss Franc', symbol: 'Fr' }, // Zurich
+            5:  { code: 'CHF', name: 'Swiss Franc', symbol: 'Fr' },
+            6:  { code: 'CHF', name: 'Swiss Franc', symbol: 'Fr' },
+            7:  { code: 'CHF', name: 'Swiss Franc', symbol: 'Fr' },
+            8:  { code: 'EUR', name: 'Euro', symbol: '€' }, // Madrid
+            9:  { code: 'EUR', name: 'Euro', symbol: '€' },
+            10: { code: 'EUR', name: 'Euro', symbol: '€' },
+            11: { code: 'EUR', name: 'Euro', symbol: '€' },
+            12: { code: 'EUR', name: 'Euro', symbol: '€' },
+        };
+
+        let calcRates = null;
+        let calcPrimary = { code: 'EUR', name: 'Euro', symbol: '€' };
+
+        function getTodayTripDay() {
+            const today = new Date().toISOString().split('T')[0];
+            for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
+                if (w.isoDate === today) return parseInt(dayNum);
+            }
+            return null;
+        }
+
+        async function fetchCalcRates(force) {
+            const cacheKey = 'calc_rates_v1';
+            if (!force) {
+                const cached = localStorage.getItem(cacheKey);
+                if (cached) {
+                    const { data, ts } = JSON.parse(cached);
+                    if (Date.now() - ts < 24 * 3600 * 1000) { calcRates = data; updateCalcUI(); return; }
+                }
+            }
+            document.getElementById('calcRatesNote').textContent = 'Fetching rates…';
+            try {
+                const res = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json');
+                const json = await res.json();
+                calcRates = { usd: 1, aed: json.usd.aed };
+                Object.values(DAY_CURRENCY).forEach(c => {
+                    const k = c.code.toLowerCase();
+                    if (json.usd[k]) calcRates[k] = json.usd[k];
+                });
+                localStorage.setItem(cacheKey, JSON.stringify({ data: calcRates, ts: Date.now() }));
+            } catch {
+                calcRates = { usd: 1, aed: 3.6725, eur: 0.92, chf: 0.89 };
+                document.getElementById('calcRatesNote').textContent = 'Offline rates (approx)';
+                return;
+            }
+            updateCalcUI();
+        }
+
+        function updateCalcUI() {
+            if (!calcRates) return;
+            const todayDay = getTodayTripDay();
+            const defaultCurrency = Object.values(DAY_CURRENCY)[0] || { code: 'EUR', name: 'Euro', symbol: '€' };
+            calcPrimary = (todayDay && DAY_CURRENCY[todayDay]) ? DAY_CURRENCY[todayDay] : defaultCurrency;
+            document.getElementById('calcCode0').textContent = calcPrimary.code;
+            document.getElementById('calcName0').textContent = calcPrimary.name;
+            document.getElementById('calcHeaderSub').textContent = calcPrimary.code + ' · AED · USD';
+            const ts = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('calcRatesNote').textContent = `Rates updated ${ts}`;
+        }
+
+        function calcConvert(sourceIdx) {
+            if (!calcRates) return;
+            const inputs = [document.getElementById('calcInput0'), document.getElementById('calcInput1'), document.getElementById('calcInput2')];
+            const codes = [calcPrimary.code.toLowerCase(), 'aed', 'usd'];
+            const val = parseFloat(inputs[sourceIdx].value);
+            if (isNaN(val)) { inputs.forEach((inp, i) => { if (i !== sourceIdx) inp.value = ''; }); return; }
+            const sourceRate = calcRates[codes[sourceIdx]] || 1;
+            const valInUsd = val / sourceRate;
+            inputs.forEach((inp, i) => {
+                if (i === sourceIdx) return;
+                inp.value = (valInUsd * (calcRates[codes[i]] || 1)).toFixed(2);
+            });
+        }
+
+        function toggleCurrencyCalc() {
+            const body = document.getElementById('calcBody');
+            const chevron = document.getElementById('calcChevron');
+            const open = body.classList.toggle('open');
+            chevron.textContent = open ? '▼' : '▶';
+            if (open && !calcRates) fetchCalcRates(false);
+        }
+
+        fetchCalcRates(false);
+
+        /* ── SWIPE NAVIGATION ── */
+        (function () {
+            let startX = 0, startY = 0, locked = false;
+            const views = ['overview', ...TRIP_DATA.days.map(d => `day${d.dayNumber}`)];
+            function isScrollable(el) {
+                while (el && el !== document.body) {
+                    const style = window.getComputedStyle(el);
+                    const overflow = style.overflowX;
+                    if ((overflow === 'auto' || overflow === 'scroll') && el.scrollWidth > el.clientWidth) return true;
+                    el = el.parentElement;
+                }
+                return false;
+            }
+            document.addEventListener('touchstart', e => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                locked = isScrollable(e.target);
+            }, { passive: true });
+            document.addEventListener('touchend', e => {
+                if (locked) return;
+                const dx = e.changedTouches[0].clientX - startX;
+                const dy = e.changedTouches[0].clientY - startY;
+                if (Math.abs(dx) < 60 || Math.abs(dy) > Math.abs(dx) * 0.8) return;
+                const current = document.querySelector('.day-view.active');
+                if (!current) return;
+                const idx = views.indexOf(current.id);
+                if (dx < 0 && idx < views.length - 1) switchView(views[idx + 1]);
+                else if (dx > 0 && idx > 0) switchView(views[idx - 1]);
+            }, { passive: true });
+        })();
 
         initializePage();
     </script>
