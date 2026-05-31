@@ -204,7 +204,7 @@
 
         /* HERO SECTION */
         .hero {
-            padding: 32px 20px;
+            padding: 16px 16px;
             border-radius: 12px;
             margin-bottom: 24px;
             text-align: center;
@@ -226,32 +226,32 @@
         }
 
         .hero-day-number {
-            font-size: 48px;
+            font-size: 28px;
             font-weight: 700;
             color: var(--accent-gold);
-            opacity: 0.6;
+            opacity: 0.7;
             position: absolute;
-            top: 16px;
-            left: 20px;
+            top: 10px;
+            left: 14px;
             z-index: 2;
             text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9), 0 0 50px rgba(0, 0, 0, 0.7);
             background: rgba(0, 0, 0, 0.4);
-            padding: 4px 12px;
-            border-radius: 8px;
+            padding: 2px 9px;
+            border-radius: 6px;
             display: inline-block;
         }
 
         .hero-title {
-            font-size: 32px;
+            font-size: 22px;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             position: relative;
             z-index: 2;
         }
 
         .hero-location {
-            font-size: 16px;
+            font-size: 14px;
             color: var(--accent-gold);
             display: flex;
             align-items: center;
@@ -1248,11 +1248,11 @@
             }
 
             .hero {
-                padding: 24px 16px;
+                padding: 14px 16px;
             }
 
             .hero-title {
-                font-size: 26px;
+                font-size: 20px;
             }
 
             .card {
@@ -1396,26 +1396,93 @@
     <main class="container">
         <!-- OVERVIEW TAB -->
         <div class="day-view active" id="overview">
-            <div class="card">
-                <div class="card-title">Itinerary</div>
-                <table class="accommodation-table" id="accommodationTable"></table>
+
+            <!-- TRIP-SPECIFIC SECTIONS: add here (e.g. currency calculator, route maps) -->
+
+            <!-- Weather for today's location — collapsed by default, shown only during the trip -->
+            <div class="collapsible-section" id="overviewWeatherSection" style="display:none;">
+                <div class="section-header collapsed" id="overview-wx-header">
+                    <h3>🌤 Weather<span class="wx-preview" id="wx-preview-overview"></span></h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content section-weather collapsed">
+                    <div id="wx-overview" style="padding: 12px 16px;">
+                        <div class="weather-loading">Loading forecast…</div>
+                    </div>
+                </div>
             </div>
 
-            <div class="card">
-                <div class="card-title">Flights</div>
-                <div class="flights-scroll" id="flightsList"></div>
+            <!-- Itinerary — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>📋 Itinerary</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div>
+                        <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:8px;">
+                            <button onclick="goToToday()" style="font-size:11px;padding:4px 10px;background:var(--accent-gold);color:var(--bg-primary);border:none;border-radius:5px;cursor:pointer;font-weight:600;font-family:inherit;">Today</button>
+                        </div>
+                        <table class="accommodation-table" id="accommodationTable"></table>
+                    </div>
+                </div>
             </div>
 
-            <div class="card">
-                <div class="card-title">Travellers</div>
-                <div class="travelers-list" id="travelersListView"></div>
+            <!-- Flights — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>✈️ Flights</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content section-flight">
+                    <div class="flights-scroll" id="flightsList"></div>
+                </div>
             </div>
 
-            <div id="carRentalCard"></div>
+            <!-- Car Rental — expanded by default, hidden if TRIP_DATA.carRental is null -->
+            <div class="collapsible-section" id="carRentalSection" style="display:none;">
+                <div class="section-header">
+                    <h3>🚗 Car Rental</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div class="car-rental-info" id="carRentalInfo"></div>
+                </div>
+            </div>
 
-            <div id="overviewLinks"></div>
+            <!-- Relevant Links — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>🔗 Relevant Links</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div class="overview-links" id="overviewLinksContent"></div>
+                </div>
+            </div>
 
-            <div id="budgetCard"></div>
+            <!-- Budget — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>💰 Budget</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div id="budgetCard"></div>
+                </div>
+            </div>
+
+            <!-- Travellers — expanded by default, moved to end -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>👥 Travellers</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div class="travelers-list" id="travelersListView"></div>
+                </div>
+            </div>
+
         </div>
 
         <!-- DAY VIEWS -->
@@ -1489,6 +1556,16 @@
             renderBudgetCard();
             renderDayTabs();
             renderDayViews();
+
+            // Auto-open today's day if within the trip; also load overview weather
+            const today = new Date().toISOString().split('T')[0];
+            for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
+                if (w.isoDate === today) {
+                    switchView(`day${dayNum}`);
+                    loadOverviewWeather(parseInt(dayNum));
+                    break;
+                }
+            }
         }
 
         function renderOverviewTab() {
@@ -1516,34 +1593,26 @@
                 .map(t => `<div class="traveler-chip">${t}</div>`)
                 .join("");
 
-            // Car rental (conditional)
-            const carRentalCard = document.getElementById("carRentalCard");
+            // Car rental (conditional — show/hide entire section)
+            const carRentalSection = document.getElementById("carRentalSection");
+            const carRentalInfo = document.getElementById("carRentalInfo");
             if (TRIP_DATA.carRental) {
-                carRentalCard.innerHTML = `
-                    <div class="card">
-                        <div class="card-title">Car Rental</div>
-                        <div class="car-rental-info">
-                            <strong>${TRIP_DATA.carRental.company}</strong><br>
-                            📞 ${TRIP_DATA.carRental.phone}<br>
-                            🌐 ${TRIP_DATA.carRental.website}
-                        </div>
-                    </div>
+                carRentalInfo.innerHTML = `
+                    <strong>${TRIP_DATA.carRental.company}</strong><br>
+                    📞 ${TRIP_DATA.carRental.phone}<br>
+                    🌐 ${TRIP_DATA.carRental.website}
                 `;
+                carRentalSection.style.display = '';
             }
 
             // Links (Spotify, Tricount, Download)
-            const linksDiv = document.getElementById('overviewLinks');
+            const linksContent = document.getElementById('overviewLinksContent');
             const links = [];
             if (TRIP_DATA.spotifyPlaylist) links.push(`<a href="${TRIP_DATA.spotifyPlaylist}" target="_blank" class="spotify-link"><span class="spotify-icon">♪</span><span>Trip Playlist</span></a>`);
             if (TRIP_DATA.tricountUrl) links.push(`<a href="${TRIP_DATA.tricountUrl}" target="_blank" class="tricount-link"><span>💰</span><span>Trip Expenses</span></a>`);
-            linksDiv.innerHTML = `
-                <div class="card">
-                    <div class="card-title">Links</div>
-                    <div class="overview-links">
-                        ${links.join('')}
-                        <button class="download-btn" onclick="downloadPage()">⬇ Download Offline</button>
-                    </div>
-                </div>
+            linksContent.innerHTML = `
+                ${links.join('')}
+                <button class="download-btn" onclick="downloadPage()">⬇ Download Offline</button>
             `;
 
             // Accommodation / itinerary table
@@ -1565,7 +1634,7 @@
                 tableHTML += `
                     <tr data-day="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">
                         <td>${day.dayNumber}</td>
-                        <td style="white-space: nowrap;">${day.dayOfWeek}<br>${day.date.split(' ')[1] || day.date}</td>
+                        <td style="white-space: nowrap; font-size: 12px;">${day.dayOfWeek} ${day.date.split(' ')[1] || ''} ${day.date.split(' ')[0]}</td>
                         <td>
                             <div style="font-weight: 600; color: var(--accent-gold); font-size: 13px;">${day.title}</div>
                             <div style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">${day.location}</div>
@@ -1595,7 +1664,7 @@
                 const datePartials = day.date.split(' ');
                 tabsHTML += `
                     <div class="${className}" data-view="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">
-                        Day ${day.dayNumber}<br>${datePartials[1] || ''} ${datePartials[0]}
+                        Day ${day.dayNumber}<br><span style="font-size:10px;opacity:0.8;">${day.dayOfWeek} ${datePartials[1] || ''} ${datePartials[0]}</span>
                     </div>
                 `;
             });
@@ -1736,19 +1805,21 @@
                 `;
             }
 
-            html += `
-                <div class="collapsible-section">
-                    <div class="section-header">
-                        <h3>🌤 Weather</h3>
-                        <div class="chevron"></div>
-                    </div>
-                    <div class="section-content section-weather">
-                        <div id="wx-${day.dayNumber}" style="padding: 12px 16px;">
-                            <div class="weather-loading">Loading forecast…</div>
+            if (DAY_WEATHER[day.dayNumber]) {
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header collapsed" id="wx-header-${day.dayNumber}">
+                            <h3>🌤 Weather<span class="wx-preview" id="wx-preview-${day.dayNumber}"></span></h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-weather collapsed">
+                            <div id="wx-${day.dayNumber}" style="padding: 12px 16px;">
+                                <div class="weather-loading">Loading forecast…</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
+                `;
+            }
 
             const dc = COST_DATA.days[day.dayNumber];
             if (dc) {
@@ -1990,26 +2061,23 @@
             const numPeople = TRIP_DATA.travelers.length || 1;
             const pp = Math.round(total / numPeople);
             el.innerHTML = `
-                <div class="card">
-                    <div class="card-title">💰 Estimated Trip Budget</div>
-                    <table class="budget-table">
-                        ${COST_DATA.summary.map(r => `
-                            <tr>
-                                <td>
-                                    <div>${r.cat}</div>
-                                    <div class="budget-note">${r.note}</div>
-                                </td>
-                                <td class="budget-amount">$${r.amount.toLocaleString()}</td>
-                            </tr>
-                        `).join('')}
-                        <tr class="budget-total-row">
-                            <td>Total · ${numPeople} ${numPeople === 1 ? 'person' : 'people'}</td>
-                            <td class="budget-amount">~$${total.toLocaleString()}</td>
+                <table class="budget-table">
+                    ${COST_DATA.summary.map(r => `
+                        <tr>
+                            <td>
+                                <div>${r.cat}</div>
+                                <div class="budget-note">${r.note}</div>
+                            </td>
+                            <td class="budget-amount">$${r.amount.toLocaleString()}</td>
                         </tr>
-                    </table>
-                    <div class="budget-perperson">~$${pp.toLocaleString()} per person</div>
-                    <div class="budget-disclaimer">${COST_DATA.disclaimer}</div>
-                </div>
+                    `).join('')}
+                    <tr class="budget-total-row">
+                        <td>Total · ${numPeople} ${numPeople === 1 ? 'person' : 'people'}</td>
+                        <td class="budget-amount">~$${total.toLocaleString()}</td>
+                    </tr>
+                </table>
+                <div class="budget-perperson">~$${pp.toLocaleString()} per person</div>
+                <div class="budget-disclaimer">${COST_DATA.disclaimer}</div>
             `;
         }
 
@@ -2032,20 +2100,31 @@
                 }
             } catch(e) {}
             try {
-                const url = `https://api.open-meteo.com/v1/forecast?latitude=${info.lat}&longitude=${info.lon}&hourly=temperature_2m&daily=sunrise,sunset&timezone=auto&start_date=${info.isoDate}&end_date=${info.isoDate}`;
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${info.lat}&longitude=${info.lon}&hourly=temperature_2m,weathercode&daily=sunrise,sunset&timezone=auto&start_date=${info.isoDate}&end_date=${info.isoDate}`;
                 const resp = await fetch(url);
                 if (!resp.ok) return null;
                 const json = await resp.json();
                 const times = json.hourly?.time || [];
                 const temps = json.hourly?.temperature_2m || [];
+                const codes = json.hourly?.weathercode || [];
                 const getT = h => {
                     const idx = times.indexOf(`${info.isoDate}T${String(h).padStart(2,'0')}:00`);
                     return idx !== -1 ? temps[idx] : null;
                 };
+                const getC = h => {
+                    const idx = times.indexOf(`${info.isoDate}T${String(h).padStart(2,'0')}:00`);
+                    return idx !== -1 ? codes[idx] : null;
+                };
+                const todayStr = new Date().toISOString().split('T')[0];
+                const nowHour = new Date().getHours();
+                const isToday = info.isoDate === todayStr;
                 const d = {
                     sunrise: (json.daily?.sunrise?.[0] || '').split('T')[1] || null,
                     sunset:  (json.daily?.sunset?.[0]  || '').split('T')[1] || null,
                     t8: getT(8), t13: getT(13), t20: getT(20),
+                    tNow:     isToday ? getT(nowHour) : null,
+                    wcodeNow: isToday ? (getC(nowHour) ?? getC(13) ?? getC(12)) : null,
+                    wcode: getC(13) ?? getC(12) ?? getC(11),
                 };
                 try { localStorage.setItem(cacheKey, JSON.stringify({ d, ts: Date.now() })); } catch(e) {}
                 return d;
@@ -2090,6 +2169,20 @@
             </svg>`;
         }
 
+        function wmoIcon(code) {
+            if (code === null || code === undefined) return { emoji: '🌤️', label: 'Weather' };
+            if (code === 0)  return { emoji: '☀️',  label: 'Clear sky' };
+            if (code <= 2)   return { emoji: '🌤️', label: 'Partly cloudy' };
+            if (code === 3)  return { emoji: '☁️',  label: 'Overcast' };
+            if (code <= 48)  return { emoji: '🌫️', label: 'Fog' };
+            if (code <= 55)  return { emoji: '🌦️', label: 'Drizzle' };
+            if (code <= 65)  return { emoji: '🌧️', label: 'Rain' };
+            if (code <= 77)  return { emoji: '❄️',  label: 'Snow' };
+            if (code <= 82)  return { emoji: '🌧️', label: 'Rain showers' };
+            if (code <= 94)  return { emoji: '⛈️',  label: 'Thunderstorm' };
+            return { emoji: '⛈️', label: 'Thunderstorm with hail' };
+        }
+
         async function loadWeatherWidget(dayNumber) {
             const el = document.getElementById(`wx-${dayNumber}`);
             if (!el) return;
@@ -2102,15 +2195,24 @@
             const updated = `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
             const chart = (data.t8 !== null && data.t13 !== null && data.t20 !== null)
                 ? weatherChartSVG(data.t8, data.t13, data.t20, dayNumber) : '';
+            const wx = wmoIcon(data.wcode);
+            const midTemp = data.t13 !== null ? `${Math.round(data.t13)}°C` : '';
             el.innerHTML = `
-                <div class="weather-sun-row">
-                    ${data.sunrise ? `<span>☀️ ${data.sunrise}</span>` : ''}
-                    ${data.sunset  ? `<span>🌅 ${data.sunset}</span>`  : ''}
+                <div class="wx-condition-row">
+                    <span class="wx-condition-icon">${wx.emoji}</span>
+                    <span class="wx-condition-label">${wx.label}${midTemp ? ' · ' + midTemp : ''}</span>
+                </div>
+                <div class="weather-sun-row" style="margin-top:10px;">
+                    ${data.sunrise ? `<span>🌅 ${data.sunrise}</span>` : ''}
+                    ${data.sunset  ? `<span>🌇 ${data.sunset}</span>`  : ''}
                     <button class="weather-refresh" title="Refresh forecast" onclick="refreshWeather(${dayNumber})">↻</button>
                     <span style="font-size:10px;color:var(--text-muted);">as of ${updated}</span>
+                    <a href="https://wttr.in/${DAY_WEATHER[dayNumber]?.lat},${DAY_WEATHER[dayNumber]?.lon}?lang=en" target="_blank" style="font-size:10px;color:var(--accent-gold);text-decoration:none;margin-left:auto;">More details ↗</a>
                 </div>
                 <div class="weather-chart-container">${chart}</div>
             `;
+            const preview = document.getElementById(`wx-preview-${dayNumber}`);
+            if (preview) preview.textContent = `${wx.emoji} ${midTemp}`;
         }
 
         function refreshWeather(dayNumber) {
@@ -2119,6 +2221,62 @@
             const el = document.getElementById(`wx-${dayNumber}`);
             if (el) el.innerHTML = `<div class="weather-loading">Refreshing…</div>`;
             loadWeatherWidget(dayNumber);
+        }
+
+        async function loadOverviewWeather(dayNumber) {
+            const el = document.getElementById('wx-overview');
+            if (!el || !DAY_WEATHER[dayNumber]) return;
+            const w = DAY_WEATHER[dayNumber];
+            // Show the section and update header with location
+            const section = document.getElementById('overviewWeatherSection');
+            if (section) section.style.display = '';
+            const day = TRIP_DATA.days.find(d => d.dayNumber === dayNumber);
+            const locLabel = day ? ` · ${day.location}` : '';
+            const header = document.getElementById('overview-wx-header');
+            if (header) {
+                const h3 = header.querySelector('h3');
+                if (h3) {
+                    const preview = document.getElementById('wx-preview-overview');
+                    h3.innerHTML = `🌤 Today's Weather<small style="font-size:11px;opacity:0.7;font-weight:400;">${locLabel}</small>`;
+                    if (preview) h3.appendChild(preview);
+                }
+            }
+            const data = await fetchWeather(dayNumber);
+            if (!data || (data.tNow === null && data.t8 === null && data.t13 === null && data.t20 === null)) {
+                el.innerHTML = `<div class="weather-error">Forecast not yet available for this date</div>`;
+                return;
+            }
+            const now = new Date();
+            const updated = `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
+            const chart = (data.t8 !== null && data.t13 !== null && data.t20 !== null)
+                ? weatherChartSVG(data.t8, data.t13, data.t20, dayNumber) : '';
+            const wx = wmoIcon(data.wcodeNow ?? data.wcode);
+            const displayTemp = data.tNow !== null ? `${Math.round(data.tNow)}°C now` : (data.t13 !== null ? `${Math.round(data.t13)}°C` : '');
+            const previewTemp = data.tNow !== null ? `${Math.round(data.tNow)}°C` : (data.t13 !== null ? `${Math.round(data.t13)}°C` : '');
+            el.innerHTML = `
+                <div class="wx-condition-row">
+                    <span class="wx-condition-icon">${wx.emoji}</span>
+                    <span class="wx-condition-label">${wx.label}${displayTemp ? ' · ' + displayTemp : ''}</span>
+                </div>
+                <div class="weather-sun-row" style="margin-top:10px;">
+                    ${data.sunrise ? `<span>🌅 ${data.sunrise}</span>` : ''}
+                    ${data.sunset  ? `<span>🌇 ${data.sunset}</span>`  : ''}
+                    <button class="weather-refresh" title="Refresh forecast" onclick="refreshOverviewWeather(${dayNumber})">↻</button>
+                    <span style="font-size:10px;color:var(--text-muted);">as of ${updated}</span>
+                    <a href="https://wttr.in/${w.lat},${w.lon}?lang=en" target="_blank" style="font-size:10px;color:var(--accent-gold);text-decoration:none;margin-left:auto;">More details ↗</a>
+                </div>
+                <div class="weather-chart-container">${chart}</div>
+            `;
+            const preview = document.getElementById('wx-preview-overview');
+            if (preview) preview.textContent = `${wx.emoji} ${previewTemp}`;
+        }
+
+        function refreshOverviewWeather(dayNumber) {
+            const info = DAY_WEATHER[dayNumber];
+            if (info) { try { localStorage.removeItem(`wx_${info.isoDate}_${info.lat}`); } catch(e) {} }
+            const el = document.getElementById('wx-overview');
+            if (el) el.innerHTML = `<div class="weather-loading">Refreshing…</div>`;
+            loadOverviewWeather(dayNumber);
         }
 
         initializePage();

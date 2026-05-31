@@ -59,7 +59,7 @@
             top: 0;
             border-bottom: 2px solid var(--border-color);
             padding: 10px 0;
-            z-index: 100;
+            z-index: 1000;
             backdrop-filter: blur(8px);
             background-color: rgba(33, 28, 22, 0.95);
             transition: var(--transition);
@@ -204,7 +204,7 @@
 
         /* HERO SECTION */
         .hero {
-            padding: 32px 20px;
+            padding: 16px 16px;
             border-radius: 12px;
             margin-bottom: 24px;
             text-align: center;
@@ -226,32 +226,32 @@
         }
 
         .hero-day-number {
-            font-size: 48px;
+            font-size: 28px;
             font-weight: 700;
             color: var(--accent-gold);
-            opacity: 0.6;
+            opacity: 0.7;
             position: absolute;
-            top: 16px;
-            left: 20px;
+            top: 10px;
+            left: 14px;
             z-index: 2;
             text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9), 0 0 50px rgba(0, 0, 0, 0.7);
             background: rgba(0, 0, 0, 0.4);
-            padding: 4px 12px;
-            border-radius: 8px;
+            padding: 2px 9px;
+            border-radius: 6px;
             display: inline-block;
         }
 
         .hero-title {
-            font-size: 32px;
+            font-size: 22px;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             position: relative;
             z-index: 2;
         }
 
         .hero-location {
-            font-size: 16px;
+            font-size: 14px;
             color: var(--accent-gold);
             display: flex;
             align-items: center;
@@ -639,6 +639,16 @@
             color: var(--text-secondary);
             margin-top: 4px;
         }
+
+        .activity-maps-link {
+            font-size: 13px;
+            text-decoration: none;
+            opacity: 0.6;
+            margin-left: 4px;
+            vertical-align: middle;
+            transition: opacity 0.2s;
+        }
+        .activity-maps-link:hover { opacity: 1; }
 
         .timeline-tag {
             display: inline-block;
@@ -1091,6 +1101,119 @@
             background-color: rgba(201, 150, 106, 0.08);
         }
 
+        /* CURRENCY CALCULATOR */
+        .calc-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 14px 20px;
+            margin: -20px -20px 0 -20px;
+            border-radius: 8px 8px 0 0;
+            user-select: none;
+        }
+        .calc-header:hover { background-color: rgba(201,150,106,0.07); }
+        .calc-header-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .calc-header-sub {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        .calc-chevron {
+            font-size: 11px;
+            color: var(--text-secondary);
+            transition: transform 0.25s ease;
+        }
+        .calc-body {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.25s ease;
+            opacity: 0;
+            padding-top: 0;
+        }
+        .calc-body.open {
+            max-height: 300px;
+            opacity: 1;
+            padding-top: 16px;
+        }
+        .calc-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .calc-row:last-of-type { margin-bottom: 0; }
+        .calc-label {
+            width: 110px;
+            flex-shrink: 0;
+        }
+        .calc-label-code {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .calc-label-name {
+            font-size: 10px;
+            color: var(--text-secondary);
+            margin-top: 1px;
+        }
+        .calc-input {
+            flex: 1;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 9px 12px;
+            color: var(--text-primary);
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .calc-input:focus { border-color: var(--accent-gold); }
+        .calc-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+        .calc-rates-note { font-size: 10px; color: var(--text-secondary); }
+        .calc-refresh { font-size: 11px; color: var(--accent-gold); cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; }
+
+        /* TRIP MAP */
+        .map-day-marker {
+            background: #C9966A;
+            color: #111;
+            font-weight: 700;
+            font-size: 10px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255,255,255,0.5);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+            font-family: 'DM Sans', sans-serif;
+            cursor: pointer;
+        }
+.leaflet-popup-content-wrapper {
+            background: var(--bg-secondary) !important;
+            color: var(--text-primary) !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: 6px !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+        }
+        .leaflet-popup-tip { background: var(--bg-secondary) !important; }
+
         .accommodation-table tr[data-day] {
             cursor: pointer;
             transition: background-color 0.2s ease;
@@ -1154,6 +1277,23 @@
         }
 
         .weather-refresh:hover { color: var(--accent-gold); }
+
+        .wx-preview {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-left: 6px;
+        }
+        .section-header:not(.collapsed) .wx-preview { display: none; }
+
+        .wx-condition-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px 0;
+        }
+        .wx-condition-icon { font-size: 28px; line-height: 1; }
+        .wx-condition-label { font-size: 14px; font-weight: 600; color: var(--text-primary); }
 
         /* BUDGET */
         .day-cost-bar {
@@ -1248,11 +1388,11 @@
             }
 
             .hero {
-                padding: 24px 16px;
+                padding: 14px 16px;
             }
 
             .hero-title {
-                font-size: 26px;
+                font-size: 20px;
             }
 
             .card {
@@ -1514,8 +1654,8 @@
                     dayNumber: 5,
                     date: "May 20",
                     dayOfWeek: "Wed",
-                    title: "To Swakopmund",
-                    location: "Desert highway to the Atlantic coast",
+                    title: "Drive to Swakopmund",
+                    location: "Sesriem → Solitaire → C14 → Atlantic Coast",
                     backgroundImage: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800",
                     flight: null,
                     hotel: {
@@ -1526,30 +1666,39 @@
                         mapsUrl: "maps.app.goo.gl/FWvKDmagbnq6b5ia7"
                     },
                     drive: {
-                        from: "Sossusvlei",
+                        from: "Elegant Desert Lodge",
                         to: "Swakopmund",
-                        duration: "~4h 45min",
-                        distance: "~360 km"
+                        duration: "~4h 30min",
+                        distance: "~350 km via C19 → C14"
                     },
                     activities: [
-                        { time: "Early AM", text: "Breakfast at lodge · pack · depart", subNote: "", needsBooking: false },
-                        { time: "Drive", text: "Scenic Namib desert highway through Kuiseb Canyon", subNote: "", needsBooking: false },
-                        { time: "~14:00", text: "Arrive Swakopmund", subNote: "Check in Schweizerhaus", needsBooking: false },
-                        { time: "Afternoon", text: "First walk: The Jetty", subNote: "beachfront · German colonial buildings", needsBooking: false },
-                        { time: "Evening", text: "First Atlantic dinner", subNote: "German-Namibian café culture", needsBooking: false }
+                        { time: "09:00", text: "Depart Elegant Desert Lodge", subNote: "Re-inflate tyres if you deflated for sand yesterday", needsBooking: false },
+                        { time: "~10:30", text: "Solitaire — fuel stop", subNote: "Last reliable fuel before Walvis Bay · ~230 km ahead", needsBooking: false, mapsUrl: "https://maps.app.goo.gl/7Ez1bFbdaLE7d8JZ7" },
+                        { time: "~10:40", text: "McGregor's Bakery — apple pie", subNote: "Namibia's most famous roadside stop · get the pie!", needsBooking: false, mapsUrl: "https://www.google.com/maps/search/?api=1&query=McGregor%27s+Bakery+Solitaire+Namibia" },
+                        { time: "~13:30", text: "Walvis Bay Lagoon — flamingos", subNote: "Thousands of flamingos & pelicans · 20 min stop · worth every minute", needsBooking: false, mapsUrl: "https://www.google.com/maps/search/?api=1&query=Walvis+Bay+Lagoon+Namibia" },
+                        { time: "~14:00", text: "Dune 7", subNote: "One of Namibia's biggest dunes · serious climb · allow 1–2hrs · bring water · views over Walvis Bay are worth it", needsBooking: false, mapsUrl: "https://www.google.com/maps/search/?api=1&query=Dune+7+Walvis+Bay+Namibia" },
+                        { time: "~15:30", text: "Arrive Swakopmund · Check in Schweizerhaus", subNote: "Unpack · freshen up · walk the beachfront", needsBooking: false }
                     ],
                     meals: {
-                        breakfast: { status: "included", note: "Included at Elegant Desert Lodge", restaurants: [] },
-                        lunch: { status: "flexible", note: "en-route / Pack snacks / petrol station stop", restaurants: [] },
-                        dinner: { status: "options", note: "", restaurants: [
-                            { name: "The Tug", desc: "Seafood · Dining inside a converted tugboat — iconic first dinner!", rating: "4.3★", mapsUrl: "maps.google.com/?q=The+Tug+Restaurant+Swakopmund" },
-                            { name: "Jetty 1905", desc: "Upscale seafood · Stunning sea views from the old pier", rating: "4.5★", mapsUrl: "maps.google.com/?q=Jetty+1905+Swakopmund" },
-                            { name: "Restaurant Altstadt", desc: "German-Namibian classics · Colonial building", rating: "4.4★", mapsUrl: "maps.google.com/?q=Restaurant+Altstadt+Swakopmund" }
-                        ] }
+                        breakfast: { status: "included", note: "Included at Elegant Desert Lodge before 09:00 departure", restaurants: [] },
+                        lunch: { status: "options", note: "McGregor's Bakery in Solitaire — pie, coffee & snacks on the road", restaurants: [
+                            { name: "McGregor's Bakery", desc: "Solitaire · World-famous apple pie · roadside institution", rating: "4.5★", mapsUrl: "www.google.com/maps/search/?api=1&query=McGregor%27s+Bakery+Solitaire+Namibia" }
+                        ]},
+                        dinner: { status: "options", note: "Dinner in Swakopmund after check-in", restaurants: [
+                            { name: "Dinner reservation", desc: "Confirmed restaurant — see Maps link", rating: "", mapsUrl: "maps.app.goo.gl/mGWSN1qLrPJoTb2r8" },
+                            { name: "The Tug", desc: "Seafood · Inside a converted tugboat — Swakopmund icon", rating: "4.3★", mapsUrl: "maps.google.com/?q=The+Tug+Restaurant+Swakopmund" },
+                            { name: "Jetty 1905", desc: "Upscale seafood · Stunning sea views from the old pier", rating: "4.5★", mapsUrl: "maps.google.com/?q=Jetty+1905+Swakopmund" }
+                        ]}
                     },
-                    route: "maps.google.com/maps/dir/Sossusvlei/Swakopmund",
-                    warnings: ["⛽ Fill up before leaving Sesriem — long stretch with very little en route"],
-                    gems: []
+                    route: "maps.google.com/maps/dir/Elegant+Desert+Lodge+Namibia/Solitaire+Namibia/Walvis+Bay+Namibia/Swakopmund+Namibia",
+                    warnings: [
+                        "⛽ Fill up at Solitaire — next reliable fuel is Walvis Bay (~230 km away)",
+                        "🌅 C14 gravel coastal section can be corrugated — take it steady"
+                    ],
+                    gems: [
+                        "Walvis Bay flamingos are one of Africa's great surprises — barely off the route",
+                        "Dune 7 is one of Namibia's biggest dunes — give it proper time, bring loads of water"
+                    ]
                 },
                 {
                     dayNumber: 6,
@@ -1570,7 +1719,7 @@
                     activities: [
                         { time: "Early AM", text: "Kayak with Seals", subNote: "Walvis Bay + Flamingo Lagoon option (ecomarinekayak.com · ~3hrs)", needsBooking: true },
                         { time: "Afternoon", text: "Sandwich Harbour 4x4 tour", subNote: "dunes touching the Atlantic (sandwichharbourtours.com or charlysdeserttours.com)", needsBooking: true },
-                        { time: "Late PM", text: "Moon Landscape at Goanikontes", subNote: "Martian terrain (~40 min from town)", needsBooking: false },
+                        { time: "Late PM", text: "Walking tour: Lighthouse · Mole · German colonial streets", subNote: "Swakopmund's most iconic landmarks on foot · easy stroll along the waterfront", needsBooking: false },
                         { time: "Evening", text: "Swakopmund Brauhaus", subNote: "craft beer · German colonial atmosphere", needsBooking: false }
                     ],
                     meals: {
@@ -1595,9 +1744,9 @@
                     dayNumber: 7,
                     date: "May 22",
                     dayOfWeek: "Fri",
-                    title: "Swakopmund",
-                    location: "Township Tour · Helicopter · Architecture",
-                    backgroundImage: "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=800",
+                    title: "Boat & Sandwich Harbour",
+                    location: "Iventure Tours · Atlantic Coast · Sandwich Harbour",
+                    backgroundImage: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800",
                     flight: null,
                     hotel: {
                         name: "Schweizerhaus / Café Anton",
@@ -1608,32 +1757,33 @@
                     },
                     drive: null,
                     activities: [
-                        { time: "Morning", text: "Mondesa Township Tour + Genocide Museum", subNote: "namibiadreamsafaris.com · Essential Namibia context", needsBooking: true },
-                        { time: "Afternoon", text: "Helicopter tour (1–2 hrs)", subNote: "over dunes + coastline (Sossusfly or Scenic Air)", needsBooking: true },
-                        { time: "Late PM", text: "Walking tour: Lighthouse · Mole · German colonial streets", subNote: "", needsBooking: false },
-                        { time: "Evening", text: "Brewer & Butcher or Kücki's Pub", subNote: "craft beers", needsBooking: false }
+                        { time: "07:15", text: "Pickup at Schweizerhaus — Iventure Tours", subNote: "Combo: Boat 🛥 + Sandwich Harbour · 4 pax · Contact Eben · +971508481045", needsBooking: false },
+                        { time: "All day", text: "Boat cruise + Sandwich Harbour combo", subNote: "N$4,000 pp · Booked by Joel · ⚠️ 1 vegetarian noted · Nationality: Poland 🇵🇱", needsBooking: false, mapsUrl: "https://www.google.com/maps/search/?api=1&query=Sandwich+Harbour+Namibia" },
+                        { time: "Evening", text: "Brewer & Butcher or Kücki's Pub", subNote: "Craft beers · well earned", needsBooking: false }
                     ],
                     meals: {
-                        breakfast: { status: "included", note: "Café Anton", restaurants: [] },
-                        lunch: { status: "options", note: "", restaurants: [
-                            { name: "Village Café", desc: "All-day brunch · Best coffee", rating: "4.5★", mapsUrl: "maps.google.com/?q=Village+Cafe+Swakopmund" }
-                        ] },
+                        breakfast: { status: "included", note: "Café Anton — eat before 07:15 pickup", restaurants: [] },
+                        lunch: { status: "included", note: "Lunch likely included on the tour — confirm with Eben", restaurants: [] },
                         dinner: { status: "options", note: "", restaurants: [
                             { name: "The Tug", desc: "Seafood · Tugboat", rating: "4.3★", mapsUrl: "maps.google.com/?q=The+Tug+Restaurant+Swakopmund" },
                             { name: "Restaurant Altstadt", desc: "German-Namibian", rating: "4.4★", mapsUrl: "maps.google.com/?q=Restaurant+Altstadt+Swakopmund" }
                         ] }
                     },
                     route: null,
-                    warnings: [],
-                    gems: ["Mondesa Township Tour gives crucial historical context for Namibia's colonial period — don't skip"]
+                    warnings: [
+                        "⏰ 07:15 pickup — set alarms, eat breakfast before",
+                        "🥗 1 vegetarian in group — already confirmed with Eben/Iventure",
+                        "📞 Eben / Iventure Tours: +971508481045"
+                    ],
+                    gems: ["Sandwich Harbour is one of Namibia's most dramatic landscapes — dunes meeting the Atlantic · limited access makes it special"]
                 },
                 {
                     dayNumber: 8,
                     date: "May 23",
                     dayOfWeek: "Sat",
-                    title: "Swakopmund",
-                    location: "Catamaran · Last Day on the Coast",
-                    backgroundImage: "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=800",
+                    title: "Cape Cross & Shipwreck",
+                    location: "Cape Cross Seal Colony · Zeila Shipwreck",
+                    backgroundImage: "https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=800",
                     flight: null,
                     hotel: {
                         name: "Schweizerhaus / Café Anton",
@@ -1642,25 +1792,29 @@
                         bookedBy: "Maria",
                         mapsUrl: "maps.app.goo.gl/FWvKDmagbnq6b5ia7"
                     },
-                    drive: null,
+                    drive: { from: "Swakopmund", to: "Cape Cross", duration: "~1h 30min", distance: "~120 km north on C34" },
                     activities: [
-                        { time: "Morning", text: "Catamaran cruise", subNote: "seals · dolphins · pelicans (swakopadventures.com/cruises)", needsBooking: true },
-                        { time: "Afternoon", text: "Free time", subNote: "beach walk · craft market · last shopping", needsBooking: false },
-                        { time: "Sunset", text: "Sunset at the Jetty or Tiger Reed Beach Bar", subNote: "last Atlantic sunset", needsBooking: false },
-                        { time: "Evening", text: "Last dinner in Swakopmund", subNote: "make it count", needsBooking: false }
+                        { time: "Morning", text: "Drive to Cape Cross Seal Reserve", subNote: "~1.5hr north · largest Cape fur seal colony in the world · 80,000–100,000 seals", needsBooking: false, mapsUrl: "https://www.google.com/maps/search/?api=1&query=Cape+Cross+Seal+Reserve+Namibia" },
+                        { time: "Late AM", text: "Zeila Shipwreck", subNote: "Grounded cargo ship just off the beach · eerie & photogenic · on the way back", needsBooking: false, mapsUrl: "https://www.google.com/maps/search/?api=1&query=Zeila+Shipwreck+Namibia" },
+                        { time: "Afternoon", text: "Free afternoon in Swakopmund", subNote: "beach walk · craft market · last shopping · relax", needsBooking: false },
+                        { time: "Sunset", text: "Tiger Reed Beach Bar", subNote: "great spot for a last Atlantic sundowner", needsBooking: false, mapsUrl: "https://www.google.com/maps/search/?api=1&query=Tiger+Reed+Beach+Bar+Swakopmund" }
                     ],
                     meals: {
-                        breakfast: { status: "included", note: "Café Anton", restaurants: [] },
-                        lunch: { status: "options", note: "", restaurants: [
-                            { name: "Ocean Cellar", desc: "Seafood · Best value for fresh fish", rating: "4.4★", mapsUrl: "maps.google.com/?q=Ocean+Cellar+Swakopmund" }
-                        ] },
-                        dinner: { status: "options", note: "", restaurants: [
-                            { name: "Jetty 1905", desc: "Farewell dinner — book ahead! Elevated seafood on the pier", rating: "4.5★", mapsUrl: "maps.google.com/?q=Jetty+1905+Swakopmund" }
-                        ] }
+                        breakfast: { status: "included", note: "Café Anton — early start", restaurants: [] },
+                        lunch: { status: "flexible", note: "Pack snacks for the road or eat back in Swakopmund on return", restaurants: [] },
+                        dinner: { status: "options", note: "Last dinner in Swakopmund — something different", restaurants: [
+                            { name: "Restaurant Altstadt", desc: "German-Namibian classics · cosy colonial building · great schnitzel", rating: "4.4★", mapsUrl: "maps.google.com/?q=Restaurant+Altstadt+Swakopmund" },
+                            { name: "Kücki's Pub", desc: "Casual · local favourite · big portions · lively atmosphere", rating: "4.3★", mapsUrl: "maps.google.com/?q=Kucki%27s+Pub+Swakopmund" },
+                            { name: "The Swakopmund Brauhaus", desc: "Craft beers · hearty food · best beer selection in town", rating: "4.2★", mapsUrl: "maps.google.com/?q=Swakopmund+Brauhaus+Namibia" },
+                            { name: "Village Café", desc: "Relaxed · all-day menu · great coffee · good for lighter meals", rating: "4.5★", mapsUrl: "maps.google.com/?q=Village+Cafe+Swakopmund" }
+                        ]}
                     },
-                    route: null,
-                    warnings: ["Pack tonight — early departure tomorrow for Damaraland (~5hr drive)"],
-                    gems: []
+                    route: "maps.google.com/maps/dir/Swakopmund/Cape+Cross+Seal+Reserve+Namibia",
+                    warnings: ["🐟 Cape Cross smells strongly — it's the seals! Completely normal, totally worth it", "Pack tonight — early departure tomorrow for Damaraland (~5hr drive)"],
+                    gems: [
+                        "Cape Cross is where Diego Cão planted a cross in 1486 — first European landing on the Namibian coast",
+                        "The Zeila ran aground in 2008 while being towed — it's now one of Namibia's most photographed wrecks"
+                    ]
                 },
                 {
                     dayNumber: 9,
@@ -1668,7 +1822,7 @@
                     dayOfWeek: "Sun",
                     title: "Damaraland",
                     location: "Spitzkoppe · Bushman's Paradise · Mopane Lodge",
-                    backgroundImage: "https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=800",
+                    backgroundImage: "https://images.unsplash.com/photo-1535338454528-1b5c8e9b3e94?w=800",
                     flight: null,
                     hotel: {
                         name: "Gondwana Damara Mopane Lodge",
@@ -1687,7 +1841,6 @@
                         { time: "08:00", text: "Depart Swakopmund", subNote: "early start", needsBooking: false },
                         { time: "~10:30", text: "Spitzkoppe", subNote: "'Matterhorn of Africa' · Hike to Bushman's Paradise (San rock art!) + The Rock Arch (~2hr stop)", needsBooking: false },
                         { time: "~13:00", text: "Continue drive to Damaraland", subNote: "", needsBooking: false },
-                        { time: "Alt", text: "Cape Cross Seal Colony instead of Spitzkoppe", subNote: "(~45 min off-route) · 200,000+ seals! Choose one — hard to do both", needsBooking: false },
                         { time: "~15:00", text: "Arrive Damara Mopane Lodge", subNote: "check in", needsBooking: false }
                     ],
                     meals: {
@@ -1732,13 +1885,11 @@
                     ],
                     meals: {
                         breakfast: { status: "included", note: "Damara Mopane Lodge (7–9 AM)", restaurants: [] },
-                        lunch: { status: "missing", note: "Confirm if available at Twyfelfontein area or arrange with Grootberg Lodge", restaurants: [
-                            { name: "Grootberg Lodge Restaurant", desc: "Ask if early lunch can be arranged on arrival · Verify with lodge", rating: "", mapsUrl: "maps.app.goo.gl/Ehb4G1ubxB4teypR6" }
-                        ] },
-                        dinner: { status: "missing", note: "⚠️ Confirm if dinner included at Grootberg Lodge — check with Felix/booking", restaurants: [] }
+                        lunch: { status: "flexible", note: "Skipped — arrived and relaxed at the lodge", restaurants: [] },
+                        dinner: { status: "confirmed", note: "Dinner at Grootberg Lodge restaurant", restaurants: [] }
                     },
                     route: "maps.google.com/maps/dir/Damaraland/Twyfelfontein+Namibia/Grootberg+Lodge+Namibia",
-                    warnings: ["⚠️ Confirm if meals (lunch/dinner) are included at Grootberg Lodge"],
+                    warnings: [],
                     gems: [
                         "Palmwag Conservancy nearby — world's highest density of desert-adapted black rhino",
                         "Burnt Mountain near Twyfelfontein — volcanic rock field that glows orange at sunset"
@@ -1748,9 +1899,9 @@
                     dayNumber: 11,
                     date: "May 26",
                     dayOfWeek: "Tue",
-                    title: "Rhino Tracking",
-                    location: "On Foot in the Wild · Drive to Etosha",
-                    backgroundImage: "https://images.unsplash.com/photo-1535338454528-1b5c8e9b3e94?w=800",
+                    title: "Elephant Tracking + Himba Village",
+                    location: "Grootberg · Drive to Etosha",
+                    backgroundImage: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800",
                     flight: null,
                     hotel: {
                         name: "Mondjila Safari Camp",
@@ -1766,10 +1917,10 @@
                         distance: ""
                     },
                     activities: [
-                        { time: "Dawn", text: "Rhino Tracking", subNote: "open vehicle + walking with trackers (ends ~4PM) OR Elephant Tracking (ends ~2PM) — choose one!", needsBooking: true },
-                        { time: "Note", text: "BOOK TRACKING at Grootberg Lodge on arrival May 25 evening", subNote: "", needsBooking: true },
+                        { time: "Dawn", text: "Elephant Tracking", subNote: "Open vehicle + walking with trackers · ended ~2PM", needsBooking: false },
+                        { time: "Afternoon", text: "Himba Village Visit", subNote: "Traditional Himba community · before heading to Etosha", needsBooking: false },
                         { time: "After", text: "Drive to Etosha Anderson/South Gate", subNote: "~3h 30min", needsBooking: false },
-                        { time: "~19:00", text: "Arrive Mondjila Safari Camp", subNote: "dinner included", needsBooking: false }
+                        { time: "~19:00", text: "Arrive Mondjila Safari Camp", subNote: "Dinner included", needsBooking: false }
                     ],
                     meals: {
                         breakfast: { status: "included", note: "At Grootberg Lodge", restaurants: [] },
@@ -1778,11 +1929,12 @@
                     },
                     route: "maps.google.com/maps/dir/Grootberg+Namibia/Etosha+National+Park+Anderson+Gate",
                     warnings: [
-                        "⚠️ Book rhino/elephant tracking AT Grootberg Lodge on evening of May 25",
-                        "🐘 Elephant ends 2PM · Rhino ends 4PM — factor into drive timing",
                         "⛽ Fill up before entering Etosha — fuel inside the park is limited"
                     ],
-                    gems: []
+                    gems: [
+                        "🐘 Elephant tracking was a highlight — tracking on foot through the bush",
+                        "🏺 Himba village visit — incredible glimpse into traditional Himba life"
+                    ]
                 },
                 {
                     dayNumber: 12,
@@ -1790,20 +1942,14 @@
                     dayOfWeek: "Wed",
                     title: "Etosha",
                     location: "South Gate → East Gate · Game Drive Loop",
-                    backgroundImage: "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800",
+                    backgroundImage: "https://images.unsplash.com/photo-1503755450-28d4fdd8177d?w=800",
                     flight: null,
                     hotel: {
                         name: "Mokuti Etosha Lodge",
                         status: "confirmed",
                         note: "Dinner & breakfast included. Booked by Ada (ENBD).",
                         bookedBy: "Ada",
-                        mapsUrl: "maps.app.goo.gl/ywZ6wDdNzdWoZy2e9",
-                        altHotel: {
-                            name: "Fort Onguma",
-                            status: "pending",
-                            note: "Ada awaiting confirmation (ENBD · all-inclusive incl. game drives)",
-                            mapsUrl: "maps.app.goo.gl/8KFd9Mpy2YpdJpCx5"
-                        }
+                        mapsUrl: "maps.app.goo.gl/ywZ6wDdNzdWoZy2e9"
                     },
                     drive: {
                         from: "Anderson Gate (South)",
@@ -1816,12 +1962,12 @@
                         { time: "Morning", text: "Drive Etosha South → East", subNote: "STOP AT EVERY WATERHOLE", needsBooking: false },
                         { time: "Key stops", text: "Okaukuejo waterhole · Halali camp · Namutoni Fort", subNote: "", needsBooking: false },
                         { time: "Afternoon", text: "Continue game driving east towards Mokuti Lodge", subNote: "", needsBooking: false },
-                        { time: "Sundowner", text: "Game drive if Fort Onguma confirmed", subNote: "(already included all-incl.)", needsBooking: false }
+                        { time: "Sundowner", text: "Arrive Mokuti Etosha Lodge · relax", subNote: "Dinner included", needsBooking: false }
                     ],
                     meals: {
                         breakfast: { status: "included", note: "Mondjila Safari Camp", restaurants: [] },
                         lunch: { status: "pending", note: "Pack from camp — eat at a shaded waterhole. No restaurants inside the park.", restaurants: [] },
-                        dinner: { status: "included", note: "Mokuti Etosha Lodge (or Fort Onguma if confirmed)", restaurants: [] }
+                        dinner: { status: "included", note: "Mokuti Etosha Lodge", restaurants: [] }
                     },
                     route: "maps.google.com/maps/dir/Etosha+Anderson+Gate/Etosha+East+Gate",
                     warnings: [
@@ -1840,38 +1986,31 @@
                     dayOfWeek: "Thu",
                     title: "Etosha",
                     location: "Full Game Drive Day",
-                    backgroundImage: "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800",
+                    backgroundImage: "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=800",
                     flight: null,
                     hotel: {
                         name: "Mokuti Etosha Lodge",
                         status: "confirmed",
                         note: "Booked by Ada (ENBD).",
                         bookedBy: "Ada",
-                        mapsUrl: "maps.app.goo.gl/ywZ6wDdNzdWoZy2e9",
-                        altHotel: {
-                            name: "Fort Onguma",
-                            status: "pending",
-                            note: "Ada awaiting confirmation",
-                            mapsUrl: "maps.app.goo.gl/8KFd9Mpy2YpdJpCx5"
-                        }
+                        mapsUrl: "maps.app.goo.gl/ywZ6wDdNzdWoZy2e9"
                     },
                     drive: null,
                     activities: [
-                        { time: "05:30", text: "Sunrise game drive", subNote: "east section around Namutoni", needsBooking: true },
-                        { time: "~10:00", text: "Return to lodge: late breakfast", subNote: "pool · rest", needsBooking: false },
-                        { time: "Afternoon", text: "Second game drive", subNote: "midday waterholes, predators active", needsBooking: false },
-                        { time: "Sundowner", text: "Sundowner drive", subNote: "(included Fort Onguma; extra cost at Mokuti)", needsBooking: false }
+                        { time: "Morning", text: "Relax at lodge", subNote: "pool · rest", needsBooking: false },
+                        { time: "10:00", text: "Reptile show at Mokuti Lodge", subNote: "", needsBooking: false },
+                        { time: "14:00", text: "Optional game drive", subNote: "east section around Namutoni", needsBooking: false },
+                        { time: "Evening", text: "Back to lodge · dinner included", subNote: "", needsBooking: false }
                     ],
                     meals: {
-                        breakfast: { status: "included", note: "Mokuti or Fort Onguma", restaurants: [] },
-                        lunch: { status: "pending", note: "Lunch box from lodge for the drive", restaurants: [] },
-                        dinner: { status: "included", note: "Included at lodge", restaurants: [] }
+                        breakfast: { status: "included", note: "Mokuti Etosha Lodge", restaurants: [] },
+                        lunch: { status: "included", note: "At the lodge", restaurants: [] },
+                        dinner: { status: "included", note: "Mokuti Etosha Lodge", restaurants: [] }
                     },
                     route: null,
                     warnings: [],
                     gems: [
-                        "Fisher's Pan near Namutoni — huge pan, often flamingos and wildebeest in season",
-                        "Onguma offers guided night game drives — self-drive visitors cannot do this"
+                        "Fisher's Pan near Namutoni — huge pan, often flamingos and wildebeest in season"
                     ]
                 },
                 {
@@ -1880,7 +2019,7 @@
                     dayOfWeek: "Fri",
                     title: "To Windhoek",
                     location: "Crocodile Farm · Capital City · Final Dinner",
-                    backgroundImage: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800",
+                    backgroundImage: "https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800",
                     flight: null,
                     hotel: {
                         name: "Tenbergen Pension",
@@ -1923,7 +2062,7 @@
                     dayOfWeek: "Sat",
                     title: "Windhoek",
                     location: "Last morning · Fly Home to Addis",
-                    backgroundImage: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800",
+                    backgroundImage: "https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=800",
                     flight: {
                         date: "May 30",
                         dayOfWeek: "Sat",
@@ -1935,11 +2074,11 @@
                         terminal: "N/A"
                     },
                     hotel: {
-                        name: "Addis Ababa Hotel",
-                        status: "missing",
-                        note: "Need hotel near airport — arrive 21:20, depart 10:30 next morning",
-                        bookedBy: null,
-                        mapsUrl: null
+                        name: "Skylight Hotel",
+                        status: "confirmed",
+                        note: "Ethiopian Airlines transit voucher · Check-in 22:20 · Bus pickup 08:30 · Dinner & breakfast included. Invoice: NAWDH8450712157921048",
+                        bookedBy: "Ethiopian Airlines",
+                        mapsUrl: "maps.google.com/?q=Skylight+Hotel+Addis+Ababa"
                     },
                     drive: {
                         from: "Tenbergen Pension",
@@ -1948,25 +2087,24 @@
                         distance: ""
                     },
                     activities: [
-                        { time: "Morning", text: "Christuskirche (1910)", subNote: "beautiful German Lutheran church, free entry", needsBooking: false },
-                        { time: "Morning", text: "Namibia Craft Centre", subNote: "last chance for curios, gemstones, local art", needsBooking: false },
-                        { time: "Morning", text: "Independence Memorial Museum", subNote: "Namibian history + liberation struggle", needsBooking: false },
-                        { time: "Morning", text: "Eros Meat Market", subNote: "stock up on biltong for the plane!", needsBooking: false },
-                        { time: "12:00 ⚠️", text: "HEAD TO AIRPORT", subNote: "35 min drive from hotel (ET 834 WDH→ADD departs 14:30)", needsBooking: false },
+                        { time: "Breakfast", text: "Breakfast next door to Tenbergen Pension", subNote: "Not included at hotel", needsBooking: false },
+                        { time: "09:00", text: "Leave hotel for shopping", subNote: "", needsBooking: false },
+                        { time: "Stop 1", text: "Hambelela Organic", subNote: "Organic products · opens 9am", needsBooking: false, mapsUrl: "https://maps.app.goo.gl/LgK6y3WB1nsNhGvd6" },
+                        { time: "Stop 2", text: "Leather Connection", subNote: "Leather goods · 18 Bell St · opens 9am", needsBooking: false, mapsUrl: "https://maps.app.goo.gl/vJjBhEKBGbMWcnGNA" },
+                        { time: "Stop 3", text: "Leon Engelbrecht Design", subNote: "Leather goods · opens 10am", needsBooking: false, mapsUrl: "https://maps.app.goo.gl/D3R7aNPimV7zcz6R6" },
+                        { time: "11:00 ⚠️", text: "Drop rental car", subNote: "Return Namibia2Go at WDH airport", needsBooking: false },
+                        { time: "~12:00", text: "Airport check-in", subNote: "ET 834 WDH→ADD departs 14:30", needsBooking: false },
                         { time: "14:30", text: "ET 834 WDH → ADD", subNote: "Arrives 21:20", needsBooking: false }
                     ],
                     meals: {
-                        breakfast: { status: "missing", note: "Confirm if included at Tenbergen Pension", restaurants: [
-                            { name: "The Social", desc: "Brunch café · Central Windhoek · Good coffee", rating: "4.4★", mapsUrl: "maps.google.com/?q=The+Social+Windhoek" },
-                            { name: "The Wolfshack", desc: "Café · Relaxed · Quick send-off breakfast", rating: "4.3★", mapsUrl: "maps.google.com/?q=The+Wolfshack+Windhoek" }
-                        ] },
-                        lunch: { status: "flexible", note: "en-route / Airport or biltong en route", restaurants: [] },
-                        dinner: { status: "flexible", note: "in-flight / On ET 834 or at ADD airport", restaurants: [] }
+                        breakfast: { status: "options", note: "Not included at Tenbergen — eating next door", restaurants: [] },
+                        lunch: { status: "flexible", note: "Airport or biltong en route", restaurants: [] },
+                        dinner: { status: "included", note: "Included at Skylight Hotel (transit voucher)", restaurants: [] }
                     },
                     route: null,
                     warnings: [
-                        "⚠️ CRITICAL: Leave hotel by 12:00 noon for 14:30 flight",
-                        "🚗 Return rental car at WDH airport before check-in"
+                        "⚠️ Drop rental car by 11:00",
+                        "✈️ ET 834 departs 14:30 — be at airport by 12:00"
                     ],
                     gems: []
                 },
@@ -2001,7 +2139,7 @@
                         { time: "After", text: "Share photos · Write lodge reviews · Plan the next one", subNote: "", needsBooking: false }
                     ],
                     meals: {
-                        breakfast: { status: "flexible", note: "in-flight / ADD airport or in-flight", restaurants: [] },
+                        breakfast: { status: "included", note: "Included at Skylight Hotel before 08:30 checkout · bus to airport at 08:30", restaurants: [] },
                         lunch: { status: "flexible", note: "in-flight / On ET 602", restaurants: [] },
                         dinner: { status: "flexible", note: "home / Welcome home!", restaurants: [] }
                     },
@@ -2025,42 +2163,163 @@
     <main class="container">
         <!-- OVERVIEW TAB -->
         <div class="day-view active" id="overview">
-            <div class="card">
-                <div class="card-title">Itinerary</div>
-                <table class="accommodation-table" id="accommodationTable"></table>
-            </div>
 
-            <div class="card">
-                <div class="card-title">Flights</div>
-                <div class="flights-scroll" id="flightsList"></div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Travellers</div>
-                <div class="travelers-list" id="travelersListView"></div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Car Rental</div>
-                <div class="car-rental-info" id="carRentalInfo"></div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Relevant Links</div>
-                <div class="overview-links">
-                    <a href="https://open.spotify.com/playlist/1XtR7v67SZOgz1DzVsDOAx" target="_blank" class="spotify-link">
-                        <span class="spotify-icon">♪</span>
-                        <span>Trip Playlist</span>
-                    </a>
-                    <a href="https://tricount.com/tQidftYrYcWVIVqrxy" target="_blank" class="tricount-link">
-                        <span>💰</span>
-                        <span>Trip Expenses</span>
-                    </a>
-                    <button class="download-btn" onclick="downloadPage()">⬇ Download Offline</button>
+            <!-- Currency — collapsed by default (custom toggle) -->
+            <div class="card" id="currencyCard">
+                <div class="calc-header" onclick="toggleCurrencyCalc()">
+                    <div class="calc-header-title">
+                        💱 Currency Calculator
+                        <span class="calc-header-sub" id="calcHeaderSub"></span>
+                    </div>
+                    <span class="calc-chevron" id="calcChevron">▶</span>
+                </div>
+                <div class="calc-body" id="calcBody">
+                    <div class="calc-row">
+                        <div class="calc-label">
+                            <div class="calc-label-code" id="calcCode0"></div>
+                            <div class="calc-label-name" id="calcName0"></div>
+                        </div>
+                        <input class="calc-input" id="calcInput0" type="number" placeholder="0" oninput="calcConvert(0)">
+                    </div>
+                    <div class="calc-row">
+                        <div class="calc-label">
+                            <div class="calc-label-code">AED</div>
+                            <div class="calc-label-name">UAE Dirham</div>
+                        </div>
+                        <input class="calc-input" id="calcInput1" type="number" placeholder="0" oninput="calcConvert(1)">
+                    </div>
+                    <div class="calc-row">
+                        <div class="calc-label">
+                            <div class="calc-label-code">USD</div>
+                            <div class="calc-label-name">US Dollar</div>
+                        </div>
+                        <input class="calc-input" id="calcInput2" type="number" placeholder="0" oninput="calcConvert(2)">
+                    </div>
+                    <div class="calc-footer">
+                        <span class="calc-rates-note" id="calcRatesNote">Loading rates…</span>
+                        <button class="calc-refresh" onclick="fetchCalcRates(true)">↻ Refresh</button>
+                    </div>
                 </div>
             </div>
 
-            <div id="budgetCard"></div>
+            <!-- Weather for today's location — collapsed by default -->
+            <div class="collapsible-section">
+                <div class="section-header collapsed" id="overview-wx-header">
+                    <h3>🌤 Weather<span class="wx-preview" id="wx-preview-overview"></span></h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content section-weather collapsed">
+                    <div id="wx-overview" style="padding: 12px 16px;">
+                        <div class="weather-loading">Loading forecast…</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Itinerary — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>📋 Itinerary</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div>
+                        <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:8px;">
+                            <button onclick="goToToday()" style="font-size:11px;padding:4px 10px;background:var(--accent-gold);color:var(--bg-primary);border:none;border-radius:5px;cursor:pointer;font-weight:600;font-family:inherit;">Today</button>
+                        </div>
+                        <table class="accommodation-table" id="accommodationTable"></table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Maps — expanded by default, placed after itinerary -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>🗺️ Maps</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div>
+                        <div style="font-size:13px;font-weight:600;color:var(--accent-gold);margin-bottom:6px;">🇪🇹 Addis Ababa — Days 1 & 2</div>
+                        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">
+                            <span style="color:#E05C5C;font-weight:600;">——</span> Day 1 city tour &nbsp;
+                            <span style="color:#E0956A;font-weight:600;">——</span> Day 2 Bishoftu lakes
+                        </div>
+                        <div id="mapAddis" style="height:320px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);margin-bottom:20px;"></div>
+                        <div style="font-size:13px;font-weight:600;color:var(--accent-gold);margin-bottom:6px;">🇳🇦 Namibia — Days 3–15</div>
+                        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">
+                            <span style="color:#C9966A;font-weight:600;">——</span> Main route &nbsp;
+                            <span style="color:#C9966A;font-weight:600;">- - -</span> Cape Cross detour
+                        </div>
+                        <div id="mapNamibia" style="height:460px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flights — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>✈️ Flights</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content section-flight">
+                    <div class="flights-scroll" id="flightsList"></div>
+                </div>
+            </div>
+
+            <!-- Car Rental — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>🚗 Car Rental</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div class="car-rental-info" id="carRentalInfo"></div>
+                </div>
+            </div>
+
+            <!-- Relevant Links — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>🔗 Relevant Links</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div class="overview-links">
+                        <a href="https://open.spotify.com/playlist/1XtR7v67SZOgz1DzVsDOAx" target="_blank" class="spotify-link">
+                            <span class="spotify-icon">♪</span>
+                            <span>Trip Playlist</span>
+                        </a>
+                        <a href="https://tricount.com/tQidftYrYcWVIVqrxy" target="_blank" class="tricount-link">
+                            <span>💰</span>
+                            <span>Trip Expenses</span>
+                        </a>
+                        <button class="download-btn" onclick="downloadPage()">⬇ Download Offline</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Budget — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>💰 Budget</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div id="budgetCard"></div>
+                </div>
+            </div>
+
+            <!-- Travellers — expanded by default, moved to end -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>👥 Travellers</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div class="travelers-list" id="travelersListView"></div>
+                </div>
+            </div>
+
         </div>
 
         <!-- DAY VIEWS -->
@@ -2132,6 +2391,16 @@
             renderBudgetCard();
             renderDayTabs();
             renderDayViews();
+
+            // Auto-open today's day if within the trip; also load overview weather
+            const today = new Date().toISOString().split('T')[0];
+            for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
+                if (w.isoDate === today) {
+                    switchView(`day${dayNum}`);
+                    loadOverviewWeather(parseInt(dayNum));
+                    break;
+                }
+            }
         }
 
         function renderOverviewTab() {
@@ -2182,7 +2451,7 @@
                 tableHTML += `
                     <tr data-day="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">
                         <td>${day.dayNumber}</td>
-                        <td style="white-space: nowrap;">${day.dayOfWeek}<br>${day.date.split(' ')[1]}</td>
+                        <td style="white-space: nowrap; font-size: 12px;">${day.dayOfWeek} ${day.date.split(' ')[1]} ${day.date.split(' ')[0]}</td>
                         <td>
                             <div style="font-weight: 600; color: var(--accent-gold); font-size: 13px;">${day.title}</div>
                             <div style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">${day.location}</div>
@@ -2212,7 +2481,7 @@
                 const datePartials = day.date.split(' ');
                 tabsHTML += `
                     <div class="${className}" data-view="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">
-                        Day ${day.dayNumber}<br>${datePartials[1]} ${datePartials[0]}
+                        Day ${day.dayNumber}<br><span style="font-size:10px;opacity:0.8;">${day.dayOfWeek} ${datePartials[1]} ${datePartials[0]}</span>
                     </div>
                 `;
             });
@@ -2266,6 +2535,23 @@
                     <button class="btn-collapse-all">Collapse All</button>
                 </div>
             `;
+
+            // Weather — collapsed by default, preview updates async
+            if (DAY_WEATHER[day.dayNumber]) {
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header collapsed" id="wx-header-${day.dayNumber}">
+                            <h3>🌤 Weather<span class="wx-preview" id="wx-preview-${day.dayNumber}"></span></h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-weather collapsed">
+                            <div id="wx-${day.dayNumber}" style="padding: 12px 16px;">
+                                <div class="weather-loading">Loading forecast…</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
 
             // Flight section on flight days (FIRST, before hotel)
             if (day.flight) {
@@ -2353,19 +2639,6 @@
                 `;
             }
 
-            html += `
-                <div class="collapsible-section">
-                    <div class="section-header">
-                        <h3>🌤 Weather</h3>
-                        <div class="chevron"></div>
-                    </div>
-                    <div class="section-content section-weather">
-                        <div id="wx-${day.dayNumber}" style="padding: 12px 16px;">
-                            <div class="weather-loading">Loading forecast…</div>
-                        </div>
-                    </div>
-                </div>
-            `;
 
             const dc = COST_DATA.days[day.dayNumber];
             if (dc) {
@@ -2423,9 +2696,11 @@
                     html += `<div class="timeline-time-group-header">${timeLabel}</div>`;
                     activities.forEach(a => {
                         const isAlternative = a.time.toLowerCase() === 'alt' || (a.text && a.text.toLowerCase().includes('instead of')) || (a.text && a.text.toLowerCase().includes('alternative'));
+                        const mapsUrl = a.mapsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.text + ' ' + day.location)}`;
                         html += `
                             <div class="timeline-item-bullet ${isAlternative ? 'alternative' : ''}">
                                 <span${isAlternative ? ' style="color: #E8C66E;"' : ''}>${a.text}</span>
+                                <a href="${mapsUrl}" target="_blank" class="activity-maps-link">📍</a>
                                 ${a.subNote ? `<div class="timeline-note">${a.subNote}</div>` : ""}
                                 ${a.needsBooking ? '<div class="timeline-tag">⚠ Book in advance</div>' : ""}
                             </div>
@@ -2435,10 +2710,11 @@
                     // Specific time
                     activities.forEach(a => {
                         const isAlternative = a.text && a.text.toLowerCase().includes('alternative');
+                        const mapsUrl = a.mapsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.text + ' ' + day.location)}`;
                         html += `
                             <div class="timeline-item">
                                 <div class="timeline-time">${timeLabel}</div>
-                                <div class="timeline-text">${a.text}</div>
+                                <div class="timeline-text">${a.text} <a href="${mapsUrl}" target="_blank" class="activity-maps-link">📍</a></div>
                                 ${a.subNote ? `<div class="timeline-note">${a.subNote}</div>` : ""}
                                 ${a.needsBooking ? '<div class="timeline-tag">⚠ Book in advance</div>' : ""}
                             </div>
@@ -2568,6 +2844,14 @@
             return html;
         }
 
+        function goToToday() {
+            const today = new Date().toISOString().split('T')[0];
+            for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
+                if (w.isoDate === today) { switchView(`day${dayNum}`); return; }
+            }
+            switchView('overview');
+        }
+
         function switchView(viewId) {
             document.querySelectorAll('.day-view').forEach(v => v.classList.remove('active'));
             document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
@@ -2644,26 +2928,23 @@
             const total = COST_DATA.summary.reduce((s, r) => s + r.amount, 0);
             const pp = Math.round(total / 4);
             el.innerHTML = `
-                <div class="card">
-                    <div class="card-title">💰 Estimated Trip Budget</div>
-                    <table class="budget-table">
-                        ${COST_DATA.summary.map(r => `
-                            <tr>
-                                <td>
-                                    <div>${r.cat}</div>
-                                    <div class="budget-note">${r.note}</div>
-                                </td>
-                                <td class="budget-amount">$${r.amount.toLocaleString()}</td>
-                            </tr>
-                        `).join('')}
-                        <tr class="budget-total-row">
-                            <td>Total · 4 people</td>
-                            <td class="budget-amount">~$${total.toLocaleString()}</td>
+                <table class="budget-table">
+                    ${COST_DATA.summary.map(r => `
+                        <tr>
+                            <td>
+                                <div>${r.cat}</div>
+                                <div class="budget-note">${r.note}</div>
+                            </td>
+                            <td class="budget-amount">$${r.amount.toLocaleString()}</td>
                         </tr>
-                    </table>
-                    <div class="budget-perperson">~$${pp.toLocaleString()} per person</div>
-                    <div class="budget-disclaimer">${COST_DATA.disclaimer}</div>
-                </div>
+                    `).join('')}
+                    <tr class="budget-total-row">
+                        <td>Total · 4 people</td>
+                        <td class="budget-amount">~$${total.toLocaleString()}</td>
+                    </tr>
+                </table>
+                <div class="budget-perperson">~$${pp.toLocaleString()} per person</div>
+                <div class="budget-disclaimer">${COST_DATA.disclaimer}</div>
             `;
         }
 
@@ -2705,20 +2986,31 @@
                 }
             } catch(e) {}
             try {
-                const url = `https://api.open-meteo.com/v1/forecast?latitude=${info.lat}&longitude=${info.lon}&hourly=temperature_2m&daily=sunrise,sunset&timezone=auto&start_date=${info.isoDate}&end_date=${info.isoDate}`;
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${info.lat}&longitude=${info.lon}&hourly=temperature_2m,weathercode&daily=sunrise,sunset&timezone=auto&start_date=${info.isoDate}&end_date=${info.isoDate}`;
                 const resp = await fetch(url);
                 if (!resp.ok) return null;
                 const json = await resp.json();
                 const times = json.hourly?.time || [];
                 const temps = json.hourly?.temperature_2m || [];
+                const codes = json.hourly?.weathercode || [];
                 const getT = h => {
                     const idx = times.indexOf(`${info.isoDate}T${String(h).padStart(2,'0')}:00`);
                     return idx !== -1 ? temps[idx] : null;
                 };
+                const getC = h => {
+                    const idx = times.indexOf(`${info.isoDate}T${String(h).padStart(2,'0')}:00`);
+                    return idx !== -1 ? codes[idx] : null;
+                };
+                const todayStr = new Date().toISOString().split('T')[0];
+                const nowHour = new Date().getHours();
+                const isToday = info.isoDate === todayStr;
                 const d = {
                     sunrise: (json.daily?.sunrise?.[0] || '').split('T')[1] || null,
                     sunset:  (json.daily?.sunset?.[0]  || '').split('T')[1] || null,
                     t8: getT(8), t13: getT(13), t20: getT(20),
+                    tNow:    isToday ? getT(nowHour) : null,
+                    wcodeNow: isToday ? (getC(nowHour) ?? getC(13) ?? getC(12)) : null,
+                    wcode: getC(13) ?? getC(12) ?? getC(11),
                 };
                 try { localStorage.setItem(cacheKey, JSON.stringify({ d, ts: Date.now() })); } catch(e) {}
                 return d;
@@ -2764,6 +3056,20 @@
             </svg>`;
         }
 
+        function wmoIcon(code) {
+            if (code === null || code === undefined) return { emoji: '🌤️', label: 'Weather' };
+            if (code === 0)              return { emoji: '☀️',  label: 'Clear sky' };
+            if (code <= 2)              return { emoji: '🌤️', label: 'Partly cloudy' };
+            if (code === 3)             return { emoji: '☁️',  label: 'Overcast' };
+            if (code <= 48)             return { emoji: '🌫️', label: 'Fog' };
+            if (code <= 55)             return { emoji: '🌦️', label: 'Drizzle' };
+            if (code <= 65)             return { emoji: '🌧️', label: 'Rain' };
+            if (code <= 77)             return { emoji: '❄️',  label: 'Snow' };
+            if (code <= 82)             return { emoji: '🌧️', label: 'Rain showers' };
+            if (code <= 94)             return { emoji: '⛈️',  label: 'Thunderstorm' };
+            return { emoji: '⛈️', label: 'Thunderstorm with hail' };
+        }
+
         async function loadWeatherWidget(dayNumber) {
             const el = document.getElementById(`wx-${dayNumber}`);
             if (!el) return;
@@ -2776,15 +3082,25 @@
             const updated = `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
             const chart = (data.t8 !== null && data.t13 !== null && data.t20 !== null)
                 ? weatherChartSVG(data.t8, data.t13, data.t20, dayNumber) : '';
+            const wx = wmoIcon(data.wcode);
+            const midTemp = data.t13 !== null ? `${Math.round(data.t13)}°C` : '';
             el.innerHTML = `
-                <div class="weather-sun-row">
-                    ${data.sunrise ? `<span>☀️ ${data.sunrise}</span>` : ''}
-                    ${data.sunset  ? `<span>🌅 ${data.sunset}</span>`  : ''}
+                <div class="wx-condition-row">
+                    <span class="wx-condition-icon">${wx.emoji}</span>
+                    <span class="wx-condition-label">${wx.label}${midTemp ? ' · ' + midTemp : ''}</span>
+                </div>
+                <div class="weather-sun-row" style="margin-top:10px;">
+                    ${data.sunrise ? `<span>🌅 ${data.sunrise}</span>` : ''}
+                    ${data.sunset  ? `<span>🌇 ${data.sunset}</span>`  : ''}
                     <button class="weather-refresh" title="Refresh forecast" onclick="refreshWeather(${dayNumber})">↻</button>
                     <span style="font-size:10px;color:var(--text-muted);">as of ${updated}</span>
+                    <a href="https://wttr.in/${DAY_WEATHER[dayNumber]?.lat},${DAY_WEATHER[dayNumber]?.lon}?lang=en" target="_blank" style="font-size:10px;color:var(--accent-gold);text-decoration:none;margin-left:auto;">More details ↗</a>
                 </div>
                 <div class="weather-chart-container">${chart}</div>
             `;
+            // Update collapsed header preview
+            const preview = document.getElementById(`wx-preview-${dayNumber}`);
+            if (preview) preview.textContent = `${wx.emoji} ${midTemp}`;
         }
 
         function refreshWeather(dayNumber) {
@@ -2795,7 +3111,336 @@
             loadWeatherWidget(dayNumber);
         }
 
+        async function loadOverviewWeather(dayNumber) {
+            const el = document.getElementById('wx-overview');
+            if (!el || !DAY_WEATHER[dayNumber]) return;
+            const w = DAY_WEATHER[dayNumber];
+            // Update header to show current location
+            const day = TRIP_DATA.days.find(d => d.dayNumber === dayNumber);
+            const locLabel = day ? ` · ${day.location}` : '';
+            const header = document.getElementById('overview-wx-header');
+            if (header) {
+                const h3 = header.querySelector('h3');
+                if (h3) {
+                    const preview = document.getElementById('wx-preview-overview');
+                    h3.innerHTML = `🌤 Today's Weather<small style="font-size:11px;opacity:0.7;font-weight:400;">${locLabel}</small>`;
+                    if (preview) h3.appendChild(preview);
+                }
+            }
+            const data = await fetchWeather(dayNumber);
+            if (!data || (data.tNow === null && data.t8 === null && data.t13 === null && data.t20 === null)) {
+                el.innerHTML = `<div class="weather-error">Forecast not yet available for this date</div>`;
+                return;
+            }
+            const now = new Date();
+            const updated = `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
+            const chart = (data.t8 !== null && data.t13 !== null && data.t20 !== null)
+                ? weatherChartSVG(data.t8, data.t13, data.t20, dayNumber) : '';
+            // Use current-hour data for display (tNow/wcodeNow) if available, else fall back to 1pm
+            const wx = wmoIcon(data.wcodeNow ?? data.wcode);
+            const displayTemp = data.tNow !== null ? `${Math.round(data.tNow)}°C now` : (data.t13 !== null ? `${Math.round(data.t13)}°C` : '');
+            const previewTemp = data.tNow !== null ? `${Math.round(data.tNow)}°C` : (data.t13 !== null ? `${Math.round(data.t13)}°C` : '');
+            el.innerHTML = `
+                <div class="wx-condition-row">
+                    <span class="wx-condition-icon">${wx.emoji}</span>
+                    <span class="wx-condition-label">${wx.label}${displayTemp ? ' · ' + displayTemp : ''}</span>
+                </div>
+                <div class="weather-sun-row" style="margin-top:10px;">
+                    ${data.sunrise ? `<span>🌅 ${data.sunrise}</span>` : ''}
+                    ${data.sunset  ? `<span>🌇 ${data.sunset}</span>`  : ''}
+                    <button class="weather-refresh" title="Refresh forecast" onclick="refreshOverviewWeather(${dayNumber})">↻</button>
+                    <span style="font-size:10px;color:var(--text-muted);">as of ${updated}</span>
+                    <a href="https://wttr.in/${w.lat},${w.lon}?lang=en" target="_blank" style="font-size:10px;color:var(--accent-gold);text-decoration:none;margin-left:auto;">More details ↗</a>
+                </div>
+                <div class="weather-chart-container">${chart}</div>
+            `;
+            const preview = document.getElementById('wx-preview-overview');
+            if (preview) preview.textContent = `${wx.emoji} ${previewTemp}`;
+        }
+
+        function refreshOverviewWeather(dayNumber) {
+            const info = DAY_WEATHER[dayNumber];
+            if (info) { try { localStorage.removeItem(`wx_${info.isoDate}_${info.lat}`); } catch(e) {} }
+            const el = document.getElementById('wx-overview');
+            if (el) el.innerHTML = `<div class="weather-loading">Refreshing…</div>`;
+            loadOverviewWeather(dayNumber);
+        }
+
         initializePage();
+
+        /* ── TRIP ROUTE MAPS ── */
+        function makeTile(map) {
+            const isLight = document.body.classList.contains('light-mode');
+            const url = isLight
+                ? 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
+                : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+            L.tileLayer(url, { attribution: '© OpenStreetMap © CARTO', subdomains: 'abcd', maxZoom: 16 }).addTo(map);
+        }
+
+        function pin(label, color) {
+            color = color || '#C9966A';
+            return L.divIcon({
+                html: '<div class="map-day-marker" style="background:' + color + ';font-size:' + (label.length > 2 ? '9' : '11') + 'px;">' + label + '</div>',
+                className: '', iconSize: [26, 26], iconAnchor: [13, 13], popupAnchor: [0, -16]
+            });
+        }
+
+        async function osrmRoute(waypoints) {
+            try {
+                const coords = waypoints.map(function(w){ return w[1].toFixed(5)+','+w[0].toFixed(5); }).join(';');
+                const r = await fetch('https://router.project-osrm.org/route/v1/driving/'+coords+'?overview=full&geometries=geojson');
+                const j = await r.json();
+                if (j.code !== 'Ok' || !j.routes[0]) return null;
+                return j.routes[0].geometry.coordinates.map(function(c){ return [c[1], c[0]]; });
+            } catch(e) { return null; }
+        }
+
+        function drawRoute(map, pts, color, dash) {
+            L.polyline(pts, { color: color||'#C9966A', weight: 3, opacity: 0.9, dashArray: dash||null, lineJoin:'round' }).addTo(map);
+        }
+
+        async function renderAddisMap() {
+            const el = document.getElementById('mapAddis');
+            if (!el || el._leaflet_id) return;
+            const map = L.map('mapAddis', { scrollWheelZoom: false });
+            makeTile(map);
+
+            // Day 1: Airport → Hotel → National Museum → Holy Trinity → Entoto Hills → Merkato → Yod Abyssinia → Hotel
+            const d1 = [
+                [8.9779, 38.7993],   // ADD Airport
+                [9.0047, 38.7813],   // Marriott Bole
+                [9.0234, 38.7541],   // National Museum of Ethiopia
+                [9.0306, 38.7654],   // Holy Trinity Cathedral
+                [9.0718, 38.7472],   // Entoto Hills
+                [9.0403, 38.7329],   // Merkato
+                [9.0198, 38.7613],   // Yod Abyssinia
+                [9.0047, 38.7813],   // Hotel (return)
+            ];
+            // Day 2: Hotel → Bishoftu → Lake Hora → Lake Babogaya → back
+            const d2 = [
+                [9.0047, 38.7813],   // Hotel
+                [8.7510, 38.9847],   // Bishoftu / Lake Hora
+                [8.7325, 38.9886],   // Lake Babogaya
+                [8.7456, 38.9812],   // Kuriftu Resort
+                [9.0047, 38.7813],   // Return to hotel
+            ];
+
+            const [r1, r2] = await Promise.all([osrmRoute(d1), osrmRoute(d2)]);
+            drawRoute(map, r1||d1, '#E05C5C');
+            drawRoute(map, r2||d2, '#E0956A');
+
+            // Markers
+            [
+                { pos:[8.9779,38.7993], label:'✈', title:'ADD Airport', color:'#7BAFD4' },
+                { pos:[9.0047,38.7813], label:'H',  title:'Marriott Hotel' },
+                { pos:[9.0234,38.7541], label:'1',  title:'National Museum of Ethiopia' },
+                { pos:[9.0306,38.7654], label:'2',  title:'Holy Trinity Cathedral' },
+                { pos:[9.0718,38.7472], label:'3',  title:'Entoto Hills' },
+                { pos:[9.0403,38.7329], label:'4',  title:'Merkato' },
+                { pos:[9.0198,38.7613], label:'5',  title:'Yod Abyssinia' },
+                { pos:[8.7510,38.9847], label:'D2', title:'Bishoftu · Lake Hora', color:'#E0956A' },
+                { pos:[8.7325,38.9886], label:'D2', title:'Lake Babogaya', color:'#E0956A' },
+            ].forEach(function(m){
+                L.marker(m.pos, { icon: pin(m.label, m.color) }).bindPopup('<strong>'+m.title+'</strong>').addTo(map);
+            });
+
+            map.invalidateSize();
+            map.fitBounds(L.latLngBounds([...d1, ...d2]), { padding: [28, 28], maxZoom: 12 });
+        }
+
+        async function renderNamibiaMap() {
+            const el = document.getElementById('mapNamibia');
+            if (!el || el._leaflet_id) return;
+            const map = L.map('mapNamibia', { scrollWheelZoom: false });
+            makeTile(map);
+
+            // Main route waypoints in order
+            const main = [
+                [-22.0000, 17.0500],  // WDH Airport (Day 3 arrival)
+                [-24.5167, 15.7500],  // Sesriem (Days 3-4)
+                [-22.6827, 14.5268],  // Swakopmund (Days 5-8)
+                [-21.8307, 15.7219],  // Spitzkoppe (Day 9 stop)
+                [-20.5960, 14.3743],  // Damaraland/Mopane Lodge (Day 9)
+                [-19.6819, 13.8919],  // Grootberg (Day 10)
+                [-19.7804, 15.9104],  // Etosha Anderson Gate (Day 11)
+                [-18.8667, 16.4833],  // Etosha Central (Day 12)
+                [-18.7958, 17.0047],  // Etosha East (Day 13)
+                [-22.5608, 17.0658],  // Windhoek (Days 14-15)
+            ];
+            // Cape Cross detour from Swakopmund and back
+            const capeLoop = [
+                [-22.6827, 14.5268],  // Swakopmund
+                [-21.7833, 13.9833],  // Cape Cross
+                [-22.6827, 14.5268],  // Back
+            ];
+
+            // OSRM can't do very long multi-stop routes well in one shot — split at Swakopmund
+            const [rA, rB, rCape] = await Promise.all([
+                osrmRoute(main.slice(0, 5)),   // WDH → Sesriem → Swakopmund → Spitzkoppe → Damaraland
+                osrmRoute(main.slice(4)),       // Damaraland → Grootberg → Etosha → Windhoek
+                osrmRoute(capeLoop),
+            ]);
+            drawRoute(map, rA || main.slice(0, 5), '#C9966A');
+            drawRoute(map, rB || main.slice(4),    '#C9966A');
+            drawRoute(map, rCape || capeLoop,      '#C9966A', '6 5');
+
+            // Markers
+            [
+                { pos:[-22.0000,17.0500], label:'3↓',  title:'Day 3 — Arrival WDH Airport' },
+                { pos:[-24.5167,15.7500], label:'3-4',  title:'Days 3-4 — Sesriem / Sossusvlei' },
+                { pos:[-22.6827,14.5268], label:'5-8',  title:'Days 5-8 — Swakopmund' },
+                { pos:[-21.7833,13.9833], label:'🦭',  title:'Day 8 — Cape Cross Seals', color:'#7BAFD4' },
+                { pos:[-21.8307,15.7219], label:'9→',  title:'Day 9 stop — Spitzkoppe' },
+                { pos:[-20.5960,14.3743], label:'9',   title:'Day 9 — Damaraland / Mopane Lodge' },
+                { pos:[-19.6819,13.8919], label:'10',  title:'Day 10 — Grootberg' },
+                { pos:[-19.7804,15.9104], label:'11',  title:'Day 11 — Etosha (south)' },
+                { pos:[-18.8667,16.4833], label:'12',  title:'Day 12 — Etosha Central' },
+                { pos:[-18.7958,17.0047], label:'13',  title:'Day 13 — Etosha East' },
+                { pos:[-22.5608,17.0658], label:'14-15',title:'Days 14-15 — Windhoek' },
+            ].forEach(function(m){
+                L.marker(m.pos, { icon: pin(m.label, m.color) }).bindPopup('<strong>'+m.title+'</strong>').addTo(map);
+            });
+
+            const allPts = [...main, ...capeLoop];
+            map.invalidateSize();
+            map.fitBounds(L.latLngBounds(allPts), { padding: [28, 28], maxZoom: 8 });
+        }
+
+        // Load Leaflet then render both maps
+        (function() {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+            document.head.appendChild(link);
+            const s = document.createElement('script');
+            s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+            s.onload = function() { setTimeout(function() { renderAddisMap(); renderNamibiaMap(); }, 300); };
+            document.head.appendChild(s);
+        })();
+
+        /* ── CURRENCY CALCULATOR ── */
+        const DAY_CURRENCY = {
+            1:  { code: 'ETB', name: 'Ethiopian Birr',   symbol: 'Br'  },
+            2:  { code: 'ETB', name: 'Ethiopian Birr',   symbol: 'Br'  },
+            3:  { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            4:  { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            5:  { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            6:  { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            7:  { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            8:  { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            9:  { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            10: { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            11: { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            12: { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            13: { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            14: { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            15: { code: 'NAD', name: 'Namibian Dollar',  symbol: 'N$'  },
+            16: { code: 'ETB', name: 'Ethiopian Birr',   symbol: 'Br'  },
+        };
+
+        let calcRates = null; // { primary_code: rate_vs_usd, aed: rate, usd: 1 }
+        let calcPrimary = { code: 'NAD', name: 'Namibian Dollar', symbol: 'N$' };
+
+        function getTodayTripDay() {
+            const today = new Date().toISOString().split('T')[0];
+            for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
+                if (w.isoDate === today) return parseInt(dayNum);
+            }
+            return null;
+        }
+
+        async function fetchCalcRates(force) {
+            const cacheKey = 'calc_rates_v1';
+            if (!force) {
+                const cached = localStorage.getItem(cacheKey);
+                if (cached) {
+                    const { data, ts } = JSON.parse(cached);
+                    if (Date.now() - ts < 24 * 3600 * 1000) { calcRates = data; updateCalcUI(); return; }
+                }
+            }
+            document.getElementById('calcRatesNote').textContent = 'Fetching rates…';
+            try {
+                const res = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json');
+                const json = await res.json();
+                calcRates = { usd: 1, aed: json.usd.aed, etb: json.usd.etb, nad: json.usd.nad };
+                localStorage.setItem(cacheKey, JSON.stringify({ data: calcRates, ts: Date.now() }));
+            } catch {
+                calcRates = { usd: 1, aed: 3.6725, etb: 132.5, nad: 18.5 };
+                document.getElementById('calcRatesNote').textContent = 'Offline rates (approx)';
+                return;
+            }
+            updateCalcUI();
+        }
+
+        function updateCalcUI() {
+            if (!calcRates) return;
+            const todayDay = getTodayTripDay();
+            calcPrimary = (todayDay && DAY_CURRENCY[todayDay]) ? DAY_CURRENCY[todayDay] : { code: 'NAD', name: 'Namibian Dollar', symbol: 'N$' };
+            document.getElementById('calcCode0').textContent = calcPrimary.code;
+            document.getElementById('calcName0').textContent = calcPrimary.name;
+            document.getElementById('calcHeaderSub').textContent = calcPrimary.code + ' · AED · USD';
+            const ts = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('calcRatesNote').textContent = `Rates updated ${ts}`;
+        }
+
+        function calcConvert(sourceIdx) {
+            if (!calcRates) return;
+            const inputs = [document.getElementById('calcInput0'), document.getElementById('calcInput1'), document.getElementById('calcInput2')];
+            const codes = [calcPrimary.code.toLowerCase(), 'aed', 'usd'];
+            const val = parseFloat(inputs[sourceIdx].value);
+            if (isNaN(val) || val === '') { inputs.forEach((inp, i) => { if (i !== sourceIdx) inp.value = ''; }); return; }
+            const sourceRate = calcRates[codes[sourceIdx]] || 1;
+            const valInUsd = val / sourceRate;
+            inputs.forEach((inp, i) => {
+                if (i === sourceIdx) return;
+                const rate = calcRates[codes[i]] || 1;
+                inp.value = (valInUsd * rate).toFixed(2);
+            });
+        }
+
+        function toggleCurrencyCalc() {
+            const body = document.getElementById('calcBody');
+            const chevron = document.getElementById('calcChevron');
+            const open = body.classList.toggle('open');
+            chevron.textContent = open ? '▼' : '▶';
+            if (open && !calcRates) fetchCalcRates(false);
+        }
+
+        fetchCalcRates(false);
+
+        /* ── SWIPE NAVIGATION ── */
+        (function () {
+            let startX = 0, startY = 0, locked = false;
+            const views = ['overview', ...TRIP_DATA.days.map(d => `day${d.dayNumber}`)];
+
+            function isScrollable(el) {
+                while (el && el !== document.body) {
+                    const style = window.getComputedStyle(el);
+                    const overflow = style.overflowX;
+                    if ((overflow === 'auto' || overflow === 'scroll') && el.scrollWidth > el.clientWidth) return true;
+                    el = el.parentElement;
+                }
+                return false;
+            }
+
+            document.addEventListener('touchstart', e => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                locked = isScrollable(e.target);
+            }, { passive: true });
+
+            document.addEventListener('touchend', e => {
+                if (locked) return;
+                const dx = e.changedTouches[0].clientX - startX;
+                const dy = e.changedTouches[0].clientY - startY;
+                if (Math.abs(dx) < 60 || Math.abs(dy) > Math.abs(dx) * 0.8) return;
+                const current = document.querySelector('.day-view.active');
+                if (!current) return;
+                const idx = views.indexOf(current.id);
+                if (dx < 0 && idx < views.length - 1) switchView(views[idx + 1]);
+                else if (dx > 0 && idx > 0) switchView(views[idx - 1]);
+            }, { passive: true });
+        })();
     </script>
 </body>
 </html>

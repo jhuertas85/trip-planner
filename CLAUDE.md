@@ -3,6 +3,7 @@
 ## What this repo is
 A static GitHub Pages site for trip itineraries. No build step, no framework — pure HTML files served directly.
 
+**GitHub repo:** https://github.com/jhuertas85/trip-planner
 **Live site:** https://jhuertas85.github.io/trip-planner/
 
 ## File structure
@@ -11,6 +12,8 @@ trip-planner/
 ├── template.html              # Master template — copy this for every new trip
 ├── 2026-05-namibia/
 │   └── index.html             # Namibia May 2026 (Juan Carlos, Maria, Ada, Felix)
+├── 2026-07-switzerland/
+│   └── index.html             # Germany · Switzerland · Madrid July 2026 (Juan Carlos)
 └── CLAUDE.md                  # This file
 ```
 
@@ -99,8 +102,11 @@ Set all amounts to 0 and fill in as bookings are confirmed.
 ## Common tasks
 - **Update a hotel:** find the day by `dayNumber` in `TRIP_DATA.days`, edit the `hotel` object
 - **Add/change activity:** find the day, edit the `activities` array
-- **New trip:** copy `template.html` into a new folder e.g. `2027-03-japan/index.html`, then fill in `TRIP_DATA`, `DAY_WEATHER`, and `COST_DATA`
+- **New trip:** copy `template.html` into a new folder e.g. `2027-03-japan/index.html`, then fill in `TRIP_DATA`, `DAY_WEATHER`, and `COST_DATA`, **and update the File structure section in this CLAUDE.md** with the new folder name, dates, and travelers
 - **After any edit:** commit + push using the token pattern above
+
+## Rule: keep this file current
+Whenever a new trip folder is created or an existing one is significantly updated (travelers, dates, route), update the **File structure** section above and add or revise the matching trip summary section at the bottom of this file. This ensures every Claude session starts with accurate context without needing to scan the repo.
 
 ## Namibia 2026 trip summary
 - **Travellers:** Juan Carlos, Maria, Ada, Felix
