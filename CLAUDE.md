@@ -55,7 +55,7 @@ const TRIP_DATA = {
   flight: { airline, from, to, departTime, arriveTime, terminal } | null,
   hotel: { name, status, note, bookedBy, mapsUrl, altHotel? },
   drive: { from, to, duration, distance } | null,
-  activities: [{ time, text, subNote, needsBooking }],
+  activities: [{ time, text, subNote, needsBooking, mapsUrl? }],  // mapsUrl optional; auto-fallback searches "text + location"
   meals: {
     breakfast/lunch/dinner: { status, note, restaurants: [{ name, desc, rating, mapsUrl }] }
   },
