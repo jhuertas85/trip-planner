@@ -639,31 +639,29 @@
                     ]
                 },
 
-                // ── DAY 10 ── Jul 6 Mon ── Pamplona San Fermín → Madrid ──
+                // ── DAY 10 ── Jul 6 Mon ── Pamplona San Fermín ──
                 {
                     dayNumber: 10, date: "Jul 6", dayOfWeek: "Mon",
-                    title: "San Fermín — Encierro", location: "Pamplona → Madrid",
+                    title: "San Fermín — Encierro", location: "Pamplona",
                     backgroundImage: "https://images.unsplash.com/photo-1565329921943-7e537b7a1d06?w=800",
                     flight: null,
-                    hotel: { name: "Friend's place in Madrid (returning)", status: "confirmed", note: "Return to friend's place in Madrid on evening train. Multiple Renfe trains ~18:00-21:00.", bookedBy: "Friend", mapsUrl: "" },
-                    drive: { from: "Pamplona", to: "Madrid", duration: "~3.5 hrs", distance: "Multiple Renfe trains from ~18:00 — book return in advance" },
+                    hotel: { name: "Friend's place in Pamplona", status: "confirmed", note: "Second night in Pamplona. Return to Madrid tomorrow evening (Jul 7, ALVIA 19:32).", bookedBy: "Friend", mapsUrl: "maps.google.com/?q=Pamplona+City+Centre" },
+                    drive: null,
                     activities: [
                         { time: "05:30", text: "Wake up — walk to Calle Estafeta",                               subNote: "Find your viewing spot by 07:00. It fills up fast.",                        needsBooking: false },
                         { time: "07:00", text: "Position on Calle Estafeta or Ayuntamiento corner",              subNote: "Best spots: fenced balconies on Estafeta. Stay in position once placed.",   needsBooking: false },
                         { time: "08:00", text: "🐂 ENCIERRO — The Bull Run",                                    subNote: "Rockets fired to signal start. Lasts ~3 minutes. This is the moment.",    needsBooking: false },
                         { time: "Morning",   text: "Post-run atmosphere — bars open, music, giants parade",     subNote: "Txistu music, Plaza del Castillo. Pamplona pintxos are among the best in Spain.", needsBooking: false },
-                        { time: "Afternoon", text: "Festival day — explore, eat well, rest if you can",         subNote: "Giants parade, street bands, the whole city is one big party",              needsBooking: false },
-                        { time: "18:00",    text: "Return train Pamplona → Madrid (~3.5 hrs)",                  subNote: "Multiple Renfe trains from ~18:00. Book return before leaving Madrid.",    needsBooking: true  },
-                        { time: "Evening",   text: "Arrive Madrid — quiet evening, early rest",                 subNote: "Two very big days back to back",                                            needsBooking: false }
+                        { time: "Afternoon", text: "Festival day — explore, eat well, rest",                    subNote: "Giants parade, street bands, the whole city is one big party",              needsBooking: false },
+                        { time: "Evening",   text: "San Fermín night — festivities continue",                   subNote: "The festival runs all night. Return train is tomorrow evening at 19:32.",  needsBooking: false }
                     ],
                     meals: {
                         breakfast: { status: "flexible", note: "Bars open at 06:00 for San Fermín — coffee before the run", restaurants: [] },
                         lunch:     { status: "flexible", note: "Pintxos in Pamplona after the encierro — excellent quality", restaurants: [] },
-                        dinner:    { status: "flexible", note: "On the train or light meal back in Madrid",                  restaurants: [] }
+                        dinner:    { status: "flexible", note: "Pamplona restaurants and bars — full festival night", restaurants: [] }
                     },
                     route: null,
                     warnings: [
-                        "⚠️ Book Pamplona → Madrid return train before you leave Madrid on Jul 5",
                         "The first rocket = gates open, the second = all bulls running. Listen for both.",
                         "Do NOT enter the bull run route — fence viewing is safer and equally spectacular"
                     ],
@@ -673,38 +671,34 @@
                     ]
                 },
 
-                // ── DAY 11 ── Jul 7 Tue ── Madrid free day ──
+                // ── DAY 11 ── Jul 7 Tue ── Pamplona → Madrid ──
                 {
                     dayNumber: 11, date: "Jul 7", dayOfWeek: "Tue",
-                    title: "Madrid — Free Day", location: "Madrid",
+                    title: "Pamplona → Madrid", location: "Pamplona → Madrid",
                     backgroundImage: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800",
                     flight: null,
-                    hotel: { name: "Friend's place in Madrid", status: "confirmed", note: "Staying with friend.", bookedBy: "Friend", mapsUrl: "" },
-                    drive: null,
+                    hotel: { name: "Friend's place in Madrid", status: "confirmed", note: "Arriving late (~23:30). Staying with friend.", bookedBy: "Friend", mapsUrl: "" },
+                    drive: { from: "Pamplona/Iruñ", to: "Madrid Atocha", duration: "3h 50m", distance: "ALVIA 00610 · Dep 19:32 · Arr 23:22 · Seat 11B Car 4 · Ref 8Y277S · €29 ✓" },
                     activities: [
-                        { time: "Morning",   text: "Slow start — good coffee, wander the neighbourhood",          subNote: "Recovery day after Pamplona. Take your time.",                               needsBooking: false },
-                        { time: "Afternoon", text: "El Prado Museum",                                            subNote: "Velázquez, Goya, El Greco. ~€15, free after 18:00.",                         needsBooking: false },
-                        { time: "Afternoon", text: "OPTION: Retiro Park",                                        subNote: "Rowboat on the lake, Crystal Palace, rose garden",                          needsBooking: false },
-                        { time: "Evening",   text: "Dinner at Taberna La Bola",                                  subNote: "Madrid's best cocido madrileño, family-run since 1870, ~€30-35. Book ahead.", needsBooking: true  },
-                        { time: "Evening",   text: "Rooftop drinks: Azotea del Círculo de Bellas Artes",         subNote: "Best rooftop view in Madrid. €5 entry. Open until late.",                   needsBooking: false },
-                        { time: "Evening",   text: "Walk Malasaña neighbourhood",                                subNote: "Bohemian bars, independent shops — wander after 22:00",                     needsBooking: false }
+                        { time: "Morning",   text: "Last morning in Pamplona — San Fermín atmosphere",           subNote: "Festival continues until Jul 14. Enjoy the city before heading out.",         needsBooking: false },
+                        { time: "Afternoon", text: "Pintxos lunch + explore old town",                          subNote: "Plaza del Castillo, Ciudadela Park, last wander through the festival streets", needsBooking: false },
+                        { time: "17:00",    text: "Head to Pamplona/Iruñ station",                              subNote: "Station is 20 min walk from old town or 5 min taxi.",                        needsBooking: false },
+                        { time: "19:32",    text: "🚆 Renfe ALVIA 00610 — Pamplona → Madrid Atocha",           subNote: "Seat 11B Car 4. Ref: 8Y277S. Arrives 23:22. Already booked (€29).",          needsBooking: false },
+                        { time: "23:22",    text: "Arrive Madrid Atocha — head to friend's place",             subNote: "Late arrival. Metro or taxi from Atocha.",                                   needsBooking: false }
                     ],
                     meals: {
-                        breakfast: { status: "flexible", note: "Slow café breakfast — Madrid has excellent coffee culture", restaurants: [] },
-                        lunch:     { status: "flexible", note: "El Prado area or Retiro Park neighbourhood",                restaurants: [] },
-                        dinner:    { status: "options",  note: "Madrid eats at 22:00 — book La Bola, then rooftop drinks", restaurants: [
-                            { name: "Taberna La Bola", desc: "Family-run since 1870. Madrid's best cocido madrileño. No tourists. ~€30-35. Reserve.", rating: "4.6★", mapsUrl: "maps.google.com/?q=Taberna+La+Bola+Madrid" }
-                        ]}
+                        breakfast: { status: "flexible", note: "Pamplona café — San Fermín morning atmosphere",   restaurants: [] },
+                        lunch:     { status: "flexible", note: "Pintxos in Pamplona old town before heading out", restaurants: [] },
+                        dinner:    { status: "flexible", note: "Light snack on the train or after arriving late in Madrid", restaurants: [] }
                     },
                     route: null,
                     warnings: [
-                        "⚠️ Book Taberna La Bola reservation — essential, they fill up",
-                        "El Prado is free after 18:00 if you want to save €15"
+                        "Station is Pamplona/Iruñ — allow 20 min from old town",
+                        "Late arrival ~23:30 in Madrid — confirm with friend before leaving Pamplona"
                     ],
                     gems: [
-                        "Taberna La Bola: 150-year-old tavern, no English menus, zero tourists — the real Madrid",
-                        "Azotea del Círculo de Bellas Artes: €5 entry for the best rooftop view in the city, open until midnight",
-                        "Malasaña: wander without a plan after 22:00 — Madrid's best neighbourhood for a late night"
+                        "Even on the last day, Pamplona during San Fermín is unlike anywhere else — don't rush to leave",
+                        "Pintxos at Bar Gaucho or Bar Txoko on Calle Estafeta — the best in the city"
                     ]
                 },
 
