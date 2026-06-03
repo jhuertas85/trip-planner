@@ -303,6 +303,15 @@
             .header-title { font-size: 18px; }
             .day-tab { padding: 6px 10px; font-size: 11px; }
         }
+        .map-day-marker {
+            background: #C9966A; color: #111; font-weight: 700; font-size: 10px;
+            width: 26px; height: 26px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid rgba(255,255,255,0.5);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5); cursor: pointer;
+        }
+        .leaflet-popup-content-wrapper { background: var(--bg-secondary) !important; color: var(--text-primary) !important; border: 1px solid var(--border-color) !important; box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important; }
+        .leaflet-popup-tip { background: var(--bg-secondary) !important; }
     </style>
 </head>
 <body>
@@ -845,6 +854,38 @@
                     </div>
                 </div>
             </div>
+            <!-- Maps — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>🗺️ Maps</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div>
+                        <div style="font-size:13px;font-weight:600;color:var(--accent-gold);margin-bottom:6px;">🇩🇪 Munich — Days 1–3</div>
+                        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">
+                            <span style="color:#7BAFD4;font-weight:600;">✈</span> Airport &nbsp;
+                            <span style="color:#C9966A;font-weight:600;">——</span> Day 1 city walk &nbsp;
+                            <span style="color:#E0956A;font-weight:600;">——</span> Day 2 walk &nbsp;
+                            <span style="color:#A8C56A;font-weight:600;">- -</span> Day 3 options
+                        </div>
+                        <div id="mapMunich" style="height:340px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);margin-bottom:20px;"></div>
+                        <div style="font-size:13px;font-weight:600;color:var(--accent-gold);margin-bottom:6px;">🇨🇭 Switzerland — Days 4–7</div>
+                        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">
+                            <span style="color:#5B9BD5;font-weight:600;">——</span> Train route &nbsp;
+                            <span style="color:#C9966A;font-weight:600;">- -</span> Day trips from Bern
+                        </div>
+                        <div id="mapSwitzerland" style="height:400px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);margin-bottom:20px;"></div>
+                        <div style="font-size:13px;font-weight:600;color:var(--accent-gold);margin-bottom:6px;">🇪🇸 Madrid & Pamplona — Days 8–12</div>
+                        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">
+                            <span style="color:#E05C5C;font-weight:600;">——</span> Madrid → Pamplona &nbsp;
+                            <span style="color:#E0956A;font-weight:600;">——</span> Return
+                        </div>
+                        <div id="mapMadrid" style="height:340px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);"></div>
+                    </div>
+                </div>
+            </div>
+
             <div class="collapsible-section">
                 <div class="section-header">
                     <h3>✈️ Flights</h3>
@@ -890,13 +931,15 @@
                     <div class="travelers-list" id="travelersListView"></div>
                 </div>
             </div>
+            <div style="text-align:center;padding:20px 0 8px;">
+                <a href="../" style="color:var(--accent-gold);text-decoration:none;font-size:13px;opacity:0.75;">← All trips</a>
+            </div>
         </div>
         <div id="dayViewsContainer"></div>
     </main>
 
     <footer>
         <p id="footerText">Trip Planner</p>
-        <p style="margin-top:8px"><a href="../" style="color:var(--accent-gold);text-decoration:none;font-size:13px;opacity:0.8;">← All trips</a></p>
     </footer>
 
     <script>
@@ -1626,6 +1669,179 @@
         })();
 
         initializePage();
+
+        /* ── TRIP ROUTE MAPS ── */
+        function makeTile(map) {
+            const url = document.body.classList.contains('light-mode')
+                ? 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
+                : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+            L.tileLayer(url, { attribution: '© OpenStreetMap © CARTO', subdomains: 'abcd', maxZoom: 18 }).addTo(map);
+        }
+        function pin(label, color) {
+            color = color || '#C9966A';
+            return L.divIcon({
+                html: '<div class="map-day-marker" style="background:' + color + ';font-size:' + (label.length > 2 ? '9' : '11') + 'px;">' + label + '</div>',
+                className: '', iconSize: [26, 26], iconAnchor: [13, 13], popupAnchor: [0, -16]
+            });
+        }
+        async function osrmRoute(waypoints) {
+            try {
+                const coords = waypoints.map(w => w[1].toFixed(5) + ',' + w[0].toFixed(5)).join(';');
+                const r = await fetch('https://router.project-osrm.org/route/v1/driving/' + coords + '?overview=full&geometries=geojson');
+                const j = await r.json();
+                if (j.code !== 'Ok' || !j.routes[0]) return null;
+                return j.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
+            } catch(e) { return null; }
+        }
+        function drawRoute(map, pts, color, dash) {
+            L.polyline(pts, { color: color || '#C9966A', weight: 3, opacity: 0.9, dashArray: dash || null, lineJoin: 'round' }).addTo(map);
+        }
+
+        async function renderMunichMap() {
+            const el = document.getElementById('mapMunich');
+            if (!el || el._leaflet_id) return;
+            const map = L.map('mapMunich', { scrollWheelZoom: false });
+            makeTile(map);
+
+            // Day 1: Hotel → Viktualienmarkt → Marienplatz → Hofbräuhaus
+            const d1 = [
+                [48.1293, 11.5590],  // myMINGA4 Hotel
+                [48.1355, 11.5756],  // Viktualienmarkt
+                [48.1374, 11.5755],  // Marienplatz
+                [48.1375, 11.5799],  // Hofbräuhaus
+            ];
+            // Day 2: Hotel → Asamkirche → English Garden → Chinesischer Turm → Augustiner
+            const d2 = [
+                [48.1293, 11.5590],  // Hotel
+                [48.1345, 11.5697],  // Asamkirche
+                [48.1430, 11.5905],  // Eisbach surfers
+                [48.1634, 11.6030],  // Chinesischer Turm
+                [48.1374, 11.5689],  // Augustiner Klosterwirt
+            ];
+            // Day 3 options: Nymphenburg and Dachau
+            const nymphenburg = [[48.1293, 11.5590], [48.1583, 11.5033]];
+            const dachau      = [[48.1293, 11.5590], [48.2703, 11.4343]];
+
+            const [r1, r2, rN, rD] = await Promise.all([
+                osrmRoute(d1), osrmRoute(d2), osrmRoute(nymphenburg), osrmRoute(dachau)
+            ]);
+            drawRoute(map, r1 || d1, '#C9966A');
+            drawRoute(map, r2 || d2, '#E0956A');
+            drawRoute(map, rN || nymphenburg, '#A8C56A', '6 4');
+            drawRoute(map, rD || dachau,      '#A8C56A', '6 4');
+
+            [
+                { pos:[48.3537,11.7860], label:'✈', title:'MUC Airport', color:'#7BAFD4' },
+                { pos:[48.1293,11.5590], label:'H',  title:'myMINGA4 Hotel' },
+                { pos:[48.1355,11.5756], label:'1',  title:'Viktualienmarkt' },
+                { pos:[48.1374,11.5755], label:'2',  title:'Marienplatz' },
+                { pos:[48.1375,11.5799], label:'3',  title:'Hofbräuhaus' },
+                { pos:[48.1345,11.5697], label:'4',  title:'Asamkirche', color:'#E0956A' },
+                { pos:[48.1430,11.5905], label:'5',  title:'Eisbach River Surfers', color:'#E0956A' },
+                { pos:[48.1634,11.6030], label:'6',  title:'Chinesischer Turm Beer Garden', color:'#E0956A' },
+                { pos:[48.1583,11.5033], label:'N',  title:'Day 3 option: Nymphenburg Palace', color:'#A8C56A' },
+                { pos:[48.2703,11.4343], label:'D',  title:'Day 3 option: Dachau Memorial', color:'#A8C56A' },
+            ].forEach(m => L.marker(m.pos, { icon: pin(m.label, m.color) }).bindPopup('<strong>' + m.title + '</strong>').addTo(map));
+
+            map.invalidateSize();
+            map.fitBounds(L.latLngBounds([...d1, ...d2, [48.3537,11.7860], [48.2703,11.4343], [48.1583,11.5033]]), { padding: [28, 28], maxZoom: 12 });
+        }
+
+        async function renderSwitzerlandMap() {
+            const el = document.getElementById('mapSwitzerland');
+            if (!el || el._leaflet_id) return;
+            const map = L.map('mapSwitzerland', { scrollWheelZoom: false });
+            makeTile(map);
+
+            // Main train route: Munich → Zurich → (Bern) → Geneva Airport
+            const trainMain = [
+                [48.1402, 11.5580],  // Munich Hbf
+                [47.3779,  8.5400],  // Zurich HB
+                [47.1410,  9.5215],  // Vaduz, Liechtenstein (detour)
+                [46.9481,  7.4474],  // Bern
+                [46.2370,  6.1089],  // Geneva Airport
+            ];
+            // Day trips from Bern
+            const toLucerne    = [[46.9481,7.4474], [47.0502,8.3093]];
+            const toInterlaken = [[46.9481,7.4474], [46.6863,7.8632]];
+
+            const [rMain, rLuc, rInt] = await Promise.all([
+                osrmRoute(trainMain.slice(0,2).concat([trainMain[3], trainMain[4]])), // Munich→Zurich→Bern→Geneva
+                osrmRoute(toLucerne),
+                osrmRoute(toInterlaken)
+            ]);
+            drawRoute(map, rMain || trainMain, '#5B9BD5');
+            drawRoute(map, rLuc  || toLucerne,    '#C9966A', '6 4');
+            drawRoute(map, rInt  || toInterlaken, '#C9966A', '6 4');
+
+            // Vaduz straight line (train+bus, OSRM won't route across Liechtenstein well)
+            L.polyline([[47.3779,8.5400],[47.1410,9.5215],[46.9481,7.4474]], { color:'#5B9BD5', weight:2, opacity:0.6, dashArray:'4 4' }).addTo(map);
+
+            [
+                { pos:[48.1402,11.5580], label:'D1', title:'Days 1-3 — Munich' },
+                { pos:[47.3779, 8.5400], label:'D4', title:'Day 4 — Zurich + Linkin Park' },
+                { pos:[47.3796, 8.5087], label:'🎸', title:'Stadion Letzigrund', color:'#E05C5C' },
+                { pos:[47.1410, 9.5215], label:'D5', title:'Day 5 — Vaduz, Liechtenstein' },
+                { pos:[46.9481, 7.4474], label:'D5', title:'Days 5-7 base — Bern', color:'#E0956A' },
+                { pos:[47.0502, 8.3093], label:'D6', title:'Day 6 day trip — Lucerne', color:'#C9966A' },
+                { pos:[46.9789, 8.2543], label:'⛰',  title:'Mt Pilatus option', color:'#A8C56A' },
+                { pos:[46.6863, 7.8632], label:'D7', title:'Day 7 day trip — Interlaken', color:'#C9966A' },
+                { pos:[46.2370, 6.1089], label:'✈',  title:'Day 8 — Geneva Airport → Madrid', color:'#7BAFD4' },
+            ].forEach(m => L.marker(m.pos, { icon: pin(m.label, m.color) }).bindPopup('<strong>' + m.title + '</strong>').addTo(map));
+
+            map.invalidateSize();
+            const allPts = [...trainMain, ...toLucerne, ...toInterlaken];
+            map.fitBounds(L.latLngBounds(allPts), { padding: [28, 28], maxZoom: 8 });
+        }
+
+        async function renderMadridMap() {
+            const el = document.getElementById('mapMadrid');
+            if (!el || el._leaflet_id) return;
+            const map = L.map('mapMadrid', { scrollWheelZoom: false });
+            makeTile(map);
+
+            const towardsPamplona = [
+                [40.4058, -3.6894],  // Madrid Atocha
+                [42.8188, -1.6440],  // Pamplona
+            ];
+            const returnMadrid = [
+                [42.8188, -1.6440],  // Pamplona
+                [40.4168, -3.7038],  // Madrid
+            ];
+
+            const [rOut, rRet] = await Promise.all([
+                osrmRoute(towardsPamplona),
+                osrmRoute(returnMadrid)
+            ]);
+            drawRoute(map, rOut || towardsPamplona, '#E05C5C');
+            drawRoute(map, rRet || returnMadrid,    '#E0956A');
+
+            [
+                { pos:[40.4168,-3.7038], label:'D8',  title:'Days 8 & 11-12 — Madrid' },
+                { pos:[40.4058,-3.6894], label:'🚆',  title:'Madrid Atocha station', color:'#7BAFD4' },
+                { pos:[40.4153,-3.7073], label:'M',   title:'Plaza Mayor' },
+                { pos:[40.4138,-3.6923], label:'P',   title:'Museo del Prado', color:'#E0956A' },
+                { pos:[40.4153,-3.6844], label:'R',   title:'Retiro Park', color:'#A8C56A' },
+                { pos:[42.8188,-1.6440], label:'D9',  title:'Days 9-10 — Pamplona · San Fermín', color:'#E05C5C' },
+                { pos:[42.8224,-1.6386], label:'🐂',  title:'Calle de la Estafeta — Bull Run', color:'#E05C5C' },
+            ].forEach(m => L.marker(m.pos, { icon: pin(m.label, m.color) }).bindPopup('<strong>' + m.title + '</strong>').addTo(map));
+
+            map.invalidateSize();
+            map.fitBounds(L.latLngBounds([...towardsPamplona, ...returnMadrid]), { padding: [32, 32], maxZoom: 9 });
+        }
+
+        // Load Leaflet then render all maps
+        (function() {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+            document.head.appendChild(link);
+            const s = document.createElement('script');
+            s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+            s.onload = function() { setTimeout(function() { renderMunichMap(); renderSwitzerlandMap(); renderMadridMap(); }, 300); };
+            document.head.appendChild(s);
+        })();
+
     </script>
 </body>
 </html>
