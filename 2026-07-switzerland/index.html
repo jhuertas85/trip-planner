@@ -413,7 +413,7 @@
                         { time: "Afternoon", text: "OPTION: Dachau Concentration Camp",                subNote: "30 min by S-Bahn from Hauptbahnhof. Most significant memorial site in Germany. Half-day.",                                               needsBooking: false },
                         { time: "Afternoon", text: "OPTION: Deutsches Museum",                         subNote: "World's largest science museum, Museumsinsel, ~€15. Best if skipping Dachau.",                                                           needsBooking: false },
                         { time: "Evening",   text: "Last Munich dinner: Görreshof Wirtshaus (Maxvorstadt)", subNote: "Local beer garden, zero tourists, excellent food",                                                                                  needsBooking: false },
-                        { time: "Evening",   text: "Pack for departure — early train tomorrow 06:48",   subNote: "München Hbf is ~10 min walk from myMINGA4. Set your alarm.",                                                                            needsBooking: false }
+                        { time: "Evening",   text: "Pack for departure — check out at 06:00 tomorrow", subNote: "Leave hotel at 06:00 for 06:48 DB ECE 198 to Zürich. München Hbf is ~10 min walk.", needsBooking: false }
                     ],
                     meals: {
                         breakfast: { status: "flexible", note: "Hotel or nearby café",                               restaurants: [] },
@@ -440,9 +440,10 @@
                     backgroundImage: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800",
                     flight: null,
                     hotel: { name: "Best Western Plus Hotel Zürcherhof", status: "confirmed", note: "Zähringerstrasse 21, Niederdorf · AED 992 (1 night) · Breakfast included", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Best+Western+Plus+Hotel+Zurcherhof+Zurich" },
-                    drive: { from: "München Hbf", to: "Zürich HB", duration: "~3h 32m", distance: "Dep 06:48 · Arr 10:20 · Book Sparpreis ~€22-30" },
+                    drive: { from: "München Hbf", to: "Zürich HB", duration: "3h 40m", distance: "ECE 198 · Dep 06:48 Gl.27 · Arr 10:28 Gl.31 · 1st class · Ref DH206EK6 · €51.99 ✓" },
                     activities: [
-                        { time: "06:48",    text: "Train München Hbf → Zürich HB",                     subNote: "Scenic route through Bavaria into Switzerland. Arrive ~10:20. Book Sparpreis in advance.",     needsBooking: true  },
+                        { time: "06:00",    text: "Check out of myMINGA4 — walk to München Hbf",         subNote: "Hotel to Hauptbahnhof is ~10 min walk. Allow extra time with luggage.",                   needsBooking: false },
+                        { time: "06:48",    text: "🚆 DB ECE 198 — München Hbf → Zürich HB", subNote: 'Platform 27. 1st class. Arr 10:28 Pl.31. Ticket: DH206EK6 · €51.99 · <a href="https://raw.githubusercontent.com/jhuertas85/trip-planner/main/tickets/DB_Munich-Zurich_30Jun2026.pdf" target="_blank" class="activity-maps-link">🎫 PDF</a>',                                                     needsBooking: false },
                         { time: "Morning",   text: "Arrive Zurich, check in Zürcherhof (Niederdorf)",   subNote: "Hotel is in the old town — you're already in the heart of it",                             needsBooking: false },
                         { time: "Afternoon", text: "Zurich Altstadt — Niederdorf lanes, Grossmünster",  subNote: "Walk straight from the hotel",                                                               needsBooking: false },
                         { time: "Afternoon", text: "Fraumünster — Chagall stained glass windows",       subNote: "~€5. Some of the finest stained glass in the world.",                                        needsBooking: false },
@@ -463,7 +464,6 @@
                     },
                     route: null,
                     warnings: [
-                        "⚠️ Book Munich → Zurich Sparpreis NOW — fares rise as the date approaches",
                         "Doors open 15:30, but support acts start 18:25 — no need to rush there early"
                     ],
                     gems: [
