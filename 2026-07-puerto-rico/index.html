@@ -2038,11 +2038,10 @@
             mapsContainer.innerHTML = TRIP_DATA.days
                 .filter(day => day.route)
                 .map(day => `
-                    <div style="margin-bottom: 16px; padding: 12px; background: var(--bg-secondary); border-radius: 6px;">
-                        <div style="font-weight: 600; margin-bottom: 8px;">Día ${day.dayNumber} - ${day.date} (${day.dayOfWeek}): ${day.title}</div>
-                        <a href="${day.route}" target="_blank" style="display: inline-block; padding: 8px 14px; background-color: var(--accent-gold); color: var(--bg-primary); border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; transition: var(--transition);" onmouseover="this.style.backgroundColor='#daa760'" onmouseout="this.style.backgroundColor='var(--accent-gold)'">
-                            📍 Ver Ruta en Google Maps →
-                        </a>
+                    <div style="margin-bottom: 20px;">
+                        <div style="font-weight: 600; margin-bottom: 10px; color: var(--accent-gold);">📍 Día ${day.dayNumber} - ${day.title}</div>
+                        <iframe style="width: 100%; height: 300px; border: none; border-radius: 6px; background: var(--bg-tertiary);" loading="lazy" src="${day.route}"></iframe>
+                        <a href="${day.route}" target="_blank" style="display: block; margin-top: 8px; padding: 8px 12px; text-align: center; background: var(--bg-secondary); color: var(--accent-gold); border-radius: 4px; text-decoration: none; font-size: 11px; font-weight: 600;">Abre en pantalla completa →</a>
                     </div>
                 `)
                 .join("");
