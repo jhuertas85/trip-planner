@@ -2868,22 +2868,7 @@
                 }
                 return false;
             }
-            document.addEventListener('touchstart', e => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                locked = isScrollable(e.target);
-            }, { passive: true });
-            document.addEventListener('touchend', e => {
-                if (locked) return;
-                const dx = e.changedTouches[0].clientX - startX;
-                const dy = e.changedTouches[0].clientY - startY;
-                if (Math.abs(dx) < 60 || Math.abs(dy) > Math.abs(dx) * 0.8) return;
-                const current = document.querySelector('.day-view.active');
-                if (!current) return;
-                const idx = views.indexOf(current.id);
-                if (dx < 0 && idx < views.length - 1) switchView(views[idx + 1]);
-                else if (dx > 0 && idx > 0) switchView(views[idx - 1]);
-            }, { passive: true });
+            // Swipe gesture removed - was interfering with map interaction
         })();
 
         initializePage();
