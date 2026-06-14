@@ -1405,6 +1405,34 @@
                     passengers: ["JC", "Maria"]
                 },
                 {
+                    date: "Jul 8", dayOfWeek: "Mié", airline: "Copa Airlines CM338",
+                    from: "LIM", to: "PTY", departTime: "02:15", arriveTime: "06:05",
+                    terminal: "Lima Jorge Chávez → Panamá Tocumén",
+                    info: "Economy · Conexión en Panamá para SJU · Solo JC",
+                    passengers: ["JC"]
+                },
+                {
+                    date: "Jul 8", dayOfWeek: "Mié", airline: "Copa Airlines CM142",
+                    from: "PTY", to: "SJU", departTime: "12:21", arriveTime: "16:14",
+                    terminal: "Panamá Tocumén → San Juan Terminal C",
+                    info: "Economy · Solo JC",
+                    passengers: ["JC"]
+                },
+                {
+                    date: "Jul 12", dayOfWeek: "Dom", airline: "Copa Airlines CM143",
+                    from: "SJU", to: "PTY", departTime: "17:15", arriveTime: "20:13",
+                    terminal: "San Juan Terminal C → Panamá Tocumén",
+                    info: "Economy · Conexión en Panamá para LIM · Solo JC",
+                    passengers: ["JC"]
+                },
+                {
+                    date: "Jul 12", dayOfWeek: "Dom", airline: "Copa Airlines CM337",
+                    from: "PTY", to: "LIM", departTime: "22:00", arriveTime: "00:56 (+1)",
+                    terminal: "Panamá Tocumén → Lima Jorge Chávez",
+                    info: "Economy · Solo JC",
+                    passengers: ["JC"]
+                },
+                {
                     date: "Jul 12", dayOfWeek: "Dom", airline: "Iberia IB382",
                     from: "SJU", to: "MAD", departTime: "17:15", arriveTime: "07:30 (+1)",
                     terminal: "Terminal C SJU → T4S Madrid Barajas",
@@ -1811,15 +1839,15 @@
                 </div>
             </div>
 
-            <!-- Maps — add map div(s) here with id="mapXxx", then implement renderXxxMap() below -->
+            <!-- Maps — Rutas de cada día -->
             <div class="collapsible-section">
                 <div class="section-header">
-                    <h3>🗺️ Mapas</h3>
+                    <h3>🗺️ Mapas de Ruta</h3>
                     <div class="chevron"></div>
                 </div>
                 <div class="section-content">
-                    <div>
-                        <!-- Example: <div id="mapMain" style="height:400px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);"></div> -->
+                    <div id="mapsContainer">
+                        <!-- Routes will be loaded here -->
                     </div>
                 </div>
             </div>
@@ -2004,6 +2032,20 @@
                 `;
                 carRentalSection.style.display = '';
             }
+
+            // Maps — Render route maps for each day
+            const mapsContainer = document.getElementById('mapsContainer');
+            mapsContainer.innerHTML = TRIP_DATA.days
+                .filter(day => day.route)
+                .map(day => `
+                    <div style="margin-bottom: 16px; padding: 12px; background: var(--bg-secondary); border-radius: 6px;">
+                        <div style="font-weight: 600; margin-bottom: 8px;">Día ${day.dayNumber} - ${day.date} (${day.dayOfWeek}): ${day.title}</div>
+                        <a href="https://${day.route}" target="_blank" style="display: inline-block; padding: 8px 14px; background-color: var(--accent-gold); color: var(--bg-primary); border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; transition: var(--transition);" onmouseover="this.style.backgroundColor='#daa760'" onmouseout="this.style.backgroundColor='var(--accent-gold)'">
+                            📍 Ver Ruta en Google Maps →
+                        </a>
+                    </div>
+                `)
+                .join("");
 
             // Links (Spotify, Tricount, Download)
             const linksContent = document.getElementById('overviewLinksContent');
