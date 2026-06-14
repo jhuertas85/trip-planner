@@ -966,6 +966,13 @@
             margin-bottom: 8px;
         }
 
+        .flight-info {
+            color: var(--text-secondary);
+            font-size: 11px;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
         .flight-checkin {
             margin-top: 8px;
         }
@@ -1393,14 +1400,16 @@
                 {
                     date: "Jul 8", dayOfWeek: "Mié", airline: "Iberia IB381",
                     from: "MAD", to: "SJU", departTime: "12:45", arriveTime: "15:25",
-                    terminal: "T4S Madrid Barajas → Terminal C SJU · Economy · Meal incl. · JC & Maria (mismo vuelo · Maria recogida 7pm)",
+                    terminal: "T4S Madrid Barajas → Terminal C SJU",
+                    info: "Economy · Comida incluida · JC & Maria (mismo vuelo · Maria recogida 7pm)",
                     passengers: ["JC", "Maria"]
                 },
                 {
                     date: "Jul 12", dayOfWeek: "Dom", airline: "Iberia IB382",
                     from: "SJU", to: "MAD", departTime: "17:15", arriveTime: "07:30 (+1)",
-                    terminal: "Terminal C SJU → T4S Madrid Barajas · Economy · Meal incl. · No free checked baggage",
-                    passengers: ["Juan", "Maria"]
+                    terminal: "Terminal C SJU → T4S Madrid Barajas",
+                    info: "Economy · Comida incluida · Sin equipaje de mano gratis · JC & Maria",
+                    passengers: ["JC", "Maria"]
                 }
             ],
             days: [
@@ -1969,6 +1978,7 @@
                         <div class="flight-times">${f.from} → ${f.to}</div>
                         <div class="flight-times">${f.departTime}–${f.arriveTime}</div>
                         <div class="flight-terminal">${f.terminal}</div>
+                        ${f.info ? `<div class="flight-info">${f.info}</div>` : ''}
                         ${TRIP_DATA.checkInUrl ? `
                         <div class="flight-checkin">
                             <a href="${TRIP_DATA.checkInUrl}" target="_blank">Check-in en línea</a>
