@@ -1391,16 +1391,40 @@
 
             flights: [
                 {
-                    date: "Jul 8", dayOfWeek: "Mié", airline: "Iberia IB381",
-                    from: "MAD", to: "SJU", departTime: "12:45", arriveTime: "15:25",
-                    terminal: "T4S Madrid Barajas → Terminal C SJU · Economy · Meal incl. · No free checked baggage",
-                    passengers: ["Juan", "Maria"]
+                    date: "Jul 8", dayOfWeek: "Mié", airline: "Copa Airlines CM338",
+                    from: "LIM", to: "PTY", departTime: "02:15", arriveTime: "05:52",
+                    terminal: "Lima Jorge Chávez → Panamá Tocumén",
+                    passengers: ["JC"]
+                },
+                {
+                    date: "Jul 8", dayOfWeek: "Mié", airline: "Copa Airlines CM142",
+                    from: "PTY", to: "SJU", departTime: "12:21", arriveTime: "16:14",
+                    terminal: "Panamá Tocumén → San Juan Terminal C",
+                    passengers: ["JC"]
+                },
+                {
+                    date: "Jul 8", dayOfWeek: "Mié", airline: "Iberia IB379",
+                    from: "MAD", to: "SJU", departTime: "16:05", arriveTime: "18:40",
+                    terminal: "T4S Madrid Barajas → Terminal C SJU · Economy · Meal incl.",
+                    passengers: ["Maria"]
+                },
+                {
+                    date: "Jul 12", dayOfWeek: "Dom", airline: "Copa Airlines CM143",
+                    from: "SJU", to: "PTY", departTime: "17:17", arriveTime: "20:15",
+                    terminal: "San Juan Terminal C → Panamá Tocumén",
+                    passengers: ["JC"]
+                },
+                {
+                    date: "Jul 12", dayOfWeek: "Dom", airline: "Copa Airlines CM337",
+                    from: "PTY", to: "LIM", departTime: "22:00", arriveTime: "00:56 (+1)",
+                    terminal: "Panamá Tocumén → Lima Jorge Chávez",
+                    passengers: ["JC"]
                 },
                 {
                     date: "Jul 12", dayOfWeek: "Dom", airline: "Iberia IB382",
                     from: "SJU", to: "MAD", departTime: "17:15", arriveTime: "07:30 (+1)",
-                    terminal: "Terminal C SJU → T4S Madrid Barajas · Economy · Meal incl. · No free checked baggage",
-                    passengers: ["Juan", "Maria"]
+                    terminal: "Terminal C SJU → T4S Madrid Barajas · Economy · Meal incl.",
+                    passengers: ["Maria"]
                 }
             ],
             days: [
@@ -1410,9 +1434,10 @@
                     location: "Luquillo, Puerto Rico",
                     backgroundImage: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800",
                     flight: {
-                        airline: "Iberia IB381", from: "MAD", to: "SJU",
-                        departTime: "12:45", arriveTime: "15:25",
-                        terminal: "T4S Madrid Barajas → Terminal C SJU"
+                        airline: "Múltiples (Grupo Huertas-Chávez 12pm, JC Copa 4:14pm, Maria Iberia 6:40pm)",
+                        from: "MAD/LIM", to: "SJU",
+                        departTime: "Varios", arriveTime: "12pm–6:40pm",
+                        terminal: "Ver actividades para detalles"
                     },
                     hotel: {
                         name: "Villa Pitahaya · Airbnb, Luquillo",
@@ -1423,12 +1448,11 @@
                     },
                     drive: { from: "SJU Airport", to: "Luquillo House", duration: "~45–75 min", distance: "~50 km · Build buffer for traffic" },
                     activities: [
-                        { time: "12:00pm", text: "Compra de supermercado — abastecer la casa para 10 personas (agua, café, desayuno, snacks, hielo, bebidas)", subNote: "Parada antes de llegar a la casa · Supermercado en Luquillo o Río Grande · ~10–15 min de SJU", needsBooking: false },
-                        { time: "3:00pm", text: "Registro en la casa · Villa Pitahaya abre 3pm", subNote: "", needsBooking: false },
-                        { time: "12:00pm", text: "Primer grupo (Familia Huertas) llega SJU → Recogida Alamo, directo a la casa", subNote: "Pueden empezar a instalarse temprano, casa abierta desde las 12pm", needsBooking: false },
-                        { time: "3:25pm", text: "JC llega a SJU (IB381) → Recogida Alamo", subNote: "Alamo: 1er piso garage SJU · Sin shuttle — cruzar la calle desde reclamo · (833) 763-1735", needsBooking: false },
+                        { time: "12:00pm", text: "Grupo Huertas-Chávez llega SJU → Recogida Alamo, parada supermercado, directo a la casa", subNote: "Pueden empezar a instalarse temprano. Casa abierta desde las 12pm con early check-in.", needsBooking: false },
+                        { time: "3:00pm", text: "Check-in Casa · Villa Pitahaya", subNote: "Esperando JC y Grupo Huertas", needsBooking: false },
+                        { time: "4:14pm", text: "JC llega a SJU (Copa CM142) → Recogida Alamo", subNote: "Alamo: 1er piso garage SJU · Sin shuttle — cruzar la calle desde reclamo · (833) 763-1735", needsBooking: false },
                         { time: "4:00pm", text: "Grupo Huertas llega SJU → Recogida Alamo, directo a la casa", subNote: "", needsBooking: false },
-                        { time: "7:00pm", text: "María llega — recogerla en SJU", subNote: "Una vez todos en casa: instalarse, comer, descansar. Sin grandes planes esta noche.", needsBooking: false }
+                        { time: "6:40pm", text: "María llega — recogerla en SJU (Iberia IB379)", subNote: "Una vez todos en casa: instalarse, comer, descansar. Sin grandes planes esta noche.", needsBooking: false }
                     ],
                     meals: {
                         breakfast: { status: "flexible", note: "Comida de aeropuerto o snacks en ruta", restaurants: [] },
