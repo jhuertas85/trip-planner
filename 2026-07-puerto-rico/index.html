@@ -1487,7 +1487,7 @@
                             ]
                         }
                     },
-                    route: "maps.google.com/maps/?q=Villa+Pitahaya+Luquillo+Puerto+Rico",
+                    route: "https://www.google.com/maps/?q=Villa+Pitahaya+Luquillo+Puerto+Rico",
                     warnings: [
                         "⏱ SJU → Luquillo: ~45 min sin tráfico, hasta 1h15 con tráfico — margen para cada recogida",
                         "💵 Efectivo AHORA: lancha bahía bio solo efectivo, muchos kioskos también. Suficiente para toda la semana.",
@@ -1541,7 +1541,7 @@
                             restaurants: []
                         }
                     },
-                    route: "maps.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/El+Yunque+PR-191+Gate/Laguna+Grande+Fajardo+Puerto+Rico",
+                    route: "https://www.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/El+Yunque+PR-191+Gate/Laguna+Grande+Fajardo+Puerto+Rico",
                     warnings: [
                         "🌳 Portón El Yunque: 8am–5pm, tope ~200 carros — llegar a apertura o riesgo de no entrar",
                         "🚫 SIN Uber dentro El Yunque — sin puntos recogida. Manejen ustedes en ambos carros.",
@@ -1599,7 +1599,7 @@
                             ]
                         }
                     },
-                    route: "maps.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/Hacienda+Carabali+Luquillo+Puerto+Rico/Luquillo+Beach+Puerto+Rico",
+                    route: "https://www.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/Hacienda+Carabali+Luquillo+Puerto+Rico/Luquillo+Beach+Puerto+Rico",
                     warnings: [
                         "📅 RESERVAR CARABALÍ CON ANTICIPACIÓN — ATV/UTV + cabalgatas. Llegar 45 min antes para check-in.",
                         "👟 Zapatos cerrados + pantalón largo OBLIGATORIO para caballos ATVs (se exige — chancletas = no montan)",
@@ -1653,7 +1653,7 @@
                             restaurants: []
                         }
                     },
-                    route: "maps.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/Ballaja+Garage+Old+San+Juan+San+Juan+Puerto+Rico",
+                    route: "https://www.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/Ballaja+Garage+Old+San+Juan+San+Juan+Puerto+Rico",
                     warnings: [
                         "🅿️ Estacionarse SOLO en garage Ballajá (techado, junto El Morro) — calles VSJ un sentido, estrechas, pocas plazas",
                         "💳 Fortalezas SIN EFECTIVO — llevar tarjeta. $10/adulto, gratis menores 16. Boleto cubre ambas fortalezas 24h.",
@@ -1706,7 +1706,7 @@
                         },
                         dinner: { status: "flexible", note: "Terminal SJU tiene opciones comida, o comida vuelo IB382 (comida incluida Iberia largo alcance)", restaurants: [] }
                     },
-                    route: "maps.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/Luis+Munoz+Marin+International+Airport+San+Juan+Puerto+Rico",
+                    route: "https://www.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/Luis+Munoz+Marin+International+Airport+San+Juan+Puerto+Rico",
                     warnings: [
                         "✈️ Juan y María: IB382 sale Terminal C 17:15 — devolver Alamo 3pm, sin margen después 12pm checkout",
                         "🚗 Devolución Alamo: SJU Dom Jul 12 antes 3:00pm · (833) 763-1735 · Llenar gasolina ANTES aeropuerto",
@@ -2040,7 +2040,7 @@
                 .map(day => `
                     <div style="margin-bottom: 16px; padding: 12px; background: var(--bg-secondary); border-radius: 6px;">
                         <div style="font-weight: 600; margin-bottom: 8px;">Día ${day.dayNumber} - ${day.date} (${day.dayOfWeek}): ${day.title}</div>
-                        <a href="https://${day.route}" target="_blank" style="display: inline-block; padding: 8px 14px; background-color: var(--accent-gold); color: var(--bg-primary); border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; transition: var(--transition);" onmouseover="this.style.backgroundColor='#daa760'" onmouseout="this.style.backgroundColor='var(--accent-gold)'">
+                        <a href="${day.route}" target="_blank" style="display: inline-block; padding: 8px 14px; background-color: var(--accent-gold); color: var(--bg-primary); border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; transition: var(--transition);" onmouseover="this.style.backgroundColor='#daa760'" onmouseout="this.style.backgroundColor='var(--accent-gold)'">
                             📍 Ver Ruta en Google Maps →
                         </a>
                     </div>
@@ -2225,7 +2225,7 @@
             if (day.route) {
                 html += `
                     <div class="card">
-                        <a href="https://${day.route}" target="_blank" style="color: var(--accent-gold); text-decoration: none;">
+                        <a href="${day.route}" target="_blank" style="color: var(--accent-gold); text-decoration: none;">
                             📍 Ver Ruta en Google Maps →
                         </a>
                     </div>
