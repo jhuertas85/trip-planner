@@ -1,1 +1,2845 @@
-PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CiAgICA8bWV0YSBjaGFyc2V0PSJVVEYtOCI+CiAgICA8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCI+CiAgICA8dGl0bGU+UHVlcnRvIFJpY28g8J+MtCDCtyBKdWx5IDIwMjY8L3RpdGxlPgogICAgPGxpbmsgcmVsPSJpY29uIiBocmVmPSIuLi9mYXZpY29uLnBuZyIgdHlwZT0iaW1hZ2UvcG5nIiAvPgogICAgPGxpbmsgcmVsPSJhcHBsZS10b3VjaC1pY29uIiBocmVmPSIuLi9mYXZpY29uLnBuZyIgLz4KICAgIDxsaW5rIGhyZWY9Imh0dHBzOi8vZm9udHMuZ29vZ2xlYXBpcy5jb20vY3NzMj9mYW1pbHk9Q29ybW9yYW50K0dhcmFtb25kOndnaHRANDAwOzYwMDs3MDAmZmFtaWx5PURNK1NhbnM6d2dodEA0MDA7NTAwOzYwMCZkaXNwbGF5PXN3YXAiIHJlbD0ic3R5bGVzaGVldCIgbWVkaWE9InByaW50IiBvbmxvYWQ9InRoaXMubWVkaWE9J2FsbCciPgogICAgPHN0eWxlPgogICAgICAgICogewogICAgICAgICAgICBtYXJnaW46IDA7CiAgICAgICAgICAgIHBhZGRpbmc6IDA7CiAgICAgICAgICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7CiAgICAgICAgfQoKICAgICAgICA6cm9vdCB7CiAgICAgICAgICAgIC0tYmctcHJpbWFyeTogIzBEMEIwODsKICAgICAgICAgICAgLS1iZy1zZWNvbmRhcnk6ICMyMTFDMTY7CiAgICAgICAgICAgIC0tYmctdGVydGlhcnk6ICMyYTI0MWE7CiAgICAgICAgICAgIC0tYm9yZGVyLWNvbG9yOiAjMzUyRDIyOwogICAgICAgICAgICAtLXRleHQtcHJpbWFyeTogI0VERTREMzsKICAgICAgICAgICAgLS10ZXh0LXNlY29uZGFyeTogIzdBNkU1RTsKICAgICAgICAgICAgLS10ZXh0LW11dGVkOiAjOEE3RTZFOwogICAgICAgICAgICAtLWFjY2VudC1nb2xkOiAjQzk5NjZBOwogICAgICAgICAgICAtLWFjY2VudC10ZXJyYWNvdHRhOiAjQzQ1MTFBOwogICAgICAgICAgICAtLXRyYW5zaXRpb246IGFsbCAwLjNzIGVhc2U7CiAgICAgICAgfQoKICAgICAgICBib2R5IHsKICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tYmctcHJpbWFyeSk7CiAgICAgICAgICAgIGNvbG9yOiB2YXIoLS10ZXh0LXByaW1hcnkpOwogICAgICAgICAgICBmb250LWZhbWlseTogJ0RNIFNhbnMnLCBzYW5zLXNlcmlmOwogICAgICAgICAgICBsaW5lLWhlaWdodDogMS42OwogICAgICAgIH0KCiAgICAgICAgYm9keS5saWdodC1tb2RlIHsKICAgICAgICAgICAgLS1iZy1wcmltYXJ5OiAjRjVGMEU4OwogICAgICAgICAgICAtLWJnLXNlY29uZGFyeTogI0ZGRkZGRjsKICAgICAgICAgICAgLS1iZy10ZXJ0aWFyeTogI0Y5RjVGMDsKICAgICAgICAgICAgLS1ib3JkZXItY29sb3I6ICNFMEQ1QzU7CiAgICAgICAgICAgIC0tdGV4dC1wcmltYXJ5OiAjMkEyMzE4OwogICAgICAgICAgICAtLXRleHQtc2Vjb25kYXJ5OiAjOEE3RTZFOwogICAgICAgICAgICAtLXRleHQtbXV0ZWQ6ICM4QTdFNkU7CiAgICAgICAgfQoKICAgICAgICBoMSwgaDIsIGgzLCBoNCwgaDUsIGg2IHsKICAgICAgICAgICAgZm9udC1mYW1pbHk6ICdDb3Jtb3JhbnQgR2FyYW1vbmQnLCBzZXJpZjsKICAgICAgICAgICAgZm9udC13ZWlnaHQ6IDYwMDsKICAgICAgICB9CgogICAgICAgIC5jb250YWluZXIgewogICAgICAgICAgICBtYXgtd2lkdGg6IDY0MHB4OwogICAgICAgICAgICBtYXJnaW46IDAgYXV0bzsKICAgICAgICAgICAgcGFkZGluZzogMCAxNnB4OwogICAgICAgIH0KCiAgICAgICAgLyogSEVBREVSICovCiAgICAgICAgaGVhZGVyIHsKICAgICAgICAgICAgcG9zaXRpb246IHN0aWNreTsKICAgICAgICAgICAgdG9wOiAwOwogICAgICAgICAgICBib3JkZXItYm90dG9tOiAycHggc29saWQgdmFyKC0tYm9yZGVyLWNvbG9yKTsKICAgICAgICAgICAgcGFkZGluZzogMTBweCAwOwogICAgICAgICAgICB6LWluZGV4OiAyMDAwOwogICAgICAgICAgICBiYWNrZHJvcC1maWx0ZXI6IGJsdXIoOHB4KTsKICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgzMywgMjgsIDIyLCAwLjk1KTsKICAgICAgICAgICAgdHJhbnNpdGlvbjogdmFyKC0tdHJhbnNpdGlvbik7CiAgICAgICAgfQoKICAgICAgICBib2R5LmxpZ2h0LW1vZGUgaGVhZGVyIHsKICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyNTUsIDI1NSwgMjU1LCAwLjk1KTsKICAgICAgICAgICAgYm94LXNoYWRvdzogMCAycHggOHB4IHJnYmEoMCwgMCwgMCwgMC4wNik7CiAgICAgICAgfQoKICAgICAgICAuaGVhZGVyLWNvbnRlbnQgewogICAgICAgICAgICBtYXgtd2lkdGg6IDY0MHB4OwogICAgICAgICAgICBtYXJnaW46IDAgYXV0bzsKICAgICAgICAgICAgcGFkZGluZzogMCAxNnB4OwogICAgICAgICAgICBkaXNwbGF5OiBmbGV4OwogICAgICAgICAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47CiAgICAgICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7CiAgICAgICAgICAgIGdhcDogOHB4OwogICAgICAgIH0KCiAgICAgICAgLmhlYWRlci10aXRsZSB7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMjBweDsKICAgICAgICAgICAgZm9udC13ZWlnaHQ6IDcwMDsKICAgICAgICAgICAgY29sb3I6IHZhcigtLWFjY2VudC1nb2xkKTsKICAgICAgICAgICAgZmxleDogMTsKICAgICAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyOwogICAgICAgICAgICB3aGl0ZS1zcGFjZTogbm93cmFwOwogICAgICAgICAgICBvdmVyZmxvdzogaGlkZGVuOwogICAgICAgICAgICB0ZXh0LW92ZXJmbG93OiBlbGxpcHNpczsKICAgICAgICB9CgogICAgICAgIC5vdmVydmlldy1idG4gewogICAgICAgICAgICBiYWNrZ3JvdW5kOiBub25lOwogICAgICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1ib3JkZXItY29sb3IpOwogICAgICAgICAgICBjb2xvcjogdmFyKC0tdGV4dC1zZWNvbmRhcnkpOwogICAgICAgICAgICBmb250LXNpemU6IDEycHg7CiAgICAgICAgICAgIGZvbnQtd2VpZ2h0OiA1MDA7CiAgICAgICAgICAgIGN1cnNvcjogcG9pbnRlcjsKICAgICAgICAgICAgcGFkZGluZzogNXB4IDhweDsKICAgICAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4OwogICAgICAgICAgICB0cmFuc2l0aW9uOiB2YXIoLS10cmFuc2l0aW9uKTsKICAgICAgICAgICAgd2hpdGUtc3BhY2U6IG5vd3JhcDsKICAgICAgICAgICAgZmxleC1zaHJpbms6IDA7CiAgICAgICAgfQoKICAgICAgICAub3ZlcnZpZXctYnRuOmhvdmVyIHsKICAgICAgICAgICAgYm9yZGVyLWNvbG9yOiB2YXIoLS1hY2NlbnQtZ29sZCk7CiAgICAgICAgICAgIGNvbG9yOiB2YXIoLS1hY2NlbnQtZ29sZCk7CiAgICAgICAgfQoKICAgICAgICAudGhlbWUtdG9nZ2xlIHsKICAgICAgICAgICAgYmFja2dyb3VuZDogbm9uZTsKICAgICAgICAgICAgYm9yZGVyOiBub25lOwogICAgICAgICAgICBjb2xvcjogdmFyKC0tdGV4dC1wcmltYXJ5KTsKICAgICAgICAgICAgZm9udC1zaXplOiAxOHB4OwogICAgICAgICAgICBjdXJzb3I6IHBvaW50ZXI7CiAgICAgICAgICAgIHBhZGRpbmc6IDVweDsKICAgICAgICAgICAgZGlzcGxheTogZmxleDsKICAgICAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjsKICAgICAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7CiAgICAgICAgICAgIHRyYW5zaXRpb246IHZhcigtLXRyYW5zaXRpb24pOwogICAgICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7CiAgICAgICAgICAgIGZsZXgtc2hyaW5rOiAwOwogICAgICAgIH0KCiAgICAgICAgLnRoZW1lLXRvZ2dsZTpob3ZlciB7CiAgICAgICAgICAgIGNvbG9yOiB2YXIoLS1hY2NlbnQtZ29sZCk7CiAgICAgICAgICAgIHRyYW5zZm9ybTogc2NhbGUoMS4xKTsKICAgICAgICB9CgogICAgICAgIC5kYXktdGFicyB7CiAgICAgICAgICAgIGRpc3BsYXk6IGZsZXg7CiAgICAgICAgICAgIG92ZXJmbG93LXg6IGF1dG87CiAgICAgICAgICAgIGdhcDogOHB4OwogICAgICAgICAgICBwYWRkaW5nLWJvdHRvbTogOHB4OwogICAgICAgICAgICBzY3JvbGwtYmVoYXZpb3I6IHNtb290aDsKICAgICAgICAgICAgbWFyZ2luLXRvcDogMTJweDsKICAgICAgICB9CgogICAgICAgIC5kYXktdGFiczotd2Via2l0LXNjcm9sbGJhciB7CiAgICAgICAgICAgIGhlaWdodDogNHB4OwogICAgICAgIH0KCiAgICAgICAgLmRheS10YWJzOi13ZWJraXQtc2Nyb2xsYmFyLXRyYWNrIHsKICAgICAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tYmctdGVydGlhcnkpOwogICAgICAgIH0KCiAgICAgICAgLmRheS10YWJzOi13ZWJraXQtc2Nyb2xsYmFyLXRodW1iIHsKICAgICAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tdGV4dC1tdXRlZCk7CiAgICAgICAgICAgIGJvcmRlci1yYWRpdXM6IDJweDsKICAgICAgICB9CgogICAgICAgIC5kYXktdGFiIHsKICAgICAgICAgICAgcGFkZGluZzogOHB4IDEycHg7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWJnLXRlcnRpYXJ5KTsKICAgICAgICAgICAgYm9yZGVyOiAycHggc29saWQgdmFyKC0tYm9yZGVyLWNvbG9yKTsKICAgICAgICAgICAgYm9yZGVyLXJhZGl1czogNnB4OwogICAgICAgICAgICBjdXJzb3I6IHBvaW50ZXI7CiAgICAgICAgICAgIHRyYW5zaXRpb246IHZhcigtLXRyYW5zaXRpb24pOwogICAgICAgICAgICB3aGl0ZS1zcGFjZTogbm93cmFwOwogICAgICAgICAgICBmb250LXNpemU6IDEycHg7CiAgICAgICAgICAgIGNvbG9yOiB2YXIoLS10ZXh0LXNlY29uZGFyeSk7CiAgICAgICAgICAgIGZvbnQtd2VpZ2h0OiA1MDA7CiAgICAgICAgICAgIHRleHQtYWxpZ246IGNlbnRlcjsKICAgICAgICAgICAgbGluZS1oZWlnaHQ6IDEuMzsKICAgICAgICB9CgogICAgICAgIC5kYXktdGFiOmhvdmVyIHsKICAgICAgICAgICAgYm9yZGVyLWNvbG9yOiB2YXIoLS10ZXh0LXNlY29uZGFyeSk7CiAgICAgICAgICAgIGNvbG9yOiB2YXIoLS1hY2NlbnQtZ29sZCk7CiAgICAgICAgfQoKICAgICAgICAuZGF5LXRhYi5hY3RpdmUgewogICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1hY2NlbnQtZ29sZCk7CiAgICAgICAgICAgIGJvcmRlci1jb2xvcjogdmFyKC0tYWNjZW50LWdvbGQpOwogICAgICAgICAgICBjb2xvcjogdmFyKC0tYmctcHJpbWFyeSk7CiAgICAgICAgICAgIGZvbnQtd2VpZ2h0OiA2MDA7CiAgICAgICAgfQoKICAgICAgICAuZGF5LXRhYi5oYXMtbWlzc2luZyB7CiAgICAgICAgICAgIGJvcmRlci1jb2xvcjogIzhBM0EzQTsKICAgICAgICB9CgogICAgICAgIC8qIE1BSU4gQ09OVEVOVCAqLwogICAgICAgIG1haW4gewogICAgICAgICAgICBwYWRkaW5nOiAyNHB4IDA7CiAgICAgICAgfQoKICAgICAgICAuZGF5LXZpZXcgewogICAgICAgICAgICBkaXNwbGF5OiBub25lOwogICAgICAgICAgICBhbmltYXRpb246IGZhZGVJbiAwLjRzIGVhc2UtaW47CiAgICAgICAgfQoKICAgICAgICAuZGF5LXZpZXcuYWN0aXZlIHsKICAgICAgICAgICAgZGlzcGxheTogYmxvY2s7CiAgICAgICAgfQoKICAgICAgICBAa2V5ZnJhbWVzIGZhZGVJbiB7CiAgICAgICAgICAgIGZyb20geyBvcGFjaXR5OiAwOyB9CiAgICAgICAgICAgIHRvIHsgb3BhY2l0eTogMTsgfQogICAgICAgIH0KCiAgICAgICAgLyogSEVSTyBTRUNUSU9OICovCiAgICAgICAgLmhlcm8gewogICAgICAgICAgICBwYWRkaW5nOiAxNnB4IDE2cHg7CiAgICAgICAgICAgIGJvcmRlci1yYWRpdXM6IDEycHg7CiAgICAgICAgICAgIG1hcmdpbi1ib3R0b206IDI0cHg7CiAgICAgICAgICAgIHRleHQtYWxpZ246IGNlbnRlcjsKICAgICAgICAgICAgcG9zaXRpb246IHJlbGF0aXZlOwogICAgICAgICAgICBvdmVyZmxvdzogaGlkZGVuOwogICAgICAgICAgICBiYWNrZ3JvdW5kLXNpemU6IGNvdmVyOwogICAgICAgICAgICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBjZW50ZXI7CiAgICAgICAgfQoKICAgICAgICAuaGVybzo6YmVmb3JlIHsKICAgICAgICAgICAgY29udGVudDogJyc7CiAgICAgICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICAgICAgICAgICAgdG9wOiAwOwogICAgICAgICAgICBsZWZ0OiAwOwogICAgICAgICAgICByaWdodDogMDsKICAgICAgICAgICAgYm90dG9tOiAwOwogICAgICAgICAgICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7CiAgICAgICAgICAgIHotaW5kZXg6IDE7CiAgICAgICAgfQoKICAgICAgICAuaGVyby1kYXktbnVtYmVyIHsKICAgICAgICAgICAgZm9udC1zaXplOiAyOHB4OwogICAgICAgICAgICBmb250LXdlaWdodDogNzAwOwogICAgICAgICAgICBjb2xvcjogdmFyKC0tYWNjZW50LWdvbGQpOwogICAgICAgICAgICBvcGFjaXR5OiAwLjc7CiAgICAgICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICAgICAgICAgICAgdG9wOiAxMHB4OwogICAgICAgICAgICBsZWZ0OiAxNHB4OwogICAgICAgICAgICB6LWluZGV4OiAyOwogICAgICAgICAgICB0ZXh0LXNoYWRvdzogMCAycHggMTVweCByZ2JhKDAsIDAsIDAsIDAuOSksIDAgMCA1MHB4IHJnYmEoMCwgMCwgMCwgMC43KTsKICAgICAgICAgICAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAwLjQpOwogICAgICAgICAgICBwYWRkaW5nOiAycHggOXB4OwogICAgICAgICAgICBib3JkZXItcmFkaXVzOiA2cHg7CiAgICAgICAgICAgIGRpc3BsYXk6IGlubGluZS1ibG9jazsKICAgICAgICB9CgogICAgICAgIC5oZXJvLXRpdGxlIHsKICAgICAgICAgICAgZm9udC1zaXplOiAyMnB4OwogICAgICAgICAgICBmb250LXdlaWdodDogNzAwOwogICAgICAgICAgICBjb2xvcjogdmFyKC0tdGV4dC1wcmltYXJ5KTsKICAgICAgICAgICAgbWFyZ2luLWJvdHRvbTogNHB4OwogICAgICAgICAgICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgICAgICAgICAgIHotaW5kZXg6IDI7CiAgICAgICAgfQoKICAgICAgICAuaGVyby1sb2NhdGlvbiB7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDsKICAgICAgICAgICAgY29sb3I6IHZhcigtLWFjY2VudC1nb2xkKTsKICAgICAgICAgICAgZGlzcGxheTogZmxleDsKICAgICAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjsKICAgICAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7CiAgICAgICAgICAgIGdhcDogOHB4OwogICAgICAgICAgICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgICAgICAgICAgIHotaW5kZXg6IDI7CiAgICAgICAgfQoKICAgICAgICAuaGVyby1sb2NhdGlvbjo6YmVmb3JlIHsKICAgICAgICAgICAgY29udGVudDogJ/CfjY0nOwogICAgICAgIH0KCiAgICAgICAgLyogQ0FSRFMgKi8KICAgICAgICAuY2FyZCB7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWJnLXNlY29uZGFyeSk7CiAgICAgICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWJvcmRlci1jb2xvcik7CiAgICAgICAgICAgIGJvcmRlci1yYWRpdXM6IDhweDsKICAgICAgICAgICAgcGFkZGluZzogMjBweDsKICAgICAgICAgICAgbWFyZ2luLWJvdHRvbTogMTZweDsKICAgICAgICAgICAgdHJhbnNpdGlvbjogdmFyKC0tdHJhbnNpdGlvbik7CiAgICAgICAgfQoKICAgICAgICBib2R5LmxpZ2h0LW1vZGUgLmNhcmQgewogICAgICAgICAgICBib3gtc2hhZG93OiAwIDFweCAzcHggcmdiYSgwLCAwLCAwLCAwLjA4KTsKICAgICAgICB9CgogICAgICAgIC5jYXJkOmhvdmVyIHsKICAgICAgICAgICAgYm9yZGVyLWNvbG9yOiB2YXIoLS1hY2NlbnQtZ29sZCk7CiAgICAgICAgfQoKICAgICAgICAuY2FyZC10aXRsZSB7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMThweDsKICAgICAgICAgICAgZm9udC13ZWlnaHQ6IDYwMDsKICAgICAgICAgICAgY29sb3I6IHZhcigtLWFjY2VudC1nb2xkKTsKICAgICAgICAgICAgbWFyZ2luLWJvdHRvbTogMTJweDsKICAgICAgICB9CgogICAgICAgIC5jYXJkLXN1YnRpdGxlIHsKICAgICAgICAgICAgZm9udC1zaXplOiAxNHB4OwogICAgICAgICAgICBjb2xvcjogdmFyKC0tdGV4dC1zZWNvbmRhcnkpOwogICAgICAgICAgICBtYXJnaW4tYm90dG9tOiAxMnB4OwogICAgICAgIH0KCiAgICAgICAgLyogU0VDVElPTiBDT0xMQVBTSUJMRSAqLwogICAgICAgIC5jb2xsYXBzaWJsZS1zZWN0aW9uIHsKICAgICAgICAgICAgbWFyZ2luLWJvdHRvbTogMTZweDsKICAgICAgICB9CgogICAgICAgIC5zZWN0aW9uLWhlYWRlciB7CiAgICAgICAgICAgIGRpc3BsYXk6IGZsZXg7CiAgICAgICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7CiAgICAgICAgICAgIGdhcDogMTJweDsKICAgICAgICAgICAgY3Vyc29yOiBwb2ludGVyOwogICAgICAgICAgICBwYWRkaW5nOiAxMnB4IDE2cHg7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWJnLXRlcnRpYXJ5KTsKICAgICAgICAgICAgYm9yZGVyLXJhZGl1czogNnB4IDZweCAwIDA7CiAgICAgICAgICAgIHRyYW5zaXRpb246IHZhcigtLXRyYW5zaXRpb24pOwogICAgICAgICAgICBib3JkZXItbGVmdDogM3B4IHNvbGlkIHRyYW5zcGFyZW50OwogICAgICAgIH0KCiAgICAgICAgLnNlY3Rpb24taGVhZGVyOmhvdmVyIHsKICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyMDEsIDE1MCwgMTA2LCAwLjEpOwogICAgICAgIH0KCiAgICAgICAgLnNlY3Rpb24taGVhZGVyIGgzIHsKICAgICAgICAgICAgZmxleDogMTsKICAgICAgICAgICAgZm9udC1zaXplOiAxNnB4OwogICAgICAgICAgICBjb2xvcjogdmFyKC0tYWNjZW50LWdvbGQpOwogICAgICAgICAgICBtYXJnaW46IDA7CiAgICAgICAgfQoKICAgICAgICAuY2hldnJvbiB7CiAgICAgICAgICAgIHdpZHRoOiAyMHB4OwogICAgICAgICAgICBoZWlnaHQ6IDIwcHg7CiAgICAgICAgICAgIGRpc3BsYXk6IGZsZXg7CiAgICAgICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7CiAgICAgICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyOwogICAgICAgICAgICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4zcyBlYXNlOwogICAgICAgIH0KCiAgICAgICAgLmNoZXZyb246OmFmdGVyIHsKICAgICAgICAgICAgY29udGVudDogJ+KWvic7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMTJweDsKICAgICAgICAgICAgY29sb3I6IHZhcigtLWFjY2VudC1nb2xkKTsKICAgICAgICAgICAgZGlzcGxheTogaW5saW5lLWJsb2NrOwogICAgICAgICAgICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4zcyBlYXNlOwogICAgICAgIH0KCiAgICAgICAgLnNlY3Rpb24taGVhZGVyLmNvbGxhcHNlZCAuY2hldnJvbjo6YWZ0ZXIgewogICAgICAgICAgICB0cmFuc2Zvcm06IHJvdGF0ZSgtOTBkZWcpOwogICAgICAgIH0KCiAgICAgICAgLnNlY3Rpb24tY29udGVudCB7CiAgICAgICAgICAgIG1heC1oZWlnaHQ6IDUwMDBweDsKICAgICAgICAgICAgb3ZlcmZsb3c6IGhpZGRlbjsKICAgICAgICAgICAgdHJhbnNpdGlvbjogbWF4LWhlaWdodCAwLjNzIGVhc2UsIG9wYWNpdHkgMC4zcyBlYXNlOwogICAgICAgICAgICBvcGFjaXR5OiAxOwogICAgICAgICAgICBwYWRkaW5nOiAwOwogICAgICAgICAgICBib3JkZXItcmFkaXVzOiAwIDAgNnB4IDZweDsKICAgICAgICB9CgogICAgICAgIC5zZWN0aW9uLWNvbnRlbnQuY29sbGFwc2VkIHsKICAgICAgICAgICAgbWF4LWhlaWdodDogMDsKICAgICAgICAgICAgb3BhY2l0eTogMDsKICAgICAgICAgICAgcGFkZGluZzogMDsKICAgICAgICB9CgogICAgICAgIC5zZWN0aW9uLWNvbnRlbnQgPiBkaXYgewogICAgICAgICAgICBwYWRkaW5nOiAxNnB4OwogICAgICAgIH0KCiAgICAgICAgLnNlY3Rpb24tZmxpZ2h0IHsKICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgzMCwgNjAsIDEwMCwgMC4yNSk7CiAgICAgICAgICAgIGJvcmRlci1sZWZ0OiAzcHggc29saWQgIzRBOEFCNTsKICAgICAgICB9CgogICAgICAgIC5zZWN0aW9uLWZsaWdodCAuc2VjdGlvbi1oZWFkZXIgewogICAgICAgICAgICBib3JkZXItbGVmdDogM3B4IHNvbGlkICM0QThBQjU7CiAgICAgICAgfQoKICAgICAgICAuc2VjdGlvbi1ob3RlbCB7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoODAsIDU1LCAzMCwgMC4yNSk7CiAgICAgICAgICAgIGJvcmRlci1sZWZ0OiAzcHggc29saWQgIzhCNkQ0NTsKICAgICAgICB9CgogICAgICAgIC5zZWN0aW9uLWhvdGVsIC5zZWN0aW9uLWhlYWRlciB7CiAgICAgICAgICAgIGJvcmRlci1sZWZ0OiAzcHggc29saWQgIzhCNkQ0NTsKICAgICAgICB9CgogICAgICAgIC5zZWN0aW9uLWFjdGl2aXRpZXMgewogICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDYwLCA3NSwgNDAsIDAuMik7CiAgICAgICAgICAgIGJvcmRlci1sZWZ0OiAzcHggc29saWQgIzdBOEE1MDsKICAgICAgICB9CgogICAgICAgIC5zZWN0aW9uLWFjdGl2aXRpZXMgLnNlY3Rpb24taGVhZGVyIHsKICAgICAgICAgICAgYm9yZGVyLWxlZnQ6IDNweCBzb2xpZCAjN0E4QTUwOwogICAgICAgIH0KCiAgICAgICAgLnNlY3Rpb24tbWVhbHMgewogICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDU1LCA2NSwgNDUsIDAuMjUpOwogICAgICAgICAgICBib3JkZXItbGVmdDogM3B4IHNvbGlkICM3QTg1NTA7CiAgICAgICAgfQoKICAgICAgICAuc2VjdGlvbi1tZWFscyAuc2VjdGlvbi1oZWFkZXIgewogICAgICAgICAgICBib3JkZXItbGVmdDogM3B4IHNvbGlkICM3QTg1NTA7CiAgICAgICAgfQoKICAgICAgICAuc2VjdGlvbi13YXJuaW5ncyB7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMTAwLCAzNSwgMzUsIDAuMik7CiAgICAgICAgICAgIGJvcmRlci1sZWZ0OiAzcHggc29saWQgI0FBNDQ0NDsKICAgICAgICB9CgogICAgICAgIC5zZWN0aW9uLXdhcm5pbmdzIC5zZWN0aW9uLWhlYWRlciB7CiAgICAgICAgICAgIGJvcmRlci1sZWZ0OiAzcHggc29saWQgI0FBNDQ0NDsKICAgICAgICB9CgogICAgICAgIC5zZWN0aW9uLWdlbXMgewogICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDEwMCwgODAsIDMwLCAwLjIpOwogICAgICAgICAgICBib3JkZXItbGVmdDogM3B4IHNvbGlkICNCODkwMzA7CiAgICAgICAgfQoKICAgICAgICAuc2VjdGlvbi1nZW1zIC5zZWN0aW9uLWhlYWRlciB7CiAgICAgICAgICAgIGJvcmRlci1sZWZ0OiAzcHggc29saWQgI0I4OTAzMDsKICAgICAgICB9CgogICAgICAgIGJvZHkubGlnaHQtbW9kZSAuc2VjdGlvbi1mbGlnaHQgewogICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDc0LCAxMzgsIDE4MSwgMC4xNSk7CiAgICAgICAgfQoKICAgICAgICBib2R5LmxpZ2h0LW1vZGUgLnNlY3Rpb24taG90ZWwgewogICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDEzOSwgMTA5LCA2OSwgMC4xNSk7CiAgICAgICAgfQoKICAgICAgICBib2R5LmxpZ2h0LW1vZGUgLnNlY3Rpb24tYWN0aXZpdGllcyB7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMTIyLCAxMzgsIDgwLCAwLjEyKTsKICAgICAgICB9CgogICAgICAgIGJvZHkubGlnaHQtbW9kZSAuc2VjdGlvbi1tZWFscyB7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMTIyLCAxMzMsIDgwLCAwLjE1KTsKICAgICAgICB9CgogICAgICAgIGJvZHkubGlnaHQtbW9kZSAuc2VjdGlvbi13YXJuaW5ncyB7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMTcwLCA2OCwgNjgsIDAuMTIpOwogICAgICAgIH0KCiAgICAgICAgYm9keS5saWdodC1tb2RlIC5zZWN0aW9uLWdlbXMgewogICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDE4NCwgMTQ0LCA0OCwgMC4xMik7CiAgICAgICAgfQoKICAgICAgICAuZXhwYW5kLWFsbC1jb250YWluZXIgewogICAgICAgICAgICBkaXNwbGF5OiBmbGV4OwogICAgICAgICAgICBnYXA6IDhweDsKICAgICAgICAgICAgbWFyZ2luLWJvdHRvbTogMTZweDsKICAgICAgICB9CgogICAgICAgIC5idG4tZXhwYW5kLWFsbCwgLmJ0bi1jb2xsYXBzZS1hbGwgewogICAgICAgICAgICBmbGV4OiAxOwogICAgICAgICAgICBwYWRkaW5nOiA2cHggMTBweDsKICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tYmctdGVydGlhcnkpOwogICAgICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1ib3JkZXItY29sb3IpOwogICAgICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7CiAgICAgICAgICAgIGNvbG9yOiB2YXIoLS10ZXh0LXNlY29uZGFyeSk7CiAgICAgICAgICAgIGN1cnNvcjogcG9pbnRlcjsKICAgICAgICAgICAgZm9udC1zaXplOiAxMXB4OwogICAgICAgICAgICBmb250LXdlaWdodDogNTAwOwogICAgICAgICAgICB0cmFuc2l0aW9uOiB2YXIoLS10cmFuc2l0aW9uKTsKICAgICAgICB9CgogICAgICAgIC5idG4tZXhwYW5kLWFsbDpob3ZlciwgLmJ0bi1jb2xsYXBzZS1hbGw6aG92ZXIgewogICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDIwMSwgMTUwLCAxMDYsIDAuMSk7CiAgICAgICAgICAgIGJvcmRlci1jb2xvcjogdmFyKC0tYWNjZW50LWdvbGQpOwogICAgICAgICAgICBjb2xvcjogdmFyKC0tYWNjZW50LWdvbGQpOwogICAgICAgIH0KCiAgICAgICAgLyogQkFER0VTICovCiAgICAgICAgLmJhZGdlIHsKICAgICAgICAgICAgZGlzcGxheTogaW5saW5lLWJsb2NrOwogICAgICAgICAgICBwYWRkaW5nOiA0cHggMTJweDsKICAgICAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4OwogICAgICAgICAgICBmb250LXNpemU6IDEycHg7CiAgICAgICAgICAgIGZvbnQtd2VpZ2h0OiA2MDA7CiAgICAgICAgICAgIG1hcmdpbi1yaWdodDogOHB4OwogICAgICAgICAgICBtYXJnaW4tYm90dG9tOiA4cHg7CiAgICAgICAgICAgIHRyYW5zaXRpb246IHZhcigtLXRyYW5zaXRpb24pOwogICAgICAgIH0KCiAgICAgICAgLmJhZGdlLnJlYWR5IHsKICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogIzRBODA1MDsKICAgICAgICAgICAgY29sb3I6ICM4REM4N0U7CiAgICAgICAgfQoKICAgICAgICAuYmFkZ2UubWlzc2luZyB7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6ICM4QTNBM0E7CiAgICAgICAgICAgIGNvbG9yOiAjRkY2QjZCOwogICAgICAgIH0KCiAgICAgICAgLmJhZGdlLm5lZWQtYm9va2luZyB7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6ICM5QTdBMzA7CiAgICAgICAgICAgIGNvbG9yOiAjRThDNjZFOwogICAgICAgIH0KCiAgICAgICAgLmJhZGdlLmNvbmZpcm1lZCB7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6ICM0QTgwNTA7CiAgICAgICAgICAgIGNvbG9yOiAjOERDODdFOwogICAgICAgIH0KCiAgICAgICAgLmJhZGdlLnBlbmRpbmcgewogICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjOUE3QTMwOwogICAgICAgICAgICBjb2xvcjogI0U4QzY2RTsKICAgICAgICB9CgogICAgICAgIC5iYWRnZS50by1ib29rIHsKICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogI0M0NTExQTsKICAgICAgICAgICAgY29sb3I6ICNGRkIzNjY7CiAgICAgICAgfQoKICAgICAgICAuYmFkZ2UuaW5jbHVkZWQgewogICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjM0E2ODc4OwogICAgICAgICAgICBjb2xvcjogIzdGQkZENDsKICAgICAgICB9CgogICAgICAgIC5iYWRnZS5vcHRpb25zIHsKICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogIzRhNDQ0MDsKICAgICAgICAgICAgY29sb3I6ICM5QThFN0U7CiAgICAgICAgfQoKICAgICAgICAvKiBEUklWRSBCQU5ORVIgKi8KICAgICAgICAuZHJpdmUtYmFubmVyIHsKICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tYmctdGVydGlhcnkpOwogICAgICAgICAgICBib3JkZXItbGVmdDogNHB4IHNvbGlkIHZhcigtLWFjY2VudC1nb2xkKTsKICAgICAgICAgICAgcGFkZGluZzogMTZweDsKICAgICAgICAgICAgbWFyZ2luLWJvdHRvbTogMTZweDsKICAgICAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4OwogICAgICAgICAgICBkaXNwbGF5OiBmbGV4OwogICAgICAgICAgICBhbGlnbi1pdGVtczogY2VudGVyOwogICAgICAgICAgICBnYXA6IDEycHg7CiAgICAgICAgICAgIHRyYW5zaXRpb246IHZhcigtLXRyYW5zaXRpb24pOwogICAgICAgIH0KCiAgICAgICAgLmRyaXZlLWJhbm5lcjo6YmVmb3JlIHsKICAgICAgICAgICAgY29udGVudDogJ/CfkqcnOwogICAgICAgICAgICBmb250LXNpemU6IDIwcHg7CiAgICAgICAgICAgIGZsZXgtc2hyaW5rOiAwOwogICAgICAgIH0KCiAgICAgICAgLmRyaXZlLWluZm8gewogICAgICAgICAgICBmbGV4OiAxOwogICAgICAgIH0KCiAgICAgICAgLmRyaXZlLXJvdXRlIHsKICAgICAgICAgICAgZm9udC13ZWlnaHQ6IDYwMDsKICAgICAgICAgICAgY29sb3I6IHZhcigtLXRleHQtcHJpbWFyeSk7CiAgICAgICAgICAgIG1hcmdpbi1ib3R0b206IDRweDsKICAgICAgICB9CgogICAgICAgIC5kcml2ZS1kdXJhdGlvbiB7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMTNweDsKICAgICAgICAgICAgY29sb3I6IHZhcigtLXRleHQtc2Vjb25kYXJ5KTsKICAgICAgICB9CgogICAgICAgIC8qIEZMSUdIVCBCQU5ORVIgKi8KICAgICAgICAuZmxpZ2h0LWJhbm5lciB7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWJnLXRlcnRpYXJ5KTsKICAgICAgICAgICAgYm9yZGVyLWxlZnQ6IDRweCBzb2xpZCAjM0E3REEwOwogICAgICAgICAgICBwYWRkaW5nOiAxNnB4OwogICAgICAgICAgICBtYXJnaW4tYm90dG9tOiAxNnB4OwogICAgICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7CiAgICAgICAgICAgIGRpc3BsYXk6IGZsZXg7CiAgICAgICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7CiAgICAgICAgICAgIGdhcDogMTJweDsKICAgICAgICAgICAgdHJhbnNpdGlvbjogdmFyKC0tdHJhbnNpdGlvbik7CiAgICAgICAgfQoKICAgICAgICAuZmxpZ2h0LWJhbm5lcjo6YmVmb3JlIHsKICAgICAgICAgICAgY29udGVudDogJ+KciO+4jyc7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMjBweDsKICAgICAgICAgICAgZmxleC1zaHJpbms6IDA7CiAgICAgICAgfQoKICAgICAgICAuZmxpZ2h0LWluZm8gewogICAgICAgICAgICBmbGV4OiAxOwogICAgICAgIH0KCiAgICAgICAgLmZsaWdodC1yb3V0ZSB7CiAgICAgICAgICAgIGZvbnQtd2VpZ2h0OiA2MDA7CiAgICAgICAgICAgIGNvbG9yOiB2YXIoLS10ZXh0LXByaW1hcnkpOwogICAgICAgICAgICBtYXJnaW4tYm90dG9tOiA0cHg7CiAgICAgICAgfQoKICAgICAgICAuZmxpZ2h0LWRldGFpbHMgewogICAgICAgICAgICBmb250LXNpemU6IDEzcHg7CiAgICAgICAgICAgIGNvbG9yOiB2YXIoLS10ZXh0LXNlY29uZGFyeSk7CiAgICAgICAgfQoKICAgICAgICAvKiBUSU1FTElORSAqLwogICAgICAgIC50aW1lbGluZSB7CiAgICAgICAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTsKICAgICAgICAgICAgcGFkZGluZy1sZWZ0OiAyMHB4OwogICAgICAgICAgICBib3JkZXItbGVmdDogMnB4IHNvbGlkIHZhcigtLWJvcmRlci1jb2xvcik7CiAgICAgICAgfQoKICAgICAgICAudGltZWxpbmUtaXRlbSB7CiAgICAgICAgICAgIHBhZGRpbmctYm90dG9tOiAxNnB4OwogICAgICAgICAgICBwYWRkaW5nLWxlZnQ6IDIwcHg7CiAgICAgICAgICAgIG1hcmdpbi1sZWZ0OiAtMjBweDsKICAgICAgICB9CgogICAgICAgIC50aW1lbGluZS10aW1lLWdyb3VwLWhlYWRlciB7CiAgICAgICAgICAgIGZvbnQtd2VpZ2h0OiA2MDA7CiAgICAgICAgICAgIGNvbG9yOiB2YXIoLS1hY2NlbnQtZ29sZCk7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMTVweDsKICAgICAgICAgICAgbWFyZ2luLWJvdHRvbTogOHB4OwogICAgICAgICAgICBtYXJnaW4tdG9wOiAxMnB4OwogICAgICAgICAgICBtYXJnaW4tbGVmdDogLTIwcHg7CiAgICAgICAgICAgIHBhZGRpbmctbGVmdDogMjBweDsKICAgICAgICB9CgogICAgICAgIC50aW1lbGluZS1pdGVtLWJ1bGxldCB7CiAgICAgICAgICAgIHBhZGRpbmctYm90dG9tOiA4cHg7CiAgICAgICAgICAgIG1hcmdpbi1sZWZ0OiAtMjBweDsKICAgICAgICAgICAgcGFkZGluZy1sZWZ0OiAyMHB4OwogICAgICAgIH0KCiAgICAgICAgLnRpbWVsaW5lLWl0ZW0tYnVsbGV0OjpiZWZvcmUgewogICAgICAgICAgICBjb250ZW50OiAn4oCiJzsKICAgICAgICAgICAgbWFyZ2luLXJpZ2h0OiA4cHg7CiAgICAgICAgICAgIGNvbG9yOiB2YXIoLS1hY2NlbnQtZ29sZCk7CiAgICAgICAgfQoKICAgICAgICAudGltZWxpbmUtdGltZSB7CiAgICAgICAgICAgIGZvbnQtd2VpZ2h0OiA2MDA7CiAgICAgICAgICAgIGNvbG9yOiB2YXIoLS1hY2NlbnQtZ29sZCk7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDsKICAgICAgICB9CgogICAgICAgIC50aW1lbGluZS10ZXh0IHsKICAgICAgICAgICAgY29sb3I6IHZhcigtLXRleHQtcHJpbWFyeSk7CiAgICAgICAgICAgIG1hcmdpbi10b3A6IDRweDsKICAgICAgICAgICAgZm9udC1zaXplOiAxNHB4OwogICAgICAgIH0KCiAgICAgICAgLnRpbWVsaW5lLW5vdGUgewogICAgICAgICAgICBmb250LXNpemU6IDEycHg7CiAgICAgICAgICAgIGNvbG9yOiB2YXIoLS10ZXh0LXNlY29uZGFyeSk7CiAgICAgICAgICAgIG1hcmdpbi10b3A6IDRweDsKICAgICAgICB9CgogICAgICAgIC50aW1lbGluZS10YWcgewogICAgICAgICAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6ICM4QTNBM0E7CiAgICAgICAgICAgIGNvbG9yOiAjRkY5OTk5OwogICAgICAgICAgICBwYWRkaW5nOiAycHggOHB4OwogICAgICAgICAgICBib3JkZXItcmFkaXVzOiAzcHg7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMTFweDsKICAgICAgICAgICAgZm9udC13ZWlnaHQ6IDYwMDsKICAgICAgICAgICAgbWFyZ2luLXRvcDogNnB4OwogICAgICAgIH0KCiAgICAgICAgLyogTUVBTFMgU0VDVElPTiAqLwogICAgICAgIC5tZWFscy1zZWN0aW9uIHsKICAgICAgICAgICAgbWFyZ2luLWJvdHRvbTogMjRweDsKICAgICAgICAgICAgcGFkZGluZzogMDsKICAgICAgICB9CgogICAgICAgIC5tZWFsLXR5cGUgewogICAgICAgICAgICBmb250LXdlaWdodDogNjAwOwogICAgICAgICAgICBjb2xvcjogdmFyKC0tYWNjZW50LWdvbGQpOwogICAgICAgICAgICBmb250LXNpemU6IDE1cHg7CiAgICAgICAgICAgIG1hcmdpbi1ib3R0b206IDhweDsKICAgICAgICAgICAgbWFyZ2luLXRvcDogMTZweDsKICAgICAgICAgICAgZGlzcGxheTogZmxleDsKICAgICAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjsKICAgICAgICAgICAgZ2FwOiA4cHg7CiAgICAgICAgfQoKICAgICAgICAubWVhbC10eXBlOjpiZWZvcmUgewogICAgICAgICAgICBjb250ZW50OiAn4oCiJzsKICAgICAgICB9CgogICAgICAgIC5tZWFsLXR5cGU6Zmlyc3QtY2hpbGQgewogICAgICAgICAgICBtYXJnaW4tdG9wOiAwOwogICAgICAgIH0KCiAgICAgICAgLm1lYWwtbm90ZSB7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDsKICAgICAgICAgICAgY29sb3I6IHZhcigtLXRleHQtcHJpbWFyeSk7CiAgICAgICAgICAgIG1hcmdpbi1ib3R0b206IDEycHg7CiAgICAgICAgICAgIHBhZGRpbmctbGVmdDogMTZweDsKICAgICAgICB9CgogICAgICAgIC5yZXN0YXVyYW50LWNhcmRzIHsKICAgICAgICAgICAgZGlzcGxheTogZmxleDsKICAgICAgICAgICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjsKICAgICAgICAgICAgZ2FwOiAxMnB4OwogICAgICAgICAgICBtYXJnaW4tdG9wOiA4cHg7CiAgICAgICAgICAgIG1hcmdpbi1ib3R0b206IDEycHg7CiAgICAgICAgICAgIHBhZGRpbmctbGVmdDogMTZweDsKICAgICAgICB9CgogICAgICAgIC5yZXN0YXVyYW50LWNhcmQgewogICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1iZy10ZXJ0aWFyeSk7CiAgICAgICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWJvcmRlci1jb2xvcik7CiAgICAgICAgICAgIGJvcmRlci1yYWRpdXM6IDZweDsKICAgICAgICAgICAgcGFkZGluZzogMTJweDsKICAgICAgICAgICAgY3Vyc29yOiBwb2ludGVyOwogICAgICAgICAgICB0cmFuc2l0aW9uOiB2YXIoLS10cmFuc2l0aW9uKTsKICAgICAgICB9CgogICAgICAgIC5yZXN0YXVyYW50LWNhcmQ6aG92ZXIgewogICAgICAgICAgICBib3JkZXItY29sb3I6IHZhcigtLXRleHQtc2Vjb25kYXJ5KTsKICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyMDEsIDE1MCwgMTA2LCAwLjA1KTsKICAgICAgICB9CgogICAgICAgIC5yZXN0YXVyYW50LWNhcmQuc2VsZWN0ZWQgewogICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjNEE4MDUwOwogICAgICAgICAgICBib3JkZXItY29sb3I6ICM3RkIwNkY7CiAgICAgICAgfQoKICAgICAgICAucmVzdGF1cmFudC1uYW1lIHsKICAgICAgICAgICAgZm9udC13ZWlnaHQ6IDYwMDsKICAgICAgICAgICAgY29sb3I6IHZhcigtLXRleHQtcHJpbWFyeSk7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDsKICAgICAgICB9CgogICAgICAgIC5yZXN0YXVyYW50LWNhcmQuc2VsZWN0ZWQgLnJlc3RhdXJhbnQtbmFtZSB7CiAgICAgICAgICAgIGNvbG9yOiAjOERDODdFOwogICAgICAgIH0KCiAgICAgICAgLnJlc3RhdXJhbnQtZGVzYyB7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMTJweDsKICAgICAgICAgICAgY29sb3I6IHZhcigtLXRleHQtc2Vjb25kYXJ5KTsKICAgICAgICAgICAgbWFyZ2luLXRvcDogNHB4OwogICAgICAgIH0KCiAgICAgICAgLnJlc3RhdXJhbnQtY2FyZC5zZWxlY3RlZCAucmVzdGF1cmFudC1kZXNjIHsKICAgICAgICAgICAgY29sb3I6ICNCOEQzQUY7CiAgICAgICAgfQoKICAgICAgICAucmVzdGF1cmFudC1tZXRhIHsKICAgICAgICAgICAgZGlzcGxheTogZmxleDsKICAgICAgICAgICAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuOwogICAgICAgICAgICBhbGlnbi1pdGVtczogY2VudGVyOwogICAgICAgICAgICBtYXJnaW4tdG9wOiA4cHg7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMTJweDsKICAgICAgICB9CgogICAgICAgIC5yZXN0YXVyYW50LXJhdGluZyB7CiAgICAgICAgICAgIGNvbG9yOiB2YXIoLS1hY2NlbnQtZ29sZCk7CiAgICAgICAgICAgIGZvbnQtd2VpZ2h0OiA2MDA7CiAgICAgICAgfQoKICAgICAgICAucmVzdGF1cmFudC1idXR0b25zIHsKICAgICAgICAgICAgZGlzcGxheTogZmxleDsKICAgICAgICAgICAgZ2FwOiA2cHg7CiAgICAgICAgICAgIG1hcmdpbi10b3A6IDhweDsKICAgICAgICB9CgogICAgICAgIC5idG4tc2VsZWN0LCAuYnRuLW1hcHMgewogICAgICAgICAgICBmbGV4OiAxOwogICAgICAgICAgICBwYWRkaW5nOiA2cHggOHB4OwogICAgICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1ib3JkZXItY29sb3IpOwogICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiB0cmFuc3BhcmVudDsKICAgICAgICAgICAgY29sb3I6IHZhcigtLWFjY2VudC1nb2xkKTsKICAgICAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4OwogICAgICAgICAgICBjdXJzb3I6IHBvaW50ZXI7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMTFweDsKICAgICAgICAgICAgZm9udC13ZWlnaHQ6IDYwMDsKICAgICAgICAgICAgdHJhbnNpdGlvbjogdmFyKC0tdHJhbnNpdGlvbik7CiAgICAgICAgfQoKICAgICAgICAuYnRuLXNlbGVjdCB7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWJnLXRlcnRpYXJ5KTsKICAgICAgICB9CgogICAgICAgIC5idG4tc2VsZWN0OmhvdmVyIHsKICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyMDEsIDE1MCwgMTA2LCAwLjEpOwogICAgICAgICAgICBib3JkZXItY29sb3I6IHZhcigtLXRleHQtc2Vjb25kYXJ5KTsKICAgICAgICB9CgogICAgICAgIC5yZXN0YXVyYW50LWNhcmQuc2VsZWN0ZWQgLmJ0bi1zZWxlY3QgewogICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjN0ZCMDZGO
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puerto Rico 🌴 · July 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0D0B08;
+            --bg-secondary: #211C16;
+            --bg-tertiary: #2a241a;
+            --border-color: #352D22;
+            --text-primary: #EDE4D3;
+            --text-secondary: #7A6E5E;
+            --text-muted: #8A7E6E;
+            --accent-gold: #C9966A;
+            --accent-terracotta: #C4511A;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.6;
+        }
+
+        body.light-mode {
+            --bg-primary: #F5F0E8;
+            --bg-secondary: #FFFFFF;
+            --bg-tertiary: #F9F5F0;
+            --border-color: #E0D5C5;
+            --text-primary: #2A2318;
+            --text-secondary: #8A7E6E;
+            --text-muted: #8A7E6E;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            border-bottom: 2px solid var(--border-color);
+            padding: 10px 0;
+            z-index: 2000;
+            backdrop-filter: blur(8px);
+            background-color: rgba(33, 28, 22, 0.95);
+            transition: var(--transition);
+        }
+
+        body.light-mode header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .header-content {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            flex: 1;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .overview-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 5px 8px;
+            border-radius: 4px;
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .overview-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .theme-toggle:hover {
+            color: var(--accent-gold);
+            transform: scale(1.1);
+        }
+
+        .day-tabs {
+            display: flex;
+            overflow-x: auto;
+            gap: 8px;
+            padding-bottom: 8px;
+            scroll-behavior: smooth;
+            margin-top: 12px;
+        }
+
+        .day-tabs::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .day-tabs::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+
+        .day-tabs::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+            border-radius: 2px;
+        }
+
+        .day-tab {
+            padding: 8px 12px;
+            background-color: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .day-tab:hover {
+            border-color: var(--text-secondary);
+            color: var(--accent-gold);
+        }
+
+        .day-tab.active {
+            background-color: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: var(--bg-primary);
+            font-weight: 600;
+        }
+
+        .day-tab.has-missing {
+            border-color: #8A3A3A;
+        }
+
+        /* MAIN CONTENT */
+        main {
+            padding: 24px 0;
+        }
+
+        .day-view {
+            display: none;
+            animation: fadeIn 0.4s ease-in;
+        }
+
+        .day-view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 16px 16px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-day-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            opacity: 0.7;
+            position: absolute;
+            top: 10px;
+            left: 14px;
+            z-index: 2;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9), 0 0 50px rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2px 9px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        .hero-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-location {
+            font-size: 14px;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-location::before {
+            content: '📍';
+        }
+
+        /* CARDS */
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: var(--transition);
+        }
+
+        body.light-mode .card {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .card:hover {
+            border-color: var(--accent-gold);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        /* SECTION COLLAPSIBLE */
+        .collapsible-section {
+            margin-bottom: 16px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 12px 16px;
+            background-color: var(--bg-tertiary);
+            border-radius: 6px 6px 0 0;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+
+        .section-header:hover {
+            background-color: rgba(201, 150, 106, 0.1);
+        }
+
+        .section-header h3 {
+            flex: 1;
+            font-size: 16px;
+            color: var(--accent-gold);
+            margin: 0;
+        }
+
+        .chevron {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .chevron::after {
+            content: '▼';
+            font-size: 12px;
+            color: var(--accent-gold);
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .section-header.collapsed .chevron::after {
+            transform: rotate(-90deg);
+        }
+
+        .section-content {
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 1;
+            padding: 0;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .section-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+            padding: 0;
+        }
+
+        .section-content > div {
+            padding: 16px;
+        }
+
+        .section-flight {
+            background-color: rgba(30, 60, 100, 0.25);
+            border-left: 3px solid #4A8AB5;
+        }
+
+        .section-flight .section-header {
+            border-left: 3px solid #4A8AB5;
+        }
+
+        .section-hotel {
+            background-color: rgba(80, 55, 30, 0.25);
+            border-left: 3px solid #8B6D45;
+        }
+
+        .section-hotel .section-header {
+            border-left: 3px solid #8B6D45;
+        }
+
+        .section-activities {
+            background-color: rgba(60, 75, 40, 0.2);
+            border-left: 3px solid #7A8A50;
+        }
+
+        .section-activities .section-header {
+            border-left: 3px solid #7A8A50;
+        }
+
+        .section-meals {
+            background-color: rgba(55, 65, 45, 0.25);
+            border-left: 3px solid #7A8550;
+        }
+
+        .section-meals .section-header {
+            border-left: 3px solid #7A8550;
+        }
+
+        .section-warnings {
+            background-color: rgba(100, 35, 35, 0.2);
+            border-left: 3px solid #AA4444;
+        }
+
+        .section-warnings .section-header {
+            border-left: 3px solid #AA4444;
+        }
+
+        .section-gems {
+            background-color: rgba(100, 80, 30, 0.2);
+            border-left: 3px solid #B89030;
+        }
+
+        .section-gems .section-header {
+            border-left: 3px solid #B89030;
+        }
+
+        body.light-mode .section-flight {
+            background-color: rgba(74, 138, 181, 0.15);
+        }
+
+        body.light-mode .section-hotel {
+            background-color: rgba(139, 109, 69, 0.15);
+        }
+
+        body.light-mode .section-activities {
+            background-color: rgba(122, 138, 80, 0.12);
+        }
+
+        body.light-mode .section-meals {
+            background-color: rgba(122, 133, 80, 0.15);
+        }
+
+        body.light-mode .section-warnings {
+            background-color: rgba(170, 68, 68, 0.12);
+        }
+
+        body.light-mode .section-gems {
+            background-color: rgba(184, 144, 48, 0.12);
+        }
+
+        .expand-all-container {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .btn-expand-all, .btn-collapse-all {
+            flex: 1;
+            padding: 6px 10px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-expand-all:hover, .btn-collapse-all:hover {
+            background-color: rgba(201, 150, 106, 0.1);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        /* BADGES */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            transition: var(--transition);
+        }
+
+        .badge.ready {
+            background-color: #4A8050;
+            color: #8DC87E;
+        }
+
+        .badge.missing {
+            background-color: #8A3A3A;
+            color: #FF6B6B;
+        }
+
+        .badge.need-booking {
+            background-color: #9A7A30;
+            color: #E8C66E;
+        }
+
+        .badge.confirmed {
+            background-color: #4A8050;
+            color: #8DC87E;
+        }
+
+        .badge.pending {
+            background-color: #9A7A30;
+            color: #E8C66E;
+        }
+
+        .badge.to-book {
+            background-color: #C4511A;
+            color: #FFB366;
+        }
+
+        .badge.included {
+            background-color: #3A6878;
+            color: #7FBFD4;
+        }
+
+        .badge.options {
+            background-color: #4a4440;
+            color: #9A8E7E;
+        }
+
+        /* DRIVE BANNER */
+        .drive-banner {
+            background-color: var(--bg-tertiary);
+            border-left: 4px solid var(--accent-gold);
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .drive-banner::before {
+            content: '🚗';
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .drive-info {
+            flex: 1;
+        }
+
+        .drive-route {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .drive-duration {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* FLIGHT BANNER */
+        .flight-banner {
+            background-color: var(--bg-tertiary);
+            border-left: 4px solid #3A7DA0;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .flight-banner::before {
+            content: '✈️';
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .flight-info {
+            flex: 1;
+        }
+
+        .flight-route {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .flight-details {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid var(--border-color);
+        }
+
+        .timeline-item {
+            padding-bottom: 16px;
+            padding-left: 20px;
+            margin-left: -20px;
+        }
+
+        .timeline-time-group-header {
+            font-weight: 600;
+            color: var(--accent-gold);
+            font-size: 15px;
+            margin-bottom: 8px;
+            margin-top: 12px;
+            margin-left: -20px;
+            padding-left: 20px;
+        }
+
+        .timeline-item-bullet {
+            padding-bottom: 8px;
+            margin-left: -20px;
+            padding-left: 20px;
+        }
+
+        .timeline-item-bullet::before {
+            content: '•';
+            margin-right: 8px;
+            color: var(--accent-gold);
+        }
+
+        .timeline-time {
+            font-weight: 600;
+            color: var(--accent-gold);
+            font-size: 14px;
+        }
+
+        .timeline-text {
+            color: var(--text-primary);
+            margin-top: 4px;
+            font-size: 14px;
+        }
+
+        .timeline-note {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .timeline-tag {
+            display: inline-block;
+            background-color: #8A3A3A;
+            color: #FF9999;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        /* MEALS SECTION */
+        .meals-section {
+            margin-bottom: 24px;
+            padding: 0;
+        }
+
+        .meal-type {
+            font-weight: 600;
+            color: var(--accent-gold);
+            font-size: 15px;
+            margin-bottom: 8px;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meal-type::before {
+            content: '•';
+        }
+
+        .meal-type:first-child {
+            margin-top: 0;
+        }
+
+        .meal-note {
+            font-size: 14px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            padding-left: 16px;
+        }
+
+        .restaurant-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+            margin-bottom: 12px;
+            padding-left: 16px;
+        }
+
+        .restaurant-card {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .restaurant-card:hover {
+            border-color: var(--text-secondary);
+            background-color: rgba(201, 150, 106, 0.05);
+        }
+
+        .restaurant-card.selected {
+            background-color: #4A8050;
+            border-color: #7FB06F;
+        }
+
+        .restaurant-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .restaurant-card.selected .restaurant-name {
+            color: #8DC87E;
+        }
+
+        .restaurant-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .restaurant-card.selected .restaurant-desc {
+            color: #B8D5AF;
+        }
+
+        .restaurant-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        .restaurant-rating {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .restaurant-buttons {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .btn-select, .btn-maps {
+            flex: 1;
+            padding: 6px 8px;
+            border: 1px solid var(--border-color);
+            background-color: transparent;
+            color: var(--accent-gold);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-select {
+            background-color: var(--bg-tertiary);
+        }
+
+        .btn-select:hover {
+            background-color: rgba(201, 150, 106, 0.1);
+            border-color: var(--text-secondary);
+        }
+
+        .restaurant-card.selected .btn-select {
+            background-color: #7FB06F;
+            color: var(--bg-primary);
+            border-color: #7FB06F;
+        }
+
+        .btn-maps:hover {
+            border-color: var(--text-secondary);
+            color: #E8C66E;
+        }
+
+        /* WARNINGS & GEMS */
+        .warnings-title, .gems-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+            margin-top: 12px;
+        }
+
+        .warning {
+            background-color: #3a2020;
+            border: 1px solid #6a3a3a;
+            border-left: 4px solid #8A3A3A;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #FFB3B3;
+        }
+
+        .gem {
+            background-color: #3a3020;
+            border: 1px solid #6a5a3a;
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #E8C66E;
+        }
+
+        /* HOTEL INFO */
+        .hotel-info {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 14px;
+            margin-bottom: 8px;
+            transition: var(--transition);
+        }
+
+        .hotel-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+
+        .hotel-note {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .hotel-status-badges {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .hotel-meta {
+            display: flex;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .hotel-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn-maps {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        /* NO HOTEL CARD */
+        .no-hotel-card {
+            background-color: rgba(201, 150, 106, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        /* ACCOMMODATION TABLE */
+        .accommodation-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .accommodation-table th {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+
+        .accommodation-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            color: var(--text-primary);
+        }
+
+        .accommodation-table tr:nth-child(even) {
+            background-color: rgba(50, 40, 30, 0.3);
+        }
+
+        body.light-mode .accommodation-table tr:nth-child(even) {
+            background-color: rgba(201, 150, 106, 0.03);
+        }
+
+        /* FLIGHTS SECTION */
+        .flights-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+
+        .flights-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .flights-scroll::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+
+        .flights-scroll::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+        }
+
+        .flight-card {
+            flex-shrink: 0;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+            min-width: 240px;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .flight-card:hover {
+            border-color: #3A7DA0;
+        }
+
+        .flight-day {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .flight-route {
+            font-weight: 600;
+            color: #3A7DA0;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .flight-times {
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .flight-terminal {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .flight-checkin {
+            margin-top: 8px;
+        }
+
+        .flight-checkin a {
+            display: inline-block;
+            padding: 6px 10px;
+            background-color: #3A7DA0;
+            color: var(--text-primary);
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .flight-checkin a:hover {
+            background-color: #4a9dc0;
+        }
+
+        /* TRAVELERS & CAR RENTAL */
+        .travelers-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .traveler-chip {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-size: 13px;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .traveler-chip:hover {
+            border-color: var(--accent-gold);
+            background-color: rgba(201, 150, 106, 0.05);
+        }
+
+        .car-rental-info {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* SPOTIFY / TRICOUNT LINKS IN OVERVIEW */
+        .spotify-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #1DB954;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .spotify-link:hover {
+            background-color: #1ed760;
+            transform: scale(1.05);
+        }
+
+        .spotify-icon {
+            font-size: 16px;
+        }
+
+        .overview-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .tricount-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #4A90D9;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .tricount-link:hover {
+            background-color: #5DA0E9;
+            transform: scale(1.05);
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .download-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            background-color: rgba(201, 150, 106, 0.08);
+        }
+
+        .accommodation-table tr[data-day] {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .accommodation-table tr[data-day]:hover {
+            background-color: rgba(201, 150, 106, 0.15) !important;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 32px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 12px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        /* WEATHER WIDGET */
+        .section-weather {
+            background-color: rgba(20, 45, 70, 0.2);
+        }
+
+        body.light-mode .section-weather {
+            background-color: rgba(74, 138, 181, 0.08);
+        }
+
+        .weather-sun-row {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .weather-chart-container { width: 100%; }
+
+        .weather-loading, .weather-error {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 12px;
+            padding: 16px 0;
+        }
+
+        .weather-chart-container svg .wx-temp { fill: var(--text-primary); }
+        .weather-chart-container svg .wx-time  { fill: var(--text-secondary); }
+
+        .weather-refresh {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 14px;
+            cursor: pointer;
+            margin-left: auto;
+            padding: 2px 6px;
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .weather-refresh:hover { color: var(--accent-gold); }
+
+        .activity-maps-link {
+            font-size: 13px;
+            text-decoration: none;
+            opacity: 0.6;
+            margin-left: 4px;
+            vertical-align: middle;
+            transition: opacity 0.2s;
+        }
+        .activity-maps-link:hover { opacity: 1; }
+
+        .wx-condition-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px 0;
+        }
+        .wx-condition-icon { font-size: 28px; line-height: 1; }
+        .wx-condition-label { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+
+        .wx-preview {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-left: 8px;
+        }
+        .section-header:not(.collapsed) .wx-preview { display: none; }
+
+        /* CURRENCY CALCULATOR */
+        .calc-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 14px 20px;
+            margin: -20px -20px 0 -20px;
+            border-radius: 8px 8px 0 0;
+            user-select: none;
+        }
+        .calc-header:hover { background-color: rgba(201,150,106,0.07); }
+        .calc-header-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .calc-header-sub {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        .calc-chevron { font-size: 11px; color: var(--text-secondary); transition: transform 0.25s ease; }
+        .calc-body {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.25s ease;
+            opacity: 0;
+            padding-top: 0;
+        }
+        .calc-body.open { max-height: 300px; opacity: 1; padding-top: 16px; }
+        .calc-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .calc-row:last-of-type { margin-bottom: 0; }
+        .calc-label { width: 110px; flex-shrink: 0; }
+        .calc-label-code { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+        .calc-label-name { font-size: 10px; color: var(--text-secondary); margin-top: 1px; }
+        .calc-input {
+            flex: 1;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 9px 12px;
+            color: var(--text-primary);
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .calc-input:focus { border-color: var(--accent-gold); }
+        .calc-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+        .calc-rates-note { font-size: 10px; color: var(--text-secondary); }
+        .calc-refresh { font-size: 11px; color: var(--accent-gold); cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; }
+
+        /* BUDGET */
+        .day-cost-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid #7A6E5E;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .day-cost-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .day-cost-items {
+            font-size: 11px;
+            color: var(--text-secondary);
+            flex: 1;
+        }
+
+        .day-cost-total {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            white-space: nowrap;
+            margin-left: auto;
+        }
+
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .budget-table td {
+            padding: 9px 10px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        .budget-table tr:last-child td { border-bottom: none; }
+
+        .budget-amount {
+            text-align: right;
+            font-weight: 600;
+            color: var(--accent-gold);
+            white-space: nowrap;
+        }
+
+        .budget-note {
+            font-size: 11px;
+            color: var(--text-secondary);
+            padding-top: 2px;
+        }
+
+        .budget-total-row td {
+            font-weight: 700;
+            font-size: 14px;
+            border-top: 2px solid var(--border-color) !important;
+            border-bottom: none !important;
+        }
+
+        .budget-perperson {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        .budget-disclaimer {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-style: italic;
+            text-align: center;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* MOBILE */
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 12px;
+            }
+
+            .hero {
+                padding: 14px 16px;
+            }
+
+            .hero-title {
+                font-size: 20px;
+            }
+
+            .card {
+                padding: 16px;
+            }
+
+            .header-title {
+                font-size: 18px;
+            }
+
+            .day-tab {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+        }
+        .map-day-marker {
+            background: #C9966A; color: #111; font-weight: 700; font-size: 10px;
+            width: 26px; height: 26px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid rgba(255,255,255,0.5);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5); cursor: pointer;
+        }
+        .leaflet-popup-content-wrapper { background: var(--bg-secondary) !important; color: var(--text-primary) !important; border: 1px solid var(--border-color) !important; box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important; }
+        .leaflet-popup-tip { background: var(--bg-secondary) !important; }
+    </style>
+</head>
+<body>
+    <script>
+        // ============================================================
+        // TRIP_DATA — Edit this section to customise your trip
+        // ============================================================
+        const TRIP_DATA = {
+            title: "Puerto Rico 🌴 · July 2026",
+            travelers: ["Mom (76)", "Dad (81)", "Sister", "Niece (23)", "Brother", "Brother's Wife", "Niece (8)", "Nephew (16)", "Juan", "Maria"],
+
+            carRental: {
+                company: "Alamo · Midsize SUV (Nissan Rogue or similar)",
+                phone: "(833) 763-1735",
+                website: "alamo.com · Pickup Jul 8 4pm @ SJU · Return Jul 12 3pm @ SJU"
+            },
+
+            houseUrl: "https://www.airbnb.com/rooms/827071",
+            spotifyPlaylist: null,
+            tricountUrl: null,
+            checkInUrl: null,
+
+            flights: [
+                {
+                    date: "Jul 8", dayOfWeek: "Wed", airline: "Iberia IB381",
+                    from: "MAD", to: "SJU", departTime: "12:45", arriveTime: "15:25",
+                    terminal: "T4S Madrid Barajas → Terminal C SJU · Economy · Meal incl. · No free checked baggage",
+                    passengers: ["Juan", "Maria"]
+                },
+                {
+                    date: "Jul 12", dayOfWeek: "Sun", airline: "Iberia IB382",
+                    from: "SJU", to: "MAD", departTime: "17:15", arriveTime: "07:30 (+1)",
+                    terminal: "Terminal C SJU → T4S Madrid Barajas · Economy · Meal incl. · No free checked baggage",
+                    passengers: ["Juan", "Maria"]
+                }
+            ],
+            days: [
+                {
+                    dayNumber: 1, date: "Jul 8", dayOfWeek: "Wed",
+                    title: "Arrive & Settle",
+                    location: "Luquillo, Puerto Rico",
+                    backgroundImage: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800",
+                    flight: {
+                        airline: "Iberia IB381", from: "MAD", to: "SJU",
+                        departTime: "12:45", arriveTime: "15:25",
+                        terminal: "T4S Madrid Barajas → Terminal C SJU"
+                    },
+                    hotel: {
+                        name: "Villa Pitahaya · Airbnb, Luquillo",
+                        status: "confirmed",
+                        note: "10 guests · Pool · Check-in 3pm · Check-out Jul 12 at 12pm · Confirmed via Airbnb",
+                        bookedBy: null,
+                        mapsUrl: "maps.google.com/maps/search/?api=1&query=Pitahaya+Luquillo+Puerto+Rico"
+                    },
+                    drive: { from: "SJU Airport", to: "Luquillo House", duration: "~45–75 min", distance: "~50 km · Build buffer for traffic" },
+                    activities: [
+                        { time: "Morning", text: "Early crew (8am) → Luquillo Beach · Balneario La Monserrate — calm, palm-lined, lifeguards, restrooms", subNote: "Can't check in until 3pm — the beach kills the wait beautifully", needsBooking: false },
+                        { time: "Morning", text: "Grocery run — stock the house for 10 people (water, coffee, breakfast, snacks, ice, drinks)", subNote: "Supermarket in Luquillo or Río Grande · ~10–15 min from beach", needsBooking: false },
+                        { time: "3:00pm", text: "House check-in · Villa Pitahaya opens at 3pm", subNote: "", needsBooking: false },
+                        { time: "3:25pm", text: "Juan & Maria land SJU (IB381) → Alamo car pickup 4pm slot", subNote: "Alamo: 1st floor parking garage at SJU · No shuttle — cross street from baggage claim · (833) 763-1735", needsBooking: false },
+                        { time: "4:15pm", text: "Huertas group arrives SJU → straight to house", subNote: "", needsBooking: false },
+                        { time: "7:00pm", text: "Maria arrives — keep one car free for airport pickup", subNote: "Once everyone's in: settle, eat, rest. No big plans tonight.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Airport food or snacks en route", restaurants: [] },
+                        lunch: {
+                            status: "options",
+                            note: "Early crew eats at the Kioskos while waiting for house check-in",
+                            restaurants: [
+                                { name: "Luquillo Kioskos", desc: "~60 food stalls side by side · mofongo, fresh fish, empanadillas, drinks · Beachfront & cheap · Built for big groups", rating: "⭐ Top pick", mapsUrl: "maps.google.com/maps/search/?api=1&query=Luquillo+Kioskos+Puerto+Rico" },
+                                { name: "La Parrilla", desc: "Seafood legend at the east (local) end of the strip · 4.1★ / ~1,000 Yelp reviews · 'Will ruin other seafood for you'", rating: "4.1★", mapsUrl: "maps.google.com/maps/search/?api=1&query=La+Parrilla+Luquillo+Puerto+Rico" }
+                            ]
+                        },
+                        dinner: {
+                            status: "options",
+                            note: "Keep it easy — cook at the house (best call with Maria landing at 7pm) or walk to the Kioskos",
+                            restaurants: [
+                                { name: "Cook at the house", desc: "Best arrival-night option · house is stocked from the grocery run · everyone is tired from travel", rating: "🏠 Recommended", mapsUrl: "maps.google.com/maps/search/?api=1&query=Luquillo+Puerto+Rico" },
+                                { name: "Luquillo Kioskos (evening)", desc: "Walk over after everyone settles · pick-your-own stalls · no wait · casual", rating: "Flexible", mapsUrl: "maps.google.com/maps/search/?api=1&query=Luquillo+Kioskos+Puerto+Rico" }
+                            ]
+                        }
+                    },
+                    route: null,
+                    warnings: [
+                        "⏱ SJU → Luquillo: ~45 min clear, up to 1h15 in traffic — build buffer for each airport pickup run",
+                        "💵 Stock CASH now: bio bay boat is cash-only, many kioskos too. Get enough for the whole week.",
+                        "🧴 Grocery run essentials: reef-safe sunscreen, bug spray, 2–3 gallons water, breakfast staples for 10",
+                        "🚗 Alamo pickup: exit baggage claim → cross street → 1st floor parking garage. No shuttle needed."
+                    ],
+                    gems: [
+                        "🦞 The east (far) end of the Luquillo Kioskos strip is where locals eat — La Parrilla is the standout ('will ruin other seafood for you')",
+                        "🛒 Stock up at the grocery store today — it's the only efficient run before the fun starts"
+                    ]
+                },
+                {
+                    dayNumber: 2, date: "Jul 9", dayOfWeek: "Thu",
+                    title: "El Yunque + Bio Bay 🌊",
+                    location: "El Yunque / Fajardo, Puerto Rico",
+                    backgroundImage: "https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Villa Pitahaya · Airbnb, Luquillo",
+                        status: "confirmed",
+                        note: "10 guests · Pool · Same house all week",
+                        bookedBy: null,
+                        mapsUrl: "maps.google.com/maps/search/?api=1&query=Pitahaya+Luquillo+Puerto+Rico"
+                    },
+                    drive: { from: "House", to: "El Yunque PR-191 gate", duration: "~15–20 min", distance: "Gate opens 8:00am · ~200-car cap · Arrive at opening" },
+                    activities: [
+                        { time: "7:30am", text: "Leave house — El Yunque gate opens 8am and caps at ~200 cars (first-come, first-served)", subNote: "Free entry, no reservation needed (as of Feb 2026). Early = guaranteed access.", needsBooking: false },
+                        { time: "8:00am", text: "La Coca Falls — roadside waterfall, zero walking. Perfect grandparent-friendly photo stop.", subNote: "", needsBooking: false },
+                        { time: "Morning", text: "Yokahú Tower — short climb to a lookout over the forest and coast", subNote: "", needsBooking: false },
+                        { time: "Morning", text: "Juan Diego Falls — 10–12 min rocky uphill stair. Skip for Dad (81) if wet.", subNote: "Easiest waterfall you actually reach inside the forest", needsBooking: false },
+                        { time: "Afternoon", text: "Active crew: La Mina Trail → La Mina Falls (swimmable pool) OR Mt. Britton Trail + tower", subNote: "Real hikes — sneakers required, expect mud. Cloud-forest views from Britton tower are the best in the park.", needsBooking: false },
+                        { time: "Afternoon", text: "Relaxed crew (grandparents + 8yo): Linger at roadside stops, then drive down early to rest at the house", subNote: "Two cars makes this split completely painless", needsBooking: false },
+                        { time: "Afternoon", text: "Lunch at Luquillo Kioskos — regroup as 10 after the forest", subNote: "~15–20 min from El Yunque gate", needsBooking: false },
+                        { time: "Afternoon", text: "House pool — recharge before the bio bay", subNote: "", needsBooking: false },
+                        { time: "Evening", text: "🌊 Bioluminescent Bay — Laguna Grande, Fajardo (~15–20 min from house)", subNote: "Electric boat (Bio Island / Capt. Suárez): ~$50/person · CASH ONLY · Book by phone BEFORE the trip · Limited seats. For grandparents + 8yo. Kayak tour option for the active crew (30 min paddle each way through mangroves).", needsBooking: true }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Quick at the house — need to leave by 7:30am", restaurants: [] },
+                        lunch: {
+                            status: "options",
+                            note: "Back at Luquillo Kioskos after El Yunque (~15–20 min from the gate)",
+                            restaurants: [
+                                { name: "Luquillo Kioskos", desc: "~60 kiosks · everyone picks their own · beachfront, casual, cheap · built for big groups", rating: "⭐ Top pick", mapsUrl: "maps.google.com/maps/search/?api=1&query=Luquillo+Kioskos+Puerto+Rico" },
+                                { name: "La Parrilla", desc: "Sit-down seafood inside the strip · 4.1★ / ~1,000 Yelp reviews · proper meal option", rating: "4.1★", mapsUrl: "maps.google.com/maps/search/?api=1&query=La+Parrilla+Luquillo+Puerto+Rico" },
+                                { name: "Mi Parcela", desc: "Burgers + PR plates · handled a group of 18 · solid if you want a real table", rating: "4.0★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Mi+Parcela+Luquillo+Puerto+Rico" }
+                            ]
+                        },
+                        dinner: {
+                            status: "flexible",
+                            note: "Light dinner before bio bay (~7pm departure) or eat after (~9–10pm). House cook-in or kioskos both work.",
+                            restaurants: []
+                        }
+                    },
+                    route: null,
+                    warnings: [
+                        "🌳 El Yunque gate: 8am–5pm, ~200-car cap — arrive at opening or risk being turned away",
+                        "🚫 NO Uber inside El Yunque — no valid pickup points. Drive yourselves in both cars.",
+                        "🌧️ It's a rainforest — rain can come anytime. Light rain layer + water shoes (rocks are slick). Rain passes fast.",
+                        "💵 Bio bay electric boat: CASH ONLY, limited seats — book by phone BEFORE the trip (Bio Island / Capt. Suárez)",
+                        "⚡ Lightning shuts bio bay tours down — doing it Thu gives Fri as a backup night if needed",
+                        "🦟 Bug spray for dusk at the bay — bring it from the house"
+                    ],
+                    gems: [
+                        "💧 Puente Roto / Río Espíritu Santo on the lower forest roads — quiet river spots most tour buses skip entirely",
+                        "🗼 Mt. Britton tower is the photo most people miss — cloud-forest views more dramatic than La Mina"
+                    ]
+                },
+                {
+                    dayNumber: 3, date: "Jul 10", dayOfWeek: "Fri",
+                    title: "Carabalí Adventure 🐎",
+                    location: "Hacienda Carabalí · Luquillo, Puerto Rico",
+                    backgroundImage: "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Villa Pitahaya · Airbnb, Luquillo",
+                        status: "confirmed",
+                        note: "10 guests · Pool · Same house all week",
+                        bookedBy: null,
+                        mapsUrl: "maps.google.com/maps/search/?api=1&query=Pitahaya+Luquillo+Puerto+Rico"
+                    },
+                    drive: { from: "House", to: "Hacienda Carabalí", duration: "5–10 min", distance: "Right in Luquillo · In the foothills of El Yunque · Open 8:30am–6pm" },
+                    activities: [
+                        { time: "8:15am", text: "Arrive Carabalí — 45 min before your 9am slot for check-in paperwork", subNote: "Book the morning slot in advance. Morning = cooler + beat afternoon rain.", needsBooking: true },
+                        { time: "Morning", text: "ATVs / UTVs (1–2 hr guided ride through 600-acre ranch) — Nephew (16) + adults", subNote: "Confirm driver age minimum when booking (16 drives with adult; younger ride as passenger)", needsBooking: true },
+                        { time: "Morning", text: "Beach horseback ride (2.5 hr) — crosses Mameyes River, out to Luquillo Beach", subNote: "~$164/adult · Min age 12 · Max 235 lb · Closed shoes + long pants REQUIRED · 16yo qualifies · 8yo does NOT", needsBooking: true },
+                        { time: "Morning", text: "Short countryside horse ride (1 hr) — gentler option for the 8yo", subNote: "Reviewers note guides add a seatbelt for little ones. Confirm when booking.", needsBooking: true },
+                        { time: "Morning", text: "Grandparents: open-wagon hayride + petting zoo — low effort and genuinely fun", subNote: "Or relax at the on-site Bar & Grill and watch everyone else go by", needsBooking: false },
+                        { time: "Morning", text: "Go-karts (1,000-ft track) — crowd-pleaser for teens and the 8yo between rides", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Beach: Luquillo Beach (calm + shallow — best for grandparents + 8yo) or Seven Seas Beach, Fajardo", subNote: "Seven Seas: ~15–20 min east, equally calm and family-friendly", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Quick at the house before heading to Carabalí", restaurants: [] },
+                        lunch: {
+                            status: "options",
+                            note: "Stay on-site to keep the group together, or roll to the house / kioskos",
+                            restaurants: [
+                                { name: "Carabalí Bar & Grill (on-site)", desc: "Easiest option — no driving, group stays together after rides", rating: "⭐ Recommended", mapsUrl: "maps.google.com/maps/search/?api=1&query=Hacienda+Carabali+Luquillo+Puerto+Rico" },
+                                { name: "Luquillo Kioskos", desc: "10 min back toward the house — all the usual options", rating: "Flexible", mapsUrl: "maps.google.com/maps/search/?api=1&query=Luquillo+Kioskos+Puerto+Rico" }
+                            ]
+                        },
+                        dinner: {
+                            status: "options",
+                            note: "Best dinner night of the trip — fresh seafood at Fajardo marina (~15–20 min east)",
+                            restaurants: [
+                                { name: "El Pescador & Tapas (Fajardo)", desc: "Fresh seafood + lobster on the water · Casual Caribbean vibe · Great cocktails · No reservations — arrive early with 10", rating: "⭐ Top pick", mapsUrl: "maps.google.com/maps/search/?api=1&query=El+Pescador+Tapas+Fajardo+Puerto+Rico" },
+                                { name: "Kalizo Kiosko (Fajardo)", desc: "4.6★ / ~960 reviews Tripadvisor · Local seafood, mofongo, relaxed", rating: "4.6★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Kalizo+Kiosko+Fajardo+Puerto+Rico" },
+                                { name: "Pasta, Amor y Vino (Luquillo)", desc: "Italian · Best ambiance/service in town · Good kid-friendly option if the group wants a break from seafood", rating: "4.4★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Pasta+Amor+y+Vino+Luquillo+Puerto+Rico" },
+                                { name: "La Estación (Luquillo)", desc: "BBQ · Fun vibe · Check hours + wait time for a group of 10", rating: "4.2★", mapsUrl: "maps.google.com/maps/search/?api=1&query=La+Estacion+Luquillo+Puerto+Rico" }
+                            ]
+                        }
+                    },
+                    route: null,
+                    warnings: [
+                        "📅 BOOK CARABALÍ IN ADVANCE — ATV/UTV + horse rides. Arrive 45 min before start for check-in.",
+                        "👟 Closed shoes + long pants REQUIRED for horses and ATVs (enforced — flip-flops = no ride for anyone)",
+                        "⚖️ Beach horse ride: max 235 lb, min age 12. The 8yo gets the shorter countryside ride.",
+                        "🌧️ Morning rides are essential — afternoon showers are much more likely in Luquillo hills",
+                        "👕 Bring a change of clothes + towel — ATVs + river crossings = you will get dirty and wet"
+                    ],
+                    gems: [
+                        "🏔️ The ranch sits in El Yunque's foothills — ATV trail views rival the national forest without the crowds",
+                        "🏖️ Seven Seas Beach (Fajardo) has a quiet far end and a little nature-reserve trail most beach-goers never find"
+                    ]
+                },
+                {
+                    dayNumber: 4, date: "Jul 11", dayOfWeek: "Sat",
+                    title: "Old San Juan 🏰",
+                    location: "Old San Juan, Puerto Rico",
+                    backgroundImage: "https://images.unsplash.com/photo-1585464231875-d9ef1f5ad396?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Villa Pitahaya · Airbnb, Luquillo",
+                        status: "confirmed",
+                        note: "Last night at the house. Pack tonight — check-out tomorrow at 12pm.",
+                        bookedBy: null,
+                        mapsUrl: "maps.google.com/maps/search/?api=1&query=Pitahaya+Luquillo+Puerto+Rico"
+                    },
+                    drive: { from: "Luquillo House", to: "Ballajá Garage, Old San Juan", duration: "~45–60 min", distance: "Park ONLY at Ballajá garage (covered, right next to El Morro)" },
+                    activities: [
+                        { time: "8:30am", text: "Leave house — beat the heat and Saturday cruise-ship crowds", subNote: "~45–60 min to OSJ. Park at Ballajá garage — do NOT try street parking with a group of 10.", needsBooking: false },
+                        { time: "9:00am", text: "Castillo San Felipe del Morro (El Morro) — opens 9am", subNote: "$10/adult · Free under 16 · CASHLESS — card only · Same ticket covers San Cristóbal for 24h · Big esplanade = flat + grandparent-friendly", needsBooking: false },
+                        { time: "Morning", text: "Cats of El Morro — the resident colony on the esplanade. Guaranteed hit with the 8yo.", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Colorful streets: Calle del Cristo, umbrella street, Plaza de Armas, La Rogativa statue", subNote: "Pace it — lots of shade, benches, and cafés. Use the car to reposition grandparents between stops.", needsBooking: false },
+                        { time: "Afternoon", text: "Paseo de la Princesa — flat waterfront promenade with the big fountain", subNote: "Best stretch for the grandparents — beautiful, zero stairs, breezy", needsBooking: false },
+                        { time: "Afternoon", text: "Castillo San Cristóbal (optional) — same ticket, if the group still has energy", subNote: "", needsBooking: false },
+                        { time: "Evening", text: "Early dinner in OSJ or drive back to the house for a relaxed last night", subNote: "With grandparents + 8yo, heading home by mid-afternoon is the smart call. Pack tonight.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Quick at the house before the 8:30am departure", restaurants: [] },
+                        lunch: {
+                            status: "options",
+                            note: "Central Old San Juan — go early or put your name in before visiting the forts",
+                            restaurants: [
+                                { name: "Raíces", desc: "40+ years · Classic Puerto Rican (mofongo, big portions) · Handles groups well · Go early to avoid wait", rating: "⭐ Top pick for the group", mapsUrl: "maps.google.com/maps/search/?api=1&query=Raices+Old+San+Juan+Puerto+Rico" },
+                                { name: "El Jibarito (Calle Sol)", desc: "No-frills local favorite · Mofongo 'gold standard' per locals · More authentic, less polished", rating: "4.3★", mapsUrl: "maps.google.com/maps/search/?api=1&query=El+Jibarito+Old+San+Juan+Puerto+Rico" },
+                                { name: "Deaverdura (Calle Sol)", desc: "Casual, colorful · PR classics + good vegetarian options · Lunch queue but worth it", rating: "4.3★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Deaverdura+Old+San+Juan+Puerto+Rico" },
+                                { name: "Princesa Cocina Cultura", desc: "Harbor-side near Paseo de la Princesa · Leafy patio · Tapas + cocktails · Live music evenings", rating: "4.4★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Princesa+Cocina+Cultura+Old+San+Juan" }
+                            ]
+                        },
+                        dinner: {
+                            status: "flexible",
+                            note: "Early dinner in OSJ (sunset from the city walls is great) or drive back and cook at the house. With grandparents + 8yo, home by 5–6pm is the comfortable call.",
+                            restaurants: []
+                        }
+                    },
+                    route: null,
+                    warnings: [
+                        "🅿️ Park ONLY at Ballajá garage (covered, next to El Morro) — OSJ streets are one-way, narrow, parking-scarce",
+                        "💳 Forts are CASHLESS — bring a card. $10/adult, free under 16. One ticket covers both forts for 24h.",
+                        "⚠️ OSJ trolley is OUT OF SERVICE as of early 2026 — use the car to reposition the grandparents instead",
+                        "🚢 Saturday = busier + cruise ship crowds — hit El Morro FIRST before it fills up",
+                        "👟 Comfortable shoes only — cobblestones cover every street in OSJ",
+                        "🌡️ Very exposed sun on the El Morro esplanade (almost no shade) — hats + water absolutely essential"
+                    ],
+                    gems: [
+                        "🗽 La Rogativa statue + the quiet city-wall walk down to San Juan Gate — most tour groups miss the lower path",
+                        "⛪ Capilla del Cristo and its tiny garden at the end of Calle del Cristo — a perfect postcard corner",
+                        "🐱 The cats of El Morro have their own colony on the esplanade — the 8yo will be obsessed"
+                    ]
+                },
+                {
+                    dayNumber: 5, date: "Jul 12", dayOfWeek: "Sun",
+                    title: "Departure ✈️",
+                    location: "Luquillo → SJU, Puerto Rico",
+                    backgroundImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800",
+                    flight: {
+                        airline: "Iberia IB382", from: "SJU", to: "MAD",
+                        departTime: "17:15", arriveTime: "07:30 Jul 13",
+                        terminal: "Terminal C SJU → T4S Madrid Barajas (arrives Mon Jul 13)"
+                    },
+                    hotel: {
+                        name: "Villa Pitahaya · Airbnb, Luquillo",
+                        status: "confirmed",
+                        note: "CHECK-OUT 12pm sharp — pack tonight (Saturday night)!",
+                        bookedBy: null,
+                        mapsUrl: "maps.google.com/maps/search/?api=1&query=Pitahaya+Luquillo+Puerto+Rico"
+                    },
+                    drive: { from: "Luquillo House", to: "SJU Airport · Alamo return", duration: "~45–75 min", distance: "Pad 30 min for Sunday afternoon traffic · Return Alamo by 3pm · Gas up before the airport" },
+                    activities: [
+                        { time: "Morning", text: "Later groups (5:15pm + 6:15pm flights): final morning at Luquillo Beach", subNote: "Pack and load cars first, then beach, then kioskos, then airport", needsBooking: false },
+                        { time: "12:00pm", text: "Check out of Airbnb — all groups", subNote: "Final grocery sweep of the fridge; pack snacks and drinks for the airport", needsBooking: false },
+                        { time: "12:00pm", text: "Lunch at Luquillo Kioskos — last mofongo of the trip", subNote: "", needsBooking: false },
+                        { time: "2:45pm", text: "Juan & Maria → SJU (IB382 departs 17:15, Terminal C)", subNote: "No buffer — drive straight from Kioskos. Return Alamo car by 3pm. ~45 min drive.", needsBooking: false },
+                        { time: "2:45pm", text: "Huertas-Chávez → SJU (5:15pm flight — leave Luquillo by 2:45pm)", subNote: "", needsBooking: false },
+                        { time: "3:45pm", text: "Huertas group → SJU (6:15pm flight — leave Luquillo by 3:45pm)", subNote: "", needsBooking: false },
+                        { time: "Return", text: "Alamo car return by 3:00pm — SJU 1st floor parking garage", subNote: "Gas up before the airport (cheaper off-airport). (833) 763-1735 if any issues.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Quick at the house — pack the night before so the morning is free", restaurants: [] },
+                        lunch: {
+                            status: "options",
+                            note: "Last lunch in Puerto Rico",
+                            restaurants: [
+                                { name: "Luquillo Kioskos", desc: "One last mofongo · 60+ stalls · Quick and easy · Right by the house", rating: "⭐ Last stop", mapsUrl: "maps.google.com/maps/search/?api=1&query=Luquillo+Kioskos+Puerto+Rico" }
+                            ]
+                        },
+                        dinner: { status: "flexible", note: "SJU terminal has food options, or the in-flight meal on IB382 (meal included on Iberia long-haul)", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [
+                        "✈️ Juan & Maria: IB382 departs Terminal C at 17:15 — return Alamo car by 3pm, no buffer after 12pm checkout",
+                        "🚗 Alamo car return: SJU Sun Jul 12 by 3:00pm · (833) 763-1735 · Gas up BEFORE the airport",
+                        "🚦 Sunday afternoon traffic toward SJU builds — add 30 min buffer on all departure windows",
+                        "📦 Pack Saturday night — do not leave it for Sunday morning checkout chaos"
+                    ],
+                    gems: [
+                        "🥤 Final fridge sweep — pack snacks and drinks for the airport; nothing goes to waste",
+                        "🛍️ SJU duty-free has Puerto Rican rum (Ron del Barrilito, Don Q, Bacardí) — last chance for a great souvenir"
+                    ]
+                }
+            ]
+        };
+
+        // ============================================================
+        // DAY_WEATHER — Add coordinates per day to enable forecasts
+        // Uses Open-Meteo (free, no API key required)
+        // ============================================================
+        const DAY_WEATHER = {
+            1: { lat: 18.3756, lon: -65.7225, isoDate: "2026-07-08" },
+            2: { lat: 18.3035, lon: -65.7839, isoDate: "2026-07-09" },
+            3: { lat: 18.3756, lon: -65.7225, isoDate: "2026-07-10" },
+            4: { lat: 18.4665, lon: -66.1185, isoDate: "2026-07-11" },
+            5: { lat: 18.3756, lon: -65.7225, isoDate: "2026-07-12" },
+        };
+
+        // ============================================================
+        // COST_DATA — Update with actual amounts as bookings are made
+        // ============================================================
+        const COST_DATA = {
+            disclaimer: "Airbnb and car rental confirmed. Activities and food are estimates — update as bookings are made.",
+            summary: [
+                { cat: "🏠 Airbnb (Pitahaya, Luquillo)", amount: 2500, note: "10 guests · 4 nights · Confirmed (2 payments of S/4,403)" },
+                { cat: "🚗 Car Rental (Alamo × 2)",       amount: 1000, note: "2 Midsize SUVs · Jul 8–12 · $461 confirmed for 1st car" },
+                { cat: "🌊 Bio Bay (boat + kayaks)",       amount: 500,  note: "~$50/person × 10 · CASH ONLY · Book in advance" },
+                { cat: "🐎 Carabalí (ATVs + horses + karts)", amount: 1200, note: "~$120/active adult · hayride for grandparents" },
+                { cat: "🏰 El Morro + San Cristóbal",     amount: 70,   note: "$10/adult × 7 adults · Free under 16" },
+                { cat: "🍽️ Food & Drinks",                amount: 1500, note: "5 days · 10 people · Many meals at house or kioskos" },
+                { cat: "💡 Cash, Fuel & Misc",            amount: 400,  note: "Gas, kioskos cash, tips, souvenirs" },
+            ],
+            days: {
+                1: { hotel: 0, activities: 0,    food: 200, other: 100 },
+                2: { hotel: 0, activities: 500,  food: 150, other: 0   },
+                3: { hotel: 0, activities: 1200, food: 200, other: 50  },
+                4: { hotel: 0, activities: 70,   food: 300, other: 0   },
+                5: { hotel: 0, activities: 0,    food: 100, other: 50  },
+            }
+        };
+    </script>
+
+    <header>
+        <div class="header-content">
+            <button class="overview-btn" onclick="switchView('overview')">← Overview</button>
+            <div class="header-title" id="headerTitle">Trip Planner</div>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
+        </div>
+        <div class="day-tabs" id="dayTabs"></div>
+    </header>
+
+    <main class="container">
+        <!-- OVERVIEW TAB -->
+        <div class="day-view active" id="overview">
+
+            <!-- Currency Calculator — collapsed by default -->
+            <div class="card" id="currencyCard">
+                <div class="calc-header" onclick="toggleCurrencyCalc()">
+                    <div class="calc-header-title">
+                        💱 Currency Calculator
+                        <span class="calc-header-sub" id="calcHeaderSub"></span>
+                    </div>
+                    <span class="calc-chevron" id="calcChevron">▶</span>
+                </div>
+                <div class="calc-body" id="calcBody">
+                    <div class="calc-row">
+                        <div class="calc-label">
+                            <div class="calc-label-code" id="calcCode0"></div>
+                            <div class="calc-label-name" id="calcName0"></div>
+                        </div>
+                        <input class="calc-input" id="calcInput0" type="number" placeholder="0" oninput="calcConvert(0)">
+                    </div>
+                    <div class="calc-row">
+                        <div class="calc-label">
+                            <div class="calc-label-code">AED</div>
+                            <div class="calc-label-name">UAE Dirham</div>
+                        </div>
+                        <input class="calc-input" id="calcInput1" type="number" placeholder="0" oninput="calcConvert(1)">
+                    </div>
+                    <div class="calc-row">
+                        <div class="calc-label">
+                            <div class="calc-label-code">USD</div>
+                            <div class="calc-label-name">US Dollar</div>
+                        </div>
+                        <input class="calc-input" id="calcInput2" type="number" placeholder="0" oninput="calcConvert(2)">
+                    </div>
+                    <div class="calc-footer">
+                        <span class="calc-rates-note" id="calcRatesNote">Loading rates…</span>
+                        <button class="calc-refresh" onclick="fetchCalcRates(true)">↻ Refresh</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRIP-SPECIFIC SECTIONS: add here (e.g. route maps) -->
+
+            <!-- Weather for today's location — collapsed by default, shown only during the trip -->
+            <div class="collapsible-section" id="overviewWeatherSection" style="display:none;">
+                <div class="section-header collapsed" id="overview-wx-header">
+                    <h3>🌤 Weather<span class="wx-preview" id="wx-preview-overview"></span></h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content section-weather collapsed">
+                    <div id="wx-overview" style="padding: 12px 16px;">
+                        <div class="weather-loading">Loading forecast…</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Itinerary — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>📋 Itinerary</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div>
+                        <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:8px;">
+                            <button onclick="goToToday()" style="font-size:11px;padding:4px 10px;background:var(--accent-gold);color:var(--bg-primary);border:none;border-radius:5px;cursor:pointer;font-weight:600;font-family:inherit;">Today</button>
+                        </div>
+                        <table class="accommodation-table" id="accommodationTable"></table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Maps — add map div(s) here with id="mapXxx", then implement renderXxxMap() below -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>🗺️ Maps</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div>
+                        <!-- Example: <div id="mapMain" style="height:400px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);"></div> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flights — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>✈️ Flights</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content section-flight">
+                    <div class="flights-scroll" id="flightsList"></div>
+                </div>
+            </div>
+
+            <!-- Car Rental — expanded by default, hidden if TRIP_DATA.carRental is null -->
+            <div class="collapsible-section" id="carRentalSection" style="display:none;">
+                <div class="section-header">
+                    <h3>🚗 Car Rental</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div class="car-rental-info" id="carRentalInfo"></div>
+                </div>
+            </div>
+
+            <!-- Relevant Links — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>🔗 Relevant Links</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div class="overview-links" id="overviewLinksContent"></div>
+                </div>
+            </div>
+
+            <!-- Budget — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>💰 Budget</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div id="budgetCard"></div>
+                </div>
+            </div>
+
+            <!-- Travellers — expanded by default, moved to end -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>👥 Travellers</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div class="travelers-list" id="travelersListView"></div>
+                </div>
+            </div>
+            <div style="text-align:center;padding:20px 0 8px;">
+                <a href="../" style="color:var(--accent-gold);text-decoration:none;font-size:13px;opacity:0.75;">← All trips</a>
+            </div>
+
+        </div>
+
+        <!-- DAY VIEWS -->
+        <div id="dayViewsContainer"></div>
+    </main>
+
+    <footer>
+        <p id="footerText">Trip Planner</p>
+    </footer>
+
+    <script>
+        // ============================================================
+        // RENDERING ENGINE
+        // ============================================================
+
+        const STATUS_STYLES = {
+            confirmed: { badge: "confirmed", label: "Confirmed" },
+            pending: { badge: "pending", label: "Pending" },
+            missing: { badge: "missing", label: "Missing" },
+            "to-book": { badge: "to-book", label: "To Book" },
+            included: { badge: "included", label: "Included" },
+            flexible: { badge: "options", label: "Flexible" },
+            options: { badge: "options", label: "Options" }
+        };
+
+        // Session storage for restaurant selections
+        const getSelectedRestaurants = (dayNum, mealType) => {
+            const key = `selected_${dayNum}_${mealType}`;
+            return JSON.parse(sessionStorage.getItem(key) || "[]");
+        };
+
+        const setSelectedRestaurant = (dayNum, mealType, restaurantName) => {
+            const key = `selected_${dayNum}_${mealType}`;
+            const selected = getSelectedRestaurants(dayNum, mealType);
+            const index = selected.indexOf(restaurantName);
+            if (index > -1) {
+                selected.splice(index, 1);
+            } else {
+                selected.push(restaurantName);
+            }
+            sessionStorage.setItem(key, JSON.stringify(selected));
+        };
+
+        const isRestaurantSelected = (dayNum, mealType, restaurantName) => {
+            return getSelectedRestaurants(dayNum, mealType).includes(restaurantName);
+        };
+
+        // Theme management
+        function initializeTheme() {
+            const saved = localStorage.getItem('theme-mode');
+            if (saved === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('themeToggle').textContent = '☀️';
+            } else {
+                document.body.classList.remove('light-mode');
+                document.getElementById('themeToggle').textContent = '🌙';
+            }
+        }
+
+        function toggleTheme() {
+            const isLight = document.body.classList.toggle('light-mode');
+            document.getElementById('themeToggle').textContent = isLight ? '☀️' : '🌙';
+            localStorage.setItem('theme-mode', isLight ? 'light' : 'dark');
+        }
+
+        function initializePage() {
+            initializeTheme();
+            document.getElementById('headerTitle').textContent = TRIP_DATA.title;
+            document.getElementById('footerText').textContent = TRIP_DATA.title + ' Trip Planner';
+            renderOverviewTab();
+            renderBudgetCard();
+            renderDayTabs();
+            renderDayViews();
+
+            // Auto-open today's day if within the trip; also load overview weather
+            const today = new Date().toISOString().split('T')[0];
+            for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
+                if (w.isoDate === today) {
+                    switchView(`day${dayNum}`);
+                    loadOverviewWeather(parseInt(dayNum));
+                    break;
+                }
+            }
+        }
+
+        function renderOverviewTab() {
+            // Flights
+            const flightsList = document.getElementById("flightsList");
+            flightsList.innerHTML = TRIP_DATA.flights
+                .map(f => `
+                    <div class="flight-card">
+                        <div class="flight-day">${f.dayOfWeek} ${f.date}</div>
+                        <div class="flight-route">${f.airline}</div>
+                        <div class="flight-times">${f.from} → ${f.to}</div>
+                        <div class="flight-times">${f.departTime}–${f.arriveTime}</div>
+                        <div class="flight-terminal">${f.terminal}</div>
+                        ${TRIP_DATA.checkInUrl ? `
+                        <div class="flight-checkin">
+                            <a href="${TRIP_DATA.checkInUrl}" target="_blank">Online Check-in</a>
+                        </div>` : ''}
+                    </div>
+                `)
+                .join("");
+
+            // Travellers
+            const travelersView = document.getElementById("travelersListView");
+            travelersView.innerHTML = TRIP_DATA.travelers
+                .map(t => `<div class="traveler-chip">${t}</div>`)
+                .join("");
+
+            // Car rental (conditional — show/hide entire section)
+            const carRentalSection = document.getElementById("carRentalSection");
+            const carRentalInfo = document.getElementById("carRentalInfo");
+            if (TRIP_DATA.carRental) {
+                carRentalInfo.innerHTML = `
+                    <strong>${TRIP_DATA.carRental.company}</strong><br>
+                    📞 ${TRIP_DATA.carRental.phone}<br>
+                    🌐 ${TRIP_DATA.carRental.website}
+                `;
+                carRentalSection.style.display = '';
+            }
+
+            // Links (Spotify, Tricount, Download)
+            const linksContent = document.getElementById('overviewLinksContent');
+            const links = [];
+            if (TRIP_DATA.spotifyPlaylist) links.push(`<a href="${TRIP_DATA.spotifyPlaylist}" target="_blank" class="spotify-link"><span class="spotify-icon">♪</span><span>Trip Playlist</span></a>`);
+            if (TRIP_DATA.tricountUrl) links.push(`<a href="${TRIP_DATA.tricountUrl}" target="_blank" class="tricount-link"><span>💰</span><span>Trip Expenses</span></a>`);
+            linksContent.innerHTML = `
+                ${links.join('')}
+                <button class="download-btn" onclick="downloadPage()">⬇ Download Offline</button>
+            `;
+
+            // Accommodation / itinerary table
+            const accTable = document.getElementById("accommodationTable");
+            let tableHTML = `
+                <tr>
+                    <th>Day</th>
+                    <th>Date</th>
+                    <th>Plan</th>
+                    <th>Status</th>
+                </tr>
+            `;
+
+            TRIP_DATA.days.forEach((day, i) => {
+                const hotelBadge = day.hotel.status === 'confirmed' ? 'ready' : day.hotel.status === 'missing' ? 'missing' : 'need-booking';
+                const hasToBook = day.activities && day.activities.some(a => a.needsBooking);
+                const actBadge = hasToBook ? 'need-booking' : (day.activities && day.activities.length > 0 ? 'ready' : 'missing');
+
+                tableHTML += `
+                    <tr data-day="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">
+                        <td>${day.dayNumber}</td>
+                        <td style="white-space: nowrap; font-size: 12px;">${day.dayOfWeek} ${day.date.split(' ')[1] || ''} ${day.date.split(' ')[0]}</td>
+                        <td>
+                            <div style="font-weight: 600; color: var(--accent-gold); font-size: 13px;">${day.title}</div>
+                            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">${day.location}</div>
+                        </td>
+                        <td>
+                            <span class="badge ${hotelBadge}" style="font-size: 10px; padding: 2px 6px; margin: 0 0 4px 0; display: block; text-align: center;">🏨 ${hotelBadge === 'ready' ? '✓' : '✗'}</span>
+                            <span class="badge ${actBadge}" style="font-size: 10px; padding: 2px 6px; margin: 0; display: block; text-align: center;">📋 ${actBadge === 'ready' ? '✓' : '!'}</span>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            accTable.innerHTML = tableHTML;
+        }
+
+        function renderDayTabs() {
+            const dayTabs = document.getElementById("dayTabs");
+            let tabsHTML = '<div class="day-tab active" data-view="overview" onclick="switchView(\'overview\')">Overview</div>';
+
+            TRIP_DATA.days.forEach(day => {
+                const hasMissing = day.hotel.status === "missing" ||
+                                   day.meals.breakfast.status === "missing" ||
+                                   day.meals.lunch.status === "missing" ||
+                                   day.meals.dinner.status === "missing";
+
+                const className = `day-tab ${hasMissing ? 'has-missing' : ''}`;
+                const datePartials = day.date.split(' ');
+                tabsHTML += `
+                    <div class="${className}" data-view="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">
+                        Day ${day.dayNumber}<br><span style="font-size:10px;opacity:0.8;">${day.dayOfWeek} ${datePartials[1] || ''} ${datePartials[0]}</span>
+                    </div>
+                `;
+            });
+
+            dayTabs.innerHTML = tabsHTML;
+        }
+
+        function renderDayViews() {
+            const container = document.getElementById("dayViewsContainer");
+            container.innerHTML = TRIP_DATA.days
+                .map(day => `<div class="day-view" id="day${day.dayNumber}">${renderDayContent(day)}</div>`)
+                .join("");
+            attachCollapsibleHandlers();
+            TRIP_DATA.days.forEach(day => loadWeatherWidget(day.dayNumber));
+        }
+
+        function attachCollapsibleHandlers() {
+            document.querySelectorAll('.section-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    this.classList.toggle('collapsed');
+                    this.nextElementSibling.classList.toggle('collapsed');
+                });
+            });
+
+            document.querySelectorAll('.btn-expand-all').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const dayView = this.closest('.day-view');
+                    dayView.querySelectorAll('.section-header').forEach(h => h.classList.remove('collapsed'));
+                    dayView.querySelectorAll('.section-content').forEach(c => c.classList.remove('collapsed'));
+                });
+            });
+
+            document.querySelectorAll('.btn-collapse-all').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const dayView = this.closest('.day-view');
+                    dayView.querySelectorAll('.section-header').forEach(h => h.classList.add('collapsed'));
+                    dayView.querySelectorAll('.section-content').forEach(c => c.classList.add('collapsed'));
+                });
+            });
+        }
+
+        function renderDayContent(day) {
+            let html = `
+                <div class="hero" style="background-image: url('${day.backgroundImage}')">
+                    <div class="hero-day-number">${day.dayNumber}</div>
+                    <div class="hero-title">${day.title}</div>
+                    <div class="hero-location">${day.location}</div>
+                </div>
+                <div class="expand-all-container">
+                    <button class="btn-expand-all">Expand All</button>
+                    <button class="btn-collapse-all">Collapse All</button>
+                </div>
+            `;
+
+            // Weather — first section, collapsed by default
+            if (DAY_WEATHER[day.dayNumber]) {
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header collapsed" id="wx-header-${day.dayNumber}">
+                            <h3>🌤 Weather<span class="wx-preview" id="wx-preview-${day.dayNumber}"></span></h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-weather collapsed">
+                            <div id="wx-${day.dayNumber}" style="padding: 12px 16px;">
+                                <div class="weather-loading">Loading forecast…</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Flight section on flight days
+            if (day.flight) {
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header">
+                            <h3>✈️ Flight</h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-flight">
+                            <div>
+                                <div style="margin-bottom: 12px;">
+                                    <div style="font-weight: 600; color: var(--accent-gold); font-size: 15px; margin-bottom: 8px;">${day.flight.airline}</div>
+                                    <div style="color: var(--text-primary); margin-bottom: 4px;"><strong>${day.flight.from} → ${day.flight.to}</strong></div>
+                                    <div style="color: var(--text-secondary); font-size: 13px; margin-bottom: 6px;">Depart: ${day.flight.departTime} · Arrive: ${day.flight.arriveTime}</div>
+                                    <div style="color: var(--text-secondary); font-size: 12px; margin-bottom: 12px;">${day.flight.terminal}</div>
+                                    ${TRIP_DATA.checkInUrl ? `<a href="${TRIP_DATA.checkInUrl}" target="_blank" style="display: inline-block; padding: 8px 14px; background-color: #3A7DA0; color: white; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; transition: var(--transition);" onmouseover="this.style.backgroundColor='#4a9dc0'" onmouseout="this.style.backgroundColor='#3A7DA0'">Online Check-in</a>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (day.drive) {
+                html += `
+                    <div class="drive-banner">
+                        <div class="drive-info">
+                            <div class="drive-route">${day.drive.from} → ${day.drive.to}</div>
+                            <div class="drive-duration">${day.drive.duration} · ${day.drive.distance}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            html += renderHotelCard(day);
+
+            if (day.activities.length > 0) {
+                html += renderActivitiesSection(day);
+            }
+
+            if (Object.values(day.meals).some(m => m.restaurants.length > 0 || m.status !== 'flexible')) {
+                html += renderMealsSection(day);
+            }
+
+            if (day.route) {
+                html += `
+                    <div class="card">
+                        <a href="https://${day.route}" target="_blank" style="color: var(--accent-gold); text-decoration: none;">
+                            📍 View Route on Google Maps →
+                        </a>
+                    </div>
+                `;
+            }
+
+            if (day.warnings.length > 0) {
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header">
+                            <h3>⚠️ Warnings</h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-warnings">
+                            <div style="padding: 16px;">
+                                ${day.warnings.map(w => `<div class="warning" style="margin-bottom: 12px; display: block;">${w}</div>`).join("")}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (day.gems.length > 0) {
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header">
+                            <h3>💎 Hidden Gems</h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-gems">
+                            <div style="padding: 16px;">
+                                ${day.gems.map(g => `<div class="gem" style="margin-bottom: 12px; display: block;">${g}</div>`).join("")}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            const dc = COST_DATA.days[day.dayNumber];
+            if (dc) {
+                const total = dc.hotel + dc.activities + dc.food + (dc.other || 0);
+                const parts = [];
+                if (dc.hotel)      parts.push(`🏨 $${dc.hotel}`);
+                if (dc.activities) parts.push(`🗺️ $${dc.activities}`);
+                if (dc.food)       parts.push(`🍽️ $${dc.food}`);
+                if (dc.other)      parts.push(`⛽ $${dc.other}`);
+                const flightNote = day.flight ? ' · excl. flights' : '';
+                html += `
+                    <div class="day-cost-bar">
+                        <span class="day-cost-label">💰 Est. group cost${flightNote}</span>
+                        <span class="day-cost-items">${parts.join(' · ')}</span>
+                        <span class="day-cost-total">~$${total}</span>
+                    </div>
+                `;
+            }
+
+            return html;
+        }
+
+        function renderActivitiesSection(day) {
+            // Group activities by time
+            const groupedActivities = {};
+            const activityOrder = [];
+
+            day.activities.forEach(a => {
+                if (!groupedActivities[a.time]) {
+                    groupedActivities[a.time] = [];
+                    activityOrder.push(a.time);
+                }
+                groupedActivities[a.time].push(a);
+            });
+
+            let html = `
+                <div class="collapsible-section">
+                    <div class="section-header">
+                        <h3>Activities</h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content section-activities">
+                        <div style="padding: 16px;">
+                            <div class="timeline">
+            `;
+
+            activityOrder.forEach(timeLabel => {
+                const activities = groupedActivities[timeLabel];
+
+                // Check if this is a specific time (HH:MM format) or a period (Morning, Afternoon, etc.)
+                const isSpecificTime = /^\d{1,2}:\d{2}/.test(timeLabel);
+
+                if (!isSpecificTime) {
+                    // Time period (Morning, Afternoon, etc.)
+                    html += `<div class="timeline-time-group-header">${timeLabel}</div>`;
+                    activities.forEach(a => {
+                        const isAlternative = a.time.toLowerCase() === 'alt' || (a.text && a.text.toLowerCase().includes('instead of')) || (a.text && a.text.toLowerCase().includes('alternative'));
+                        const mapsUrl = a.mapsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.text + ' ' + day.location)}`;
+                        html += `
+                            <div class="timeline-item-bullet ${isAlternative ? 'alternative' : ''}">
+                                <span${isAlternative ? ' style="color: #E8C66E;"' : ''}>${a.text}</span>
+                                <a href="${mapsUrl}" target="_blank" class="activity-maps-link">📍</a>
+                                ${a.subNote ? `<div class="timeline-note">${a.subNote}</div>` : ""}
+                                ${a.needsBooking ? '<div class="timeline-tag">⚠ Book in advance</div>' : ""}
+                            </div>
+                        `;
+                    });
+                } else {
+                    // Specific time
+                    activities.forEach(a => {
+                        const isAlternative = a.text && a.text.toLowerCase().includes('alternative');
+                        const mapsUrl = a.mapsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.text + ' ' + day.location)}`;
+                        html += `
+                            <div class="timeline-item">
+                                <div class="timeline-time">${timeLabel}</div>
+                                <div class="timeline-text">${a.text} <a href="${mapsUrl}" target="_blank" class="activity-maps-link">📍</a></div>
+                                ${a.subNote ? `<div class="timeline-note">${a.subNote}</div>` : ""}
+                                ${a.needsBooking ? '<div class="timeline-tag">⚠ Book in advance</div>' : ""}
+                            </div>
+                        `;
+                    });
+                }
+            });
+
+            html += `
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            return html;
+        }
+
+        function renderHotelCard(day) {
+            let html = `<div class="collapsible-section">
+                <div class="section-header">
+                    <h3>Hotel</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content section-hotel">
+                    <div style="padding: 16px;">`;
+
+            const statusData = STATUS_STYLES[day.hotel.status];
+            const hotelReady = day.hotel.status === 'confirmed' ? 'ready' : day.hotel.status === 'missing' ? 'missing' : 'need-booking';
+
+            html += `
+                <div class="hotel-info">
+                    <div class="hotel-name">${day.hotel.name}</div>
+                    <div class="hotel-status-badges">
+                        <span class="badge ${hotelReady === 'ready' ? 'ready' : 'missing'}">Hotel: ${hotelReady === 'ready' ? 'Ready' : 'Missing'}</span>
+                    </div>
+                    ${day.hotel.note ? `<div class="hotel-note">${day.hotel.note}</div>` : ""}
+                    ${day.hotel.mapsUrl ? `
+                        <div class="hotel-buttons">
+                            <a href="https://${day.hotel.mapsUrl}" target="_blank" class="btn-maps">Maps</a>
+                        </div>
+                    ` : ""}
+                </div>
+            `;
+
+            if (day.hotel.altHotel) {
+                const altReady = day.hotel.altHotel.status === 'confirmed' ? 'ready' : day.hotel.altHotel.status === 'missing' ? 'missing' : 'need-booking';
+                html += `
+                    <div class="hotel-info" style="border-left: 4px solid #9A7A30; margin-top: 12px;">
+                        <div class="hotel-name">${day.hotel.altHotel.name}</div>
+                        <div class="hotel-status-badges">
+                            <span class="badge ${altReady === 'ready' ? 'ready' : 'need-booking'}">Hotel: ${altReady === 'ready' ? 'Ready' : 'Pending'}</span>
+                        </div>
+                        ${day.hotel.altHotel.note ? `<div class="hotel-note">${day.hotel.altHotel.note}</div>` : ""}
+                        ${day.hotel.altHotel.mapsUrl ? `
+                            <div class="hotel-buttons">
+                                <a href="https://${day.hotel.altHotel.mapsUrl}" target="_blank" class="btn-maps">Maps</a>
+                            </div>
+                        ` : ""}
+                    </div>
+                `;
+            }
+
+            html += `</div></div></div>`;
+            return html;
+        }
+
+        function renderMealsSection(day) {
+            let html = `
+                <div class="collapsible-section">
+                    <div class="section-header">
+                        <h3>Meals</h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content section-meals">
+                        <div class="meals-section">
+            `;
+
+            const mealTypes = ['breakfast', 'lunch', 'dinner'];
+            const mealLabels = { breakfast: 'Breakfast', lunch: 'Lunch', dinner: 'Dinner' };
+
+            mealTypes.forEach((mealType, idx) => {
+                const meal = day.meals[mealType];
+                const statusData = STATUS_STYLES[meal.status];
+
+                html += `
+                    <div style="margin-bottom: 16px; padding-bottom: 12px; ${idx < mealTypes.length - 1 ? 'border-bottom: 1px solid var(--border-color);' : ''}">
+                        <div class="meal-type">${mealLabels[mealType]}</div>
+                        <span class="badge ${statusData.badge}">${statusData.label}</span>
+                `;
+
+                if (meal.note) {
+                    html += `<div class="meal-note">${meal.note}</div>`;
+                }
+
+                if (meal.restaurants.length > 0) {
+                    html += `<div class="restaurant-cards">`;
+                    meal.restaurants.forEach(rest => {
+                        const isSelected = isRestaurantSelected(day.dayNumber, mealType, rest.name);
+                        html += `
+                            <div class="restaurant-card ${isSelected ? 'selected' : ''}">
+                                <div class="restaurant-name">${rest.name}</div>
+                                <div class="restaurant-desc">${rest.desc}</div>
+                                <div class="restaurant-meta">
+                                    <span class="restaurant-rating">${rest.rating}</span>
+                                </div>
+                                <div class="restaurant-buttons">
+                                    <button class="btn-select" onclick="toggleRestaurant(${day.dayNumber}, '${mealType}', '${rest.name.replace(/'/g, "\\'")}')">
+                                        ${isSelected ? '✓ Selected' : 'Select'}
+                                    </button>
+                                    <a href="https://${rest.mapsUrl}" target="_blank" class="btn-maps">Maps</a>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += `</div>`;
+                }
+
+                html += `</div>`;
+            });
+
+            html += `
+                        </div>
+                    </div>
+                </div>
+            `;
+            return html;
+        }
+
+        function goToToday() {
+            const today = new Date().toISOString().split('T')[0];
+            for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
+                if (w.isoDate === today) { switchView(`day${dayNum}`); return; }
+            }
+            switchView('overview');
+        }
+
+        function switchView(viewId) {
+            document.querySelectorAll('.day-view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+
+            document.getElementById(viewId).classList.add('active');
+            document.querySelector(`[data-view="${viewId}"]`).classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            const activeTab = document.querySelector(`[data-view="${viewId}"]`);
+            if (activeTab) {
+                activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+        }
+
+        function toggleRestaurant(dayNum, mealType, restaurantName) {
+            setSelectedRestaurant(dayNum, mealType, restaurantName);
+            renderDayViews();
+            switchView(`day${dayNum}`);
+        }
+
+        function downloadPage() {
+            const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = (TRIP_DATA.title || 'trip').toLowerCase().replace(/\s+/g, '-') + '-itinerary.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function renderBudgetCard() {
+            const el = document.getElementById('budgetCard');
+            if (!el) return;
+            const total = COST_DATA.summary.reduce((s, r) => s + r.amount, 0);
+            const numPeople = TRIP_DATA.travelers.length || 1;
+            const pp = Math.round(total / numPeople);
+            el.innerHTML = `
+                <table class="budget-table">
+                    ${COST_DATA.summary.map(r => `
+                        <tr>
+                            <td>
+                                <div>${r.cat}</div>
+                                <div class="budget-note">${r.note}</div>
+                            </td>
+                            <td class="budget-amount">$${r.amount.toLocaleString()}</td>
+                        </tr>
+                    `).join('')}
+                    <tr class="budget-total-row">
+                        <td>Total · ${numPeople} ${numPeople === 1 ? 'person' : 'people'}</td>
+                        <td class="budget-amount">~$${total.toLocaleString()}</td>
+                    </tr>
+                </table>
+                <div class="budget-perperson">~$${pp.toLocaleString()} per person</div>
+                <div class="budget-disclaimer">${COST_DATA.disclaimer}</div>
+            `;
+        }
+
+        // ============================================================
+        // WEATHER — Open-Meteo (free, no API key required)
+        // Populate DAY_WEATHER above with lat/lon per day number
+        // ============================================================
+
+        const WX_CACHE_TTL = 3 * 60 * 60 * 1000; // 3 hours
+
+        async function fetchWeather(dayNumber) {
+            const info = DAY_WEATHER[dayNumber];
+            if (!info) return null;
+            const cacheKey = `wx_${info.isoDate}_${info.lat}`;
+            try {
+                const cached = localStorage.getItem(cacheKey);
+                if (cached) {
+                    const { d, ts } = JSON.parse(cached);
+                    if (Date.now() - ts < WX_CACHE_TTL) return d;
+                }
+            } catch(e) {}
+            try {
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${info.lat}&longitude=${info.lon}&hourly=temperature_2m,weathercode&daily=sunrise,sunset&timezone=auto&start_date=${info.isoDate}&end_date=${info.isoDate}`;
+                const resp = await fetch(url);
+                if (!resp.ok) return null;
+                const json = await resp.json();
+                const times = json.hourly?.time || [];
+                const temps = json.hourly?.temperature_2m || [];
+                const codes = json.hourly?.weathercode || [];
+                const getT = h => {
+                    const idx = times.indexOf(`${info.isoDate}T${String(h).padStart(2,'0')}:00`);
+                    return idx !== -1 ? temps[idx] : null;
+                };
+                const getC = h => {
+                    const idx = times.indexOf(`${info.isoDate}T${String(h).padStart(2,'0')}:00`);
+                    return idx !== -1 ? codes[idx] : null;
+                };
+                const todayStr = new Date().toISOString().split('T')[0];
+                const nowHour = new Date().getHours();
+                const isToday = info.isoDate === todayStr;
+                const d = {
+                    sunrise: (json.daily?.sunrise?.[0] || '').split('T')[1] || null,
+                    sunset:  (json.daily?.sunset?.[0]  || '').split('T')[1] || null,
+                    t8: getT(8), t13: getT(13), t20: getT(20),
+                    tNow:     isToday ? getT(nowHour) : null,
+                    wcodeNow: isToday ? (getC(nowHour) ?? getC(13) ?? getC(12)) : null,
+                    wcode: getC(13) ?? getC(12) ?? getC(11),
+                };
+                try { localStorage.setItem(cacheKey, JSON.stringify({ d, ts: Date.now() })); } catch(e) {}
+                return d;
+            } catch(e) { return null; }
+        }
+
+        function weatherChartSVG(t8, t13, t20, dayNum) {
+            const vals = [t8, t13, t20];
+            const labs = ['8 AM', '1 PM', '8 PM'];
+            const W = 300, pL = 16, pR = 16, pT = 28, pB = 22, cH = 50;
+            const tH = pT + cH + pB, cW = W - pL - pR;
+            const minV = Math.min(...vals) - 2, maxV = Math.max(...vals) + 2;
+            const toY = v => pT + cH - ((v - minV) / (maxV - minV)) * cH;
+            const xs = [pL, pL + cW / 2, pL + cW];
+            const pts = vals.map((v, i) => ({ x: xs[i], y: toY(v) }));
+            const ext = [
+                { x: 2*pts[0].x - pts[1].x, y: 2*pts[0].y - pts[1].y },
+                ...pts,
+                { x: 2*pts[2].x - pts[1].x, y: 2*pts[2].y - pts[1].y }
+            ];
+            let curve = `M ${pts[0].x},${pts[0].y.toFixed(1)}`;
+            for (let i = 1; i < 3; i++) {
+                const [p0, p1, p2, p3] = [ext[i-1], ext[i], ext[i+1], ext[i+2]];
+                const cp1 = { x: p1.x + (p2.x-p0.x)/6, y: p1.y + (p2.y-p0.y)/6 };
+                const cp2 = { x: p2.x - (p3.x-p1.x)/6, y: p2.y - (p3.y-p1.y)/6 };
+                curve += ` C ${cp1.x.toFixed(1)},${cp1.y.toFixed(1)} ${cp2.x.toFixed(1)},${cp2.y.toFixed(1)} ${p2.x},${p2.y.toFixed(1)}`;
+            }
+            const fillPath = `${curve} L ${pts[2].x},${pT+cH} L ${pts[0].x},${pT+cH} Z`;
+            const gid = `wxg${dayNum}`;
+            return `<svg width="100%" viewBox="0 0 ${W} ${tH}" style="display:block;overflow:visible;">
+                <defs><linearGradient id="${gid}" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#C9966A" stop-opacity="0.3"/>
+                    <stop offset="100%" stop-color="#C9966A" stop-opacity="0.03"/>
+                </linearGradient></defs>
+                <path d="${fillPath}" fill="url(#${gid})"/>
+                <path d="${curve}" fill="none" stroke="#C9966A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                ${pts.map((p, i) => `
+                    <circle cx="${p.x}" cy="${p.y.toFixed(1)}" r="4" fill="#C9966A" stroke="var(--bg-secondary)" stroke-width="1.5"/>
+                    <text class="wx-temp" x="${p.x}" y="${(p.y-10).toFixed(1)}" text-anchor="middle" font-size="11" font-weight="600" font-family="DM Sans,sans-serif">${Math.round(vals[i])}°C</text>
+                    <text class="wx-time" x="${p.x}" y="${pT+cH+16}" text-anchor="middle" font-size="10" font-family="DM Sans,sans-serif">${labs[i]}</text>
+                `).join('')}
+            </svg>`;
+        }
+
+        function wmoIcon(code) {
+            if (code === null || code === undefined) return { emoji: '🌤️', label: 'Weather' };
+            if (code === 0)  return { emoji: '☀️',  label: 'Clear sky' };
+            if (code <= 2)   return { emoji: '🌤️', label: 'Partly cloudy' };
+            if (code === 3)  return { emoji: '☁️',  label: 'Overcast' };
+            if (code <= 48)  return { emoji: '🌫️', label: 'Fog' };
+            if (code <= 55)  return { emoji: '🌦️', label: 'Drizzle' };
+            if (code <= 65)  return { emoji: '🌧️', label: 'Rain' };
+            if (code <= 77)  return { emoji: '❄️',  label: 'Snow' };
+            if (code <= 82)  return { emoji: '🌧️', label: 'Rain showers' };
+            if (code <= 94)  return { emoji: '⛈️',  label: 'Thunderstorm' };
+            return { emoji: '⛈️', label: 'Thunderstorm with hail' };
+        }
+
+        async function loadWeatherWidget(dayNumber) {
+            const el = document.getElementById(`wx-${dayNumber}`);
+            if (!el) return;
+            const data = await fetchWeather(dayNumber);
+            if (!data || (data.t8 === null && data.t13 === null && data.t20 === null)) {
+                el.innerHTML = `<div class="weather-error">Forecast not yet available for this date</div>`;
+                return;
+            }
+            const now = new Date();
+            const updated = `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
+            const chart = (data.t8 !== null && data.t13 !== null && data.t20 !== null)
+                ? weatherChartSVG(data.t8, data.t13, data.t20, dayNumber) : '';
+            const wx = wmoIcon(data.wcode);
+            const midTemp = data.t13 !== null ? `${Math.round(data.t13)}°C` : '';
+            el.innerHTML = `
+                <div class="wx-condition-row">
+                    <span class="wx-condition-icon">${wx.emoji}</span>
+                    <span class="wx-condition-label">${wx.label}${midTemp ? ' · ' + midTemp : ''}</span>
+                </div>
+                <div class="weather-sun-row" style="margin-top:10px;">
+                    ${data.sunrise ? `<span>🌅 ${data.sunrise}</span>` : ''}
+                    ${data.sunset  ? `<span>🌇 ${data.sunset}</span>`  : ''}
+                    <button class="weather-refresh" title="Refresh forecast" onclick="refreshWeather(${dayNumber})">↻</button>
+                    <span style="font-size:10px;color:var(--text-muted);">as of ${updated}</span>
+                    <a href="https://wttr.in/${DAY_WEATHER[dayNumber]?.lat},${DAY_WEATHER[dayNumber]?.lon}?lang=en" target="_blank" style="font-size:10px;color:var(--accent-gold);text-decoration:none;margin-left:auto;">More details ↗</a>
+                </div>
+                <div class="weather-chart-container">${chart}</div>
+            `;
+            const preview = document.getElementById(`wx-preview-${dayNumber}`);
+            if (preview) preview.textContent = `${wx.emoji} ${midTemp}`;
+        }
+
+        function refreshWeather(dayNumber) {
+            const info = DAY_WEATHER[dayNumber];
+            if (info) { try { localStorage.removeItem(`wx_${info.isoDate}_${info.lat}`); } catch(e) {} }
+            const el = document.getElementById(`wx-${dayNumber}`);
+            if (el) el.innerHTML = `<div class="weather-loading">Refreshing…</div>`;
+            loadWeatherWidget(dayNumber);
+        }
+
+        async function loadOverviewWeather(dayNumber) {
+            const el = document.getElementById('wx-overview');
+            if (!el || !DAY_WEATHER[dayNumber]) return;
+            const w = DAY_WEATHER[dayNumber];
+            // Show the section and update header with location
+            const section = document.getElementById('overviewWeatherSection');
+            if (section) section.style.display = '';
+            const day = TRIP_DATA.days.find(d => d.dayNumber === dayNumber);
+            const locLabel = day ? ` · ${day.location}` : '';
+            const header = document.getElementById('overview-wx-header');
+            if (header) {
+                const h3 = header.querySelector('h3');
+                if (h3) {
+                    const preview = document.getElementById('wx-preview-overview');
+                    h3.innerHTML = `🌤 Today's Weather<small style="font-size:11px;opacity:0.7;font-weight:400;">${locLabel}</small>`;
+                    if (preview) h3.appendChild(preview);
+                }
+            }
+            const data = await fetchWeather(dayNumber);
+            if (!data || (data.tNow === null && data.t8 === null && data.t13 === null && data.t20 === null)) {
+                el.innerHTML = `<div class="weather-error">Forecast not yet available for this date</div>`;
+                return;
+            }
+            const now = new Date();
+            const updated = `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
+            const chart = (data.t8 !== null && data.t13 !== null && data.t20 !== null)
+                ? weatherChartSVG(data.t8, data.t13, data.t20, dayNumber) : '';
+            const wx = wmoIcon(data.wcodeNow ?? data.wcode);
+            const displayTemp = data.tNow !== null ? `${Math.round(data.tNow)}°C now` : (data.t13 !== null ? `${Math.round(data.t13)}°C` : '');
+            const previewTemp = data.tNow !== null ? `${Math.round(data.tNow)}°C` : (data.t13 !== null ? `${Math.round(data.t13)}°C` : '');
+            el.innerHTML = `
+                <div class="wx-condition-row">
+                    <span class="wx-condition-icon">${wx.emoji}</span>
+                    <span class="wx-condition-label">${wx.label}${displayTemp ? ' · ' + displayTemp : ''}</span>
+                </div>
+                <div class="weather-sun-row" style="margin-top:10px;">
+                    ${data.sunrise ? `<span>🌅 ${data.sunrise}</span>` : ''}
+                    ${data.sunset  ? `<span>🌇 ${data.sunset}</span>`  : ''}
+                    <button class="weather-refresh" title="Refresh forecast" onclick="refreshOverviewWeather(${dayNumber})">↻</button>
+                    <span style="font-size:10px;color:var(--text-muted);">as of ${updated}</span>
+                    <a href="https://wttr.in/${w.lat},${w.lon}?lang=en" target="_blank" style="font-size:10px;color:var(--accent-gold);text-decoration:none;margin-left:auto;">More details ↗</a>
+                </div>
+                <div class="weather-chart-container">${chart}</div>
+            `;
+            const preview = document.getElementById('wx-preview-overview');
+            if (preview) preview.textContent = `${wx.emoji} ${previewTemp}`;
+        }
+
+        function refreshOverviewWeather(dayNumber) {
+            const info = DAY_WEATHER[dayNumber];
+            if (info) { try { localStorage.removeItem(`wx_${info.isoDate}_${info.lat}`); } catch(e) {} }
+            const el = document.getElementById('wx-overview');
+            if (el) el.innerHTML = `<div class="weather-loading">Refreshing…</div>`;
+            loadOverviewWeather(dayNumber);
+        }
+
+        // ============================================================
+        // CURRENCY CALCULATOR
+        // DAY_CURRENCY: map day number → { code, name, symbol } for the
+        // local currency on that day. The calculator always shows
+        // local currency / AED / USD. Update per trip.
+        // ============================================================
+        const DAY_CURRENCY = {
+            // 1: { code: 'USD', name: 'US Dollar', symbol: '$' },
+        };
+
+        let calcRates = null;
+        let calcPrimary = { code: 'USD', name: 'US Dollar', symbol: '$' };
+
+        function getTodayTripDay() {
+            const today = new Date().toISOString().split('T')[0];
+            for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
+                if (w.isoDate === today) return parseInt(dayNum);
+            }
+            return null;
+        }
+
+        async function fetchCalcRates(force) {
+            const cacheKey = 'calc_rates_v1';
+            if (!force) {
+                const cached = localStorage.getItem(cacheKey);
+                if (cached) {
+                    const { data, ts } = JSON.parse(cached);
+                    if (Date.now() - ts < 24 * 3600 * 1000) { calcRates = data; updateCalcUI(); return; }
+                }
+            }
+            document.getElementById('calcRatesNote').textContent = 'Fetching rates…';
+            try {
+                const res = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json');
+                const json = await res.json();
+                calcRates = { usd: 1, aed: json.usd.aed };
+                // add local currencies from DAY_CURRENCY
+                Object.values(DAY_CURRENCY).forEach(c => {
+                    const k = c.code.toLowerCase();
+                    if (json.usd[k]) calcRates[k] = json.usd[k];
+                });
+                localStorage.setItem(cacheKey, JSON.stringify({ data: calcRates, ts: Date.now() }));
+            } catch {
+                calcRates = { usd: 1, aed: 3.6725 };
+                document.getElementById('calcRatesNote').textContent = 'Offline rates (approx)';
+                return;
+            }
+            updateCalcUI();
+        }
+
+        function updateCalcUI() {
+            if (!calcRates) return;
+            const todayDay = getTodayTripDay();
+            const defaultCurrency = Object.values(DAY_CURRENCY)[0] || { code: 'USD', name: 'US Dollar', symbol: '$' };
+            calcPrimary = (todayDay && DAY_CURRENCY[todayDay]) ? DAY_CURRENCY[todayDay] : defaultCurrency;
+            document.getElementById('calcCode0').textContent = calcPrimary.code;
+            document.getElementById('calcName0').textContent = calcPrimary.name;
+            document.getElementById('calcHeaderSub').textContent = calcPrimary.code + ' · AED · USD';
+            const ts = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('calcRatesNote').textContent = `Rates updated ${ts}`;
+        }
+
+        function calcConvert(sourceIdx) {
+            if (!calcRates) return;
+            const inputs = [document.getElementById('calcInput0'), document.getElementById('calcInput1'), document.getElementById('calcInput2')];
+            const codes = [calcPrimary.code.toLowerCase(), 'aed', 'usd'];
+            const val = parseFloat(inputs[sourceIdx].value);
+            if (isNaN(val)) { inputs.forEach((inp, i) => { if (i !== sourceIdx) inp.value = ''; }); return; }
+            const sourceRate = calcRates[codes[sourceIdx]] || 1;
+            const valInUsd = val / sourceRate;
+            inputs.forEach((inp, i) => {
+                if (i === sourceIdx) return;
+                inp.value = (valInUsd * (calcRates[codes[i]] || 1)).toFixed(2);
+            });
+        }
+
+        function toggleCurrencyCalc() {
+            const body = document.getElementById('calcBody');
+            const chevron = document.getElementById('calcChevron');
+            const open = body.classList.toggle('open');
+            chevron.textContent = open ? '▼' : '▶';
+            if (open && !calcRates) fetchCalcRates(false);
+        }
+
+        fetchCalcRates(false);
+
+        /* ── SWIPE NAVIGATION ── */
+        (function () {
+            let startX = 0, startY = 0, locked = false;
+            const views = ['overview', ...TRIP_DATA.days.map(d => `day${d.dayNumber}`)];
+            function isScrollable(el) {
+                while (el && el !== document.body) {
+                    const style = window.getComputedStyle(el);
+                    const overflow = style.overflowX;
+                    if ((overflow === 'auto' || overflow === 'scroll') && el.scrollWidth > el.clientWidth) return true;
+                    el = el.parentElement;
+                }
+                return false;
+            }
+            document.addEventListener('touchstart', e => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                locked = isScrollable(e.target);
+            }, { passive: true });
+            document.addEventListener('touchend', e => {
+                if (locked) return;
+                const dx = e.changedTouches[0].clientX - startX;
+                const dy = e.changedTouches[0].clientY - startY;
+                if (Math.abs(dx) < 60 || Math.abs(dy) > Math.abs(dx) * 0.8) return;
+                const current = document.querySelector('.day-view.active');
+                if (!current) return;
+                const idx = views.indexOf(current.id);
+                if (dx < 0 && idx < views.length - 1) switchView(views[idx + 1]);
+                else if (dx > 0 && idx > 0) switchView(views[idx - 1]);
+            }, { passive: true });
+        })();
+
+        initializePage();
+
+        /* ── TRIP ROUTE MAPS ── */
+        function makeTile(map) {
+            const url = document.body.classList.contains('light-mode')
+                ? 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
+                : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+            L.tileLayer(url, { attribution: '© OpenStreetMap © CARTO', subdomains: 'abcd', maxZoom: 18 }).addTo(map);
+        }
+        function pin(label, color) {
+            color = color || '#C9966A';
+            return L.divIcon({
+                html: '<div class="map-day-marker" style="background:' + color + ';font-size:' + (label.length > 2 ? '9' : '11') + 'px;">' + label + '</div>',
+                className: '', iconSize: [26, 26], iconAnchor: [13, 13], popupAnchor: [0, -16]
+            });
+        }
+        async function osrmRoute(waypoints) {
+            try {
+                const coords = waypoints.map(w => w[1].toFixed(5) + ',' + w[0].toFixed(5)).join(';');
+                const r = await fetch('https://router.project-osrm.org/route/v1/driving/' + coords + '?overview=full&geometries=geojson');
+                const j = await r.json();
+                if (j.code !== 'Ok' || !j.routes[0]) return null;
+                return j.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
+            } catch(e) { return null; }
+        }
+        function drawRoute(map, pts, color, dash) {
+            L.polyline(pts, { color: color || '#C9966A', weight: 3, opacity: 0.9, dashArray: dash || null, lineJoin: 'round' }).addTo(map);
+        }
+
+        // TODO: implement renderXxxMap() for each map div, then call them in the onload below
+        // async function renderMainMap() { ... }
+
+        // Load Leaflet then render maps
+        (function() {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+            document.head.appendChild(link);
+            const s = document.createElement('script');
+            s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+            s.onload = function() { setTimeout(function() { /* renderMainMap(); */ }, 300); };
+            document.head.appendChild(s);
+        })();
+
+    </script>
+</body>
+</html>
