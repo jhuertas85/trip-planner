@@ -1379,7 +1379,7 @@
             travelers: ["Mamá", "Papá", "Giova", "Ari", "Coki", "Liz", "Em", "Matías", "JC", "Maria"],
 
             carRental: {
-                company: "Alamo · Midsize SUV (Nissan Rogue or similar)",
+                company: "RAV4 SUV (ya rentado)",
                 phone: "(833) 763-1735",
                 website: "alamo.com · Pickup Jul 8 4pm @ SJU · Return Jul 12 3pm @ SJU"
             },
@@ -1392,7 +1392,7 @@
             flights: [
                 {
                     date: "Jul 8", dayOfWeek: "Mié", airline: "Iberia IB381",
-                    from: "MAD", to: "SJU", departTime: "12:45", arriveTime: "15:25",
+                    from: "MAD", to: "SJU", departTime: "12:45", arriveTime: "12:00",
                     terminal: "T4S Madrid Barajas → Terminal C SJU · Economy · Meal incl. · No free checked baggage",
                     passengers: ["Juan", "Maria"]
                 },
@@ -1411,7 +1411,7 @@
                     backgroundImage: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800",
                     flight: {
                         airline: "Iberia IB381", from: "MAD", to: "SJU",
-                        departTime: "12:45", arriveTime: "15:25",
+                        departTime: "12:45", arriveTime: "12:00",
                         terminal: "T4S Madrid Barajas → Terminal C SJU"
                     },
                     hotel: {
@@ -1426,8 +1426,8 @@
                         { time: "Mañana", text: "Grupo temprano (8am) → Playa Luquillo (Balneario La Monserrate) — tranquila, palmeras, salvavidas, baños", subNote: "No pueden entrar hasta las 3pm — la playa mata la espera", needsBooking: false },
                         { time: "Mañana", text: "Compra de supermercado — abastecer la casa para 10 personas (agua, café, desayuno, snacks, hielo, bebidas)", subNote: "Supermercado en Luquillo o Río Grande · ~10–15 min de la playa", needsBooking: false },
                         { time: "3:00pm", text: "Registro en la casa · Villa Pitahaya abre 3pm", subNote: "", needsBooking: false },
-                        { time: "3:25pm", text: "JC llega a SJU (IB381) → recogida Alamo 4pm", subNote: "Alamo: 1er piso garage SJU · Sin shuttle — cruzar la calle desde reclamo · (833) 763-1735", needsBooking: false },
-                        { time: "4:15pm", text: "Grupo Huertas llega SJU → directo a la casa", subNote: "", needsBooking: false },
+                        { time: "12:00pm", text: "JC llega a SJU (IB381) → recogida Alamo 12:30pm", subNote: "Alamo: 1er piso garage SJU · Sin shuttle — cruzar la calle desde reclamo · (833) 763-1735", needsBooking: false },
+                        { time: "12:30pm", text: "Grupo Huertas llega SJU → directo a la casa", subNote: "Todos pueden instalarse en la casa ahora que está abierta desde temprano", needsBooking: false },
                         { time: "7:00pm", text: "María llega — recogerla en SJU", subNote: "Una vez todos: instalarse, comer, descansar. Sin grandes planes esta noche.", needsBooking: false }
                     ],
                     meals: {
@@ -1441,17 +1441,16 @@
                             ]
                         },
                         dinner: {
-                            status: "options",
-                            note: "Opciones: cocinar en la casa (mejor con María 7pm, todos cansados) — o si energía: restaurante bonito con mariscos frescos",
+                            status: "confirmed",
+                            note: "Cena en El Pescador & Tapas — reserva para 10 personas en la noche (7:30–8pm). Mariscos frescos, ambiente Caribe tranquilo, cócteles geniales.",
                             restaurants: [
-                                { name: "Cook at the house", desc: "Mejor opción noche llegada · la casa abastecida · todos cansados viaje", rating: "🏠 Recomendado", mapsUrl: "maps.google.com/maps/search/?api=1&query=Luquillo+Puerto+Rico" },
-                                { name: "El Pescador & Tapas (Fajardo)", desc: "Mariscos frescos + langosta agua · vibe Caribe casual · cócteles geniales · reserva si tienes energía", rating: "⭐ Upscale", mapsUrl: "maps.google.com/maps/search/?api=1&query=El+Pescador+Tapas+Fajardo+Puerto+Rico" },
-                                { name: "Luquillo Kioskos (noche)", desc: "Caminar después instalarse · auto-servicio · sin espera · casual", rating: "Flexible", mapsUrl: "maps.google.com/maps/search/?api=1&query=Luquillo+Kioskos+Puerto+Rico" }
+                                { name: "El Pescador & Tapas (Fajardo)", desc: "⭐ RECOMENDACIÓN PRINCIPAL — Mariscos frescos + langosta agua · vibe Caribe casual · cócteles geniales · ~15–20 min de casa", rating: "⭐⭐⭐ Upscale", mapsUrl: "maps.google.com/maps/search/?api=1&query=El+Pescador+Tapas+Fajardo+Puerto+Rico" }
                             ]
                         }
                     },
                     route: "maps.google.com/maps/?q=Villa+Pitahaya+Luquillo+Puerto+Rico",
                     warnings: [
+                        "🚨 CRÍTICO: Solicitar early check-in a Villa Pitahaya — normalmente abre 3pm pero grupo llega 12pm. Confirmar disponibilidad ANTES del viaje.",
                         "⏱ SJU → Luquillo: ~45 min sin tráfico, hasta 1h15 con tráfico — margen para cada recogida",
                         "💵 Efectivo AHORA: lancha bahía bio solo efectivo, muchos kioskos también. Suficiente para toda la semana.",
                         "🧴 Esenciales compra: bloqueador reef-safe, repelente, 2-3 galones agua, desayuno para 10",
@@ -1477,15 +1476,15 @@
                     },
                     drive: { from: "House", to: "El Yunque PR-191 gate", duration: "~15–20 min", distance: "Gate opens 8:00am · ~200-car cap · Arrive at opening" },
                     activities: [
-                        { time: "7:30am", text: "Salir casa — Portón El Yunque abre 8am y tiene límite ~200 carros (orden llegada)", subNote: "Entrada gratis, sin reserva necesaria (Feb 2026). Temprano = acceso garantizado.", needsBooking: false },
-                        { time: "8:00am", text: "Cascada La Coca — cascada a orilla carretera, cero caminata. Parada foto perfecta abuelos.", subNote: "", needsBooking: false },
-                        { time: "Mañana", text: "Torre Yokahú — subida corta a mirador sobre bosque y costa", subNote: "", needsBooking: false },
-                        { time: "Mañana", text: "Cascadas Juan Diego — escalera rocosa sube 10–12 min. Saltarla si está mojado (Papá).", subNote: "Cascada más fácil que realmente alcanzas dentro del bosque", needsBooking: false },
-                        { time: "Tarde", text: "Grupo activo: Sendero La Mina → Cascadas La Mina (piscina) O Sendero Mt. Britton + torre", subNote: "Caminatas reales — tenis requeridos, esperar lodo. Vistas bosque nuboso desde torre Britton son mejores del parque.", needsBooking: false },
-                        { time: "Tarde", text: "Grupo relajado (abuelos + niña 8): Parar en miradores, luego bajar temprano descansar casa", subNote: "Dos carros hacen esta división totalmente sin dolor", needsBooking: false },
+                        { time: "7:30am", text: "Salir casa — Portón El Yunque abre 8am y tiene límite ~200 carros (orden llegada)", subNote: "Entrada gratis, sin reserva necesaria. Temprano = acceso garantizado.", needsBooking: false },
+                        { time: "8:00am", text: "Cascada La Coca — cascada a orilla carretera, cero caminata. Parada foto perfecta abuelos.", subNote: "Mañana LIGERA — fotos, aire montaña, energía para bahía bio esta noche", needsBooking: false },
+                        { time: "Mañana", text: "Torre Yokahú — subida corta a mirador sobre bosque y costa", subNote: "Opcional si energía — excelentes vistas, solo 10 min arriba", needsBooking: false },
+                        { time: "Mañana", text: "Cascadas Juan Diego — escalera rocosa sube 10–12 min. Opcional si grupo en forma.", subNote: "Saltarla si está mojado o grupo quiere guardar energía", needsBooking: false },
+                        { time: "Tarde", text: "Grupo activo DESPUÉS almuerzo: Sendero La Mina → Cascadas La Mina (piscina) O Sendero Mt. Britton + torre", subNote: "Caminatas reales — tenis requeridos, esperar lodo. Vistas bosque nuboso desde torre Britton son mejores del parque.", needsBooking: false },
+                        { time: "Tarde", text: "Grupo relajado (abuelos + niña 8): Miradores, luego bajar temprano descansar casa", subNote: "Dos carros hacen esta división totalmente sin dolor", needsBooking: false },
                         { time: "Tarde", text: "Almuerzo en Kioskos Luquillo — reagruparse 10 después bosque", subNote: "~15–20 min del portón El Yunque", needsBooking: false },
-                        { time: "Tarde", text: "Piscina casa — recargarse antes bahía bio", subNote: "", needsBooking: false },
-                        { time: "Noche", text: "🌊 Bahía Bioluminiscente — Laguna Grande, Fajardo (~15–20 min casa)", subNote: "Lancha eléctrica (Bio Island / Capt. Suárez): ~$50/persona · SOLO EFECTIVO · Reservar teléfono ANTES · Asientos limitados. Para abuelos + niña 8. Opción kayak grupo activo (30 min remar cada lado manglares).", needsBooking: true }
+                        { time: "Tarde", text: "Piscina casa — recargarse bien antes bahía bio", subNote: "", needsBooking: false },
+                        { time: "Noche ⭐", text: "🌊 Bahía Bioluminiscente — Laguna Grande, Fajardo (~15–20 min casa)", subNote: "🌟 ACTIVIDAD PRINCIPAL DEL DÍA — Lancha eléctrica (Bio Island / Capt. Suárez): ~$50/persona · SOLO EFECTIVO · Reservar teléfono ANTES · Asientos limitados. Para abuelos + niña 8. Opción kayak grupo activo (30 min remar cada lado manglares).", needsBooking: true }
                     ],
                     meals: {
                         breakfast: { status: "flexible", note: "Rápido casa — necesitan partir 7:30am", restaurants: [] },
