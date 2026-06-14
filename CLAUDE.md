@@ -111,13 +111,14 @@ Set all amounts to 0 and fill in as bookings are confirmed.
 Whenever a new trip folder is created or an existing one is significantly updated (travelers, dates, route), update the **File structure** section above and add or revise the matching trip summary section at the bottom of this file. This ensures every Claude session starts with accurate context without needing to scan the repo.
 
 ## Puerto Rico 2026 trip summary
-- **Travellers:** Mom (76), Dad (81), Sister, Niece (23), Brother, Brother's Wife, Niece (8), Nephew (16), Juan, Maria — 10 total
-- **Dates:** Jul 8–12, 2026 (5 days · Wed–Sun)
-- **Base:** Airbnb Villa Pitahaya, Luquillo (Airbnb listing 827071 · 10 guests · pool · confirmed)
-- **Flights (Juan & Maria):** Iberia IB381 MAD→SJU Jul 8 (12:45–15:25) · IB382 SJU→MAD Jul 12 (17:15)
-- **Car rental:** Alamo × 2 Midsize SUVs · SJU · Jul 8 4pm pickup → Jul 12 3pm return · (833) 763-1735
-- **Route:** Luquillo beach (Day 1) → El Yunque + Bio Bay Laguna Grande (Day 2) → Hacienda Carabalí ATVs/horses (Day 3) → Old San Juan forts (Day 4) → Departure (Day 5)
-- **Key bookings needed:** Bio Bay electric boat (cash, by phone) · Carabalí rides (advance booking)
+- **Travellers:** Mamá (76), Papá (81), Giova, Ari (23), Coki, Liz, Emma (8), Matías (16), JC, Maria — 10 total
+- **Dates:** Jul 8–12, 2026 (5 days · Mié–Dom)
+- **Base:** Villa Pitahaya (Airbnb 827071, Luquillo) · 10 guests · Piscina · Confirmado · GPS 18.3756,-65.7225
+- **Flights:** Iberia IB381 MAD→SJU Jul 8 (12:45–15:25, JC & Maria) · IB382 SJU→MAD Jul 12 (17:15, JC & Maria)
+- **Car rental:** Alamo × 2 Midsize SUVs · Jul 8 4pm pickup → Jul 12 3pm return · (833) 763-1735
+- **Route:** Playa Luquillo (Día 1) → El Yunque + Laguna Grande Bio Bay (Día 2) → Hacienda Carabalí ATVs/caballos (Día 3) → Viejo San Juan fortalezas (Día 4) → Salida (Día 5)
+- **Lenguaje:** 100% español · USD para todas las transacciones
+- **Bookings necesarios:** Lancha Bio Bay (efectivo, teléfono) · Carabalí rides (reserva anticipada)
 
 ## Namibia 2026 trip summary
 - **Travellers:** Juan Carlos, Maria, Ada, Felix
