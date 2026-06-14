@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Puerto Rico 🌴 · July 2026</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <style>
         * {
@@ -1839,16 +1841,14 @@
                 </div>
             </div>
 
-            <!-- Maps — Rutas de cada día -->
+            <!-- Map — Puerto Rico Trip Overview -->
             <div class="collapsible-section">
                 <div class="section-header">
-                    <h3>🗺️ Mapas de Ruta</h3>
+                    <h3>🗺️ Mapa del Viaje</h3>
                     <div class="chevron"></div>
                 </div>
                 <div class="section-content">
-                    <div id="mapsContainer">
-                        <!-- Routes will be loaded here -->
-                    </div>
+                    <div id="tripMap" style="height: 400px; border-radius: 6px; overflow: hidden; background: var(--bg-tertiary); margin-bottom: 20px;"></div>
                 </div>
             </div>
 
@@ -2033,18 +2033,30 @@
                 carRentalSection.style.display = '';
             }
 
-            // Maps — Render route maps for each day
-            const mapsContainer = document.getElementById('mapsContainer');
-            mapsContainer.innerHTML = TRIP_DATA.days
-                .filter(day => day.route)
-                .map(day => `
-                    <div style="margin-bottom: 20px;">
-                        <div style="font-weight: 600; margin-bottom: 10px; color: var(--accent-gold);">📍 Día ${day.dayNumber} - ${day.title}</div>
-                        <iframe style="width: 100%; height: 300px; border: none; border-radius: 6px; background: var(--bg-tertiary);" loading="lazy" src="${day.route}"></iframe>
-                        <a href="${day.route}" target="_blank" style="display: block; margin-top: 8px; padding: 8px 12px; text-align: center; background: var(--bg-secondary); color: var(--accent-gold); border-radius: 4px; text-decoration: none; font-size: 11px; font-weight: 600;">Abre en pantalla completa →</a>
-                    </div>
-                `)
-                .join("");
+            // Map — Render trip map with all days
+            setTimeout(() => {
+                const map = L.map('tripMap', { scrollWheelZoom: false }).setView([18.2, -65.5], 10);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap',
+                    maxZoom: 19
+                }).addTo(map);
+
+                // Add markers for each day
+                TRIP_DATA.days.forEach(day => {
+                    const lat = DAY_WEATHER[day.dayNumber]?.lat;
+                    const lon = DAY_WEATHER[day.dayNumber]?.lon;
+                    if (lat && lon) {
+                        L.circleMarker([lat, lon], {
+                            radius: 8,
+                            fillColor: '#C9966A',
+                            color: '#fff',
+                            weight: 2,
+                            opacity: 1,
+                            fillOpacity: 0.8
+                        }).bindPopup(`<strong>Día ${day.dayNumber}</strong><br>${day.title}<br>${day.date}`).addTo(map);
+                    }
+                });
+            }, 100);
 
             // Links (Spotify, Tricount, Download)
             const linksContent = document.getElementById('overviewLinksContent');
