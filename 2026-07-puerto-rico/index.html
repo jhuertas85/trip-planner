@@ -1753,20 +1753,20 @@
                     <div class="calc-row">
                         <div class="calc-label">
                             <div class="calc-label-code">AED</div>
-                            <div class="calc-label-name">UAE Dirham</div>
+                            <div class="calc-label-name">Dirham de EAU</div>
                         </div>
                         <input class="calc-input" id="calcInput1" type="number" placeholder="0" oninput="calcConvert(1)">
                     </div>
                     <div class="calc-row">
                         <div class="calc-label">
                             <div class="calc-label-code">PEN</div>
-                            <div class="calc-label-name">Peruvian Sol</div>
+                            <div class="calc-label-name">Sol Peruano</div>
                         </div>
                         <input class="calc-input" id="calcInput2" type="number" placeholder="0" oninput="calcConvert(2)">
                     </div>
                     <div class="calc-footer">
                         <span class="calc-rates-note" id="calcRatesNote">Cargando rates…</span>
-                        <button class="calc-refresh" onclick="fetchCalcRates(true)">↻ Refresh</button>
+                        <button class="calc-refresh" onclick="fetchCalcRates(true)">↻ Actualizar</button>
                     </div>
                 </div>
             </div>
@@ -1776,7 +1776,7 @@
             <!-- Clima for today's location — collapsed by default, shown only during the trip -->
             <div class="collapsible-section" id="overviewWeatherSection" style="display:none;">
                 <div class="section-header collapsed" id="overview-wx-header">
-                    <h3>🌤 Weather<span class="wx-preview" id="wx-preview-overview"></span></h3>
+                    <h3>🌤 Clima<span class="wx-preview" id="wx-preview-overview"></span></h3>
                     <div class="chevron"></div>
                 </div>
                 <div class="section-content section-weather collapsed">
@@ -1789,13 +1789,13 @@
             <!-- Itinerary — expanded by default -->
             <div class="collapsible-section">
                 <div class="section-header">
-                    <h3>📋 Itinerary</h3>
+                    <h3>📋 Itinerario</h3>
                     <div class="chevron"></div>
                 </div>
                 <div class="section-content">
                     <div>
                         <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:8px;">
-                            <button onclick="goToToday()" style="font-size:11px;padding:4px 10px;background:var(--accent-gold);color:var(--bg-primary);border:none;border-radius:5px;cursor:pointer;font-weight:600;font-family:inherit;">Today</button>
+                            <button onclick="goToToday()" style="font-size:11px;padding:4px 10px;background:var(--accent-gold);color:var(--bg-primary);border:none;border-radius:5px;cursor:pointer;font-weight:600;font-family:inherit;">Hoy</button>
                         </div>
                         <table class="accommodation-table" id="accommodationTable"></table>
                     </div>
@@ -1805,7 +1805,7 @@
             <!-- Maps — add map div(s) here with id="mapXxx", then implement renderXxxMap() below -->
             <div class="collapsible-section">
                 <div class="section-header">
-                    <h3>🗺️ Maps</h3>
+                    <h3>🗺️ Mapas</h3>
                     <div class="chevron"></div>
                 </div>
                 <div class="section-content">
@@ -1818,7 +1818,7 @@
             <!-- Vuelos — expanded by default -->
             <div class="collapsible-section">
                 <div class="section-header">
-                    <h3>✈️ Flights</h3>
+                    <h3>✈️ Vuelos</h3>
                     <div class="chevron"></div>
                 </div>
                 <div class="section-content section-flight">
@@ -1829,7 +1829,7 @@
             <!-- Alquiler de Coches — expanded by default, hidden if TRIP_DATA.carRental is null -->
             <div class="collapsible-section" id="carRentalSection" style="display:none;">
                 <div class="section-header">
-                    <h3>🚗 Car Rental</h3>
+                    <h3>🚗 Alquiler de Coches</h3>
                     <div class="chevron"></div>
                 </div>
                 <div class="section-content">
@@ -2174,7 +2174,7 @@
                 html += `
                     <div class="card">
                         <a href="https://${day.route}" target="_blank" style="color: var(--accent-gold); text-decoration: none;">
-                            📍 View Route on Google Maps →
+                            📍 Ver Ruta en Google Maps →
                         </a>
                     </div>
                 `;
