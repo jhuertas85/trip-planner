@@ -1416,12 +1416,7 @@
                     title: "Llegada e instalación",
                     location: "Luquillo, Puerto Rico",
                     backgroundImage: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800",
-                    flight: {
-                        airline: "Múltiples · JC Iberia 15:25 · Grupo Huertas Perú Copa 16:14 · Maria Iberia 18:40",
-                        from: "MAD / LIM", to: "SJU",
-                        departTime: "Varios", arriveTime: "15:25–18:40",
-                        terminal: "Ver sección Vuelos para detalles"
-                    },
+                    flight: { mode: "arrivals" },
                     hotel: {
                         name: "Villa Pitahaya · Airbnb, Luquillo",
                         status: "confirmed",
@@ -1642,11 +1637,7 @@
                     title: "Regreso ✈️",
                     location: "Luquillo → SJU, Puerto Rico",
                     backgroundImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800",
-                    flight: {
-                        airline: "Iberia IB382", from: "SJU", to: "MAD",
-                        departTime: "17:15", arriveTime: "07:30 Jul 13",
-                        terminal: "Terminal C SJU → T4S Madrid Barajas (arrives Mon Jul 13)"
-                    },
+                    flight: { mode: "departures" },
                     hotel: {
                         name: "Villa Pitahaya · Airbnb, Luquillo",
                         status: "confirmed",
@@ -1661,7 +1652,7 @@
                         { time: "12:00pm", text: "Almuerzo Kioskos Luquillo — último mofongo viaje", subNote: "", needsBooking: false },
                         { time: "2:45pm", text: "JC & Maria → SJU (IB382 sale 17:15, Terminal C)", subNote: "Sin buffer — manejar directo Kioskos. Devolver Alamo antes 3pm. ~45 min manejo.", needsBooking: false },
                         { time: "2:45pm", text: "Grupo Huertas-Chávez → SJU (vuelo 5:15pm — partir Luquillo antes 2:45pm)", subNote: "", needsBooking: false },
-                        { time: "3:45pm", text: "Grupo Huertas → SJU (vuelo 6:15pm — partir Luquillo antes 3:45pm)", subNote: "", needsBooking: false },
+                        { time: "3:45pm", text: "Grupo Huertas Perú → SJU (Copa CM143 sale 18:17 — partir Luquillo antes 3:45pm)", subNote: "Conexión PTY → Lima (CM337)", needsBooking: false },
                         { time: "Return", text: "Devolución Alamo antes 3:00pm — garage estacionamiento piso 1 SJU", subNote: "Llenar gasolina antes aeropuerto (más barato fuera aeropuerto). (833) 763-1735 si problemas.", needsBooking: false }
                     ],
                     meals: {
@@ -2137,22 +2128,42 @@
 
             // Flight section on flight days
             if (day.flight) {
+                let flightContent = '';
+                if (day.flight.mode === 'arrivals' || day.flight.mode === 'departures') {
+                    const isArrivals = day.flight.mode === 'arrivals';
+                    const flights = TRIP_DATA.flights
+                        .filter(f => f.direction === (isArrivals ? 'in' : 'out'))
+                        .sort((a, b) => isArrivals
+                            ? a.arriveTime.localeCompare(b.arriveTime)
+                            : a.departTime.localeCompare(b.departTime));
+                    const label = isArrivals ? '✈ Llegadas · 8 Jul' : '✈ Salidas · 12 Jul';
+                    flightContent = `<div class="flights-scroll">
+                        <div class="flight-section-label">${label}</div>
+                        ${flights.map(f => `
+                            <div class="flight-row">
+                                <div><strong>${f.airline}</strong><br><span style="color:var(--accent);font-size:11px;">${f.passengers.join(' · ')}</span></div>
+                                <div class="flight-times">${f.from} → ${f.to}</div>
+                                <div class="flight-times">${f.departTime} → ${f.arriveTime}</div>
+                                <div class="flight-terminal">${f.terminal}</div>
+                            </div>`).join('')}
+                    </div>`;
+                } else {
+                    flightContent = `<div style="margin-bottom: 12px;">
+                        <div style="font-weight: 600; color: var(--accent-gold); font-size: 15px; margin-bottom: 8px;">${day.flight.airline}</div>
+                        <div style="color: var(--text-primary); margin-bottom: 4px;"><strong>${day.flight.from} → ${day.flight.to}</strong></div>
+                        <div style="color: var(--text-secondary); font-size: 13px; margin-bottom: 6px;">Depart: ${day.flight.departTime} · Arrive: ${day.flight.arriveTime}</div>
+                        <div style="color: var(--text-secondary); font-size: 12px; margin-bottom: 12px;">${day.flight.terminal}</div>
+                        ${TRIP_DATA.checkInUrl ? `<a href="${TRIP_DATA.checkInUrl}" target="_blank" style="display: inline-block; padding: 8px 14px; background-color: #3A7DA0; color: white; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; transition: var(--transition);" onmouseover="this.style.backgroundColor='#4a9dc0'" onmouseout="this.style.backgroundColor='#3A7DA0'">Check-in en línea</a>` : ''}
+                    </div>`;
+                }
                 html += `
                     <div class="collapsible-section">
                         <div class="section-header">
-                            <h3>✈️ Flight</h3>
+                            <h3>✈️ Vuelos</h3>
                             <div class="chevron"></div>
                         </div>
                         <div class="section-content section-flight">
-                            <div>
-                                <div style="margin-bottom: 12px;">
-                                    <div style="font-weight: 600; color: var(--accent-gold); font-size: 15px; margin-bottom: 8px;">${day.flight.airline}</div>
-                                    <div style="color: var(--text-primary); margin-bottom: 4px;"><strong>${day.flight.from} → ${day.flight.to}</strong></div>
-                                    <div style="color: var(--text-secondary); font-size: 13px; margin-bottom: 6px;">Depart: ${day.flight.departTime} · Arrive: ${day.flight.arriveTime}</div>
-                                    <div style="color: var(--text-secondary); font-size: 12px; margin-bottom: 12px;">${day.flight.terminal}</div>
-                                    ${TRIP_DATA.checkInUrl ? `<a href="${TRIP_DATA.checkInUrl}" target="_blank" style="display: inline-block; padding: 8px 14px; background-color: #3A7DA0; color: white; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; transition: var(--transition);" onmouseover="this.style.backgroundColor='#4a9dc0'" onmouseout="this.style.backgroundColor='#3A7DA0'">Check-in en línea</a>` : ''}
-                                </div>
-                            </div>
+                            ${flightContent}
                         </div>
                     </div>
                 `;
