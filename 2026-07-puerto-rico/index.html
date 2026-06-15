@@ -911,17 +911,34 @@
             margin-bottom: 24px;
         }
 
+        .flight-section-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            padding: 10px 12px 4px;
+            opacity: 0.8;
+        }
+
+        .flight-section-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 10px 12px;
+            opacity: 0.5;
+        }
+
         .flight-row {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr auto;
-            gap: 12px;
+            grid-template-columns: 1.4fr 0.8fr 1fr 1.4fr;
+            gap: 10px;
             padding: 10px 12px;
             border-bottom: 1px solid var(--border-color);
             align-items: center;
             font-size: 13px;
         }
 
-        .flight-row:first-child {
+        .flight-row:first-of-type {
             border-top: 1px solid var(--border-color);
         }
 
@@ -1341,7 +1358,7 @@
         // ============================================================
         const TRIP_DATA = {
             title: "Puerto Rico 🌴 · Julio 2026",
-            travelers: ["Mamá", "Papá", "Giova", "Ari", "Coki", "Liz", "Em", "Matías", "JC", "Maria"],
+            travelers: ["Mamá", "Papá", "Giova", "Ari", "Coki", "Liz", "Emma", "Matías", "JC", "Maria"],
 
             carRental: {
                 company: "RAV4 SUV (ya rentado)",
@@ -1355,23 +1372,42 @@
             checkInUrl: null,
 
             flights: [
+                // LLEGADAS · 8 Jul — sorted by SJU arrival time
                 {
-                    date: "Jul 8", dayOfWeek: "Mié", airline: "Iberia IB381",
+                    date: "Jul 8", dayOfWeek: "Mié", direction: "in",
+                    airline: "Iberia IB381",
                     from: "MAD", to: "SJU", departTime: "12:45", arriveTime: "15:25",
-                    terminal: "T4S Madrid Barajas → Terminal C SJU",
+                    terminal: "T4S Barajas → Terminal C SJU",
                     passengers: ["JC"]
                 },
                 {
-                    date: "Jul 8", dayOfWeek: "Mié", airline: "Iberia IB379",
-                    from: "MAD", to: "SJU", departTime: "16:05", arriveTime: "18:40",
-                    terminal: "T4S Madrid Barajas → Terminal C SJU",
-                    passengers: ["Maria"]
+                    date: "Jul 8", dayOfWeek: "Mié", direction: "in",
+                    airline: "Copa CM338 + CM142",
+                    from: "LIM", to: "SJU", departTime: "02:15", arriveTime: "16:14",
+                    terminal: "Lima · PTY 05:52–12:21 · Terminal C SJU",
+                    passengers: ["Grupo Huertas Perú"]
                 },
                 {
-                    date: "Jul 12", dayOfWeek: "Dom", airline: "Iberia IB382",
-                    from: "SJU", to: "MAD", departTime: "17:15", arriveTime: "07:30 (+1)",
-                    terminal: "Terminal C SJU → T4S Madrid Barajas",
+                    date: "Jul 8", dayOfWeek: "Mié", direction: "in",
+                    airline: "Iberia IB0379",
+                    from: "MAD", to: "SJU", departTime: "16:05", arriveTime: "18:40",
+                    terminal: "T4S Barajas → Terminal C SJU",
+                    passengers: ["Maria"]
+                },
+                // SALIDAS · 12 Jul — sorted by SJU departure time
+                {
+                    date: "Jul 12", dayOfWeek: "Dom", direction: "out",
+                    airline: "Iberia IB382",
+                    from: "SJU", to: "MAD", departTime: "17:15", arriveTime: "07:30 Jul 13",
+                    terminal: "Terminal C SJU → T4S Barajas",
                     passengers: ["JC", "Maria"]
+                },
+                {
+                    date: "Jul 12", dayOfWeek: "Dom", direction: "out",
+                    airline: "Copa CM143 + CM337",
+                    from: "SJU", to: "LIM", departTime: "18:17", arriveTime: "—",
+                    terminal: "SJU · PTY 20:13 · Lima",
+                    passengers: ["Grupo Huertas Perú"]
                 }
             ],
             days: [
@@ -1381,10 +1417,10 @@
                     location: "Luquillo, Puerto Rico",
                     backgroundImage: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800",
                     flight: {
-                        airline: "Múltiples (Grupo Huertas-Chávez 12pm, JC Copa 4:14pm, Maria Iberia 6:40pm)",
-                        from: "MAD/LIM", to: "SJU",
-                        departTime: "Varios", arriveTime: "12pm–6:40pm",
-                        terminal: "Ver actividades para detalles"
+                        airline: "Múltiples · JC Iberia 15:25 · Grupo Huertas Perú Copa 16:14 · Maria Iberia 18:40",
+                        from: "MAD / LIM", to: "SJU",
+                        departTime: "Varios", arriveTime: "15:25–18:40",
+                        terminal: "Ver sección Vuelos para detalles"
                     },
                     hotel: {
                         name: "Villa Pitahaya · Airbnb, Luquillo",
@@ -1398,7 +1434,7 @@
                         { time: "12:00pm", text: "Grupo Huertas-Chávez llega SJU → Recogida Alamo, parada supermercado, directo a la casa", subNote: "Pueden empezar a instalarse temprano. Casa abierta desde las 12pm con early check-in.", needsBooking: false },
                         { time: "3:00pm", text: "Check-in Casa · Villa Pitahaya", subNote: "Esperando JC y Grupo Huertas", needsBooking: false },
                         { time: "3:25pm", text: "JC llega a SJU (3:25pm) → Recogida Alamo", subNote: "Alamo: 1er piso garage SJU · Sin shuttle — cruzar la calle desde reclamo · (833) 763-1735", needsBooking: false },
-                        { time: "4:00pm", text: "Grupo Huertas llega SJU → Recogida Alamo, directo a la casa", subNote: "", needsBooking: false },
+                        { time: "4:14pm", text: "Grupo Huertas Perú llega SJU (Copa CM142) → Recogida Alamo, directo a la casa", subNote: "Vuelan desde Lima vía Panamá. Alamo: 1er piso garage SJU.", needsBooking: false },
                         { time: "6:40pm", text: "María llega — recogerla en SJU", subNote: "Una vez todos en casa: instalarse, comer, descansar. Sin grandes planes esta noche.", needsBooking: false }
                     ],
                     meals: {
@@ -1927,19 +1963,28 @@
         }
 
         function renderOverviewTab() {
-            // Flights
+            // Flights — split into arrivals and departures, each sorted independently
             const flightsList = document.getElementById("flightsList");
-            flightsList.innerHTML = TRIP_DATA.flights
-                .sort((a, b) => a.departTime.localeCompare(b.departTime))
-                .map(f => `
-                    <div class="flight-row">
-                        <div><strong>${f.dayOfWeek} ${f.date}</strong><br><span class="flight-day">${f.airline}</span></div>
-                        <div class="flight-times">${f.from} → ${f.to}</div>
-                        <div class="flight-times">${f.departTime} – ${f.arriveTime}</div>
-                        <div class="flight-terminal">${f.terminal}${TRIP_DATA.checkInUrl ? ' · <a href="' + TRIP_DATA.checkInUrl + '" target="_blank" style="color: #3A7DA0; text-decoration: none;">Check-in</a>' : ''}</div>
-                    </div>
-                `)
-                .join("");
+            const arriving = TRIP_DATA.flights
+                .filter(f => f.direction === "in")
+                .sort((a, b) => a.arriveTime.localeCompare(b.arriveTime));
+            const departing = TRIP_DATA.flights
+                .filter(f => f.direction === "out")
+                .sort((a, b) => a.departTime.localeCompare(b.departTime));
+            const renderFlight = f => `
+                <div class="flight-row">
+                    <div><strong>${f.airline}</strong><br><span class="flight-day" style="color:var(--accent);font-size:11px;">${f.passengers.join(" · ")}</span></div>
+                    <div class="flight-times">${f.from} → ${f.to}</div>
+                    <div class="flight-times">${f.departTime} → ${f.arriveTime}</div>
+                    <div class="flight-terminal">${f.terminal}</div>
+                </div>
+            `;
+            flightsList.innerHTML =
+                `<div class="flight-section-label">✈ Llegadas · 8 Jul</div>` +
+                arriving.map(renderFlight).join("") +
+                `<div class="flight-section-divider"></div>` +
+                `<div class="flight-section-label">✈ Salidas · 12 Jul</div>` +
+                departing.map(renderFlight).join("");
 
             // Travellers
             const travelersView = document.getElementById("travelersListView");
