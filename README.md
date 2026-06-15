@@ -12,6 +12,7 @@ A static GitHub Pages site for family trip itineraries — no build step, no fra
 |------|-------|-----------|-----------|
 | Namibia 2026 | May 16–31, 2026 | Juan Carlos, Maria, Ada, Felix | [Open](https://jhuertas85.github.io/trip-planner/2026-05-namibia/) |
 | Germany · Switzerland · Madrid 2026 | July 2026 | Juan Carlos | [Open](https://jhuertas85.github.io/trip-planner/2026-07-switzerland/) |
+| Puerto Rico 2026 | Jul 8–12, 2026 | Mamá, Papá, Giova, Ari, Coki, Liz, Emma, Matías, JC, Maria | [Open](https://jhuertas85.github.io/trip-planner/2026-07-puerto-rico/) |
 
 ---
 
@@ -48,6 +49,8 @@ trip-planner/
 ├── 2026-05-namibia/
 │   └── index.html
 ├── 2026-07-switzerland/
+│   └── index.html
+├── 2026-07-puerto-rico/
 │   └── index.html
 └── CLAUDE.md                  # Codebase context and conventions
 ```
