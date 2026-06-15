@@ -907,83 +907,48 @@
 
         /* FLIGHTS SECTION */
         .flights-scroll {
-            display: flex;
-            gap: 12px;
-            overflow-x: auto;
-            padding-bottom: 12px;
+            width: 100%;
             margin-bottom: 24px;
         }
 
-        .flights-scroll::-webkit-scrollbar {
-            height: 4px;
-        }
-
-        .flights-scroll::-webkit-scrollbar-track {
-            background: var(--bg-tertiary);
-        }
-
-        .flights-scroll::-webkit-scrollbar-thumb {
-            background: var(--text-muted);
-        }
-
-        .flight-card {
-            flex-shrink: 0;
-            background-color: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 14px;
-            min-width: 240px;
+        .flight-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 12px;
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
             font-size: 13px;
-            transition: var(--transition);
         }
 
-        .flight-card:hover {
-            border-color: #3A7DA0;
+        .flight-row:first-child {
+            border-top: 1px solid var(--border-color);
+        }
+
+        .flight-row:hover {
+            background-color: rgba(201, 150, 106, 0.05);
         }
 
         .flight-day {
             font-size: 12px;
             color: var(--text-secondary);
-            margin-bottom: 8px;
             font-weight: 500;
         }
 
         .flight-route {
             font-weight: 600;
             color: #3A7DA0;
-            margin-bottom: 8px;
-            font-size: 15px;
+            font-size: 14px;
         }
 
         .flight-times {
             color: var(--text-primary);
-            margin-bottom: 6px;
+            font-size: 12px;
         }
 
         .flight-terminal {
             color: var(--text-secondary);
-            font-size: 12px;
-            margin-bottom: 8px;
-        }
-
-        .flight-checkin {
-            margin-top: 8px;
-        }
-
-        .flight-checkin a {
-            display: inline-block;
-            padding: 6px 10px;
-            background-color: #3A7DA0;
-            color: var(--text-primary);
-            border-radius: 4px;
-            text-decoration: none;
             font-size: 11px;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .flight-checkin a:hover {
-            background-color: #4a9dc0;
         }
 
         /* TRAVELERS & CAR RENTAL */
@@ -1961,17 +1926,13 @@
             // Flights
             const flightsList = document.getElementById("flightsList");
             flightsList.innerHTML = TRIP_DATA.flights
+                .sort((a, b) => a.departTime.localeCompare(b.departTime))
                 .map(f => `
-                    <div class="flight-card">
-                        <div class="flight-day">${f.dayOfWeek} ${f.date}</div>
-                        <div class="flight-route">${f.airline}</div>
+                    <div class="flight-row">
+                        <div><strong>${f.dayOfWeek} ${f.date}</strong><br><span class="flight-day">${f.airline}</span></div>
                         <div class="flight-times">${f.from} → ${f.to}</div>
-                        <div class="flight-times">${f.departTime}–${f.arriveTime}</div>
-                        <div class="flight-terminal">${f.terminal}</div>
-                        ${TRIP_DATA.checkInUrl ? `
-                        <div class="flight-checkin">
-                            <a href="${TRIP_DATA.checkInUrl}" target="_blank">Check-in en línea</a>
-                        </div>` : ''}
+                        <div class="flight-times">${f.departTime} – ${f.arriveTime}</div>
+                        <div class="flight-terminal">${f.terminal}${TRIP_DATA.checkInUrl ? ' · <a href="' + TRIP_DATA.checkInUrl + '" target="_blank" style="color: #3A7DA0; text-decoration: none;">Check-in</a>' : ''}</div>
                     </div>
                 `)
                 .join("");
@@ -2829,8 +2790,45 @@
             L.polyline(pts, { color: color || '#C9966A', weight: 3, opacity: 0.9, dashArray: dash || null, lineJoin: 'round' }).addTo(map);
         }
 
-        // TODO: implement renderXxxMap() for each map div, then call them in the onload below
-        // async function renderMainMap() { ... }
+        async function renderMainMap() {
+            const el = document.getElementById('tripMap');
+            if (!el || el._leaflet_id) return;
+            const map = L.map('tripMap', { scrollWheelZoom: false });
+            makeTile(map);
+
+            // Collect all day coordinates from DAY_WEATHER
+            const waypoints = [];
+            const dayMarkers = [];
+            const dayLabels = ['', 'Día 1', 'Día 2', 'Día 3', 'Día 4', 'Día 5'];
+            const dayColors = ['', '#C9966A', '#D9A76A', '#E0956A', '#E9896A', '#F27D6A'];
+
+            for (let i = 1; i <= 5; i++) {
+                if (DAY_WEATHER[i]) {
+                    const w = DAY_WEATHER[i];
+                    waypoints.push([w.lat, w.lon]);
+                    dayMarkers.push({ pos: [w.lat, w.lon], label: i.toString(), color: dayColors[i] });
+                }
+            }
+
+            // Draw route connecting all waypoints
+            if (waypoints.length > 1) {
+                const route = await osrmRoute(waypoints);
+                drawRoute(map, route || waypoints, '#C9966A');
+            }
+
+            // Add markers for each day
+            dayMarkers.forEach(m => {
+                L.marker(m.pos, { icon: pin(m.label, m.color) })
+                    .bindPopup(dayLabels[parseInt(m.label)])
+                    .addTo(map);
+            });
+
+            // Fit bounds to all markers
+            if (waypoints.length > 0) {
+                const group = new L.featureGroup(dayMarkers.map(m => L.marker(m.pos)));
+                map.fitBounds(group.getBounds(), { padding: [50, 50] });
+            }
+        }
 
         // Load Leaflet then render maps
         (function() {
@@ -2840,7 +2838,7 @@
             document.head.appendChild(link);
             const s = document.createElement('script');
             s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-            s.onload = function() { setTimeout(function() { /* renderMainMap(); */ }, 300); };
+            s.onload = function() { setTimeout(function() { renderMainMap(); }, 300); };
             document.head.appendChild(s);
         })();
 
