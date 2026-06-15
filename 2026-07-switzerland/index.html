@@ -42,7 +42,7 @@
         header {
             position: sticky; top: 0;
             border-bottom: 2px solid var(--border-color);
-            padding: 10px 0; z-index: 100;
+            padding: 10px 0; z-index: 2000;
             backdrop-filter: blur(8px);
             background-color: rgba(33, 28, 22, 0.95);
             transition: var(--transition);
@@ -354,7 +354,7 @@
                             { name: "Hofbräuhaus",        desc: "Legendary beer hall — one beer, then move on",                 rating: "4.2★", mapsUrl: "maps.google.com/?q=Hofbrauhaus+Munich" }
                         ]}
                     },
-                    route: null,
+                    route: "www.google.com/maps/dir/Munich+Airport+MUC/myMINGA4+Hotel+Munich+Fliegenstrasse+4",
                     warnings: [
                         "Book Gasthaus Isarthor before you fly — fills up fast on weekends",
                         "S-Bahn from T1: take S1 (Ostbahnhof) or S8 (Herrsching) — both reach city centre in ~40 min"
@@ -390,7 +390,7 @@
                             { name: "Augustiner Klosterwirt", desc: "Roast pork, Bavarian classics, ~€25-30. Excellent quality.", rating: "4.6★", mapsUrl: "maps.google.com/?q=Augustiner+Klosterwirt+Munich" }
                         ]}
                     },
-                    route: null,
+                    route: "www.google.com/maps/dir/myMINGA4+Hotel+Munich/Viktualienmarkt+Munich/Englischer+Garten+Munich/Chinesischer+Turm+Biergarten+Munich/Nymphenburg+Palace+Munich",
                     warnings: [],
                     gems: [
                         "Asamkirche: jaw-dropping Baroque interior, 5 min from Marienplatz, free, almost always empty",
@@ -413,7 +413,7 @@
                         { time: "Afternoon", text: "OPTION: Dachau Concentration Camp",                subNote: "30 min by S-Bahn from Hauptbahnhof. Most significant memorial site in Germany. Half-day.",                                               needsBooking: false },
                         { time: "Afternoon", text: "OPTION: Deutsches Museum",                         subNote: "World's largest science museum, Museumsinsel, ~€15. Best if skipping Dachau.",                                                           needsBooking: false },
                         { time: "Evening",   text: "Last Munich dinner: Görreshof Wirtshaus (Maxvorstadt)", subNote: "Local beer garden, zero tourists, excellent food",                                                                                  needsBooking: false },
-                        { time: "Evening",   text: "Pack for departure — early train tomorrow 06:48",   subNote: "München Hbf is ~10 min walk from myMINGA4. Set your alarm.",                                                                            needsBooking: false }
+                        { time: "Evening",   text: "Pack for departure — check out at 06:00 tomorrow", subNote: "Leave hotel at 06:00 for 06:48 DB ECE 198 to Zürich. München Hbf is ~10 min walk.", needsBooking: false }
                     ],
                     meals: {
                         breakfast: { status: "flexible", note: "Hotel or nearby café",                               restaurants: [] },
@@ -422,7 +422,7 @@
                             { name: "Görreshof Wirtshaus", desc: "Maxvorstadt local beer garden, no tourists, excellent Bavarian food", rating: "4.4★", mapsUrl: "maps.google.com/?q=Gorreshof+Wirtshaus+Munich" }
                         ]}
                     },
-                    route: null,
+                    route: "www.google.com/maps/dir/myMINGA4+Hotel+Munich/Marienplatz+Munich/Deutsches+Museum+Munich/Hofbrauhaus+Munich/Augustiner+Klosterwirt+Munich",
                     warnings: [
                         "Pack tonight — train Munich → Zurich departs 06:48. München Hbf is ~10 min walk.",
                         "Book Munich → Zurich Sparpreis NOW if not done (~€22-30 2nd class)"
@@ -440,15 +440,16 @@
                     backgroundImage: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800",
                     flight: null,
                     hotel: { name: "Best Western Plus Hotel Zürcherhof", status: "confirmed", note: "Zähringerstrasse 21, Niederdorf · AED 992 (1 night) · Breakfast included", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Best+Western+Plus+Hotel+Zurcherhof+Zurich" },
-                    drive: { from: "München Hbf", to: "Zürich HB", duration: "~3h 32m", distance: "Dep 06:48 · Arr 10:20 · Book Sparpreis ~€22-30" },
+                    drive: { from: "München Hbf", to: "Zürich HB", duration: "3h 40m", distance: "ECE 198 · Dep 06:48 Gl.27 · Arr 10:28 Gl.31 · 1st class · Ref DH206EK6 · €51.99 ✓" },
                     activities: [
-                        { time: "06:48",    text: "Train München Hbf → Zürich HB",                     subNote: "Scenic route through Bavaria into Switzerland. Arrive ~10:20. Book Sparpreis in advance.",     needsBooking: true  },
+                        { time: "06:00",    text: "Check out of myMINGA4 — walk to München Hbf",         subNote: "Hotel to Hauptbahnhof is ~10 min walk. Allow extra time with luggage.",                   needsBooking: false },
+                        { time: "06:48",    text: "🚆 DB ECE 198 — München Hbf → Zürich HB", subNote: 'Platform 27. 1st class. Arr 10:28 Pl.31. Ticket: DH206EK6 · €51.99 · <a href="https://raw.githubusercontent.com/jhuertas85/trip-planner/main/tickets/DB_Munich-Zurich_30Jun2026.pdf" target="_blank" class="activity-maps-link">🎫 PDF</a>',                                                     needsBooking: false },
                         { time: "Morning",   text: "Arrive Zurich, check in Zürcherhof (Niederdorf)",   subNote: "Hotel is in the old town — you're already in the heart of it",                             needsBooking: false },
                         { time: "Afternoon", text: "Zurich Altstadt — Niederdorf lanes, Grossmünster",  subNote: "Walk straight from the hotel",                                                               needsBooking: false },
                         { time: "Afternoon", text: "Fraumünster — Chagall stained glass windows",       subNote: "~€5. Some of the finest stained glass in the world.",                                        needsBooking: false },
                         { time: "Afternoon", text: "Bahnhofstrasse + Limmat river waterfront",           subNote: "Europe's most expensive shopping street — window shop, then enjoy the river",               needsBooking: false },
                         { time: "17:00",    text: "Eat a proper meal before the concert",               subNote: "Don't rely on stadium food. Early dinner, then head out.",                                   needsBooking: false },
-                        { time: "18:00",    text: "Tram 2 or 3 → Stadion Letzigrund (~15 min)",         subNote: "Doors open 15:30 — arrive when suits you",                                                  needsBooking: false },
+                        { time: "18:00",    text: "Tram 2 or 3 → Stadion Letzigrund (~15 min)",         subNote: "Doors open 15:30 — arrive when suits you. Buy ZVV single ticket (~CHF 4.40) — Swiss Pass starts Jul 1, not today.",  needsBooking: false },
                         { time: "18:25",    text: "Phantogram",                                         subNote: "Stadion Letzigrund",                                                                         needsBooking: false },
                         { time: "19:10",    text: "Clipse",                                             subNote: "Stadion Letzigrund",                                                                         needsBooking: false },
                         { time: "20:25",    text: "🎸 LINKIN PARK",                                     subNote: "Concert ends ~22:30-23:00",                                                                  needsBooking: false }
@@ -461,14 +462,14 @@
                         ]},
                         dinner:    { status: "flexible", note: "Eat before the concert ~17:00 — stadium food is not the move", restaurants: [] }
                     },
-                    route: null,
+                    route: "www.google.com/maps/dir/Zurich+HB/Hotel+Zurcherhof+Niederdorf+Zurich/Grossmunster+Zurich/Fraumunster+Zurich/Bahnhofstrasse+Zurich/Letzigrund+Stadium+Zurich",
                     warnings: [
-                        "⚠️ Book Munich → Zurich Sparpreis NOW — fares rise as the date approaches",
                         "Doors open 15:30, but support acts start 18:25 — no need to rush there early"
                     ],
                     gems: [
                         "Fraumünster's Chagall windows are genuinely one of the greatest things in any church in Europe",
-                        "Niederdorf neighbourhood: Zurich at its most medieval and walkable — explore on foot from the hotel"
+                        "Niederdorf neighbourhood: Zurich at its most medieval and walkable — explore on foot from the hotel",
+                        "📱 Download the SBB app for timetables — your Swiss Travel Pass (Jul 1–5) covers all trains, trams and boats from tomorrow. Today (Jun 30) buy ZVV single tickets for Zürich trams (~CHF 4.40 each)."
                     ]
                 },
 
@@ -483,11 +484,11 @@
                     activities: [
                         { time: "Morning",   text: "Sleep in — concert recovery. Late hotel breakfast.",    subNote: "Breakfast included at Zürcherhof",                                                         needsBooking: false },
                         { time: "Morning",   text: "Check out, store luggage if needed",                   subNote: "Hotel can hold bags",                                                                      needsBooking: false },
-                        { time: "Afternoon", text: "Train Zurich → Vaduz (via Buchs SG)",                  subNote: "~1h 45m. Hourly. No reservation required.",                                                needsBooking: false },
+                        { time: "Afternoon", text: "Train Zurich → Vaduz (via Buchs SG)",                  subNote: '~1h 45m. Hourly. Swiss Travel Pass ✓ (to Buchs SG). Bus Buchs→Vaduz not covered (~CHF 4). <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false },
                         { time: "Afternoon", text: "Vaduz: passport stamp at tourist office",              subNote: "Official Liechtenstein tourist stamp — walk-in, Städtle main street. Genuinely unique.",   needsBooking: false },
                         { time: "Afternoon", text: "Vaduz Castle — exterior only, Rhine Valley views",     subNote: "Walk up from town. Great views over the Rhine into Switzerland.",                          needsBooking: false },
                         { time: "Afternoon", text: "Liechtenstein National Museum",                        subNote: "~€8 — history of one of the world's smallest and strangest countries",                    needsBooking: false },
-                        { time: "Evening",   text: "Train Vaduz → Bern (~2h via Sargans or Zürich)",       subNote: "Check in Prize by Radisson",                                                               needsBooking: false },
+                        { time: "Evening",   text: "Train Vaduz → Bern (~2h via Sargans or Zürich)",       subNote: 'Check in Prize by Radisson. Swiss Travel Pass ✓ from Buchs SG. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false },
                         { time: "Evening",   text: "Walk Bern Altstadt — Zytglogge, Bärengraben bear park", subNote: "Bear park free and open late. Time the clock tower on the hour.",                       needsBooking: false }
                     ],
                     meals: {
@@ -497,14 +498,15 @@
                         ]},
                         dinner:    { status: "flexible", note: "Simple dinner near hotel in Bern — recover from two big days", restaurants: [] }
                     },
-                    route: null,
+                    route: "www.google.com/maps/dir/Zurich+HB/Vaduz+Tourist+Office+Liechtenstein/Vaduz+Castle+Liechtenstein/Liechtenstein+National+Museum+Vaduz/Prize+by+Radisson+Bern+City",
                     warnings: [
                         "Liechtenstein is doubly landlocked — one of only two such countries in the world",
                         "Tourist office for passport stamp is on Städtle (the main pedestrian street) — easy to find"
                     ],
                     gems: [
                         "Liechtenstein passport stamp: official tourist stamp from a micro-nation — one of the most unusual souvenirs in Europe",
-                        "Vaduz is tiny — you can do all the main sights in 2-3 hours, leaving time for Bern in the evening"
+                        "Vaduz is tiny — you can do all the main sights in 2-3 hours, leaving time for Bern in the evening",
+                        '🎫 Swiss Travel Pass active from today (Jul 1–5) — all Swiss trains, trams, buses and boats included. Also valid as Swiss Museum Pass (500+ museums free). Show QR code + passport. No separate tickets needed. <a href="https://raw.githubusercontent.com/jhuertas85/trip-planner/main/tickets/SwissTravelPass_1-5Jul2026.pdf" target="_blank" class="activity-maps-link">🎫 PDF</a>'
                     ]
                 },
 
@@ -518,13 +520,13 @@
                     drive: { from: "Bern", to: "Lucerne", duration: "~1h direct", distance: "Depart ~13:00 after work · regular trains" },
                     activities: [
                         { time: "Morning",   text: "Work from hotel — WFH 🖥️",                       subNote: "Breakfast included. Fast WiFi. Protect mornings for calls.",                                          needsBooking: false },
-                        { time: "13:00",    text: "Train Bern → Lucerne (~1h direct)",                subNote: "Regular direct trains. Depart after work.",                                                            needsBooking: false },
+                        { time: "13:00",    text: "Train Bern → Lucerne (~1h direct)",                subNote: 'Swiss Travel Pass ✓ No ticket needed. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>',                                                            needsBooking: false },
                         { time: "Afternoon", text: "Chapel Bridge (Kapellbrücke)",                    subNote: "14th century covered wooden bridge — most photographed structure in Switzerland.",                     needsBooking: false },
                         { time: "Afternoon", text: "Lion Monument (Löwendenkmal)",                    subNote: "Carved into a cliff face. Mark Twain called it the most mournful piece of rock in the world. Free.",   needsBooking: false },
                         { time: "Afternoon", text: "Lucerne old town wander",                         subNote: "Medieval streets and painted building facades",                                                          needsBooking: false },
-                        { time: "Evening",   text: "OPTION: Mt Pilatus gondola",                      subNote: "~CHF 72-82 · 2,132m · staggering Alpine views · book online in advance · allow 2-3 hrs",             needsBooking: true  },
+                        { time: "Evening",   text: "OPTION: Mt Pilatus gondola",                      subNote: "~CHF 36-41 with Swiss Travel Pass (50% off) · 2,132m · staggering Alpine views · book online in advance · allow 2-3 hrs", needsBooking: true  },
                         { time: "Evening",   text: "OPTION: Lake Lucerne boat cruise",                subNote: "~1.5 hrs, ~CHF 30. No booking needed. Beautiful evening on the water.",                               needsBooking: false },
-                        { time: "Evening",   text: "Train back Lucerne → Bern (~1h)",                 subNote: "Regular direct trains",                                                                                 needsBooking: false }
+                        { time: "Evening",   text: "Train back Lucerne → Bern (~1h)",                 subNote: 'Swiss Travel Pass ✓ No ticket needed. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>',                                                                                 needsBooking: false }
                     ],
                     meals: {
                         breakfast: { status: "included", note: "Hotel breakfast — eat before work starts",    restaurants: [] },
@@ -533,7 +535,7 @@
                             { name: "Lötschberg", desc: "Classic Bernese cuisine — fondue, cheese dishes, local wines. ~€30-35.", rating: "4.5★", mapsUrl: "maps.google.com/?q=Lotschberg+Restaurant+Bern" }
                         ]}
                     },
-                    route: null,
+                    route: "www.google.com/maps/dir/Prize+by+Radisson+Bern+City/Bern+HB/Kapellbrucke+Lucerne+Switzerland/Lowenmal+Lucerne+Switzerland/Old+Town+Lucerne/Bern+HB",
                     warnings: [
                         "⚠️ Book Mt Pilatus gondola online in advance — popular and can sell out on sunny days",
                         "Check weather for Pilatus morning of — gondola closes in bad weather"
@@ -554,10 +556,10 @@
                     drive: { from: "Bern", to: "Interlaken Ost", duration: "~50 min direct", distance: "Depart ~13:00 after work" },
                     activities: [
                         { time: "Morning",   text: "Work from hotel — WFH 🖥️",                           subNote: "Breakfast included. Last full Bern morning.",                                                    needsBooking: false },
-                        { time: "13:00",    text: "Train Bern → Interlaken Ost (~50 min direct)",         subNote: "Scenic Alpine approach. Depart after work.",                                                     needsBooking: false },
-                        { time: "Afternoon", text: "Harder Kulm funicular — summit 1,322m",              subNote: "Two Lakes Bridge platform — panoramic Alps and both lakes. Book online ~CHF 32 return.",          needsBooking: true  },
+                        { time: "13:00",    text: "Train Bern → Interlaken Ost (~50 min direct)",         subNote: 'Swiss Travel Pass ✓ No ticket needed. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>',                                                     needsBooking: false },
+                        { time: "Afternoon", text: "Harder Kulm funicular — summit 1,322m",              subNote: "Two Lakes Bridge platform — panoramic Alps and both lakes. ~CHF 16 return with Swiss Travel Pass (50% off). Book online.", needsBooking: true  },
                         { time: "Afternoon", text: "Walk along Lake Brienz or Lake Thun shoreline",       subNote: "Two glacial lakes, one town between them — genuinely alpine landscape",                          needsBooking: false },
-                        { time: "Evening",   text: "Train back Interlaken → Bern (~50 min)",              subNote: "Last evening in Switzerland",                                                                    needsBooking: false },
+                        { time: "Evening",   text: "Train back Interlaken → Bern (~50 min)",              subNote: 'Swiss Travel Pass ✓ No ticket needed. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>',                                                                    needsBooking: false },
                         { time: "Evening",   text: "Walk Aare river bend from Nydeggbrücke",              subNote: "Bern's entire medieval Altstadt appears to float on a river peninsula.",                         needsBooking: false },
                         { time: "Evening",   text: "Dinner at Restaurant Rosengarten",                    subNote: "Rose garden hill, views over Bern, Swiss-French cuisine ~€35-45. Book ahead.",                  needsBooking: true  }
                     ],
@@ -570,11 +572,11 @@
                             { name: "Restaurant Rosengarten", desc: "Rose garden hill above Bern, views over the city, Swiss-French cuisine. ~€35-45. Reserve.", rating: "4.4★", mapsUrl: "maps.google.com/?q=Restaurant+Rosengarten+Bern" }
                         ]}
                     },
-                    route: null,
+                    route: "www.google.com/maps/dir/Prize+by+Radisson+Bern+City/Bern+HB/Interlaken+Ost+Station/Harder+Kulm+Interlaken/Nydeggbrucke+Bern/Restaurant+Rosengarten+Bern",
                     warnings: [
                         "⚠️ Book Harder Kulm funicular online — sells out on fair-weather Fridays",
                         "⚠️ Reserve Restaurant Rosengarten tonight — popular and worth it",
-                        "Pack tonight — train Bern → Geneva Airport departs ~12:00-12:15 tomorrow"
+                        "⚠️ Pack tonight — checkout tomorrow 09:15, train Bern HB 09:32 → GVA 11:19"
                     ],
                     gems: [
                         "Aare river bend from Nydeggbrücke: Bern's Altstadt floats on a river peninsula — one of the best urban views in Europe",
@@ -589,14 +591,17 @@
                     backgroundImage: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800",
                     flight: { airline: "IB 0616", from: "GVA", to: "MAD", departTime: "14:10", arriveTime: "16:15", terminal: "GVA T1 → MAD" },
                     hotel: { name: "Friend's place in Madrid", status: "confirmed", note: "Staying with friend · 4 nights Jul 4–8", bookedBy: "Friend", mapsUrl: "" },
-                    drive: { from: "Bern", to: "Geneva Airport (GVA)", duration: "~1h 45m direct", distance: "Depart ~12:00-12:15 · Arrive GVA ~13:45" },
+                    drive: { from: "Bern HB", to: "Genève-Aéroport", duration: "1h 47m direct", distance: "IC 5 · Dep 09:32 Bern HB Gl.5 · Arr 11:19 Genève-Aéroport · No reservation needed" },
                     activities: [
-                        { time: "Morning",   text: "Final Bern wander — Bundesplatz, Kramgasse, morning coffee", subNote: "Late checkout or store luggage at reception", needsBooking: false },
-                        { time: "Morning",   text: "Long relaxed lunch — last Swiss meal",                        subNote: "Savour it",                                  needsBooking: false },
-                        { time: "12:00",    text: "Pick up luggage, train Bern → Geneva Airport",              subNote: "~1h 45m direct. Arrive GVA ~13:45.",          needsBooking: false },
-                        { time: "14:10",    text: "✈️ IB0616 Geneva → Madrid",                                 subNote: "Dep 14:10 GVA T1 → Arr 16:15 MAD (~2h 05m)", needsBooking: false },
-                        { time: "17:00",    text: "Metro/taxi to hotel (~30-40 min)",                           subNote: "Arrive hotel ~17:00-17:30",                   needsBooking: false },
-                        { time: "Evening",   text: "First Madrid evening — walk to Plaza Mayor or Puerta del Sol", subNote: "Get your bearings — Madrid is electric on a Saturday night", needsBooking: false }
+                        { time: "07:30",    text: "Wake up — hotel breakfast at Prize by Radisson",          subNote: "Breakfast included. Eat well — next meal is in Madrid.",                                    needsBooking: false },
+                        { time: "08:30",    text: "Quick last Bern walk — Bundesplatz, Kramgasse",           subNote: "15-20 min stroll only. Don't go far — you need to check out at 09:15.",                    needsBooking: false },
+                        { time: "09:15",    text: "Check out of Prize by Radisson",                          subNote: "Viktoriastrasse 21 → Bern HB is ~10 min walk. Head straight to the station.",              needsBooking: false },
+                        { time: "09:32",    text: "🚆 SBB IC 5 — Bern HB → Genève-Aéroport",               subNote: 'Direct, ~1h 47m. Arrives 11:19. Swiss Travel Pass ✓ No ticket needed. Alt: 10:02→11:49. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false },
+                        { time: "11:19",    text: "Arrive Genève-Aéroport — Terminal 1 (Iberia)",           subNote: "Follow signs to T1. Check-in counters open. Airport is compact — 10 min walk from train to gate.", needsBooking: false },
+                        { time: "12:00",    text: "✅ At gate / checked in",                                 subNote: "2h 10m buffer before departure. Grab coffee or lunch in the terminal.",                       needsBooking: false },
+                        { time: "14:10",    text: "✈️ IB0616 Geneva → Madrid",                               subNote: "Dep 14:10 GVA T1 → Arr 16:15 MAD (~2h 05m)",                                               needsBooking: false },
+                        { time: "17:00",    text: "Metro/taxi to friend's place (~30-40 min)",               subNote: "Metro L8 from Barajas or taxi ~€35",                                                        needsBooking: false },
+                        { time: "Evening",   text: "First Madrid evening — Plaza Mayor or Puerta del Sol",   subNote: "Get your bearings — Madrid is electric on a Saturday night",                                needsBooking: false }
                     ],
                     meals: {
                         breakfast: { status: "included", note: "Last hotel breakfast in Bern", restaurants: [] },
@@ -606,10 +611,13 @@
                             { name: "Casa Lucio",            desc: "Madrid institution since 1974 — huevos rotos, bull tail stew, ~€35-45. Book ahead.",      rating: "4.5★", mapsUrl: "maps.google.com/?q=Casa+Lucio+Madrid" }
                         ]}
                     },
-                    route: null,
+                    route: "www.google.com/maps/dir/Prize+by+Radisson+Bern+City/Bern+HB/Geneva+Airport+Switzerland",
                     warnings: [
-                        "⚠️ Book Casa Lucio reservation before leaving Switzerland",
-                        "Check in online for IB0616 before going to Geneva airport"
+                        "⚠️ Check out by 09:15 — the 09:32 IC 5 from Bern HB is the target train",
+                        "Alt train: 10:02 Bern HB → 11:49 GVA — tighter but still workable",
+                        "Verify SBB times at sbb.ch — Jul 4 is a Saturday, confirm schedule",
+                        "Check in online for IB0616 before going to Geneva airport",
+                        "⚠️ Book Casa Lucio Madrid reservation before leaving Switzerland"
                     ],
                     gems: [
                         "Madrid eats at 21:00-22:00 — don't fight it, embrace it",
@@ -639,7 +647,7 @@
                         lunch:     { status: "flexible", note: "Near Atocha before 17:32 train",                restaurants: [] },
                         dinner:    { status: "flexible", note: "Pintxos crawl around Plaza del Castillo on the festival eve", restaurants: [] }
                     },
-                    route: null,
+                    route: "www.google.com/maps/dir/Parque+del+Retiro+Madrid/Madrid+Atocha+Station/Pamplona+City+Centre+Spain",
                     warnings: [
                         "Sleep by 02:00 at the latest — up at 05:30 for the bull run",
                         "Do NOT run in the encierro unless you've done serious research — viewing from the fence is safer and just as spectacular"
@@ -671,7 +679,7 @@
                         lunch:     { status: "flexible", note: "Pintxos in Pamplona after the encierro — excellent quality", restaurants: [] },
                         dinner:    { status: "flexible", note: "Pamplona restaurants and bars — full festival night", restaurants: [] }
                     },
-                    route: null,
+                    route: "www.google.com/maps/dir/Calle+Estafeta+Pamplona/Plaza+del+Ayuntamiento+Pamplona/Plaza+del+Castillo+Pamplona/Ciudadela+Park+Pamplona",
                     warnings: [
                         "The first rocket = gates open, the second = all bulls running. Listen for both.",
                         "Do NOT enter the bull run route — fence viewing is safer and equally spectacular"
@@ -694,7 +702,7 @@
                         { time: "Morning",   text: "Last morning in Pamplona — San Fermín atmosphere",           subNote: "Festival continues until Jul 14. Enjoy the city before heading out.",         needsBooking: false },
                         { time: "Afternoon", text: "Pintxos lunch + explore old town",                          subNote: "Plaza del Castillo, Ciudadela Park, last wander through the festival streets", needsBooking: false },
                         { time: "17:00",    text: "Head to Pamplona/Iruñ station",                              subNote: "Station is 20 min walk from old town or 5 min taxi.",                        needsBooking: false },
-                        { time: "19:32",    text: "🚆 Renfe ALVIA 00610 — Pamplona → Madrid Atocha",           subNote: "Seat 11B Car 4. Ref: 8Y277S. Arrives 23:22. Already booked (€29).",          needsBooking: false },
+                        { time: "19:32",    text: "🚆 Renfe ALVIA 00610 — Pamplona → Madrid Atocha",           subNote: 'Seat 11B Car 4. Ref: 8Y277S. Arrives 23:22. €29 · <a href="https://raw.githubusercontent.com/jhuertas85/trip-planner/main/tickets/Renfe_Pamplona-Madrid_7Jul2026.pdf" target="_blank" class="activity-maps-link">🎫 PDF</a>',          needsBooking: false },
                         { time: "23:22",    text: "Arrive Madrid Atocha — head to friend's place",             subNote: "Late arrival. Metro or taxi from Atocha.",                                   needsBooking: false }
                     ],
                     meals: {
@@ -702,7 +710,7 @@
                         lunch:     { status: "flexible", note: "Pintxos in Pamplona old town before heading out", restaurants: [] },
                         dinner:    { status: "flexible", note: "Light snack on the train or after arriving late in Madrid", restaurants: [] }
                     },
-                    route: null,
+                    route: "www.google.com/maps/dir/Plaza+del+Castillo+Pamplona/Pamplona+Irun+Train+Station/Madrid+Puerta+de+Atocha",
                     warnings: [
                         "Station is Pamplona/Iruñ — allow 20 min from old town",
                         "Late arrival ~23:30 in Madrid — confirm with friend before leaving Pamplona"
@@ -732,7 +740,7 @@
                         lunch:     { status: "flexible", note: "Airport or in-flight",                restaurants: [] },
                         dinner:    { status: "flexible", note: "Arrive San Juan 15:25 — Puerto Rico planning separate", restaurants: [] }
                     },
-                    route: null,
+                    route: "www.google.com/maps/dir/Madrid+City+Centre/Madrid+Barajas+Airport+Terminal+4S",
                     warnings: [
                         "⚠️ CRITICAL: No free checked baggage on IB381 — add bag online BEFORE check-in closes",
                         "⚠️ Leave hotel by 10:30 sharp — do not miss this flight",

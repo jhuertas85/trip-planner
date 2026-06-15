@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trip Planner</title>
+    <title>Puerto Rico 🌴 · Julio 2026 ✓</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <style>
         * {
@@ -907,83 +907,48 @@
 
         /* FLIGHTS SECTION */
         .flights-scroll {
-            display: flex;
-            gap: 12px;
-            overflow-x: auto;
-            padding-bottom: 12px;
+            width: 100%;
             margin-bottom: 24px;
         }
 
-        .flights-scroll::-webkit-scrollbar {
-            height: 4px;
-        }
-
-        .flights-scroll::-webkit-scrollbar-track {
-            background: var(--bg-tertiary);
-        }
-
-        .flights-scroll::-webkit-scrollbar-thumb {
-            background: var(--text-muted);
-        }
-
-        .flight-card {
-            flex-shrink: 0;
-            background-color: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 14px;
-            min-width: 240px;
+        .flight-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 12px;
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
             font-size: 13px;
-            transition: var(--transition);
         }
 
-        .flight-card:hover {
-            border-color: #3A7DA0;
+        .flight-row:first-child {
+            border-top: 1px solid var(--border-color);
+        }
+
+        .flight-row:hover {
+            background-color: rgba(201, 150, 106, 0.05);
         }
 
         .flight-day {
             font-size: 12px;
             color: var(--text-secondary);
-            margin-bottom: 8px;
             font-weight: 500;
         }
 
         .flight-route {
             font-weight: 600;
             color: #3A7DA0;
-            margin-bottom: 8px;
-            font-size: 15px;
+            font-size: 14px;
         }
 
         .flight-times {
             color: var(--text-primary);
-            margin-bottom: 6px;
+            font-size: 12px;
         }
 
         .flight-terminal {
             color: var(--text-secondary);
-            font-size: 12px;
-            margin-bottom: 8px;
-        }
-
-        .flight-checkin {
-            margin-top: 8px;
-        }
-
-        .flight-checkin a {
-            display: inline-block;
-            padding: 6px 10px;
-            background-color: #3A7DA0;
-            color: var(--text-primary);
-            border-radius: 4px;
-            text-decoration: none;
             font-size: 11px;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .flight-checkin a:hover {
-            background-color: #4a9dc0;
         }
 
         /* TRAVELERS & CAR RENTAL */
@@ -1375,81 +1340,316 @@
         // TRIP_DATA — Edit this section to customise your trip
         // ============================================================
         const TRIP_DATA = {
-            title: "Trip Name 2027",
-            travelers: ["Person 1", "Person 2"],
+            title: "Puerto Rico 🌴 · Julio 2026",
+            travelers: ["Mamá", "Papá", "Giova", "Ari", "Coki", "Liz", "Em", "Matías", "JC", "Maria"],
 
-            // Optional sections — set to null to hide
-            carRental: null,
-            // carRental: { company: "Rental Co.", phone: "+1 234 567 890", website: "example.com" },
+            carRental: {
+                company: "RAV4 SUV (ya rentado)",
+                phone: "(833) 763-1735",
+                website: "alamo.com · Pickup Jul 8 4pm @ SJU · Return Jul 12 3pm @ SJU"
+            },
 
+            houseUrl: "https://www.airbnb.com/rooms/827071",
             spotifyPlaylist: null,
-            // spotifyPlaylist: "https://open.spotify.com/playlist/YOUR_ID",
-
             tricountUrl: null,
-            // tricountUrl: "https://tricount.com/YOUR_ID",
-
             checkInUrl: null,
-            // checkInUrl: "https://airline.com/check-in",
 
             flights: [
                 {
-                    date: "Jan 1", dayOfWeek: "Mon", airline: "XX 001",
-                    from: "AAA", to: "BBB", departTime: "10:00", arriveTime: "14:00",
-                    terminal: "Terminal 1", passengers: ["Person 1", "Person 2"]
+                    date: "Jul 8", dayOfWeek: "Mié", airline: "Iberia IB381",
+                    from: "MAD", to: "SJU", departTime: "12:45", arriveTime: "15:25",
+                    terminal: "T4S Madrid Barajas → Terminal C SJU",
+                    passengers: ["JC"]
+                },
+                {
+                    date: "Jul 8", dayOfWeek: "Mié", airline: "Iberia IB379",
+                    from: "MAD", to: "SJU", departTime: "16:05", arriveTime: "18:40",
+                    terminal: "T4S Madrid Barajas → Terminal C SJU",
+                    passengers: ["Maria"]
+                },
+                {
+                    date: "Jul 12", dayOfWeek: "Dom", airline: "Iberia IB382",
+                    from: "SJU", to: "MAD", departTime: "17:15", arriveTime: "07:30 (+1)",
+                    terminal: "Terminal C SJU → T4S Madrid Barajas",
+                    passengers: ["JC", "Maria"]
                 }
             ],
             days: [
                 {
-                    dayNumber: 1, date: "Jan 1", dayOfWeek: "Mon",
-                    title: "Arrival", location: "City, Country",
-                    backgroundImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800",
+                    dayNumber: 1, date: "Jul 8", dayOfWeek: "Mié",
+                    title: "Llegada e instalación",
+                    location: "Luquillo, Puerto Rico",
+                    backgroundImage: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800",
                     flight: {
-                        date: "Jan 1", dayOfWeek: "Mon", airline: "XX 001",
-                        from: "AAA", to: "BBB", departTime: "10:00", arriveTime: "14:00",
-                        terminal: "Terminal 1"
+                        airline: "Múltiples (Grupo Huertas-Chávez 12pm, JC Copa 4:14pm, Maria Iberia 6:40pm)",
+                        from: "MAD/LIM", to: "SJU",
+                        departTime: "Varios", arriveTime: "12pm–6:40pm",
+                        terminal: "Ver actividades para detalles"
                     },
                     hotel: {
-                        name: "Hotel Name", status: "confirmed",
-                        note: "Check-in from 15:00", bookedBy: null, mapsUrl: null
+                        name: "Villa Pitahaya · Airbnb, Luquillo",
+                        status: "confirmed",
+                        note: "10 huéspedes · Piscina · Check-in 3pm · Checkout Jul 12 12pm · Confirmado via Airbnb",
+                        bookedBy: null,
+                        mapsUrl: "maps.google.com/maps/?q=18.3756,-65.7225"
                     },
-                    drive: null,
+                    drive: { from: "SJU Airport", to: "Luquillo House", duration: "~45–75 min", distance: "~50 km · Build buffer for traffic" },
                     activities: [
-                        { time: "14:00", text: "Check in to hotel", subNote: "", needsBooking: false },
-                        { time: "Afternoon", text: "Explore the area", subNote: "", needsBooking: false }
+                        { time: "12:00pm", text: "Grupo Huertas-Chávez llega SJU → Recogida Alamo, parada supermercado, directo a la casa", subNote: "Pueden empezar a instalarse temprano. Casa abierta desde las 12pm con early check-in.", needsBooking: false },
+                        { time: "3:00pm", text: "Check-in Casa · Villa Pitahaya", subNote: "Esperando JC y Grupo Huertas", needsBooking: false },
+                        { time: "3:25pm", text: "JC llega a SJU (3:25pm) → Recogida Alamo", subNote: "Alamo: 1er piso garage SJU · Sin shuttle — cruzar la calle desde reclamo · (833) 763-1735", needsBooking: false },
+                        { time: "4:00pm", text: "Grupo Huertas llega SJU → Recogida Alamo, directo a la casa", subNote: "", needsBooking: false },
+                        { time: "6:40pm", text: "María llega — recogerla en SJU", subNote: "Una vez todos en casa: instalarse, comer, descansar. Sin grandes planes esta noche.", needsBooking: false }
                     ],
                     meals: {
-                        breakfast: { status: "flexible", note: "", restaurants: [] },
-                        lunch: { status: "options", note: "", restaurants: [
-                            { name: "Restaurant Name", desc: "Local cuisine · Great views", rating: "4.5★", mapsUrl: "maps.google.com/?q=Restaurant+Name" }
-                        ]},
-                        dinner: { status: "options", note: "", restaurants: [] }
+                        breakfast: { status: "flexible", note: "Comida de aeropuerto o snacks en ruta", restaurants: [] },
+                        lunch: {
+                            status: "options",
+                            note: "Almuerzo después de instalarse y descansar. Opciones locales Luquillo.",
+                            restaurants: [
+                                { name: "Luquillo Kioskos", desc: "~60 kioskos uno al lado del otro · mofongo, pescado fresco, empanadillas, tragos · frente a playa, barato · hecho para grupos", rating: "⭐ Recomendación top", mapsUrl: "maps.google.com/maps/search/?api=1&query=Luquillo+Kioskos+Puerto+Rico" },
+                                { name: "La Parrilla", desc: "Leyenda de mariscos en el extremo este (local) · 4.1★ / ~1,000 reseñas Yelp · 'te arruina los mariscos de cualquier otro lado'", rating: "4.1★", mapsUrl: "maps.google.com/maps/search/?api=1&query=La+Parrilla+Luquillo+Puerto+Rico" }
+                            ]
+                        },
+                        dinner: {
+                            status: "confirmed",
+                            note: "Cena en El Pescador & Tapas — reserva para 10 personas en la noche (7:30–8pm). Mariscos frescos, ambiente Caribe tranquilo, cócteles geniales.",
+                            restaurants: [
+                                { name: "El Pescador & Tapas (Fajardo)", desc: "⭐ RECOMENDACIÓN PRINCIPAL — Mariscos frescos + langosta agua · vibe Caribe casual · cócteles geniales · ~15–20 min de casa", rating: "⭐⭐⭐ Upscale", mapsUrl: "maps.google.com/maps/search/?api=1&query=El+Pescador+Tapas+Fajardo+Puerto+Rico" }
+                            ]
+                        }
                     },
-                    route: null,
-                    warnings: [],
-                    gems: []
+                    route: "maps.google.com/maps/?q=Villa+Pitahaya+Luquillo+Puerto+Rico",
+                    warnings: [
+                        "🚨 CRÍTICO: Grupo Huertas llega 12pm pero check-in normal 3pm. DEBE solicitar early check-in a Villa Pitahaya. Confirmar disponibilidad ANTES del viaje.",
+                        "⏱ SJU → Luquillo: ~45 min sin tráfico, hasta 1h15 con tráfico — margen para cada recogida",
+                        "💵 Efectivo AHORA: lancha bahía bio solo efectivo, muchos kioskos también. Suficiente para toda la semana.",
+                        "🧴 Esenciales compra: bloqueador reef-safe, repelente, 2-3 galones agua, desayuno para 10",
+                        "🚗 Recogida Alamo: salir reclamo → cruzar calle → 1er piso parking. Sin shuttle."
+                    ],
+                    gems: [
+                        "🦞 Extremo este de los Kioskos Luquillo es donde comen locales — La Parrilla destaca ('arruina los mariscos de otro lado')",
+                        "🛒 Abastecer supermercado hoy — única compra eficiente antes de la diversión"
+                    ]
                 },
                 {
-                    dayNumber: 2, date: "Jan 2", dayOfWeek: "Tue",
-                    title: "Day Title", location: "City, Country",
-                    backgroundImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800",
+                    dayNumber: 2, date: "Jul 9", dayOfWeek: "Jue",
+                    title: "Bosque El Yunque (+ Bahía Bioluminiscente de noche) 🌊",
+                    location: "El Yunque / Fajardo, Puerto Rico",
+                    backgroundImage: "https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=800",
                     flight: null,
                     hotel: {
-                        name: "Hotel Name", status: "pending",
-                        note: "Awaiting confirmation", bookedBy: null, mapsUrl: null
+                        name: "Villa Pitahaya · Airbnb, Luquillo",
+                        status: "confirmed",
+                        note: "10 huéspedes · Piscina · Misma casa toda la semana",
+                        bookedBy: null,
+                        mapsUrl: "maps.google.com/maps/?q=18.3756,-65.7225"
                     },
-                    drive: { from: "City A", to: "City B", duration: "2h", distance: "150 km" },
+                    drive: { from: "House", to: "El Yunque PR-191 gate", duration: "~15–20 min", distance: "Gate opens 8:00am · ~200-car cap · Arrive at opening" },
                     activities: [
-                        { time: "Morning", text: "Activity 1", subNote: "Book in advance", needsBooking: true },
-                        { time: "Afternoon", text: "Activity 2", subNote: "", needsBooking: false }
+                        { time: "9:00am", text: "Salir casa — Portón El Yunque abre 8am. Llegada 9:00am", subNote: "Entrada gratis, sin reserva necesaria. Plenty de plazas a esa hora.", needsBooking: false },
+                        { time: "9:00am", text: "Cascada La Coca — cascada a orilla carretera, cero caminata. Parada foto perfecta abuelos.", subNote: "Mañana LIGERA — fotos, aire montaña, energía para bahía bio esta noche", needsBooking: false },
+                        { time: "Mañana", text: "Torre Yokahú — subida corta a mirador sobre bosque y costa", subNote: "Opcional si energía — excelentes vistas, solo 10 min arriba", needsBooking: false },
+                        { time: "Mañana", text: "Cascadas Juan Diego — escalera rocosa sube 10–12 min. Opcional si grupo en forma.", subNote: "Saltarla si está mojado o grupo quiere guardar energía", needsBooking: false },
+                        { time: "Tarde", text: "Grupo activo DESPUÉS almuerzo: Sendero La Mina → Cascadas La Mina (piscina) O Sendero Mt. Britton + torre", subNote: "Caminatas reales — tenis requeridos, esperar lodo. Vistas bosque nuboso desde torre Britton son mejores del parque.", needsBooking: false },
+                        { time: "Tarde", text: "Grupo relajado (abuelos + niña 8): Miradores, luego bajar temprano descansar casa", subNote: "Dos carros hacen esta división totalmente sin dolor", needsBooking: false },
+                        { time: "Tarde", text: "Almuerzo en Kioskos Luquillo — reagruparse 10 después bosque", subNote: "~15–20 min del portón El Yunque", needsBooking: false },
+                        { time: "Tarde", text: "Piscina casa — recargarse bien antes bahía bio", subNote: "", needsBooking: false },
+                        { time: "7:00pm ⭐", text: "🌊 Bahía Bioluminiscente — Laguna Grande, Fajardo (~15–20 min casa)", subNote: "🌟 ACTIVIDAD PRINCIPAL DEL DÍA — Salida en lancha eléctrica 7:00–8:30pm (Bio Island / Capt. Suárez): ~$50/persona · SOLO EFECTIVO · Reservar teléfono ANTES · Asientos limitados. Para abuelos + niña 8. Opción kayak grupo activo (30 min remar cada lado manglares).", needsBooking: true }
                     ],
                     meals: {
-                        breakfast: { status: "included", note: "At hotel", restaurants: [] },
-                        lunch: { status: "flexible", note: "", restaurants: [] },
-                        dinner: { status: "missing", note: "", restaurants: [] }
+                        breakfast: { status: "flexible", note: "Rápido casa — partir 9:00am", restaurants: [] },
+                        lunch: {
+                            status: "options",
+                            note: "De vuelta Kioskos Luquillo después El Yunque (~15–20 min del portón)",
+                            restaurants: [
+                                { name: "Luquillo Kioskos", desc: "~60 kioskos · cada uno elige · frente playa, casual, barato · hecho grupos grandes", rating: "⭐ Recomendación top", mapsUrl: "maps.google.com/maps/search/?api=1&query=Luquillo+Kioskos+Puerto+Rico" },
+                                { name: "La Parrilla", desc: "Mariscos sentados dentro strip · 4.1★ / ~1,000 reseñas Yelp · opción comida formal", rating: "4.1★", mapsUrl: "maps.google.com/maps/search/?api=1&query=La+Parrilla+Luquillo+Puerto+Rico" },
+                                { name: "Mi Parcela", desc: "Hamburguesas + platos PR · manejó grupo 18 · sólido si quieren mesa real", rating: "4.0★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Mi+Parcela+Luquillo+Puerto+Rico" }
+                            ]
+                        },
+                        dinner: {
+                            status: "flexible",
+                            note: "Cena ligera antes bahía bio (~salida 7pm) o comer después (~9–10pm). Cocinar casa o kioskos ambos funcionan.",
+                            restaurants: []
+                        }
                     },
-                    route: null,
-                    warnings: ["⚠️ Warning example — something to watch out for"],
-                    gems: ["💡 Hidden gem — insider tip goes here"]
+                    route: "maps.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/El+Yunque+PR-191+Gate/Laguna+Grande+Fajardo+Puerto+Rico",
+                    warnings: [
+                        "🌳 Portón El Yunque: 8am–5pm, tope ~200 carros — llegar a apertura o riesgo de no entrar",
+                        "🚫 SIN Uber dentro El Yunque — sin puntos recogida. Manejen ustedes en ambos carros.",
+                        "🌧️ Es selva tropical — lluvia cualquier momento. Capa ligera lluvia + zapatos agua (rocas resbaladizas). Lluvia pasa rápido.",
+                        "💵 Lancha bahía bio: SOLO EFECTIVO, asientos limitados — reserva teléfono ANTES del viaje (Bio Island / Capt. Suárez)",
+                        "⚡ Rayos cierran tours bahía bio — hacerlo jue da vie como respaldo si necesario",
+                        "🦟 Repelente para atardecer bahía — traer de la casa"
+                    ],
+                    gems: [
+                        "💧 Puente Roto / Río Espíritu Santo en carreteras bajas bosque — lugares río tranquilos que tours se saltan",
+                        "🗼 Torre Mt. Britton es foto que mayoría pierde — vistas bosque nuboso más dramáticas que La Mina"
+                    ]
+                },
+                {
+                    dayNumber: 3, date: "Jul 10", dayOfWeek: "Vie",
+                    title: "Parque de Aventura Carabalí 🐎",
+                    location: "Hacienda Carabalí · Luquillo, Puerto Rico",
+                    backgroundImage: "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Villa Pitahaya · Airbnb, Luquillo",
+                        status: "confirmed",
+                        note: "10 huéspedes · Piscina · Misma casa toda la semana",
+                        bookedBy: null,
+                        mapsUrl: "maps.google.com/maps/?q=18.3756,-65.7225"
+                    },
+                    drive: { from: "House", to: "Hacienda Carabalí", duration: "5–10 min", distance: "Right in Luquillo · In the foothills of El Yunque · Open 8:30am–6pm" },
+                    activities: [
+                        { time: "8:15am", text: "Llegar Carabalí — 45 min antes slot 9am check-in", subNote: "Reservar slot mañana con anticipación. Mañana = más fresco + evitar lluvia tarde.", needsBooking: true },
+                        { time: "Mañana", text: "ATVs / UTVs (recorrido guiado 1–2 hr por hacienda 600 acres) — Matías (16) + adultos", subNote: "Confirmar edad mínima conductor reservando (16 maneja con adulto; menores pasajero)", needsBooking: true },
+                        { time: "Mañana", text: "Cabalgata playa (2.5 hr) — cruza Río Mameyes, hasta Playa Luquillo", subNote: "~$164/adulto · Edad mín 12 · Máx 235 lb · Zapatos cerrados + pantalón largo REQUERIDO · 16yo califica · 8yo NO", needsBooking: true },
+                        { time: "Mañana", text: "Cabalgata campo corta (1 hr) — opción más suave para niña 8", subNote: "Reseñas notan guías agregan cinturón niños pequeños. Confirmar reservando.", needsBooking: true },
+                        { time: "Mañana", text: "Abuelos: paseo hayride + zoológico abierto — poco esfuerzo genuinamente divertido", subNote: "O relajarse Bar & Grill sitio y ver a todos pasar", needsBooking: false },
+                        { time: "Mañana", text: "Go-karts (pista 1,000 ft) — complaciente para adolescentes y niña 8 entre paseos", subNote: "", needsBooking: false },
+                        { time: "Tarde", text: "Playa: Playa Luquillo (tranquila + poco profunda — mejor abuelos + niña 8) o Playa Seven Seas, Fajardo", subNote: "Seven Seas: ~15–20 min este, igualmente tranquila y amigable familia", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Rápido casa antes ir Carabalí", restaurants: [] },
+                        lunch: {
+                            status: "options",
+                            note: "Quedarse sitio mantener grupo junto, o ir casa / kioskos",
+                            restaurants: [
+                                { name: "Carabalí Bar & Grill (on-site)", desc: "Opción más fácil — sin manejo, grupo junto después paseos", rating: "⭐ Recomendado", mapsUrl: "maps.google.com/maps/search/?api=1&query=Hacienda+Carabali+Luquillo+Puerto+Rico" },
+                                { name: "Luquillo Kioskos", desc: "10 min hacia casa — todas opciones habituales", rating: "Flexible", mapsUrl: "maps.google.com/maps/search/?api=1&query=Luquillo+Kioskos+Puerto+Rico" }
+                            ]
+                        },
+                        dinner: {
+                            status: "options",
+                            note: "Mejor noche cena viaje — mariscos frescos marina Fajardo (~15–20 min este)",
+                            restaurants: [
+                                { name: "El Pescador & Tapas (Fajardo)", desc: "Mariscos frescos + langosta agua · Vibe Caribe casual · Cócteles geniales · Sin reservas — llegar temprano 10", rating: "⭐ Recomendación top", mapsUrl: "maps.google.com/maps/search/?api=1&query=El+Pescador+Tapas+Fajardo+Puerto+Rico" },
+                                { name: "Kalizo Kiosko (Fajardo)", desc: "4.6★ / ~960 reseñas Tripadvisor · Mariscos locales, mofongo, relajado", rating: "4.6★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Kalizo+Kiosko+Fajardo+Puerto+Rico" },
+                                { name: "Pasta, Amor y Vino (Luquillo)", desc: "Italiano · Mejor ambiente/servicio pueblo · Buena opción amigable niños si grupo quiere descanso mariscos", rating: "4.4★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Pasta+Amor+y+Vino+Luquillo+Puerto+Rico" },
+                                { name: "La Estación (Luquillo)", desc: "BBQ · Vibe divertida · Verificar horarios + espera grupo 10", rating: "4.2★", mapsUrl: "maps.google.com/maps/search/?api=1&query=La+Estacion+Luquillo+Puerto+Rico" }
+                            ]
+                        }
+                    },
+                    route: "maps.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/Hacienda+Carabali+Luquillo+Puerto+Rico/Luquillo+Beach+Puerto+Rico",
+                    warnings: [
+                        "📅 RESERVAR CARABALÍ CON ANTICIPACIÓN — ATV/UTV + cabalgatas. Llegar 45 min antes para check-in.",
+                        "👟 Zapatos cerrados + pantalón largo OBLIGATORIO para caballos ATVs (se exige — chancletas = no montan)",
+                        "⚖️ Cabalgata playa: máx 235 lb, edad mín 12. La de 8 años toma cabalgata corta campo.",
+                        "🌧️ Paseos mañana esenciales — lluvias tarde mucho más probable colinas Luquillo",
+                        "👕 Llevar muda ropa + toalla — ATVs + cruces río = van a estar sucios/mojados"
+                    ],
+                    gems: [
+                        "🏔️ La hacienda está en faldas El Yunque — vistas senderos ATV rivalizan bosque nacional sin multitudes",
+                        "🏖️ Seven Seas (Fajardo) tiene extremo tranquilo y sendero pequeño reserva natural que casi nadie camina"
+                    ]
+                },
+                {
+                    dayNumber: 4, date: "Jul 11", dayOfWeek: "Sáb",
+                    title: "Día de ciudad en el Viejo San Juan 🏰",
+                    location: "San Juan Antiguo, Puerto Rico",
+                    backgroundImage: "https://images.unsplash.com/photo-1585464231875-d9ef1f5ad396?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Villa Pitahaya · Airbnb, Luquillo",
+                        status: "confirmed",
+                        note: "Última noche casa. Empacar hoy noche — checkout mañana 12pm.",
+                        bookedBy: null,
+                        mapsUrl: "maps.google.com/maps/?q=18.3756,-65.7225"
+                    },
+                    drive: { from: "Luquillo House", to: "Ballajá Garage, Old San Juan", duration: "~45–60 min", distance: "Park ONLY at Ballajá garage (covered, right next to El Morro)" },
+                    activities: [
+                        { time: "8:30am", text: "Salir casa — evitar calor multitudes cruceros sábado", subNote: "~45–60 min a OSJ. Parquear garage Ballajá — NO intenten estacionamiento calle grupo 10.", needsBooking: false },
+                        { time: "9:00am", text: "Castillo San Felipe del Morro (El Morro) — abre 9am", subNote: "$10/adulto · Gratis menores 16 · SIN EFECTIVO — tarjeta solo · Mismo boleto cubre San Cristóbal 24h · Explanada grande = plana + amigable abuelos", needsBooking: false },
+                        { time: "Mañana", text: "Gatos El Morro — colonia residente explanada. Éxito garantizado niña 8.", subNote: "", needsBooking: false },
+                        { time: "Tarde", text: "Calles coloridas: Calle del Cristo, calle paraguas, Plaza de Armas, estatua La Rogativa", subNote: "Ritmo — mucha sombra, bancos, cafés. Usa carro reposicionar abuelos entre paradas.", needsBooking: false },
+                        { time: "Tarde", text: "Paseo de la Princesa — paseo plano junto agua con fuente grande", subNote: "Mejor trecho abuelos — hermoso, cero escaleras, ventoso", needsBooking: false },
+                        { time: "Tarde", text: "Castillo San Cristóbal (opcional) — mismo boleto, si grupo aún tiene energía", subNote: "", needsBooking: false },
+                        { time: "Noche", text: "Cena temprana OSJ o manejar casa última noche relajada", subNote: "Con abuelos + niña 8, partir casa mid-tarde es llamada smart. Empacar hoy.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Rápido casa antes salida 8:30am", restaurants: [] },
+                        lunch: {
+                            status: "options",
+                            note: "Centro Viejo San Juan — ir temprano o poner nombre antes visitar fortalezas",
+                            restaurants: [
+                                { name: "Raíces", desc: "40+ años · Clásico Puertorriqueño (mofongo, porciones grandes) · Maneja grupos bien · Ir temprano evitar espera", rating: "⭐ Recomendación top for the group", mapsUrl: "maps.google.com/maps/search/?api=1&query=Raices+Old+San+Juan+Puerto+Rico" },
+                                { name: "El Jibarito (Calle Sol)", desc: "Favorito local sin adornos · Mofongo 'estándar oro' per locales · Más auténtico, menos pulido", rating: "4.3★", mapsUrl: "maps.google.com/maps/search/?api=1&query=El+Jibarito+Old+San+Juan+Puerto+Rico" },
+                                { name: "Deaverdura (Calle Sol)", desc: "Casual, colorido · Clásicos PR + buenas opciones vegetarianas · Cola almuerzo pero vale", rating: "4.3★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Deaverdura+Old+San+Juan+Puerto+Rico" },
+                                { name: "Princesa Cocina Cultura", desc: "Orilla puerto cerca Paseo Princesa · Patio frondoso · Tapas + cócteles · Música viva tardes", rating: "4.4★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Princesa+Cocina+Cultura+Old+San+Juan" }
+                            ]
+                        },
+                        dinner: {
+                            status: "flexible",
+                            note: "Cena temprana OSJ (atardecer desde murallas ciudad es genial) o manejar cocinar casa. Con abuelos + niña 8, casa 5–6pm es llamada cómoda.",
+                            restaurants: []
+                        }
+                    },
+                    route: "maps.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/Ballaja+Garage+Old+San+Juan+San+Juan+Puerto+Rico",
+                    warnings: [
+                        "🅿️ Estacionarse SOLO en garage Ballajá (techado, junto El Morro) — calles VSJ un sentido, estrechas, pocas plazas",
+                        "💳 Fortalezas SIN EFECTIVO — llevar tarjeta. $10/adulto, gratis menores 16. Boleto cubre ambas fortalezas 24h.",
+                        "⚠️ Trolley VSJ FUERA DE SERVICIO desde principios 2026 — usar carro para reposicionar abuelos",
+                        "🚢 Sábado = más ocupado + multitudes cruceros — ir El Morro PRIMERO antes que se llene",
+                        "👟 Solo zapatos cómodos — adoquines cubren cada calle VSJ",
+                        "🌡️ Sol muy expuesto explanada El Morro (casi sin sombra) — sombreros + agua absolutamente esencial"
+                    ],
+                    gems: [
+                        "🗽 Estatua La Rogativa + paseo tranquilo muralla hasta Puerta San Juan — mayoría tours se pierde camino bajo",
+                        "⛪ Capilla del Cristo y su jardincito — rincón postal perfecto",
+                        "🐱 Gatos El Morro tienen colonia propia en explanada — la de 8 años quedará obsesionada"
+                    ]
+                },
+                {
+                    dayNumber: 5, date: "Jul 12", dayOfWeek: "Dom",
+                    title: "Regreso ✈️",
+                    location: "Luquillo → SJU, Puerto Rico",
+                    backgroundImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800",
+                    flight: {
+                        airline: "Iberia IB382", from: "SJU", to: "MAD",
+                        departTime: "17:15", arriveTime: "07:30 Jul 13",
+                        terminal: "Terminal C SJU → T4S Madrid Barajas (arrives Mon Jul 13)"
+                    },
+                    hotel: {
+                        name: "Villa Pitahaya · Airbnb, Luquillo",
+                        status: "confirmed",
+                        note: "CHECK-OUT 12pm sharp — pack tonight (Saturday night)!",
+                        bookedBy: null,
+                        mapsUrl: "maps.google.com/maps/?q=18.3756,-65.7225"
+                    },
+                    drive: { from: "Luquillo House", to: "SJU Airport · Alamo return", duration: "~45–75 min", distance: "Pad 30 min for Sunday afternoon traffic · Return Alamo by 3pm · Gas up before the airport" },
+                    activities: [
+                        { time: "Mañana", text: "Grupos después (vuelos 5:15pm + 6:15pm): mañana final Playa Luquillo", subNote: "Empacar cargar carros primero, luego playa, kioskos, aeropuerto", needsBooking: false },
+                        { time: "12:00pm", text: "Check out of Airbnb — all groups", subNote: "Último barrido comida refrigerador; empacar snacks bebidas aeropuerto", needsBooking: false },
+                        { time: "12:00pm", text: "Almuerzo Kioskos Luquillo — último mofongo viaje", subNote: "", needsBooking: false },
+                        { time: "2:45pm", text: "JC & Maria → SJU (IB382 sale 17:15, Terminal C)", subNote: "Sin buffer — manejar directo Kioskos. Devolver Alamo antes 3pm. ~45 min manejo.", needsBooking: false },
+                        { time: "2:45pm", text: "Grupo Huertas-Chávez → SJU (vuelo 5:15pm — partir Luquillo antes 2:45pm)", subNote: "", needsBooking: false },
+                        { time: "3:45pm", text: "Grupo Huertas → SJU (vuelo 6:15pm — partir Luquillo antes 3:45pm)", subNote: "", needsBooking: false },
+                        { time: "Return", text: "Devolución Alamo antes 3:00pm — garage estacionamiento piso 1 SJU", subNote: "Llenar gasolina antes aeropuerto (más barato fuera aeropuerto). (833) 763-1735 si problemas.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Quick at the house — pack the night before so the morning is free", restaurants: [] },
+                        lunch: {
+                            status: "options",
+                            note: "Último almuerzo Puerto Rico",
+                            restaurants: [
+                                { name: "Luquillo Kioskos", desc: "Último mofongo · 60+ kioskos · Rápido fácil · Junto casa", rating: "⭐ Última parada", mapsUrl: "maps.google.com/maps/search/?api=1&query=Luquillo+Kioskos+Puerto+Rico" }
+                            ]
+                        },
+                        dinner: { status: "flexible", note: "Terminal SJU tiene opciones comida, o comida vuelo IB382 (comida incluida Iberia largo alcance)", restaurants: [] }
+                    },
+                    route: "maps.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/Luis+Munoz+Marin+International+Airport+San+Juan+Puerto+Rico",
+                    warnings: [
+                        "✈️ Juan y María: IB382 sale Terminal C 17:15 — devolver Alamo 3pm, sin margen después 12pm checkout",
+                        "🚗 Devolución Alamo: SJU Dom Jul 12 antes 3:00pm · (833) 763-1735 · Llenar gasolina ANTES aeropuerto",
+                        "🚦 Tráfico domingo tarde hacia SJU aumenta — agregar 30 min buffer en todas salidas",
+                        "📦 Empacar sábado noche — no dejar para caos checkout domingo mañana"
+                    ],
+                    gems: [
+                        "🥤 Última pasada nevera — empacar snacks y bebidas para aeropuerto; nada se desperdicia",
+                        "🛍️ Duty-free SJU tiene ron puertorriqueño (Ron del Barrilito, Don Q, Bacardí) — última oportunidad recuerdo"
+                    ]
                 }
             ]
         };
@@ -1459,34 +1659,41 @@
         // Uses Open-Meteo (free, no API key required)
         // ============================================================
         const DAY_WEATHER = {
-            // Add coords per day: dayNumber: { lat: 0.0, lon: 0.0, isoDate: "YYYY-MM-DD" }
-            // Example: 1: { lat: 48.8566, lon: 2.3522, isoDate: "2027-01-01" },
+            1: { lat: 18.3756, lon: -65.7225, isoDate: "2026-07-08" },
+            2: { lat: 18.3035, lon: -65.7839, isoDate: "2026-07-09" },
+            3: { lat: 18.3756, lon: -65.7225, isoDate: "2026-07-10" },
+            4: { lat: 18.4665, lon: -66.1185, isoDate: "2026-07-11" },
+            5: { lat: 18.3756, lon: -65.7225, isoDate: "2026-07-12" },
         };
 
         // ============================================================
         // COST_DATA — Update with actual amounts as bookings are made
         // ============================================================
         const COST_DATA = {
-            disclaimer: "All figures are estimates. Update with confirmed prices as bookings are made.",
+            disclaimer: "Airbnb y alquiler coche confirmados. Actividades y comida son estimados — actualizar conforme se hacen reservas.",
             summary: [
-                { cat: "✈️ Flights",               amount: 0, note: "X pax · round-trip" },
-                { cat: "🏨 Accommodation",           amount: 0, note: "X nights · X rooms" },
-                { cat: "🚗 Car Rental",              amount: 0, note: "If applicable" },
-                { cat: "🗺️ Activities & Tours",      amount: 0, note: "Tours, entrance fees, etc." },
-                { cat: "🍽️ Food & Drinks",           amount: 0, note: "Meals not included in stays" },
-                { cat: "⛽ Fuel",                    amount: 0, note: "If self-driving" },
-                { cat: "💡 Tips, Souvenirs & Misc",  amount: 0, note: "Personal expenses" },
+                { cat: "🏠 Airbnb (Pitahaya, Luquillo)", amount: 2500, note: "10 huéspedes · 4 noches · Confirmado (2 pagos de S/4,403)" },
+                { cat: "🚗 Alquiler de Coches (Alamo × 2)",       amount: 1000, note: "2 SUVs Medianos · Jul 8–12 · $461 confirmado para 1er coche" },
+                { cat: "🌊 Bio Bay (boat + kayaks)",       amount: 500,  note: "~$50/persona × 10 · SOLO EFECTIVO · Reservar anticipadamente" },
+                { cat: "🐎 Carabalí (ATVs + horses + karts)", amount: 1200, note: "~$120/adulto activo · paseo hayride abuelos" },
+                { cat: "🏰 El Morro + San Cristóbal",     amount: 70,   note: "$10/adulto × 7 adultos · Gratis menores 16" },
+                { cat: "🍽️ Food & Drinks",                amount: 1500, note: "5 días · 10 personas · Muchas comidas casa o kioskos" },
+                { cat: "💡 Cash, Fuel & Misc",            amount: 400,  note: "Gasolina, efectivo kioskos, propinas, souvenirs" },
             ],
             days: {
-                // 1: { hotel: 0, activities: 0, food: 0, other: 0 },
+                1: { hotel: 0, activities: 0,    food: 200, other: 100 },
+                2: { hotel: 0, activities: 500,  food: 150, other: 0   },
+                3: { hotel: 0, activities: 1200, food: 200, other: 50  },
+                4: { hotel: 0, activities: 70,   food: 300, other: 0   },
+                5: { hotel: 0, activities: 0,    food: 100, other: 50  },
             }
         };
     </script>
 
     <header>
         <div class="header-content">
-            <button class="overview-btn" onclick="switchView('overview')">← Overview</button>
-            <div class="header-title" id="headerTitle">Trip Planner</div>
+            <button class="overview-btn" onclick="switchView('overview')">← Resumen</button>
+            <div class="header-title" id="headerTitle">Planificador de Viajes</div>
             <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
         </div>
         <div class="day-tabs" id="dayTabs"></div>
@@ -1500,7 +1707,7 @@
             <div class="card" id="currencyCard">
                 <div class="calc-header" onclick="toggleCurrencyCalc()">
                     <div class="calc-header-title">
-                        💱 Currency Calculator
+                        💱 Calculadora de Moneda
                         <span class="calc-header-sub" id="calcHeaderSub"></span>
                     </div>
                     <span class="calc-chevron" id="calcChevron">▶</span>
@@ -1516,35 +1723,35 @@
                     <div class="calc-row">
                         <div class="calc-label">
                             <div class="calc-label-code">AED</div>
-                            <div class="calc-label-name">UAE Dirham</div>
+                            <div class="calc-label-name">Dirham de EAU</div>
                         </div>
                         <input class="calc-input" id="calcInput1" type="number" placeholder="0" oninput="calcConvert(1)">
                     </div>
                     <div class="calc-row">
                         <div class="calc-label">
-                            <div class="calc-label-code">USD</div>
-                            <div class="calc-label-name">US Dollar</div>
+                            <div class="calc-label-code">PEN</div>
+                            <div class="calc-label-name">Sol Peruano</div>
                         </div>
                         <input class="calc-input" id="calcInput2" type="number" placeholder="0" oninput="calcConvert(2)">
                     </div>
                     <div class="calc-footer">
-                        <span class="calc-rates-note" id="calcRatesNote">Loading rates…</span>
-                        <button class="calc-refresh" onclick="fetchCalcRates(true)">↻ Refresh</button>
+                        <span class="calc-rates-note" id="calcRatesNote">Cargando rates…</span>
+                        <button class="calc-refresh" onclick="fetchCalcRates(true)">↻ Actualizar</button>
                     </div>
                 </div>
             </div>
 
             <!-- TRIP-SPECIFIC SECTIONS: add here (e.g. route maps) -->
 
-            <!-- Weather for today's location — collapsed by default, shown only during the trip -->
+            <!-- Clima for today's location — collapsed by default, shown only during the trip -->
             <div class="collapsible-section" id="overviewWeatherSection" style="display:none;">
                 <div class="section-header collapsed" id="overview-wx-header">
-                    <h3>🌤 Weather<span class="wx-preview" id="wx-preview-overview"></span></h3>
+                    <h3>🌤 Clima<span class="wx-preview" id="wx-preview-overview"></span></h3>
                     <div class="chevron"></div>
                 </div>
                 <div class="section-content section-weather collapsed">
                     <div id="wx-overview" style="padding: 12px 16px;">
-                        <div class="weather-loading">Loading forecast…</div>
+                        <div class="weather-loading">Cargando forecast…</div>
                     </div>
                 </div>
             </div>
@@ -1552,36 +1759,34 @@
             <!-- Itinerary — expanded by default -->
             <div class="collapsible-section">
                 <div class="section-header">
-                    <h3>📋 Itinerary</h3>
+                    <h3>📋 Itinerario</h3>
                     <div class="chevron"></div>
                 </div>
                 <div class="section-content">
                     <div>
                         <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:8px;">
-                            <button onclick="goToToday()" style="font-size:11px;padding:4px 10px;background:var(--accent-gold);color:var(--bg-primary);border:none;border-radius:5px;cursor:pointer;font-weight:600;font-family:inherit;">Today</button>
+                            <button onclick="goToToday()" style="font-size:11px;padding:4px 10px;background:var(--accent-gold);color:var(--bg-primary);border:none;border-radius:5px;cursor:pointer;font-weight:600;font-family:inherit;">Hoy</button>
                         </div>
                         <table class="accommodation-table" id="accommodationTable"></table>
                     </div>
                 </div>
             </div>
 
-            <!-- Maps — add map div(s) here with id="mapXxx", then implement renderXxxMap() below -->
+            <!-- Maps — Puerto Rico Trip Overview -->
             <div class="collapsible-section">
                 <div class="section-header">
-                    <h3>🗺️ Maps</h3>
+                    <h3>🗺️ Mapa del Viaje</h3>
                     <div class="chevron"></div>
                 </div>
                 <div class="section-content">
-                    <div>
-                        <!-- Example: <div id="mapMain" style="height:400px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);"></div> -->
-                    </div>
+                    <div id="tripMap" style="height: 400px; border-radius: 6px; overflow: hidden; background: var(--bg-tertiary); margin-bottom: 20px;"></div>
                 </div>
             </div>
 
-            <!-- Flights — expanded by default -->
+            <!-- Vuelos — expanded by default -->
             <div class="collapsible-section">
                 <div class="section-header">
-                    <h3>✈️ Flights</h3>
+                    <h3>✈️ Vuelos</h3>
                     <div class="chevron"></div>
                 </div>
                 <div class="section-content section-flight">
@@ -1589,10 +1794,10 @@
                 </div>
             </div>
 
-            <!-- Car Rental — expanded by default, hidden if TRIP_DATA.carRental is null -->
+            <!-- Alquiler de Coches — expanded by default, hidden if TRIP_DATA.carRental is null -->
             <div class="collapsible-section" id="carRentalSection" style="display:none;">
                 <div class="section-header">
-                    <h3>🚗 Car Rental</h3>
+                    <h3>🚗 Alquiler de Coches</h3>
                     <div class="chevron"></div>
                 </div>
                 <div class="section-content">
@@ -1611,7 +1816,7 @@
                 </div>
             </div>
 
-            <!-- Budget — expanded by default -->
+            <!-- Presupuesto — expanded by default -->
             <div class="collapsible-section">
                 <div class="section-header">
                     <h3>💰 Budget</h3>
@@ -1643,7 +1848,7 @@
     </main>
 
     <footer>
-        <p id="footerText">Trip Planner</p>
+        <p id="footerText">Planificador de Viajes</p>
     </footer>
 
     <script>
@@ -1652,13 +1857,13 @@
         // ============================================================
 
         const STATUS_STYLES = {
-            confirmed: { badge: "confirmed", label: "Confirmed" },
-            pending: { badge: "pending", label: "Pending" },
-            missing: { badge: "missing", label: "Missing" },
-            "to-book": { badge: "to-book", label: "To Book" },
-            included: { badge: "included", label: "Included" },
+            confirmed: { badge: "confirmed", label: "Confirmado" },
+            pending: { badge: "pending", label: "Pendiente" },
+            missing: { badge: "missing", label: "Faltante" },
+            "to-book": { badge: "to-book", label: "Para reservar" },
+            included: { badge: "included", label: "Incluido" },
             flexible: { badge: "options", label: "Flexible" },
-            options: { badge: "options", label: "Options" }
+            options: { badge: "options", label: "Opciones" }
         };
 
         // Session storage for restaurant selections
@@ -1725,17 +1930,13 @@
             // Flights
             const flightsList = document.getElementById("flightsList");
             flightsList.innerHTML = TRIP_DATA.flights
+                .sort((a, b) => a.departTime.localeCompare(b.departTime))
                 .map(f => `
-                    <div class="flight-card">
-                        <div class="flight-day">${f.dayOfWeek} ${f.date}</div>
-                        <div class="flight-route">${f.airline}</div>
+                    <div class="flight-row">
+                        <div><strong>${f.dayOfWeek} ${f.date}</strong><br><span class="flight-day">${f.airline}</span></div>
                         <div class="flight-times">${f.from} → ${f.to}</div>
-                        <div class="flight-times">${f.departTime}–${f.arriveTime}</div>
-                        <div class="flight-terminal">${f.terminal}</div>
-                        ${TRIP_DATA.checkInUrl ? `
-                        <div class="flight-checkin">
-                            <a href="${TRIP_DATA.checkInUrl}" target="_blank">Online Check-in</a>
-                        </div>` : ''}
+                        <div class="flight-times">${f.departTime} – ${f.arriveTime}</div>
+                        <div class="flight-terminal">${f.terminal}${TRIP_DATA.checkInUrl ? ' · <a href="' + TRIP_DATA.checkInUrl + '" target="_blank" style="color: #3A7DA0; text-decoration: none;">Check-in</a>' : ''}</div>
                     </div>
                 `)
                 .join("");
@@ -1805,7 +2006,7 @@
 
         function renderDayTabs() {
             const dayTabs = document.getElementById("dayTabs");
-            let tabsHTML = '<div class="day-tab active" data-view="overview" onclick="switchView(\'overview\')">Overview</div>';
+            let tabsHTML = '<div class="day-tab active" data-view="overview" onclick="switchView(\'overview\')">Resumen</div>';
 
             TRIP_DATA.days.forEach(day => {
                 const hasMissing = day.hotel.status === "missing" ||
@@ -1872,7 +2073,7 @@
                 </div>
             `;
 
-            // Weather — first section, collapsed by default
+            // Clima — first section, collapsed by default
             if (DAY_WEATHER[day.dayNumber]) {
                 html += `
                     <div class="collapsible-section">
@@ -1882,7 +2083,7 @@
                         </div>
                         <div class="section-content section-weather collapsed">
                             <div id="wx-${day.dayNumber}" style="padding: 12px 16px;">
-                                <div class="weather-loading">Loading forecast…</div>
+                                <div class="weather-loading">Cargando forecast…</div>
                             </div>
                         </div>
                     </div>
@@ -1904,7 +2105,7 @@
                                     <div style="color: var(--text-primary); margin-bottom: 4px;"><strong>${day.flight.from} → ${day.flight.to}</strong></div>
                                     <div style="color: var(--text-secondary); font-size: 13px; margin-bottom: 6px;">Depart: ${day.flight.departTime} · Arrive: ${day.flight.arriveTime}</div>
                                     <div style="color: var(--text-secondary); font-size: 12px; margin-bottom: 12px;">${day.flight.terminal}</div>
-                                    ${TRIP_DATA.checkInUrl ? `<a href="${TRIP_DATA.checkInUrl}" target="_blank" style="display: inline-block; padding: 8px 14px; background-color: #3A7DA0; color: white; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; transition: var(--transition);" onmouseover="this.style.backgroundColor='#4a9dc0'" onmouseout="this.style.backgroundColor='#3A7DA0'">Online Check-in</a>` : ''}
+                                    ${TRIP_DATA.checkInUrl ? `<a href="${TRIP_DATA.checkInUrl}" target="_blank" style="display: inline-block; padding: 8px 14px; background-color: #3A7DA0; color: white; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; transition: var(--transition);" onmouseover="this.style.backgroundColor='#4a9dc0'" onmouseout="this.style.backgroundColor='#3A7DA0'">Check-in en línea</a>` : ''}
                                 </div>
                             </div>
                         </div>
@@ -1937,7 +2138,7 @@
                 html += `
                     <div class="card">
                         <a href="https://${day.route}" target="_blank" style="color: var(--accent-gold); text-decoration: none;">
-                            📍 View Route on Google Maps →
+                            📍 Ver Ruta en Google Maps →
                         </a>
                     </div>
                 `;
@@ -2012,7 +2213,7 @@
             let html = `
                 <div class="collapsible-section">
                     <div class="section-header">
-                        <h3>Activities</h3>
+                        <h3>Actividades</h3>
                         <div class="chevron"></div>
                     </div>
                     <div class="section-content section-activities">
@@ -2120,7 +2321,7 @@
             let html = `
                 <div class="collapsible-section">
                     <div class="section-header">
-                        <h3>Meals</h3>
+                        <h3>Comidas</h3>
                         <div class="chevron"></div>
                     </div>
                     <div class="section-content section-meals">
@@ -2241,7 +2442,7 @@
                         <td class="budget-amount">~$${total.toLocaleString()}</td>
                     </tr>
                 </table>
-                <div class="budget-perperson">~$${pp.toLocaleString()} per person</div>
+                <div class="budget-perperson">~$${pp.toLocaleString()} por persona</div>
                 <div class="budget-disclaimer">${COST_DATA.disclaimer}</div>
             `;
         }
@@ -2353,7 +2554,7 @@
             if (!el) return;
             const data = await fetchWeather(dayNumber);
             if (!data || (data.t8 === null && data.t13 === null && data.t20 === null)) {
-                el.innerHTML = `<div class="weather-error">Forecast not yet available for this date</div>`;
+                el.innerHTML = `<div class="weather-error">Pronóstico no disponible aún for this date</div>`;
                 return;
             }
             const now = new Date();
@@ -2402,13 +2603,13 @@
                 const h3 = header.querySelector('h3');
                 if (h3) {
                     const preview = document.getElementById('wx-preview-overview');
-                    h3.innerHTML = `🌤 Today's Weather<small style="font-size:11px;opacity:0.7;font-weight:400;">${locLabel}</small>`;
+                    h3.innerHTML = `🌤 Clima de Hoy<small style="font-size:11px;opacity:0.7;font-weight:400;">${locLabel}</small>`;
                     if (preview) h3.appendChild(preview);
                 }
             }
             const data = await fetchWeather(dayNumber);
             if (!data || (data.tNow === null && data.t8 === null && data.t13 === null && data.t20 === null)) {
-                el.innerHTML = `<div class="weather-error">Forecast not yet available for this date</div>`;
+                el.innerHTML = `<div class="weather-error">Pronóstico no disponible aún for this date</div>`;
                 return;
             }
             const now = new Date();
@@ -2451,7 +2652,11 @@
         // local currency / AED / USD. Update per trip.
         // ============================================================
         const DAY_CURRENCY = {
-            // 1: { code: 'USD', name: 'US Dollar', symbol: '$' },
+            1: { code: 'USD', name: 'US Dollar', symbol: '$' },
+            2: { code: 'USD', name: 'US Dollar', symbol: '$' },
+            3: { code: 'USD', name: 'US Dollar', symbol: '$' },
+            4: { code: 'USD', name: 'US Dollar', symbol: '$' },
+            5: { code: 'USD', name: 'US Dollar', symbol: '$' },
         };
 
         let calcRates = null;
@@ -2500,7 +2705,7 @@
             calcPrimary = (todayDay && DAY_CURRENCY[todayDay]) ? DAY_CURRENCY[todayDay] : defaultCurrency;
             document.getElementById('calcCode0').textContent = calcPrimary.code;
             document.getElementById('calcName0').textContent = calcPrimary.name;
-            document.getElementById('calcHeaderSub').textContent = calcPrimary.code + ' · AED · USD';
+            document.getElementById('calcHeaderSub').textContent = calcPrimary.code + ' · AED · PEN';
             const ts = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             document.getElementById('calcRatesNote').textContent = `Rates updated ${ts}`;
         }
@@ -2589,8 +2794,45 @@
             L.polyline(pts, { color: color || '#C9966A', weight: 3, opacity: 0.9, dashArray: dash || null, lineJoin: 'round' }).addTo(map);
         }
 
-        // TODO: implement renderXxxMap() for each map div, then call them in the onload below
-        // async function renderMainMap() { ... }
+        async function renderMainMap() {
+            const el = document.getElementById('tripMap');
+            if (!el || el._leaflet_id) return;
+            const map = L.map('tripMap', { scrollWheelZoom: false });
+            makeTile(map);
+
+            // Collect all day coordinates from DAY_WEATHER
+            const waypoints = [];
+            const dayMarkers = [];
+            const dayLabels = ['', 'Día 1', 'Día 2', 'Día 3', 'Día 4', 'Día 5'];
+            const dayColors = ['', '#C9966A', '#D9A76A', '#E0956A', '#E9896A', '#F27D6A'];
+
+            for (let i = 1; i <= 5; i++) {
+                if (DAY_WEATHER[i]) {
+                    const w = DAY_WEATHER[i];
+                    waypoints.push([w.lat, w.lon]);
+                    dayMarkers.push({ pos: [w.lat, w.lon], label: i.toString(), color: dayColors[i] });
+                }
+            }
+
+            // Draw route connecting all waypoints
+            if (waypoints.length > 1) {
+                const route = await osrmRoute(waypoints);
+                drawRoute(map, route || waypoints, '#C9966A');
+            }
+
+            // Add markers for each day
+            dayMarkers.forEach(m => {
+                L.marker(m.pos, { icon: pin(m.label, m.color) })
+                    .bindPopup(dayLabels[parseInt(m.label)])
+                    .addTo(map);
+            });
+
+            // Fit bounds to all markers
+            if (waypoints.length > 0) {
+                const group = new L.featureGroup(dayMarkers.map(m => L.marker(m.pos)));
+                map.fitBounds(group.getBounds(), { padding: [50, 50] });
+            }
+        }
 
         // Load Leaflet then render maps
         (function() {
@@ -2600,7 +2842,7 @@
             document.head.appendChild(link);
             const s = document.createElement('script');
             s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-            s.onload = function() { setTimeout(function() { /* renderMainMap(); */ }, 300); };
+            s.onload = function() { setTimeout(function() { renderMainMap(); }, 300); };
             document.head.appendChild(s);
         })();
 

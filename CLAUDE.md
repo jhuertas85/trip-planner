@@ -14,6 +14,8 @@ trip-planner/
 │   └── index.html             # Namibia May 2026 (Juan Carlos, Maria, Ada, Felix)
 ├── 2026-07-switzerland/
 │   └── index.html             # Germany · Switzerland · Madrid July 2026 (Juan Carlos)
+├── 2026-07-puerto-rico/
+│   └── index.html             # Puerto Rico July 2026 (Family trip · 10 people · Luquillo)
 └── CLAUDE.md                  # This file
 ```
 
@@ -107,6 +109,16 @@ Set all amounts to 0 and fill in as bookings are confirmed.
 
 ## Rule: keep this file current
 Whenever a new trip folder is created or an existing one is significantly updated (travelers, dates, route), update the **File structure** section above and add or revise the matching trip summary section at the bottom of this file. This ensures every Claude session starts with accurate context without needing to scan the repo.
+
+## Puerto Rico 2026 trip summary
+- **Travellers:** Mamá (76), Papá (81), Giova, Ari (23), Coki, Liz, Emma (8), Matías (16), JC, Maria — 10 total
+- **Dates:** Jul 8–12, 2026 (5 days · Mié–Dom)
+- **Base:** Villa Pitahaya (Airbnb 827071, Luquillo) · 10 guests · Piscina · Confirmado · GPS 18.3756,-65.7225
+- **Flights:** Iberia IB381 MAD→SJU Jul 8 (12:45–15:25, JC & Maria) · IB382 SJU→MAD Jul 12 (17:15, JC & Maria)
+- **Car rental:** Alamo × 2 Midsize SUVs · Jul 8 4pm pickup → Jul 12 3pm return · (833) 763-1735
+- **Route:** Playa Luquillo (Día 1) → El Yunque + Laguna Grande Bio Bay (Día 2) → Hacienda Carabalí ATVs/caballos (Día 3) → Viejo San Juan fortalezas (Día 4) → Salida (Día 5)
+- **Lenguaje:** 100% español · USD para todas las transacciones
+- **Bookings necesarios:** Lancha Bio Bay (efectivo, teléfono) · Carabalí rides (reserva anticipada)
 
 ## Namibia 2026 trip summary
 - **Travellers:** Juan Carlos, Maria, Ada, Felix
