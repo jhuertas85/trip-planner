@@ -9,14 +9,21 @@ A static GitHub Pages site for trip itineraries. No build step, no framework —
 ## File structure
 ```
 trip-planner/
+├── index.html                 # Homepage — trips listing page (GitHub Pages root)
 ├── template.html              # Master template — copy this for every new trip
+├── favicon.png
+├── README.md
+├── CLAUDE.md                  # This file
+├── tickets/                   # PDF travel tickets
+│   ├── DB_Munich-Zurich_30Jun2026.pdf
+│   ├── Renfe_Pamplona-Madrid_7Jul2026.pdf
+│   └── SwissTravelPass_1-5Jul2026.pdf
 ├── 2026-05-namibia/
 │   └── index.html             # Namibia May 2026 (Juan Carlos, Maria, Ada, Felix)
 ├── 2026-07-switzerland/
 │   └── index.html             # Germany · Switzerland · Madrid July 2026 (Juan Carlos)
-├── 2026-07-puerto-rico/
-│   └── index.html             # Puerto Rico July 2026 (Family trip · 10 people · Luquillo)
-└── CLAUDE.md                  # This file
+└── 2026-07-puerto-rico/
+    └── index.html             # Puerto Rico Jul 2026 (10 people · Luquillo · Jul 8–12)
 ```
 
 Each trip is a self-contained single HTML file. All trip data lives in a `TRIP_DATA` JavaScript object near the top of the rendering script. The rendering engine reads from that object — **only edit `TRIP_DATA`, `DAY_WEATHER`, and `COST_DATA` for content changes**, not the rendering code.
