@@ -410,28 +410,32 @@
                     hotel: { name: "myMINGA4 Hotel & Serviced Apartments", status: "confirmed", note: "Last night — check out tomorrow Jun 30. Pack tonight.", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=myMINGA4+Hotel+Munich+Fliegenstrasse+4" },
                     drive: null,
                     activities: [
-                        { time: "Morning",   text: "Nymphenburg Palace and gardens",                    subNote: "~20 min by tram. Free gardens, €8 interior. Go early before crowds.",                                                                     needsBooking: false },
-                        { time: "Afternoon", text: "NS-Dokumentationszentrum",                         subNote: "Built on exact site of Nazi party HQ — one of the most important historical museums in Germany. €7 (free Sundays).",                       needsBooking: false },
-                        { time: "Afternoon", text: "OPTION: Dachau Concentration Camp",                subNote: "30 min by S-Bahn from Hauptbahnhof. Most significant memorial site in Germany. Half-day.",                                               needsBooking: false },
-                        { time: "Afternoon", text: "OPTION: Deutsches Museum",                         subNote: "World's largest science museum, Museumsinsel, ~€15. Best if skipping Dachau.",                                                           needsBooking: false },
-                        { time: "Evening",   text: "Last Munich dinner: Görreshof Wirtshaus (Maxvorstadt)", subNote: "Local beer garden, zero tourists, excellent food",                                                                                  needsBooking: false },
-                        { time: "Evening",   text: "Pack for departure — check out at 06:00 tomorrow", subNote: "Leave hotel at 06:00 for 06:48 DB ECE 198 to Zürich. München Hbf is ~10 min walk.", needsBooking: false }
+                        { time: "08:30",    text: "🚆 S2 to Dachau Concentration Camp Memorial",          subNote: "S2 from Hauptbahnhof (25 min) → bus 726 to memorial. Free entry. Open 09:00. Budget 3 hours minimum — first Nazi camp, model for all others.", needsBooking: false, mapsUrl: "maps.google.com/?q=KZ+Gedenkstätte+Dachau" },
+                        { time: "Afternoon", text: "Königsplatz — Nazi rally grounds & 1933 book burnings", subNote: "The square where Hitler staged massive rallies. Intact. 2 min from NS-Dokumentationszentrum.",                                          needsBooking: false, mapsUrl: "maps.google.com/?q=Königsplatz+Munich" },
+                        { time: "Afternoon", text: "NS-Dokumentationszentrum",                             subNote: "Built on the exact site of Nazi party HQ. Specifically about how Munich became the birthplace of fascism — not a typical museum. €7.",    needsBooking: false, mapsUrl: "maps.google.com/?q=NS-Dokumentationszentrum+Munich" },
+                        { time: "Afternoon", text: "Feldherrnhalle & Viscardgasse — Odeonsplatz",          subNote: "Where Beer Hall Putsch ended (1923). Find the golden cobblestones in the Viscardgasse alley — memorial to those who refused to salute the Nazis.", needsBooking: false, mapsUrl: "maps.google.com/?q=Feldherrnhalle+Munich" },
+                        { time: "Afternoon", text: "White Rose memorial — LMU Munich (5 min walk)",        subNote: "Sophie & Hans Scholl were arrested here handing out anti-Nazi leaflets. Free, inside the university entrance.",                             needsBooking: false, mapsUrl: "maps.google.com/?q=DenkStätte+Weiße+Rose+Munich" },
+                        { time: "Evening",   text: "🍺 Hofgarten — evening beer under the arcades",        subNote: "Arcaded garden right next to Odeonsplatz. Beer kiosk, locals on a summer evening, zero tourists. No restaurant, just Munich.",             needsBooking: false, mapsUrl: "maps.google.com/?q=Hofgarten+Munich" },
+                        { time: "Late",      text: "Pack for departure — train 06:48 tomorrow",            subNote: "Leave hotel at 06:00. München Hbf is ~10 min walk.",                                                                                     needsBooking: false }
                     ],
                     meals: {
-                        breakfast: { status: "flexible", note: "Hotel or nearby café",                               restaurants: [] },
-                        lunch:     { status: "flexible", note: "Near whichever afternoon activity you choose",        restaurants: [] },
-                        dinner:    { status: "options",  note: "Last Munich dinner — local, no tourists", restaurants: [
-                            { name: "Görreshof Wirtshaus", desc: "Maxvorstadt local beer garden, no tourists, excellent Bavarian food", rating: "4.4★", mapsUrl: "maps.google.com/?q=Gorreshof+Wirtshaus+Munich" }
+                        breakfast: { status: "flexible", note: "Quick coffee near hotel or grab something at Hauptbahnhof before the S2", restaurants: [] },
+                        lunch:     { status: "options",  note: "Back from Dachau ~13:00 — eat near Königsplatz", restaurants: [
+                            { name: "Café Lenbachhaus", desc: "Right next to Königsplatz, light lunch, good quality, calm atmosphere after a heavy morning.", rating: "4.2★", mapsUrl: "maps.google.com/?q=Cafe+Lenbachhaus+Munich" }
+                        ]},
+                        dinner:    { status: "flexible", note: "Drinks and bites in the Hofgarten/Odeonsplatz area — skip a sit-down dinner tonight", restaurants: [
+                            { name: "Augustiner Stammhaus", desc: "Most local of all Munich beer halls — dark wood, cold Augustiner on tap, bites available. On the way back from Odeonsplatz.", rating: "4.4★", mapsUrl: "maps.google.com/?q=Augustiner+Stammhaus+Munich" }
                         ]}
                     },
-                    route: "www.google.com/maps/dir/myMINGA4+Hotel+Munich/Marienplatz+Munich/Deutsches+Museum+Munich/Hofbrauhaus+Munich/Augustiner+Klosterwirt+Munich",
+                    route: "www.google.com/maps/dir/KZ+Gedenkstätte+Dachau/Königsplatz+Munich/NS-Dokumentationszentrum+Munich/Feldherrnhalle+Munich/Hofgarten+Munich",
                     warnings: [
-                        "Pack tonight — train Munich → Zurich departs 06:48. München Hbf is ~10 min walk.",
-                        "Book Munich → Zurich Sparpreis NOW if not done (~€22-30 2nd class)"
+                        "Dachau: go early — opens 09:00. Budget minimum 3 hours. Rushing it misses the point.",
+                        "Pack tonight — train Munich → Zurich departs 06:48. München Hbf is ~10 min walk."
                     ],
                     gems: [
-                        "NS-Dokumentationszentrum: built on the exact site of Nazi party HQ — sobering and essential",
-                        "Nymphenburg on a Monday morning: arrive early and you may have the baroque gardens almost to yourself"
+                        "Viscardgasse: find the golden cobblestones — the alley Munich locals used to avoid saluting the Feldherrnhalle. Most tourists walk straight past it.",
+                        "Hofgarten at dusk: locals under the arcades with a beer, no tourists — your last Munich evening",
+                        "Munich was called 'Hauptstadt der Bewegung' (Capital of the Movement) — the Nazi party was born here, not Berlin"
                     ]
                 },
 
