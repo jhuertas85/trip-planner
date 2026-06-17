@@ -343,20 +343,21 @@
                     activities: [
                         { time: "13:15",    text: "Arrive MUC T1 — S1/S8 S-Bahn to city centre", subNote: "~40 min, ~AED 50. Taxi option ~AED 65.", needsBooking: false },
                         { time: "Afternoon", text: "Check in, short walk to Viktualienmarkt", subNote: "Pretzel from Rischart bakery — orient yourself", needsBooking: false },
-                        { time: "Evening",   text: "Dinner at Gasthaus Isarthor", subNote: "Roast pork, locals only, ~€25 — must book ahead", needsBooking: true },
-                        { time: "Evening",   text: "One beer at Hofbräuhaus", subNote: "45 min max — bucket list, then early night. Long travel day.", needsBooking: false }
+                        { time: "Evening",   text: "Dinner at Gasthaus Isarthor", subNote: 'Roast pork, locals only, ~€25. <a href="https://www.gasthaus-isarthor.de" target="_blank" class="activity-maps-link">📅 Book online</a>', needsBooking: true },
+                        { time: "Evening",   text: "Evening beer at Augustiner am Dom", subNote: "Hofbräuhaus is temporarily closed. Augustiner is better anyway — local crowd, no tourists, same location.", needsBooking: false }
                     ],
                     meals: {
                         breakfast: { status: "flexible", note: "On board EK0049 or at DXB before departure", restaurants: [] },
                         lunch:     { status: "flexible", note: "In-flight or grab something on arrival", restaurants: [] },
-                        dinner:    { status: "options",  note: "Book Gasthaus Isarthor before you fly", restaurants: [
-                            { name: "Gasthaus Isarthor", desc: "Traditional Bavarian roast pork, beloved by locals. Book ahead.", rating: "4.4★", mapsUrl: "maps.google.com/?q=Gasthaus+Isarthor+Munich" },
-                            { name: "Hofbräuhaus",        desc: "Legendary beer hall — one beer, then move on",                 rating: "4.2★", mapsUrl: "maps.google.com/?q=Hofbrauhaus+Munich" }
+                        dinner:    { status: "options",  note: "Book Gasthaus Isarthor before you fly — Saturday fills up fast", restaurants: [
+                            { name: "Gasthaus Isarthor", desc: "Traditional Bavarian roast pork, beloved by locals. Book ahead at gasthaus-isarthor.de.", rating: "4.4★", mapsUrl: "maps.google.com/?q=Gasthaus+Isarthor+Munich" },
+                            { name: "Augustiner am Dom", desc: "Classic Munich beer hall — local crowd, no tourists, great Augustiner beer on tap. No reservation needed.", rating: "4.4★", mapsUrl: "maps.google.com/?q=Augustiner+am+Dom+Munich" }
                         ]}
                     },
                     route: "www.google.com/maps/dir/Munich+Airport+MUC/myMINGA4+Hotel+Munich+Fliegenstrasse+4",
                     warnings: [
-                        "Book Gasthaus Isarthor before you fly — fills up fast on weekends",
+                        "⚠️ Book Gasthaus Isarthor NOW at gasthaus-isarthor.de — Saturday dinner, fills up fast",
+                        "Hofbräuhaus temporarily closed — replaced with Augustiner am Dom (better anyway)",
                         "S-Bahn from T1: take S1 (Ostbahnhof) or S8 (Herrsching) — both reach city centre in ~40 min"
                     ],
                     gems: ["Rischart bakery at Viktualienmarkt — best pretzels in Munich, grab one on your first afternoon walk"]
