@@ -1224,7 +1224,7 @@
                     html += `<div class="timeline-time-group-header">${timeLabel}</div>`;
                     acts.forEach(a => {
                         const isAlternative = a.time.toLowerCase() === 'alt' || (a.text && a.text.toLowerCase().includes('instead of')) || (a.text && a.text.toLowerCase().includes('alternative'));
-                        const mapsUrl = a.mapsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.text + ' ' + day.location)}`;
+                        const mapsUrl = a.mapsUrl ? `https://${a.mapsUrl}` : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.text + ' ' + day.location)}`;
                         html += `<div class="timeline-item-bullet ${isAlternative ? 'alternative' : ''}">
                             <span${isAlternative ? ' style="color: #E8C66E;"' : ''}>${a.text}</span>
                             <a href="${mapsUrl}" target="_blank" class="activity-maps-link">📍</a>
@@ -1235,7 +1235,7 @@
                 } else {
                     acts.forEach(a => {
                         const isAlternative = a.text && a.text.toLowerCase().includes('alternative');
-                        const mapsUrl = a.mapsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.text + ' ' + day.location)}`;
+                        const mapsUrl = a.mapsUrl ? `https://${a.mapsUrl}` : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.text + ' ' + day.location)}`;
                         html += `<div class="timeline-item">
                             <div class="timeline-time">${timeLabel}</div>
                             <div class="timeline-text">${a.text} <a href="${mapsUrl}" target="_blank" class="activity-maps-link">📍</a></div>
