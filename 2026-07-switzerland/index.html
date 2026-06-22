@@ -522,67 +522,67 @@
                     ]
                 },
 
-                // ── DAY 6 ── Jul 2 Thu ── Bern WFH + Lucerne day trip ──
+                // ── DAY 6 ── Jul 2 Thu ── Lucerne full day ──
                 {
                     dayNumber: 6, date: "Jul 2", dayOfWeek: "Thu",
-                    title: "WFH + Lucerne", location: "Bern → Lucerne (day trip)",
+                    title: "Lucerne — Full Day", location: "Bern → Lucerne (day trip)",
                     backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
                     flight: null,
-                    hotel: { name: "Prize by Radisson Bern City", status: "confirmed", note: "WFH morning — breakfast included, fast WiFi", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Prize+by+Radisson+Bern+City+Viktoriastrasse" },
-                    drive: { from: "Bern", to: "Lucerne", duration: "~1h direct", distance: "Depart ~13:00 after work · regular trains" },
+                    hotel: { name: "Prize by Radisson Bern City", status: "confirmed", note: "Breakfast included. Full day trip to Lucerne.", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Prize+by+Radisson+Bern+City+Viktoriastrasse" },
+                    drive: { from: "Bern", to: "Lucerne", duration: "~1h direct", distance: "Depart ~09:00 · Swiss Travel Pass ✓" },
                     activities: [
-                        { time: "Morning",   text: "Work from hotel — WFH 🖥️",                       subNote: "Breakfast included. Fast WiFi. Protect mornings for calls.",                                          needsBooking: false },
-                        { time: "13:00",    text: "Train Bern → Lucerne (~1h direct)",                subNote: 'Swiss Travel Pass ✓ No ticket needed. Depart Bern HB ~13:00, arrive Lucerne HB ~14:00. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false, mapsUrl: "maps.google.com/?q=Lucerne+Hauptbahnhof" },
-                        { time: "Afternoon", text: "Kapellbrucke — Chapel Bridge",                    subNote: "5 min walk from Lucerne HB. 14th-century covered wooden footbridge — most photographed structure in Switzerland. Look up while crossing to see the 17th-century painted panels on the rafters.", needsBooking: false, mapsUrl: "maps.google.com/?q=Kapellbrucke+Lucerne" },
-                        { time: "Afternoon", text: "Lowenmal — Lion Monument",                        subNote: "10 min walk from Kapellbrucke. Carved into a natural cliff face, free. Mark Twain called it 'the most mournful piece of rock in the world' — it commemorates Swiss Guards killed in the French Revolution.", needsBooking: false, mapsUrl: "maps.google.com/?q=Lowenmal+Lucerne" },
-                        { time: "Afternoon", text: "Lucerne old town wander",                         subNote: "Medieval streets with painted guild facades and covered arcades. The Spreuerbrucke bridge (less crowded than Kapellbrucke) is also worth crossing.", needsBooking: false, mapsUrl: "maps.google.com/?q=Old+Town+Lucerne" },
-                        { time: "Evening",   text: "OPTION: Mt Pilatus gondola",                      subNote: "~CHF 36-41 with Swiss Travel Pass (50% off). 2,132m summit — staggering Alpine views. Book online in advance; closes in bad weather. Allow 2-3 hrs total.", needsBooking: true, mapsUrl: "maps.google.com/?q=Mount+Pilatus+Lucerne" },
-                        { time: "Evening",   text: "OPTION: Lake Lucerne boat cruise",                subNote: "Departs from next to Lucerne HB. ~1.5 hrs, covered by Swiss Travel Pass. Beautiful evening on the water with mountain backdrop.", needsBooking: false, mapsUrl: "maps.google.com/?q=Lake+Lucerne+boat+pier" },
-                        { time: "Evening",   text: "Train back Lucerne → Bern (~1h)",                 subNote: 'Swiss Travel Pass ✓ No ticket needed. Frequent service back to Bern HB. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false, mapsUrl: "maps.google.com/?q=Bern+Hauptbahnhof" }
+                        { time: "09:00",    text: "🚆 Train Bern → Lucerne (~1h direct)",                subNote: 'Swiss Travel Pass ✓ No ticket needed. Depart Bern HB ~09:00, arrive Lucerne HB ~10:00. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false, mapsUrl: "maps.google.com/?q=Lucerne+Hauptbahnhof" },
+                        { time: "10:00",    text: "Kapellbrücke — Chapel Bridge",                        subNote: "5 min walk from Lucerne HB. 14th-century covered wooden footbridge — most photographed structure in Switzerland. Look up while crossing to see the 17th-century painted panels on the rafters.", needsBooking: false, mapsUrl: "maps.google.com/?q=Kapellbrucke+Lucerne" },
+                        { time: "10:30",    text: "Löwendenkmal — Lion Monument",                        subNote: "10 min walk from Kapellbrücke. Carved directly into a cliff face, free. Mark Twain called it 'the most mournful piece of rock in the world' — commemorates Swiss Guards killed in the French Revolution.", needsBooking: false, mapsUrl: "maps.google.com/?q=Lowenmal+Lucerne" },
+                        { time: "11:00",    text: "Lucerne old town — painted guild facades",            subNote: "Medieval streets with frescoed buildings and covered arcades. The Spreuerbrücke bridge (less crowded than Kapellbrücke) is also worth crossing.", needsBooking: false, mapsUrl: "maps.google.com/?q=Old+Town+Lucerne" },
+                        { time: "12:30",    text: "Lunch in Lucerne",                                    subNote: "Plenty of options in the old town and along the lakefront. Budget CHF 20-30.",                                                                 needsBooking: false, mapsUrl: "maps.google.com/?q=Lucerne+Old+Town+restaurants" },
+                        { time: "14:00",    text: "Mt Pilatus gondola — 2,132m summit",                 subNote: "~CHF 36-41 with Swiss Travel Pass (50% off). Staggering Alpine panorama — on a clear day you see 73 peaks. Book online in advance; gondola closes in bad weather. Allow 2-3 hrs total.", needsBooking: true, mapsUrl: "maps.google.com/?q=Mount+Pilatus+Lucerne" },
+                        { time: "Afternoon", text: "OPTION if bad weather: Lake Lucerne boat cruise",   subNote: "Departs from pier next to Lucerne HB. ~1.5 hrs, fully covered by Swiss Travel Pass. Beautiful on the water with mountain backdrop.", needsBooking: false, mapsUrl: "maps.google.com/?q=Lake+Lucerne+SGV+Pier" },
+                        { time: "Evening",   text: "🚆 Train back Lucerne → Bern (~1h)",                 subNote: 'Swiss Travel Pass ✓ Frequent service back to Bern HB. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false, mapsUrl: "maps.google.com/?q=Bern+Hauptbahnhof" }
                     ],
                     meals: {
-                        breakfast: { status: "included", note: "Hotel breakfast — eat before work starts",    restaurants: [] },
-                        lunch:     { status: "flexible", note: "Working lunch at hotel or quick bite before train", restaurants: [] },
+                        breakfast: { status: "included", note: "Hotel breakfast before heading out",    restaurants: [] },
+                        lunch:     { status: "flexible", note: "Lunch in Lucerne old town — CHF 20-30", restaurants: [] },
                         dinner:    { status: "options",  note: "Dinner back in Bern after Lucerne", restaurants: [
                             { name: "Lötschberg", desc: "Classic Bernese cuisine — fondue, cheese dishes, local wines. ~€30-35.", rating: "4.5★", mapsUrl: "maps.google.com/?q=Lotschberg+Restaurant+Bern" }
                         ]}
                     },
-                    route: "www.google.com/maps/dir/Prize+by+Radisson+Bern+City/Bern+HB/Kapellbrucke+Lucerne+Switzerland/Lowenmal+Lucerne+Switzerland/Old+Town+Lucerne/Bern+HB",
+                    route: "www.google.com/maps/dir/Bern+Hauptbahnhof/Kapellbrucke+Lucerne/Lowenmal+Lucerne/Old+Town+Lucerne/Mount+Pilatus+Lucerne/Bern+Hauptbahnhof",
                     warnings: [
-                        "⚠️ Book Mt Pilatus gondola online in advance — popular and can sell out on sunny days",
-                        "Check weather for Pilatus morning of — gondola closes in bad weather"
+                        "⚠️ Book Mt Pilatus gondola online in advance — popular and sells out on sunny days",
+                        "Check weather for Pilatus morning of — gondola closes in bad weather. If closed, do the lake cruise instead"
                     ],
                     gems: [
                         "Lion Monument: carved into a cliff face, completely free, and one of the most unexpectedly moving sculptures in Europe",
-                        "Kapellbrücke interior: look up while crossing — 17th century painted panels overhead"
+                        "Kapellbrücke interior: look up while crossing — 17th century painted panels overhead that most people miss"
                     ]
                 },
 
-                // ── DAY 7 ── Jul 3 Fri ── Bern WFH + Interlaken day trip ──
+                // ── DAY 7 ── Jul 3 Fri ── Interlaken full day ──
                 {
                     dayNumber: 7, date: "Jul 3", dayOfWeek: "Fri",
-                    title: "WFH + Interlaken", location: "Bern → Interlaken (day trip)",
+                    title: "Interlaken — Full Day", location: "Bern → Interlaken (day trip)",
                     backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
                     flight: null,
-                    hotel: { name: "Prize by Radisson Bern City", status: "confirmed", note: "Last Bern night — check out tomorrow Jul 4", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Prize+by+Radisson+Bern+City+Viktoriastrasse" },
-                    drive: { from: "Bern", to: "Interlaken Ost", duration: "~50 min direct", distance: "Depart ~13:00 after work" },
+                    hotel: { name: "Prize by Radisson Bern City", status: "confirmed", note: "Last Bern night — check out tomorrow Jul 4. Pack tonight.", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Prize+by+Radisson+Bern+City+Viktoriastrasse" },
+                    drive: { from: "Bern", to: "Interlaken Ost", duration: "~50 min direct", distance: "Depart ~09:00 · Swiss Travel Pass ✓" },
                     activities: [
-                        { time: "Morning",   text: "Work from hotel — WFH 🖥️",                           subNote: "Breakfast included. Last full Bern morning.",                                                    needsBooking: false },
-                        { time: "13:00",    text: "Train Bern → Interlaken Ost (~50 min direct)",         subNote: 'Swiss Travel Pass ✓ No ticket needed. Depart Bern HB ~13:00. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false, mapsUrl: "maps.google.com/?q=Interlaken+Ost+Station" },
-                        { time: "Afternoon", text: "Harder Kulm funicular — summit 1,322m",              subNote: "Funicular departs 5 min walk from Interlaken Ost. ~CHF 16 return with Swiss Travel Pass (50% off). The Two Lakes Bridge platform gives a panoramic view of Lakes Brienz and Thun with the Alps behind. Book online.", needsBooking: true, mapsUrl: "maps.google.com/?q=Harder+Kulm+Interlaken" },
-                        { time: "Afternoon", text: "Lake Thun shoreline walk",                            subNote: "5 min walk from Interlaken Ost towards the lake. Turquoise glacial water, Alps reflected in the surface. Walk west along the shore for the best views.", needsBooking: false, mapsUrl: "maps.google.com/?q=Lake+Thun+Interlaken" },
-                        { time: "Afternoon", text: "Lake Brienz shoreline",                               subNote: "East side of Interlaken — equally stunning, fewer tourists. The Brienz side has a clear view towards the Bernese Oberland peaks.", needsBooking: false, mapsUrl: "maps.google.com/?q=Lake+Brienz+Interlaken" },
-                        { time: "Evening",   text: "Train back Interlaken → Bern (~50 min)",              subNote: 'Swiss Travel Pass ✓ No ticket needed. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false, mapsUrl: "maps.google.com/?q=Bern+Hauptbahnhof" },
-                        { time: "Evening",   text: "Walk Aare river bend from Nydeggbrucke",              subNote: "10 min walk from Bern HB. The Nydeggbrucke bridge gives the best single view of the city — Bern's medieval Altstadt appears to float on a river peninsula. Sunset is spectacular here.", needsBooking: false, mapsUrl: "maps.google.com/?q=Nydeggbrucke+Bern" },
-                        { time: "Evening",   text: "Dinner at Restaurant Rosengarten",                    subNote: "On the rose garden hill above Bern — 10 min walk from Nydeggbrucke. Views over the city, Swiss-French cuisine ~€35-45. Must book ahead.", needsBooking: true, mapsUrl: "maps.google.com/?q=Restaurant+Rosengarten+Bern" }
+                        { time: "09:00",    text: "🚆 Train Bern → Interlaken Ost (~50 min direct)",        subNote: 'Swiss Travel Pass ✓ No ticket needed. Depart Bern HB ~09:00. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false, mapsUrl: "maps.google.com/?q=Interlaken+Ost+Station" },
+                        { time: "10:00",    text: "Harder Kulm funicular — summit 1,322m",                  subNote: "Funicular departs 5 min walk from Interlaken Ost. ~CHF 16 return with Swiss Travel Pass (50% off). The Two Lakes Bridge platform gives a panoramic view of Lakes Brienz and Thun with the Alps behind. Book online — sells out on clear Fridays.", needsBooking: true, mapsUrl: "maps.google.com/?q=Harder+Kulm+Interlaken" },
+                        { time: "12:00",    text: "Lunch in Interlaken with lake views",                    subNote: "Restaurant Schuh on the main street has a terrace facing the Alps — Swiss classics, CHF 25-35. Or grab something cheaper at the Coop near Interlaken Ost.", needsBooking: false, mapsUrl: "maps.google.com/?q=Restaurant+Schuh+Interlaken" },
+                        { time: "13:30",    text: "Lake Thun shoreline walk",                               subNote: "5 min walk west from Interlaken Ost. Turquoise glacial water, Alps reflected in the surface. Walk along the shore for the best views.", needsBooking: false, mapsUrl: "maps.google.com/?q=Lake+Thun+Interlaken" },
+                        { time: "14:30",    text: "Lake Brienz shoreline",                                  subNote: "East side of Interlaken — equally stunning, fewer tourists. Clear view towards the Bernese Oberland peaks. The contrast between the two lakes is striking.", needsBooking: false, mapsUrl: "maps.google.com/?q=Lake+Brienz+Interlaken" },
+                        { time: "16:00",    text: "🚆 Train back Interlaken → Bern (~50 min)",              subNote: 'Swiss Travel Pass ✓ No ticket needed. Frequent service. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false, mapsUrl: "maps.google.com/?q=Bern+Hauptbahnhof" },
+                        { time: "17:00",    text: "Nydeggbrücke — sunset over Bern's Altstadt",             subNote: "10 min walk from Bern HB. The bridge gives the best single view in the city — the medieval Altstadt appears to float on a river peninsula. Timed right, the light is exceptional.", needsBooking: false, mapsUrl: "maps.google.com/?q=Nydeggbrucke+Bern" },
+                        { time: "19:00",    text: "🍺 Evening drink with a view — Rosengarten terrace",     subNote: "On the rose garden hill above Bern, 10 min walk from Nydeggbrücke. Panoramic view over the city. Can eat here (Swiss-French, ~CHF 35-45, book ahead) or just drinks.", needsBooking: false, mapsUrl: "maps.google.com/?q=Restaurant+Rosengarten+Bern" }
                     ],
                     meals: {
-                        breakfast: { status: "included", note: "Hotel breakfast — eat before work", restaurants: [] },
+                        breakfast: { status: "included", note: "Hotel breakfast before heading out", restaurants: [] },
                         lunch:     { status: "options",  note: "Lunch in Interlaken with lake views", restaurants: [
-                            { name: "Restaurant Schuh", desc: "Swiss classics and lake views in Interlaken. ~€25-35.", rating: "4.3★", mapsUrl: "maps.google.com/?q=Restaurant+Schuh+Interlaken" }
+                            { name: "Restaurant Schuh", desc: "Swiss classics and terrace facing the Alps. CHF 25-35.", rating: "4.3★", mapsUrl: "maps.google.com/?q=Restaurant+Schuh+Interlaken" }
                         ]},
-                        dinner:    { status: "options",  note: "Last Swiss dinner — book ahead", restaurants: [
-                            { name: "Restaurant Rosengarten", desc: "Rose garden hill above Bern, views over the city, Swiss-French cuisine. ~€35-45. Reserve.", rating: "4.4★", mapsUrl: "maps.google.com/?q=Restaurant+Rosengarten+Bern" }
+                        dinner:    { status: "options",  note: "Rosengarten terrace drinks or full dinner — book if eating", restaurants: [
+                            { name: "Restaurant Rosengarten", desc: "Rose garden hill above Bern, panoramic city views, Swiss-French cuisine. ~CHF 35-45. Reserve if eating.", rating: "4.4★", mapsUrl: "maps.google.com/?q=Restaurant+Rosengarten+Bern" }
                         ]}
                     },
                     route: "www.google.com/maps/dir/Prize+by+Radisson+Bern+City/Bern+HB/Interlaken+Ost+Station/Harder+Kulm+Interlaken/Nydeggbrucke+Bern/Restaurant+Rosengarten+Bern",
