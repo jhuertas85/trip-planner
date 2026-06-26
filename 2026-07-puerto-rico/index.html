@@ -1430,7 +1430,8 @@
                         { time: "3:00pm", text: "Check-in Casa · Villa Pitahaya", subNote: "GPS: 18.3756,-65.7225 · Luquillo. Esperando JC y Grupo Huertas Peru. Piscina disponible desde la llegada.", needsBooking: false, mapsUrl: "maps.google.com/maps/?q=18.3756,-65.7225" },
                         { time: "3:25pm", text: "JC llega a SJU (IB381) → Recogida Alamo, 2do SUV", subNote: "Alamo: 1er piso garage SJU · Sin shuttle — cruzar la calle desde reclamo · (833) 763-1735. Conducir directo a la casa ~45-75 min.", needsBooking: false, mapsUrl: "maps.google.com/?q=Alamo+Rent+A+Car+SJU+Airport+Puerto+Rico" },
                         { time: "4:14pm", text: "Grupo Huertas Peru llega SJU (Copa CM142) → Recogida Alamo, directo a la casa", subNote: "Vuelan desde Lima via Panama. Alamo: 1er piso garage SJU — cruzar calle desde reclamo. Acomodarse en 2do SUV.", needsBooking: false, mapsUrl: "maps.google.com/?q=Luis+Munoz+Marin+International+Airport+San+Juan" },
-                        { time: "6:40pm", text: "Maria llega (IB0379) — recogerla en SJU", subNote: "Una vez todos en casa: instalarse, comer, descansar. Sin grandes planes esta noche.", needsBooking: false, mapsUrl: "maps.google.com/?q=Luis+Munoz+Marin+International+Airport+San+Juan" }
+                        { time: "6:40pm", text: "Maria llega (IB0379) — recogerla en SJU", subNote: "Una vez todos en casa: instalarse, comer, descansar. Sin grandes planes esta noche.", needsBooking: false, mapsUrl: "maps.google.com/?q=Luis+Munoz+Marin+International+Airport+San+Juan" },
+                        { time: "7:00pm", text: "🔥 Parrillada en casa — primera noche todos juntos", subNote: "BBQ en Villa Pitahaya. Encender la parrilla, piscina, noche tranquila en familia.", needsBooking: false }
                     ],
                     meals: {
                         breakfast: { status: "flexible", note: "Comida de aeropuerto o snacks en ruta", restaurants: [] },
@@ -1444,17 +1445,15 @@
                         },
                         dinner: {
                             status: "confirmed",
-                            note: "Cena en El Pescador & Tapas — reserva para 10 personas en la noche (7:30–8pm). Mariscos frescos, ambiente Caribe tranquilo, cócteles geniales.",
-                            restaurants: [
-                                { name: "El Pescador & Tapas (Fajardo)", desc: "⭐ RECOMENDACIÓN PRINCIPAL — Mariscos frescos + langosta agua · vibe Caribe casual · cócteles geniales · ~15–20 min de casa", rating: "⭐⭐⭐ Upscale", mapsUrl: "maps.google.com/maps/search/?api=1&query=El+Pescador+Tapas+Fajardo+Puerto+Rico" }
-                            ]
+                            note: "Parrillada en casa — primera noche todos juntos en Villa Pitahaya. BBQ en la terraza, piscina, sin manejo.",
+                            restaurants: []
                         }
                     },
                     route: "maps.google.com/maps/?q=Villa+Pitahaya+Luquillo+Puerto+Rico",
                     warnings: [
                         "🚨 CRÍTICO: Grupo Huertas llega 12pm pero check-in normal 3pm. DEBE solicitar early check-in a Villa Pitahaya. Confirmar disponibilidad ANTES del viaje.",
                         "⏱ SJU → Luquillo: ~45 min sin tráfico, hasta 1h15 con tráfico — margen para cada recogida",
-                        "💵 Efectivo AHORA: lancha bahía bio solo efectivo, muchos kioskos también. Suficiente para toda la semana.",
+                        "💵 Efectivo: traer para kioskos y propinas. Bio Bay ya reservado con tarjeta.",
                         "🧴 Esenciales compra: bloqueador reef-safe, repelente, 2-3 galones agua, desayuno para 10",
                         "🚗 Recogida Alamo: salir reclamo → cruzar calle → 1er piso parking. Sin shuttle."
                     ],
@@ -1465,8 +1464,65 @@
                 },
                 {
                     dayNumber: 2, date: "Jul 9", dayOfWeek: "Jue",
-                    title: "Bosque El Yunque (+ Bahía Bioluminiscente de noche) 🌊",
-                    location: "El Yunque / Fajardo, Puerto Rico",
+                    title: "Viejo San Juan 🏰",
+                    location: "San Juan Antiguo, Puerto Rico",
+                    backgroundImage: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Villa Pitahaya · Airbnb, Luquillo",
+                        status: "confirmed",
+                        note: "10 huéspedes · Piscina · Misma casa toda la semana",
+                        bookedBy: null,
+                        mapsUrl: "maps.google.com/maps/?q=18.3756,-65.7225"
+                    },
+                    drive: { from: "House", to: "Viejo San Juan", duration: "~45–55 min", distance: "PR-3 → PR-26 → centro histórico · Aparcar en Covadonga o Doña Fela" },
+                    activities: [
+                        { time: "8:30am", text: "Salir de casa hacia Viejo San Juan", subNote: "~50 min de manejo. Salir temprano para llegar antes del calor y las multitudes. Aparcar en el garaje Covadonga (calle Recinto Sur) o Doña Fela.", needsBooking: false, mapsUrl: "maps.google.com/?q=Parking+Garage+Covadonga+Old+San+Juan+Puerto+Rico" },
+                        { time: "9:30am", text: "🏰 Castillo San Felipe del Morro (El Morro) — fortaleza icónica", subNote: "Abre 9am. $10/adulto · gratis menores 16. La fortaleza más fotogénica de PR — murallas sobre el Atlántico. ~1.5–2 hr para recorrer tranquilo. Perfecto para Papá + Mamá con sillas de paseo en los campos.", needsBooking: false, mapsUrl: "maps.google.com/?q=Castillo+San+Felipe+del+Morro+Old+San+Juan+Puerto+Rico" },
+                        { time: "Mañana", text: "🏰 Castillo San Cristóbal — segunda fortaleza (opcional)", subNote: "5 min a pie de El Morro. $10/adulto · mismo pase válido mismo día. Si el grupo tiene energía después El Morro — vistas sobre la ciudad.", needsBooking: false, mapsUrl: "maps.google.com/?q=Castillo+San+Cristobal+Old+San+Juan+Puerto+Rico" },
+                        { time: "12:00pm", text: "Paseo por el casco histórico — callejones azules", subNote: "Los adoquines azules del Viejo San Juan son únicos en el mundo. Calle Fortaleza, Calle San Sebastián, Plaza de Armas. Sombra + heladerías + balcones coloniales.", needsBooking: false, mapsUrl: "maps.google.com/?q=Calle+Fortaleza+Old+San+Juan+Puerto+Rico" },
+                        { time: "1:00pm", text: "Almuerzo en el Viejo San Juan", subNote: "Muchas opciones a pie — ver opciones de almuerzo abajo. Perfecta hora para comer antes del calor de la tarde.", needsBooking: false, mapsUrl: "maps.google.com/?q=Old+San+Juan+restaurants+Puerto+Rico" },
+                        { time: "4:00pm", text: "👁️ Paseo La Perla — vista desde las murallas del casco histórico", subNote: "Caminar por las murallas del Viejo San Juan con vistas sobre La Perla y el mar Atlántico. Fotos espectaculares al atardecer. NO bajar al barrio La Perla.", needsBooking: false, mapsUrl: "maps.google.com/?q=La+Perla+San+Juan+Puerto+Rico+viewpoint" },
+                        { time: "6:00pm", text: "Regreso a casa desde Viejo San Juan", subNote: "~50 min de vuelta. Tráfico moderado tarde entre semana. Llegar ~7pm.", needsBooking: false, mapsUrl: "maps.google.com/maps/dir/Old+San+Juan+Puerto+Rico/Villa+Pitahaya+Luquillo+Puerto+Rico" }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Rápido en casa — salir 8:30am", restaurants: [] },
+                        lunch: {
+                            status: "options",
+                            note: "Muchas opciones a pie en el casco histórico — llegar entre 12–1pm para plazas",
+                            restaurants: [
+                                { name: "Raíces", desc: "Cocina puertorriqueña clásica · mofongo, pernil, tostones · ambiente colonial · ideal grupo grande", rating: "⭐ Recomendación top", mapsUrl: "maps.google.com/maps/search/?api=1&query=Raices+Restaurant+Old+San+Juan+Puerto+Rico" },
+                                { name: "El Jibarito", desc: "Comida criolla auténtica · precios locales · sin pretensiones · favorito de los residentes", rating: "4.3★", mapsUrl: "maps.google.com/maps/search/?api=1&query=El+Jibarito+Old+San+Juan+Puerto+Rico" },
+                                { name: "Deaverdura", desc: "Opciones vegetarianas y ensaladas frescas · bueno para quien quiere algo ligero", rating: "4.4★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Deaverdura+Old+San+Juan+Puerto+Rico" },
+                                { name: "Princesa Cocina y Cultura", desc: "Vistas a la bahía · ambiente especial · bueno para celebrar con cócteles", rating: "4.2★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Princesa+Cocina+y+Cultura+San+Juan+Puerto+Rico" }
+                            ]
+                        },
+                        dinner: {
+                            status: "flexible",
+                            note: "Cena en casa al regresar ~7pm — o Kioskos Luquillo si el grupo tiene energía",
+                            restaurants: [
+                                { name: "Luquillo Kioskos", desc: "De paso de vuelta a casa · frente playa · casual", rating: "4.0★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Luquillo+Kioskos+Puerto+Rico" }
+                            ]
+                        }
+                    },
+                    route: "maps.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/Castillo+San+Felipe+del+Morro+Old+San+Juan+Puerto+Rico",
+                    warnings: [
+                        "🚗 Aparcar en VSJ es complicado — usar garaje Covadonga (Calle Recinto Sur) o Doña Fela desde primera hora",
+                        "☀️ Día caluroso caminando — salir temprano, llevar agua, buscar sombra después las 12pm",
+                        "💵 El Morro: $10/adulto · gratis menores 16 — llevar efectivo por si acaso",
+                        "🚫 NO bajar al barrio La Perla — solo vista desde las murallas",
+                        "🚦 Tráfico de vuelta tarde puede ser lento — salir antes de las 6:30pm si posible"
+                    ],
+                    gems: [
+                        "🏰 El Morro al amanecer/mañana temprano: sin colas, mejor luz para fotos, más fresco para los abuelos",
+                        "🪁 Los campos de El Morro los locales sacan cometas los fines de semana — vista preciosa sobre el Atlántico",
+                        "🔵 Los adoquines azules del VSJ son únicos en el mundo — vienen de lingotes de hierro de los barcos coloniales"
+                    ]
+                },
+                {
+                    dayNumber: 3, date: "Jul 10", dayOfWeek: "Vie",
+                    title: "Selva y Aventura 🌿🐎",
+                    location: "El Yunque · Hacienda Carabalí, Luquillo",
                     backgroundImage: "https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=800",
                     flight: null,
                     hotel: {
@@ -1476,165 +1532,104 @@
                         bookedBy: null,
                         mapsUrl: "maps.google.com/maps/?q=18.3756,-65.7225"
                     },
-                    drive: { from: "House", to: "El Yunque PR-191 gate", duration: "~15–20 min", distance: "Gate opens 8:00am · ~200-car cap · Arrive at opening" },
+                    drive: { from: "House", to: "El Yunque (mañana) → Hacienda Carabalí (tarde)", duration: "15–20 min El Yunque · 5–10 min Carabalí", distance: "Portón El Yunque abre 8am · Carabalí abre 8:30am" },
                     activities: [
-                        { time: "9:00am", text: "Porton El Yunque — entrada al bosque", subNote: "15 min de casa. Portón abre 8am, pero llegar 9am es suficiente para encontrar plaza. Entrada gratis, sin reserva necesaria. Tope ~200 carros.", needsBooking: false, mapsUrl: "maps.google.com/?q=El+Yunque+National+Forest+Puerto+Rico" },
-                        { time: "9:00am", text: "Cascada La Coca — cascada a orilla de carretera PR-191", subNote: "Primera parada en la carretera del bosque — cascada grande visible desde el carro, cero caminata. Parada foto perfecta para abuelos. Mañana LIGERA para guardar energia para la bahia bio esta noche.", needsBooking: false, mapsUrl: "maps.google.com/?q=La+Coca+Falls+El+Yunque+Puerto+Rico" },
-                        { time: "Manana", text: "Torre Yokahu — mirador sobre bosque y costa norte", subNote: "Subida corta (escaleras, 5-10 min). Vistas 360° sobre la selva tropical y el Atlantico. Gratis, accesible desde el aparcamiento del centro de visitantes.", needsBooking: false, mapsUrl: "maps.google.com/?q=Yokahu+Tower+El+Yunque+Puerto+Rico" },
-                        { time: "Manana", text: "Cascadas Juan Diego — opcional para grupo en forma", subNote: "Escalera rocosa sube 10-12 min. Cascada con piscina natural poco profunda. Saltarla si esta mojado o el grupo quiere guardar energia.", needsBooking: false, mapsUrl: "maps.google.com/?q=Juan+Diego+Falls+El+Yunque+Puerto+Rico" },
-                        { time: "Tarde", text: "Sendero La Mina → Cascadas La Mina — grupo activo", subNote: "Caminata real 45 min cada lado — tenis requeridos, esperar lodo. Cascadas con piscina natural. Los mas exigentes del parque.", needsBooking: false, mapsUrl: "maps.google.com/?q=La+Mina+Falls+El+Yunque+Puerto+Rico" },
-                        { time: "Tarde", text: "Torre Mt. Britton — opcional grupo activo", subNote: "Las mejores vistas del parque — bosque nuboso y costa desde la cima. 30 min subida. Alternativa a Cascadas La Mina si el grupo prefiere vistas a agua.", needsBooking: false, mapsUrl: "maps.google.com/?q=Mt+Britton+Tower+El+Yunque+Puerto+Rico" },
-                        { time: "Tarde", text: "Grupo relajado (abuelos + nina 8): Miradores, luego bajar temprano a descansar casa", subNote: "Dos carros hacen esta division sin problema. Miradores a lo largo de PR-191 son accesibles y panoramicos.", needsBooking: false },
-                        { time: "Tarde", text: "Kioskos Luquillo — almuerzo, reagrupar los 10", subNote: "~15-20 min del porton El Yunque. ~60 kioskos frente a la playa — cada uno elige lo suyo.", needsBooking: false, mapsUrl: "maps.google.com/?q=Luquillo+Kioskos+Puerto+Rico" },
-                        { time: "Tarde", text: "Piscina casa — recargarse bien antes bahia bio", subNote: "Descanso esencial entre el bosque (manana) y la bahia (noche). Cena ligera antes de salir.", needsBooking: false, mapsUrl: "maps.google.com/maps/?q=18.3756,-65.7225" },
-                        { time: "7:00pm ⭐", text: "🌊 Bahia Bioluminiscente — Laguna Grande, Fajardo", subNote: "🌟 ACTIVIDAD PRINCIPAL DEL DIA — ~15-20 min de casa. Lancha electrica 7:00-8:30pm (Bio Island / Capt. Suarez): ~$50/persona · SOLO EFECTIVO · Reservar por telefono ANTES · Asientos limitados. Para abuelos + nina 8. Opcion kayak grupo activo (30 min remar manglares).", needsBooking: true, mapsUrl: "maps.google.com/?q=Laguna+Grande+Fajardo+Puerto+Rico" }
+                        { time: "9:30am", text: "Portón El Yunque — entrada a la selva tropical", subNote: "Entrada gratis, sin reserva. Llevar agua, repelente, calzado cerrado.", needsBooking: false },
+                        { time: "9:30am", text: "Cascada La Coca — a orilla de carretera, cero caminata", subNote: "Parada foto perfecta para abuelos + Emma. Mañana LIGERA — energía para Carabalí.", needsBooking: false },
+                        { time: "Mañana", text: "Torre Yokahú — mirador sobre el bosque y la costa, subida corta", subNote: "Opcional pero vale — 10 min arriba, vistas espectaculares", needsBooking: false },
+                        { time: "Mañana", text: "Grupo activo: Sendero La Mina → Cascadas La Mina (piscina natural)", subNote: "Tenis requeridos, esperar lodo. Grupo relajado (abuelos + Emma): miradores y fotos.", needsBooking: false },
+                        { time: "12:30pm", text: "Almuerzo Kioskos Luquillo — reagrupar los 10 antes de Carabalí", subNote: "~15–20 min del portón El Yunque · punto de reagrupación perfecto", needsBooking: false },
+                        { time: "2:00pm", text: "Hacienda Carabalí — ATVs / UTVs + caballos (slot tarde)", subNote: "Reservar con anticipación. Tarde en Carabalí es aceptable — está en faldas del bosque, menos expuesto al sol.", needsBooking: true },
+                        { time: "Tarde", text: "ATVs / UTVs — recorrido guiado 1–2 hr por hacienda de 600 acres", subNote: "Matías (16) + adultos. Confirmar edad mínima conductor al reservar.", needsBooking: true },
+                        { time: "Tarde", text: "Cabalgata playa (2.5 hr) — cruza Río Mameyes hasta Playa Luquillo", subNote: "~$164/adulto · Edad mín 12 · Máx 235 lb · Zapatos cerrados + pantalón largo · Emma (8) toma cabalgata campo corta (1 hr)", needsBooking: true },
+                        { time: "Tarde", text: "Abuelos: paseo hayride + zoológico abierto + go-karts", subNote: "Sin esfuerzo y genuinamente divertido. O relajarse en el Bar & Grill del sitio.", needsBooking: false }
                     ],
                     meals: {
-                        breakfast: { status: "flexible", note: "Rápido casa — partir 9:00am", restaurants: [] },
+                        breakfast: { status: "flexible", note: "Rápido en casa — salir 9:15am", restaurants: [] },
                         lunch: {
                             status: "options",
-                            note: "De vuelta Kioskos Luquillo después El Yunque (~15–20 min del portón)",
+                            note: "Kioskos Luquillo entre El Yunque y Carabalí — punto de reagrupación perfecto",
                             restaurants: [
-                                { name: "Luquillo Kioskos", desc: "~60 kioskos · cada uno elige · frente playa, casual, barato · hecho grupos grandes", rating: "⭐ Recomendación top", mapsUrl: "maps.google.com/maps/search/?api=1&query=Luquillo+Kioskos+Puerto+Rico" },
-                                { name: "La Parrilla", desc: "Mariscos sentados dentro strip · 4.1★ / ~1,000 reseñas Yelp · opción comida formal", rating: "4.1★", mapsUrl: "maps.google.com/maps/search/?api=1&query=La+Parrilla+Luquillo+Puerto+Rico" },
-                                { name: "Mi Parcela", desc: "Hamburguesas + platos PR · manejó grupo 18 · sólido si quieren mesa real", rating: "4.0★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Mi+Parcela+Luquillo+Puerto+Rico" }
-                            ]
-                        },
-                        dinner: {
-                            status: "flexible",
-                            note: "Cena ligera antes bahía bio (~salida 7pm) o comer después (~9–10pm). Cocinar casa o kioskos ambos funcionan.",
-                            restaurants: []
-                        }
-                    },
-                    route: "maps.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/El+Yunque+PR-191+Gate/Laguna+Grande+Fajardo+Puerto+Rico",
-                    warnings: [
-                        "🌳 Portón El Yunque: 8am–5pm, tope ~200 carros — llegar a apertura o riesgo de no entrar",
-                        "🚫 SIN Uber dentro El Yunque — sin puntos recogida. Manejen ustedes en ambos carros.",
-                        "🌧️ Es selva tropical — lluvia cualquier momento. Capa ligera lluvia + zapatos agua (rocas resbaladizas). Lluvia pasa rápido.",
-                        "💵 Lancha bahía bio: SOLO EFECTIVO, asientos limitados — reserva teléfono ANTES del viaje (Bio Island / Capt. Suárez)",
-                        "⚡ Rayos cierran tours bahía bio — hacerlo jue da vie como respaldo si necesario",
-                        "🦟 Repelente para atardecer bahía — traer de la casa"
-                    ],
-                    gems: [
-                        "💧 Puente Roto / Río Espíritu Santo en carreteras bajas bosque — lugares río tranquilos que tours se saltan",
-                        "🗼 Torre Mt. Britton es foto que mayoría pierde — vistas bosque nuboso más dramáticas que La Mina"
-                    ]
-                },
-                {
-                    dayNumber: 3, date: "Jul 10", dayOfWeek: "Vie",
-                    title: "Parque de Aventura Carabalí 🐎",
-                    location: "Hacienda Carabalí · Luquillo, Puerto Rico",
-                    backgroundImage: "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800",
-                    flight: null,
-                    hotel: {
-                        name: "Villa Pitahaya · Airbnb, Luquillo",
-                        status: "confirmed",
-                        note: "10 huéspedes · Piscina · Misma casa toda la semana",
-                        bookedBy: null,
-                        mapsUrl: "maps.google.com/maps/?q=18.3756,-65.7225"
-                    },
-                    drive: { from: "House", to: "Hacienda Carabalí", duration: "5–10 min", distance: "Right in Luquillo · In the foothills of El Yunque · Open 8:30am–6pm" },
-                    activities: [
-                        { time: "8:15am", text: "Llegar Hacienda Carabali — 45 min antes del slot 9am", subNote: "Reservar slot manana con anticipacion. 5-10 min de la casa en los primeros llanos de El Yunque. Manana = mas fresco + evitar lluvia tarde.", needsBooking: true, mapsUrl: "maps.google.com/?q=Hacienda+Carabali+Luquillo+Puerto+Rico" },
-                        { time: "Manana", text: "ATVs / UTVs — recorrido guiado 1-2 hr por la hacienda de 600 acres", subNote: "Matias (16) + adultos. Confirmar edad minima al reservar (16 maneja con adulto; menores van de pasajeros). Vistas de El Yunque desde los senderos.", needsBooking: true, mapsUrl: "maps.google.com/?q=Hacienda+Carabali+Luquillo+Puerto+Rico" },
-                        { time: "Manana", text: "Cabalgata playa (2.5 hr) — cruza Rio Mameyes hasta Playa Luquillo", subNote: "~$164/adulto · Edad min 12 · Max 235 lb · Zapatos cerrados + pantalon largo REQUERIDO · Matias (16) califica · Emma (8) NO para esta ruta.", needsBooking: true, mapsUrl: "maps.google.com/?q=Hacienda+Carabali+Luquillo+Puerto+Rico" },
-                        { time: "Manana", text: "Cabalgata campo corta (1 hr) — opcion para Emma (8) y abuelos", subNote: "Ruta mas corta y suave por la hacienda. Los guias agregan cinturon de seguridad para ninos pequenos. Confirmar al reservar.", needsBooking: true, mapsUrl: "maps.google.com/?q=Hacienda+Carabali+Luquillo+Puerto+Rico" },
-                        { time: "Manana", text: "Abuelos: hayride + zoologico abierto en Carabali", subNote: "Paseo en tractor por la hacienda — poco esfuerzo, genuinamente divertido. O relajarse en el Bar & Grill del sitio viendo a todos pasar.", needsBooking: false, mapsUrl: "maps.google.com/?q=Hacienda+Carabali+Luquillo+Puerto+Rico" },
-                        { time: "Manana", text: "Go-karts — pista de 1,000 ft", subNote: "Buena opcion para Matias y Emma entre los paseos principales. Sin reserva requerida.", needsBooking: false, mapsUrl: "maps.google.com/?q=Hacienda+Carabali+Luquillo+Puerto+Rico" },
-                        { time: "Tarde", text: "Playa Luquillo — tarde de playa tranquila", subNote: "Balneario con aguas tranquilas y poco profundas — perfecta para abuelos y Emma. Banos publicos, duchas, kioscos a 5 min en carro de Carabali.", needsBooking: false, mapsUrl: "maps.google.com/?q=Playa+Luquillo+Puerto+Rico" },
-                        { time: "Tarde", text: "Playa Seven Seas, Fajardo — alternativa mas tranquila", subNote: "~15-20 min este desde Carabali. Igual de tranquila y amigable para familia. Menos concurrida que Luquillo los viernes.", needsBooking: false, mapsUrl: "maps.google.com/?q=Seven+Seas+Beach+Fajardo+Puerto+Rico" }
-                    ],
-                    meals: {
-                        breakfast: { status: "flexible", note: "Rápido casa antes ir Carabalí", restaurants: [] },
-                        lunch: {
-                            status: "options",
-                            note: "Quedarse sitio mantener grupo junto, o ir casa / kioskos",
-                            restaurants: [
-                                { name: "Carabalí Bar & Grill (on-site)", desc: "Opción más fácil — sin manejo, grupo junto después paseos", rating: "⭐ Recomendado", mapsUrl: "maps.google.com/maps/search/?api=1&query=Hacienda+Carabali+Luquillo+Puerto+Rico" },
-                                { name: "Luquillo Kioskos", desc: "10 min hacia casa — todas opciones habituales", rating: "Flexible", mapsUrl: "maps.google.com/maps/search/?api=1&query=Luquillo+Kioskos+Puerto+Rico" }
+                                { name: "Luquillo Kioskos", desc: "~60 kioskos · cada uno elige · frente playa, casual, barato · hecho para grupos grandes", rating: "⭐ Recomendación top", mapsUrl: "maps.google.com/maps/search/?api=1&query=Luquillo+Kioskos+Puerto+Rico" },
+                                { name: "Carabalí Bar & Grill (on-site)", desc: "Si prefieren comer en el lugar — sin manejo, grupo junto después paseos", rating: "Conveniente", mapsUrl: "maps.google.com/maps/search/?api=1&query=Hacienda+Carabali+Luquillo+Puerto+Rico" }
                             ]
                         },
                         dinner: {
                             status: "options",
-                            note: "Mejor noche cena viaje — mariscos frescos marina Fajardo (~15–20 min este)",
+                            note: "Mejor noche para El Pescador — mariscos frescos marina Fajardo (~15 min de casa)",
                             restaurants: [
-                                { name: "El Pescador & Tapas (Fajardo)", desc: "Mariscos frescos + langosta agua · Vibe Caribe casual · Cócteles geniales · Sin reservas — llegar temprano 10", rating: "⭐ Recomendación top", mapsUrl: "maps.google.com/maps/search/?api=1&query=El+Pescador+Tapas+Fajardo+Puerto+Rico" },
-                                { name: "Kalizo Kiosko (Fajardo)", desc: "4.6★ / ~960 reseñas Tripadvisor · Mariscos locales, mofongo, relajado", rating: "4.6★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Kalizo+Kiosko+Fajardo+Puerto+Rico" },
-                                { name: "Pasta, Amor y Vino (Luquillo)", desc: "Italiano · Mejor ambiente/servicio pueblo · Buena opción amigable niños si grupo quiere descanso mariscos", rating: "4.4★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Pasta+Amor+y+Vino+Luquillo+Puerto+Rico" },
-                                { name: "La Estación (Luquillo)", desc: "BBQ · Vibe divertida · Verificar horarios + espera grupo 10", rating: "4.2★", mapsUrl: "maps.google.com/maps/search/?api=1&query=La+Estacion+Luquillo+Puerto+Rico" }
+                                { name: "El Pescador & Tapas (Fajardo)", desc: "Mariscos frescos + langosta · Vibe Caribe casual · Cócteles geniales · Sin reservas — llegar temprano para grupo 10", rating: "⭐ Recomendación top", mapsUrl: "maps.google.com/maps/search/?api=1&query=El+Pescador+Tapas+Fajardo+Puerto+Rico" },
+                                { name: "Kalizo Kiosko (Fajardo)", desc: "4.6★ · Mariscos locales, mofongo, relajado", rating: "4.6★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Kalizo+Kiosko+Fajardo+Puerto+Rico" },
+                                { name: "Pasta, Amor y Vino (Luquillo)", desc: "Italiano · Buen ambiente · Buena opción si el grupo quiere descanso de mariscos", rating: "4.4★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Pasta+Amor+y+Vino+Luquillo+Puerto+Rico" }
                             ]
                         }
                     },
-                    route: "maps.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/Hacienda+Carabali+Luquillo+Puerto+Rico/Luquillo+Beach+Puerto+Rico",
+                    route: "maps.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/El+Yunque+PR-191+Gate/Luquillo+Kioskos/Hacienda+Carabali+Luquillo+Puerto+Rico",
                     warnings: [
-                        "📅 RESERVAR CARABALÍ CON ANTICIPACIÓN — ATV/UTV + cabalgatas. Llegar 45 min antes para check-in.",
-                        "👟 Zapatos cerrados + pantalón largo OBLIGATORIO para caballos ATVs (se exige — chancletas = no montan)",
-                        "⚖️ Cabalgata playa: máx 235 lb, edad mín 12. La de 8 años toma cabalgata corta campo.",
-                        "🌧️ Paseos mañana esenciales — lluvias tarde mucho más probable colinas Luquillo",
-                        "👕 Llevar muda ropa + toalla — ATVs + cruces río = van a estar sucios/mojados"
+                        "🌳 Portón El Yunque: 8am–5pm, tope ~200 carros — llegar 9:30am bien para viernes",
+                        "🌧️ Selva tropical — lluvia en cualquier momento. Capa ligera + zapatos cerrados. Pasa rápido.",
+                        "📅 RESERVAR CARABALÍ CON ANTICIPACIÓN — ATV/UTV + cabalgatas. Pedir slot tarde.",
+                        "👟 Zapatos cerrados + pantalón largo OBLIGATORIO para caballos y ATVs (chancletas = no montan)",
+                        "⚖️ Cabalgata playa: máx 235 lb, edad mín 12. Emma (8) toma cabalgata campo corta.",
+                        "🚫 SIN Uber dentro El Yunque — sin puntos recogida. Ambos carros necesarios."
                     ],
                     gems: [
-                        "🏔️ La hacienda está en faldas El Yunque — vistas senderos ATV rivalizan bosque nacional sin multitudes",
-                        "🏖️ Seven Seas (Fajardo) tiene extremo tranquilo y sendero pequeño reserva natural que casi nadie camina"
+                        "🏔️ Carabalí está en faldas El Yunque — vistas desde los senderos ATV rivalizan el parque nacional sin multitudes",
+                        "💧 Cascada La Coca: parada de 5 min con fotos espectaculares, no requiere caminar nada",
+                        "🗼 Torre Mt. Britton (El Yunque): las vistas de bosque nuboso más dramáticas del parque, casi nadie la hace"
                     ]
                 },
                 {
                     dayNumber: 4, date: "Jul 11", dayOfWeek: "Sáb",
-                    title: "Día de ciudad en el Viejo San Juan 🏰",
-                    location: "San Juan Antiguo, Puerto Rico",
-                    backgroundImage: "https://images.unsplash.com/photo-1585464231875-d9ef1f5ad396?w=800",
+                    title: "Playa y Noche Bioluminiscente 🏖✨",
+                    location: "Luquillo · Fajardo, Puerto Rico",
+                    backgroundImage: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800",
                     flight: null,
                     hotel: {
                         name: "Villa Pitahaya · Airbnb, Luquillo",
                         status: "confirmed",
-                        note: "Última noche casa. Empacar hoy noche — checkout mañana 12pm.",
+                        note: "Última noche en casa — empacar esta noche. Checkout mañana 12pm.",
                         bookedBy: null,
                         mapsUrl: "maps.google.com/maps/?q=18.3756,-65.7225"
                     },
-                    drive: { from: "Luquillo House", to: "Ballajá Garage, Old San Juan", duration: "~45–60 min", distance: "Park ONLY at Ballajá garage (covered, right next to El Morro)" },
+                    drive: { from: "House", to: "Playa Luquillo (día) · Kayak Village Fajardo (noche)", duration: "2 min playa · 15–20 min Fajardo (noche)", distance: "La playa está literalmente al lado de casa" },
                     activities: [
-                        { time: "8:30am", text: "Salir casa — llegar OSJ antes cruceros", subNote: "~45-60 min de Luquillo a Viejo San Juan. Estacionar SOLO en Garage Ballaja — techado, junto El Morro, $3/hr. NO intenten estacionamiento en calle con grupo de 10.", needsBooking: false, mapsUrl: "maps.google.com/?q=Ballaja+Parking+Garage+Old+San+Juan+Puerto+Rico" },
-                        { time: "9:00am", text: "Castillo San Felipe del Morro (El Morro)", subNote: "Abre 9am. $10/adulto · Gratis menores 16 · SIN EFECTIVO — tarjeta solo · El mismo boleto cubre San Cristobal las 24h siguientes. Explanada grande y plana — perfecta para abuelos.", needsBooking: false, mapsUrl: "maps.google.com/?q=Castillo+San+Felipe+del+Morro+San+Juan+Puerto+Rico" },
-                        { time: "Manana", text: "Gatos El Morro — colonia residente de la explanada", subNote: "Colonia de gatos salvajes vive en la explanada del castillo — Emma quedara obsesionada. Los cuidan voluntarios locales.", needsBooking: false, mapsUrl: "maps.google.com/?q=Castillo+San+Felipe+del+Morro+San+Juan+Puerto+Rico" },
-                        { time: "Tarde", text: "Calle del Cristo — calle principal adoquinada", subNote: "Calle comercial colorida del Viejo San Juan, desde el Morro hacia el sur. Mucha sombra bajo los balcones, tiendas locales, cafes.", needsBooking: false, mapsUrl: "maps.google.com/?q=Calle+del+Cristo+Old+San+Juan+Puerto+Rico" },
-                        { time: "Tarde", text: "Calle Fortaleza — la calle de los paraguas", subNote: "Famosa por los paraguas de colores suspendidos entre los balcones. Foto iconica de Puerto Rico. A 2 min de Calle del Cristo.", needsBooking: false, mapsUrl: "maps.google.com/?q=Calle+Fortaleza+Old+San+Juan+Puerto+Rico" },
-                        { time: "Tarde", text: "Plaza de Armas — plaza central VSJ", subNote: "La plaza principal del Viejo San Juan, rodeada de cafes y el Ayuntamiento historico. Buena parada para descansar con bancos y fuente.", needsBooking: false, mapsUrl: "maps.google.com/?q=Plaza+de+Armas+Old+San+Juan+Puerto+Rico" },
-                        { time: "Tarde", text: "Estatua La Rogativa + muralla de la ciudad", subNote: "Estatua de las mujeres que salvaron la ciudad del asedio ingles de 1797. Junto a la muralla con vistas al puerto — uno de los mejores rincones del VSJ.", needsBooking: false, mapsUrl: "maps.google.com/?q=La+Rogativa+Statue+Old+San+Juan+Puerto+Rico" },
-                        { time: "Tarde", text: "Paseo de la Princesa — paseo plano junto al agua", subNote: "El mejor trecho para abuelos — hermoso paseo borde de mar, cero escaleras, siempre ventoso. Fuente grande al final. Accesible desde La Rogativa bajando.", needsBooking: false, mapsUrl: "maps.google.com/?q=Paseo+de+la+Princesa+Old+San+Juan+Puerto+Rico" },
-                        { time: "Tarde", text: "Castillo San Cristobal — opcional si grupo tiene energia", subNote: "Mismo boleto que El Morro. 10 min a pie desde Plaza de Armas. El fuerte mas grande construido por los espanoles en America. Menos masificado que El Morro por la tarde.", needsBooking: false, mapsUrl: "maps.google.com/?q=Castillo+San+Cristobal+Old+San+Juan+Puerto+Rico" },
-                        { time: "Noche", text: "Cena temprana en OSJ o manejar a casa ultima noche relajada", subNote: "Con abuelos + nina 8, salir a casa mid-tarde es la decision inteligente. Empacar esta noche — checkout manana 12pm.", needsBooking: false }
+                        { time: "9:30am", text: "Playa Luquillo — día de playa frente a casa", subNote: "Aguas tranquilas y poco profundas — ideal abuelos + Emma. Traer sillas, parasol, nevera.", needsBooking: false },
+                        { time: "Mañana", text: "Deportes de agua: snorkel, boogie boards, frisbee playa", subNote: "Último día activo antes de la salida — grupo decide el ritmo", needsBooking: false },
+                        { time: "Tarde", text: "Descanso en casa / piscina — recuperarse antes del Bio Bay de noche", subNote: "Comer algo ligero en casa ~6:30–7pm antes de salir", needsBooking: false },
+                        { time: "Noche", text: "📦 EMPACAR antes de salir a Bio Bay — checkout mañana 12pm", subNote: "Dejar maletas listas esta noche para no correr mañana", needsBooking: false },
+                        { time: "9:15pm", text: "Salir casa → Kayak Village, Fajardo (~15–20 min)", subNote: "Llegar 9:30pm para check-in antes del tour 9:45pm", needsBooking: false },
+                        { time: "9:45pm ⭐", text: "🌊 Bahía Bioluminiscente en Bote — BioIsland Crew, Kayak Village Fajardo", subNote: "✅ JC: 6 personas CONFIRMADO (Order #21907 · $461.61 total) · ⚠️ Coki: reservar 4 personas mismo operador URGENTE · Bote eléctrico silencioso · 1h15min · Rayos/lluvia cancela", needsBooking: true },
+                        { time: "11:00pm", text: "Regreso a casa — fin del tour", subNote: "~15–20 min de vuelta. Maletas ya hechas. Mañana salida según vuelo de cada grupo.", needsBooking: false }
                     ],
                     meals: {
-                        breakfast: { status: "flexible", note: "Rápido casa antes salida 8:30am", restaurants: [] },
+                        breakfast: { status: "flexible", note: "Relajado en casa — último gran desayuno del viaje", restaurants: [] },
                         lunch: {
                             status: "options",
-                            note: "Centro Viejo San Juan — ir temprano o poner nombre antes visitar fortalezas",
+                            note: "Último almuerzo Kioskos Luquillo — o en casa si el grupo prefiere tranquilo",
                             restaurants: [
-                                { name: "Raíces", desc: "40+ años · Clásico Puertorriqueño (mofongo, porciones grandes) · Maneja grupos bien · Ir temprano evitar espera", rating: "⭐ Recomendación top for the group", mapsUrl: "maps.google.com/maps/search/?api=1&query=Raices+Old+San+Juan+Puerto+Rico" },
-                                { name: "El Jibarito (Calle Sol)", desc: "Favorito local sin adornos · Mofongo 'estándar oro' per locales · Más auténtico, menos pulido", rating: "4.3★", mapsUrl: "maps.google.com/maps/search/?api=1&query=El+Jibarito+Old+San+Juan+Puerto+Rico" },
-                                { name: "Deaverdura (Calle Sol)", desc: "Casual, colorido · Clásicos PR + buenas opciones vegetarianas · Cola almuerzo pero vale", rating: "4.3★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Deaverdura+Old+San+Juan+Puerto+Rico" },
-                                { name: "Princesa Cocina Cultura", desc: "Orilla puerto cerca Paseo Princesa · Patio frondoso · Tapas + cócteles · Música viva tardes", rating: "4.4★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Princesa+Cocina+Cultura+Old+San+Juan" }
+                                { name: "Luquillo Kioskos", desc: "Último mofongo del viaje · frente playa · el plan obvio", rating: "⭐ Último de la semana", mapsUrl: "maps.google.com/maps/search/?api=1&query=Luquillo+Kioskos+Puerto+Rico" }
                             ]
                         },
                         dinner: {
                             status: "flexible",
-                            note: "Cena temprana OSJ (atardecer desde murallas ciudad es genial) o manejar cocinar casa. Con abuelos + niña 8, casa 5–6pm es llamada cómoda.",
+                            note: "Cena ligera en casa ~6:30–7pm — Bio Bay sale 9:45pm, no conviene salir a restaurante esta noche.",
                             restaurants: []
                         }
                     },
-                    route: "maps.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/Ballaja+Garage+Old+San+Juan+San+Juan+Puerto+Rico",
+                    route: "maps.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/Kayak+Village+Fajardo+Puerto+Rico",
                     warnings: [
-                        "🅿️ Estacionarse SOLO en garage Ballajá (techado, junto El Morro) — calles VSJ un sentido, estrechas, pocas plazas",
-                        "💳 Fortalezas SIN EFECTIVO — llevar tarjeta. $10/adulto, gratis menores 16. Boleto cubre ambas fortalezas 24h.",
-                        "⚠️ Trolley VSJ FUERA DE SERVICIO desde principios 2026 — usar carro para reposicionar abuelos",
-                        "🚢 Sábado = más ocupado + multitudes cruceros — ir El Morro PRIMERO antes que se llene",
-                        "👟 Solo zapatos cómodos — adoquines cubren cada calle VSJ",
-                        "🌡️ Sol muy expuesto explanada El Morro (casi sin sombra) — sombreros + agua absolutamente esencial"
+                        "✅ Bio Bay Grupo 1 (JC · 6 personas): CONFIRMADO Order #21907 · $461.61",
+                        "⚠️ Bio Bay Grupo 2 (Coki · 4 personas): PENDIENTE RESERVA — misma empresa BioIsland Crew URGENTE",
+                        "⛈️ Rayos / lluvia intensa cancelan el tour — verificar forecast el día antes",
+                        "🦟 Repelente OBLIGATORIO para la bahía bio — manglares de noche",
+                        "🌙 Tour sale 9:45pm puntual — llegar Kayak Village 9:30pm mínimo para check-in",
+                        "📦 Empacar esta noche — checkout mañana 12pm sharp"
                     ],
                     gems: [
-                        "🗽 Estatua La Rogativa + paseo tranquilo muralla hasta Puerta San Juan — mayoría tours se pierde camino bajo",
-                        "⛪ Capilla del Cristo y su jardincito — rincón postal perfecto",
-                        "🐱 Gatos El Morro tienen colonia propia en explanada — la de 8 años quedará obsesionada"
+                        "✨ La bahía bioluminiscente es el highlight del viaje — el agua brilla verde al tocarla, mágico para toda la familia",
+                        "🛥️ BioIsland Crew usa bote eléctrico (silencioso) — mucho mejor experiencia que kayak para abuelos + Emma",
+                        "🌙 Laguna Grande es considerada una de las 3 mejores bahías bioluminiscentes del mundo"
                     ]
                 },
                 {
@@ -1646,7 +1641,7 @@
                     hotel: {
                         name: "Villa Pitahaya · Airbnb, Luquillo",
                         status: "confirmed",
-                        note: "CHECK-OUT 12pm sharp — pack tonight (Saturday night)!",
+                        note: "CHECK-OUT 12pm sharp. Empacar la noche anterior (sábado) — llegarán tarde del Bio Bay.",
                         bookedBy: null,
                         mapsUrl: "maps.google.com/maps/?q=18.3756,-65.7225"
                     },
@@ -1692,7 +1687,7 @@
         // ============================================================
         const DAY_WEATHER = {
             1: { lat: 18.3756, lon: -65.7225, isoDate: "2026-07-08" },
-            2: { lat: 18.3035, lon: -65.7839, isoDate: "2026-07-09" },
+            2: { lat: 18.4655, lon: -66.1171, isoDate: "2026-07-09" },
             3: { lat: 18.3756, lon: -65.7225, isoDate: "2026-07-10" },
             4: { lat: 18.4665, lon: -66.1185, isoDate: "2026-07-11" },
             5: { lat: 18.3756, lon: -65.7225, isoDate: "2026-07-12" },
@@ -1714,9 +1709,9 @@
             ],
             days: {
                 1: { hotel: 0, activities: 0,    food: 200, other: 100 },
-                2: { hotel: 0, activities: 500,  food: 150, other: 0   },
+                2: { hotel: 0, activities: 70,   food: 300, other: 0   },
                 3: { hotel: 0, activities: 1200, food: 200, other: 50  },
-                4: { hotel: 0, activities: 70,   food: 300, other: 0   },
+                4: { hotel: 0, activities: 500,  food: 150, other: 0   },
                 5: { hotel: 0, activities: 0,    food: 100, other: 50  },
             }
         };
