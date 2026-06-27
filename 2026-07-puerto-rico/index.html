@@ -1575,57 +1575,66 @@
                 },
                 {
                     dayNumber: 4, date: "Jul 11", dayOfWeek: "Sáb",
-                    title: "Playa, Snorkel y Bahía Bio 🏖🤿✨",
-                    location: "Luquillo · Fajardo, Puerto Rico",
+                    title: "Vieques + Bahía Bioluminiscente 🏝✨",
+                    location: "Vieques · Fajardo, Puerto Rico",
                     backgroundImage: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800",
                     flight: null,
                     hotel: {
                         name: "Villa Pitahaya · Airbnb, Luquillo",
                         status: "confirmed",
-                        note: "Última noche en casa — empacar esta tarde. Checkout mañana 12pm.",
+                        note: "Última noche en casa — empacar esta tarde antes del Bio Bay. Checkout mañana 12pm.",
                         bookedBy: null,
                         mapsUrl: "maps.google.com/maps/?q=18.3756,-65.7225"
                     },
-                    drive: { from: "Casa", to: "Playa Luquillo (día) · Fajardo snorkel (opcional) · Kayak Village (noche)", duration: "2 min playa · 15–20 min Fajardo", distance: "Playa Luquillo está literalmente al lado de casa" },
+                    drive: { from: "Casa → Terminal Ferry Fajardo → Vieques (ferry 1h)", to: "Vieques (día) → Terminal Ferry → Casa → Kayak Village (noche)", duration: "15 min a terminal · 1h ferry · 15 min casa", distance: "Terminal Puerto Real, Fajardo · Ferry público $2/persona o water taxi privado ~$40-50/persona" },
                     activities: [
-                        { time: "9:30am", text: "Playa Luquillo — playa tranquila frente a casa", subNote: "Aguas poco profundas y tranquilas — ideal para abuelos + Emma. Traer sillas, parasol, nevera. Último día de playa del viaje.", needsBooking: false, mapsUrl: "maps.google.com/?q=Playa+Luquillo+Puerto+Rico" },
-                        { time: "10:00am", text: "🤿 Snorkel — opcional grupo activo", subNote: "Opción A: Snorkel desde Playa Luquillo — reef en el extremo oeste de la playa, muchos peces. Opción B: Seven Seas Beach en Fajardo (15 min) — mejor reef, aguas más claras. Traer o alquilar snorkel en la playa.", needsBooking: false, mapsUrl: "maps.google.com/?q=Seven+Seas+Beach+Fajardo+Puerto+Rico" },
-                        { time: "1:00pm", text: "Almuerzo en los Kioskos Luquillo — frente a la playa", subNote: "5 min de la playa. Ver opciones de almuerzo abajo.", needsBooking: false, mapsUrl: "maps.google.com/?q=Luquillo+Kioskos+Puerto+Rico" },
-                        { time: "Tarde", text: "Piscina casa — descanso antes de la noche Bio Bay", subNote: "Descanso obligatorio. Cena ligera en casa ~6:30–7pm. Empacar esta tarde.", needsBooking: false, mapsUrl: "maps.google.com/maps/?q=18.3756,-65.7225" },
-                        { time: "Tarde", text: "📦 EMPACAR — checkout mañana 12pm", subNote: "Dejar maletas listas esta tarde para no correr el domingo por la mañana.", needsBooking: false },
+                        { time: "7:30am", text: "Desayuno rápido y salir hacia terminal ferry Fajardo", subNote: "15 min de casa. Terminal Puerto Real (Fajardo). LLEGAR 1h ANTES para comprar tickets y hacer cola — el ferry del sábado se llena rápido. Alternativa: contratar water taxi privado (no necesita cola, más cómodo para los abuelos).", needsBooking: false, mapsUrl: "maps.google.com/?q=Puerto+Real+Ferry+Terminal+Fajardo+Puerto+Rico" },
+                        { time: "9:00am", text: "🚢 Ferry Fajardo → Vieques (1 hora)", subNote: "Ferry público ~$2/persona. Salida aprox 9am — verificar horario oficial en bit.ly o llamar: (787) 497-7740. Sentarse en cubierta para vistas. Acomodar los abuelos adentro con A/C.", needsBooking: false, mapsUrl: "maps.google.com/?q=Puerto+Real+Ferry+Terminal+Fajardo+Puerto+Rico" },
+                        { time: "10:00am", text: "Llegar Isabel Segunda, Vieques — alquilar golf carts", subNote: "Hay varios puestos de alquiler en el muelle. Necesitan 2-3 carts para 10 personas (~$70-80/cart). O contratar un van/taxi local para todo el grupo. Los caballos salvajes aparecen en la carretera — parte de la experiencia.", needsBooking: false, mapsUrl: "maps.google.com/?q=Isabel+Segunda+Vieques+Puerto+Rico" },
+                        { time: "10:30am ⭐", text: "🏖️ Playa Caracas (Red Beach) — la mejor playa de Vieques", subNote: "~15 min en golf cart desde el muelle. Agua cristalina turquesa, arena blanca, coral natural para snorkel, sin oleaje. Ideal para todos los niveles. Traer snorkel — el reef tiene muchos peces tropicales. Sin servicios en playa — llevar agua y snacks.", needsBooking: false, mapsUrl: "maps.google.com/?q=Playa+Caracas+Red+Beach+Vieques+Puerto+Rico" },
+                        { time: "Mañana", text: "Sun Bay (Balneario) — opción para Mamá + Papá + Emma si Caracas es mucho", subNote: "1 km al este de Esperanza. Tiene baños, sombra y acceso fácil. Más accesible que Caracas para los abuelos. Los dos carros pueden dividirse.", needsBooking: false, mapsUrl: "maps.google.com/?q=Sun+Bay+Vieques+Puerto+Rico" },
+                        { time: "12:30pm", text: "Almuerzo en Esperanza — malecón frente al mar", subNote: "~10-15 min de Playa Caracas. El pueblo de Esperanza tiene restaurantes en el malecón con vistas al Caribe. Ver opciones abajo.", needsBooking: false, mapsUrl: "maps.google.com/?q=Esperanza+Vieques+Puerto+Rico" },
+                        { time: "2:00pm", text: "Regresar al muelle Isabel Segunda para el ferry de vuelta", subNote: "~20 min de Esperanza al muelle. Llegar antes de las 2:30pm para asegurar asientos en ferry de las 3pm.", needsBooking: false, mapsUrl: "maps.google.com/?q=Isabel+Segunda+Vieques+Puerto+Rico" },
+                        { time: "3:00pm", text: "🚢 Ferry Vieques → Fajardo (1 hora)", subNote: "Verificar horario — ferry vuelta aprox 3pm o 4pm. Llegar Fajardo ~4pm. Manejar a casa ~15 min.", needsBooking: false, mapsUrl: "maps.google.com/?q=Puerto+Real+Ferry+Terminal+Fajardo+Puerto+Rico" },
+                        { time: "4:30pm", text: "De vuelta en casa — ducha, descanso, EMPACAR", subNote: "5 horas antes del Bio Bay. Empacar maletas ahora para no correr mañana. Cena ligera en casa ~7pm.", needsBooking: false, mapsUrl: "maps.google.com/maps/?q=18.3756,-65.7225" },
                         { time: "9:15pm", text: "Salir casa → Kayak Village, Fajardo (~15–20 min)", subNote: "Llegar 9:30pm para check-in antes del tour 9:45pm.", needsBooking: false, mapsUrl: "maps.google.com/?q=Kayak+Village+Fajardo+Puerto+Rico" },
                         { time: "9:45pm ⭐", text: "🌊 Bahía Bioluminiscente en Bote — BioIsland Crew, Kayak Village Fajardo", subNote: "✅ JC: 6 personas CONFIRMADO (Order #21907 · $461.61 total) · ⚠️ Coki: reservar 4 personas mismo operador URGENTE · Bote eléctrico silencioso · 1h15min · Rayos/lluvia cancela", needsBooking: true, mapsUrl: "maps.google.com/?q=Kayak+Village+Fajardo+Puerto+Rico" },
                         { time: "11:00pm", text: "Regreso a casa — fin del tour", subNote: "~15–20 min de vuelta. Maletas ya hechas. Mañana salida según vuelo de cada grupo.", needsBooking: false }
                     ],
                     meals: {
-                        breakfast: { status: "flexible", note: "Relajado en casa — último gran desayuno del viaje", restaurants: [] },
+                        breakfast: { status: "flexible", note: "Muy rápido en casa — salir 7:30am para llegar al ferry", restaurants: [] },
                         lunch: {
                             status: "options",
-                            note: "Kioskos Luquillo después de la playa — 5 min, frente al mar, último mofongo del viaje",
+                            note: "Malecón de Esperanza, Vieques — restaurantes frente al mar Caribe, ~12:30pm",
                             restaurants: [
-                                { name: "Luquillo Kioskos", desc: "~60 kioskos · frente playa · mofongo, pescado, ceviche, empanadillas · último de la semana · el plan obvio", rating: "⭐ Último de la semana", mapsUrl: "maps.google.com/maps/search/?api=1&query=Luquillo+Kioskos+Puerto+Rico" },
-                                { name: "La Parrilla", desc: "Mariscos sentados bajo techo · 4.1★ · ~1,000 reseñas · buena opción si los kioskos están llenos", rating: "4.1★", mapsUrl: "maps.google.com/maps/search/?api=1&query=La+Parrilla+Luquillo+Puerto+Rico" }
+                                { name: "La Dulce Vida (Esperanza)", desc: "Frente al malecón · cocina local e internacional · vistas al mar · buena para grupos", rating: "⭐ Recomendación top", mapsUrl: "maps.google.com/maps/search/?api=1&query=La+Dulce+Vida+Esperanza+Vieques+Puerto+Rico" },
+                                { name: "Bananas Guesthouse (Esperanza)", desc: "Popular, informal, buen ambiente · americana y PR · bien para grupos grandes", rating: "4.1★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Bananas+Guesthouse+Esperanza+Vieques+Puerto+Rico" },
+                                { name: "Belly Button's Bar (Esperanza)", desc: "Bar y snacks al lado del malecón · ideal aperitivo antes de comer · ambiente playero", rating: "4.0★", mapsUrl: "maps.google.com/maps/search/?api=1&query=Belly+Buttons+Bar+Esperanza+Vieques+Puerto+Rico" }
                             ]
                         },
                         dinner: {
                             status: "flexible",
-                            note: "Cena ligera en casa ~6:30–7pm — Bio Bay sale 9:45pm, no conviene salir a restaurante esta noche.",
+                            note: "Cena ligera en casa ~7pm — llegamos de Vieques ~4:30pm. Bio Bay sale 9:45pm.",
                             restaurants: []
                         }
                     },
-                    route: "maps.google.com/maps/dir/Villa+Pitahaya+Luquillo+Puerto+Rico/Kayak+Village+Fajardo+Puerto+Rico",
+                    route: "maps.google.com/maps/dir/Villa+Pitahaya+Luquillo/Puerto+Real+Ferry+Terminal+Fajardo/Isabel+Segunda+Vieques+Puerto+Rico",
                     warnings: [
+                        "⛴️ LLEGAR AL FERRY 1h ANTES — sábado en julio es temporada alta, se llena rápido",
+                        "📞 Confirmar horario ferry antes: (787) 497-7740 — el horario puede cambiar por temporada",
+                        "💡 Alternativa cómoda: water taxi privado para 10 personas (~$40-50/persona round trip) — sin cola, más flexible, mejor para los abuelos",
+                        "🏖️ Playa Caracas no tiene baños ni sombra — llevar agua, bloqueador, snacks y sombrilla",
+                        "⏰ Salir de Esperanza antes de 2pm para llegar al ferry de las 3pm con margen",
                         "✅ Bio Bay Grupo 1 (JC · 6 personas): CONFIRMADO Order #21907 · $461.61",
                         "⚠️ Bio Bay Grupo 2 (Coki · 4 personas): PENDIENTE RESERVA — BioIsland Crew URGENTE",
-                        "⛈️ Rayos / lluvia intensa cancelan el tour — verificar forecast el día antes",
-                        "🦟 Repelente OBLIGATORIO para la bahía bio — manglares de noche",
-                        "🌙 Tour sale 9:45pm puntual — llegar Kayak Village 9:30pm mínimo",
-                        "📦 Empacar esta tarde — checkout mañana 12pm sharp"
+                        "⛈️ Rayos / lluvia cancela el Bio Bay — verificar forecast el día antes",
+                        "📦 Empacar al llegar de Vieques (~4:30pm) — no habrá tiempo después del Bio Bay"
                     ],
                     gems: [
-                        "✨ La bahía bioluminiscente es el highlight del viaje — el agua brilla verde al tocarla, mágico para toda la familia",
-                        "🛥️ BioIsland Crew usa bote eléctrico (silencioso) — mucho mejor para abuelos + Emma que kayak",
-                        "🤿 Seven Seas Beach (Fajardo, 15 min): el mejor reef local para snorkel sin tener que tomar un bote"
+                        "🐴 Los caballos salvajes de Vieques son descendientes de los caballos españoles del siglo XVI — los verás en la carretera camino a las playas",
+                        "🌊 Playa Caracas (Red Beach): el agua más clara y azul del viaje, con coral natural — ideal para snorkel sin tomar otro bote",
+                        "✨ La bahía bioluminiscente de Laguna Grande brilla verde al tocar el agua — mágico para toda la familia",
+                        "🛥️ BioIsland Crew usa bote eléctrico silencioso — mucho mejor que kayak para los abuelos + Emma"
                     ]
                 },
                 {
@@ -1685,7 +1694,7 @@
             1: { lat: 18.3756, lon: -65.7225, isoDate: "2026-07-08" },
             2: { lat: 18.4655, lon: -66.1171, isoDate: "2026-07-09" },
             3: { lat: 18.3183, lon: -65.7900, isoDate: "2026-07-10" },
-            4: { lat: 18.4665, lon: -66.1185, isoDate: "2026-07-11" },
+            4: { lat: 18.1114, lon: -65.4400, isoDate: "2026-07-11" },
             5: { lat: 18.3756, lon: -65.7225, isoDate: "2026-07-12" },
         };
 
