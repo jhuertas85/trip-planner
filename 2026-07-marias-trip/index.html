@@ -1,0 +1,2738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maria's Trip — July–August 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0D0B08;
+            --bg-secondary: #211C16;
+            --bg-tertiary: #2a241a;
+            --border-color: #352D22;
+            --text-primary: #EDE4D3;
+            --text-secondary: #7A6E5E;
+            --text-muted: #8A7E6E;
+            --accent-gold: #C9966A;
+            --accent-terracotta: #C4511A;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.6;
+        }
+
+        body.light-mode {
+            --bg-primary: #F5F0E8;
+            --bg-secondary: #FFFFFF;
+            --bg-tertiary: #F9F5F0;
+            --border-color: #E0D5C5;
+            --text-primary: #2A2318;
+            --text-secondary: #8A7E6E;
+            --text-muted: #8A7E6E;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            border-bottom: 2px solid var(--border-color);
+            padding: 10px 0;
+            z-index: 2000;
+            backdrop-filter: blur(8px);
+            background-color: rgba(33, 28, 22, 0.95);
+            transition: var(--transition);
+        }
+
+        body.light-mode header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .header-content {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            flex: 1;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .overview-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 5px 8px;
+            border-radius: 4px;
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .overview-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .theme-toggle:hover {
+            color: var(--accent-gold);
+            transform: scale(1.1);
+        }
+
+        .day-tabs {
+            display: flex;
+            overflow-x: auto;
+            gap: 8px;
+            padding-bottom: 8px;
+            scroll-behavior: smooth;
+            margin-top: 12px;
+        }
+
+        .day-tabs::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .day-tabs::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+
+        .day-tabs::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+            border-radius: 2px;
+        }
+
+        .day-tab {
+            padding: 8px 12px;
+            background-color: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .day-tab:hover {
+            border-color: var(--text-secondary);
+            color: var(--accent-gold);
+        }
+
+        .day-tab.active {
+            background-color: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: var(--bg-primary);
+            font-weight: 600;
+        }
+
+        .day-tab.has-missing {
+            border-color: #8A3A3A;
+        }
+
+        /* MAIN CONTENT */
+        main {
+            padding: 24px 0;
+        }
+
+        .day-view {
+            display: none;
+            animation: fadeIn 0.4s ease-in;
+        }
+
+        .day-view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 16px 16px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-day-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            opacity: 0.7;
+            position: absolute;
+            top: 10px;
+            left: 14px;
+            z-index: 2;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9), 0 0 50px rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2px 9px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        .hero-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-location {
+            font-size: 14px;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-location::before {
+            content: '📍';
+        }
+
+        /* CARDS */
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: var(--transition);
+        }
+
+        body.light-mode .card {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .card:hover {
+            border-color: var(--accent-gold);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        /* SECTION COLLAPSIBLE */
+        .collapsible-section {
+            margin-bottom: 16px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 12px 16px;
+            background-color: var(--bg-tertiary);
+            border-radius: 6px 6px 0 0;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+
+        .section-header:hover {
+            background-color: rgba(201, 150, 106, 0.1);
+        }
+
+        .section-header h3 {
+            flex: 1;
+            font-size: 16px;
+            color: var(--accent-gold);
+            margin: 0;
+        }
+
+        .chevron {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .chevron::after {
+            content: '▼';
+            font-size: 12px;
+            color: var(--accent-gold);
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .section-header.collapsed .chevron::after {
+            transform: rotate(-90deg);
+        }
+
+        .section-content {
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 1;
+            padding: 0;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .section-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+            padding: 0;
+        }
+
+        .section-content > div {
+            padding: 16px;
+        }
+
+        .section-flight {
+            background-color: rgba(30, 60, 100, 0.25);
+            border-left: 3px solid #4A8AB5;
+        }
+
+        .section-flight .section-header {
+            border-left: 3px solid #4A8AB5;
+        }
+
+        .section-hotel {
+            background-color: rgba(80, 55, 30, 0.25);
+            border-left: 3px solid #8B6D45;
+        }
+
+        .section-hotel .section-header {
+            border-left: 3px solid #8B6D45;
+        }
+
+        .section-activities {
+            background-color: rgba(60, 75, 40, 0.2);
+            border-left: 3px solid #7A8A50;
+        }
+
+        .section-activities .section-header {
+            border-left: 3px solid #7A8A50;
+        }
+
+        .section-meals {
+            background-color: rgba(55, 65, 45, 0.25);
+            border-left: 3px solid #7A8550;
+        }
+
+        .section-meals .section-header {
+            border-left: 3px solid #7A8550;
+        }
+
+        .section-warnings {
+            background-color: rgba(100, 35, 35, 0.2);
+            border-left: 3px solid #AA4444;
+        }
+
+        .section-warnings .section-header {
+            border-left: 3px solid #AA4444;
+        }
+
+        .section-gems {
+            background-color: rgba(100, 80, 30, 0.2);
+            border-left: 3px solid #B89030;
+        }
+
+        .section-gems .section-header {
+            border-left: 3px solid #B89030;
+        }
+
+        body.light-mode .section-flight {
+            background-color: rgba(74, 138, 181, 0.15);
+        }
+
+        body.light-mode .section-hotel {
+            background-color: rgba(139, 109, 69, 0.15);
+        }
+
+        body.light-mode .section-activities {
+            background-color: rgba(122, 138, 80, 0.12);
+        }
+
+        body.light-mode .section-meals {
+            background-color: rgba(122, 133, 80, 0.15);
+        }
+
+        body.light-mode .section-warnings {
+            background-color: rgba(170, 68, 68, 0.12);
+        }
+
+        body.light-mode .section-gems {
+            background-color: rgba(184, 144, 48, 0.12);
+        }
+
+        .expand-all-container {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .btn-expand-all, .btn-collapse-all {
+            flex: 1;
+            padding: 6px 10px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-expand-all:hover, .btn-collapse-all:hover {
+            background-color: rgba(201, 150, 106, 0.1);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        /* BADGES */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            transition: var(--transition);
+        }
+
+        .badge.ready {
+            background-color: #4A8050;
+            color: #8DC87E;
+        }
+
+        .badge.missing {
+            background-color: #8A3A3A;
+            color: #FF6B6B;
+        }
+
+        .badge.need-booking {
+            background-color: #9A7A30;
+            color: #E8C66E;
+        }
+
+        .badge.confirmed {
+            background-color: #4A8050;
+            color: #8DC87E;
+        }
+
+        .badge.pending {
+            background-color: #9A7A30;
+            color: #E8C66E;
+        }
+
+        .badge.to-book {
+            background-color: #C4511A;
+            color: #FFB366;
+        }
+
+        .badge.included {
+            background-color: #3A6878;
+            color: #7FBFD4;
+        }
+
+        .badge.options {
+            background-color: #4a4440;
+            color: #9A8E7E;
+        }
+
+        /* DRIVE BANNER */
+        .drive-banner {
+            background-color: var(--bg-tertiary);
+            border-left: 4px solid var(--accent-gold);
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .drive-banner::before {
+            content: '🚗';
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .drive-info {
+            flex: 1;
+        }
+
+        .drive-route {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .drive-duration {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* FLIGHT BANNER */
+        .flight-banner {
+            background-color: var(--bg-tertiary);
+            border-left: 4px solid #3A7DA0;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .flight-banner::before {
+            content: '✈️';
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .flight-info {
+            flex: 1;
+        }
+
+        .flight-route {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .flight-details {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid var(--border-color);
+        }
+
+        .timeline-item {
+            padding-bottom: 16px;
+            padding-left: 20px;
+            margin-left: -20px;
+        }
+
+        .timeline-time-group-header {
+            font-weight: 600;
+            color: var(--accent-gold);
+            font-size: 15px;
+            margin-bottom: 8px;
+            margin-top: 12px;
+            margin-left: -20px;
+            padding-left: 20px;
+        }
+
+        .timeline-item-bullet {
+            padding-bottom: 8px;
+            margin-left: -20px;
+            padding-left: 20px;
+        }
+
+        .timeline-item-bullet::before {
+            content: '•';
+            margin-right: 8px;
+            color: var(--accent-gold);
+        }
+
+        .timeline-time {
+            font-weight: 600;
+            color: var(--accent-gold);
+            font-size: 14px;
+        }
+
+        .timeline-text {
+            color: var(--text-primary);
+            margin-top: 4px;
+            font-size: 14px;
+        }
+
+        .timeline-note {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .timeline-tag {
+            display: inline-block;
+            background-color: #8A3A3A;
+            color: #FF9999;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        /* MEALS SECTION */
+        .meals-section {
+            margin-bottom: 24px;
+            padding: 0;
+        }
+
+        .meal-type {
+            font-weight: 600;
+            color: var(--accent-gold);
+            font-size: 15px;
+            margin-bottom: 8px;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meal-type::before {
+            content: '•';
+        }
+
+        .meal-type:first-child {
+            margin-top: 0;
+        }
+
+        .meal-note {
+            font-size: 14px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            padding-left: 16px;
+        }
+
+        .restaurant-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+            margin-bottom: 12px;
+            padding-left: 16px;
+        }
+
+        .restaurant-card {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .restaurant-card:hover {
+            border-color: var(--text-secondary);
+            background-color: rgba(201, 150, 106, 0.05);
+        }
+
+        .restaurant-card.selected {
+            background-color: #4A8050;
+            border-color: #7FB06F;
+        }
+
+        .restaurant-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .restaurant-card.selected .restaurant-name {
+            color: #8DC87E;
+        }
+
+        .restaurant-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .restaurant-card.selected .restaurant-desc {
+            color: #B8D5AF;
+        }
+
+        .restaurant-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        .restaurant-rating {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .restaurant-buttons {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .btn-select, .btn-maps {
+            flex: 1;
+            padding: 6px 8px;
+            border: 1px solid var(--border-color);
+            background-color: transparent;
+            color: var(--accent-gold);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-select {
+            background-color: var(--bg-tertiary);
+        }
+
+        .btn-select:hover {
+            background-color: rgba(201, 150, 106, 0.1);
+            border-color: var(--text-secondary);
+        }
+
+        .restaurant-card.selected .btn-select {
+            background-color: #7FB06F;
+            color: var(--bg-primary);
+            border-color: #7FB06F;
+        }
+
+        .btn-maps:hover {
+            border-color: var(--text-secondary);
+            color: #E8C66E;
+        }
+
+        /* WARNINGS & GEMS */
+        .warnings-title, .gems-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+            margin-top: 12px;
+        }
+
+        .warning {
+            background-color: #3a2020;
+            border: 1px solid #6a3a3a;
+            border-left: 4px solid #8A3A3A;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #FFB3B3;
+        }
+
+        .gem {
+            background-color: #3a3020;
+            border: 1px solid #6a5a3a;
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #E8C66E;
+        }
+
+        /* HOTEL INFO */
+        .hotel-info {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 14px;
+            margin-bottom: 8px;
+            transition: var(--transition);
+        }
+
+        .hotel-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+
+        .hotel-note {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .hotel-status-badges {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .hotel-meta {
+            display: flex;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .hotel-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn-maps {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        /* NO HOTEL CARD */
+        .no-hotel-card {
+            background-color: rgba(201, 150, 106, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        /* ACCOMMODATION TABLE */
+        .accommodation-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .accommodation-table th {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+
+        .accommodation-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            color: var(--text-primary);
+        }
+
+        .accommodation-table tr:nth-child(even) {
+            background-color: rgba(50, 40, 30, 0.3);
+        }
+
+        body.light-mode .accommodation-table tr:nth-child(even) {
+            background-color: rgba(201, 150, 106, 0.03);
+        }
+
+        /* FLIGHTS SECTION */
+        .flights-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+
+        .flights-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .flights-scroll::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+
+        .flights-scroll::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+        }
+
+        .flight-card {
+            flex-shrink: 0;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+            min-width: 240px;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .flight-card:hover {
+            border-color: #3A7DA0;
+        }
+
+        .flight-day {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .flight-route {
+            font-weight: 600;
+            color: #3A7DA0;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .flight-times {
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .flight-terminal {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .flight-checkin {
+            margin-top: 8px;
+        }
+
+        .flight-checkin a {
+            display: inline-block;
+            padding: 6px 10px;
+            background-color: #3A7DA0;
+            color: var(--text-primary);
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .flight-checkin a:hover {
+            background-color: #4a9dc0;
+        }
+
+        /* TRAVELERS & CAR RENTAL */
+        .travelers-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .traveler-chip {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-size: 13px;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .traveler-chip:hover {
+            border-color: var(--accent-gold);
+            background-color: rgba(201, 150, 106, 0.05);
+        }
+
+        .car-rental-info {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* SPOTIFY / TRICOUNT LINKS IN OVERVIEW */
+        .spotify-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #1DB954;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .spotify-link:hover {
+            background-color: #1ed760;
+            transform: scale(1.05);
+        }
+
+        .spotify-icon {
+            font-size: 16px;
+        }
+
+        .overview-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .tricount-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #4A90D9;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .tricount-link:hover {
+            background-color: #5DA0E9;
+            transform: scale(1.05);
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .download-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            background-color: rgba(201, 150, 106, 0.08);
+        }
+
+        .accommodation-table tr[data-day] {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .accommodation-table tr[data-day]:hover {
+            background-color: rgba(201, 150, 106, 0.15) !important;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 32px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 12px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        /* WEATHER WIDGET */
+        .section-weather {
+            background-color: rgba(20, 45, 70, 0.2);
+        }
+
+        body.light-mode .section-weather {
+            background-color: rgba(74, 138, 181, 0.08);
+        }
+
+        .weather-sun-row {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .weather-chart-container { width: 100%; }
+
+        .weather-loading, .weather-error {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 12px;
+            padding: 16px 0;
+        }
+
+        .weather-chart-container svg .wx-temp { fill: var(--text-primary); }
+        .weather-chart-container svg .wx-time  { fill: var(--text-secondary); }
+
+        .weather-refresh {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 14px;
+            cursor: pointer;
+            margin-left: auto;
+            padding: 2px 6px;
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .weather-refresh:hover { color: var(--accent-gold); }
+
+        .activity-maps-link {
+            font-size: 13px;
+            text-decoration: none;
+            opacity: 0.6;
+            margin-left: 4px;
+            vertical-align: middle;
+            transition: opacity 0.2s;
+        }
+        .activity-maps-link:hover { opacity: 1; }
+
+        .wx-condition-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px 0;
+        }
+        .wx-condition-icon { font-size: 28px; line-height: 1; }
+        .wx-condition-label { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+
+        .wx-preview {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-left: 8px;
+        }
+        .section-header:not(.collapsed) .wx-preview { display: none; }
+
+        /* CURRENCY CALCULATOR */
+        .calc-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 14px 20px;
+            margin: -20px -20px 0 -20px;
+            border-radius: 8px 8px 0 0;
+            user-select: none;
+        }
+        .calc-header:hover { background-color: rgba(201,150,106,0.07); }
+        .calc-header-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .calc-header-sub {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        .calc-chevron { font-size: 11px; color: var(--text-secondary); transition: transform 0.25s ease; }
+        .calc-body {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.25s ease;
+            opacity: 0;
+            padding-top: 0;
+        }
+        .calc-body.open { max-height: 300px; opacity: 1; padding-top: 16px; }
+        .calc-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .calc-row:last-of-type { margin-bottom: 0; }
+        .calc-label { width: 110px; flex-shrink: 0; }
+        .calc-label-code { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+        .calc-label-name { font-size: 10px; color: var(--text-secondary); margin-top: 1px; }
+        .calc-input {
+            flex: 1;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 9px 12px;
+            color: var(--text-primary);
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .calc-input:focus { border-color: var(--accent-gold); }
+        .calc-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+        .calc-rates-note { font-size: 10px; color: var(--text-secondary); }
+        .calc-refresh { font-size: 11px; color: var(--accent-gold); cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; }
+
+        /* BUDGET */
+        .day-cost-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid #7A6E5E;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .day-cost-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .day-cost-items {
+            font-size: 11px;
+            color: var(--text-secondary);
+            flex: 1;
+        }
+
+        .day-cost-total {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            white-space: nowrap;
+            margin-left: auto;
+        }
+
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .budget-table td {
+            padding: 9px 10px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        .budget-table tr:last-child td { border-bottom: none; }
+
+        .budget-amount {
+            text-align: right;
+            font-weight: 600;
+            color: var(--accent-gold);
+            white-space: nowrap;
+        }
+
+        .budget-note {
+            font-size: 11px;
+            color: var(--text-secondary);
+            padding-top: 2px;
+        }
+
+        .budget-total-row td {
+            font-weight: 700;
+            font-size: 14px;
+            border-top: 2px solid var(--border-color) !important;
+            border-bottom: none !important;
+        }
+
+        .budget-perperson {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        .budget-disclaimer {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-style: italic;
+            text-align: center;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* MOBILE */
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 12px;
+            }
+
+            .hero {
+                padding: 14px 16px;
+            }
+
+            .hero-title {
+                font-size: 20px;
+            }
+
+            .card {
+                padding: 16px;
+            }
+
+            .header-title {
+                font-size: 18px;
+            }
+
+            .day-tab {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+        }
+        .map-day-marker {
+            background: #C9966A; color: #111; font-weight: 700; font-size: 10px;
+            width: 26px; height: 26px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid rgba(255,255,255,0.5);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5); cursor: pointer;
+        }
+        .leaflet-popup-content-wrapper { background: var(--bg-secondary) !important; color: var(--text-primary) !important; border: 1px solid var(--border-color) !important; box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important; }
+        .leaflet-popup-tip { background: var(--bg-secondary) !important; }
+    </style>
+</head>
+<body>
+    <script>
+        // ============================================================
+        // TRIP_DATA — Maria's Trip July–August 2026
+        // ============================================================
+        const TRIP_DATA = {
+            title: "Maria's trip July 2026",
+            travelers: ["Maria"],
+
+            spotifyPlaylist: null,
+            tricountUrl: null,
+            checkInUrl: null,
+            carRental: null,
+
+            flights: [
+                {
+                    date: "Jul 5", dayOfWeek: "Sun", airline: "FZ 1787",
+                    from: "DXB", to: "KRK", departTime: "06:50", arriveTime: "11:50",
+                    terminal: "", passengers: ["Maria"]
+                },
+                {
+                    date: "Jul 5", dayOfWeek: "Sun", airline: "LO 2161",
+                    from: "KRK", to: "MAD", departTime: "16:10", arriveTime: "19:35",
+                    terminal: "Terminal 2", passengers: ["Maria"]
+                },
+                {
+                    date: "Jul 8", dayOfWeek: "Wed", airline: "IB 0379",
+                    from: "MAD", to: "SJU", departTime: "16:05", arriveTime: "18:40",
+                    terminal: "Terminal 4S", passengers: ["Maria"]
+                },
+                {
+                    date: "Jul 12", dayOfWeek: "Sun", airline: "IB 0382",
+                    from: "SJU", to: "MAD", departTime: "17:15", arriveTime: "07:30",
+                    terminal: "Terminal C", passengers: ["Maria"]
+                },
+                {
+                    date: "Jul 14", dayOfWeek: "Tue", airline: "LH 1805",
+                    from: "MAD", to: "MUC", departTime: "18:25", arriveTime: "21:00",
+                    terminal: "Terminal 2", passengers: ["Maria"]
+                },
+                {
+                    date: "Jul 14", dayOfWeek: "Tue", airline: "LH 1626",
+                    from: "MUC", to: "KRK", departTime: "22:10", arriveTime: "23:30",
+                    terminal: "", passengers: ["Maria"]
+                },
+                {
+                    date: "Jul 19", dayOfWeek: "Sun", airline: "LO 279",
+                    from: "WAW", to: "LHR", departTime: "15:20", arriveTime: "17:10",
+                    terminal: "", passengers: ["Maria"]
+                },
+                {
+                    date: "Jul 23", dayOfWeek: "Thu", airline: "LO 280",
+                    from: "LHR", to: "WAW", departTime: "18:10", arriveTime: "21:45",
+                    terminal: "Terminal 2", passengers: ["Maria"]
+                },
+                {
+                    date: "Aug 2", dayOfWeek: "Sun", airline: "FZ 1788",
+                    from: "KRK", to: "DXB", departTime: "12:50", arriveTime: "20:30",
+                    terminal: "", passengers: ["Maria"]
+                }
+            ],
+
+            days: [
+                {
+                    dayNumber: 1, date: "Jul 5", dayOfWeek: "Sun",
+                    title: "Dubai → Kraków → Madrid", location: "Travel Day",
+                    backgroundImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800",
+                    flight: {
+                        date: "Jul 5", dayOfWeek: "Sun", airline: "FZ 1787 + LO 2161",
+                        from: "DXB", to: "MAD", departTime: "06:50", arriveTime: "19:35",
+                        terminal: "Terminal 2"
+                    },
+                    hotel: {
+                        name: "Friend's Place", status: "confirmed",
+                        note: "Address pending", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "06:50", text: "Depart Dubai (FZ 1787)", subNote: "", needsBooking: false },
+                        { time: "11:50", text: "Arrive Kraków", subNote: "2h layover", needsBooking: false },
+                        { time: "16:10", text: "Depart Kraków (LO 2161)", subNote: "", needsBooking: false },
+                        { time: "19:35", text: "Arrive Madrid", subNote: "Check in at friend's place", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "During layover", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 2, date: "Jul 6", dayOfWeek: "Mon",
+                    title: "Remote Work", location: "Madrid",
+                    backgroundImage: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Friend's Place", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Remote work", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Explore Madrid", subNote: "Rest after travel", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: ["💡 Retiro Park is perfect for evening walks"]
+                },
+                {
+                    dayNumber: 3, date: "Jul 7", dayOfWeek: "Tue",
+                    title: "Remote Work", location: "Madrid",
+                    backgroundImage: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Friend's Place", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Remote work", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Local exploration", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 4, date: "Jul 8", dayOfWeek: "Wed",
+                    title: "Madrid → San Juan", location: "Travel Day",
+                    backgroundImage: "https://images.unsplash.com/photo-1473093295203-cad00df16e50?w=800",
+                    flight: {
+                        date: "Jul 8", dayOfWeek: "Wed", airline: "IB 0379",
+                        from: "MAD", to: "SJU", departTime: "16:05", arriveTime: "18:40",
+                        terminal: "Terminal 4S"
+                    },
+                    hotel: {
+                        name: "Camino Del Lago Pitahaya", status: "confirmed",
+                        note: "Check-in: 18:40", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Camino+Del+Lago+Pitahaya+Luquillo"
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Remote work", subNote: "", needsBooking: false },
+                        { time: "16:05", text: "Depart Madrid (IB 0379)", subNote: "Terminal 4S", needsBooking: false },
+                        { time: "18:40", text: "Arrive San Juan", subNote: "Check in to hotel", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "After arrival", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 5, date: "Jul 9", dayOfWeek: "Thu",
+                    title: "Arrival & Luquillo", location: "Puerto Rico",
+                    backgroundImage: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Camino Del Lago Pitahaya", status: "confirmed",
+                        note: "Luquillo Beach", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Camino+Del+Lago+Pitahaya+Luquillo"
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Afternoon", text: "Settle into hotel", subNote: "", needsBooking: false },
+                        { time: "Evening", text: "Explore Luquillo Beach", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: ["💡 Luquillo Beach has calm waters, perfect for swimming"]
+                },
+                {
+                    dayNumber: 6, date: "Jul 10", dayOfWeek: "Fri",
+                    title: "Old San Juan", location: "Puerto Rico",
+                    backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Camino Del Lago Pitahaya", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Drive to Old San Juan", subNote: "45 min from Luquillo", needsBooking: false },
+                        { time: "Morning", text: "Explore historic streets", subNote: "Colorful colonial architecture", needsBooking: false },
+                        { time: "Afternoon", text: "Fort El Morro", subNote: "Historic fort with views", needsBooking: true },
+                        { time: "Evening", text: "Return to hotel", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "options", note: "In Old San Juan", restaurants: [
+                            { name: "La Mallorquina", desc: "Puerto Rican cuisine · Historic restaurant", rating: "4.5★", mapsUrl: "https://maps.google.com/?q=La+Mallorquina+Old+San+Juan" }
+                        ]},
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: ["💡 El Yunque rainforest is nearby for a day trip"]
+                },
+                {
+                    dayNumber: 7, date: "Jul 11", dayOfWeek: "Sat",
+                    title: "El Yunque & Hacienda Carabalí", location: "Puerto Rico",
+                    backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Camino Del Lago Pitahaya", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "El Yunque Rainforest hike", subNote: "Waterfalls & trails", needsBooking: true },
+                        { time: "Afternoon", text: "Hacienda Carabalí", subNote: "Horseback riding", needsBooking: true },
+                        { time: "Evening", text: "Return to hotel", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "Pack picnic for rainforest", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: ["⚠️ Bring water and sturdy hiking boots for rainforest"],
+                    gems: ["💡 Carabalí offers beautiful views of the valley"]
+                },
+                {
+                    dayNumber: 8, date: "Jul 12", dayOfWeek: "Sun",
+                    title: "Luquillo Beach & Bioluminescent Bay", location: "Puerto Rico",
+                    backgroundImage: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800",
+                    flight: {
+                        date: "Jul 12", dayOfWeek: "Sun", airline: "IB 0382",
+                        from: "SJU", to: "MAD", departTime: "17:15", arriveTime: "07:30",
+                        terminal: "Terminal C"
+                    },
+                    hotel: {
+                        name: "Camino Del Lago Pitahaya", status: "confirmed",
+                        note: "Last night", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Luquillo Beach", subNote: "Final beach day", needsBooking: false },
+                        { time: "Afternoon", text: "Pack & check out", subNote: "", needsBooking: false },
+                        { time: "17:15", text: "Depart for Madrid", subNote: "Terminal C", needsBooking: false },
+                        { time: "Evening", text: "Bioluminescent Bay tour", subNote: "Fajardo · 9:45pm", needsBooking: true }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "Before flight", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: ["💡 Bio Bay is magical at night — magical glowing organisms"]
+                },
+                {
+                    dayNumber: 9, date: "Jul 13", dayOfWeek: "Mon",
+                    title: "Madrid Arrival", location: "Madrid",
+                    backgroundImage: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Hotel pending", status: "pending",
+                        note: "July 13-14", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "07:30", text: "Arrive Madrid", subNote: "Terminal 4S", needsBooking: false },
+                        { time: "Morning", text: "Rest after night flight", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Remote work", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 10, date: "Jul 14", dayOfWeek: "Tue",
+                    title: "Madrid → Munich → Kraków", location: "Travel Day",
+                    backgroundImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800",
+                    flight: {
+                        date: "Jul 14", dayOfWeek: "Tue", airline: "LH 1805 + LH 1626",
+                        from: "MAD", to: "KRK", departTime: "18:25", arriveTime: "23:30",
+                        terminal: "Terminal 2"
+                    },
+                    hotel: {
+                        name: "Dom Franciszkański San Antonio", status: "confirmed",
+                        note: "ul. Krowoderska 7", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Dom+Franciszkanski+San+Antonio+Krakow"
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Remote work", subNote: "", needsBooking: false },
+                        { time: "18:25", text: "Depart Madrid (LH 1805)", subNote: "Terminal 2", needsBooking: false },
+                        { time: "21:00", text: "Arrive Munich", subNote: "2h layover", needsBooking: false },
+                        { time: "22:10", text: "Depart Munich (LH 1626)", subNote: "", needsBooking: false },
+                        { time: "23:30", text: "Arrive Kraków", subNote: "Check in to hotel", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 11, date: "Jul 15", dayOfWeek: "Wed",
+                    title: "Kraków Work Day", location: "Kraków, Poland",
+                    backgroundImage: "https://images.unsplash.com/photo-1489749798305-4fea3ba63d97?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Dom Franciszkański San Antonio", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Work at Nomia office", subNote: "Kurniki 9", needsBooking: false },
+                        { time: "Afternoon", text: "Continue work", subNote: "", needsBooking: false },
+                        { time: "Evening", text: "Explore Kraków", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "Near office", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: ["💡 Kraków's Old Town is a UNESCO World Heritage site"]
+                },
+                {
+                    dayNumber: 12, date: "Jul 16", dayOfWeek: "Thu",
+                    title: "Kraków Work Day", location: "Kraków, Poland",
+                    backgroundImage: "https://images.unsplash.com/photo-1489749798305-4fea3ba63d97?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Dom Franciszkański San Antonio", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Work at Nomia office", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Continue work", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 13, date: "Jul 17", dayOfWeek: "Fri",
+                    title: "Kraków Work Day", location: "Kraków, Poland",
+                    backgroundImage: "https://images.unsplash.com/photo-1489749798305-4fea3ba63d97?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Dom Franciszkański San Antonio", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Work at Nomia office", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Continue work", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 14, date: "Jul 18", dayOfWeek: "Sat",
+                    title: "Kraków → Warsaw", location: "Train Journey",
+                    backgroundImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Four Points by Sheraton Warsaw Mokotów", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Four+Points+by+Sheraton+Warsaw+Mokotow"
+                    },
+                    drive: {
+                        from: "Kraków Główny", to: "Warszawa Centralna", duration: "3h 05m", distance: "Train"
+                    },
+                    activities: [
+                        { time: "11:47", text: "Train 3828 departs Kraków", subNote: "Wagon 14, Seat 32", needsBooking: false },
+                        { time: "14:52", text: "Arrive Warsaw", subNote: "Check in to hotel", needsBooking: false },
+                        { time: "Afternoon", text: "Explore Warsaw", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "Train snacks", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 15, date: "Jul 19", dayOfWeek: "Sun",
+                    title: "Warsaw → London", location: "Travel Day",
+                    backgroundImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800",
+                    flight: {
+                        date: "Jul 19", dayOfWeek: "Sun", airline: "LO 279",
+                        from: "WAW", to: "LHR", departTime: "15:20", arriveTime: "17:10",
+                        terminal: ""
+                    },
+                    hotel: {
+                        name: "Hub by Premier Inn Westminster Abbey", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Hub+by+Premier+Inn+Westminster+Abbey+London"
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Explore Warsaw", subNote: "", needsBooking: false },
+                        { time: "15:20", text: "Depart Warsaw (LO 279)", subNote: "", needsBooking: false },
+                        { time: "17:10", text: "Arrive London", subNote: "Check in to hotel", needsBooking: false },
+                        { time: "Evening", text: "Rest", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 16, date: "Jul 20", dayOfWeek: "Mon",
+                    title: "London Work Day", location: "London, UK",
+                    backgroundImage: "https://images.unsplash.com/photo-1486299218605-6d3236c7d960?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Hub by Premier Inn Westminster Abbey", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Work at Nomia office", subNote: "10 York Road, SE1 7ND", needsBooking: false },
+                        { time: "Afternoon", text: "Continue work", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 17, date: "Jul 21", dayOfWeek: "Tue",
+                    title: "London Work Day", location: "London, UK",
+                    backgroundImage: "https://images.unsplash.com/photo-1486299218605-6d3236c7d960?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Hub by Premier Inn Westminster Abbey", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Work at Nomia office", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Continue work", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 18, date: "Jul 22", dayOfWeek: "Wed",
+                    title: "London Work Day", location: "London, UK",
+                    backgroundImage: "https://images.unsplash.com/photo-1486299218605-6d3236c7d960?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Hub by Premier Inn Westminster Abbey", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Work at Nomia office", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Continue work", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 19, date: "Jul 23", dayOfWeek: "Thu",
+                    title: "London → Warsaw", location: "Travel Day",
+                    backgroundImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800",
+                    flight: {
+                        date: "Jul 23", dayOfWeek: "Thu", airline: "LO 280",
+                        from: "LHR", to: "WAW", departTime: "18:10", arriveTime: "21:45",
+                        terminal: "Terminal 2"
+                    },
+                    hotel: {
+                        name: "Courtyard by Marriott Warsaw Airport", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Courtyard+by+Marriott+Warsaw+Airport"
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Work at Nomia office", subNote: "Last morning", needsBooking: false },
+                        { time: "Afternoon", text: "Travel to airport", subNote: "", needsBooking: false },
+                        { time: "18:10", text: "Depart London (LO 280)", subNote: "Terminal 2", needsBooking: false },
+                        { time: "21:45", text: "Arrive Warsaw", subNote: "Check in to hotel", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "After arrival", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 20, date: "Jul 24", dayOfWeek: "Fri",
+                    title: "Warsaw → Kraków + Time with Alex", location: "Train Journey",
+                    backgroundImage: "https://images.unsplash.com/photo-1489749798305-4fea3ba63d97?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Campanile Prime Kraków Old Town", status: "confirmed",
+                        note: "ul. Św. Tomasza 34", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Campanile+Prime+Krakow+Old+Town"
+                    },
+                    drive: {
+                        from: "Warszawa Centralna", to: "Kraków Główny", duration: "3h 05m", distance: "Train"
+                    },
+                    activities: [
+                        { time: "15:16", text: "Train IC 13103 departs Warsaw", subNote: "Wagon 11, Seat 56", needsBooking: false },
+                        { time: "18:30", text: "Arrive Kraków", subNote: "Check in to hotel", needsBooking: false },
+                        { time: "Evening", text: "Time with Alex", subNote: "Dinner & catching up", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "Train snacks", restaurants: [] },
+                        dinner: { status: "options", note: "With Alex", restaurants: [
+                            { name: "TBD", desc: "Local restaurant", rating: "4★", mapsUrl: "https://maps.google.com/?q=restaurants+Krakow" }
+                        ]}
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 21, date: "Jul 25", dayOfWeek: "Sat",
+                    title: "Time with Alex", location: "Kraków, Poland",
+                    backgroundImage: "https://images.unsplash.com/photo-1489749798305-4fea3ba63d97?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Campanile Prime Kraków Old Town", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Breakfast with Alex", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Explore Kraków", subNote: "", needsBooking: false },
+                        { time: "Evening", text: "Dinner & night out", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "options", note: "With Alex", restaurants: [] },
+                        lunch: { status: "options", note: "With Alex", restaurants: [] },
+                        dinner: { status: "options", note: "With Alex", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 22, date: "Jul 26", dayOfWeek: "Sun",
+                    title: "Time with Alex", location: "Kraków, Poland",
+                    backgroundImage: "https://images.unsplash.com/photo-1489749798305-4fea3ba63d97?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Campanile Prime Kraków Old Town", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Breakfast with Alex", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Activities with Alex", subNote: "", needsBooking: false },
+                        { time: "Evening", text: "Farewell dinner", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "options", note: "With Alex", restaurants: [] },
+                        lunch: { status: "options", note: "With Alex", restaurants: [] },
+                        dinner: { status: "options", note: "Farewell with Alex", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 23, date: "Jul 27", dayOfWeek: "Mon",
+                    title: "Kraków Work Week", location: "Kraków, Poland",
+                    backgroundImage: "https://images.unsplash.com/photo-1489749798305-4fea3ba63d97?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Campanile Prime Kraków Old Town", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Work at Nomia office", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Continue work", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 24, date: "Jul 28", dayOfWeek: "Tue",
+                    title: "Kraków Work Week", location: "Kraków, Poland",
+                    backgroundImage: "https://images.unsplash.com/photo-1489749798305-4fea3ba63d97?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Campanile Prime Kraków Old Town", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Work at Nomia office", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Continue work", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 25, date: "Jul 29", dayOfWeek: "Wed",
+                    title: "Kraków Work Week", location: "Kraków, Poland",
+                    backgroundImage: "https://images.unsplash.com/photo-1489749798305-4fea3ba63d97?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Campanile Prime Kraków Old Town", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Work at Nomia office", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Continue work", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 26, date: "Jul 30", dayOfWeek: "Thu",
+                    title: "Kraków Work Week", location: "Kraków, Poland",
+                    backgroundImage: "https://images.unsplash.com/photo-1489749798305-4fea3ba63d97?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Campanile Prime Kraków Old Town", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Work at Nomia office", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Continue work", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 27, date: "Jul 31", dayOfWeek: "Fri",
+                    title: "Kraków Work Week", location: "Kraków, Poland",
+                    backgroundImage: "https://images.unsplash.com/photo-1489749798305-4fea3ba63d97?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Campanile Prime Kraków Old Town", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Work at Nomia office", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Continue work", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 28, date: "Aug 1", dayOfWeek: "Sat",
+                    title: "Family Time & Wrap-up", location: "Kraków, Poland",
+                    backgroundImage: "https://images.unsplash.com/photo-1489749798305-4fea3ba63d97?w=800",
+                    flight: null,
+                    hotel: {
+                        name: "Campanile Prime Kraków Old Town", status: "confirmed",
+                        note: "", bookedBy: null, mapsUrl: null
+                    },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Family time", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Packing & wrap-up", subNote: "", needsBooking: false },
+                        { time: "Evening", text: "Final evening in Kraków", subNote: "", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "", restaurants: [] },
+                        dinner: { status: "flexible", note: "Family dinner", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+                {
+                    dayNumber: 29, date: "Aug 2", dayOfWeek: "Sun",
+                    title: "Kraków → Dubai", location: "Travel Day",
+                    backgroundImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800",
+                    flight: {
+                        date: "Aug 2", dayOfWeek: "Sun", airline: "FZ 1788",
+                        from: "KRK", to: "DXB", departTime: "12:50", arriveTime: "20:30",
+                        terminal: ""
+                    },
+                    hotel: null,
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Final goodbyes", subNote: "", needsBooking: false },
+                        { time: "12:50", text: "Depart Kraków (FZ 1788)", subNote: "", needsBooking: false },
+                        { time: "20:30", text: "Arrive Dubai", subNote: "End of trip", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        lunch: { status: "flexible", note: "Before flight", restaurants: [] },
+                        dinner: { status: "flexible", note: "", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                }
+            ]
+        };
+
+        // ============================================================
+        // DAY_WEATHER
+        // ============================================================
+        const DAY_WEATHER = {
+            5: { lat: 18.3256, lon: -65.1430, isoDate: "2026-07-09" },
+            6: { lat: 18.3256, lon: -65.1430, isoDate: "2026-07-10" },
+            7: { lat: 18.3256, lon: -65.1430, isoDate: "2026-07-11" },
+            8: { lat: 18.3256, lon: -65.1430, isoDate: "2026-07-12" },
+            11: { lat: 50.0647, lon: 19.9450, isoDate: "2026-07-15" },
+            15: { lat: 51.5074, lon: -0.1278, isoDate: "2026-07-19" },
+        };
+
+        // ============================================================
+        // COST_DATA
+        // ============================================================
+        const COST_DATA = {
+            disclaimer: "All figures are estimates. Update with confirmed prices as bookings are made.",
+            summary: [
+                { cat: "✈️ Flights",               amount: 0, note: "1 pax · round-trip" },
+                { cat: "🏨 Accommodation",           amount: 0, note: "29 nights · multiple locations" },
+                { cat: "🗺️ Activities & Tours",      amount: 0, note: "Tours, entrance fees, etc." },
+                { cat: "🍽️ Food & Drinks",           amount: 0, note: "Meals not included in stays" },
+                { cat: "💡 Tips, Souvenirs & Misc",  amount: 0, note: "Personal expenses" },
+            ],
+            days: {}
+        };
+    </script>
+
+    <header>
+        <div class="header-content">
+            <button class="overview-btn" onclick="switchView('overview')">← Overview</button>
+            <div class="header-title" id="headerTitle">Trip Planner</div>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
+        </div>
+        <div class="day-tabs" id="dayTabs"></div>
+    </header>
+
+    <main class="container">
+        <!-- OVERVIEW TAB -->
+        <div class="day-view active" id="overview">
+
+            <!-- Currency Calculator — collapsed by default -->
+            <div class="card" id="currencyCard">
+                <div class="calc-header" onclick="toggleCurrencyCalc()">
+                    <div class="calc-header-title">
+                        💱 Currency Calculator
+                        <span class="calc-header-sub" id="calcHeaderSub"></span>
+                    </div>
+                    <span class="calc-chevron" id="calcChevron">▶</span>
+                </div>
+                <div class="calc-body" id="calcBody">
+                    <div class="calc-row">
+                        <div class="calc-label">
+                            <div class="calc-label-code">EUR</div>
+                            <div class="calc-label-name">Euro</div>
+                        </div>
+                        <input class="calc-input" id="calcInput0" type="number" placeholder="0" oninput="calcConvert(0)">
+                    </div>
+                    <div class="calc-row">
+                        <div class="calc-label">
+                            <div class="calc-label-code">USD</div>
+                            <div class="calc-label-name">US Dollar</div>
+                        </div>
+                        <input class="calc-input" id="calcInput1" type="number" placeholder="0" oninput="calcConvert(1)">
+                    </div>
+                    <div class="calc-row">
+                        <div class="calc-label">
+                            <div class="calc-label-code">PLN</div>
+                            <div class="calc-label-name">Polish Zloty</div>
+                        </div>
+                        <input class="calc-input" id="calcInput2" type="number" placeholder="0" oninput="calcConvert(2)">
+                    </div>
+                    <div class="calc-footer">
+                        <span class="calc-rates-note" id="calcRatesNote">Loading rates…</span>
+                        <button class="calc-refresh" onclick="fetchCalcRates(true)">↻ Refresh</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Itinerary — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>📋 Itinerary</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div>
+                        <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:8px;">
+                            <button onclick="goToToday()" style="font-size:11px;padding:4px 10px;background:var(--accent-gold);color:var(--bg-primary);border:none;border-radius:5px;cursor:pointer;font-weight:600;font-family:inherit;">Today</button>
+                        </div>
+                        <table class="accommodation-table" id="accommodationTable"></table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flights — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>✈️ Flights</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content section-flight">
+                    <div class="flights-scroll" id="flightsList"></div>
+                </div>
+            </div>
+
+            <!-- Relevant Links — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>🔗 Relevant Links</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div class="overview-links" id="overviewLinksContent"></div>
+                </div>
+            </div>
+
+            <!-- Budget — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>💰 Budget</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div id="budgetCard"></div>
+                </div>
+            </div>
+
+            <!-- Travellers — expanded by default, moved to end -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>👥 Travellers</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div class="travelers-list" id="travelersListView"></div>
+                </div>
+            </div>
+            <div style="text-align:center;padding:20px 0 8px;">
+                <a href="../" style="color:var(--accent-gold);text-decoration:none;font-size:13px;opacity:0.75;">← All trips</a>
+            </div>
+
+        </div>
+
+        <!-- DAY VIEWS -->
+        <div id="dayViewsContainer"></div>
+    </main>
+
+    <footer>
+        <p id="footerText">Trip Planner</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script>
+        // ============================================================
+        // RENDERING ENGINE (from template)
+        // ============================================================
+
+        const STATUS_STYLES = {
+            confirmed: { badge: "confirmed", label: "Confirmed" },
+            pending: { badge: "pending", label: "Pending" },
+            missing: { badge: "missing", label: "Missing" },
+            "to-book": { badge: "to-book", label: "To Book" },
+            included: { badge: "included", label: "Included" },
+            flexible: { badge: "options", label: "Flexible" },
+            options: { badge: "options", label: "Options" }
+        };
+
+        const getSelectedRestaurants = (dayNum, mealType) => {
+            const key = `selected_${dayNum}_${mealType}`;
+            return JSON.parse(sessionStorage.getItem(key) || "[]");
+        };
+
+        const setSelectedRestaurant = (dayNum, mealType, restaurantName) => {
+            const key = `selected_${dayNum}_${mealType}`;
+            const selected = getSelectedRestaurants(dayNum, mealType);
+            const index = selected.indexOf(restaurantName);
+            if (index > -1) {
+                selected.splice(index, 1);
+            } else {
+                selected.push(restaurantName);
+            }
+            sessionStorage.setItem(key, JSON.stringify(selected));
+        };
+
+        const isRestaurantSelected = (dayNum, mealType, restaurantName) => {
+            return getSelectedRestaurants(dayNum, mealType).includes(restaurantName);
+        };
+
+        function initializeTheme() {
+            const saved = localStorage.getItem('theme-mode');
+            if (saved === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('themeToggle').textContent = '☀️';
+            } else {
+                document.body.classList.remove('light-mode');
+                document.getElementById('themeToggle').textContent = '🌙';
+            }
+        }
+
+        function toggleTheme() {
+            const isLight = document.body.classList.toggle('light-mode');
+            document.getElementById('themeToggle').textContent = isLight ? '☀️' : '🌙';
+            localStorage.setItem('theme-mode', isLight ? 'light' : 'dark');
+        }
+
+        function switchView(viewId) {
+            document.querySelectorAll('.day-view').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`[data-view="${viewId}"]`)?.classList.add('active');
+        }
+
+        function renderBudgetCard() {
+            const budgetCard = document.getElementById('budgetCard');
+            let html = `<table class="budget-table">`;
+            COST_DATA.summary.forEach(item => {
+                html += `<tr><td>${item.cat}</td><td class="budget-amount">$${item.amount}</td><td class="budget-note">${item.note}</td></tr>`;
+            });
+            html += `<tr class="budget-total-row"><td><strong>Total</strong></td><td class="budget-amount"><strong>$${COST_DATA.summary.reduce((a, b) => a + b.amount, 0)}</strong></td><td></td></tr>`;
+            html += `</table><div class="budget-disclaimer">${COST_DATA.disclaimer}</div>`;
+            budgetCard.innerHTML = html;
+        }
+
+        function initializePage() {
+            initializeTheme();
+            document.getElementById('headerTitle').textContent = TRIP_DATA.title;
+            document.getElementById('footerText').textContent = TRIP_DATA.title + ' Trip Planner';
+            renderOverviewTab();
+            renderBudgetCard();
+            renderDayTabs();
+            renderDayViews();
+
+            const today = new Date().toISOString().split('T')[0];
+            for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
+                if (w.isoDate === today) {
+                    switchView(`day${dayNum}`);
+                    break;
+                }
+            }
+        }
+
+        function renderOverviewTab() {
+            const flightsList = document.getElementById("flightsList");
+            flightsList.innerHTML = TRIP_DATA.flights
+                .map(f => `
+                    <div class="flight-card">
+                        <div class="flight-day">${f.dayOfWeek} ${f.date}</div>
+                        <div class="flight-route">${f.airline}</div>
+                        <div class="flight-times">${f.from} → ${f.to}</div>
+                        <div class="flight-times">${f.departTime}–${f.arriveTime}</div>
+                        <div class="flight-terminal">${f.terminal}</div>
+                    </div>
+                `)
+                .join("");
+
+            const travelersView = document.getElementById("travelersListView");
+            travelersView.innerHTML = TRIP_DATA.travelers
+                .map(t => `<div class="traveler-chip">${t}</div>`)
+                .join("");
+
+            const linksContent = document.getElementById('overviewLinksContent');
+            linksContent.innerHTML = `<button class="download-btn" onclick="downloadPage()">⬇ Download Offline</button>`;
+
+            const accTable = document.getElementById("accommodationTable");
+            let tableHTML = `<tr><th>Day</th><th>Date</th><th>Plan</th><th>Status</th></tr>`;
+
+            TRIP_DATA.days.forEach((day) => {
+                const hotelBadge = day.hotel ? (day.hotel.status === 'confirmed' ? 'ready' : day.hotel.status === 'missing' ? 'missing' : 'need-booking') : 'missing';
+                const hasToBook = day.activities && day.activities.some(a => a.needsBooking);
+                const actBadge = hasToBook ? 'need-booking' : (day.activities && day.activities.length > 0 ? 'ready' : 'missing');
+
+                tableHTML += `
+                    <tr data-day="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">
+                        <td>${day.dayNumber}</td>
+                        <td style="white-space: nowrap; font-size: 12px;">${day.dayOfWeek} ${day.date.split(' ')[1] || ''} ${day.date.split(' ')[0]}</td>
+                        <td>
+                            <div style="font-weight: 600; color: var(--accent-gold); font-size: 13px;">${day.title}</div>
+                            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">${day.location}</div>
+                        </td>
+                        <td>
+                            <span class="badge ${hotelBadge}" style="font-size: 10px; padding: 2px 6px; margin: 0 0 4px 0; display: block; text-align: center;">🏨 ${hotelBadge === 'ready' ? '✓' : '✗'}</span>
+                            <span class="badge ${actBadge}" style="font-size: 10px; padding: 2px 6px; margin: 0; display: block; text-align: center;">📋 ${actBadge === 'ready' ? '✓' : '!'}</span>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            accTable.innerHTML = tableHTML;
+        }
+
+        function renderDayTabs() {
+            const dayTabs = document.getElementById("dayTabs");
+            let tabsHTML = '<div class="day-tab active" data-view="overview" onclick="switchView(\'overview\')">Overview</div>';
+
+            TRIP_DATA.days.forEach(day => {
+                const hasMissing = (day.hotel && day.hotel.status === "missing") ||
+                                   day.meals.breakfast.status === "missing" ||
+                                   day.meals.lunch.status === "missing" ||
+                                   day.meals.dinner.status === "missing";
+
+                const className = `day-tab ${hasMissing ? 'has-missing' : ''}`;
+                const datePartials = day.date.split(' ');
+                tabsHTML += `
+                    <div class="${className}" data-view="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">
+                        Day ${day.dayNumber}<br><span style="font-size:10px;opacity:0.8;">${day.dayOfWeek} ${datePartials[1] || ''} ${datePartials[0]}</span>
+                    </div>
+                `;
+            });
+
+            dayTabs.innerHTML = tabsHTML;
+        }
+
+        function renderDayViews() {
+            const container = document.getElementById("dayViewsContainer");
+            container.innerHTML = TRIP_DATA.days
+                .map(day => `<div class="day-view" id="day${day.dayNumber}">${renderDayContent(day)}</div>`)
+                .join("");
+            attachCollapsibleHandlers();
+        }
+
+        function attachCollapsibleHandlers() {
+            document.querySelectorAll('.section-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    this.classList.toggle('collapsed');
+                    this.nextElementSibling.classList.toggle('collapsed');
+                });
+            });
+
+            document.querySelectorAll('.btn-expand-all').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const dayView = this.closest('.day-view');
+                    dayView.querySelectorAll('.section-header').forEach(h => h.classList.remove('collapsed'));
+                    dayView.querySelectorAll('.section-content').forEach(c => c.classList.remove('collapsed'));
+                });
+            });
+
+            document.querySelectorAll('.btn-collapse-all').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const dayView = this.closest('.day-view');
+                    dayView.querySelectorAll('.section-header').forEach(h => h.classList.add('collapsed'));
+                    dayView.querySelectorAll('.section-content').forEach(c => c.classList.add('collapsed'));
+                });
+            });
+        }
+
+        function renderDayContent(day) {
+            let html = `
+                <div class="hero" style="background-image: url('${day.backgroundImage}')">
+                    <div class="hero-day-number">${day.dayNumber}</div>
+                    <div class="hero-title">${day.title}</div>
+                    <div class="hero-location">${day.location}</div>
+                </div>
+                <div class="expand-all-container">
+                    <button class="btn-expand-all">Expand All</button>
+                    <button class="btn-collapse-all">Collapse All</button>
+                </div>
+            `;
+
+            if (day.flight) {
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header">
+                            <h3>✈️ Flight</h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-flight">
+                            <div>
+                                <div style="margin-bottom: 12px;">
+                                    <div style="font-weight: 600; color: var(--accent-gold); font-size: 15px; margin-bottom: 8px;">${day.flight.airline}</div>
+                                    <div style="color: var(--text-primary); margin-bottom: 4px;"><strong>${day.flight.from} → ${day.flight.to}</strong></div>
+                                    <div style="color: var(--text-secondary); font-size: 13px; margin-bottom: 6px;">Depart: ${day.flight.departTime} · Arrive: ${day.flight.arriveTime}</div>
+                                    <div style="color: var(--text-secondary); font-size: 12px; margin-bottom: 12px;">${day.flight.terminal}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (day.drive) {
+                html += `
+                    <div class="drive-banner">
+                        <div class="drive-info">
+                            <div class="drive-route">${day.drive.from} → ${day.drive.to}</div>
+                            <div class="drive-duration">${day.drive.duration} · ${day.drive.distance}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (day.hotel) {
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header">
+                            <h3>🏨 Hotel</h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-hotel">
+                            <div>
+                                <div class="hotel-info">
+                                    <div class="hotel-name">${day.hotel.name}</div>
+                                    <div class="hotel-note">${day.hotel.note}</div>
+                                    <div class="hotel-status-badges">
+                                        <span class="badge ${day.hotel.status}">${day.hotel.status}</span>
+                                    </div>
+                                    ${day.hotel.mapsUrl ? `<a href="${day.hotel.mapsUrl}" target="_blank" class="btn-maps">📍 Maps</a>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (day.activities && day.activities.length > 0) {
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header">
+                            <h3>📍 Activities</h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-activities">
+                            <div class="timeline">
+                                ${day.activities.map((a, i) => `
+                                    <div class="timeline-item">
+                                        <div class="timeline-time">${a.time}</div>
+                                        <div class="timeline-text">${a.text}</div>
+                                        ${a.subNote ? `<div class="timeline-note">${a.subNote}</div>` : ''}
+                                        ${a.needsBooking ? `<div class="timeline-tag">Book in advance</div>` : ''}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (day.meals) {
+                const hasMeals = Object.values(day.meals).some(m => m.status !== 'missing');
+                if (hasMeals) {
+                    html += `
+                        <div class="collapsible-section">
+                            <div class="section-header">
+                                <h3>🍽️ Meals</h3>
+                                <div class="chevron"></div>
+                            </div>
+                            <div class="section-content section-meals">
+                                <div class="meals-section">
+                                    ${day.meals.breakfast.status !== 'missing' ? `
+                                        <div class="meal-type">Breakfast</div>
+                                        ${day.meals.breakfast.note ? `<div class="meal-note">${day.meals.breakfast.note}</div>` : ''}
+                                        <div class="badge ${day.meals.breakfast.status}">${day.meals.breakfast.status}</div>
+                                    ` : ''}
+                                    ${day.meals.lunch.status !== 'missing' ? `
+                                        <div class="meal-type">Lunch</div>
+                                        ${day.meals.lunch.note ? `<div class="meal-note">${day.meals.lunch.note}</div>` : ''}
+                                        <div class="badge ${day.meals.lunch.status}">${day.meals.lunch.status}</div>
+                                    ` : ''}
+                                    ${day.meals.dinner.status !== 'missing' ? `
+                                        <div class="meal-type">Dinner</div>
+                                        ${day.meals.dinner.note ? `<div class="meal-note">${day.meals.dinner.note}</div>` : ''}
+                                        <div class="badge ${day.meals.dinner.status}">${day.meals.dinner.status}</div>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            if (day.warnings && day.warnings.length > 0) {
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header">
+                            <h3>⚠️ Warnings</h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-warnings">
+                            <div>
+                                ${day.warnings.map(w => `<div class="warning">${w}</div>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (day.gems && day.gems.length > 0) {
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header">
+                            <h3>✨ Hidden Gems</h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-gems">
+                            <div>
+                                ${day.gems.map(g => `<div class="gem">${g}</div>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            return html;
+        }
+
+        function downloadPage() {
+            const html = document.documentElement.outerHTML;
+            const blob = new Blob([html], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${TRIP_DATA.title.replace(/\s+/g, '-')}.html`;
+            a.click();
+        }
+
+        function goToToday() {
+            const today = new Date().toISOString().split('T')[0];
+            for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
+                if (w.isoDate === today) {
+                    switchView(`day${dayNum}`);
+                    return;
+                }
+            }
+        }
+
+        function toggleCurrencyCalc() {
+            const body = document.getElementById('calcBody');
+            body.classList.toggle('open');
+        }
+
+        async function fetchCalcRates(forceRefresh = false) {
+            try {
+                const cacheKey = 'calc_rates';
+                const cachedData = localStorage.getItem(cacheKey);
+                if (cachedData && !forceRefresh) {
+                    const parsed = JSON.parse(cachedData);
+                    if (Date.now() - parsed.timestamp < 3600000) {
+                        updateCalcRates(parsed.rates);
+                        return;
+                    }
+                }
+                const response = await fetch('https://api.exchangerate-api.com/v4/latest/EUR');
+                const data = await response.json();
+                localStorage.setItem(cacheKey, JSON.stringify({ rates: data.rates, timestamp: Date.now() }));
+                updateCalcRates(data.rates);
+            } catch (e) {
+                console.error('Exchange rate fetch failed:', e);
+            }
+        }
+
+        function updateCalcRates(rates) {
+            document.getElementById('calcCode0').textContent = 'EUR';
+            document.getElementById('calcName0').textContent = 'Euro';
+            document.getElementById('calcRatesNote').textContent = `1 EUR = ${rates.USD?.toFixed(2) || '?'} USD · ${rates.PLN?.toFixed(2) || '?'} PLN`;
+            window.globalRates = rates;
+        }
+
+        function calcConvert(index) {
+            const inputs = ['calcInput0', 'calcInput1', 'calcInput2'];
+            const codes = ['EUR', 'USD', 'PLN'];
+            const val = parseFloat(document.getElementById(inputs[index]).value) || 0;
+            if (!window.globalRates) return;
+            const baseRates = { EUR: 1, USD: window.globalRates.USD, PLN: window.globalRates.PLN };
+            const baseAmount = val / baseRates[codes[index]];
+            codes.forEach((code, i) => {
+                if (i !== index) {
+                    document.getElementById(inputs[i]).value = (baseAmount * baseRates[code]).toFixed(2);
+                }
+            });
+        }
+
+        window.addEventListener('load', () => {
+            initializePage();
+            fetchCalcRates();
+        });
+    </script>
+</body>
+</html>
