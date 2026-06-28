@@ -123,7 +123,7 @@ Whenever a new trip folder is created or an existing one is significantly update
 - **Base:** Villa Pitahaya (Airbnb 827071, Luquillo) · 10 guests · Piscina · Confirmado · GPS 18.3756,-65.7225
 - **Flights:** Iberia IB381 MAD→SJU Jul 8 (12:45–15:25, JC & Maria) · IB382 SJU→MAD Jul 12 (17:15, JC & Maria)
 - **Car rental:** Alamo × 2 Midsize SUVs · Jul 8 4pm pickup → Jul 12 3pm return · (833) 763-1735
-- **Route:** Playa Luquillo (Día 1) → Viejo San Juan fortalezas + Paseo La Perla (Día 2) → El Yunque mañana + Hacienda Carabalí tarde (Día 3) → Playa Luquillo + Bio Bay 9:45pm (Día 4) → Salida (Día 5)
+- **Route:** Playa Luquillo (Día 1) → Cuevas Camuy mañana (grupo activo) + VSJ todos 2pm (Día 2) → El Yunque día completo (Día 3) → Vieques día trip (ferry 9am) + Bio Bay 9:45pm (Día 4) → Salida (Día 5)
 - **Lenguaje:** 100% español · USD para todas las transacciones
 - **Bookings necesarios:** Lancha Bio Bay (efectivo, teléfono) · Carabalí rides (reserva anticipada)
 
