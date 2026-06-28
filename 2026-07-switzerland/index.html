@@ -373,34 +373,30 @@
                     hotel: { name: "myMINGA4 Hotel & Serviced Apartments", status: "confirmed", note: "Continuing stay", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=myMINGA4+Hotel+Munich+Fliegenstrasse+4" },
                     drive: null,
                     activities: [
-                        { time: "Morning",   text: "Nymphenburg Palace — baroque palace & gardens",             subNote: "Tram 17 from Hauptbahnhof (20 min). Vast baroque gardens, free to roam. The palace exterior and canal are the highlight — interior optional.", needsBooking: false, mapsUrl: "maps.google.com/?q=Nymphenburg+Palace+Munich" },
-                        { time: "Morning",   text: "Viktualienmarkt — coffee, pretzel, wander stalls",                   subNote: "10 min walk from hotel. Open daily from 08:00. Best atmosphere in the morning before the crowds arrive.",    needsBooking: false, mapsUrl: "maps.google.com/?q=Viktualienmarkt+Munich" },
-                        { time: "Morning",   text: "Marienplatz — Munich's central square",                               subNote: "3 min walk from Viktualienmarkt. Free to explore. The square itself is the heart of the city — look for the golden Mariensäule column.", needsBooking: false, mapsUrl: "maps.google.com/?q=Marienplatz+Munich" },
-                        { time: "Morning",   text: "Neues Rathaus — Glockenspiel tower",                                  subNote: "Glockenspiel chimes at 11:00 and 12:00 — mechanical figures dance on the tower facade. Free to watch from the square. Arrive by 10:45 for a good spot.", needsBooking: false, mapsUrl: "maps.google.com/?q=Neues+Rathaus+Munich" },
-                        { time: "Morning",   text: "Asamkirche",                                                          subNote: "5 min walk from Marienplatz on Sendlinger Strasse. Free entry. Most ornate Baroque interior in Munich — almost no tourists.", needsBooking: false, mapsUrl: "maps.google.com/?q=Asamkirche+Munich" },
-                        { time: "Afternoon", text: "Eisbach river surfers — English Garden",                              subNote: "20 min walk or U4/U5 to Giselastrasse. People surf a standing river wave at the park entrance, year-round, completely free to watch.", needsBooking: false, mapsUrl: "maps.google.com/?q=Eisbach+Wave+Munich" },
-                        { time: "Afternoon", text: "English Garden — Chinesischer Turm beer garden",                      subNote: "5 min walk from Eisbach wave into the park. Maß of Augustiner + Schweinshaxn ~€22. No reservation needed.", needsBooking: false, mapsUrl: "maps.google.com/?q=Chinesischer+Turm+Biergarten+Munich" },
-                        { time: "Afternoon", text: "Monopteros temple",                                                   subNote: "5 min walk south within the English Garden. Greek-style hilltop rotunda with sweeping park views. Locals drink wine on the steps at golden hour.", needsBooking: false, mapsUrl: "maps.google.com/?q=Monopteros+Munich" },
-                        { time: "Evening",   text: "Dinner at Augustiner Klosterwirt",                                    subNote: "Best Schweinsbraten (roast pork) in the city centre, ~€25-30. On Augustinerstrasse near Marienplatz — no reservation usually needed.", needsBooking: false, mapsUrl: "maps.google.com/?q=Augustiner+Klosterwirt+Munich" },
-                        { time: "Evening",   text: "Nightcap walk through Maxvorstadt or Lehel",                          subNote: "Beautiful residential neighbourhoods flanking the old town — grand 19th-century streets, no plan needed.", needsBooking: false }
+                        { time: "Morning",   text: "Nymphenburg Palace — baroque palace & gardens",                       subNote: "Vast baroque gardens with canal. Palace exterior and grounds are free.", needsBooking: false, mapsUrl: "maps.google.com/?q=Nymphenburg+Palace+Munich" },
+                        { time: "Morning",   text: "Olympiaberg — river & wakeboarding",                                  subNote: "Olympic Park hill with city views. Caught the river and wakeboarding on the way towards the English Garden area.", needsBooking: false, mapsUrl: "maps.google.com/?q=Olympiaberg+Munich" },
+                        { time: "Morning",   text: "BMW Museum",                                                          subNote: "World-class car and design museum next to the Olympic Park. Bowl-shaped building, iconic from the outside.", needsBooking: false, mapsUrl: "maps.google.com/?q=BMW+Museum+Munich" },
+                        { time: "Lunch",     text: "Biergarten am Chinesischen Turm",                                     subNote: "Classic Munich beer garden in the English Garden. Maß of Augustiner under the chestnut trees.", needsBooking: false, mapsUrl: "maps.google.com/?q=Chinesischer+Turm+Biergarten+Munich" },
+                        { time: "Afternoon", text: "Brücke über Schwabinger Bach — river swimming",                       subNote: "Locals swimming in the clear river channel, kids jumping in, felt like a beach in the middle of the city.", needsBooking: false, mapsUrl: "maps.google.com/?q=Schwabinger+Bach+Munich" },
+                        { time: "Afternoon", text: "Hofgarten — arcaded garden",                                          subNote: "Peaceful arcaded garden next to the Residenz. Beer kiosk, locals relaxing, zero tourists.", needsBooking: false, mapsUrl: "maps.google.com/?q=Hofgarten+Munich" },
+                        { time: "Afternoon", text: "Residenz München — royal palace",                                     subNote: "The massive Wittelsbach royal palace complex. Free to walk the courtyards. The Antiquarium hall is one of the most impressive rooms in Bavaria.", needsBooking: false, mapsUrl: "maps.google.com/?q=Residenz+Munich" },
+                        { time: "Afternoon", text: "Max-Joseph-Platz",                                                    subNote: "Grand square in front of the Residenz and the National Theatre. Monument to King Max Joseph I at the centre.", needsBooking: false, mapsUrl: "maps.google.com/?q=Max+Joseph+Platz+Munich" },
+                        { time: "Evening",   text: "Marienplatz — walking around the old town",                           subNote: "Heart of Munich. Neues Rathaus, Glockenspiel tower, Mariensäule column.", needsBooking: false, mapsUrl: "maps.google.com/?q=Marienplatz+Munich" },
+                        { time: "Evening",   text: "🍺 Beer near Marienplatz",                                            subNote: "Well deserved after a massive full day on foot.", needsBooking: false, mapsUrl: "maps.google.com/?q=Marienplatz+Munich" }
                     ],
                     meals: {
-                        breakfast: { status: "options", note: "Coffee and pretzel at Viktualienmarkt", restaurants: [
-                            { name: "Rischart — Viktualienmarkt", desc: "Best pretzels and pastries, outdoor tables, morning market atmosphere", rating: "4.5★", mapsUrl: "maps.google.com/?q=Rischart+Viktualienmarkt+Munich" }
+                        breakfast: { status: "flexible", note: "Grabbed something on the go", restaurants: [] },
+                        lunch:     { status: "confirmed", note: "Biergarten am Chinesischen Turm — Maß of Augustiner in the English Garden", restaurants: [
+                            { name: "Biergarten am Chinesischen Turm", desc: "Classic Munich beer garden. Maß + Schweinshaxn under the chestnut trees.", rating: "4.3★", mapsUrl: "maps.google.com/?q=Chinesischer+Turm+Biergarten+Munich" }
                         ]},
-                        lunch:     { status: "options", note: "Beer garden lunch in the English Garden", restaurants: [
-                            { name: "Chinesischer Turm Beer Garden", desc: "Maß of Augustiner + Schweinshaxn ~€22. Iconic, no reservation needed.", rating: "4.3★", mapsUrl: "maps.google.com/?q=Chinesischer+Turm+Biergarten+Munich" }
-                        ]},
-                        dinner:    { status: "options", note: "Best Schweinsbraten in the centre", restaurants: [
-                            { name: "Augustiner Klosterwirt", desc: "Roast pork, Bavarian classics, ~€25-30. Excellent quality.", rating: "4.6★", mapsUrl: "maps.google.com/?q=Augustiner+Klosterwirt+Munich" }
-                        ]}
+                        dinner:    { status: "flexible", note: "Drinks and bites near Marienplatz", restaurants: [] }
                     },
-                    route: "www.google.com/maps/dir/myMINGA4+Hotel+Munich/Viktualienmarkt+Munich/Marienplatz+Munich/Asamkirche+Munich/Englischer+Garten+Munich/Chinesischer+Turm+Biergarten+Munich",
+                    route: "www.google.com/maps/dir/Nymphenburg+Palace+Munich/Olympiaberg+Munich/BMW+Museum+Munich/Chinesischer+Turm+Biergarten+Munich/Residenz+Munich/Marienplatz+Munich",
                     warnings: [],
                     gems: [
-                        "Asamkirche: jaw-dropping Baroque interior, 5 min from Marienplatz, free, almost always empty",
-                        "Eisbach surfers: people surf a standing river wave in a city park — year-round, completely surreal",
-                        "Monopteros at golden hour: most underrated view in Munich, locals drink wine on the steps"
+                        "Schwabinger Bach river swimming: locals treating a city river channel like a beach — completely spontaneous and surreal",
+                        "BMW Museum: worth it even if you're not a car person — the architecture and design exhibits stand on their own",
+                        "Hofgarten: stumbled upon something most tourists never find — locals under the arcades with a beer"
                     ]
                 },
 
@@ -413,16 +409,20 @@
                     hotel: { name: "myMINGA4 Hotel & Serviced Apartments", status: "confirmed", note: "Last night — check out tomorrow Jun 30. ⚠️ Pack bag before leaving for the tour.", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=myMINGA4+Hotel+Munich+Fliegenstrasse+4" },
                     drive: null,
                     activities: [
-                        { time: "08:30",     text: "🎫 GetYourGuide tour departs — Neuschwanstein & Linderhof",  subNote: "Day Trip with Castle Tickets (entrance included). Ref: GYG83XFQM9F3. Check the GetYourGuide app tonight for the exact meeting point. Duration 10.5 hours.", needsBooking: false, mapsUrl: "maps.google.com/?q=Munich+Central+Station" },
-                        { time: "Morning",   text: "Neuschwanstein Castle — iconic hilltop castle",               subNote: "The castle that inspired Disney's Sleeping Beauty. Interior guided tour included. Allow 2 hours inside. The view from Marienbrücke bridge above is the classic shot — don't miss it.", needsBooking: false, mapsUrl: "maps.google.com/?q=Neuschwanstein+Castle+Bavaria" },
-                        { time: "Afternoon", text: "Linderhof Palace — baroque royal palace",                     subNote: "King Ludwig II's most intimate palace, surrounded by French formal gardens. Smaller than Neuschwanstein but beautifully ornate. The Venus Grotto with artificial lake is unusual.", needsBooking: false, mapsUrl: "maps.google.com/?q=Linderhof+Palace+Bavaria" },
-                        { time: "~19:00",    text: "Back in Munich — freshen up before the match",               subNote: "Drop things at hotel, quick shower. Bag should already be packed — you leave for Zurich at 06:48 tomorrow.", needsBooking: false, mapsUrl: "maps.google.com/?q=myMINGA4+Hotel+Munich+Fliegenstrasse+4" },
+                        { time: "08:30",     text: "🎫 Meet tour at Karlsplatz 21 — Neuschwanstein & Linderhof", subNote: "Day Trip with Castle Tickets included. Ref: GYG83XFQM9F3. Meeting point is Karlsplatz 21 — arrive a few minutes early. Bus/coach from Munich.", needsBooking: false, mapsUrl: "maps.app.goo.gl/Vwooj6U9ERjwmJNT9" },
+                        { time: "~10:30",    text: "Linderhof Palace — guided tour",                              subNote: "First stop. King Ludwig II's most intimate palace — ornate French Baroque with formal gardens and the famous Venus Grotto. 1 hour guided tour.", needsBooking: false, mapsUrl: "maps.google.com/?q=Linderhof+Palace+Bavaria" },
+                        { time: "~12:30",    text: "Hohenschwangau — lunch & free time",                          subNote: "2 hours here. Lunch NOT included — plenty of restaurants and cafés in the village below the castles. Ludwig II's childhood home castle is right here.", needsBooking: false, mapsUrl: "maps.google.com/?q=Hohenschwangau+Castle+Bavaria" },
+                        { time: "~14:30",    text: "Marienbrücke — the viewpoint above Neuschwanstein",           subNote: "Optional walk up to the bridge above the castle. This is the classic postcard shot. Do this before the interior tour — most impressive view in Bavaria.", needsBooking: false, mapsUrl: "maps.google.com/?q=Marienbrucke+Neuschwanstein" },
+                        { time: "~15:00",    text: "Neuschwanstein Castle — guided interior tour",                subNote: "The Disney castle in real life. 30-min guided tour inside. The Throne Room and Singer's Hall are the highlights. Castle tickets included in your booking.", needsBooking: false, mapsUrl: "maps.google.com/?q=Neuschwanstein+Castle+Bavaria" },
+                        { time: "~19:00",    text: "Drop-off Karlsplatz 21 — back in Munich",                    subNote: "Walk back to hotel (~15 min from Karlsplatz). Quick freshen up. Bag should already be packed.", needsBooking: false, mapsUrl: "maps.google.com/?q=Karlsplatz+Munich" },
                         { time: "21:00",     text: "🍺 Augustiner-Keller — beer and food before kickoff",        subNote: "Arnulfstrasse 52, 5 min from hotel. 5,000-seat beer garden with outdoor screens. Brazil vs Japan plays first, then Germany at 22:30.", needsBooking: false, mapsUrl: "maps.google.com/?q=Augustiner+Keller+Munich+Arnulfstrasse" },
                         { time: "22:30",     text: "🏆 Germany Round of 32 — watch the match",                   subNote: "Germany's first knockout match. Game ends ~00:30. Set multiple alarms — train is 06:48. Leave hotel at 06:00.", needsBooking: false, mapsUrl: "maps.google.com/?q=Augustiner+Keller+Munich+Arnulfstrasse" }
                     ],
                     meals: {
-                        breakfast: { status: "flexible", note: "Quick coffee at hotel or grab something at Hauptbahnhof before the tour", restaurants: [] },
-                        lunch:     { status: "included", note: "Lunch stop included in the tour itinerary near the castles", restaurants: [] },
+                        breakfast: { status: "flexible", note: "Quick coffee at hotel before heading to Karlsplatz", restaurants: [] },
+                        lunch:     { status: "options",  note: "⚠️ Lunch NOT included — buy in Hohenschwangau village during the 2-hour stop", restaurants: [
+                            { name: "Restaurants in Hohenschwangau village", desc: "Several options in the village below the castles. Buy during the free time stop (~12:30). Budget €15-20.", rating: "", mapsUrl: "maps.google.com/?q=Hohenschwangau+Village+Restaurants" }
+                        ]},
                         dinner:    { status: "options",  note: "Beer and bites at Augustiner-Keller watching Germany play", restaurants: [
                             { name: "Augustiner-Keller", desc: "5,000-seat beer garden on Arnulfstrasse. Outdoor screens for the World Cup. Arrive 21:00 for Germany at 22:30. 5 min from hotel.", rating: "4.5★", mapsUrl: "maps.google.com/?q=Augustiner+Keller+Munich+Arnulfstrasse" }
                         ]}
