@@ -373,6 +373,7 @@
                     hotel: { name: "myMINGA4 Hotel & Serviced Apartments", status: "confirmed", note: "Continuing stay", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=myMINGA4+Hotel+Munich+Fliegenstrasse+4" },
                     drive: null,
                     activities: [
+                        { time: "Morning",   text: "Nymphenburg Palace — baroque palace & gardens",             subNote: "Tram 17 from Hauptbahnhof (20 min). Vast baroque gardens, free to roam. The palace exterior and canal are the highlight — interior optional.", needsBooking: false, mapsUrl: "maps.google.com/?q=Nymphenburg+Palace+Munich" },
                         { time: "Morning",   text: "Viktualienmarkt — coffee, pretzel, wander stalls",                   subNote: "10 min walk from hotel. Open daily from 08:00. Best atmosphere in the morning before the crowds arrive.",    needsBooking: false, mapsUrl: "maps.google.com/?q=Viktualienmarkt+Munich" },
                         { time: "Morning",   text: "Marienplatz — Munich's central square",                               subNote: "3 min walk from Viktualienmarkt. Free to explore. The square itself is the heart of the city — look for the golden Mariensäule column.", needsBooking: false, mapsUrl: "maps.google.com/?q=Marienplatz+Munich" },
                         { time: "Morning",   text: "Neues Rathaus — Glockenspiel tower",                                  subNote: "Glockenspiel chimes at 11:00 and 12:00 — mechanical figures dance on the tower facade. Free to watch from the square. Arrive by 10:45 for a good spot.", needsBooking: false, mapsUrl: "maps.google.com/?q=Neues+Rathaus+Munich" },
@@ -403,44 +404,38 @@
                     ]
                 },
 
-                // ── DAY 3 ── Jun 29 Mon ── Munich last day ──
+                // ── DAY 3 ── Jun 29 Mon ── Neuschwanstein ──
                 {
                     dayNumber: 3, date: "Jun 29", dayOfWeek: "Mon",
-                    title: "Munich — Last Day", location: "Munich",
-                    backgroundImage: "https://images.unsplash.com/photo-1555993539-1732b0258235?w=800",
+                    title: "Neuschwanstein & Linderhof — Castle Day", location: "Bavaria",
+                    backgroundImage: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800",
                     flight: null,
-                    hotel: { name: "myMINGA4 Hotel & Serviced Apartments", status: "confirmed", note: "Last night — check out tomorrow Jun 30. Pack tonight.", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=myMINGA4+Hotel+Munich+Fliegenstrasse+4" },
+                    hotel: { name: "myMINGA4 Hotel & Serviced Apartments", status: "confirmed", note: "Last night — check out tomorrow Jun 30. ⚠️ Pack bag before leaving for the tour.", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=myMINGA4+Hotel+Munich+Fliegenstrasse+4" },
                     drive: null,
                     activities: [
-                        { time: "09:00",    text: "📱 Buy Bayern Ticket in MVV app",                      subNote: "€29 · covers all MVV transport all day (trams, S-Bahn, Dachau and back). Valid from 09:00. Buy before leaving hotel.",                           needsBooking: false },
-                        { time: "09:15",    text: "Nymphenburg Palace — baroque gardens walk",             subNote: "Tram 17 from Hauptbahnhof (20 min). Gardens are free and huge. 1 hour is enough if skipping the interior.",                                     needsBooking: false, mapsUrl: "maps.google.com/?q=Nymphenburg+Palace+Munich" },
-                        { time: "11:00",    text: "🚆 S2 to Dachau Concentration Camp Memorial",          subNote: "S2 from Hauptbahnhof (25 min) → bus 726 to memorial. Free entry. Open 09:00. First Nazi camp, model for all others — 3 hours minimum.",       needsBooking: false, mapsUrl: "maps.google.com/?q=KZ+Dachau+Memorial" },
-                        { time: "Afternoon", text: "Konigsplatz — Nazi rally grounds & 1933 book burnings", subNote: "The square where Hitler staged massive rallies and burned books in 1933. Still intact — the two temple buildings are the originals. The 'Brown House' (Nazi party HQ) stood on the adjacent street.", needsBooking: false, mapsUrl: "maps.google.com/?q=Konigsplatz+Munich" },
-                        { time: "Afternoon", text: "Feldherrnhalle — Beer Hall Putsch site",                 subNote: "Walk to Odeonsplatz: the loggia where the 1923 coup march ended in gunfire. Hitler fled through here, was arrested days later. A key stop on any Third Reich tour.", needsBooking: false, mapsUrl: "maps.google.com/?q=Feldherrnhalle+Munich" },
-                        { time: "Afternoon", text: "Viscardgasse — the alley that defied the Nazis",         subNote: "Hidden side alley off Odeonsplatz. Find the golden cobblestones — marks the path locals used to avoid saluting the SS guards posted at the Feldherrnhalle. Most tourists walk straight past it.", needsBooking: false, mapsUrl: "maps.google.com/?q=Viscardgasse+Munich" },
-                        { time: "19:00",     text: "🍺 [Optional] Hofgarten — evening beer under the arcades",  subNote: "Arcaded garden right next to Odeonsplatz. Beer kiosk, locals on a summer evening, zero tourists. Good spot to decompress after Dachau before heading back to pack.", needsBooking: false, mapsUrl: "maps.google.com/?q=Hofgarten+Munich" },
-                        { time: "21:00",     text: "🍺 Augustiner-Keller — beer and food before kickoff",    subNote: "Arnulfstrasse 52, 5 min from hotel. 5,000-seat beer garden with outdoor screens. Arrive early to get a good spot. Brazil vs Japan plays first, then Germany at 22:30. Pack your bag before you leave — come home and go straight to sleep.", needsBooking: false, mapsUrl: "maps.google.com/?q=Augustiner+Keller+Munich+Arnulfstrasse" },
-                        { time: "22:30",     text: "🏆 Germany Round of 32 — watch the match",             subNote: "Germany's first knockout match. Kick back with a Maß under the trees. Game ends ~00:30. Train is 06:48 — set multiple alarms.", needsBooking: false, mapsUrl: "maps.google.com/?q=Augustiner+Keller+Munich+Arnulfstrasse" }
+                        { time: "08:30",     text: "🎫 GetYourGuide tour departs — Neuschwanstein & Linderhof",  subNote: "Day Trip with Castle Tickets (entrance included). Ref: GYG83XFQM9F3. Check the GetYourGuide app tonight for the exact meeting point. Duration 10.5 hours.", needsBooking: false, mapsUrl: "maps.google.com/?q=Munich+Central+Station" },
+                        { time: "Morning",   text: "Neuschwanstein Castle — iconic hilltop castle",               subNote: "The castle that inspired Disney's Sleeping Beauty. Interior guided tour included. Allow 2 hours inside. The view from Marienbrücke bridge above is the classic shot — don't miss it.", needsBooking: false, mapsUrl: "maps.google.com/?q=Neuschwanstein+Castle+Bavaria" },
+                        { time: "Afternoon", text: "Linderhof Palace — baroque royal palace",                     subNote: "King Ludwig II's most intimate palace, surrounded by French formal gardens. Smaller than Neuschwanstein but beautifully ornate. The Venus Grotto with artificial lake is unusual.", needsBooking: false, mapsUrl: "maps.google.com/?q=Linderhof+Palace+Bavaria" },
+                        { time: "~19:00",    text: "Back in Munich — freshen up before the match",               subNote: "Drop things at hotel, quick shower. Bag should already be packed — you leave for Zurich at 06:48 tomorrow.", needsBooking: false, mapsUrl: "maps.google.com/?q=myMINGA4+Hotel+Munich+Fliegenstrasse+4" },
+                        { time: "21:00",     text: "🍺 Augustiner-Keller — beer and food before kickoff",        subNote: "Arnulfstrasse 52, 5 min from hotel. 5,000-seat beer garden with outdoor screens. Brazil vs Japan plays first, then Germany at 22:30.", needsBooking: false, mapsUrl: "maps.google.com/?q=Augustiner+Keller+Munich+Arnulfstrasse" },
+                        { time: "22:30",     text: "🏆 Germany Round of 32 — watch the match",                   subNote: "Germany's first knockout match. Game ends ~00:30. Set multiple alarms — train is 06:48. Leave hotel at 06:00.", needsBooking: false, mapsUrl: "maps.google.com/?q=Augustiner+Keller+Munich+Arnulfstrasse" }
                     ],
                     meals: {
-                        breakfast: { status: "flexible", note: "Quick coffee near hotel or grab something at Hauptbahnhof before the S2", restaurants: [] },
-                        lunch:     { status: "options",  note: "Back from Dachau ~13:00 — eat near Königsplatz", restaurants: [
-                            { name: "Café Lenbachhaus", desc: "Right next to Königsplatz, light lunch, good quality, calm atmosphere after a heavy morning.", rating: "4.2★", mapsUrl: "maps.google.com/?q=Cafe+Lenbachhaus+Munich" }
-                        ]},
-                        dinner:    { status: "options", note: "Beer and bites at Augustiner-Keller watching Germany play", restaurants: [
+                        breakfast: { status: "flexible", note: "Quick coffee at hotel or grab something at Hauptbahnhof before the tour", restaurants: [] },
+                        lunch:     { status: "included", note: "Lunch stop included in the tour itinerary near the castles", restaurants: [] },
+                        dinner:    { status: "options",  note: "Beer and bites at Augustiner-Keller watching Germany play", restaurants: [
                             { name: "Augustiner-Keller", desc: "5,000-seat beer garden on Arnulfstrasse. Outdoor screens for the World Cup. Arrive 21:00 for Germany at 22:30. 5 min from hotel.", rating: "4.5★", mapsUrl: "maps.google.com/?q=Augustiner+Keller+Munich+Arnulfstrasse" }
                         ]}
                     },
-                    route: "www.google.com/maps/dir/Nymphenburg+Palace+Munich/KZ+Gedenkstätte+Dachau/Königsplatz+München/Feldherrnhalle+München/Hofgarten+München",
+                    route: "www.google.com/maps/dir/Neuschwanstein+Castle/Linderhof+Palace/Munich",
                     warnings: [
-                        "Dachau: go early — opens 09:00. Budget minimum 3 hours. Rushing it misses the point.",
-                        "⚠️ Pack your bag BEFORE heading to Augustiner-Keller at 21:00 — game ends ~00:30, train is 06:48. Come home and go straight to sleep.",
+                        "⚠️ Pack your bag TONIGHT (Jun 28) or first thing in the morning — tour leaves 08:30, game ends ~00:30, train 06:48. No time to pack between match and departure.",
+                        "Check GetYourGuide app tonight for exact meeting point — bring the QR code (ref GYG83XFQM9F3).",
                         "München Hbf is ~10 min walk from hotel — leave at 06:00."
                     ],
                     gems: [
-                        "Viscardgasse: find the golden cobblestones — the alley Munich locals used to avoid saluting the Feldherrnhalle. Most tourists walk straight past it.",
-                        "Hofgarten at dusk: locals under the arcades with a beer, no tourists — your last Munich evening",
-                        "Munich was called 'Hauptstadt der Bewegung' (Capital of the Movement) — the Nazi party was born here, not Berlin"
+                        "Marienbrücke bridge above Neuschwanstein: the classic postcard view — walk up after the interior tour, worth every step",
+                        "Ludwig II never finished Neuschwanstein — he died mysteriously in 1886, only 6 weeks after moving in"
                     ]
                 },
 
