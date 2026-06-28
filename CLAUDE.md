@@ -22,8 +22,10 @@ trip-planner/
 │   └── index.html             # Namibia May 2026 (Juan Carlos, Maria, Ada, Felix)
 ├── 2026-07-switzerland/
 │   └── index.html             # Germany · Switzerland · Madrid July 2026 (Juan Carlos)
-└── 2026-07-puerto-rico/
-    └── index.html             # Puerto Rico Jul 2026 (10 people · Luquillo · Jul 8–12)
+├── 2026-07-puerto-rico/
+│   └── index.html             # Puerto Rico Jul 2026 (10 people · Luquillo · Jul 8–12)
+└── 2026-07-marias-trip/
+    └── index.html             # Maria's Trip July–Aug 2026 (Dubai · Madrid · Puerto Rico · Kraków · London)
 ```
 
 Each trip is a self-contained single HTML file. All trip data lives in a `TRIP_DATA` JavaScript object near the top of the rendering script. The rendering engine reads from that object — **only edit `TRIP_DATA`, `DAY_WEATHER`, and `COST_DATA` for content changes**, not the rendering code.
@@ -134,3 +136,14 @@ Whenever a new trip folder is created or an existing one is significantly update
 - **Car rental:** Namibia2Go · 2,000 EUR confirmed
 - **Ethiopia tour:** Talelign Befkadu · USD 480 total (Day 1: Addis city, Day 2: Bishoftu crater lakes)
 - **Route:** Addis Ababa (2 nights) → Sossusvlei → Swakopmund (4 nights) → Damaraland → Grootberg → Etosha (2 nights) → Windhoek → home
+
+## Maria's Trip 2026 summary
+- **Traveller:** Maria
+- **Dates:** Jul 5 – Aug 2, 2026 (29 days · Sun–Sun)
+- **Route:** Dubai → Kraków → Madrid (Jul 5–8) → Puerto Rico (Jul 8–12) → Madrid (Jul 12–14) → Kraków (Jul 14–26) → Warsaw (Jul 18–19) → London (Jul 19–23) → Kraków (Jul 24–31) → Dubai (Aug 2)
+- **Flights:** FZ 1787, LO 2161, IB 0379, IB 0382, LH 1805, LH 1626, LO 279, LO 280, FZ 1788 (9 flights total)
+- **Puerto Rico base:** Camino Del Lago Pitahaya, Luquillo (Jul 9–12)
+- **Kraków:** Dom Franciszkański San Antonio (Jul 15–18), Campanile Prime Kraków Old Town (Jul 24–31)
+- **Activities:** Old San Juan, El Yunque Rainforest, Hacienda Carabalí, Bioluminescent Bay, Remote work in Madrid/London, Time with Alex in Kraków
+- **Work locations:** Nomia office (Kurniki 9, Kraków), Nomia office (10 York Road, London)
+- **Trains:** Kraków–Warsaw (Jul 18), Warsaw–Kraków (Jul 24)
