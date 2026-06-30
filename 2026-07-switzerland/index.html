@@ -530,39 +530,54 @@
                     ]
                 },
 
-                // ── DAY 6 ── Jul 2 Thu ── Lucerne full day ──
+                // ── DAY 6 ── Jul 2 Thu ── Lucerne + Mt Pilatus ──
                 {
                     dayNumber: 6, date: "Jul 2", dayOfWeek: "Thu",
-                    title: "Lucerne — Full Day", location: "Bern → Lucerne (day trip)",
+                    title: "Lucerne + Mt Pilatus", location: "Bern → Lucerne → Pilatus → Bern",
                     backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
                     flight: null,
-                    hotel: { name: "Prize by Radisson Bern City", status: "confirmed", note: "Breakfast included. Full day trip to Lucerne.", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Prize+by+Radisson+Bern+City+Viktoriastrasse" },
-                    drive: { from: "Bern", to: "Lucerne", duration: "~1h direct", distance: "Depart ~09:00 · Swiss Travel Pass ✓" },
+                    hotel: { name: "Prize by Radisson Bern City", status: "confirmed", note: "Breakfast included. Full day trip to Lucerne + Pilatus.", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Prize+by+Radisson+Bern+City+Viktoriastrasse" },
+                    drive: { from: "Bern HB", to: "Lucerne HB", duration: "~1h direct", distance: "Depart 09:15 · Swiss Travel Pass ✓ · then bus to Kriens for Pilatus gondola" },
                     activities: [
-                        { time: "09:00",    text: "🚆 Train Bern → Lucerne (~1h direct)",                subNote: 'Swiss Travel Pass ✓ No ticket needed. Depart Bern HB ~09:00, arrive Lucerne HB ~10:00. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false, mapsUrl: "maps.google.com/?q=Lucerne+Hauptbahnhof" },
-                        { time: "10:00",    text: "Kapellbrücke — Chapel Bridge",                        subNote: "5 min walk from Lucerne HB. 14th-century covered wooden footbridge — most photographed structure in Switzerland. Look up while crossing to see the 17th-century painted panels on the rafters.", needsBooking: false, mapsUrl: "maps.google.com/?q=Kapellbrucke+Lucerne" },
-                        { time: "10:30",    text: "Löwendenkmal — Lion Monument",                        subNote: "10 min walk from Kapellbrücke. Carved directly into a cliff face, free. Mark Twain called it 'the most mournful piece of rock in the world' — commemorates Swiss Guards killed in the French Revolution.", needsBooking: false, mapsUrl: "maps.google.com/?q=Lowenmal+Lucerne" },
-                        { time: "11:00",    text: "Lucerne old town — painted guild facades",            subNote: "Medieval streets with frescoed buildings and covered arcades. The Spreuerbrücke bridge (less crowded than Kapellbrücke) is also worth crossing.", needsBooking: false, mapsUrl: "maps.google.com/?q=Old+Town+Lucerne" },
-                        { time: "12:30",    text: "Lunch in Lucerne",                                    subNote: "Plenty of options in the old town and along the lakefront. Budget CHF 20-30.",                                                                 needsBooking: false, mapsUrl: "maps.google.com/?q=Lucerne+Old+Town+restaurants" },
-                        { time: "14:00",    text: "Mt Pilatus gondola — 2,132m summit",                 subNote: "~CHF 36-41 with Swiss Travel Pass (50% off). Staggering Alpine panorama — on a clear day you see 73 peaks. Book online in advance; gondola closes in bad weather. Allow 2-3 hrs total.", needsBooking: true, mapsUrl: "maps.google.com/?q=Mount+Pilatus+Lucerne" },
-                        { time: "Afternoon", text: "OPTION if bad weather: Lake Lucerne boat cruise",   subNote: "Departs from pier next to Lucerne HB. ~1.5 hrs, fully covered by Swiss Travel Pass. Beautiful on the water with mountain backdrop.", needsBooking: false, mapsUrl: "maps.google.com/?q=Lake+Lucerne+SGV+Pier" },
-                        { time: "Evening",   text: "🚆 Train back Lucerne → Bern (~1h)",                 subNote: 'Swiss Travel Pass ✓ Frequent service back to Bern HB. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false, mapsUrl: "maps.google.com/?q=Bern+Hauptbahnhof" }
+                        { time: "08:30",    text: "Breakfast at hotel",                                          subNote: "Breakfast included. Eat well — full day on your feet.", needsBooking: false },
+                        { time: "09:15",    text: "🚆 Train Bern HB → Lucerne (~1h direct)",                    subNote: 'Swiss Travel Pass ✓ Hourly departures, no reservation needed. 🪟 Any window seat — not a particularly scenic route. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false, mapsUrl: "maps.google.com/?q=Lucerne+Hauptbahnhof" },
+                        { time: "10:15",    text: "Kapellbrücke — Chapel Bridge",                               subNote: "5 min walk from Lucerne HB. 14th-century covered wooden footbridge. Look up while crossing — 17th-century painted roof panels that most people miss.", needsBooking: false, mapsUrl: "maps.google.com/?q=Kapellbrucke+Lucerne" },
+                        { time: "10:30",    text: "Old Town (Altstadt) — Weinmarkt, Kornmarkt, Hirschenplatz", subNote: "Car-free historic core with painted medieval facades, Renaissance fountains, City Hall on Kornmarkt. 45 min wander.", needsBooking: false, mapsUrl: "maps.google.com/?q=Old+Town+Lucerne" },
+                        { time: "11:15",    text: "Spreuerbrücke — Dance of Death bridge",                      subNote: "HIDDEN GEM. Second historic wooden bridge with darker 'Dance of Death' roof paintings — far less crowded than Chapel Bridge and arguably more atmospheric.", needsBooking: false, mapsUrl: "maps.google.com/?q=Spreuerbrucke+Lucerne" },
+                        { time: "11:30",    text: "Löwendenkmal — Lion Monument",                               subNote: "Dying lion carved into a sandstone cliff, 1821, Swiss Guards memorial. Mark Twain called it 'the most mournful piece of rock in the world.' Optional detour: Musegg Wall just above — free, climbable medieval city wall with open terrace views from the Männli tower.", needsBooking: false, mapsUrl: "maps.google.com/?q=Lowenmal+Lucerne" },
+                        { time: "12:00",    text: "🍽️ Lunch — Zunfthausrestaurant Pfistern",                  subNote: "Kornmarkt 4 — traditional Swiss dishes with river views, on the route back toward the bus stop. Try the cheese fondue. Solid, central, no detour needed.", needsBooking: false, mapsUrl: "maps.google.com/?q=Zunfthausrestaurant+Pfistern+Lucerne" },
+                        { time: "13:10",    text: "🚌 Bus Lucerne Bahnhof → Kriens, Pilatus Bahnen stop",      subNote: "~10-15 min, covered by Swiss Travel Pass. Stop right at the gondola station.", needsBooking: false, mapsUrl: "maps.google.com/?q=Pilatus+Bahnen+Kriens" },
+                        { time: "13:35",    text: "🚠 Gondola Kriens → Fräkmüntegg (~20 min)",                 subNote: '🪟 Right side tends to face more open valley views on the way up. Buy ticket at pilatus.ch/en/booking morning-of — select Kriens ↔ Pilatus Kulm return with Swiss Travel Pass 50% discount. <a href="https://pilatus.ch/en/booking" target="_blank" class="activity-maps-link">🎫 Book</a>', needsBooking: true, mapsUrl: "maps.google.com/?q=Frakmuntegg+Pilatus" },
+                        { time: "13:55",    text: "Transfer straight through Fräkmüntegg — do not stop yet",  subNote: "You'll stop here on the way back for the toboggan. Now: head straight to the Dragon Ride cable car.", needsBooking: false, mapsUrl: "maps.google.com/?q=Frakmuntegg+Pilatus" },
+                        { time: "14:00",    text: "🚡 Dragon Ride cable car Fräkmüntegg → Pilatus Kulm (~4 min)", subNote: "Dramatic crossing over rocky ravines just below the summit. Look down — one of the most dramatic short cable car crossings in Switzerland.", needsBooking: false, mapsUrl: "maps.google.com/?q=Pilatus+Kulm+Summit" },
+                        { time: "14:05",    text: "Pilatus Kulm summit — 2,132m",                              subNote: "360° panoramic views over Lake Lucerne and 73 Alpine peaks. Main event — give it real time while views are clear (mountain weather clouds over by mid-afternoon). Optional: climb to Esel and Oberhaupt side viewpoints (15-20 min each) — same summit, much better photos, far fewer people.", needsBooking: false, mapsUrl: "maps.google.com/?q=Pilatus+Kulm+Summit" },
+                        { time: "15:15",    text: "🚡 Dragon Ride back to Fräkmüntegg — STOP HERE",           subNote: "This time stay at Fräkmüntegg for the toboggan slide.", needsBooking: false, mapsUrl: "maps.google.com/?q=Frakmuntegg+Pilatus" },
+                        { time: "15:20",    text: "🛷 Dragon Ride summer toboggan slide",                      subNote: "Switzerland's longest alpine slide. Small separate fee paid on-site — not covered by mountain ticket or pass. Allow ~70 min for queue + ride. Skip the Rope Park if the toboggan line is long.", needsBooking: false, mapsUrl: "maps.google.com/?q=Frakmuntegg+Pilatus" },
+                        { time: "16:30",    text: "🚠 Gondola Fräkmüntegg → Kriens (~25 min)",                subNote: "🪟 Left side faces the valley/Lucerne direction on the way down — minor bonus if available.", needsBooking: false, mapsUrl: "maps.google.com/?q=Pilatus+Bahnen+Kriens" },
+                        { time: "17:10",    text: "🚌 Bus Kriens → Lucerne Bahnhof (~15 min)",                subNote: "Swiss Travel Pass ✓ Free time for a quick lakeside walk or coffee before the train.", needsBooking: false, mapsUrl: "maps.google.com/?q=Lucerne+Hauptbahnhof" },
+                        { time: "18:30",    text: "🚆 Train Lucerne → Bern HB (~1h direct)",                  subNote: 'Swiss Travel Pass ✓ Hourly, no reservation needed. 🪟 Any window seat — not a scenic route. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false, mapsUrl: "maps.google.com/?q=Bern+Hauptbahnhof" }
                     ],
                     meals: {
-                        breakfast: { status: "included", note: "Hotel breakfast before heading out",    restaurants: [] },
-                        lunch:     { status: "flexible", note: "Lunch in Lucerne old town — CHF 20-30", restaurants: [] },
-                        dinner:    { status: "options",  note: "Dinner back in Bern after Lucerne", restaurants: [
-                            { name: "Lötschberg", desc: "Classic Bernese cuisine — fondue, cheese dishes, local wines. ~€30-35.", rating: "4.5★", mapsUrl: "maps.google.com/?q=Lotschberg+Restaurant+Bern" }
+                        breakfast: { status: "included", note: "Hotel breakfast at 08:30 before heading out", restaurants: [] },
+                        lunch:     { status: "options",  note: "Zunfthausrestaurant Pfistern — Swiss dishes with river views, Kornmarkt 4", restaurants: [
+                            { name: "Zunfthausrestaurant Pfistern", desc: "Traditional Swiss food with river views on Kornmarkt. Try the cheese fondue. Central, fits the route perfectly.", rating: "4.3★", mapsUrl: "maps.google.com/?q=Zunfthausrestaurant+Pfistern+Lucerne" }
+                        ]},
+                        dinner:    { status: "flexible", note: "Simple dinner near hotel in Bern — long day on your feet", restaurants: [
+                            { name: "Lötschberg", desc: "Classic Bernese cuisine — fondue, cheese dishes, local wines. ~CHF 30-35.", rating: "4.5★", mapsUrl: "maps.google.com/?q=Lotschberg+Restaurant+Bern" }
                         ]}
                     },
-                    route: "www.google.com/maps/dir/Bern+Hauptbahnhof/Kapellbrucke+Lucerne/Lowenmal+Lucerne/Old+Town+Lucerne/Mount+Pilatus+Lucerne/Bern+Hauptbahnhof",
+                    route: "www.google.com/maps/dir/Bern+Hauptbahnhof/Kapellbrucke+Lucerne/Spreuerbrucke+Lucerne/Lowenmal+Lucerne/Pilatus+Bahnen+Kriens/Pilatus+Kulm+Summit/Bern+Hauptbahnhof",
                     warnings: [
-                        "⚠️ Book Mt Pilatus gondola online in advance — popular and sells out on sunny days",
-                        "Check weather for Pilatus morning of — gondola closes in bad weather. If closed, do the lake cruise instead"
+                        "⚠️ Buy Pilatus ticket morning-of at pilatus.ch/en/booking — select Kriens ↔ Pilatus Kulm return with Swiss Travel Pass 50% discount. No advance booking needed for gondola itself.",
+                        "Check weather morning of — if summit is clouded over, consider Lake Lucerne boat cruise instead (fully covered by Swiss Travel Pass from the pier next to Lucerne HB)",
+                        "Last gondola down from Kriens side runs until ~17:30 in summer — today's timeline beats that comfortably",
+                        "Bring a light layer for the summit — noticeably cooler and windier at 2,132m"
                     ],
                     gems: [
-                        "Lion Monument: carved into a cliff face, completely free, and one of the most unexpectedly moving sculptures in Europe",
-                        "Kapellbrücke interior: look up while crossing — 17th century painted panels overhead that most people miss"
+                        "Spreuerbrücke: Lucerne's second wooden bridge with 'Dance of Death' roof paintings — most tourists only photograph Chapel Bridge and skip this one entirely",
+                        "Musegg Wall: free climbable medieval city wall just above the old town — climb the Männli tower for the best open-terrace view over Lucerne and the lake",
+                        "Esel + Oberhaupt viewpoints at Pilatus Kulm: most visitors never leave the main deck — these side climbs give better photos with far fewer people",
+                        "Dragon Ride cable car: treat the 4-min crossing over the rocky ravines as the experience itself, not just transport — look down"
                     ]
                 },
 
