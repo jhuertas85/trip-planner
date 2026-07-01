@@ -856,29 +856,29 @@
                 <div class="calc-body" id="calcBody">
                     <div class="calc-row">
                         <div class="calc-label">
-                            <div class="calc-label-code" id="calcCode0"></div>
-                            <div class="calc-label-name" id="calcName0"></div>
-                        </div>
-                        <input class="calc-input" id="calcInput0" type="number" placeholder="0" oninput="calcConvert(0)">
-                    </div>
-                    <div class="calc-row">
-                        <div class="calc-label">
                             <div class="calc-label-code">AED</div>
                             <div class="calc-label-name">UAE Dirham</div>
                         </div>
-                        <input class="calc-input" id="calcInput1" type="number" placeholder="0" oninput="calcConvert(1)">
+                        <input class="calc-input" id="calcInput0" type="number" placeholder="0" oninput="calcConvert(0)">
                     </div>
                     <div class="calc-row">
                         <div class="calc-label">
                             <div class="calc-label-code">USD</div>
                             <div class="calc-label-name">US Dollar</div>
                         </div>
-                        <input class="calc-input" id="calcInput2" type="number" placeholder="0" oninput="calcConvert(2)">
+                        <input class="calc-input" id="calcInput1" type="number" placeholder="0" oninput="calcConvert(1)">
                     </div>
                     <div class="calc-row">
                         <div class="calc-label">
-                            <div class="calc-label-code">CHF</div>
-                            <div class="calc-label-name">Swiss Franc</div>
+                            <div class="calc-label-code">EUR</div>
+                            <div class="calc-label-name">Euro</div>
+                        </div>
+                        <input class="calc-input" id="calcInput2" type="number" placeholder="0" oninput="calcConvert(2)">
+                    </div>
+                    <div class="calc-row" id="calcRow3" style="display:none">
+                        <div class="calc-label">
+                            <div class="calc-label-code" id="calcCode3"></div>
+                            <div class="calc-label-name" id="calcName3"></div>
                         </div>
                         <input class="calc-input" id="calcInput3" type="number" placeholder="0" oninput="calcConvert(3)">
                     </div>
@@ -1647,7 +1647,7 @@
             try {
                 const res = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json');
                 const json = await res.json();
-                calcRates = { usd: 1, aed: json.usd.aed };
+                calcRates = { usd: 1, aed: json.usd.aed, eur: json.usd.eur };
                 Object.values(DAY_CURRENCY).forEach(c => {
                     const k = c.code.toLowerCase();
                     if (json.usd[k]) calcRates[k] = json.usd[k];
@@ -1666,17 +1666,30 @@
             const todayDay = getTodayTripDay();
             const defaultCurrency = Object.values(DAY_CURRENCY)[0] || { code: 'EUR', name: 'Euro', symbol: '€' };
             calcPrimary = (todayDay && DAY_CURRENCY[todayDay]) ? DAY_CURRENCY[todayDay] : defaultCurrency;
-            document.getElementById('calcCode0').textContent = calcPrimary.code;
-            document.getElementById('calcName0').textContent = calcPrimary.name;
-            document.getElementById('calcHeaderSub').textContent = calcPrimary.code + ' · AED · USD · CHF';
+            const baseCodes = ['AED', 'USD', 'EUR'];
+            const showLocal = !baseCodes.includes(calcPrimary.code);
+            const row3 = document.getElementById('calcRow3');
+            if (showLocal) {
+                document.getElementById('calcCode3').textContent = calcPrimary.code;
+                document.getElementById('calcName3').textContent = calcPrimary.name;
+                row3.style.display = '';
+                document.getElementById('calcHeaderSub').textContent = 'AED · USD · EUR · ' + calcPrimary.code;
+            } else {
+                row3.style.display = 'none';
+                document.getElementById('calcHeaderSub').textContent = 'AED · USD · EUR';
+            }
             const ts = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             document.getElementById('calcRatesNote').textContent = `Rates updated ${ts}`;
         }
 
         function calcConvert(sourceIdx) {
             if (!calcRates) return;
-            const inputs = [document.getElementById('calcInput0'), document.getElementById('calcInput1'), document.getElementById('calcInput2'), document.getElementById('calcInput3')];
-            const codes = [calcPrimary.code.toLowerCase(), 'aed', 'usd', 'chf'];
+            const baseCodes = ['AED', 'USD', 'EUR'];
+            const showLocal = !baseCodes.includes(calcPrimary.code);
+            const allInputs = [document.getElementById('calcInput0'), document.getElementById('calcInput1'), document.getElementById('calcInput2'), document.getElementById('calcInput3')];
+            const allCodes = ['aed', 'usd', 'eur', calcPrimary.code.toLowerCase()];
+            const inputs = showLocal ? allInputs : allInputs.slice(0, 3);
+            const codes = showLocal ? allCodes : allCodes.slice(0, 3);
             const val = parseFloat(inputs[sourceIdx].value);
             if (isNaN(val)) { inputs.forEach((inp, i) => { if (i !== sourceIdx) inp.value = ''; }); return; }
             const sourceRate = calcRates[codes[sourceIdx]] || 1;
