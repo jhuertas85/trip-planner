@@ -585,42 +585,56 @@
                     ]
                 },
 
-                // ── DAY 7 ── Jul 3 Fri ── Interlaken full day ──
+                // ── DAY 7 ── Jul 3 Fri ── Interlaken + Paragliding ──
                 {
                     dayNumber: 7, date: "Jul 3", dayOfWeek: "Fri",
-                    title: "Interlaken — Full Day", location: "Bern → Interlaken (day trip)",
+                    title: "Interlaken — Paragliding Day", location: "Bern → Interlaken (day trip)",
                     backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
                     flight: null,
-                    hotel: { name: "Prize by Radisson Bern City", status: "confirmed", note: "Last Bern night — check out tomorrow Jul 4. Pack tonight.", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Prize+by+Radisson+Bern+City+Viktoriastrasse" },
-                    drive: { from: "Bern", to: "Interlaken Ost", duration: "~50 min direct", distance: "Depart ~09:00 · Swiss Travel Pass ✓" },
+                    hotel: { name: "Prize by Radisson Bern City", status: "confirmed", note: "Last Bern night — check out tomorrow Jul 4. ⚠️ Pack tonight.", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Prize+by+Radisson+Bern+City+Viktoriastrasse" },
+                    drive: { from: "Bern HB", to: "Interlaken Ost", duration: "~50 min direct", distance: "Depart 08:10 · Swiss Travel Pass ✓ · trains every 30 min" },
                     activities: [
-                        { time: "09:00",    text: "🚆 Train Bern → Interlaken Ost (~50 min direct)",        subNote: 'Swiss Travel Pass ✓ No ticket needed. Depart Bern HB ~09:00. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false, mapsUrl: "maps.google.com/?q=Interlaken+Ost+Station" },
-                        { time: "10:00",    text: "Harder Kulm funicular — summit 1,322m",                  subNote: "Funicular departs 5 min walk from Interlaken Ost. ~CHF 16 return with Swiss Travel Pass (50% off). The Two Lakes Bridge platform gives a panoramic view of Lakes Brienz and Thun with the Alps behind. Book online — sells out on clear Fridays.", needsBooking: true, mapsUrl: "maps.google.com/?q=Harder+Kulm+Interlaken" },
-                        { time: "12:00",    text: "Lunch in Interlaken with lake views",                    subNote: "Restaurant Schuh on the main street has a terrace facing the Alps — Swiss classics, CHF 25-35. Or grab something cheaper at the Coop near Interlaken Ost.", needsBooking: false, mapsUrl: "maps.google.com/?q=Restaurant+Schuh+Interlaken" },
-                        { time: "13:30",    text: "Lake Thun shoreline walk",                               subNote: "5 min walk west from Interlaken Ost. Turquoise glacial water, Alps reflected in the surface. Walk along the shore for the best views.", needsBooking: false, mapsUrl: "maps.google.com/?q=Lake+Thun+Interlaken" },
-                        { time: "14:30",    text: "Lake Brienz shoreline",                                  subNote: "East side of Interlaken — equally stunning, fewer tourists. Clear view towards the Bernese Oberland peaks. The contrast between the two lakes is striking.", needsBooking: false, mapsUrl: "maps.google.com/?q=Lake+Brienz+Interlaken" },
-                        { time: "16:00",    text: "🚆 Train back Interlaken → Bern (~50 min)",              subNote: 'Swiss Travel Pass ✓ No ticket needed. Frequent service. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false, mapsUrl: "maps.google.com/?q=Bern+Hauptbahnhof" },
-                        { time: "17:00",    text: "Nydeggbrücke — sunset over Bern's Altstadt",             subNote: "10 min walk from Bern HB. The bridge gives the best single view in the city — the medieval Altstadt appears to float on a river peninsula. Timed right, the light is exceptional.", needsBooking: false, mapsUrl: "maps.google.com/?q=Nydeggbrucke+Bern" },
-                        { time: "19:00",    text: "🍺 Evening drink with a view — Rosengarten terrace",     subNote: "On the rose garden hill above Bern, 10 min walk from Nydeggbrücke. Panoramic view over the city. Can eat here (Swiss-French, ~CHF 35-45, book ahead) or just drinks.", needsBooking: false, mapsUrl: "maps.google.com/?q=Restaurant+Rosengarten+Bern" }
+                        { time: "07:30",    text: "Wake up — quick breakfast at hotel",                          subNote: "Breakfast included. Eat fast — need to be at Bern HB by 08:00.", needsBooking: false },
+                        { time: "08:10",    text: "🚆 Train Bern HB → Interlaken Ost (~50 min)",                subNote: 'Swiss Travel Pass ✓ Trains every 30 min — catch the 08:10 or next before 08:30. 🪟 Sit RIGHT side — last 20 min runs along Lake Thun with stunning mountain reflections. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false, mapsUrl: "maps.google.com/?q=Interlaken+Ost+Station" },
+                        { time: "09:05",    text: "Walk to Skywings desk — Höheweg 56",                         subNote: "8 min straight down the main boulevard from Interlaken Ost. Meeting point is at the landing area in front of Restaurant Schuh.", needsBooking: false, mapsUrl: "maps.google.com/?q=Howheweg+56+Interlaken" },
+                        { time: "09:15",    text: "✅ Check in at Skywings Paragliding desk",                   subNote: "⚠️ Arrive by 09:15 — activity starts 09:20 sharp. Already booked via GetYourGuide ✅. Check weather tonight: if heavy sustained rain forecast for Jul 3, cancel before midnight for full refund.", needsBooking: false, mapsUrl: "maps.google.com/?q=Skywings+Paragliding+Interlaken" },
+                        { time: "09:20",    text: "🚌 Bus to Beatenberg launch site (~20 min)",                 subNote: "They transport you — no need to find the launch site yourself.", needsBooking: false, mapsUrl: "maps.google.com/?q=Beatenberg+Switzerland" },
+                        { time: "10:00",    text: "🪂 TAKE OFF — Tandem Paragliding over the Alps",             subNote: "Views: Lake Thun and Lake Brienz simultaneously below you, Eiger, Mönch and Jungfrau directly ahead. Flight ~15-20 min. Arguably the most spectacular paragliding scenery in Europe.", needsBooking: false, mapsUrl: "maps.google.com/?q=Beatenberg+Paragliding+Launch" },
+                        { time: "10:20",    text: "Land in Höhematte Park — central Interlaken",                subNote: "Sit on the grass and watch other paragliders come in to land. Constant stream of colorful gliders descending. From here you see the entire geography at once: lakes on both sides, Alps to the south.", needsBooking: false, mapsUrl: "maps.google.com/?q=Hohematte+Park+Interlaken" },
+                        { time: "11:00",    text: "Höheweg boulevard + Japanese Garden",                        subNote: "HIDDEN GEM: A traditional Japanese garden with stone lanterns and koi carp pond in the middle of the Swiss Alps — part of a sister-city relationship with Otsu City, Japan. Completely surreal. On Höheweg toward Interlaken West.", needsBooking: false, mapsUrl: "maps.google.com/?q=Japanese+Garden+Interlaken" },
+                        { time: "11:30",    text: "Unterseen Old Town",                                         subNote: "HIDDEN GEM. 5 min across the river from Interlaken West. Medieval church tower framing the Jungfrau behind it — one of Switzerland's most beautiful spots, and almost no tourists ever in the photo.", needsBooking: false, mapsUrl: "maps.google.com/?q=Unterseen+Old+Town+Interlaken" },
+                        { time: "12:00",    text: "🍽️ Lunch — Restaurant Schuh or Gasthof Hirschen",           subNote: "Schuh: right at the landing area (Höheweg 56), classic Swiss menu, good terrace. Hirschen in Unterseen: more local, significantly cheaper, no reservation needed — worth it if you want to avoid the tourist strip.", needsBooking: false, mapsUrl: "maps.google.com/?q=Restaurant+Schuh+Interlaken" },
+                        { time: "13:15",    text: "Walk to Harder Kulm funicular station (~10 min)",            subNote: "From Interlaken Ost. Buy ticket at the station counter — show Swiss Travel Pass for 50% off (~CHF 19 return). No advance booking needed.", needsBooking: false, mapsUrl: "maps.google.com/?q=Harder+Kulm+Funicular+Interlaken" },
+                        { time: "13:35",    text: "🚠 Funicular up to Harder Kulm — 1,322m summit",            subNote: "~8 min up, steep and fast. Two Lakes Bridge platform: both Lake Thun and Lake Brienz visible simultaneously — the same lakes you flew over this morning, completely different perspective.", needsBooking: false, mapsUrl: "maps.google.com/?q=Harder+Kulm+Interlaken" },
+                        { time: "15:00",    text: "Funicular back down — optional: Lake Brienz walk",           subNote: "OPTION A (energy good): Walk east from Interlaken Ost along Lake Brienz shore — turquoise glacial water, almost unnaturally vivid, almost no crowds. OPTION B (rainy): St. Beatus Caves above Lake Thun, ~15 min by bus, CHF 20 — dragon legends, stalactites, underground waterfalls. OPTION C (low energy): find a lakeside bench and sit.", needsBooking: false, mapsUrl: "maps.google.com/?q=Lake+Brienz+Interlaken" },
+                        { time: "17:10",    text: "🚆 Train Interlaken Ost → Bern HB (~50 min)",               subNote: 'Swiss Travel Pass ✓ Trains every 30 min. 🪟 Sit LEFT side now — same Lake Thun scenery with golden afternoon light on the water. <a href="https://www.sbb.ch/en/timetable.html" target="_blank" class="activity-maps-link">🚆 sbb.ch</a>', needsBooking: false, mapsUrl: "maps.google.com/?q=Bern+Hauptbahnhof" },
+                        { time: "18:30",    text: "🍽️ Last Swiss dinner — Restaurant Lötschberg",              subNote: "Zeughausgasse 16, Bern old town. Classic Bernese cuisine, vaulted stone interior, local crowd, excellent cheese and wine. ~CHF 35-45. Last night in Switzerland — worth a proper sit-down.", needsBooking: true, mapsUrl: "maps.google.com/?q=Restaurant+Lotschberg+Bern" }
                     ],
                     meals: {
-                        breakfast: { status: "included", note: "Hotel breakfast before heading out", restaurants: [] },
-                        lunch:     { status: "options",  note: "Lunch in Interlaken with lake views", restaurants: [
-                            { name: "Restaurant Schuh", desc: "Swiss classics and terrace facing the Alps. CHF 25-35.", rating: "4.3★", mapsUrl: "maps.google.com/?q=Restaurant+Schuh+Interlaken" }
+                        breakfast: { status: "included", note: "Quick hotel breakfast at 07:30 — need to leave by 08:00", restaurants: [] },
+                        lunch:     { status: "options",  note: "Restaurant Schuh (tourist-friendly, terrace) or Gasthof Hirschen in Unterseen (local, cheaper)", restaurants: [
+                            { name: "Restaurant Schuh", desc: "Right at the paragliding landing area. Classic Swiss menu — Älplermagronen, Rösti, fondue. Good terrace. CHF 25-35.", rating: "4.3★", mapsUrl: "maps.google.com/?q=Restaurant+Schuh+Interlaken" },
+                            { name: "Gasthof Hirschen — Unterseen", desc: "Authentic Bernese cuisine, almost entirely locals, significantly cheaper. Walk-in, no reservation needed. CHF 18-25.", rating: "4.4★", mapsUrl: "maps.google.com/?q=Gasthof+Hirschen+Unterseen+Interlaken" }
                         ]},
-                        dinner:    { status: "options",  note: "Rosengarten terrace drinks or full dinner — book if eating", restaurants: [
-                            { name: "Restaurant Rosengarten", desc: "Rose garden hill above Bern, panoramic city views, Swiss-French cuisine. ~CHF 35-45. Reserve if eating.", rating: "4.4★", mapsUrl: "maps.google.com/?q=Restaurant+Rosengarten+Bern" }
+                        dinner:    { status: "options",  note: "Last Swiss dinner — Restaurant Lötschberg in Bern, classic Bernese cuisine", restaurants: [
+                            { name: "Restaurant Lötschberg", desc: "Zeughausgasse 16, Bern. Vaulted stone interior, local crowd, excellent cheese and wine. ~CHF 35-45. Book ahead.", rating: "4.5★", mapsUrl: "maps.google.com/?q=Restaurant+Lotschberg+Bern" },
+                            { name: "Restaurant Harmonie", desc: "Closer to station, simpler, affordable Bernese comfort food. ~CHF 20-30. No reservation needed.", rating: "4.2★", mapsUrl: "maps.google.com/?q=Restaurant+Harmonie+Bern" }
                         ]}
                     },
-                    route: "www.google.com/maps/dir/Prize+by+Radisson+Bern+City/Bern+HB/Interlaken+Ost+Station/Harder+Kulm+Interlaken/Nydeggbrucke+Bern/Restaurant+Rosengarten+Bern",
+                    route: "www.google.com/maps/dir/Interlaken+Ost/Skywings+Paragliding+Interlaken/Hohematte+Park+Interlaken/Unterseen+Old+Town/Harder+Kulm+Interlaken/Bern+Hauptbahnhof",
                     warnings: [
-                        "⚠️ Book Harder Kulm funicular online — sells out on fair-weather Fridays",
-                        "⚠️ Reserve Restaurant Rosengarten tonight — popular and worth it",
-                        "⚠️ Pack tonight — checkout tomorrow 09:15, train Bern HB 09:32 → GVA 11:19"
+                        "⚠️ Paragliding — arrive at Höheweg 56 by 09:15. Activity starts 09:20 sharp. Already booked ✅",
+                        "⚠️ Check weather tonight — if heavy sustained rain forecast for Jul 3, cancel before midnight for full refund",
+                        "Harder Kulm: no booking needed, buy at counter, Swiss Travel Pass 50% off (~CHF 19 return)",
+                        "⚠️ Pack tonight — checkout tomorrow 09:15, train Bern HB 09:32 → GVA 11:19",
+                        "Last train Interlaken Ost → Bern runs well past 20:00 — no stress on return timing"
                     ],
                     gems: [
-                        "Aare river bend from Nydeggbrücke: Bern's Altstadt floats on a river peninsula — one of the best urban views in Europe",
-                        "Harder Kulm Two Lakes Bridge: standing between the Alps and two glacial lakes at 1,322m"
+                        "Unterseen Old Town: medieval church tower framing the Jungfrau — one of Switzerland's most beautiful and least-visited spots. Almost no tourists, ever.",
+                        "Japanese Garden (Höhematte): a full traditional Japanese garden with koi pond in the Swiss Alps — created as part of a sister-city relationship with Otsu City, Japan. Genuinely surreal.",
+                        "Höhematte Park after landing: sit on the grass and watch other paragliders come in — free, mesmerising, Jungfrau as backdrop",
+                        "St. Beatus Caves (if rainy): dragon caves above Lake Thun — ties directly into the Pilatus dragon mythology from the day before",
+                        "Lake Brienz shore walk: most tourists boat on the lake, almost nobody walks the near shore — the turquoise glacial colour up close is more vivid than any photo"
                     ]
                 },
 
