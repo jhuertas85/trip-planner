@@ -1,0 +1,15 @@
+const CACHE = 'ch-trip-v1';
+
+self.addEventListener('install', e => {
+  e.waitUntil(
+    caches.open(CACHE).then(c => c.addAll(['./', './index.html', './manifest.json']))
+  );
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', () => self.clients.claim());
+
+// Network-first: always serve fresh content, fall back to cache only when offline
+self.addEventListener('fetch', e => {
+  e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
+});
