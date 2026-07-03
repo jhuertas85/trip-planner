@@ -1,0 +1,11 @@
+{
+  "name": "JC's Trips",
+  "short_name": "JC's Trips",
+  "display": "standalone",
+  "start_url": "./",
+  "background_color": "#1a1a1a",
+  "theme_color": "#C9966A",
+  "icons": [
+    { "src": "./favicon.png", "sizes": "any", "type": "image/png" }
+  ]
+}
