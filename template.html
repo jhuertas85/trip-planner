@@ -191,6 +191,12 @@
             border-color: #8A3A3A;
         }
 
+        .day-tab.today:not(.active) {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            background: rgba(201,150,106,0.08);
+        }
+
         /* MAIN CONTENT */
         main {
             padding: 24px 0;
@@ -1173,14 +1179,22 @@
         }
         .activity-maps-link:hover { opacity: 1; }
 
-        .wx-condition-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 16px 0;
-        }
-        .wx-condition-icon { font-size: 28px; line-height: 1; }
+        .wx-condition-row { display: flex; align-items: center; gap: 10px; }
+        .wx-condition-icon { font-size: 22px; }
         .wx-condition-label { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+        .wx-rain-alert { border-radius: 4px; padding: 8px 12px; margin-top: 8px; font-size: 12px; }
+        .wx-rain-light { background: rgba(91,155,213,0.12); border-left: 3px solid #5B9BD5; color: #7FBFD4; }
+        .wx-rain-heavy { background: rgba(123,104,238,0.12); border-left: 3px solid #7B68EE; color: #B39DDB; }
+        .wx-storm { background: rgba(200,50,50,0.15); border-left: 3px solid #E74C3C; color: #FF8A80; }
+        .wx-prob-row { display: flex; gap: 6px; margin-top: 10px; }
+        .wx-prob-item { flex: 1; text-align: center; font-size: 11px; background: var(--bg-tertiary); border-radius: 4px; padding: 6px 4px; color: var(--text-secondary); }
+        .wx-prob-val { font-weight: 700; font-size: 13px; display: block; margin-bottom: 2px; }
+        .wx-prob-val.rain { color: #7FBFD4; }
+        .wx-prob-val.heavy { color: #B39DDB; }
+        .wx-prob-val.storm { color: #FF8A80; }
+        .section-calc { background-color: rgba(50,40,20,0.2); }
+        .section-calc .section-header { border-left: 3px solid var(--accent-gold); }
+        body.light-mode .section-calc { background-color: rgba(201,150,106,0.06); }
 
         .wx-preview {
             font-size: 12px;
@@ -1191,39 +1205,6 @@
         .section-header:not(.collapsed) .wx-preview { display: none; }
 
         /* CURRENCY CALCULATOR */
-        .calc-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            padding: 14px 20px;
-            margin: -20px -20px 0 -20px;
-            border-radius: 8px 8px 0 0;
-            user-select: none;
-        }
-        .calc-header:hover { background-color: rgba(201,150,106,0.07); }
-        .calc-header-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--accent-gold);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .calc-header-sub {
-            font-size: 11px;
-            color: var(--text-secondary);
-            font-weight: 400;
-        }
-        .calc-chevron { font-size: 11px; color: var(--text-secondary); transition: transform 0.25s ease; }
-        .calc-body {
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.25s ease;
-            opacity: 0;
-            padding-top: 0;
-        }
-        .calc-body.open { max-height: 300px; opacity: 1; padding-top: 16px; }
         .calc-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
         .calc-row:last-of-type { margin-bottom: 0; }
         .calc-label { width: 110px; flex-shrink: 0; }
@@ -1505,39 +1486,45 @@
         <div class="day-view active" id="overview">
 
             <!-- Currency Calculator — collapsed by default -->
-            <div class="card" id="currencyCard">
-                <div class="calc-header" onclick="toggleCurrencyCalc()">
-                    <div class="calc-header-title">
-                        💱 Currency Calculator
-                        <span class="calc-header-sub" id="calcHeaderSub"></span>
-                    </div>
-                    <span class="calc-chevron" id="calcChevron">▶</span>
+            <div class="collapsible-section section-calc" id="overviewCalcSection">
+                <div class="section-header collapsed" id="overviewCalcHeader">
+                    <h3>💱 Currency <span id="calcHeaderSub" style="font-size:11px;font-weight:400;color:var(--text-secondary);margin-left:4px;"></span></h3>
+                    <div class="chevron"></div>
                 </div>
-                <div class="calc-body" id="calcBody">
-                    <div class="calc-row">
-                        <div class="calc-label">
-                            <div class="calc-label-code" id="calcCode0"></div>
-                            <div class="calc-label-name" id="calcName0"></div>
+                <div class="section-content collapsed" id="calcBody">
+                    <div style="padding:16px;">
+                        <div class="calc-row">
+                            <div class="calc-label">
+                                <div class="calc-label-code">AED</div>
+                                <div class="calc-label-name">UAE Dirham</div>
+                            </div>
+                            <input class="calc-input" id="calcInput0" type="number" placeholder="0" oninput="calcConvert(0)">
                         </div>
-                        <input class="calc-input" id="calcInput0" type="number" placeholder="0" oninput="calcConvert(0)">
-                    </div>
-                    <div class="calc-row">
-                        <div class="calc-label">
-                            <div class="calc-label-code">AED</div>
-                            <div class="calc-label-name">UAE Dirham</div>
+                        <div class="calc-row">
+                            <div class="calc-label">
+                                <div class="calc-label-code">USD</div>
+                                <div class="calc-label-name">US Dollar</div>
+                            </div>
+                            <input class="calc-input" id="calcInput1" type="number" placeholder="0" oninput="calcConvert(1)">
                         </div>
-                        <input class="calc-input" id="calcInput1" type="number" placeholder="0" oninput="calcConvert(1)">
-                    </div>
-                    <div class="calc-row">
-                        <div class="calc-label">
-                            <div class="calc-label-code">USD</div>
-                            <div class="calc-label-name">US Dollar</div>
+                        <div class="calc-row">
+                            <div class="calc-label">
+                                <div class="calc-label-code">EUR</div>
+                                <div class="calc-label-name">Euro</div>
+                            </div>
+                            <input class="calc-input" id="calcInput2" type="number" placeholder="0" oninput="calcConvert(2)">
                         </div>
-                        <input class="calc-input" id="calcInput2" type="number" placeholder="0" oninput="calcConvert(2)">
-                    </div>
-                    <div class="calc-footer">
-                        <span class="calc-rates-note" id="calcRatesNote">Loading rates…</span>
-                        <button class="calc-refresh" onclick="fetchCalcRates(true)">↻ Refresh</button>
+                        <div class="calc-row" id="calcRow3" style="display:none">
+                            <div class="calc-label">
+                                <div class="calc-label-code" id="calcCode3"></div>
+                                <div class="calc-label-name" id="calcName3"></div>
+                            </div>
+                            <input class="calc-input" id="calcInput3" type="number" placeholder="0" oninput="calcConvert(3)">
+                        </div>
+                        <div class="calc-footer">
+                            <span class="calc-rates-note" id="calcRatesNote">Loading rates…</span>
+                            <button class="calc-refresh" onclick="fetchCalcRates(true)">↻ Refresh</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1812,25 +1799,19 @@
         }
 
         function renderDayTabs() {
-            const dayTabs = document.getElementById("dayTabs");
+            const todayISO = new Date().toISOString().split('T')[0];
             let tabsHTML = '<div class="day-tab active" data-view="overview" onclick="switchView(\'overview\')">Overview</div>';
-
             TRIP_DATA.days.forEach(day => {
                 const hasMissing = day.hotel.status === "missing" ||
-                                   day.meals.breakfast.status === "missing" ||
-                                   day.meals.lunch.status === "missing" ||
-                                   day.meals.dinner.status === "missing";
-
-                const className = `day-tab ${hasMissing ? 'has-missing' : ''}`;
+                    day.meals.breakfast.status === "missing" ||
+                    day.meals.lunch.status === "missing" ||
+                    day.meals.dinner.status === "missing";
+                const isToday = DAY_WEATHER[day.dayNumber]?.isoDate === todayISO;
+                const className = `day-tab ${hasMissing ? 'has-missing' : ''} ${isToday ? 'today' : ''}`.trim();
                 const datePartials = day.date.split(' ');
-                tabsHTML += `
-                    <div class="${className}" data-view="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">
-                        Day ${day.dayNumber}<br><span style="font-size:10px;opacity:0.8;">${day.dayOfWeek} ${datePartials[1] || ''} ${datePartials[0]}</span>
-                    </div>
-                `;
+                tabsHTML += `<div class="${className}" data-view="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">Day ${day.dayNumber}${isToday ? ' ·' : ''}<br><span style="font-size:10px;opacity:0.8;">${isToday ? 'Today' : (day.dayOfWeek + ' ' + (datePartials[1] || '') + ' ' + datePartials[0])}</span></div>`;
             });
-
-            dayTabs.innerHTML = tabsHTML;
+            document.getElementById("dayTabs").innerHTML = tabsHTML;
         }
 
         function renderDayViews() {
@@ -1845,24 +1826,38 @@
         function attachCollapsibleHandlers() {
             document.querySelectorAll('.section-header').forEach(header => {
                 header.addEventListener('click', function() {
+                    const wasCollapsed = this.classList.contains('collapsed');
                     this.classList.toggle('collapsed');
                     this.nextElementSibling.classList.toggle('collapsed');
+                    if (wasCollapsed) {
+                        // Weather: refresh when opened
+                        const wxDay = this.dataset.wxDay;
+                        if (wxDay) loadWeatherWidget(parseInt(wxDay));
+                        // Per-day calc: fetch rates when opened
+                        const calcDay = this.closest('.section-calc')?.dataset?.calcDay;
+                        if (calcDay) {
+                            if (!calcRates) fetchCalcRates(false).then(() => dcUpdateNote(parseInt(calcDay)));
+                            else dcUpdateNote(parseInt(calcDay));
+                        }
+                        // Overview calc
+                        if (this.id === 'overviewCalcHeader') {
+                            if (!calcRates) fetchCalcRates(false);
+                        }
+                    }
                 });
             });
-
             document.querySelectorAll('.btn-expand-all').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const dayView = this.closest('.day-view');
-                    dayView.querySelectorAll('.section-header').forEach(h => h.classList.remove('collapsed'));
-                    dayView.querySelectorAll('.section-content').forEach(c => c.classList.remove('collapsed'));
+                    const dv = this.closest('.day-view');
+                    dv.querySelectorAll('.section-header').forEach(h => h.classList.remove('collapsed'));
+                    dv.querySelectorAll('.section-content').forEach(c => c.classList.remove('collapsed'));
                 });
             });
-
             document.querySelectorAll('.btn-collapse-all').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const dayView = this.closest('.day-view');
-                    dayView.querySelectorAll('.section-header').forEach(h => h.classList.add('collapsed'));
-                    dayView.querySelectorAll('.section-content').forEach(c => c.classList.add('collapsed'));
+                    const dv = this.closest('.day-view');
+                    dv.querySelectorAll('.section-header').forEach(h => h.classList.add('collapsed'));
+                    dv.querySelectorAll('.section-content').forEach(c => c.classList.add('collapsed'));
                 });
             });
         }
@@ -1880,21 +1875,22 @@
                 </div>
             `;
 
-            // Weather — first section, collapsed by default
+            // Currency — collapsed by default
+            html += renderCalcSection(day.dayNumber);
+
+            // Weather — collapsed by default
             if (DAY_WEATHER[day.dayNumber]) {
-                html += `
-                    <div class="collapsible-section">
-                        <div class="section-header collapsed" id="wx-header-${day.dayNumber}">
-                            <h3>🌤 Weather<span class="wx-preview" id="wx-preview-${day.dayNumber}"></span></h3>
-                            <div class="chevron"></div>
-                        </div>
-                        <div class="section-content section-weather collapsed">
-                            <div id="wx-${day.dayNumber}" style="padding: 12px 16px;">
-                                <div class="weather-loading">Loading forecast…</div>
-                            </div>
+                html += `<div class="collapsible-section">
+                    <div class="section-header collapsed" id="wx-header-${day.dayNumber}" data-wx-day="${day.dayNumber}">
+                        <h3>🌤 Weather<span class="wx-preview" id="wx-preview-${day.dayNumber}"></span></h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content section-weather collapsed">
+                        <div id="wx-${day.dayNumber}" style="padding: 12px 16px;">
+                            <div class="weather-loading">Loading forecast…</div>
                         </div>
                     </div>
-                `;
+                </div>`;
             }
 
             // Flight section on flight days
@@ -1987,18 +1983,15 @@
             if (dc) {
                 const total = dc.hotel + dc.activities + dc.food + (dc.other || 0);
                 const parts = [];
-                if (dc.hotel)      parts.push(`🏨 $${dc.hotel}`);
-                if (dc.activities) parts.push(`🗺️ $${dc.activities}`);
-                if (dc.food)       parts.push(`🍽️ $${dc.food}`);
-                if (dc.other)      parts.push(`⛽ $${dc.other}`);
-                const flightNote = day.flight ? ' · excl. flights' : '';
-                html += `
-                    <div class="day-cost-bar">
-                        <span class="day-cost-label">💰 Est. group cost${flightNote}</span>
-                        <span class="day-cost-items">${parts.join(' · ')}</span>
-                        <span class="day-cost-total">~$${total}</span>
-                    </div>
-                `;
+                if (dc.hotel)      parts.push(`🏨 AED ${dc.hotel}`);
+                if (dc.activities) parts.push(`🗺️ AED ${dc.activities}`);
+                if (dc.food)       parts.push(`🍽️ AED ${dc.food}`);
+                if (dc.other)      parts.push(`⛽ AED ${dc.other}`);
+                html += `<div class="day-cost-bar">
+                    <span class="day-cost-label">💰 Est. cost${day.flight ? ' · excl. flights' : ''}</span>
+                    <span class="day-cost-items">${parts.join(' · ')}</span>
+                    <span class="day-cost-total">~AED ${total}</span>
+                </div>`;
             }
 
             return html;
@@ -2077,47 +2070,35 @@
 
         function renderHotelCard(day) {
             let html = `<div class="collapsible-section">
-                <div class="section-header">
-                    <h3>Hotel</h3>
-                    <div class="chevron"></div>
-                </div>
-                <div class="section-content section-hotel">
-                    <div style="padding: 16px;">`;
+                <div class="section-header"><h3>🏨 Hotel</h3><div class="chevron"></div></div>
+                <div class="section-content section-hotel"><div style="padding:16px;">`;
 
-            const statusData = STATUS_STYLES[day.hotel.status];
-            const hotelReady = day.hotel.status === 'confirmed' ? 'ready' : day.hotel.status === 'missing' ? 'missing' : 'need-booking';
-
-            html += `
-                <div class="hotel-info">
-                    <div class="hotel-name">${day.hotel.name}</div>
-                    <div class="hotel-status-badges">
-                        <span class="badge ${hotelReady === 'ready' ? 'ready' : 'missing'}">Hotel: ${hotelReady === 'ready' ? 'Ready' : 'Missing'}</span>
-                    </div>
+            if (day.hotel.status === 'missing') {
+                html += `<div class="hotel-info" style="border-left:4px solid #8A3A3A;">
+                    <div class="hotel-name"><span class="badge missing" style="margin-right:8px;font-size:11px;">Missing</span>No hotel booked</div>
                     ${day.hotel.note ? `<div class="hotel-note">${day.hotel.note}</div>` : ""}
-                    ${day.hotel.mapsUrl ? `
-                        <div class="hotel-buttons">
-                            <a href="https://${day.hotel.mapsUrl}" target="_blank" class="btn-maps">Maps</a>
-                        </div>
-                    ` : ""}
-                </div>
-            `;
+                </div>`;
+            } else {
+                const pin = day.hotel.mapsUrl ? ` <a href="https://${day.hotel.mapsUrl}" target="_blank" class="activity-maps-link" title="Maps">📍</a>` : '';
+                html += `<div class="hotel-info">
+                    <div class="hotel-name">${day.hotel.name}${pin}</div>
+                    ${day.hotel.note ? `<div class="hotel-note">${day.hotel.note}</div>` : ""}
+                </div>`;
+            }
 
             if (day.hotel.altHotel) {
-                const altReady = day.hotel.altHotel.status === 'confirmed' ? 'ready' : day.hotel.altHotel.status === 'missing' ? 'missing' : 'need-booking';
-                html += `
-                    <div class="hotel-info" style="border-left: 4px solid #9A7A30; margin-top: 12px;">
-                        <div class="hotel-name">${day.hotel.altHotel.name}</div>
-                        <div class="hotel-status-badges">
-                            <span class="badge ${altReady === 'ready' ? 'ready' : 'need-booking'}">Hotel: ${altReady === 'ready' ? 'Ready' : 'Pending'}</span>
-                        </div>
+                if (day.hotel.altHotel.status === 'missing') {
+                    html += `<div class="hotel-info" style="border-left:4px solid #9A7A30;margin-top:12px;">
+                        <div class="hotel-name"><span class="badge pending" style="margin-right:8px;font-size:11px;">Pending</span>${day.hotel.altHotel.name}</div>
                         ${day.hotel.altHotel.note ? `<div class="hotel-note">${day.hotel.altHotel.note}</div>` : ""}
-                        ${day.hotel.altHotel.mapsUrl ? `
-                            <div class="hotel-buttons">
-                                <a href="https://${day.hotel.altHotel.mapsUrl}" target="_blank" class="btn-maps">Maps</a>
-                            </div>
-                        ` : ""}
-                    </div>
-                `;
+                    </div>`;
+                } else {
+                    const altPin = day.hotel.altHotel.mapsUrl ? ` <a href="https://${day.hotel.altHotel.mapsUrl}" target="_blank" class="activity-maps-link" title="Maps">📍</a>` : '';
+                    html += `<div class="hotel-info" style="border-left:4px solid #9A7A30;margin-top:12px;">
+                        <div class="hotel-name">${day.hotel.altHotel.name}${altPin}</div>
+                        ${day.hotel.altHotel.note ? `<div class="hotel-note">${day.hotel.altHotel.note}</div>` : ""}
+                    </div>`;
+                }
             }
 
             html += `</div></div></div>`;
@@ -2241,15 +2222,15 @@
                                 <div>${r.cat}</div>
                                 <div class="budget-note">${r.note}</div>
                             </td>
-                            <td class="budget-amount">$${r.amount.toLocaleString()}</td>
+                            <td class="budget-amount">AED ${r.amount.toLocaleString()}</td>
                         </tr>
                     `).join('')}
                     <tr class="budget-total-row">
                         <td>Total · ${numPeople} ${numPeople === 1 ? 'person' : 'people'}</td>
-                        <td class="budget-amount">~$${total.toLocaleString()}</td>
+                        <td class="budget-amount">~AED ${total.toLocaleString()}</td>
                     </tr>
                 </table>
-                <div class="budget-perperson">~$${pp.toLocaleString()} per person</div>
+                <div class="budget-perperson">~AED ${pp.toLocaleString()} per person</div>
                 <div class="budget-disclaimer">${COST_DATA.disclaimer}</div>
             `;
         }
@@ -2259,45 +2240,55 @@
         // Populate DAY_WEATHER above with lat/lon per day number
         // ============================================================
 
-        const WX_CACHE_TTL = 3 * 60 * 60 * 1000; // 3 hours
+        const WX_CACHE_TTL = 3 * 60 * 60 * 1000;
+        const WX_CACHE_TTL_RECENT = 30 * 60 * 1000;
 
-        async function fetchWeather(dayNumber) {
+        async function fetchWeather(dayNumber, force) {
             const info = DAY_WEATHER[dayNumber];
             if (!info) return null;
             const cacheKey = `wx_${info.isoDate}_${info.lat}`;
+            const todayStr = new Date().toISOString().split('T')[0];
+            const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+            const dayBeforeYesterday = new Date(Date.now() - 2*86400000).toISOString().split('T')[0];
+            const isRecent = (info.isoDate >= dayBeforeYesterday && info.isoDate <= todayStr);
+            const ttl = isRecent ? WX_CACHE_TTL_RECENT : WX_CACHE_TTL;
+            if (!force) {
+                try {
+                    const cached = localStorage.getItem(cacheKey);
+                    if (cached) { const { d, ts } = JSON.parse(cached); if (Date.now() - ts < ttl) return d; }
+                } catch(e) {}
+            }
             try {
-                const cached = localStorage.getItem(cacheKey);
-                if (cached) {
-                    const { d, ts } = JSON.parse(cached);
-                    if (Date.now() - ts < WX_CACHE_TTL) return d;
-                }
-            } catch(e) {}
-            try {
-                const url = `https://api.open-meteo.com/v1/forecast?latitude=${info.lat}&longitude=${info.lon}&hourly=temperature_2m,weathercode&daily=sunrise,sunset&timezone=auto&start_date=${info.isoDate}&end_date=${info.isoDate}`;
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${info.lat}&longitude=${info.lon}&hourly=temperature_2m,weathercode,precipitation_probability&daily=sunrise,sunset&timezone=auto&start_date=${info.isoDate}&end_date=${info.isoDate}`;
                 const resp = await fetch(url);
                 if (!resp.ok) return null;
                 const json = await resp.json();
-                const times = json.hourly?.time || [];
-                const temps = json.hourly?.temperature_2m || [];
+                const times = json.hourly?.time || [], temps = json.hourly?.temperature_2m || [];
                 const codes = json.hourly?.weathercode || [];
-                const getT = h => {
-                    const idx = times.indexOf(`${info.isoDate}T${String(h).padStart(2,'0')}:00`);
-                    return idx !== -1 ? temps[idx] : null;
-                };
-                const getC = h => {
-                    const idx = times.indexOf(`${info.isoDate}T${String(h).padStart(2,'0')}:00`);
-                    return idx !== -1 ? codes[idx] : null;
-                };
-                const todayStr = new Date().toISOString().split('T')[0];
+                const pp = json.hourly?.precipitation_probability || [];
+                const getT  = h => { const idx = times.indexOf(`${info.isoDate}T${String(h).padStart(2,'0')}:00`); return idx !== -1 ? temps[idx] : null; };
+                const getC  = h => { const idx = times.indexOf(`${info.isoDate}T${String(h).padStart(2,'0')}:00`); return idx !== -1 ? codes[idx] : null; };
+                const getPP = h => { const idx = times.indexOf(`${info.isoDate}T${String(h).padStart(2,'0')}:00`); return idx !== -1 ? (pp[idx] ?? null) : null; };
                 const nowHour = new Date().getHours();
                 const isToday = info.isoDate === todayStr;
+                const allPP = times.map((t, i) => t.startsWith(info.isoDate) ? (pp[i] ?? 0) : 0);
+                const maxPP = allPP.length ? Math.max(...allPP) : 0;
+                const rainHours = times.reduce((acc, t, i) => {
+                    if (t.startsWith(info.isoDate) && (pp[i] ?? 0) >= 30) {
+                        const h = parseInt(t.split('T')[1]);
+                        acc.push({ h, pp: pp[i], code: codes[i] ?? 0 });
+                    }
+                    return acc;
+                }, []);
                 const d = {
-                    sunrise: (json.daily?.sunrise?.[0] || '').split('T')[1] || null,
-                    sunset:  (json.daily?.sunset?.[0]  || '').split('T')[1] || null,
+                    sunrise: (json.daily?.sunrise?.[0]||'').split('T')[1]||null,
+                    sunset:  (json.daily?.sunset?.[0] ||'').split('T')[1]||null,
                     t8: getT(8), t13: getT(13), t20: getT(20),
                     tNow:     isToday ? getT(nowHour) : null,
                     wcodeNow: isToday ? (getC(nowHour) ?? getC(13) ?? getC(12)) : null,
                     wcode: getC(13) ?? getC(12) ?? getC(11),
+                    pp8: getPP(8), pp13: getPP(13), pp20: getPP(20),
+                    maxPP, rainHours,
                 };
                 try { localStorage.setItem(cacheKey, JSON.stringify({ d, ts: Date.now() })); } catch(e) {}
                 return d;
@@ -2343,17 +2334,57 @@
         }
 
         function wmoIcon(code) {
-            if (code === null || code === undefined) return { emoji: '🌤️', label: 'Weather' };
-            if (code === 0)  return { emoji: '☀️',  label: 'Clear sky' };
-            if (code <= 2)   return { emoji: '🌤️', label: 'Partly cloudy' };
-            if (code === 3)  return { emoji: '☁️',  label: 'Overcast' };
-            if (code <= 48)  return { emoji: '🌫️', label: 'Fog' };
-            if (code <= 55)  return { emoji: '🌦️', label: 'Drizzle' };
-            if (code <= 65)  return { emoji: '🌧️', label: 'Rain' };
-            if (code <= 77)  return { emoji: '❄️',  label: 'Snow' };
-            if (code <= 82)  return { emoji: '🌧️', label: 'Rain showers' };
-            if (code <= 94)  return { emoji: '⛈️',  label: 'Thunderstorm' };
-            return { emoji: '⛈️', label: 'Thunderstorm with hail' };
+            if (code === null || code === undefined) return { emoji: '🌤️', label: 'Weather', severity: 0 };
+            if (code === 0)  return { emoji: '☀️',  label: 'Clear sky', severity: 0 };
+            if (code <= 2)   return { emoji: '🌤️', label: 'Partly cloudy', severity: 0 };
+            if (code === 3)  return { emoji: '☁️',  label: 'Overcast', severity: 0 };
+            if (code <= 48)  return { emoji: '🌫️', label: 'Fog', severity: 0 };
+            if (code <= 53)  return { emoji: '🌦️', label: 'Light drizzle', severity: 1 };
+            if (code <= 55)  return { emoji: '🌦️', label: 'Drizzle', severity: 1 };
+            if (code <= 61)  return { emoji: '🌧️', label: 'Light rain', severity: 1 };
+            if (code <= 63)  return { emoji: '🌧️', label: 'Moderate rain', severity: 2 };
+            if (code <= 65)  return { emoji: '🌧️', label: 'Heavy rain', severity: 3 };
+            if (code <= 67)  return { emoji: '🌧️', label: 'Freezing rain', severity: 3 };
+            if (code <= 77)  return { emoji: '❄️',  label: 'Snow', severity: 1 };
+            if (code <= 81)  return { emoji: '🌧️', label: 'Light rain showers', severity: 1 };
+            if (code <= 82)  return { emoji: '🌧️', label: 'Heavy rain showers', severity: 3 };
+            if (code <= 94)  return { emoji: '⛈️',  label: 'Thunderstorm', severity: 4 };
+            return { emoji: '⛈️', label: 'Thunderstorm + hail', severity: 4 };
+        }
+
+        function buildRainAlert(data, wx) {
+            let html = '';
+            if (!data) return html;
+            const maxPP = data.maxPP || 0;
+            const rainHours = data.rainHours || [];
+            const hasStorm = wx.severity >= 4 || rainHours.some(r => r.code >= 95);
+            const hasHeavy = wx.severity >= 3 || rainHours.some(r => r.code >= 65 && r.code < 95);
+            const hasRain  = wx.severity >= 1 || maxPP >= 30;
+            if (hasStorm) {
+                html += `<div class="wx-rain-alert wx-storm">⚡ Thunderstorm expected`;
+                if (rainHours.length) { const peak = rainHours.reduce((a, b) => b.pp > a.pp ? b : a); html += ` around ${peak.h}:00`; }
+                html += `</div>`;
+            } else if (hasHeavy || maxPP >= 60) {
+                html += `<div class="wx-rain-alert wx-rain-heavy">🌧 Heavy rain possible`;
+                if (rainHours.length) { const hrs = rainHours.map(r => `${r.h}:00`); html += ` — ${hrs[0]}${hrs.length > 1 ? '–' + hrs[hrs.length-1] : ''}`; }
+                html += ` (up to ${maxPP}%)</div>`;
+            } else if (hasRain && maxPP >= 30) {
+                html += `<div class="wx-rain-alert wx-rain-light">🌦 Rain possible`;
+                if (rainHours.length) { const hrs = rainHours.map(r => `${r.h}:00`); html += ` — ${hrs[0]}${hrs.length > 1 ? '–' + hrs[hrs.length-1] : ''}`; }
+                html += ` (up to ${maxPP}%)</div>`;
+            }
+            const pp8 = data.pp8, pp13 = data.pp13, pp20 = data.pp20;
+            if (pp8 !== null || pp13 !== null || pp20 !== null) {
+                const ppClass = p => p >= 70 ? 'storm' : p >= 40 ? 'heavy' : p >= 20 ? 'rain' : '';
+                html += `<div class="wx-prob-row">
+                    ${[{l:'8 AM',p:pp8},{l:'1 PM',p:pp13},{l:'8 PM',p:pp20}].map(x => x.p !== null ? `
+                        <div class="wx-prob-item">
+                            <span class="wx-prob-val ${ppClass(x.p)}">${x.p}%</span>
+                            <span>💧 ${x.l}</span>
+                        </div>` : '').join('')}
+                </div>`;
+            }
+            return html;
         }
 
         async function loadWeatherWidget(dayNumber) {
@@ -2366,15 +2397,16 @@
             }
             const now = new Date();
             const updated = `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
-            const chart = (data.t8 !== null && data.t13 !== null && data.t20 !== null)
-                ? weatherChartSVG(data.t8, data.t13, data.t20, dayNumber) : '';
+            const chart = (data.t8 !== null && data.t13 !== null && data.t20 !== null) ? weatherChartSVG(data.t8, data.t13, data.t20, dayNumber) : '';
             const wx = wmoIcon(data.wcode);
             const midTemp = data.t13 !== null ? `${Math.round(data.t13)}°C` : '';
+            const rainAlert = buildRainAlert(data, wx);
             el.innerHTML = `
                 <div class="wx-condition-row">
                     <span class="wx-condition-icon">${wx.emoji}</span>
                     <span class="wx-condition-label">${wx.label}${midTemp ? ' · ' + midTemp : ''}</span>
                 </div>
+                ${rainAlert}
                 <div class="weather-sun-row" style="margin-top:10px;">
                     ${data.sunrise ? `<span>🌅 ${data.sunrise}</span>` : ''}
                     ${data.sunset  ? `<span>🌇 ${data.sunset}</span>`  : ''}
@@ -2385,7 +2417,8 @@
                 <div class="weather-chart-container">${chart}</div>
             `;
             const preview = document.getElementById(`wx-preview-${dayNumber}`);
-            if (preview) preview.textContent = `${wx.emoji} ${midTemp}`;
+            const rainFlag = wx.severity >= 1 ? ` · ${wx.emoji}` : '';
+            if (preview) preview.textContent = `${wx.emoji} ${midTemp}${rainFlag}`;
         }
 
         function refreshWeather(dayNumber) {
@@ -2426,11 +2459,13 @@
             const wx = wmoIcon(data.wcodeNow ?? data.wcode);
             const displayTemp = data.tNow !== null ? `${Math.round(data.tNow)}°C now` : (data.t13 !== null ? `${Math.round(data.t13)}°C` : '');
             const previewTemp = data.tNow !== null ? `${Math.round(data.tNow)}°C` : (data.t13 !== null ? `${Math.round(data.t13)}°C` : '');
+            const rainAlert = buildRainAlert(data, wx);
             el.innerHTML = `
                 <div class="wx-condition-row">
                     <span class="wx-condition-icon">${wx.emoji}</span>
                     <span class="wx-condition-label">${wx.label}${displayTemp ? ' · ' + displayTemp : ''}</span>
                 </div>
+                ${rainAlert}
                 <div class="weather-sun-row" style="margin-top:10px;">
                     ${data.sunrise ? `<span>🌅 ${data.sunrise}</span>` : ''}
                     ${data.sunset  ? `<span>🌇 ${data.sunset}</span>`  : ''}
@@ -2459,11 +2494,14 @@
         // local currency / AED / USD. Update per trip.
         // ============================================================
         const DAY_CURRENCY = {
-            // 1: { code: 'USD', name: 'US Dollar', symbol: '$' },
+            // Map day number to local currency for that day.
+            // The calculator always shows AED / USD / EUR, plus a 4th row for local currency
+            // when it differs from those three. Example:
+            // 1: { code: 'JPY', name: 'Japanese Yen', symbol: '¥' },
         };
 
         let calcRates = null;
-        let calcPrimary = { code: 'USD', name: 'US Dollar', symbol: '$' };
+        let calcPrimary = { code: 'EUR', name: 'Euro', symbol: '€' };
 
         function getTodayTripDay() {
             const today = new Date().toISOString().split('T')[0];
@@ -2486,15 +2524,14 @@
             try {
                 const res = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json');
                 const json = await res.json();
-                calcRates = { usd: 1, aed: json.usd.aed };
-                // add local currencies from DAY_CURRENCY
+                calcRates = { usd: 1, aed: json.usd.aed, eur: json.usd.eur };
                 Object.values(DAY_CURRENCY).forEach(c => {
                     const k = c.code.toLowerCase();
                     if (json.usd[k]) calcRates[k] = json.usd[k];
                 });
                 localStorage.setItem(cacheKey, JSON.stringify({ data: calcRates, ts: Date.now() }));
             } catch {
-                calcRates = { usd: 1, aed: 3.6725 };
+                calcRates = { usd: 1, aed: 3.6725, eur: 0.92 };
                 document.getElementById('calcRatesNote').textContent = 'Offline rates (approx)';
                 return;
             }
@@ -2504,19 +2541,37 @@
         function updateCalcUI() {
             if (!calcRates) return;
             const todayDay = getTodayTripDay();
-            const defaultCurrency = Object.values(DAY_CURRENCY)[0] || { code: 'USD', name: 'US Dollar', symbol: '$' };
+            const defaultCurrency = Object.values(DAY_CURRENCY)[0] || { code: 'EUR', name: 'Euro', symbol: '€' };
             calcPrimary = (todayDay && DAY_CURRENCY[todayDay]) ? DAY_CURRENCY[todayDay] : defaultCurrency;
-            document.getElementById('calcCode0').textContent = calcPrimary.code;
-            document.getElementById('calcName0').textContent = calcPrimary.name;
-            document.getElementById('calcHeaderSub').textContent = calcPrimary.code + ' · AED · USD';
+            const baseCodes = ['AED', 'USD', 'EUR'];
+            const showLocal = !baseCodes.includes(calcPrimary.code);
+            const row3 = document.getElementById('calcRow3');
+            if (row3) {
+                if (showLocal) {
+                    document.getElementById('calcCode3').textContent = calcPrimary.code;
+                    document.getElementById('calcName3').textContent = calcPrimary.name;
+                    row3.style.display = '';
+                    document.getElementById('calcHeaderSub').textContent = 'AED · USD · EUR · ' + calcPrimary.code;
+                } else {
+                    row3.style.display = 'none';
+                    document.getElementById('calcHeaderSub').textContent = 'AED · USD · EUR';
+                }
+            }
             const ts = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            document.getElementById('calcRatesNote').textContent = `Rates updated ${ts}`;
+            const note = document.getElementById('calcRatesNote');
+            if (note) note.textContent = `Rates updated ${ts}`;
+            // Also update all per-day calc notes
+            TRIP_DATA.days.forEach(d => dcUpdateNote(d.dayNumber));
         }
 
         function calcConvert(sourceIdx) {
             if (!calcRates) return;
-            const inputs = [document.getElementById('calcInput0'), document.getElementById('calcInput1'), document.getElementById('calcInput2')];
-            const codes = [calcPrimary.code.toLowerCase(), 'aed', 'usd'];
+            const baseCodes = ['AED', 'USD', 'EUR'];
+            const showLocal = !baseCodes.includes(calcPrimary.code);
+            const allInputs = [document.getElementById('calcInput0'), document.getElementById('calcInput1'), document.getElementById('calcInput2'), document.getElementById('calcInput3')];
+            const allCodes = ['aed', 'usd', 'eur', calcPrimary.code.toLowerCase()];
+            const inputs = showLocal ? allInputs : allInputs.slice(0, 3);
+            const codes = showLocal ? allCodes : allCodes.slice(0, 3);
             const val = parseFloat(inputs[sourceIdx].value);
             if (isNaN(val)) { inputs.forEach((inp, i) => { if (i !== sourceIdx) inp.value = ''; }); return; }
             const sourceRate = calcRates[codes[sourceIdx]] || 1;
@@ -2527,46 +2582,80 @@
             });
         }
 
-        function toggleCurrencyCalc() {
-            const body = document.getElementById('calcBody');
-            const chevron = document.getElementById('calcChevron');
-            const open = body.classList.toggle('open');
-            chevron.textContent = open ? '▼' : '▶';
-            if (open && !calcRates) fetchCalcRates(false);
-        }
-
         fetchCalcRates(false);
 
-        /* ── SWIPE NAVIGATION ── */
-        (function () {
-            let startX = 0, startY = 0, locked = false;
-            const views = ['overview', ...TRIP_DATA.days.map(d => `day${d.dayNumber}`)];
-            function isScrollable(el) {
-                while (el && el !== document.body) {
-                    const style = window.getComputedStyle(el);
-                    const overflow = style.overflowX;
-                    if ((overflow === 'auto' || overflow === 'scroll') && el.scrollWidth > el.clientWidth) return true;
-                    el = el.parentElement;
-                }
-                return false;
+        // ============================================================
+        // PER-DAY CURRENCY CALCULATOR
+        // ============================================================
+        function renderCalcSection(dayNum) {
+            const cur = DAY_CURRENCY[dayNum] || Object.values(DAY_CURRENCY)[0] || { code: 'EUR', name: 'Euro', symbol: '€' };
+            const baseCodes = ['AED', 'USD', 'EUR'];
+            const showLocal = !baseCodes.includes(cur.code);
+            const currencies = [
+                { code: 'AED', name: 'UAE Dirham' },
+                { code: 'USD', name: 'US Dollar' },
+                { code: 'EUR', name: 'Euro' },
+            ];
+            if (showLocal) currencies.push({ code: cur.code, name: cur.name });
+            const subtitle = currencies.map(c => c.code).join(' · ');
+            const rows = currencies.map((c, i) => `
+                <div class="calc-row">
+                    <div class="calc-label">
+                        <div class="calc-label-code">${c.code}</div>
+                        <div class="calc-label-name">${c.name}</div>
+                    </div>
+                    <input class="calc-input" id="dc${dayNum}-${i}" type="number" placeholder="0" oninput="dcConvert(${dayNum}, ${i}, ${currencies.length})">
+                </div>`).join('');
+            return `
+                <div class="collapsible-section section-calc" data-calc-day="${dayNum}">
+                    <div class="section-header collapsed">
+                        <h3>💱 Currency <span style="font-size:11px;font-weight:400;color:var(--text-secondary);margin-left:4px;">${subtitle}</span></h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content collapsed">
+                        <div style="padding:16px;">
+                            ${rows}
+                            <div class="calc-footer">
+                                <span class="calc-rates-note" id="dc${dayNum}-note">Tap to load rates</span>
+                                <button class="calc-refresh" onclick="dcRefresh(${dayNum})">↻ Refresh</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+        }
+
+        function dcConvert(dayNum, sourceIdx, count) {
+            if (!calcRates) { fetchCalcRates(false).then(() => dcConvert(dayNum, sourceIdx, count)); return; }
+            const cur = DAY_CURRENCY[dayNum] || Object.values(DAY_CURRENCY)[0] || { code: 'EUR', name: 'Euro', symbol: '€' };
+            const baseCodes = ['AED', 'USD', 'EUR'];
+            const showLocal = !baseCodes.includes(cur.code);
+            const codes = ['aed', 'usd', 'eur'];
+            if (showLocal) codes.push(cur.code.toLowerCase());
+            const n = showLocal ? 4 : 3;
+            const inputs = Array.from({ length: n }, (_, i) => document.getElementById(`dc${dayNum}-${i}`));
+            const val = parseFloat(inputs[sourceIdx]?.value);
+            if (isNaN(val)) { inputs.forEach((inp, i) => { if (i !== sourceIdx && inp) inp.value = ''; }); return; }
+            const sourceRate = calcRates[codes[sourceIdx]] || 1;
+            const valInUsd = val / sourceRate;
+            inputs.forEach((inp, i) => {
+                if (i === sourceIdx || !inp) return;
+                inp.value = (valInUsd * (calcRates[codes[i]] || 1)).toFixed(2);
+            });
+        }
+
+        function dcUpdateNote(dayNum) {
+            const note = document.getElementById(`dc${dayNum}-note`);
+            if (note && calcRates) {
+                const ts = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                note.textContent = `Updated ${ts}`;
             }
-            document.addEventListener('touchstart', e => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                locked = isScrollable(e.target);
-            }, { passive: true });
-            document.addEventListener('touchend', e => {
-                if (locked) return;
-                const dx = e.changedTouches[0].clientX - startX;
-                const dy = e.changedTouches[0].clientY - startY;
-                if (Math.abs(dx) < 60 || Math.abs(dy) > Math.abs(dx) * 0.8) return;
-                const current = document.querySelector('.day-view.active');
-                if (!current) return;
-                const idx = views.indexOf(current.id);
-                if (dx < 0 && idx < views.length - 1) switchView(views[idx + 1]);
-                else if (dx > 0 && idx > 0) switchView(views[idx - 1]);
-            }, { passive: true });
-        })();
+        }
+
+        function dcRefresh(dayNum) {
+            const note = document.getElementById(`dc${dayNum}-note`);
+            if (note) note.textContent = 'Refreshing…';
+            fetchCalcRates(true).then(() => dcUpdateNote(dayNum));
+        }
 
         initializePage();
 
@@ -2612,6 +2701,11 @@
             document.head.appendChild(s);
         })();
 
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js').catch(() => {});
+        }
     </script>
 </body>
 </html>
