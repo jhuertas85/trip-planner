@@ -1363,7 +1363,7 @@
         // ============================================================
         // TRIP_DATA — Edit this section to customise your trip
         // ============================================================
-const TRIP_DATA = {
+        const TRIP_DATA = {
     title: "Bali → Komodo → Kuala Lumpur 2026",
     travelers: ["Juan Carlos", "Maria"],
 
@@ -1419,13 +1419,13 @@ const TRIP_DATA = {
                 { time: "16:35", text: "Land at Ngurah Rai Airport (DPS)", subNote: "Get local SIM/eSIM, withdraw IDR", needsBooking: false },
                 { time: "17:30", text: "Transfer to Seminyak", subNote: "45 min by Grab · ~IDR 150-250k", needsBooking: false },
                 { time: "Evening", text: "Check in & settle", subNote: "Sunset beach walk if energy allows", needsBooking: false },
-                { time: "Dinner", text: "Low-key dinner on Jl. Kayu Aya (Eat Street)", subNote: "Rest after 9.5h flight", needsBooking: false }
+                { time: "Dinner", text: "Low-key dinner on Jl. Kayu Aya", subNote: "Rest after 9.5h flight", needsBooking: false }
             ],
             meals: {
                 breakfast: { status: "flexible", note: "", restaurants: [] },
                 lunch: { status: "flexible", note: "On flight", restaurants: [] },
                 dinner: { status: "options", note: "", restaurants: [
-                    { name: "Jl. Kayu Aya Eat Street", desc: "Local Indonesian · Casual", rating: "4.5★", mapsUrl: "maps.google.com/?q=Kayu+Aya+Eat+Street+Seminyak" }
+                    { name: "Eat Street", desc: "Local Indonesian", rating: "4.5★", mapsUrl: "maps.google.com/?q=Kayu+Aya+Eat+Street" }
                 ]}
             },
             route: null,
@@ -1434,7 +1434,7 @@ const TRIP_DATA = {
         },
         {
             dayNumber: 2, date: "Aug 16", dayOfWeek: "Sat",
-            title: "Uluwatu Highlights + Kecak", location: "Seminyak & Uluwatu",
+            title: "Uluwatu + Kecak", location: "Seminyak & Uluwatu",
             backgroundImage: "https://images.unsplash.com/photo-1583649014236-89bb85bb24af?w=800",
             flight: null,
             hotel: {
@@ -1443,29 +1443,28 @@ const TRIP_DATA = {
             },
             drive: null,
             activities: [
-                { time: "Morning", text: "Slow breakfast, then tour pickup", subNote: "Book: Uluwatu Highlights Tour · 4.7★ · ~$22", needsBooking: true },
-                { time: "Afternoon", text: "Water Blow (Nusa Dua), GWK Cultural Park, Melasti Beach", subNote: "Full-day tour with hotel pickup", needsBooking: false },
-                { time: "Sunset", text: "Uluwatu Temple at sunset", subNote: "Arrive early for good Kecak seat", needsBooking: false },
-                { time: "18:00", text: "Kecak Fire Dance", subNote: "Clifftop over Indian Ocean · Bring light layer", needsBooking: false },
-                { time: "20:00", text: "Dinner", subNote: "Single Fin (clifftop) or back in Seminyak", needsBooking: false }
+                { time: "Morning", text: "Breakfast & tour pickup", subNote: "Uluwatu Highlights Tour · 4.7★ · ~$22", needsBooking: true },
+                { time: "Afternoon", text: "Water Blow, GWK Cultural Park, Melasti Beach", subNote: "", needsBooking: false },
+                { time: "Sunset", text: "Uluwatu Temple", subNote: "Arrive early for Kecak seat", needsBooking: false },
+                { time: "18:00", text: "Kecak Fire Dance", subNote: "Clifftop Indian Ocean views", needsBooking: false },
+                { time: "20:00", text: "Dinner", subNote: "Single Fin or back to Seminyak", needsBooking: false }
             ],
             meals: {
-                breakfast: { status: "flexible", note: "Before tour", restaurants: [] },
-                lunch: { status: "included", note: "During tour", restaurants: [] },
+                breakfast: { status: "flexible", note: "", restaurants: [] },
+                lunch: { status: "included", note: "Tour included", restaurants: [] },
                 dinner: { status: "options", note: "", restaurants: [
-                    { name: "Single Fin", desc: "Clifftop views · Modern Asian", rating: "4.6★", mapsUrl: "maps.google.com/?q=Single+Fin+Uluwatu" },
-                    { name: "La Plancha", desc: "Beanbags on sand · Seafood", rating: "4.5★", mapsUrl: "maps.google.com/?q=La+Plancha+Seminyak" },
-                    { name: "Potato Head Beach Club", desc: "Clifftop pool bar · Views", rating: "4.4★", mapsUrl: "maps.google.com/?q=Potato+Head+Seminyak" }
+                    { name: "Single Fin", desc: "Clifftop views", rating: "4.6★", mapsUrl: "maps.google.com/?q=Single+Fin+Uluwatu" },
+                    { name: "La Plancha", desc: "Beanbags on sand", rating: "4.5★", mapsUrl: "maps.google.com/?q=La+Plancha" }
                 ]}
             },
             route: null,
-            warnings: ["⚠️ Macaque monkeys snatch sunglasses & hats", "Sarongs provided for temple coverage"],
-            gems: ["💡 Clifftop walk south of temple is quieter with great photos"]
+            warnings: ["Macaque monkeys snatch sunglasses", "Bring light jacket for evening"],
+            gems: ["Clifftop walk south of temple · quieter photos"]
         },
         {
             dayNumber: 3, date: "Aug 17", dayOfWeek: "Mon",
-            title: "Work Day · Indonesian Independence Day", location: "Seminyak",
-            backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+            title: "Work Day", location: "Seminyak",
+            backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
             flight: null,
             hotel: {
                 name: "Courtyard by Marriott Bali Seminyak", status: "confirmed",
@@ -1473,28 +1472,25 @@ const TRIP_DATA = {
             },
             drive: null,
             activities: [
-                { time: "Morning", text: "Morning free until 13:30", subNote: "Beach · breakfast · yoga · massage · Canggu café scene", needsBooking: false },
-                { time: "14:00", text: "Work Dubai hours (14:00-21:00)", subNote: "Test video call quality · Use business hub if WiFi drops", needsBooking: false },
-                { time: "Afternoon", text: "Optional: Hari Kemerdekaan celebrations", subNote: "Flag ceremonies · village games · panjat pinang", needsBooking: false },
-                { time: "Evening", text: "Dinner after 21:00", subNote: "Sarong · Mama San · Merah Putih · Motel Mexicola", needsBooking: false }
+                { time: "Morning", text: "Free until 13:30", subNote: "Beach · yoga · café", needsBooking: false },
+                { time: "14:00", text: "Work 14:00-21:00 Dubai time", subNote: "", needsBooking: false },
+                { time: "Evening", text: "Dinner after 21:00", subNote: "Sarong · Mama San · Merah Putih", needsBooking: false }
             ],
             meals: {
-                breakfast: { status: "flexible", note: "Beach café", restaurants: [] },
+                breakfast: { status: "flexible", note: "", restaurants: [] },
                 lunch: { status: "flexible", note: "", restaurants: [] },
-                dinner: { status: "options", note: "After 21:00", restaurants: [
-                    { name: "Sarong", desc: "Fine dining Indonesian", rating: "4.7★", mapsUrl: "maps.google.com/?q=Sarong+Bali" },
-                    { name: "Mama San", desc: "Asian fusion · rooftop", rating: "4.6★", mapsUrl: "maps.google.com/?q=Mama+San+Bali" },
-                    { name: "Merah Putih", desc: "Modern Indonesian · beautiful room", rating: "4.5★", mapsUrl: "maps.google.com/?q=Merah+Putih+Bali" }
+                dinner: { status: "options", note: "", restaurants: [
+                    { name: "Sarong", desc: "Fine dining", rating: "4.7★", mapsUrl: "maps.google.com/?q=Sarong+Bali" }
                 ]}
             },
             route: null,
-            warnings: ["⚠️ Windy evenings ~23-24°C · take light jacket to dinner"],
-            gems: ["💡 National holiday · catch morning flag ceremonies for authentic Bali"]
+            warnings: ["Bring light jacket for cool evenings"],
+            gems: []
         },
         {
             dayNumber: 4, date: "Aug 18", dayOfWeek: "Tue",
             title: "Work Day", location: "Seminyak",
-            backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+            backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
             flight: null,
             hotel: {
                 name: "Courtyard by Marriott Bali Seminyak", status: "confirmed",
@@ -1502,27 +1498,23 @@ const TRIP_DATA = {
             },
             drive: null,
             activities: [
-                { time: "Morning", text: "Free until 13:30", subNote: "Beach club (quieter pre-noon) · spa/massage · Canggu", needsBooking: false },
-                { time: "14:00", text: "Work Dubai hours (14:00-21:00)", subNote: "Backup: Courtyard 24-hr business hub", needsBooking: false },
-                { time: "17:00", text: "Optional: Sunset drink", subNote: "Potato Head · La Plancha · Ku De Ta", needsBooking: false },
-                { time: "21:00+", text: "Dinner & evening", subNote: "Late dinner rotation", needsBooking: false }
+                { time: "Morning", text: "Free until 13:30", subNote: "Beach · massage · yoga", needsBooking: false },
+                { time: "14:00", text: "Work 14:00-21:00", subNote: "", needsBooking: false },
+                { time: "Evening", text: "Dinner after 21:00", subNote: "", needsBooking: false }
             ],
             meals: {
-                breakfast: { status: "flexible", note: "Morning", restaurants: [] },
+                breakfast: { status: "flexible", note: "", restaurants: [] },
                 lunch: { status: "flexible", note: "", restaurants: [] },
-                dinner: { status: "options", note: "After 21:00", restaurants: [
-                    { name: "Motel Mexicola", desc: "Fun · cocktails · loud", rating: "4.3★", mapsUrl: "maps.google.com/?q=Motel+Mexicola+Bali" },
-                    { name: "Revolver", desc: "Café culture · laptops OK", rating: "4.4★", mapsUrl: "maps.google.com/?q=Revolver+Bali" }
-                ]}
+                dinner: { status: "options", note: "", restaurants: [] }
             },
             route: null,
             warnings: [],
-            gems: ["💡 Laptop-friendly: Revolver · Sisterfields · Expat Roasters"]
+            gems: []
         },
         {
             dayNumber: 5, date: "Aug 19", dayOfWeek: "Wed",
             title: "Work Day", location: "Seminyak",
-            backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+            backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
             flight: null,
             hotel: {
                 name: "Courtyard by Marriott Bali Seminyak", status: "confirmed",
@@ -1530,27 +1522,23 @@ const TRIP_DATA = {
             },
             drive: null,
             activities: [
-                { time: "Morning", text: "Free until 13:30", subNote: "Yoga · pool · beach walk · café", needsBooking: false },
-                { time: "14:00", text: "Work Dubai hours", subNote: "Business hub backup available", needsBooking: false },
-                { time: "Afternoon", text: "Pre-work reset: 90-min massage", subNote: "Bali's best-value luxury pricing", needsBooking: false },
-                { time: "Evening", text: "Dinner after 21:00", subNote: "Explore different neighborhood", needsBooking: false }
+                { time: "Morning", text: "Free until 13:30", subNote: "", needsBooking: false },
+                { time: "14:00", text: "Work 14:00-21:00", subNote: "", needsBooking: false },
+                { time: "Afternoon", text: "90-min massage reset", subNote: "", needsBooking: false }
             ],
             meals: {
                 breakfast: { status: "flexible", note: "", restaurants: [] },
                 lunch: { status: "flexible", note: "", restaurants: [] },
-                dinner: { status: "options", note: "After 21:00", restaurants: [
-                    { name: "Sarong", desc: "Fine dining", rating: "4.7★", mapsUrl: "maps.google.com/?q=Sarong+Bali" },
-                    { name: "Mama San", desc: "Asian fusion", rating: "4.6★", mapsUrl: "maps.google.com/?q=Mama+San+Bali" }
-                ]}
+                dinner: { status: "options", note: "", restaurants: [] }
             },
             route: null,
             warnings: [],
-            gems: ["💡 Afternoon spa as work-reset ritual"]
+            gems: []
         },
         {
             dayNumber: 6, date: "Aug 20", dayOfWeek: "Thu",
             title: "Work Day", location: "Seminyak",
-            backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+            backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
             flight: null,
             hotel: {
                 name: "Courtyard by Marriott Bali Seminyak", status: "confirmed",
@@ -1558,70 +1546,63 @@ const TRIP_DATA = {
             },
             drive: null,
             activities: [
-                { time: "Morning", text: "Free until 13:30", subNote: "Canggu · beach · gym", needsBooking: false },
-                { time: "14:00", text: "Work Dubai hours", subNote: "", needsBooking: false },
-                { time: "Afternoon", text: "Sunset drink (pre-work ~17:00)", subNote: "Rooftops: Ku De Ta or Potato Head", needsBooking: false },
-                { time: "21:00+", text: "Late dinner", subNote: "Book for 21:00-21:30", needsBooking: false }
+                { time: "Morning", text: "Free until 13:30", subNote: "", needsBooking: false },
+                { time: "14:00", text: "Work 14:00-21:00", subNote: "", needsBooking: false },
+                { time: "Afternoon", text: "Sunset drink", subNote: "Ku De Ta", needsBooking: false }
             ],
             meals: {
                 breakfast: { status: "flexible", note: "", restaurants: [] },
                 lunch: { status: "flexible", note: "", restaurants: [] },
-                dinner: { status: "options", note: "After 21:00", restaurants: [
-                    { name: "Petitenget temples end", desc: "Sunset · calm", rating: "4.3★", mapsUrl: "maps.google.com/?q=Petitenget+Bali" }
-                ]}
+                dinner: { status: "options", note: "", restaurants: [] }
             },
             route: null,
-            warnings: ["⚠️ Windy · cool evenings · light jacket"],
-            gems: ["💡 Petitenget temple end beach is calmer than club stretch"]
+            warnings: [],
+            gems: []
         },
         {
             dayNumber: 7, date: "Aug 21", dayOfWeek: "Fri",
-            title: "Work Day · Wrap-up", location: "Seminyak",
-            backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+            title: "Work Day · Pack", location: "Seminyak",
+            backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
             flight: null,
             hotel: {
                 name: "Courtyard by Marriott Bali Seminyak", status: "confirmed",
-                note: "Check-out morning Aug 22", bookedBy: null, mapsUrl: null
+                note: "Check-out Aug 22", bookedBy: null, mapsUrl: null
             },
             drive: null,
             activities: [
-                { time: "Morning", text: "Last beach morning", subNote: "Savor Seminyak", needsBooking: false },
-                { time: "14:00", text: "Work Dubai hours", subNote: "Last work day", needsBooking: false },
-                { time: "Evening", text: "Dinner prep for early flight", subNote: "Early night · 7am flight tomorrow", needsBooking: false }
+                { time: "Morning", text: "Last beach morning", subNote: "", needsBooking: false },
+                { time: "14:00", text: "Work 14:00-21:00", subNote: "", needsBooking: false },
+                { time: "Evening", text: "Early night · pack for flight", subNote: "7am flight next day", needsBooking: false }
             ],
             meals: {
                 breakfast: { status: "flexible", note: "", restaurants: [] },
                 lunch: { status: "flexible", note: "", restaurants: [] },
-                dinner: { status: "options", note: "Early", restaurants: [
-                    { name: "Sarong", desc: "Last Seminyak dinner", rating: "4.7★", mapsUrl: "maps.google.com/?q=Sarong+Bali" }
-                ]}
+                dinner: { status: "options", note: "", restaurants: [] }
             },
             route: null,
-            warnings: ["⚠️ Early flight 07:10 next day · pack tonight"],
+            warnings: ["Pack tonight · early flight"],
             gems: []
         },
         {
             dayNumber: 8, date: "Aug 22", dayOfWeek: "Sat",
-            title: "Komodo Liveaboard Day 1", location: "Labuan Bajo & Liveaboard",
+            title: "Komodo Liveaboard", location: "Labuan Bajo",
             backgroundImage: "https://images.unsplash.com/photo-1511321334288-a01a3f06d711?w=800",
             flight: {
-                date: "Aug 22", dayOfWeek: "Sat", airline: "AirAsia Z2 106",
+                date: "Aug 22", dayOfWeek: "Sat", airline: "AirAsia",
                 from: "DPS", to: "LBJ", departTime: "07:10", arriveTime: "08:15",
                 terminal: "T1"
             },
             hotel: {
                 name: "Liveaboard Cabin", status: "confirmed",
-                note: "2D1N Komodo boat · Overnight on boat", bookedBy: null, mapsUrl: null
+                note: "2D1N Komodo boat", bookedBy: null, mapsUrl: null
             },
             drive: null,
             activities: [
-                { time: "05:00", text: "Check out of Courtyard", subNote: "Leave bags at bell desk · transfer to DPS", needsBooking: false },
-                { time: "07:10", text: "Flight DPS → LBJ (Seat 5A/7A)", subNote: "Left window · volcano views (Agung, Rinjani)", needsBooking: false },
-                { time: "08:30", text: "Airport pickup", subNote: "Transfer to liveaboard (10 min)", needsBooking: false },
-                { time: "10:30", text: "Board the boat", subNote: "Snorkeling safety briefing", needsBooking: false },
-                { time: "Afternoon", text: "Snorkel at Manjarite Island", subNote: "Clear water · coral reefs", needsBooking: false },
-                { time: "Sunset", text: "Kalong Island flying foxes", subNote: "Thousands launch at dusk", needsBooking: false },
-                { time: "Evening", text: "Dinner on board", subNote: "Sleep in cabin", needsBooking: false }
+                { time: "05:00", text: "Checkout Courtyard", subNote: "", needsBooking: false },
+                { time: "07:10", text: "Flight DPS → LBJ", subNote: "Seat 5A/7A for volcano views", needsBooking: false },
+                { time: "10:30", text: "Board liveaboard", subNote: "", needsBooking: false },
+                { time: "Afternoon", text: "Snorkel Manjarite Island", subNote: "", needsBooking: false },
+                { time: "Sunset", text: "Kalong Island flying foxes", subNote: "", needsBooking: false }
             ],
             meals: {
                 breakfast: { status: "included", note: "On boat", restaurants: [] },
@@ -1629,45 +1610,41 @@ const TRIP_DATA = {
                 dinner: { status: "included", note: "On boat", restaurants: [] }
             },
             route: null,
-            warnings: ["⚠️ Take motion-sickness tablet before boarding", "⚠️ Bring light layer for cool boat ride & sleeping on deck"],
-            gems: ["💡 Reef-safe sunscreen + hat + dry bag essential"]
+            warnings: ["Motion-sickness tablet before boarding", "Light layer for cool boat ride"],
+            gems: ["Reef-safe sunscreen essential"]
         },
         {
             dayNumber: 9, date: "Aug 23", dayOfWeek: "Sun",
-            title: "Komodo Liveaboard Day 2 → Hotel", location: "Padar · Komodo · Pink Beach · Labuan Bajo",
+            title: "Komodo Dragons & Pink Beach", location: "Padar · Komodo",
             backgroundImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800",
             flight: null,
             hotel: {
                 name: "Oh!Julia Hotel Komodo", status: "confirmed",
-                note: "Night 1 of 2 · Check-in 17:00", bookedBy: null, mapsUrl: null
+                note: "Night 1 of 2", bookedBy: null, mapsUrl: null
             },
             drive: null,
             activities: [
-                { time: "05:00", text: "Padar Island sunrise", subNote: "Iconic ridgeline viewpoint · steep but short 20-min climb", needsBooking: false },
-                { time: "06:30", text: "Breakfast on board", subNote: "", needsBooking: false },
-                { time: "Morning", text: "Swim/relax at Pink Beach", subNote: "", needsBooking: false },
-                { time: "12:00", text: "Lunch on board", subNote: "", needsBooking: false },
-                { time: "Afternoon", text: "Komodo Island ranger walk", subNote: "Observe dragons from safe distance", needsBooking: false },
-                { time: "Afternoon", text: "Snorkel at Manta Point", subNote: "Sea conditions permitting · August on-season for mantas", needsBooking: false },
-                { time: "17:00", text: "Return to Labuan Bajo", subNote: "Drop-off at Oh!Julia Hotel", needsBooking: false },
-                { time: "18:00", text: "Rooftop pool sunset drink", subNote: "Harbour views", needsBooking: false },
-                { time: "20:00", text: "Dinner at Kampung Ujung", subNote: "Harbourside grilled-fish stalls · pick your catch", needsBooking: false }
+                { time: "05:00", text: "Padar Island sunrise", subNote: "20-min climb · ridgeline viewpoint", needsBooking: false },
+                { time: "Morning", text: "Pink Beach swim", subNote: "", needsBooking: false },
+                { time: "Afternoon", text: "Komodo dragon trek", subNote: "Ranger-led · safe distance", needsBooking: false },
+                { time: "Afternoon", text: "Manta Point snorkel", subNote: "Sea conditions permitting", needsBooking: false },
+                { time: "17:00", text: "Back to Labuan Bajo", subNote: "", needsBooking: false },
+                { time: "Evening", text: "Kampung Ujung dinner", subNote: "Grilled fish", needsBooking: false }
             ],
             meals: {
                 breakfast: { status: "included", note: "On boat", restaurants: [] },
                 lunch: { status: "included", note: "On boat", restaurants: [] },
-                dinner: { status: "options", note: "Labuan Bajo", restaurants: [
-                    { name: "Kampung Ujung", desc: "Local night market · grilled fish", rating: "4.5★", mapsUrl: "maps.google.com/?q=Kampung+Ujung+Labuan+Bajo" },
-                    { name: "Oh!Julia Hotel", desc: "Rooftop pool bar · views", rating: "4.3★", mapsUrl: "maps.google.com/?q=Oh+Julia+Hotel" }
+                dinner: { status: "options", note: "", restaurants: [
+                    { name: "Kampung Ujung", desc: "Fish stalls", rating: "4.5★", mapsUrl: "maps.google.com/?q=Kampung+Ujung" }
                 ]}
             },
             route: null,
-            warnings: ["⚠️ Stay close to ranger on dragon trek", "⚠️ Light layer for 05:00 pre-dawn start on deck (you run cold)"],
-            gems: ["💡 Kampung Ujung is the local move · better & cheaper than tourist restaurants"]
+            warnings: ["Stay close to ranger on dragon trek", "Light layer for 05:00 start"],
+            gems: ["Kampung Ujung is local move · cheap & good"]
         },
         {
             dayNumber: 10, date: "Aug 24", dayOfWeek: "Mon",
-            title: "Free Day · Caves & Sunset", location: "Labuan Bajo",
+            title: "Caves & Sunset", location: "Labuan Bajo",
             backgroundImage: "https://images.unsplash.com/photo-1511379938547-c1f69b13d835?w=800",
             flight: null,
             hotel: {
@@ -1676,63 +1653,57 @@ const TRIP_DATA = {
             },
             drive: null,
             activities: [
-                { time: "Morning", text: "Sleep in after early boat days", subNote: "Late breakfast at hotel", needsBooking: false },
-                { time: "Morning", text: "Rangko Cave", subNote: "Underground lake · crystal turquoise water · swim inside", needsBooking: true },
-                { time: "Afternoon", text: "Batu Cermin (Mirror Stone Cave)", subNote: "Glittering limestone walls · tunnel system · hard hats provided", needsBooking: false },
-                { time: "Afternoon", text: "Rooftop pool return", subNote: "Afternoon drink · harbour views", needsBooking: false },
-                { time: "Sunset", text: "Sylvia Hill (Bukit Sylvia)", subNote: "Hilltop with Teletubbies hills views · sea & islands", needsBooking: false },
-                { time: "Evening", text: "Farewell dinner", subNote: "Kampung Ujung or harbour restaurant", needsBooking: false },
-                { time: "22:00", text: "Early night", subNote: "Flight in the morning", needsBooking: false }
+                { time: "Morning", text: "Sleep in · late breakfast", subNote: "", needsBooking: false },
+                { time: "Morning", text: "Rangko Cave", subNote: "Underground turquoise lake", needsBooking: true },
+                { time: "Afternoon", text: "Batu Cermin Cave", subNote: "Glittering limestone walls", needsBooking: false },
+                { time: "Afternoon", text: "Rooftop pool", subNote: "Harbour views", needsBooking: false },
+                { time: "Sunset", text: "Sylvia Hill", subNote: "Teletubbies hills · islands", needsBooking: false },
+                { time: "Evening", text: "Farewell dinner", subNote: "", needsBooking: false }
             ],
             meals: {
-                breakfast: { status: "flexible", note: "Late breakfast at hotel", restaurants: [] },
+                breakfast: { status: "flexible", note: "", restaurants: [] },
                 lunch: { status: "flexible", note: "", restaurants: [] },
-                dinner: { status: "options", note: "Farewell dinner", restaurants: [
-                    { name: "Kampung Ujung", desc: "Grilled fish · market", rating: "4.5★", mapsUrl: "maps.google.com/?q=Kampung+Ujung+Labuan+Bajo" }
+                dinner: { status: "options", note: "", restaurants: [
+                    { name: "Kampung Ujung", desc: "Fish stalls", rating: "4.5★", mapsUrl: "maps.google.com/?q=Kampung+Ujung" }
                 ]}
             },
             route: null,
-            warnings: ["⚠️ Rangko Cave best visited around midday when light enters", "⚠️ Sylvia Hill is steep/sandy hike · wear regular shoes not sandals"],
-            gems: ["💡 Rangko Cave is best-kept secret · most visitors miss it"]
+            warnings: ["Rangko Cave best midday · Sylvia Hill steep sandy hike"],
+            gems: ["Rangko Cave is best-kept secret"]
         },
         {
             dayNumber: 11, date: "Aug 25", dayOfWeek: "Tue",
             title: "Fly Back to Bali", location: "Labuan Bajo → Seminyak",
             backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
             flight: {
-                date: "Aug 25", dayOfWeek: "Tue", airline: "AirAsia Z2 109",
+                date: "Aug 25", dayOfWeek: "Tue", airline: "AirAsia",
                 from: "LBJ", to: "DPS", departTime: "10:35", arriveTime: "11:45",
                 terminal: "T1"
             },
             hotel: {
                 name: "Courtyard by Marriott Bali Seminyak", status: "confirmed",
-                note: "Check-in Aug 25 · 25-28 Aug", bookedBy: null, mapsUrl: null
+                note: "Aug 25-28", bookedBy: null, mapsUrl: null
             },
             drive: null,
             activities: [
-                { time: "08:30", text: "Leave Oh!Julia", subNote: "10 min to airport", needsBooking: false },
-                { time: "10:35", text: "Flight LBJ → DPS", subNote: "RIGHT side (seat F) for volcano views + sun behind you", needsBooking: false },
-                { time: "11:45", text: "Land Bali", subNote: "", needsBooking: false },
-                { time: "Afternoon", text: "Transfer to Courtyard", subNote: "45 min from DPS", needsBooking: false },
-                { time: "Afternoon", text: "Pool & decompress", subNote: "Rest before manta trip tomorrow", needsBooking: false },
-                { time: "Evening", text: "Sunset at La Plancha or Potato Head", subNote: "You haven't seen Seminyak sunset in 4 days", needsBooking: false },
-                { time: "Dinner", text: "Easy dinner in Seminyak", subNote: "", needsBooking: false }
+                { time: "08:30", text: "Leave Oh!Julia", subNote: "", needsBooking: false },
+                { time: "10:35", text: "Flight LBJ → DPS", subNote: "Right side (F) for views", needsBooking: false },
+                { time: "Afternoon", text: "Transfer to Courtyard", subNote: "", needsBooking: false },
+                { time: "Afternoon", text: "Pool & rest", subNote: "", needsBooking: false },
+                { time: "Sunset", text: "Seminyak beach drink", subNote: "", needsBooking: false }
             ],
             meals: {
-                breakfast: { status: "flexible", note: "Before flight", restaurants: [] },
-                lunch: { status: "flexible", note: "After landing", restaurants: [] },
-                dinner: { status: "options", note: "", restaurants: [
-                    { name: "La Plancha", desc: "Sunset beanbags", rating: "4.5★", mapsUrl: "maps.google.com/?q=La+Plancha+Seminyak" },
-                    { name: "Potato Head Beach Club", desc: "Pool bar sunset", rating: "4.4★", mapsUrl: "maps.google.com/?q=Potato+Head+Seminyak" }
-                ]}
+                breakfast: { status: "flexible", note: "", restaurants: [] },
+                lunch: { status: "flexible", note: "", restaurants: [] },
+                dinner: { status: "options", note: "", restaurants: [] }
             },
             route: null,
-            warnings: ["⚠️ Manta tour tomorrow · confirm wetsuit + hotel pickup from Seminyak"],
+            warnings: ["Confirm manta tour for tomorrow"],
             gems: []
         },
         {
             dayNumber: 12, date: "Aug 26", dayOfWeek: "Wed",
-            title: "Manta Day Trip (Juan solo)", location: "Nusa Penida · Seminyak",
+            title: "Manta Rays (Juan solo)", location: "Nusa Penida",
             backgroundImage: "https://images.unsplash.com/photo-1495854484909-c894fdcc538d?w=800",
             flight: null,
             hotel: {
@@ -1741,31 +1712,24 @@ const TRIP_DATA = {
             },
             drive: null,
             activities: [
-                { time: "06:00", text: "Hotel pickup in Seminyak", subNote: "Transfer to Sanur port (adds 30-40 min vs direct)", needsBooking: true },
-                { time: "06:30", text: "Transfer to Sanur port", subNote: "", needsBooking: false },
-                { time: "07:00", text: "Fast boat to Nusa Penida", subNote: "30-45 min crossing (can be choppy)", needsBooking: false },
-                { time: "Morning", text: "Manta Point / Manta Bay snorkel", subNote: "Calmest & best early · mantas near surface (upwelling season)", needsBooking: false },
-                { time: "Afternoon", text: "Kelingking Beach viewpoint", subNote: "Iconic cliff photo", needsBooking: false },
-                { time: "Afternoon", text: "Broken Beach · Angel's Billabong · Crystal Bay", subNote: "", needsBooking: false },
-                { time: "Midday", text: "Lunch included", subNote: "", needsBooking: false },
-                { time: "Afternoon", text: "Fast boat back to Sanur", subNote: "Mid-late afternoon", needsBooking: false },
-                { time: "Late afternoon", text: "Grab back to Seminyak", subNote: "", needsBooking: false },
-                { time: "Evening", text: "Celebrate the mantas!", subNote: "Dinner in Seminyak", needsBooking: false }
+                { time: "06:00", text: "Hotel pickup", subNote: "", needsBooking: true },
+                { time: "Morning", text: "Manta Point snorkel", subNote: "Mantas near surface", needsBooking: false },
+                { time: "Afternoon", text: "Kelingking Beach · Broken Beach", subNote: "", needsBooking: false },
+                { time: "Afternoon", text: "Crystal Bay · Angel's Billabong", subNote: "", needsBooking: false },
+                { time: "Late afternoon", text: "Back to Seminyak", subNote: "", needsBooking: false }
             ],
             meals: {
-                breakfast: { status: "flexible", note: "Early before pickup", restaurants: [] },
-                lunch: { status: "included", note: "On the tour", restaurants: [] },
-                dinner: { status: "options", note: "Celebrate", restaurants: [
-                    { name: "Sarong", desc: "Fine dining", rating: "4.7★", mapsUrl: "maps.google.com/?q=Sarong+Bali" }
-                ]}
+                breakfast: { status: "flexible", note: "", restaurants: [] },
+                lunch: { status: "included", note: "On tour", restaurants: [] },
+                dinner: { status: "options", note: "", restaurants: [] }
             },
             route: null,
-            warnings: ["⚠️ Wear the wetsuit · August water 22-26°C (you run cold · you'll last far longer)", "⚠️ Motion-sickness tablet 30 min before", "⚠️ Badung Strait can be choppy"],
-            gems: ["💡 Ask to include Gamat Bay if time allows · quiet coral · often overlooked"]
+            warnings: ["Wear wetsuit · August water cold", "Motion-sickness tablet", "Badung Strait can be choppy"],
+            gems: []
         },
         {
             dayNumber: 13, date: "Aug 27", dayOfWeek: "Thu",
-            title: "Ubud Day Trip (Juan solo)", location: "Ubud · Seminyak",
+            title: "Ubud (Juan solo)", location: "Ubud",
             backgroundImage: "https://images.unsplash.com/photo-1511379938547-c1f69b13d835?w=800",
             flight: null,
             hotel: {
@@ -1774,27 +1738,25 @@ const TRIP_DATA = {
             },
             drive: { from: "Seminyak", to: "Ubud", duration: "1.5h", distance: "~70 km" },
             activities: [
-                { time: "Morning", text: "Pickup to Ubud", subNote: "~1-1.5 hrs from Seminyak", needsBooking: true },
-                { time: "Morning", text: "Tegallalang rice terraces", subNote: "Northern end (quieter than main stretch)", needsBooking: false },
-                { time: "Afternoon", text: "Sacred Monkey Forest", subNote: "No loose sunglasses/bottles/food", needsBooking: false },
+                { time: "Morning", text: "Pickup to Ubud", subNote: "", needsBooking: true },
+                { time: "Morning", text: "Tegallalang rice terraces", subNote: "Northern end · quieter", needsBooking: false },
+                { time: "Afternoon", text: "Sacred Monkey Forest", subNote: "", needsBooking: false },
                 { time: "Afternoon", text: "Saraswati Temple", subNote: "", needsBooking: false },
-                { time: "Afternoon", text: "Ubud Market / town centre", subNote: "Browse local crafts", needsBooking: false },
-                { time: "Evening", text: "Back to Seminyak for dinner", subNote: "", needsBooking: false }
+                { time: "Afternoon", text: "Ubud Market", subNote: "", needsBooking: false },
+                { time: "Evening", text: "Back to Seminyak", subNote: "", needsBooking: false }
             ],
             meals: {
-                breakfast: { status: "flexible", note: "Before tour", restaurants: [] },
-                lunch: { status: "included", note: "During tour", restaurants: [] },
-                dinner: { status: "options", note: "Back in Seminyak", restaurants: [
-                    { name: "Sarong", desc: "Final Bali dinner", rating: "4.7★", mapsUrl: "maps.google.com/?q=Sarong+Bali" }
-                ]}
+                breakfast: { status: "flexible", note: "", restaurants: [] },
+                lunch: { status: "included", note: "On tour", restaurants: [] },
+                dinner: { status: "options", note: "", restaurants: [] }
             },
             route: null,
-            warnings: ["⚠️ Ubud can get brief afternoon showers even in dry season", "⚠️ Monkey Forest: macaques steal items"],
-            gems: ["💡 Northern Tegallalang end is quieter than tour-bus main section", "💡 Alternatively: skip this day & rest in Seminyak (perfectly valid)"]
+            warnings: ["Monkey Forest · no loose items", "Afternoon showers possible"],
+            gems: []
         },
         {
             dayNumber: 14, date: "Aug 28", dayOfWeek: "Fri",
-            title: "Fly to Kuala Lumpur", location: "Seminyak → Kuala Lumpur",
+            title: "Fly to KL (Juan solo)", location: "Bali → Kuala Lumpur",
             backgroundImage: "https://images.unsplash.com/photo-1508784185304-5e037fde9237?w=800",
             flight: {
                 date: "Aug 28", dayOfWeek: "Fri", airline: "TBD",
@@ -1802,32 +1764,31 @@ const TRIP_DATA = {
                 terminal: "T1"
             },
             hotel: {
-                name: "TBD - Traders/Platinum 2/PARKROYAL", status: "to-book",
+                name: "TBD", status: "to-book",
                 note: "28-30 Aug (2 nights)", bookedBy: null, mapsUrl: null
             },
             drive: null,
             activities: [
-                { time: "08:30", text: "Checkout Courtyard", subNote: "Leave Seminyak", needsBooking: false },
-                { time: "09:00", text: "Transfer to DPS", subNote: "45 min", needsBooking: false },
-                { time: "11:15", text: "Flight DPS → KUL", subNote: "Nonstop · ~3h50", needsBooking: false },
-                { time: "15:05", text: "Land KL", subNote: "Transfer to hotel 45-60 min by Grab or KLIA Ekspres", needsBooking: false },
-                { time: "Evening", text: "Jalan Alor night food street", subNote: "Satay · grilled seafood · noodles · buzzing after dark", needsBooking: false },
-                { time: "Evening", text: "First rooftop drink", subNote: "SkyBar (Traders) or Heli Lounge Bar", needsBooking: false }
+                { time: "08:30", text: "Checkout Courtyard", subNote: "", needsBooking: false },
+                { time: "09:00", text: "Transfer to DPS", subNote: "", needsBooking: false },
+                { time: "11:15", text: "Flight DPS → KUL", subNote: "", needsBooking: false },
+                { time: "Evening", text: "Jalan Alor hawker street", subNote: "", needsBooking: false },
+                { time: "Evening", text: "Rooftop drink", subNote: "SkyBar or Heli Lounge", needsBooking: false }
             ],
             meals: {
-                breakfast: { status: "flexible", note: "Morning", restaurants: [] },
+                breakfast: { status: "flexible", note: "", restaurants: [] },
                 lunch: { status: "flexible", note: "", restaurants: [] },
-                dinner: { status: "options", note: "Jalan Alor hawker street", restaurants: [
-                    { name: "Jalan Alor", desc: "Night hawker street · satay & seafood", rating: "4.4★", mapsUrl: "maps.google.com/?q=Jalan+Alor+Kuala+Lumpur" }
+                dinner: { status: "options", note: "", restaurants: [
+                    { name: "Jalan Alor", desc: "Night hawker street", rating: "4.4★", mapsUrl: "maps.google.com/?q=Jalan+Alor" }
                 ]}
             },
             route: null,
-            warnings: ["⚠️ Maria stays in Bali", "⚠️ Malls open at 10:00, not 09:00", "⚠️ Merdeka markets on (National Month)"],
-            gems: ["💡 Download Grab for KL · it's cheap & essential"]
+            warnings: ["Maria stays in Bali", "Malls open 10:00 not 9:00"],
+            gems: []
         },
         {
             dayNumber: 15, date: "Aug 29", dayOfWeek: "Sat",
-            title: "The Big KL Day", location: "Kuala Lumpur",
+            title: "KL Highlights", location: "Kuala Lumpur",
             backgroundImage: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800",
             flight: null,
             hotel: {
@@ -1836,32 +1797,26 @@ const TRIP_DATA = {
             },
             drive: null,
             activities: [
-                { time: "06:00", text: "Batu Caves", subNote: "Go first thing · rainbow steps · limestone caverns", needsBooking: false },
-                { time: "10:00", text: "Petronas Twin Towers", subNote: "Book skybridge/deck online ahead · KLCC Park views", needsBooking: true },
-                { time: "Midday", text: "Lunch in air-conditioned Suria KLCC", subNote: "Escape midday heat", needsBooking: false },
-                { time: "Afternoon", text: "Merdeka 118 observation deck", subNote: "World's 2nd-tallest building · The View", needsBooking: false },
-                { time: "Afternoon", text: "KL Tower or skip for rooftop", subNote: "Optional", needsBooking: false },
-                { time: "Afternoon", text: "Central Market + Chinatown / Petaling Street", subNote: "Merdeka markets running", needsBooking: false },
-                { time: "Sunset", text: "Rooftop sundowners", subNote: "SkyBar (Traders) · Vertigo (Banyan Tree) · Mesa on 51", needsBooking: false },
-                { time: "Evening", text: "Dinner + nightlife", subNote: "Changkat Bukit Bintang", needsBooking: false }
+                { time: "06:00", text: "Batu Caves", subNote: "Rainbow steps", needsBooking: false },
+                { time: "10:00", text: "Petronas Twin Towers", subNote: "Book online ahead", needsBooking: true },
+                { time: "Midday", text: "Lunch at KLCC", subNote: "", needsBooking: false },
+                { time: "Afternoon", text: "Merdeka 118 · KL Tower", subNote: "", needsBooking: false },
+                { time: "Afternoon", text: "Central Market · Chinatown", subNote: "", needsBooking: false },
+                { time: "Sunset", text: "Rooftop cocktails", subNote: "SkyBar · Vertigo · Mesa", needsBooking: false },
+                { time: "Evening", text: "Changkat Bukit Bintang", subNote: "Nightlife", needsBooking: false }
             ],
             meals: {
                 breakfast: { status: "flexible", note: "", restaurants: [] },
-                lunch: { status: "options", note: "KLCC air-conditioned", restaurants: [
-                    { name: "Suria KLCC", desc: "Shopping mall · many options", rating: "4.3★", mapsUrl: "maps.google.com/?q=Suria+KLCC" }
-                ]},
-                dinner: { status: "options", note: "Evening", restaurants: [
-                    { name: "Changkat Bukit Bintang", desc: "Nightlife street · bars & dining", rating: "4.3★", mapsUrl: "maps.google.com/?q=Changkat+Bukit+Bintang" },
-                    { name: "Lot 10 Hutong", desc: "Heritage hawker · air-conditioned", rating: "4.5★", mapsUrl: "maps.google.com/?q=Lot+10+Hutong+KL" }
-                ]}
+                lunch: { status: "options", note: "KLCC", restaurants: [] },
+                dinner: { status: "options", note: "", restaurants: [] }
             },
             route: null,
-            warnings: ["⚠️ August storms hit ~17:30-18:00 · plan rooftops a bit later or have indoor backup", "⚠️ Long trousers for mosques (Jamek)", "⚠️ Don't walk Bukit Bintang-Chinatown midday · it's hot/humid"],
-            gems: ["💡 Kampung Baru · village in shadow of skyscrapers · traditional food & striking photos", "💡 Heli Lounge Bar · drinks on an actual helipad · best skyline views for price"]
+            warnings: ["Afternoon storms ~17:30", "Trousers for mosques"],
+            gems: ["Kampung Baru · village with traditional food", "Heli Lounge Bar · drinks on helipad"]
         },
         {
             dayNumber: 16, date: "Aug 30", dayOfWeek: "Sun",
-            title: "Half Day KL → Fly Home", location: "Kuala Lumpur → Dubai",
+            title: "Fly Home", location: "Kuala Lumpur → Dubai",
             backgroundImage: "https://images.unsplash.com/photo-1512207736139-d983b3f2b4c5?w=800",
             flight: {
                 date: "Aug 30", dayOfWeek: "Sun", airline: "TBD",
@@ -1872,25 +1827,24 @@ const TRIP_DATA = {
             drive: null,
             activities: [
                 { time: "Morning", text: "Brunch in KL", subNote: "", needsBooking: false },
-                { time: "Morning", text: "Last KLCC shopping or Merdeka-market wander", subNote: "Quiet morning move", needsBooking: false },
-                { time: "15:30", text: "Leave for KLIA", subNote: "Head to airport", needsBooking: false },
-                { time: "19:10", text: "Flight KUL → DXB", subNote: "Nonstop · ~7h", needsBooking: false },
-                { time: "22:10", text: "Land Dubai", subNote: "Arrive Sunday night", needsBooking: false },
-                { time: "Aug 31 Monday", text: "Fresh for Monday work", subNote: "", needsBooking: false }
+                { time: "Morning", text: "Last-minute shopping", subNote: "", needsBooking: false },
+                { time: "15:30", text: "Leave for KLIA", subNote: "", needsBooking: false },
+                { time: "19:10", text: "Flight KUL → DXB", subNote: "Nonstop · 7h", needsBooking: false },
+                { time: "22:10", text: "Land Dubai", subNote: "Monday fresh", needsBooking: false }
             ],
             meals: {
-                breakfast: { status: "flexible", note: "Brunch", restaurants: [] },
+                breakfast: { status: "flexible", note: "", restaurants: [] },
                 lunch: { status: "flexible", note: "", restaurants: [] },
                 dinner: { status: "flexible", note: "On flight", restaurants: [] }
             },
             route: null,
-            warnings: ["⚠️ Merdeka peak is Aug 30 night fireworks + Aug 31 parade · you'll miss them (trade-off for on-time Monday)", "⚠️ Hot, humid, possible storm"],
-            gems: ["💡 You catch festive build-up · peak fireworks are the trade-off for Monday freshness"]
+            warnings: [],
+            gems: ["Catch festive build-up · peak fireworks tomorrow (trade-off for Monday)"]
         }
     ]
 };
 
-const DAY_WEATHER = {
+        const DAY_WEATHER = {
     1: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-15" },
     2: { lat: -8.7395, lon: 115.1689, isoDate: "2026-08-16" },
     3: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-17" },
@@ -1909,16 +1863,16 @@ const DAY_WEATHER = {
     16: { lat: 3.1390, lon: 101.6869, isoDate: "2026-08-30" }
 };
 
-const COST_DATA = {
+        const COST_DATA = {
     disclaimer: "All figures are estimates. Update with confirmed prices as bookings are made.",
     summary: [
-        { cat: "✈️ Flights", amount: 0, note: "DXB-DPS-LBJ-DPS-KUL-DXB (Juan & Maria split)" },
-        { cat: "🏨 Accommodation", amount: 0, note: "Courtyard Seminyak (7 nights) + Liveaboard (1 night) + Oh!Julia (2 nights) + KL hotel (2 nights)" },
-        { cat: "🚗 Car Rental", amount: 0, note: "N/A - Grab/tours only" },
-        { cat: "🗺️ Activities & Tours", amount: 0, note: "Uluwatu · Nusa Penida · Ubud · Komodo boat · Labuan Bajo caves · KL tours" },
-        { cat: "🍽️ Food & Drinks", amount: 0, note: "Meals not included · dinners 21:00+ · rooftop cocktails" },
+        { cat: "✈️ Flights", amount: 0, note: "DXB-DPS-LBJ-DPS-KUL-DXB · Juan & Maria split" },
+        { cat: "🏨 Accommodation", amount: 0, note: "Seminyak 7 · Liveaboard 1 · Labuan Bajo 2 · KL 2" },
+        { cat: "🚗 Car Rental", amount: 0, note: "N/A" },
+        { cat: "🗺️ Activities & Tours", amount: 0, note: "Uluwatu · Komodo · caves · KL tours" },
+        { cat: "🍽️ Food & Drinks", amount: 0, note: "Meals not included" },
         { cat: "⛽ Fuel", amount: 0, note: "N/A" },
-        { cat: "💡 Tips, Souvenirs & Misc", amount: 0, note: "IDR cash · park/ranger fees · personal" }
+        { cat: "💡 Tips, Souvenirs & Misc", amount: 0, note: "Personal expenses" }
     ],
     days: {}
 };
