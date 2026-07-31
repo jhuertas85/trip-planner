@@ -1,0 +1,3191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Planner</title>
+    <link rel="icon" href="../favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="../favicon.png" />
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Trip">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0D0B08">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0D0B08;
+            --bg-secondary: #211C16;
+            --bg-tertiary: #2a241a;
+            --border-color: #352D22;
+            --text-primary: #EDE4D3;
+            --text-secondary: #7A6E5E;
+            --text-muted: #8A7E6E;
+            --accent-gold: #C9966A;
+            --accent-terracotta: #C4511A;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.6;
+        }
+
+        body.light-mode {
+            --bg-primary: #F5F0E8;
+            --bg-secondary: #FFFFFF;
+            --bg-tertiary: #F9F5F0;
+            --border-color: #E0D5C5;
+            --text-primary: #2A2318;
+            --text-secondary: #8A7E6E;
+            --text-muted: #8A7E6E;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            border-bottom: 2px solid var(--border-color);
+            padding: 10px 0;
+            z-index: 2000;
+            backdrop-filter: blur(8px);
+            background-color: rgba(33, 28, 22, 0.95);
+            transition: var(--transition);
+        }
+
+        body.light-mode header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .header-content {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            flex: 1;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .overview-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 5px 8px;
+            border-radius: 4px;
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .overview-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .theme-toggle:hover {
+            color: var(--accent-gold);
+            transform: scale(1.1);
+        }
+
+        .day-tabs {
+            display: flex;
+            overflow-x: auto;
+            gap: 8px;
+            padding-bottom: 8px;
+            scroll-behavior: smooth;
+            margin-top: 12px;
+        }
+
+        .day-tabs::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .day-tabs::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+
+        .day-tabs::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+            border-radius: 2px;
+        }
+
+        .day-tab {
+            padding: 8px 12px;
+            background-color: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .day-tab:hover {
+            border-color: var(--text-secondary);
+            color: var(--accent-gold);
+        }
+
+        .day-tab.active {
+            background-color: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: var(--bg-primary);
+            font-weight: 600;
+        }
+
+        .day-tab.has-missing {
+            border-color: #8A3A3A;
+        }
+
+        .day-tab.today:not(.active) {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            background: rgba(201,150,106,0.08);
+        }
+
+        /* MAIN CONTENT */
+        main {
+            padding: 24px 0;
+        }
+
+        .day-view {
+            display: none;
+            animation: fadeIn 0.4s ease-in;
+        }
+
+        .day-view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 16px 16px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-day-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            opacity: 0.7;
+            position: absolute;
+            top: 10px;
+            left: 14px;
+            z-index: 2;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9), 0 0 50px rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2px 9px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        .hero-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-location {
+            font-size: 14px;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-location::before {
+            content: '📍';
+        }
+
+        /* CARDS */
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: var(--transition);
+        }
+
+        body.light-mode .card {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .card:hover {
+            border-color: var(--accent-gold);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        /* SECTION COLLAPSIBLE */
+        .collapsible-section {
+            margin-bottom: 16px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 12px 16px;
+            background-color: var(--bg-tertiary);
+            border-radius: 6px 6px 0 0;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+
+        .section-header:hover {
+            background-color: rgba(201, 150, 106, 0.1);
+        }
+
+        .section-header h3 {
+            flex: 1;
+            font-size: 16px;
+            color: var(--accent-gold);
+            margin: 0;
+        }
+
+        .chevron {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .chevron::after {
+            content: '▼';
+            font-size: 12px;
+            color: var(--accent-gold);
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .section-header.collapsed .chevron::after {
+            transform: rotate(-90deg);
+        }
+
+        .section-content {
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 1;
+            padding: 0;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .section-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+            padding: 0;
+        }
+
+        .section-content > div {
+            padding: 16px;
+        }
+
+        .section-flight {
+            background-color: rgba(30, 60, 100, 0.25);
+            border-left: 3px solid #4A8AB5;
+        }
+
+        .section-flight .section-header {
+            border-left: 3px solid #4A8AB5;
+        }
+
+        .section-hotel {
+            background-color: rgba(80, 55, 30, 0.25);
+            border-left: 3px solid #8B6D45;
+        }
+
+        .section-hotel .section-header {
+            border-left: 3px solid #8B6D45;
+        }
+
+        .section-activities {
+            background-color: rgba(60, 75, 40, 0.2);
+            border-left: 3px solid #7A8A50;
+        }
+
+        .section-activities .section-header {
+            border-left: 3px solid #7A8A50;
+        }
+
+        .section-meals {
+            background-color: rgba(55, 65, 45, 0.25);
+            border-left: 3px solid #7A8550;
+        }
+
+        .section-meals .section-header {
+            border-left: 3px solid #7A8550;
+        }
+
+        .section-warnings {
+            background-color: rgba(100, 35, 35, 0.2);
+            border-left: 3px solid #AA4444;
+        }
+
+        .section-warnings .section-header {
+            border-left: 3px solid #AA4444;
+        }
+
+        .section-gems {
+            background-color: rgba(100, 80, 30, 0.2);
+            border-left: 3px solid #B89030;
+        }
+
+        .section-gems .section-header {
+            border-left: 3px solid #B89030;
+        }
+
+        body.light-mode .section-flight {
+            background-color: rgba(74, 138, 181, 0.15);
+        }
+
+        body.light-mode .section-hotel {
+            background-color: rgba(139, 109, 69, 0.15);
+        }
+
+        body.light-mode .section-activities {
+            background-color: rgba(122, 138, 80, 0.12);
+        }
+
+        body.light-mode .section-meals {
+            background-color: rgba(122, 133, 80, 0.15);
+        }
+
+        body.light-mode .section-warnings {
+            background-color: rgba(170, 68, 68, 0.12);
+        }
+
+        body.light-mode .section-gems {
+            background-color: rgba(184, 144, 48, 0.12);
+        }
+
+        .expand-all-container {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .btn-expand-all, .btn-collapse-all {
+            flex: 1;
+            padding: 6px 10px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-expand-all:hover, .btn-collapse-all:hover {
+            background-color: rgba(201, 150, 106, 0.1);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        /* BADGES */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            transition: var(--transition);
+        }
+
+        .badge.ready {
+            background-color: #4A8050;
+            color: #8DC87E;
+        }
+
+        .badge.missing {
+            background-color: #8A3A3A;
+            color: #FF6B6B;
+        }
+
+        .badge.need-booking {
+            background-color: #9A7A30;
+            color: #E8C66E;
+        }
+
+        .badge.confirmed {
+            background-color: #4A8050;
+            color: #8DC87E;
+        }
+
+        .badge.pending {
+            background-color: #9A7A30;
+            color: #E8C66E;
+        }
+
+        .badge.to-book {
+            background-color: #C4511A;
+            color: #FFB366;
+        }
+
+        .badge.included {
+            background-color: #3A6878;
+            color: #7FBFD4;
+        }
+
+        .badge.options {
+            background-color: #4a4440;
+            color: #9A8E7E;
+        }
+
+        /* DRIVE BANNER */
+        .drive-banner {
+            background-color: var(--bg-tertiary);
+            border-left: 4px solid var(--accent-gold);
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .drive-banner::before {
+            content: '🚗';
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .drive-info {
+            flex: 1;
+        }
+
+        .drive-route {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .drive-duration {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* FLIGHT BANNER */
+        .flight-banner {
+            background-color: var(--bg-tertiary);
+            border-left: 4px solid #3A7DA0;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .flight-banner::before {
+            content: '✈️';
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .flight-info {
+            flex: 1;
+        }
+
+        .flight-route {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .flight-details {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid var(--border-color);
+        }
+
+        .timeline-item {
+            padding-bottom: 16px;
+            padding-left: 20px;
+            margin-left: -20px;
+        }
+
+        .timeline-time-group-header {
+            font-weight: 600;
+            color: var(--accent-gold);
+            font-size: 15px;
+            margin-bottom: 8px;
+            margin-top: 12px;
+            margin-left: -20px;
+            padding-left: 20px;
+        }
+
+        .timeline-item-bullet {
+            padding-bottom: 8px;
+            margin-left: -20px;
+            padding-left: 20px;
+        }
+
+        .timeline-item-bullet::before {
+            content: '•';
+            margin-right: 8px;
+            color: var(--accent-gold);
+        }
+
+        .timeline-time {
+            font-weight: 600;
+            color: var(--accent-gold);
+            font-size: 14px;
+        }
+
+        .timeline-text {
+            color: var(--text-primary);
+            margin-top: 4px;
+            font-size: 14px;
+        }
+
+        .timeline-note {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .timeline-tag {
+            display: inline-block;
+            background-color: #8A3A3A;
+            color: #FF9999;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        /* MEALS SECTION */
+        .meals-section {
+            margin-bottom: 24px;
+            padding: 0;
+        }
+
+        .meal-type {
+            font-weight: 600;
+            color: var(--accent-gold);
+            font-size: 15px;
+            margin-bottom: 8px;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meal-type::before {
+            content: '•';
+        }
+
+        .meal-type:first-child {
+            margin-top: 0;
+        }
+
+        .meal-note {
+            font-size: 14px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            padding-left: 16px;
+        }
+
+        .restaurant-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+            margin-bottom: 12px;
+            padding-left: 16px;
+        }
+
+        .restaurant-card {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .restaurant-card:hover {
+            border-color: var(--text-secondary);
+            background-color: rgba(201, 150, 106, 0.05);
+        }
+
+        .restaurant-card.selected {
+            background-color: #4A8050;
+            border-color: #7FB06F;
+        }
+
+        .restaurant-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .restaurant-card.selected .restaurant-name {
+            color: #8DC87E;
+        }
+
+        .restaurant-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .restaurant-card.selected .restaurant-desc {
+            color: #B8D5AF;
+        }
+
+        .restaurant-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        .restaurant-rating {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .restaurant-buttons {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .btn-select, .btn-maps {
+            flex: 1;
+            padding: 6px 8px;
+            border: 1px solid var(--border-color);
+            background-color: transparent;
+            color: var(--accent-gold);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-select {
+            background-color: var(--bg-tertiary);
+        }
+
+        .btn-select:hover {
+            background-color: rgba(201, 150, 106, 0.1);
+            border-color: var(--text-secondary);
+        }
+
+        .restaurant-card.selected .btn-select {
+            background-color: #7FB06F;
+            color: var(--bg-primary);
+            border-color: #7FB06F;
+        }
+
+        .btn-maps:hover {
+            border-color: var(--text-secondary);
+            color: #E8C66E;
+        }
+
+        /* WARNINGS & GEMS */
+        .warnings-title, .gems-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+            margin-top: 12px;
+        }
+
+        .warning {
+            background-color: #3a2020;
+            border: 1px solid #6a3a3a;
+            border-left: 4px solid #8A3A3A;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #FFB3B3;
+        }
+
+        .gem {
+            background-color: #3a3020;
+            border: 1px solid #6a5a3a;
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #E8C66E;
+        }
+
+        /* HOTEL INFO */
+        .hotel-info {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 14px;
+            margin-bottom: 8px;
+            transition: var(--transition);
+        }
+
+        .hotel-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+
+        .hotel-note {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .hotel-status-badges {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .hotel-meta {
+            display: flex;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .hotel-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn-maps {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        /* NO HOTEL CARD */
+        .no-hotel-card {
+            background-color: rgba(201, 150, 106, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        /* ACCOMMODATION TABLE */
+        .accommodation-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .accommodation-table th {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+
+        .accommodation-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            color: var(--text-primary);
+        }
+
+        .accommodation-table tr:nth-child(even) {
+            background-color: rgba(50, 40, 30, 0.3);
+        }
+
+        body.light-mode .accommodation-table tr:nth-child(even) {
+            background-color: rgba(201, 150, 106, 0.03);
+        }
+
+        /* FLIGHTS SECTION */
+        .flights-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+
+        .flights-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .flights-scroll::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+
+        .flights-scroll::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+        }
+
+        .flight-card {
+            flex-shrink: 0;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+            min-width: 240px;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .flight-card:hover {
+            border-color: #3A7DA0;
+        }
+
+        .flight-day {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .flight-route {
+            font-weight: 600;
+            color: #3A7DA0;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .flight-times {
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .flight-terminal {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .flight-checkin {
+            margin-top: 8px;
+        }
+
+        .flight-checkin a {
+            display: inline-block;
+            padding: 6px 10px;
+            background-color: #3A7DA0;
+            color: var(--text-primary);
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .flight-checkin a:hover {
+            background-color: #4a9dc0;
+        }
+
+        /* TRAVELERS & CAR RENTAL */
+        .travelers-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .traveler-chip {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-size: 13px;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .traveler-chip:hover {
+            border-color: var(--accent-gold);
+            background-color: rgba(201, 150, 106, 0.05);
+        }
+
+        .car-rental-info {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* SPOTIFY / TRICOUNT LINKS IN OVERVIEW */
+        .spotify-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #1DB954;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .spotify-link:hover {
+            background-color: #1ed760;
+            transform: scale(1.05);
+        }
+
+        .spotify-icon {
+            font-size: 16px;
+        }
+
+        .overview-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .tricount-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #4A90D9;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .tricount-link:hover {
+            background-color: #5DA0E9;
+            transform: scale(1.05);
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .download-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            background-color: rgba(201, 150, 106, 0.08);
+        }
+
+        .accommodation-table tr[data-day] {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .accommodation-table tr[data-day]:hover {
+            background-color: rgba(201, 150, 106, 0.15) !important;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 32px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 12px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        /* WEATHER WIDGET */
+        .section-weather {
+            background-color: rgba(20, 45, 70, 0.2);
+        }
+
+        body.light-mode .section-weather {
+            background-color: rgba(74, 138, 181, 0.08);
+        }
+
+        .weather-sun-row {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .weather-chart-container { width: 100%; }
+
+        .weather-loading, .weather-error {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 12px;
+            padding: 16px 0;
+        }
+
+        .weather-chart-container svg .wx-temp { fill: var(--text-primary); }
+        .weather-chart-container svg .wx-time  { fill: var(--text-secondary); }
+
+        .weather-refresh {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 14px;
+            cursor: pointer;
+            margin-left: auto;
+            padding: 2px 6px;
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .weather-refresh:hover { color: var(--accent-gold); }
+
+        .activity-maps-link {
+            font-size: 13px;
+            text-decoration: none;
+            opacity: 0.6;
+            margin-left: 4px;
+            vertical-align: middle;
+            transition: opacity 0.2s;
+        }
+        .activity-maps-link:hover { opacity: 1; }
+
+        .wx-condition-row { display: flex; align-items: center; gap: 10px; }
+        .wx-condition-icon { font-size: 22px; }
+        .wx-condition-label { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+        .wx-rain-alert { border-radius: 4px; padding: 8px 12px; margin-top: 8px; font-size: 12px; }
+        .wx-rain-light { background: rgba(91,155,213,0.12); border-left: 3px solid #5B9BD5; color: #7FBFD4; }
+        .wx-rain-heavy { background: rgba(123,104,238,0.12); border-left: 3px solid #7B68EE; color: #B39DDB; }
+        .wx-storm { background: rgba(200,50,50,0.15); border-left: 3px solid #E74C3C; color: #FF8A80; }
+        .wx-prob-row { display: flex; gap: 6px; margin-top: 10px; }
+        .wx-prob-item { flex: 1; text-align: center; font-size: 11px; background: var(--bg-tertiary); border-radius: 4px; padding: 6px 4px; color: var(--text-secondary); }
+        .wx-prob-val { font-weight: 700; font-size: 13px; display: block; margin-bottom: 2px; }
+        .wx-prob-val.rain { color: #7FBFD4; }
+        .wx-prob-val.heavy { color: #B39DDB; }
+        .wx-prob-val.storm { color: #FF8A80; }
+        .section-calc { background-color: rgba(50,40,20,0.2); }
+        .section-calc .section-header { border-left: 3px solid var(--accent-gold); }
+        body.light-mode .section-calc { background-color: rgba(201,150,106,0.06); }
+
+        .wx-preview {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-left: 8px;
+        }
+        .section-header:not(.collapsed) .wx-preview { display: none; }
+
+        /* CURRENCY CALCULATOR */
+        .calc-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .calc-row:last-of-type { margin-bottom: 0; }
+        .calc-label { width: 110px; flex-shrink: 0; }
+        .calc-label-code { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+        .calc-label-name { font-size: 10px; color: var(--text-secondary); margin-top: 1px; }
+        .calc-input {
+            flex: 1;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 9px 12px;
+            color: var(--text-primary);
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .calc-input:focus { border-color: var(--accent-gold); }
+        .calc-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+        .calc-rates-note { font-size: 10px; color: var(--text-secondary); }
+        .calc-refresh { font-size: 11px; color: var(--accent-gold); cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; }
+
+        /* BUDGET */
+        .day-cost-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid #7A6E5E;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .day-cost-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .day-cost-items {
+            font-size: 11px;
+            color: var(--text-secondary);
+            flex: 1;
+        }
+
+        .day-cost-total {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            white-space: nowrap;
+            margin-left: auto;
+        }
+
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .budget-table td {
+            padding: 9px 10px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        .budget-table tr:last-child td { border-bottom: none; }
+
+        .budget-amount {
+            text-align: right;
+            font-weight: 600;
+            color: var(--accent-gold);
+            white-space: nowrap;
+        }
+
+        .budget-note {
+            font-size: 11px;
+            color: var(--text-secondary);
+            padding-top: 2px;
+        }
+
+        .budget-total-row td {
+            font-weight: 700;
+            font-size: 14px;
+            border-top: 2px solid var(--border-color) !important;
+            border-bottom: none !important;
+        }
+
+        .budget-perperson {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        .budget-disclaimer {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-style: italic;
+            text-align: center;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* MOBILE */
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 12px;
+            }
+
+            .hero {
+                padding: 14px 16px;
+            }
+
+            .hero-title {
+                font-size: 20px;
+            }
+
+            .card {
+                padding: 16px;
+            }
+
+            .header-title {
+                font-size: 18px;
+            }
+
+            .day-tab {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+        }
+        .map-day-marker {
+            background: #C9966A; color: #111; font-weight: 700; font-size: 10px;
+            width: 26px; height: 26px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid rgba(255,255,255,0.5);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5); cursor: pointer;
+        }
+        .leaflet-popup-content-wrapper { background: var(--bg-secondary) !important; color: var(--text-primary) !important; border: 1px solid var(--border-color) !important; box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important; }
+        .leaflet-popup-tip { background: var(--bg-secondary) !important; }
+    </style>
+</head>
+<body>
+    <script>
+        // ============================================================
+        // TRIP_DATA — Edit this section to customise your trip
+        // ============================================================
+const TRIP_DATA = {
+    title: "Bali → Komodo → Kuala Lumpur 2026",
+    travelers: ["Juan Carlos", "Maria"],
+
+    carRental: null,
+    spotifyPlaylist: null,
+    tricountUrl: null,
+    checkInUrl: null,
+
+    flights: [
+        {
+            date: "Aug 15", dayOfWeek: "Fri", airline: "Emirates EK0368",
+            from: "DXB", to: "DPS", departTime: "03:10", arriveTime: "16:35",
+            terminal: "T1", passengers: ["Juan Carlos", "Maria"]
+        },
+        {
+            date: "Aug 22", dayOfWeek: "Sat", airline: "AirAsia Z2 106",
+            from: "DPS", to: "LBJ", departTime: "07:10", arriveTime: "08:15",
+            terminal: "T1", passengers: ["Juan Carlos", "Maria"]
+        },
+        {
+            date: "Aug 25", dayOfWeek: "Tue", airline: "AirAsia Z2 109",
+            from: "LBJ", to: "DPS", departTime: "10:35", arriveTime: "11:45",
+            terminal: "T1", passengers: ["Juan Carlos", "Maria"]
+        },
+        {
+            date: "Aug 28", dayOfWeek: "Fri", airline: "TBD",
+            from: "DPS", to: "KUL", departTime: "11:15", arriveTime: "15:05",
+            terminal: "T1", passengers: ["Juan Carlos"]
+        },
+        {
+            date: "Aug 30", dayOfWeek: "Sun", airline: "TBD",
+            from: "KUL", to: "DXB", departTime: "19:10", arriveTime: "22:10",
+            terminal: "T1", passengers: ["Juan Carlos"]
+        }
+    ],
+
+    days: [
+        {
+            dayNumber: 1, date: "Aug 15", dayOfWeek: "Fri",
+            title: "Arrival", location: "Seminyak, Bali",
+            backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
+            flight: {
+                date: "Aug 15", dayOfWeek: "Fri", airline: "Emirates EK0368",
+                from: "DXB", to: "DPS", departTime: "03:10", arriveTime: "16:35",
+                terminal: "T1"
+            },
+            hotel: {
+                name: "Courtyard by Marriott Bali Seminyak", status: "confirmed",
+                note: "Check-in from 15:00 · Aug 15-22", bookedBy: null, mapsUrl: null
+            },
+            drive: null,
+            activities: [
+                { time: "16:35", text: "Land at Ngurah Rai Airport (DPS)", subNote: "Get local SIM/eSIM, withdraw IDR", needsBooking: false },
+                { time: "17:30", text: "Transfer to Seminyak", subNote: "45 min by Grab · ~IDR 150-250k", needsBooking: false },
+                { time: "Evening", text: "Check in & settle", subNote: "Sunset beach walk if energy allows", needsBooking: false },
+                { time: "Dinner", text: "Low-key dinner on Jl. Kayu Aya (Eat Street)", subNote: "Rest after 9.5h flight", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "flexible", note: "", restaurants: [] },
+                lunch: { status: "flexible", note: "On flight", restaurants: [] },
+                dinner: { status: "options", note: "", restaurants: [
+                    { name: "Jl. Kayu Aya Eat Street", desc: "Local Indonesian · Casual", rating: "4.5★", mapsUrl: "maps.google.com/?q=Kayu+Aya+Eat+Street+Seminyak" }
+                ]}
+            },
+            route: null,
+            warnings: ["Don't over-plan on arrival day"],
+            gems: ["Local SIM at airport is easiest"]
+        },
+        {
+            dayNumber: 2, date: "Aug 16", dayOfWeek: "Sat",
+            title: "Uluwatu Highlights + Kecak", location: "Seminyak & Uluwatu",
+            backgroundImage: "https://images.unsplash.com/photo-1583649014236-89bb85bb24af?w=800",
+            flight: null,
+            hotel: {
+                name: "Courtyard by Marriott Bali Seminyak", status: "confirmed",
+                note: "Aug 15-22", bookedBy: null, mapsUrl: null
+            },
+            drive: null,
+            activities: [
+                { time: "Morning", text: "Slow breakfast, then tour pickup", subNote: "Book: Uluwatu Highlights Tour · 4.7★ · ~$22", needsBooking: true },
+                { time: "Afternoon", text: "Water Blow (Nusa Dua), GWK Cultural Park, Melasti Beach", subNote: "Full-day tour with hotel pickup", needsBooking: false },
+                { time: "Sunset", text: "Uluwatu Temple at sunset", subNote: "Arrive early for good Kecak seat", needsBooking: false },
+                { time: "18:00", text: "Kecak Fire Dance", subNote: "Clifftop over Indian Ocean · Bring light layer", needsBooking: false },
+                { time: "20:00", text: "Dinner", subNote: "Single Fin (clifftop) or back in Seminyak", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "flexible", note: "Before tour", restaurants: [] },
+                lunch: { status: "included", note: "During tour", restaurants: [] },
+                dinner: { status: "options", note: "", restaurants: [
+                    { name: "Single Fin", desc: "Clifftop views · Modern Asian", rating: "4.6★", mapsUrl: "maps.google.com/?q=Single+Fin+Uluwatu" },
+                    { name: "La Plancha", desc: "Beanbags on sand · Seafood", rating: "4.5★", mapsUrl: "maps.google.com/?q=La+Plancha+Seminyak" },
+                    { name: "Potato Head Beach Club", desc: "Clifftop pool bar · Views", rating: "4.4★", mapsUrl: "maps.google.com/?q=Potato+Head+Seminyak" }
+                ]}
+            },
+            route: null,
+            warnings: ["⚠️ Macaque monkeys snatch sunglasses & hats", "Sarongs provided for temple coverage"],
+            gems: ["💡 Clifftop walk south of temple is quieter with great photos"]
+        },
+        {
+            dayNumber: 3, date: "Aug 17", dayOfWeek: "Mon",
+            title: "Work Day · Indonesian Independence Day", location: "Seminyak",
+            backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+            flight: null,
+            hotel: {
+                name: "Courtyard by Marriott Bali Seminyak", status: "confirmed",
+                note: "Aug 15-22", bookedBy: null, mapsUrl: null
+            },
+            drive: null,
+            activities: [
+                { time: "Morning", text: "Morning free until 13:30", subNote: "Beach · breakfast · yoga · massage · Canggu café scene", needsBooking: false },
+                { time: "14:00", text: "Work Dubai hours (14:00-21:00)", subNote: "Test video call quality · Use business hub if WiFi drops", needsBooking: false },
+                { time: "Afternoon", text: "Optional: Hari Kemerdekaan celebrations", subNote: "Flag ceremonies · village games · panjat pinang", needsBooking: false },
+                { time: "Evening", text: "Dinner after 21:00", subNote: "Sarong · Mama San · Merah Putih · Motel Mexicola", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "flexible", note: "Beach café", restaurants: [] },
+                lunch: { status: "flexible", note: "", restaurants: [] },
+                dinner: { status: "options", note: "After 21:00", restaurants: [
+                    { name: "Sarong", desc: "Fine dining Indonesian", rating: "4.7★", mapsUrl: "maps.google.com/?q=Sarong+Bali" },
+                    { name: "Mama San", desc: "Asian fusion · rooftop", rating: "4.6★", mapsUrl: "maps.google.com/?q=Mama+San+Bali" },
+                    { name: "Merah Putih", desc: "Modern Indonesian · beautiful room", rating: "4.5★", mapsUrl: "maps.google.com/?q=Merah+Putih+Bali" }
+                ]}
+            },
+            route: null,
+            warnings: ["⚠️ Windy evenings ~23-24°C · take light jacket to dinner"],
+            gems: ["💡 National holiday · catch morning flag ceremonies for authentic Bali"]
+        },
+        {
+            dayNumber: 4, date: "Aug 18", dayOfWeek: "Tue",
+            title: "Work Day", location: "Seminyak",
+            backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+            flight: null,
+            hotel: {
+                name: "Courtyard by Marriott Bali Seminyak", status: "confirmed",
+                note: "Aug 15-22", bookedBy: null, mapsUrl: null
+            },
+            drive: null,
+            activities: [
+                { time: "Morning", text: "Free until 13:30", subNote: "Beach club (quieter pre-noon) · spa/massage · Canggu", needsBooking: false },
+                { time: "14:00", text: "Work Dubai hours (14:00-21:00)", subNote: "Backup: Courtyard 24-hr business hub", needsBooking: false },
+                { time: "17:00", text: "Optional: Sunset drink", subNote: "Potato Head · La Plancha · Ku De Ta", needsBooking: false },
+                { time: "21:00+", text: "Dinner & evening", subNote: "Late dinner rotation", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "flexible", note: "Morning", restaurants: [] },
+                lunch: { status: "flexible", note: "", restaurants: [] },
+                dinner: { status: "options", note: "After 21:00", restaurants: [
+                    { name: "Motel Mexicola", desc: "Fun · cocktails · loud", rating: "4.3★", mapsUrl: "maps.google.com/?q=Motel+Mexicola+Bali" },
+                    { name: "Revolver", desc: "Café culture · laptops OK", rating: "4.4★", mapsUrl: "maps.google.com/?q=Revolver+Bali" }
+                ]}
+            },
+            route: null,
+            warnings: [],
+            gems: ["💡 Laptop-friendly: Revolver · Sisterfields · Expat Roasters"]
+        },
+        {
+            dayNumber: 5, date: "Aug 19", dayOfWeek: "Wed",
+            title: "Work Day", location: "Seminyak",
+            backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+            flight: null,
+            hotel: {
+                name: "Courtyard by Marriott Bali Seminyak", status: "confirmed",
+                note: "Aug 15-22", bookedBy: null, mapsUrl: null
+            },
+            drive: null,
+            activities: [
+                { time: "Morning", text: "Free until 13:30", subNote: "Yoga · pool · beach walk · café", needsBooking: false },
+                { time: "14:00", text: "Work Dubai hours", subNote: "Business hub backup available", needsBooking: false },
+                { time: "Afternoon", text: "Pre-work reset: 90-min massage", subNote: "Bali's best-value luxury pricing", needsBooking: false },
+                { time: "Evening", text: "Dinner after 21:00", subNote: "Explore different neighborhood", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "flexible", note: "", restaurants: [] },
+                lunch: { status: "flexible", note: "", restaurants: [] },
+                dinner: { status: "options", note: "After 21:00", restaurants: [
+                    { name: "Sarong", desc: "Fine dining", rating: "4.7★", mapsUrl: "maps.google.com/?q=Sarong+Bali" },
+                    { name: "Mama San", desc: "Asian fusion", rating: "4.6★", mapsUrl: "maps.google.com/?q=Mama+San+Bali" }
+                ]}
+            },
+            route: null,
+            warnings: [],
+            gems: ["💡 Afternoon spa as work-reset ritual"]
+        },
+        {
+            dayNumber: 6, date: "Aug 20", dayOfWeek: "Thu",
+            title: "Work Day", location: "Seminyak",
+            backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+            flight: null,
+            hotel: {
+                name: "Courtyard by Marriott Bali Seminyak", status: "confirmed",
+                note: "Aug 15-22", bookedBy: null, mapsUrl: null
+            },
+            drive: null,
+            activities: [
+                { time: "Morning", text: "Free until 13:30", subNote: "Canggu · beach · gym", needsBooking: false },
+                { time: "14:00", text: "Work Dubai hours", subNote: "", needsBooking: false },
+                { time: "Afternoon", text: "Sunset drink (pre-work ~17:00)", subNote: "Rooftops: Ku De Ta or Potato Head", needsBooking: false },
+                { time: "21:00+", text: "Late dinner", subNote: "Book for 21:00-21:30", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "flexible", note: "", restaurants: [] },
+                lunch: { status: "flexible", note: "", restaurants: [] },
+                dinner: { status: "options", note: "After 21:00", restaurants: [
+                    { name: "Petitenget temples end", desc: "Sunset · calm", rating: "4.3★", mapsUrl: "maps.google.com/?q=Petitenget+Bali" }
+                ]}
+            },
+            route: null,
+            warnings: ["⚠️ Windy · cool evenings · light jacket"],
+            gems: ["💡 Petitenget temple end beach is calmer than club stretch"]
+        },
+        {
+            dayNumber: 7, date: "Aug 21", dayOfWeek: "Fri",
+            title: "Work Day · Wrap-up", location: "Seminyak",
+            backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+            flight: null,
+            hotel: {
+                name: "Courtyard by Marriott Bali Seminyak", status: "confirmed",
+                note: "Check-out morning Aug 22", bookedBy: null, mapsUrl: null
+            },
+            drive: null,
+            activities: [
+                { time: "Morning", text: "Last beach morning", subNote: "Savor Seminyak", needsBooking: false },
+                { time: "14:00", text: "Work Dubai hours", subNote: "Last work day", needsBooking: false },
+                { time: "Evening", text: "Dinner prep for early flight", subNote: "Early night · 7am flight tomorrow", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "flexible", note: "", restaurants: [] },
+                lunch: { status: "flexible", note: "", restaurants: [] },
+                dinner: { status: "options", note: "Early", restaurants: [
+                    { name: "Sarong", desc: "Last Seminyak dinner", rating: "4.7★", mapsUrl: "maps.google.com/?q=Sarong+Bali" }
+                ]}
+            },
+            route: null,
+            warnings: ["⚠️ Early flight 07:10 next day · pack tonight"],
+            gems: []
+        },
+        {
+            dayNumber: 8, date: "Aug 22", dayOfWeek: "Sat",
+            title: "Komodo Liveaboard Day 1", location: "Labuan Bajo & Liveaboard",
+            backgroundImage: "https://images.unsplash.com/photo-1511321334288-a01a3f06d711?w=800",
+            flight: {
+                date: "Aug 22", dayOfWeek: "Sat", airline: "AirAsia Z2 106",
+                from: "DPS", to: "LBJ", departTime: "07:10", arriveTime: "08:15",
+                terminal: "T1"
+            },
+            hotel: {
+                name: "Liveaboard Cabin", status: "confirmed",
+                note: "2D1N Komodo boat · Overnight on boat", bookedBy: null, mapsUrl: null
+            },
+            drive: null,
+            activities: [
+                { time: "05:00", text: "Check out of Courtyard", subNote: "Leave bags at bell desk · transfer to DPS", needsBooking: false },
+                { time: "07:10", text: "Flight DPS → LBJ (Seat 5A/7A)", subNote: "Left window · volcano views (Agung, Rinjani)", needsBooking: false },
+                { time: "08:30", text: "Airport pickup", subNote: "Transfer to liveaboard (10 min)", needsBooking: false },
+                { time: "10:30", text: "Board the boat", subNote: "Snorkeling safety briefing", needsBooking: false },
+                { time: "Afternoon", text: "Snorkel at Manjarite Island", subNote: "Clear water · coral reefs", needsBooking: false },
+                { time: "Sunset", text: "Kalong Island flying foxes", subNote: "Thousands launch at dusk", needsBooking: false },
+                { time: "Evening", text: "Dinner on board", subNote: "Sleep in cabin", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "included", note: "On boat", restaurants: [] },
+                lunch: { status: "included", note: "On boat", restaurants: [] },
+                dinner: { status: "included", note: "On boat", restaurants: [] }
+            },
+            route: null,
+            warnings: ["⚠️ Take motion-sickness tablet before boarding", "⚠️ Bring light layer for cool boat ride & sleeping on deck"],
+            gems: ["💡 Reef-safe sunscreen + hat + dry bag essential"]
+        },
+        {
+            dayNumber: 9, date: "Aug 23", dayOfWeek: "Sun",
+            title: "Komodo Liveaboard Day 2 → Hotel", location: "Padar · Komodo · Pink Beach · Labuan Bajo",
+            backgroundImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800",
+            flight: null,
+            hotel: {
+                name: "Oh!Julia Hotel Komodo", status: "confirmed",
+                note: "Night 1 of 2 · Check-in 17:00", bookedBy: null, mapsUrl: null
+            },
+            drive: null,
+            activities: [
+                { time: "05:00", text: "Padar Island sunrise", subNote: "Iconic ridgeline viewpoint · steep but short 20-min climb", needsBooking: false },
+                { time: "06:30", text: "Breakfast on board", subNote: "", needsBooking: false },
+                { time: "Morning", text: "Swim/relax at Pink Beach", subNote: "", needsBooking: false },
+                { time: "12:00", text: "Lunch on board", subNote: "", needsBooking: false },
+                { time: "Afternoon", text: "Komodo Island ranger walk", subNote: "Observe dragons from safe distance", needsBooking: false },
+                { time: "Afternoon", text: "Snorkel at Manta Point", subNote: "Sea conditions permitting · August on-season for mantas", needsBooking: false },
+                { time: "17:00", text: "Return to Labuan Bajo", subNote: "Drop-off at Oh!Julia Hotel", needsBooking: false },
+                { time: "18:00", text: "Rooftop pool sunset drink", subNote: "Harbour views", needsBooking: false },
+                { time: "20:00", text: "Dinner at Kampung Ujung", subNote: "Harbourside grilled-fish stalls · pick your catch", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "included", note: "On boat", restaurants: [] },
+                lunch: { status: "included", note: "On boat", restaurants: [] },
+                dinner: { status: "options", note: "Labuan Bajo", restaurants: [
+                    { name: "Kampung Ujung", desc: "Local night market · grilled fish", rating: "4.5★", mapsUrl: "maps.google.com/?q=Kampung+Ujung+Labuan+Bajo" },
+                    { name: "Oh!Julia Hotel", desc: "Rooftop pool bar · views", rating: "4.3★", mapsUrl: "maps.google.com/?q=Oh+Julia+Hotel" }
+                ]}
+            },
+            route: null,
+            warnings: ["⚠️ Stay close to ranger on dragon trek", "⚠️ Light layer for 05:00 pre-dawn start on deck (you run cold)"],
+            gems: ["💡 Kampung Ujung is the local move · better & cheaper than tourist restaurants"]
+        },
+        {
+            dayNumber: 10, date: "Aug 24", dayOfWeek: "Mon",
+            title: "Free Day · Caves & Sunset", location: "Labuan Bajo",
+            backgroundImage: "https://images.unsplash.com/photo-1511379938547-c1f69b13d835?w=800",
+            flight: null,
+            hotel: {
+                name: "Oh!Julia Hotel Komodo", status: "confirmed",
+                note: "Night 2 of 2", bookedBy: null, mapsUrl: null
+            },
+            drive: null,
+            activities: [
+                { time: "Morning", text: "Sleep in after early boat days", subNote: "Late breakfast at hotel", needsBooking: false },
+                { time: "Morning", text: "Rangko Cave", subNote: "Underground lake · crystal turquoise water · swim inside", needsBooking: true },
+                { time: "Afternoon", text: "Batu Cermin (Mirror Stone Cave)", subNote: "Glittering limestone walls · tunnel system · hard hats provided", needsBooking: false },
+                { time: "Afternoon", text: "Rooftop pool return", subNote: "Afternoon drink · harbour views", needsBooking: false },
+                { time: "Sunset", text: "Sylvia Hill (Bukit Sylvia)", subNote: "Hilltop with Teletubbies hills views · sea & islands", needsBooking: false },
+                { time: "Evening", text: "Farewell dinner", subNote: "Kampung Ujung or harbour restaurant", needsBooking: false },
+                { time: "22:00", text: "Early night", subNote: "Flight in the morning", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "flexible", note: "Late breakfast at hotel", restaurants: [] },
+                lunch: { status: "flexible", note: "", restaurants: [] },
+                dinner: { status: "options", note: "Farewell dinner", restaurants: [
+                    { name: "Kampung Ujung", desc: "Grilled fish · market", rating: "4.5★", mapsUrl: "maps.google.com/?q=Kampung+Ujung+Labuan+Bajo" }
+                ]}
+            },
+            route: null,
+            warnings: ["⚠️ Rangko Cave best visited around midday when light enters", "⚠️ Sylvia Hill is steep/sandy hike · wear regular shoes not sandals"],
+            gems: ["💡 Rangko Cave is best-kept secret · most visitors miss it"]
+        },
+        {
+            dayNumber: 11, date: "Aug 25", dayOfWeek: "Tue",
+            title: "Fly Back to Bali", location: "Labuan Bajo → Seminyak",
+            backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
+            flight: {
+                date: "Aug 25", dayOfWeek: "Tue", airline: "AirAsia Z2 109",
+                from: "LBJ", to: "DPS", departTime: "10:35", arriveTime: "11:45",
+                terminal: "T1"
+            },
+            hotel: {
+                name: "Courtyard by Marriott Bali Seminyak", status: "confirmed",
+                note: "Check-in Aug 25 · 25-28 Aug", bookedBy: null, mapsUrl: null
+            },
+            drive: null,
+            activities: [
+                { time: "08:30", text: "Leave Oh!Julia", subNote: "10 min to airport", needsBooking: false },
+                { time: "10:35", text: "Flight LBJ → DPS", subNote: "RIGHT side (seat F) for volcano views + sun behind you", needsBooking: false },
+                { time: "11:45", text: "Land Bali", subNote: "", needsBooking: false },
+                { time: "Afternoon", text: "Transfer to Courtyard", subNote: "45 min from DPS", needsBooking: false },
+                { time: "Afternoon", text: "Pool & decompress", subNote: "Rest before manta trip tomorrow", needsBooking: false },
+                { time: "Evening", text: "Sunset at La Plancha or Potato Head", subNote: "You haven't seen Seminyak sunset in 4 days", needsBooking: false },
+                { time: "Dinner", text: "Easy dinner in Seminyak", subNote: "", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "flexible", note: "Before flight", restaurants: [] },
+                lunch: { status: "flexible", note: "After landing", restaurants: [] },
+                dinner: { status: "options", note: "", restaurants: [
+                    { name: "La Plancha", desc: "Sunset beanbags", rating: "4.5★", mapsUrl: "maps.google.com/?q=La+Plancha+Seminyak" },
+                    { name: "Potato Head Beach Club", desc: "Pool bar sunset", rating: "4.4★", mapsUrl: "maps.google.com/?q=Potato+Head+Seminyak" }
+                ]}
+            },
+            route: null,
+            warnings: ["⚠️ Manta tour tomorrow · confirm wetsuit + hotel pickup from Seminyak"],
+            gems: []
+        },
+        {
+            dayNumber: 12, date: "Aug 26", dayOfWeek: "Wed",
+            title: "Manta Day Trip (Juan solo)", location: "Nusa Penida · Seminyak",
+            backgroundImage: "https://images.unsplash.com/photo-1495854484909-c894fdcc538d?w=800",
+            flight: null,
+            hotel: {
+                name: "Courtyard by Marriott Bali Seminyak", status: "confirmed",
+                note: "Aug 25-28", bookedBy: null, mapsUrl: null
+            },
+            drive: null,
+            activities: [
+                { time: "06:00", text: "Hotel pickup in Seminyak", subNote: "Transfer to Sanur port (adds 30-40 min vs direct)", needsBooking: true },
+                { time: "06:30", text: "Transfer to Sanur port", subNote: "", needsBooking: false },
+                { time: "07:00", text: "Fast boat to Nusa Penida", subNote: "30-45 min crossing (can be choppy)", needsBooking: false },
+                { time: "Morning", text: "Manta Point / Manta Bay snorkel", subNote: "Calmest & best early · mantas near surface (upwelling season)", needsBooking: false },
+                { time: "Afternoon", text: "Kelingking Beach viewpoint", subNote: "Iconic cliff photo", needsBooking: false },
+                { time: "Afternoon", text: "Broken Beach · Angel's Billabong · Crystal Bay", subNote: "", needsBooking: false },
+                { time: "Midday", text: "Lunch included", subNote: "", needsBooking: false },
+                { time: "Afternoon", text: "Fast boat back to Sanur", subNote: "Mid-late afternoon", needsBooking: false },
+                { time: "Late afternoon", text: "Grab back to Seminyak", subNote: "", needsBooking: false },
+                { time: "Evening", text: "Celebrate the mantas!", subNote: "Dinner in Seminyak", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "flexible", note: "Early before pickup", restaurants: [] },
+                lunch: { status: "included", note: "On the tour", restaurants: [] },
+                dinner: { status: "options", note: "Celebrate", restaurants: [
+                    { name: "Sarong", desc: "Fine dining", rating: "4.7★", mapsUrl: "maps.google.com/?q=Sarong+Bali" }
+                ]}
+            },
+            route: null,
+            warnings: ["⚠️ Wear the wetsuit · August water 22-26°C (you run cold · you'll last far longer)", "⚠️ Motion-sickness tablet 30 min before", "⚠️ Badung Strait can be choppy"],
+            gems: ["💡 Ask to include Gamat Bay if time allows · quiet coral · often overlooked"]
+        },
+        {
+            dayNumber: 13, date: "Aug 27", dayOfWeek: "Thu",
+            title: "Ubud Day Trip (Juan solo)", location: "Ubud · Seminyak",
+            backgroundImage: "https://images.unsplash.com/photo-1511379938547-c1f69b13d835?w=800",
+            flight: null,
+            hotel: {
+                name: "Courtyard by Marriott Bali Seminyak", status: "confirmed",
+                note: "Aug 25-28", bookedBy: null, mapsUrl: null
+            },
+            drive: { from: "Seminyak", to: "Ubud", duration: "1.5h", distance: "~70 km" },
+            activities: [
+                { time: "Morning", text: "Pickup to Ubud", subNote: "~1-1.5 hrs from Seminyak", needsBooking: true },
+                { time: "Morning", text: "Tegallalang rice terraces", subNote: "Northern end (quieter than main stretch)", needsBooking: false },
+                { time: "Afternoon", text: "Sacred Monkey Forest", subNote: "No loose sunglasses/bottles/food", needsBooking: false },
+                { time: "Afternoon", text: "Saraswati Temple", subNote: "", needsBooking: false },
+                { time: "Afternoon", text: "Ubud Market / town centre", subNote: "Browse local crafts", needsBooking: false },
+                { time: "Evening", text: "Back to Seminyak for dinner", subNote: "", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "flexible", note: "Before tour", restaurants: [] },
+                lunch: { status: "included", note: "During tour", restaurants: [] },
+                dinner: { status: "options", note: "Back in Seminyak", restaurants: [
+                    { name: "Sarong", desc: "Final Bali dinner", rating: "4.7★", mapsUrl: "maps.google.com/?q=Sarong+Bali" }
+                ]}
+            },
+            route: null,
+            warnings: ["⚠️ Ubud can get brief afternoon showers even in dry season", "⚠️ Monkey Forest: macaques steal items"],
+            gems: ["💡 Northern Tegallalang end is quieter than tour-bus main section", "💡 Alternatively: skip this day & rest in Seminyak (perfectly valid)"]
+        },
+        {
+            dayNumber: 14, date: "Aug 28", dayOfWeek: "Fri",
+            title: "Fly to Kuala Lumpur", location: "Seminyak → Kuala Lumpur",
+            backgroundImage: "https://images.unsplash.com/photo-1508784185304-5e037fde9237?w=800",
+            flight: {
+                date: "Aug 28", dayOfWeek: "Fri", airline: "TBD",
+                from: "DPS", to: "KUL", departTime: "11:15", arriveTime: "15:05",
+                terminal: "T1"
+            },
+            hotel: {
+                name: "TBD - Traders/Platinum 2/PARKROYAL", status: "to-book",
+                note: "28-30 Aug (2 nights)", bookedBy: null, mapsUrl: null
+            },
+            drive: null,
+            activities: [
+                { time: "08:30", text: "Checkout Courtyard", subNote: "Leave Seminyak", needsBooking: false },
+                { time: "09:00", text: "Transfer to DPS", subNote: "45 min", needsBooking: false },
+                { time: "11:15", text: "Flight DPS → KUL", subNote: "Nonstop · ~3h50", needsBooking: false },
+                { time: "15:05", text: "Land KL", subNote: "Transfer to hotel 45-60 min by Grab or KLIA Ekspres", needsBooking: false },
+                { time: "Evening", text: "Jalan Alor night food street", subNote: "Satay · grilled seafood · noodles · buzzing after dark", needsBooking: false },
+                { time: "Evening", text: "First rooftop drink", subNote: "SkyBar (Traders) or Heli Lounge Bar", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "flexible", note: "Morning", restaurants: [] },
+                lunch: { status: "flexible", note: "", restaurants: [] },
+                dinner: { status: "options", note: "Jalan Alor hawker street", restaurants: [
+                    { name: "Jalan Alor", desc: "Night hawker street · satay & seafood", rating: "4.4★", mapsUrl: "maps.google.com/?q=Jalan+Alor+Kuala+Lumpur" }
+                ]}
+            },
+            route: null,
+            warnings: ["⚠️ Maria stays in Bali", "⚠️ Malls open at 10:00, not 09:00", "⚠️ Merdeka markets on (National Month)"],
+            gems: ["💡 Download Grab for KL · it's cheap & essential"]
+        },
+        {
+            dayNumber: 15, date: "Aug 29", dayOfWeek: "Sat",
+            title: "The Big KL Day", location: "Kuala Lumpur",
+            backgroundImage: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800",
+            flight: null,
+            hotel: {
+                name: "TBD", status: "to-book",
+                note: "Aug 28-30", bookedBy: null, mapsUrl: null
+            },
+            drive: null,
+            activities: [
+                { time: "06:00", text: "Batu Caves", subNote: "Go first thing · rainbow steps · limestone caverns", needsBooking: false },
+                { time: "10:00", text: "Petronas Twin Towers", subNote: "Book skybridge/deck online ahead · KLCC Park views", needsBooking: true },
+                { time: "Midday", text: "Lunch in air-conditioned Suria KLCC", subNote: "Escape midday heat", needsBooking: false },
+                { time: "Afternoon", text: "Merdeka 118 observation deck", subNote: "World's 2nd-tallest building · The View", needsBooking: false },
+                { time: "Afternoon", text: "KL Tower or skip for rooftop", subNote: "Optional", needsBooking: false },
+                { time: "Afternoon", text: "Central Market + Chinatown / Petaling Street", subNote: "Merdeka markets running", needsBooking: false },
+                { time: "Sunset", text: "Rooftop sundowners", subNote: "SkyBar (Traders) · Vertigo (Banyan Tree) · Mesa on 51", needsBooking: false },
+                { time: "Evening", text: "Dinner + nightlife", subNote: "Changkat Bukit Bintang", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "flexible", note: "", restaurants: [] },
+                lunch: { status: "options", note: "KLCC air-conditioned", restaurants: [
+                    { name: "Suria KLCC", desc: "Shopping mall · many options", rating: "4.3★", mapsUrl: "maps.google.com/?q=Suria+KLCC" }
+                ]},
+                dinner: { status: "options", note: "Evening", restaurants: [
+                    { name: "Changkat Bukit Bintang", desc: "Nightlife street · bars & dining", rating: "4.3★", mapsUrl: "maps.google.com/?q=Changkat+Bukit+Bintang" },
+                    { name: "Lot 10 Hutong", desc: "Heritage hawker · air-conditioned", rating: "4.5★", mapsUrl: "maps.google.com/?q=Lot+10+Hutong+KL" }
+                ]}
+            },
+            route: null,
+            warnings: ["⚠️ August storms hit ~17:30-18:00 · plan rooftops a bit later or have indoor backup", "⚠️ Long trousers for mosques (Jamek)", "⚠️ Don't walk Bukit Bintang-Chinatown midday · it's hot/humid"],
+            gems: ["💡 Kampung Baru · village in shadow of skyscrapers · traditional food & striking photos", "💡 Heli Lounge Bar · drinks on an actual helipad · best skyline views for price"]
+        },
+        {
+            dayNumber: 16, date: "Aug 30", dayOfWeek: "Sun",
+            title: "Half Day KL → Fly Home", location: "Kuala Lumpur → Dubai",
+            backgroundImage: "https://images.unsplash.com/photo-1512207736139-d983b3f2b4c5?w=800",
+            flight: {
+                date: "Aug 30", dayOfWeek: "Sun", airline: "TBD",
+                from: "KUL", to: "DXB", departTime: "19:10", arriveTime: "22:10",
+                terminal: "T1"
+            },
+            hotel: null,
+            drive: null,
+            activities: [
+                { time: "Morning", text: "Brunch in KL", subNote: "", needsBooking: false },
+                { time: "Morning", text: "Last KLCC shopping or Merdeka-market wander", subNote: "Quiet morning move", needsBooking: false },
+                { time: "15:30", text: "Leave for KLIA", subNote: "Head to airport", needsBooking: false },
+                { time: "19:10", text: "Flight KUL → DXB", subNote: "Nonstop · ~7h", needsBooking: false },
+                { time: "22:10", text: "Land Dubai", subNote: "Arrive Sunday night", needsBooking: false },
+                { time: "Aug 31 Monday", text: "Fresh for Monday work", subNote: "", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "flexible", note: "Brunch", restaurants: [] },
+                lunch: { status: "flexible", note: "", restaurants: [] },
+                dinner: { status: "flexible", note: "On flight", restaurants: [] }
+            },
+            route: null,
+            warnings: ["⚠️ Merdeka peak is Aug 30 night fireworks + Aug 31 parade · you'll miss them (trade-off for on-time Monday)", "⚠️ Hot, humid, possible storm"],
+            gems: ["💡 You catch festive build-up · peak fireworks are the trade-off for Monday freshness"]
+        }
+    ]
+};
+
+const DAY_WEATHER = {
+    1: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-15" },
+    2: { lat: -8.7395, lon: 115.1689, isoDate: "2026-08-16" },
+    3: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-17" },
+    4: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-18" },
+    5: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-19" },
+    6: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-20" },
+    7: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-21" },
+    8: { lat: -8.4500, lon: 119.8822, isoDate: "2026-08-22" },
+    9: { lat: -8.3742, lon: 119.4025, isoDate: "2026-08-23" },
+    10: { lat: -8.4500, lon: 119.8822, isoDate: "2026-08-24" },
+    11: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-25" },
+    12: { lat: -8.7000, lon: 115.5000, isoDate: "2026-08-26" },
+    13: { lat: -8.5069, lon: 115.2625, isoDate: "2026-08-27" },
+    14: { lat: 3.1390, lon: 101.6869, isoDate: "2026-08-28" },
+    15: { lat: 3.1390, lon: 101.6869, isoDate: "2026-08-29" },
+    16: { lat: 3.1390, lon: 101.6869, isoDate: "2026-08-30" }
+};
+
+const COST_DATA = {
+    disclaimer: "All figures are estimates. Update with confirmed prices as bookings are made.",
+    summary: [
+        { cat: "✈️ Flights", amount: 0, note: "DXB-DPS-LBJ-DPS-KUL-DXB (Juan & Maria split)" },
+        { cat: "🏨 Accommodation", amount: 0, note: "Courtyard Seminyak (7 nights) + Liveaboard (1 night) + Oh!Julia (2 nights) + KL hotel (2 nights)" },
+        { cat: "🚗 Car Rental", amount: 0, note: "N/A - Grab/tours only" },
+        { cat: "🗺️ Activities & Tours", amount: 0, note: "Uluwatu · Nusa Penida · Ubud · Komodo boat · Labuan Bajo caves · KL tours" },
+        { cat: "🍽️ Food & Drinks", amount: 0, note: "Meals not included · dinners 21:00+ · rooftop cocktails" },
+        { cat: "⛽ Fuel", amount: 0, note: "N/A" },
+        { cat: "💡 Tips, Souvenirs & Misc", amount: 0, note: "IDR cash · park/ranger fees · personal" }
+    ],
+    days: {}
+};
+
+        // ============================================================
+        // DAY_WEATHER — Add coordinates per day to enable forecasts
+        // Uses Open-Meteo (free, no API key required)
+        // ============================================================
+        const DAY_WEATHER = {
+            // Add coords per day: dayNumber: { lat: 0.0, lon: 0.0, isoDate: "YYYY-MM-DD" }
+            // Example: 1: { lat: 48.8566, lon: 2.3522, isoDate: "2027-01-01" },
+        };
+
+        // ============================================================
+        // COST_DATA — Update with actual amounts as bookings are made
+        // ============================================================
+        const COST_DATA = {
+            disclaimer: "All figures are estimates. Update with confirmed prices as bookings are made.",
+            summary: [
+                { cat: "✈️ Flights",               amount: 0, note: "X pax · round-trip" },
+                { cat: "🏨 Accommodation",           amount: 0, note: "X nights · X rooms" },
+                { cat: "🚗 Car Rental",              amount: 0, note: "If applicable" },
+                { cat: "🗺️ Activities & Tours",      amount: 0, note: "Tours, entrance fees, etc." },
+                { cat: "🍽️ Food & Drinks",           amount: 0, note: "Meals not included in stays" },
+                { cat: "⛽ Fuel",                    amount: 0, note: "If self-driving" },
+                { cat: "💡 Tips, Souvenirs & Misc",  amount: 0, note: "Personal expenses" },
+            ],
+            days: {
+                // 1: { hotel: 0, activities: 0, food: 0, other: 0 },
+            }
+        };
+    </script>
+
+    <header>
+        <div class="header-content">
+            <button class="overview-btn" onclick="switchView('overview')">← Overview</button>
+            <div class="header-title" id="headerTitle">Trip Planner</div>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
+        </div>
+        <div class="day-tabs" id="dayTabs"></div>
+    </header>
+
+    <main class="container">
+        <!-- OVERVIEW TAB -->
+        <div class="day-view active" id="overview">
+
+            <!-- Currency Calculator — collapsed by default -->
+            <div class="collapsible-section section-calc" id="overviewCalcSection">
+                <div class="section-header collapsed" id="overviewCalcHeader">
+                    <h3>💱 Currency <span id="calcHeaderSub" style="font-size:11px;font-weight:400;color:var(--text-secondary);margin-left:4px;"></span></h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content collapsed" id="calcBody">
+                    <div style="padding:16px;">
+                        <div class="calc-row">
+                            <div class="calc-label">
+                                <div class="calc-label-code">AED</div>
+                                <div class="calc-label-name">UAE Dirham</div>
+                            </div>
+                            <input class="calc-input" id="calcInput0" type="number" placeholder="0" oninput="calcConvert(0)">
+                        </div>
+                        <div class="calc-row">
+                            <div class="calc-label">
+                                <div class="calc-label-code">USD</div>
+                                <div class="calc-label-name">US Dollar</div>
+                            </div>
+                            <input class="calc-input" id="calcInput1" type="number" placeholder="0" oninput="calcConvert(1)">
+                        </div>
+                        <div class="calc-row">
+                            <div class="calc-label">
+                                <div class="calc-label-code">EUR</div>
+                                <div class="calc-label-name">Euro</div>
+                            </div>
+                            <input class="calc-input" id="calcInput2" type="number" placeholder="0" oninput="calcConvert(2)">
+                        </div>
+                        <div class="calc-row" id="calcRow3" style="display:none">
+                            <div class="calc-label">
+                                <div class="calc-label-code" id="calcCode3"></div>
+                                <div class="calc-label-name" id="calcName3"></div>
+                            </div>
+                            <input class="calc-input" id="calcInput3" type="number" placeholder="0" oninput="calcConvert(3)">
+                        </div>
+                        <div class="calc-footer">
+                            <span class="calc-rates-note" id="calcRatesNote">Loading rates…</span>
+                            <button class="calc-refresh" onclick="fetchCalcRates(true)">↻ Refresh</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRIP-SPECIFIC SECTIONS: add here (e.g. route maps) -->
+
+            <!-- Weather for today's location — collapsed by default, shown only during the trip -->
+            <div class="collapsible-section" id="overviewWeatherSection" style="display:none;">
+                <div class="section-header collapsed" id="overview-wx-header">
+                    <h3>🌤 Weather<span class="wx-preview" id="wx-preview-overview"></span></h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content section-weather collapsed">
+                    <div id="wx-overview" style="padding: 12px 16px;">
+                        <div class="weather-loading">Loading forecast…</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Itinerary — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>📋 Itinerary</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div>
+                        <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:8px;">
+                            <button onclick="goToToday()" style="font-size:11px;padding:4px 10px;background:var(--accent-gold);color:var(--bg-primary);border:none;border-radius:5px;cursor:pointer;font-weight:600;font-family:inherit;">Today</button>
+                        </div>
+                        <table class="accommodation-table" id="accommodationTable"></table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Maps — add map div(s) here with id="mapXxx", then implement renderXxxMap() below -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>🗺️ Maps</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div>
+                        <!-- Example: <div id="mapMain" style="height:400px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);"></div> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flights — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>✈️ Flights</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content section-flight">
+                    <div class="flights-scroll" id="flightsList"></div>
+                </div>
+            </div>
+
+            <!-- Car Rental — expanded by default, hidden if TRIP_DATA.carRental is null -->
+            <div class="collapsible-section" id="carRentalSection" style="display:none;">
+                <div class="section-header">
+                    <h3>🚗 Car Rental</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div class="car-rental-info" id="carRentalInfo"></div>
+                </div>
+            </div>
+
+            <!-- Relevant Links — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>🔗 Relevant Links</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div class="overview-links" id="overviewLinksContent"></div>
+                </div>
+            </div>
+
+            <!-- Budget — expanded by default -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>💰 Budget</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div id="budgetCard"></div>
+                </div>
+            </div>
+
+            <!-- Travellers — expanded by default, moved to end -->
+            <div class="collapsible-section">
+                <div class="section-header">
+                    <h3>👥 Travellers</h3>
+                    <div class="chevron"></div>
+                </div>
+                <div class="section-content">
+                    <div class="travelers-list" id="travelersListView"></div>
+                </div>
+            </div>
+            <div style="text-align:center;padding:20px 0 8px;">
+                <a href="../" style="color:var(--accent-gold);text-decoration:none;font-size:13px;opacity:0.75;">← All trips</a>
+            </div>
+
+        </div>
+
+        <!-- DAY VIEWS -->
+        <div id="dayViewsContainer"></div>
+    </main>
+
+    <footer>
+        <p id="footerText">Trip Planner</p>
+    </footer>
+
+    <script>
+        // ============================================================
+        // RENDERING ENGINE
+        // ============================================================
+
+        const STATUS_STYLES = {
+            confirmed: { badge: "confirmed", label: "Confirmed" },
+            pending: { badge: "pending", label: "Pending" },
+            missing: { badge: "missing", label: "Missing" },
+            "to-book": { badge: "to-book", label: "To Book" },
+            included: { badge: "included", label: "Included" },
+            flexible: { badge: "options", label: "Flexible" },
+            options: { badge: "options", label: "Options" }
+        };
+
+        // Session storage for restaurant selections
+        const getSelectedRestaurants = (dayNum, mealType) => {
+            const key = `selected_${dayNum}_${mealType}`;
+            return JSON.parse(sessionStorage.getItem(key) || "[]");
+        };
+
+        const setSelectedRestaurant = (dayNum, mealType, restaurantName) => {
+            const key = `selected_${dayNum}_${mealType}`;
+            const selected = getSelectedRestaurants(dayNum, mealType);
+            const index = selected.indexOf(restaurantName);
+            if (index > -1) {
+                selected.splice(index, 1);
+            } else {
+                selected.push(restaurantName);
+            }
+            sessionStorage.setItem(key, JSON.stringify(selected));
+        };
+
+        const isRestaurantSelected = (dayNum, mealType, restaurantName) => {
+            return getSelectedRestaurants(dayNum, mealType).includes(restaurantName);
+        };
+
+        // Theme management
+        function initializeTheme() {
+            const saved = localStorage.getItem('theme-mode');
+            if (saved === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('themeToggle').textContent = '☀️';
+            } else {
+                document.body.classList.remove('light-mode');
+                document.getElementById('themeToggle').textContent = '🌙';
+            }
+        }
+
+        function toggleTheme() {
+            const isLight = document.body.classList.toggle('light-mode');
+            document.getElementById('themeToggle').textContent = isLight ? '☀️' : '🌙';
+            localStorage.setItem('theme-mode', isLight ? 'light' : 'dark');
+        }
+
+        function initializePage() {
+            initializeTheme();
+            document.getElementById('headerTitle').textContent = TRIP_DATA.title;
+            document.getElementById('footerText').textContent = TRIP_DATA.title + ' Trip Planner';
+            renderOverviewTab();
+            renderBudgetCard();
+            renderDayTabs();
+            renderDayViews();
+
+            // Auto-open today's day if within the trip; also load overview weather
+            const today = new Date().toISOString().split('T')[0];
+            for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
+                if (w.isoDate === today) {
+                    switchView(`day${dayNum}`);
+                    loadOverviewWeather(parseInt(dayNum));
+                    break;
+                }
+            }
+        }
+
+        function renderOverviewTab() {
+            // Flights
+            const flightsList = document.getElementById("flightsList");
+            flightsList.innerHTML = TRIP_DATA.flights
+                .map(f => `
+                    <div class="flight-card">
+                        <div class="flight-day">${f.dayOfWeek} ${f.date}</div>
+                        <div class="flight-route">${f.airline}</div>
+                        <div class="flight-times">${f.from} → ${f.to}</div>
+                        <div class="flight-times">${f.departTime}–${f.arriveTime}</div>
+                        <div class="flight-terminal">${f.terminal}</div>
+                        ${TRIP_DATA.checkInUrl ? `
+                        <div class="flight-checkin">
+                            <a href="${TRIP_DATA.checkInUrl}" target="_blank">Online Check-in</a>
+                        </div>` : ''}
+                    </div>
+                `)
+                .join("");
+
+            // Travellers
+            const travelersView = document.getElementById("travelersListView");
+            travelersView.innerHTML = TRIP_DATA.travelers
+                .map(t => `<div class="traveler-chip">${t}</div>`)
+                .join("");
+
+            // Car rental (conditional — show/hide entire section)
+            const carRentalSection = document.getElementById("carRentalSection");
+            const carRentalInfo = document.getElementById("carRentalInfo");
+            if (TRIP_DATA.carRental) {
+                carRentalInfo.innerHTML = `
+                    <strong>${TRIP_DATA.carRental.company}</strong><br>
+                    📞 ${TRIP_DATA.carRental.phone}<br>
+                    🌐 ${TRIP_DATA.carRental.website}
+                `;
+                carRentalSection.style.display = '';
+            }
+
+            // Links (Spotify, Tricount, Download)
+            const linksContent = document.getElementById('overviewLinksContent');
+            const links = [];
+            if (TRIP_DATA.spotifyPlaylist) links.push(`<a href="${TRIP_DATA.spotifyPlaylist}" target="_blank" class="spotify-link"><span class="spotify-icon">♪</span><span>Trip Playlist</span></a>`);
+            if (TRIP_DATA.tricountUrl) links.push(`<a href="${TRIP_DATA.tricountUrl}" target="_blank" class="tricount-link"><span>💰</span><span>Trip Expenses</span></a>`);
+            linksContent.innerHTML = `
+                ${links.join('')}
+                <button class="download-btn" onclick="downloadPage()">⬇ Download Offline</button>
+            `;
+
+            // Accommodation / itinerary table
+            const accTable = document.getElementById("accommodationTable");
+            let tableHTML = `
+                <tr>
+                    <th>Day</th>
+                    <th>Date</th>
+                    <th>Plan</th>
+                    <th>Status</th>
+                </tr>
+            `;
+
+            TRIP_DATA.days.forEach((day, i) => {
+                const hotelBadge = day.hotel.status === 'confirmed' ? 'ready' : day.hotel.status === 'missing' ? 'missing' : 'need-booking';
+                const hasToBook = day.activities && day.activities.some(a => a.needsBooking);
+                const actBadge = hasToBook ? 'need-booking' : (day.activities && day.activities.length > 0 ? 'ready' : 'missing');
+
+                tableHTML += `
+                    <tr data-day="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">
+                        <td>${day.dayNumber}</td>
+                        <td style="white-space: nowrap; font-size: 12px;">${day.dayOfWeek} ${day.date.split(' ')[1] || ''} ${day.date.split(' ')[0]}</td>
+                        <td>
+                            <div style="font-weight: 600; color: var(--accent-gold); font-size: 13px;">${day.title}</div>
+                            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">${day.location}</div>
+                        </td>
+                        <td>
+                            <span class="badge ${hotelBadge}" style="font-size: 10px; padding: 2px 6px; margin: 0 0 4px 0; display: block; text-align: center;">🏨 ${hotelBadge === 'ready' ? '✓' : '✗'}</span>
+                            <span class="badge ${actBadge}" style="font-size: 10px; padding: 2px 6px; margin: 0; display: block; text-align: center;">📋 ${actBadge === 'ready' ? '✓' : '!'}</span>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            accTable.innerHTML = tableHTML;
+        }
+
+        function renderDayTabs() {
+            const todayISO = new Date().toISOString().split('T')[0];
+            let tabsHTML = '<div class="day-tab active" data-view="overview" onclick="switchView(\'overview\')">Overview</div>';
+            TRIP_DATA.days.forEach(day => {
+                const hasMissing = day.hotel.status === "missing" ||
+                    day.meals.breakfast.status === "missing" ||
+                    day.meals.lunch.status === "missing" ||
+                    day.meals.dinner.status === "missing";
+                const isToday = DAY_WEATHER[day.dayNumber]?.isoDate === todayISO;
+                const className = `day-tab ${hasMissing ? 'has-missing' : ''} ${isToday ? 'today' : ''}`.trim();
+                const datePartials = day.date.split(' ');
+                tabsHTML += `<div class="${className}" data-view="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">Day ${day.dayNumber}${isToday ? ' ·' : ''}<br><span style="font-size:10px;opacity:0.8;">${isToday ? 'Today' : (day.dayOfWeek + ' ' + (datePartials[1] || '') + ' ' + datePartials[0])}</span></div>`;
+            });
+            document.getElementById("dayTabs").innerHTML = tabsHTML;
+        }
+
+        function renderDayViews() {
+            const container = document.getElementById("dayViewsContainer");
+            container.innerHTML = TRIP_DATA.days
+                .map(day => `<div class="day-view" id="day${day.dayNumber}">${renderDayContent(day)}</div>`)
+                .join("");
+            attachCollapsibleHandlers();
+            TRIP_DATA.days.forEach(day => loadWeatherWidget(day.dayNumber));
+        }
+
+        function attachCollapsibleHandlers() {
+            document.querySelectorAll('.section-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    const wasCollapsed = this.classList.contains('collapsed');
+                    this.classList.toggle('collapsed');
+                    this.nextElementSibling.classList.toggle('collapsed');
+                    if (wasCollapsed) {
+                        // Weather: refresh when opened
+                        const wxDay = this.dataset.wxDay;
+                        if (wxDay) loadWeatherWidget(parseInt(wxDay));
+                        // Per-day calc: fetch rates when opened
+                        const calcDay = this.closest('.section-calc')?.dataset?.calcDay;
+                        if (calcDay) {
+                            if (!calcRates) fetchCalcRates(false).then(() => dcUpdateNote(parseInt(calcDay)));
+                            else dcUpdateNote(parseInt(calcDay));
+                        }
+                        // Overview calc
+                        if (this.id === 'overviewCalcHeader') {
+                            if (!calcRates) fetchCalcRates(false);
+                        }
+                    }
+                });
+            });
+            document.querySelectorAll('.btn-expand-all').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const dv = this.closest('.day-view');
+                    dv.querySelectorAll('.section-header').forEach(h => h.classList.remove('collapsed'));
+                    dv.querySelectorAll('.section-content').forEach(c => c.classList.remove('collapsed'));
+                });
+            });
+            document.querySelectorAll('.btn-collapse-all').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const dv = this.closest('.day-view');
+                    dv.querySelectorAll('.section-header').forEach(h => h.classList.add('collapsed'));
+                    dv.querySelectorAll('.section-content').forEach(c => c.classList.add('collapsed'));
+                });
+            });
+        }
+
+        function renderDayContent(day) {
+            let html = `
+                <div class="hero" style="background-image: url('${day.backgroundImage}')">
+                    <div class="hero-day-number">${day.dayNumber}</div>
+                    <div class="hero-title">${day.title}</div>
+                    <div class="hero-location">${day.location}</div>
+                </div>
+                <div class="expand-all-container">
+                    <button class="btn-expand-all">Expand All</button>
+                    <button class="btn-collapse-all">Collapse All</button>
+                </div>
+            `;
+
+            // Currency — collapsed by default
+            html += renderCalcSection(day.dayNumber);
+
+            // Weather — collapsed by default
+            if (DAY_WEATHER[day.dayNumber]) {
+                html += `<div class="collapsible-section">
+                    <div class="section-header collapsed" id="wx-header-${day.dayNumber}" data-wx-day="${day.dayNumber}">
+                        <h3>🌤 Weather<span class="wx-preview" id="wx-preview-${day.dayNumber}"></span></h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content section-weather collapsed">
+                        <div id="wx-${day.dayNumber}" style="padding: 12px 16px;">
+                            <div class="weather-loading">Loading forecast…</div>
+                        </div>
+                    </div>
+                </div>`;
+            }
+
+            // Flight section on flight days
+            if (day.flight) {
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header">
+                            <h3>✈️ Flight</h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-flight">
+                            <div>
+                                <div style="margin-bottom: 12px;">
+                                    <div style="font-weight: 600; color: var(--accent-gold); font-size: 15px; margin-bottom: 8px;">${day.flight.airline}</div>
+                                    <div style="color: var(--text-primary); margin-bottom: 4px;"><strong>${day.flight.from} → ${day.flight.to}</strong></div>
+                                    <div style="color: var(--text-secondary); font-size: 13px; margin-bottom: 6px;">Depart: ${day.flight.departTime} · Arrive: ${day.flight.arriveTime}</div>
+                                    <div style="color: var(--text-secondary); font-size: 12px; margin-bottom: 12px;">${day.flight.terminal}</div>
+                                    ${TRIP_DATA.checkInUrl ? `<a href="${TRIP_DATA.checkInUrl}" target="_blank" style="display: inline-block; padding: 8px 14px; background-color: #3A7DA0; color: white; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; transition: var(--transition);" onmouseover="this.style.backgroundColor='#4a9dc0'" onmouseout="this.style.backgroundColor='#3A7DA0'">Online Check-in</a>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (day.drive) {
+                html += `
+                    <div class="drive-banner">
+                        <div class="drive-info">
+                            <div class="drive-route">${day.drive.from} → ${day.drive.to}</div>
+                            <div class="drive-duration">${day.drive.duration} · ${day.drive.distance}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            html += renderHotelCard(day);
+
+            if (day.activities.length > 0) {
+                html += renderActivitiesSection(day);
+            }
+
+            if (Object.values(day.meals).some(m => m.restaurants.length > 0 || m.status !== 'flexible')) {
+                html += renderMealsSection(day);
+            }
+
+            if (day.route) {
+                html += `
+                    <div class="card">
+                        <a href="https://${day.route}" target="_blank" style="color: var(--accent-gold); text-decoration: none;">
+                            📍 View Route on Google Maps →
+                        </a>
+                    </div>
+                `;
+            }
+
+            if (day.warnings.length > 0) {
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header">
+                            <h3>⚠️ Warnings</h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-warnings">
+                            <div style="padding: 16px;">
+                                ${day.warnings.map(w => `<div class="warning" style="margin-bottom: 12px; display: block;">${w}</div>`).join("")}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (day.gems.length > 0) {
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header">
+                            <h3>💎 Hidden Gems</h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-gems">
+                            <div style="padding: 16px;">
+                                ${day.gems.map(g => `<div class="gem" style="margin-bottom: 12px; display: block;">${g}</div>`).join("")}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            const dc = COST_DATA.days[day.dayNumber];
+            if (dc) {
+                const total = dc.hotel + dc.activities + dc.food + (dc.other || 0);
+                const parts = [];
+                if (dc.hotel)      parts.push(`🏨 AED ${dc.hotel}`);
+                if (dc.activities) parts.push(`🗺️ AED ${dc.activities}`);
+                if (dc.food)       parts.push(`🍽️ AED ${dc.food}`);
+                if (dc.other)      parts.push(`⛽ AED ${dc.other}`);
+                html += `<div class="day-cost-bar">
+                    <span class="day-cost-label">💰 Est. cost${day.flight ? ' · excl. flights' : ''}</span>
+                    <span class="day-cost-items">${parts.join(' · ')}</span>
+                    <span class="day-cost-total">~AED ${total}</span>
+                </div>`;
+            }
+
+            return html;
+        }
+
+        function renderActivitiesSection(day) {
+            // Group activities by time
+            const groupedActivities = {};
+            const activityOrder = [];
+
+            day.activities.forEach(a => {
+                if (!groupedActivities[a.time]) {
+                    groupedActivities[a.time] = [];
+                    activityOrder.push(a.time);
+                }
+                groupedActivities[a.time].push(a);
+            });
+
+            let html = `
+                <div class="collapsible-section">
+                    <div class="section-header">
+                        <h3>Activities</h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content section-activities">
+                        <div style="padding: 16px;">
+                            <div class="timeline">
+            `;
+
+            activityOrder.forEach(timeLabel => {
+                const activities = groupedActivities[timeLabel];
+
+                // Check if this is a specific time (HH:MM format) or a period (Morning, Afternoon, etc.)
+                const isSpecificTime = /^\d{1,2}:\d{2}/.test(timeLabel);
+
+                if (!isSpecificTime) {
+                    // Time period (Morning, Afternoon, etc.)
+                    html += `<div class="timeline-time-group-header">${timeLabel}</div>`;
+                    activities.forEach(a => {
+                        const isAlternative = a.time.toLowerCase() === 'alt' || (a.text && a.text.toLowerCase().includes('instead of')) || (a.text && a.text.toLowerCase().includes('alternative'));
+                        const mapsUrl = a.mapsUrl ? `https://${a.mapsUrl}` : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.text + ' ' + day.location)}`;
+                        html += `
+                            <div class="timeline-item-bullet ${isAlternative ? 'alternative' : ''}">
+                                <span${isAlternative ? ' style="color: #E8C66E;"' : ''}>${a.text}</span>
+                                <a href="${mapsUrl}" target="_blank" class="activity-maps-link">📍</a>
+                                ${a.subNote ? `<div class="timeline-note">${a.subNote}</div>` : ""}
+                                ${a.needsBooking ? '<div class="timeline-tag">⚠ Book in advance</div>' : ""}
+                            </div>
+                        `;
+                    });
+                } else {
+                    // Specific time
+                    activities.forEach(a => {
+                        const isAlternative = a.text && a.text.toLowerCase().includes('alternative');
+                        const mapsUrl = a.mapsUrl ? `https://${a.mapsUrl}` : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.text + ' ' + day.location)}`;
+                        html += `
+                            <div class="timeline-item">
+                                <div class="timeline-time">${timeLabel}</div>
+                                <div class="timeline-text">${a.text} <a href="${mapsUrl}" target="_blank" class="activity-maps-link">📍</a></div>
+                                ${a.subNote ? `<div class="timeline-note">${a.subNote}</div>` : ""}
+                                ${a.needsBooking ? '<div class="timeline-tag">⚠ Book in advance</div>' : ""}
+                            </div>
+                        `;
+                    });
+                }
+            });
+
+            html += `
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            return html;
+        }
+
+        function renderHotelCard(day) {
+            let html = `<div class="collapsible-section">
+                <div class="section-header"><h3>🏨 Hotel</h3><div class="chevron"></div></div>
+                <div class="section-content section-hotel"><div style="padding:16px;">`;
+
+            if (day.hotel.status === 'missing') {
+                html += `<div class="hotel-info" style="border-left:4px solid #8A3A3A;">
+                    <div class="hotel-name"><span class="badge missing" style="margin-right:8px;font-size:11px;">Missing</span>No hotel booked</div>
+                    ${day.hotel.note ? `<div class="hotel-note">${day.hotel.note}</div>` : ""}
+                </div>`;
+            } else {
+                const pin = day.hotel.mapsUrl ? ` <a href="https://${day.hotel.mapsUrl}" target="_blank" class="activity-maps-link" title="Maps">📍</a>` : '';
+                html += `<div class="hotel-info">
+                    <div class="hotel-name">${day.hotel.name}${pin}</div>
+                    ${day.hotel.note ? `<div class="hotel-note">${day.hotel.note}</div>` : ""}
+                </div>`;
+            }
+
+            if (day.hotel.altHotel) {
+                if (day.hotel.altHotel.status === 'missing') {
+                    html += `<div class="hotel-info" style="border-left:4px solid #9A7A30;margin-top:12px;">
+                        <div class="hotel-name"><span class="badge pending" style="margin-right:8px;font-size:11px;">Pending</span>${day.hotel.altHotel.name}</div>
+                        ${day.hotel.altHotel.note ? `<div class="hotel-note">${day.hotel.altHotel.note}</div>` : ""}
+                    </div>`;
+                } else {
+                    const altPin = day.hotel.altHotel.mapsUrl ? ` <a href="https://${day.hotel.altHotel.mapsUrl}" target="_blank" class="activity-maps-link" title="Maps">📍</a>` : '';
+                    html += `<div class="hotel-info" style="border-left:4px solid #9A7A30;margin-top:12px;">
+                        <div class="hotel-name">${day.hotel.altHotel.name}${altPin}</div>
+                        ${day.hotel.altHotel.note ? `<div class="hotel-note">${day.hotel.altHotel.note}</div>` : ""}
+                    </div>`;
+                }
+            }
+
+            html += `</div></div></div>`;
+            return html;
+        }
+
+        function renderMealsSection(day) {
+            let html = `
+                <div class="collapsible-section">
+                    <div class="section-header">
+                        <h3>Meals</h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content section-meals">
+                        <div class="meals-section">
+            `;
+
+            const mealTypes = ['breakfast', 'lunch', 'dinner'];
+            const mealLabels = { breakfast: 'Breakfast', lunch: 'Lunch', dinner: 'Dinner' };
+
+            mealTypes.forEach((mealType, idx) => {
+                const meal = day.meals[mealType];
+                const statusData = STATUS_STYLES[meal.status];
+
+                html += `
+                    <div style="margin-bottom: 16px; padding-bottom: 12px; ${idx < mealTypes.length - 1 ? 'border-bottom: 1px solid var(--border-color);' : ''}">
+                        <div class="meal-type">${mealLabels[mealType]}</div>
+                        <span class="badge ${statusData.badge}">${statusData.label}</span>
+                `;
+
+                if (meal.note) {
+                    html += `<div class="meal-note">${meal.note}</div>`;
+                }
+
+                if (meal.restaurants.length > 0) {
+                    html += `<div class="restaurant-cards">`;
+                    meal.restaurants.forEach(rest => {
+                        const isSelected = isRestaurantSelected(day.dayNumber, mealType, rest.name);
+                        html += `
+                            <div class="restaurant-card ${isSelected ? 'selected' : ''}">
+                                <div class="restaurant-name">${rest.name}</div>
+                                <div class="restaurant-desc">${rest.desc}</div>
+                                <div class="restaurant-meta">
+                                    <span class="restaurant-rating">${rest.rating}</span>
+                                </div>
+                                <div class="restaurant-buttons">
+                                    <button class="btn-select" onclick="toggleRestaurant(${day.dayNumber}, '${mealType}', '${rest.name.replace(/'/g, "\\'")}')">
+                                        ${isSelected ? '✓ Selected' : 'Select'}
+                                    </button>
+                                    <a href="https://${rest.mapsUrl}" target="_blank" class="btn-maps">Maps</a>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += `</div>`;
+                }
+
+                html += `</div>`;
+            });
+
+            html += `
+                        </div>
+                    </div>
+                </div>
+            `;
+            return html;
+        }
+
+        function goToToday() {
+            const today = new Date().toISOString().split('T')[0];
+            for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
+                if (w.isoDate === today) { switchView(`day${dayNum}`); return; }
+            }
+            switchView('overview');
+        }
+
+        function switchView(viewId) {
+            document.querySelectorAll('.day-view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+
+            document.getElementById(viewId).classList.add('active');
+            document.querySelector(`[data-view="${viewId}"]`).classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            const activeTab = document.querySelector(`[data-view="${viewId}"]`);
+            if (activeTab) {
+                activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+        }
+
+        function toggleRestaurant(dayNum, mealType, restaurantName) {
+            setSelectedRestaurant(dayNum, mealType, restaurantName);
+            renderDayViews();
+            switchView(`day${dayNum}`);
+        }
+
+        function downloadPage() {
+            const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = (TRIP_DATA.title || 'trip').toLowerCase().replace(/\s+/g, '-') + '-itinerary.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function renderBudgetCard() {
+            const el = document.getElementById('budgetCard');
+            if (!el) return;
+            const total = COST_DATA.summary.reduce((s, r) => s + r.amount, 0);
+            const numPeople = TRIP_DATA.travelers.length || 1;
+            const pp = Math.round(total / numPeople);
+            el.innerHTML = `
+                <table class="budget-table">
+                    ${COST_DATA.summary.map(r => `
+                        <tr>
+                            <td>
+                                <div>${r.cat}</div>
+                                <div class="budget-note">${r.note}</div>
+                            </td>
+                            <td class="budget-amount">AED ${r.amount.toLocaleString()}</td>
+                        </tr>
+                    `).join('')}
+                    <tr class="budget-total-row">
+                        <td>Total · ${numPeople} ${numPeople === 1 ? 'person' : 'people'}</td>
+                        <td class="budget-amount">~AED ${total.toLocaleString()}</td>
+                    </tr>
+                </table>
+                <div class="budget-perperson">~AED ${pp.toLocaleString()} per person</div>
+                <div class="budget-disclaimer">${COST_DATA.disclaimer}</div>
+            `;
+        }
+
+        // ============================================================
+        // WEATHER — Open-Meteo (free, no API key required)
+        // Populate DAY_WEATHER above with lat/lon per day number
+        // ============================================================
+
+        const WX_CACHE_TTL = 3 * 60 * 60 * 1000;
+        const WX_CACHE_TTL_RECENT = 30 * 60 * 1000;
+
+        async function fetchWeather(dayNumber, force) {
+            const info = DAY_WEATHER[dayNumber];
+            if (!info) return null;
+            const cacheKey = `wx_${info.isoDate}_${info.lat}`;
+            const todayStr = new Date().toISOString().split('T')[0];
+            const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+            const dayBeforeYesterday = new Date(Date.now() - 2*86400000).toISOString().split('T')[0];
+            const isRecent = (info.isoDate >= dayBeforeYesterday && info.isoDate <= todayStr);
+            const ttl = isRecent ? WX_CACHE_TTL_RECENT : WX_CACHE_TTL;
+            if (!force) {
+                try {
+                    const cached = localStorage.getItem(cacheKey);
+                    if (cached) { const { d, ts } = JSON.parse(cached); if (Date.now() - ts < ttl) return d; }
+                } catch(e) {}
+            }
+            try {
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${info.lat}&longitude=${info.lon}&hourly=temperature_2m,weathercode,precipitation_probability&daily=sunrise,sunset&timezone=auto&start_date=${info.isoDate}&end_date=${info.isoDate}`;
+                const resp = await fetch(url);
+                if (!resp.ok) return null;
+                const json = await resp.json();
+                const times = json.hourly?.time || [], temps = json.hourly?.temperature_2m || [];
+                const codes = json.hourly?.weathercode || [];
+                const pp = json.hourly?.precipitation_probability || [];
+                const getT  = h => { const idx = times.indexOf(`${info.isoDate}T${String(h).padStart(2,'0')}:00`); return idx !== -1 ? temps[idx] : null; };
+                const getC  = h => { const idx = times.indexOf(`${info.isoDate}T${String(h).padStart(2,'0')}:00`); return idx !== -1 ? codes[idx] : null; };
+                const getPP = h => { const idx = times.indexOf(`${info.isoDate}T${String(h).padStart(2,'0')}:00`); return idx !== -1 ? (pp[idx] ?? null) : null; };
+                const nowHour = new Date().getHours();
+                const isToday = info.isoDate === todayStr;
+                const allPP = times.map((t, i) => t.startsWith(info.isoDate) ? (pp[i] ?? 0) : 0);
+                const maxPP = allPP.length ? Math.max(...allPP) : 0;
+                const rainHours = times.reduce((acc, t, i) => {
+                    if (t.startsWith(info.isoDate) && (pp[i] ?? 0) >= 30) {
+                        const h = parseInt(t.split('T')[1]);
+                        acc.push({ h, pp: pp[i], code: codes[i] ?? 0 });
+                    }
+                    return acc;
+                }, []);
+                const d = {
+                    sunrise: (json.daily?.sunrise?.[0]||'').split('T')[1]||null,
+                    sunset:  (json.daily?.sunset?.[0] ||'').split('T')[1]||null,
+                    t8: getT(8), t13: getT(13), t20: getT(20),
+                    tNow:     isToday ? getT(nowHour) : null,
+                    wcodeNow: isToday ? (getC(nowHour) ?? getC(13) ?? getC(12)) : null,
+                    wcode: getC(13) ?? getC(12) ?? getC(11),
+                    pp8: getPP(8), pp13: getPP(13), pp20: getPP(20),
+                    maxPP, rainHours,
+                };
+                try { localStorage.setItem(cacheKey, JSON.stringify({ d, ts: Date.now() })); } catch(e) {}
+                return d;
+            } catch(e) { return null; }
+        }
+
+        function weatherChartSVG(t8, t13, t20, dayNum) {
+            const vals = [t8, t13, t20];
+            const labs = ['8 AM', '1 PM', '8 PM'];
+            const W = 300, pL = 16, pR = 16, pT = 28, pB = 22, cH = 50;
+            const tH = pT + cH + pB, cW = W - pL - pR;
+            const minV = Math.min(...vals) - 2, maxV = Math.max(...vals) + 2;
+            const toY = v => pT + cH - ((v - minV) / (maxV - minV)) * cH;
+            const xs = [pL, pL + cW / 2, pL + cW];
+            const pts = vals.map((v, i) => ({ x: xs[i], y: toY(v) }));
+            const ext = [
+                { x: 2*pts[0].x - pts[1].x, y: 2*pts[0].y - pts[1].y },
+                ...pts,
+                { x: 2*pts[2].x - pts[1].x, y: 2*pts[2].y - pts[1].y }
+            ];
+            let curve = `M ${pts[0].x},${pts[0].y.toFixed(1)}`;
+            for (let i = 1; i < 3; i++) {
+                const [p0, p1, p2, p3] = [ext[i-1], ext[i], ext[i+1], ext[i+2]];
+                const cp1 = { x: p1.x + (p2.x-p0.x)/6, y: p1.y + (p2.y-p0.y)/6 };
+                const cp2 = { x: p2.x - (p3.x-p1.x)/6, y: p2.y - (p3.y-p1.y)/6 };
+                curve += ` C ${cp1.x.toFixed(1)},${cp1.y.toFixed(1)} ${cp2.x.toFixed(1)},${cp2.y.toFixed(1)} ${p2.x},${p2.y.toFixed(1)}`;
+            }
+            const fillPath = `${curve} L ${pts[2].x},${pT+cH} L ${pts[0].x},${pT+cH} Z`;
+            const gid = `wxg${dayNum}`;
+            return `<svg width="100%" viewBox="0 0 ${W} ${tH}" style="display:block;overflow:visible;">
+                <defs><linearGradient id="${gid}" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#C9966A" stop-opacity="0.3"/>
+                    <stop offset="100%" stop-color="#C9966A" stop-opacity="0.03"/>
+                </linearGradient></defs>
+                <path d="${fillPath}" fill="url(#${gid})"/>
+                <path d="${curve}" fill="none" stroke="#C9966A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                ${pts.map((p, i) => `
+                    <circle cx="${p.x}" cy="${p.y.toFixed(1)}" r="4" fill="#C9966A" stroke="var(--bg-secondary)" stroke-width="1.5"/>
+                    <text class="wx-temp" x="${p.x}" y="${(p.y-10).toFixed(1)}" text-anchor="middle" font-size="11" font-weight="600" font-family="DM Sans,sans-serif">${Math.round(vals[i])}°C</text>
+                    <text class="wx-time" x="${p.x}" y="${pT+cH+16}" text-anchor="middle" font-size="10" font-family="DM Sans,sans-serif">${labs[i]}</text>
+                `).join('')}
+            </svg>`;
+        }
+
+        function wmoIcon(code) {
+            if (code === null || code === undefined) return { emoji: '🌤️', label: 'Weather', severity: 0 };
+            if (code === 0)  return { emoji: '☀️',  label: 'Clear sky', severity: 0 };
+            if (code <= 2)   return { emoji: '🌤️', label: 'Partly cloudy', severity: 0 };
+            if (code === 3)  return { emoji: '☁️',  label: 'Overcast', severity: 0 };
+            if (code <= 48)  return { emoji: '🌫️', label: 'Fog', severity: 0 };
+            if (code <= 53)  return { emoji: '🌦️', label: 'Light drizzle', severity: 1 };
+            if (code <= 55)  return { emoji: '🌦️', label: 'Drizzle', severity: 1 };
+            if (code <= 61)  return { emoji: '🌧️', label: 'Light rain', severity: 1 };
+            if (code <= 63)  return { emoji: '🌧️', label: 'Moderate rain', severity: 2 };
+            if (code <= 65)  return { emoji: '🌧️', label: 'Heavy rain', severity: 3 };
+            if (code <= 67)  return { emoji: '🌧️', label: 'Freezing rain', severity: 3 };
+            if (code <= 77)  return { emoji: '❄️',  label: 'Snow', severity: 1 };
+            if (code <= 81)  return { emoji: '🌧️', label: 'Light rain showers', severity: 1 };
+            if (code <= 82)  return { emoji: '🌧️', label: 'Heavy rain showers', severity: 3 };
+            if (code <= 94)  return { emoji: '⛈️',  label: 'Thunderstorm', severity: 4 };
+            return { emoji: '⛈️', label: 'Thunderstorm + hail', severity: 4 };
+        }
+
+        function buildRainAlert(data, wx) {
+            let html = '';
+            if (!data) return html;
+            const maxPP = data.maxPP || 0;
+            const rainHours = data.rainHours || [];
+            const hasStorm = wx.severity >= 4 || rainHours.some(r => r.code >= 95);
+            const hasHeavy = wx.severity >= 3 || rainHours.some(r => r.code >= 65 && r.code < 95);
+            const hasRain  = wx.severity >= 1 || maxPP >= 30;
+            if (hasStorm) {
+                html += `<div class="wx-rain-alert wx-storm">⚡ Thunderstorm expected`;
+                if (rainHours.length) { const peak = rainHours.reduce((a, b) => b.pp > a.pp ? b : a); html += ` around ${peak.h}:00`; }
+                html += `</div>`;
+            } else if (hasHeavy || maxPP >= 60) {
+                html += `<div class="wx-rain-alert wx-rain-heavy">🌧 Heavy rain possible`;
+                if (rainHours.length) { const hrs = rainHours.map(r => `${r.h}:00`); html += ` — ${hrs[0]}${hrs.length > 1 ? '–' + hrs[hrs.length-1] : ''}`; }
+                html += ` (up to ${maxPP}%)</div>`;
+            } else if (hasRain && maxPP >= 30) {
+                html += `<div class="wx-rain-alert wx-rain-light">🌦 Rain possible`;
+                if (rainHours.length) { const hrs = rainHours.map(r => `${r.h}:00`); html += ` — ${hrs[0]}${hrs.length > 1 ? '–' + hrs[hrs.length-1] : ''}`; }
+                html += ` (up to ${maxPP}%)</div>`;
+            }
+            const pp8 = data.pp8, pp13 = data.pp13, pp20 = data.pp20;
+            if (pp8 !== null || pp13 !== null || pp20 !== null) {
+                const ppClass = p => p >= 70 ? 'storm' : p >= 40 ? 'heavy' : p >= 20 ? 'rain' : '';
+                html += `<div class="wx-prob-row">
+                    ${[{l:'8 AM',p:pp8},{l:'1 PM',p:pp13},{l:'8 PM',p:pp20}].map(x => x.p !== null ? `
+                        <div class="wx-prob-item">
+                            <span class="wx-prob-val ${ppClass(x.p)}">${x.p}%</span>
+                            <span>💧 ${x.l}</span>
+                        </div>` : '').join('')}
+                </div>`;
+            }
+            return html;
+        }
+
+        async function loadWeatherWidget(dayNumber) {
+            const el = document.getElementById(`wx-${dayNumber}`);
+            if (!el) return;
+            const data = await fetchWeather(dayNumber);
+            if (!data || (data.t8 === null && data.t13 === null && data.t20 === null)) {
+                el.innerHTML = `<div class="weather-error">Forecast not yet available for this date</div>`;
+                return;
+            }
+            const now = new Date();
+            const updated = `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
+            const chart = (data.t8 !== null && data.t13 !== null && data.t20 !== null) ? weatherChartSVG(data.t8, data.t13, data.t20, dayNumber) : '';
+            const wx = wmoIcon(data.wcode);
+            const midTemp = data.t13 !== null ? `${Math.round(data.t13)}°C` : '';
+            const rainAlert = buildRainAlert(data, wx);
+            el.innerHTML = `
+                <div class="wx-condition-row">
+                    <span class="wx-condition-icon">${wx.emoji}</span>
+                    <span class="wx-condition-label">${wx.label}${midTemp ? ' · ' + midTemp : ''}</span>
+                </div>
+                ${rainAlert}
+                <div class="weather-sun-row" style="margin-top:10px;">
+                    ${data.sunrise ? `<span>🌅 ${data.sunrise}</span>` : ''}
+                    ${data.sunset  ? `<span>🌇 ${data.sunset}</span>`  : ''}
+                    <button class="weather-refresh" title="Refresh forecast" onclick="refreshWeather(${dayNumber})">↻</button>
+                    <span style="font-size:10px;color:var(--text-muted);">as of ${updated}</span>
+                    <a href="https://wttr.in/${DAY_WEATHER[dayNumber]?.lat},${DAY_WEATHER[dayNumber]?.lon}?lang=en" target="_blank" style="font-size:10px;color:var(--accent-gold);text-decoration:none;margin-left:auto;">More details ↗</a>
+                </div>
+                <div class="weather-chart-container">${chart}</div>
+            `;
+            const preview = document.getElementById(`wx-preview-${dayNumber}`);
+            const rainFlag = wx.severity >= 1 ? ` · ${wx.emoji}` : '';
+            if (preview) preview.textContent = `${wx.emoji} ${midTemp}${rainFlag}`;
+        }
+
+        function refreshWeather(dayNumber) {
+            const info = DAY_WEATHER[dayNumber];
+            if (info) { try { localStorage.removeItem(`wx_${info.isoDate}_${info.lat}`); } catch(e) {} }
+            const el = document.getElementById(`wx-${dayNumber}`);
+            if (el) el.innerHTML = `<div class="weather-loading">Refreshing…</div>`;
+            loadWeatherWidget(dayNumber);
+        }
+
+        async function loadOverviewWeather(dayNumber) {
+            const el = document.getElementById('wx-overview');
+            if (!el || !DAY_WEATHER[dayNumber]) return;
+            const w = DAY_WEATHER[dayNumber];
+            // Show the section and update header with location
+            const section = document.getElementById('overviewWeatherSection');
+            if (section) section.style.display = '';
+            const day = TRIP_DATA.days.find(d => d.dayNumber === dayNumber);
+            const locLabel = day ? ` · ${day.location}` : '';
+            const header = document.getElementById('overview-wx-header');
+            if (header) {
+                const h3 = header.querySelector('h3');
+                if (h3) {
+                    const preview = document.getElementById('wx-preview-overview');
+                    h3.innerHTML = `🌤 Today's Weather<small style="font-size:11px;opacity:0.7;font-weight:400;">${locLabel}</small>`;
+                    if (preview) h3.appendChild(preview);
+                }
+            }
+            const data = await fetchWeather(dayNumber);
+            if (!data || (data.tNow === null && data.t8 === null && data.t13 === null && data.t20 === null)) {
+                el.innerHTML = `<div class="weather-error">Forecast not yet available for this date</div>`;
+                return;
+            }
+            const now = new Date();
+            const updated = `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
+            const chart = (data.t8 !== null && data.t13 !== null && data.t20 !== null)
+                ? weatherChartSVG(data.t8, data.t13, data.t20, dayNumber) : '';
+            const wx = wmoIcon(data.wcodeNow ?? data.wcode);
+            const displayTemp = data.tNow !== null ? `${Math.round(data.tNow)}°C now` : (data.t13 !== null ? `${Math.round(data.t13)}°C` : '');
+            const previewTemp = data.tNow !== null ? `${Math.round(data.tNow)}°C` : (data.t13 !== null ? `${Math.round(data.t13)}°C` : '');
+            const rainAlert = buildRainAlert(data, wx);
+            el.innerHTML = `
+                <div class="wx-condition-row">
+                    <span class="wx-condition-icon">${wx.emoji}</span>
+                    <span class="wx-condition-label">${wx.label}${displayTemp ? ' · ' + displayTemp : ''}</span>
+                </div>
+                ${rainAlert}
+                <div class="weather-sun-row" style="margin-top:10px;">
+                    ${data.sunrise ? `<span>🌅 ${data.sunrise}</span>` : ''}
+                    ${data.sunset  ? `<span>🌇 ${data.sunset}</span>`  : ''}
+                    <button class="weather-refresh" title="Refresh forecast" onclick="refreshOverviewWeather(${dayNumber})">↻</button>
+                    <span style="font-size:10px;color:var(--text-muted);">as of ${updated}</span>
+                    <a href="https://wttr.in/${w.lat},${w.lon}?lang=en" target="_blank" style="font-size:10px;color:var(--accent-gold);text-decoration:none;margin-left:auto;">More details ↗</a>
+                </div>
+                <div class="weather-chart-container">${chart}</div>
+            `;
+            const preview = document.getElementById('wx-preview-overview');
+            if (preview) preview.textContent = `${wx.emoji} ${previewTemp}`;
+        }
+
+        function refreshOverviewWeather(dayNumber) {
+            const info = DAY_WEATHER[dayNumber];
+            if (info) { try { localStorage.removeItem(`wx_${info.isoDate}_${info.lat}`); } catch(e) {} }
+            const el = document.getElementById('wx-overview');
+            if (el) el.innerHTML = `<div class="weather-loading">Refreshing…</div>`;
+            loadOverviewWeather(dayNumber);
+        }
+
+        // ============================================================
+        // CURRENCY CALCULATOR
+        // DAY_CURRENCY: map day number → { code, name, symbol } for the
+        // local currency on that day. The calculator always shows
+        // local currency / AED / USD. Update per trip.
+        // ============================================================
+        const DAY_CURRENCY = {
+            // Map day number to local currency for that day.
+            // The calculator always shows AED / USD / EUR, plus a 4th row for local currency
+            // when it differs from those three. Example:
+            // 1: { code: 'JPY', name: 'Japanese Yen', symbol: '¥' },
+        };
+
+        let calcRates = null;
+        let calcPrimary = { code: 'EUR', name: 'Euro', symbol: '€' };
+
+        function getTodayTripDay() {
+            const today = new Date().toISOString().split('T')[0];
+            for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
+                if (w.isoDate === today) return parseInt(dayNum);
+            }
+            return null;
+        }
+
+        async function fetchCalcRates(force) {
+            const cacheKey = 'calc_rates_v1';
+            if (!force) {
+                const cached = localStorage.getItem(cacheKey);
+                if (cached) {
+                    const { data, ts } = JSON.parse(cached);
+                    if (Date.now() - ts < 24 * 3600 * 1000) { calcRates = data; updateCalcUI(); return; }
+                }
+            }
+            document.getElementById('calcRatesNote').textContent = 'Fetching rates…';
+            try {
+                const res = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json');
+                const json = await res.json();
+                calcRates = { usd: 1, aed: json.usd.aed, eur: json.usd.eur };
+                Object.values(DAY_CURRENCY).forEach(c => {
+                    const k = c.code.toLowerCase();
+                    if (json.usd[k]) calcRates[k] = json.usd[k];
+                });
+                localStorage.setItem(cacheKey, JSON.stringify({ data: calcRates, ts: Date.now() }));
+            } catch {
+                calcRates = { usd: 1, aed: 3.6725, eur: 0.92 };
+                document.getElementById('calcRatesNote').textContent = 'Offline rates (approx)';
+                return;
+            }
+            updateCalcUI();
+        }
+
+        function updateCalcUI() {
+            if (!calcRates) return;
+            const todayDay = getTodayTripDay();
+            const defaultCurrency = Object.values(DAY_CURRENCY)[0] || { code: 'EUR', name: 'Euro', symbol: '€' };
+            calcPrimary = (todayDay && DAY_CURRENCY[todayDay]) ? DAY_CURRENCY[todayDay] : defaultCurrency;
+            const baseCodes = ['AED', 'USD', 'EUR'];
+            const showLocal = !baseCodes.includes(calcPrimary.code);
+            const row3 = document.getElementById('calcRow3');
+            if (row3) {
+                if (showLocal) {
+                    document.getElementById('calcCode3').textContent = calcPrimary.code;
+                    document.getElementById('calcName3').textContent = calcPrimary.name;
+                    row3.style.display = '';
+                    document.getElementById('calcHeaderSub').textContent = 'AED · USD · EUR · ' + calcPrimary.code;
+                } else {
+                    row3.style.display = 'none';
+                    document.getElementById('calcHeaderSub').textContent = 'AED · USD · EUR';
+                }
+            }
+            const ts = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const note = document.getElementById('calcRatesNote');
+            if (note) note.textContent = `Rates updated ${ts}`;
+            // Also update all per-day calc notes
+            TRIP_DATA.days.forEach(d => dcUpdateNote(d.dayNumber));
+        }
+
+        function calcConvert(sourceIdx) {
+            if (!calcRates) return;
+            const baseCodes = ['AED', 'USD', 'EUR'];
+            const showLocal = !baseCodes.includes(calcPrimary.code);
+            const allInputs = [document.getElementById('calcInput0'), document.getElementById('calcInput1'), document.getElementById('calcInput2'), document.getElementById('calcInput3')];
+            const allCodes = ['aed', 'usd', 'eur', calcPrimary.code.toLowerCase()];
+            const inputs = showLocal ? allInputs : allInputs.slice(0, 3);
+            const codes = showLocal ? allCodes : allCodes.slice(0, 3);
+            const val = parseFloat(inputs[sourceIdx].value);
+            if (isNaN(val)) { inputs.forEach((inp, i) => { if (i !== sourceIdx) inp.value = ''; }); return; }
+            const sourceRate = calcRates[codes[sourceIdx]] || 1;
+            const valInUsd = val / sourceRate;
+            inputs.forEach((inp, i) => {
+                if (i === sourceIdx) return;
+                inp.value = (valInUsd * (calcRates[codes[i]] || 1)).toFixed(2);
+            });
+        }
+
+        fetchCalcRates(false);
+
+        // ============================================================
+        // PER-DAY CURRENCY CALCULATOR
+        // ============================================================
+        function renderCalcSection(dayNum) {
+            const cur = DAY_CURRENCY[dayNum] || Object.values(DAY_CURRENCY)[0] || { code: 'EUR', name: 'Euro', symbol: '€' };
+            const baseCodes = ['AED', 'USD', 'EUR'];
+            const showLocal = !baseCodes.includes(cur.code);
+            const currencies = [
+                { code: 'AED', name: 'UAE Dirham' },
+                { code: 'USD', name: 'US Dollar' },
+                { code: 'EUR', name: 'Euro' },
+            ];
+            if (showLocal) currencies.push({ code: cur.code, name: cur.name });
+            const subtitle = currencies.map(c => c.code).join(' · ');
+            const rows = currencies.map((c, i) => `
+                <div class="calc-row">
+                    <div class="calc-label">
+                        <div class="calc-label-code">${c.code}</div>
+                        <div class="calc-label-name">${c.name}</div>
+                    </div>
+                    <input class="calc-input" id="dc${dayNum}-${i}" type="number" placeholder="0" oninput="dcConvert(${dayNum}, ${i}, ${currencies.length})">
+                </div>`).join('');
+            return `
+                <div class="collapsible-section section-calc" data-calc-day="${dayNum}">
+                    <div class="section-header collapsed">
+                        <h3>💱 Currency <span style="font-size:11px;font-weight:400;color:var(--text-secondary);margin-left:4px;">${subtitle}</span></h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content collapsed">
+                        <div style="padding:16px;">
+                            ${rows}
+                            <div class="calc-footer">
+                                <span class="calc-rates-note" id="dc${dayNum}-note">Tap to load rates</span>
+                                <button class="calc-refresh" onclick="dcRefresh(${dayNum})">↻ Refresh</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+        }
+
+        function dcConvert(dayNum, sourceIdx, count) {
+            if (!calcRates) { fetchCalcRates(false).then(() => dcConvert(dayNum, sourceIdx, count)); return; }
+            const cur = DAY_CURRENCY[dayNum] || Object.values(DAY_CURRENCY)[0] || { code: 'EUR', name: 'Euro', symbol: '€' };
+            const baseCodes = ['AED', 'USD', 'EUR'];
+            const showLocal = !baseCodes.includes(cur.code);
+            const codes = ['aed', 'usd', 'eur'];
+            if (showLocal) codes.push(cur.code.toLowerCase());
+            const n = showLocal ? 4 : 3;
+            const inputs = Array.from({ length: n }, (_, i) => document.getElementById(`dc${dayNum}-${i}`));
+            const val = parseFloat(inputs[sourceIdx]?.value);
+            if (isNaN(val)) { inputs.forEach((inp, i) => { if (i !== sourceIdx && inp) inp.value = ''; }); return; }
+            const sourceRate = calcRates[codes[sourceIdx]] || 1;
+            const valInUsd = val / sourceRate;
+            inputs.forEach((inp, i) => {
+                if (i === sourceIdx || !inp) return;
+                inp.value = (valInUsd * (calcRates[codes[i]] || 1)).toFixed(2);
+            });
+        }
+
+        function dcUpdateNote(dayNum) {
+            const note = document.getElementById(`dc${dayNum}-note`);
+            if (note && calcRates) {
+                const ts = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                note.textContent = `Updated ${ts}`;
+            }
+        }
+
+        function dcRefresh(dayNum) {
+            const note = document.getElementById(`dc${dayNum}-note`);
+            if (note) note.textContent = 'Refreshing…';
+            fetchCalcRates(true).then(() => dcUpdateNote(dayNum));
+        }
+
+        initializePage();
+
+        /* ── TRIP ROUTE MAPS ── */
+        function makeTile(map) {
+            const url = document.body.classList.contains('light-mode')
+                ? 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
+                : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+            L.tileLayer(url, { attribution: '© OpenStreetMap © CARTO', subdomains: 'abcd', maxZoom: 18 }).addTo(map);
+        }
+        function pin(label, color) {
+            color = color || '#C9966A';
+            return L.divIcon({
+                html: '<div class="map-day-marker" style="background:' + color + ';font-size:' + (label.length > 2 ? '9' : '11') + 'px;">' + label + '</div>',
+                className: '', iconSize: [26, 26], iconAnchor: [13, 13], popupAnchor: [0, -16]
+            });
+        }
+        async function osrmRoute(waypoints) {
+            try {
+                const coords = waypoints.map(w => w[1].toFixed(5) + ',' + w[0].toFixed(5)).join(';');
+                const r = await fetch('https://router.project-osrm.org/route/v1/driving/' + coords + '?overview=full&geometries=geojson');
+                const j = await r.json();
+                if (j.code !== 'Ok' || !j.routes[0]) return null;
+                return j.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
+            } catch(e) { return null; }
+        }
+        function drawRoute(map, pts, color, dash) {
+            L.polyline(pts, { color: color || '#C9966A', weight: 3, opacity: 0.9, dashArray: dash || null, lineJoin: 'round' }).addTo(map);
+        }
+
+        // TODO: implement renderXxxMap() for each map div, then call them in the onload below
+        // async function renderMainMap() { ... }
+
+        // Load Leaflet then render maps
+        (function() {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+            document.head.appendChild(link);
+            const s = document.createElement('script');
+            s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+            s.onload = function() { setTimeout(function() { /* renderMainMap(); */ }, 300); };
+            document.head.appendChild(s);
+        })();
+
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js').catch(() => {});
+        }
+    </script>
+</body>
+</html>
