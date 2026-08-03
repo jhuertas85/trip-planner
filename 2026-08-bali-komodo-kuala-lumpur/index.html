@@ -1364,1057 +1364,373 @@
         // TRIP_DATA — Edit this section to customise your trip
         // ============================================================
         const TRIP_DATA = {
-    "title": "Bali \u00b7 Komodo \u00b7 Kuala Lumpur 2026",
-    "travelers": [
-        "Juan Carlos",
-        "Maria"
+    title: "Bali · Komodo · Kuala Lumpur 2026",
+    travelers: ["Juan Carlos", "Maria"],
+    carRental: null,
+    spotifyPlaylist: null,
+    tricountUrl: null,
+    checkInUrl: null,
+    flights: [
+        { date: "Aug 15", dayOfWeek: "Fri", airline: "Emirates EK0368", from: "DXB", to: "DPS", departTime: "03:10", arriveTime: "16:35", terminal: "T1", passengers: ["Juan Carlos", "Maria"] },
+        { date: "Aug 22", dayOfWeek: "Sat", airline: "AirAsia", from: "DPS", to: "LBJ", departTime: "07:10", arriveTime: "08:15", terminal: "T1", passengers: ["Juan Carlos", "Maria"] },
+        { date: "Aug 25", dayOfWeek: "Tue", airline: "AirAsia", from: "LBJ", to: "DPS", departTime: "10:35", arriveTime: "11:45", terminal: "T1", passengers: ["Juan Carlos", "Maria"] },
+        { date: "Aug 28", dayOfWeek: "Fri", airline: "TBD", from: "DPS", to: "KUL", departTime: "11:15", arriveTime: "15:05", terminal: "T1", passengers: ["Juan Carlos"] },
+        { date: "Aug 30", dayOfWeek: "Sun", airline: "TBD", from: "KUL", to: "DXB", departTime: "19:10", arriveTime: "22:10", terminal: "T1", passengers: ["Juan Carlos"] }
     ],
-    "carRental": null,
-    "spotifyPlaylist": null,
-    "tricountUrl": null,
-    "checkInUrl": null,
-    "flights": [
+    days: [
         {
-            "date": "Aug 15",
-            "dayOfWeek": "Fri",
-            "airline": "Emirates EK0368",
-            "from": "DXB",
-            "to": "DPS",
-            "departTime": "03:10",
-            "arriveTime": "16:35",
-            "terminal": "T1",
-            "passengers": [
-                "Juan Carlos",
-                "Maria"
-            ]
+            dayNumber: 1, date: "Aug 15", dayOfWeek: "Fri", title: "Arrival", location: "Seminyak, Bali",
+            backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
+            flight: { date: "Aug 15", dayOfWeek: "Fri", airline: "Emirates EK0368", from: "DXB", to: "DPS", departTime: "03:10", arriveTime: "16:35", terminal: "T1" },
+            hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Aug 15-22", bookedBy: null, mapsUrl: null },
+            drive: null,
+            activities: [
+                { time: "16:35", text: "Land at Bali DPS", subNote: "Get SIM, withdraw IDR", needsBooking: false },
+                { time: "Evening", text: "Transfer to Seminyak", subNote: "45 min by Grab", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "flexible", note: "", restaurants: [] },
+                lunch: { status: "flexible", note: "On flight", restaurants: [] },
+                dinner: { status: "options", note: "", restaurants: [{ name: "Eat Street", desc: "Local", rating: "4.5★", mapsUrl: "maps.google.com/?q=Kayu+Aya" }] }
+            },
+            route: null, warnings: [], gems: []
         },
         {
-            "date": "Aug 22",
-            "dayOfWeek": "Sat",
-            "airline": "AirAsia",
-            "from": "DPS",
-            "to": "LBJ",
-            "departTime": "07:10",
-            "arriveTime": "08:15",
-            "terminal": "T1",
-            "passengers": [
-                "Juan Carlos",
-                "Maria"
-            ]
+            dayNumber: 2, date: "Aug 16", dayOfWeek: "Sat", title: "Uluwatu & Kecak", location: "South Bali",
+            backgroundImage: "https://images.unsplash.com/photo-1509391366360-2e938d440220?w=800",
+            flight: null,
+            hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Aug 15-22", bookedBy: null, mapsUrl: null },
+            drive: { from: "Seminyak", to: "Uluwatu", duration: "1.5h", distance: "50 km" },
+            activities: [
+                { time: "Morning", text: "Sleep in after arrival", subNote: "Relax at hotel", needsBooking: false },
+                { time: "14:00", text: "Depart for Uluwatu", subNote: "1.5h drive south", needsBooking: false },
+                { time: "16:30", text: "Kecak Fire Dance performance", subNote: "Book tickets · Sunset at clifftop temple", needsBooking: true },
+                { time: "Evening", text: "Dinner at Uluwatu", subNote: "Seafood with a view", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "included", note: "Hotel breakfast", restaurants: [] },
+                lunch: { status: "flexible", note: "", restaurants: [] },
+                dinner: { status: "options", note: "", restaurants: [{ name: "Sunset Clifftop", desc: "Seafood · Uluwatu views", rating: "4.6★", mapsUrl: "maps.google.com/?q=Uluwatu+Seafood+Restaurant" }] }
+            },
+            route: null, warnings: [], gems: ["Kecak Fire Dance is magical at sunset"]
         },
         {
-            "date": "Aug 25",
-            "dayOfWeek": "Tue",
-            "airline": "AirAsia",
-            "from": "LBJ",
-            "to": "DPS",
-            "departTime": "10:35",
-            "arriveTime": "11:45",
-            "terminal": "T1",
-            "passengers": [
-                "Juan Carlos",
-                "Maria"
-            ]
+            dayNumber: 3, date: "Aug 17", dayOfWeek: "Sun", title: "Beach Day", location: "Seminyak",
+            backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
+            flight: null,
+            hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Aug 15-22", bookedBy: null, mapsUrl: null },
+            drive: null,
+            activities: [
+                { time: "08:00", text: "Sunrise yoga", subNote: "Beach class at hotel or nearby", needsBooking: false },
+                { time: "10:00", text: "Beach time", subNote: "Seminyak Beach", needsBooking: false },
+                { time: "12:30", text: "Lunch at beach club", subNote: "", needsBooking: false },
+                { time: "Evening", text: "Sunset dinner", subNote: "Local restaurant", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "included", note: "Hotel or yoga class", restaurants: [] },
+                lunch: { status: "options", note: "", restaurants: [{ name: "Beach Club", desc: "Casual · Great views", rating: "4.5★", mapsUrl: "maps.google.com/?q=Seminyak+Beach+Club" }] },
+                dinner: { status: "options", note: "", restaurants: [] }
+            },
+            route: null, warnings: [], gems: []
         },
         {
-            "date": "Aug 28",
-            "dayOfWeek": "Fri",
-            "airline": "TBD",
-            "from": "DPS",
-            "to": "KUL",
-            "departTime": "11:15",
-            "arriveTime": "15:05",
-            "terminal": "T1",
-            "passengers": [
-                "Juan Carlos"
-            ]
+            dayNumber: 4, date: "Aug 18", dayOfWeek: "Mon", title: "Workation", location: "Seminyak",
+            backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
+            flight: null,
+            hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Aug 15-22", bookedBy: null, mapsUrl: null },
+            drive: null,
+            activities: [
+                { time: "08:00", text: "Work from hotel", subNote: "14:00-21:00 Dubai time", needsBooking: false },
+                { time: "12:00", text: "Lunch break", subNote: "Local cafe", needsBooking: false },
+                { time: "20:00", text: "Evening swim", subNote: "Hotel pool", needsBooking: false }
+            ],
+            meals: {
+                breakfast: { status: "included", note: "Hotel", restaurants: [] },
+                lunch: { status: "flexible", note: "", restaurants: [] },
+                dinner: { status: "options", note: "", restaurants: [] }
+            },
+            route: null, warnings: [], gems: []
         },
         {
-            "date": "Aug 30",
-            "dayOfWeek": "Sun",
-            "airline": "TBD",
-            "from": "KUL",
-            "to": "DXB",
-            "departTime": "19:10",
-            "arriveTime": "22:10",
-            "terminal": "T1",
-            "passengers": [
-                "Juan Carlos"
-            ]
-        }
-    ],
-    "days": [
-        {
-            "dayNumber": 1,
-            "date": "Aug 15",
-            "dayOfWeek": "Fri",
-            "title": "Arrival",
-            "location": "Seminyak, Bali",
-            "backgroundImage": "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
-            "flight": {
-                "date": "Aug 15",
-                "dayOfWeek": "Fri",
-                "airline": "Emirates EK0368",
-                "from": "DXB",
-                "to": "DPS",
-                "departTime": "03:10",
-                "arriveTime": "16:35",
-                "terminal": "T1"
-            },
-            "hotel": {
-                "name": "Courtyard by Marriott Bali Seminyak",
-                "status": "confirmed",
-                "note": "Aug 15-22",
-                "bookedBy": null,
-                "mapsUrl": null
-            },
-            "drive": null,
-            "activities": [
-                {
-                    "time": "16:35",
-                    "text": "Land at Bali DPS",
-                    "subNote": "Get SIM, withdraw IDR",
-                    "needsBooking": false
-                },
-                {
-                    "time": "Evening",
-                    "text": "Transfer to Seminyak",
-                    "subNote": "45 min by Grab",
-                    "needsBooking": false
-                }
+            dayNumber: 5, date: "Aug 19", dayOfWeek: "Tue", title: "Workation", location: "Seminyak",
+            backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
+            flight: null,
+            hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Aug 15-22", bookedBy: null, mapsUrl: null },
+            drive: null,
+            activities: [
+                { time: "08:00", text: "Work from hotel", subNote: "14:00-21:00 Dubai time", needsBooking: false },
+                { time: "12:00", text: "Lunch break", subNote: "Local cafe", needsBooking: false },
+                { time: "Evening", text: "Massage", subNote: "Balinese spa", needsBooking: true }
             ],
-            "meals": {
-                "breakfast": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "lunch": {
-                    "status": "flexible",
-                    "note": "On flight",
-                    "restaurants": []
-                },
-                "dinner": {
-                    "status": "options",
-                    "note": "",
-                    "restaurants": [
-                        {
-                            "name": "Eat Street",
-                            "desc": "Local",
-                            "rating": "4.5\u2605",
-                            "mapsUrl": "maps.google.com/?q=Kayu+Aya"
-                        }
-                    ]
-                }
+            meals: {
+                breakfast: { status: "included", note: "Hotel", restaurants: [] },
+                lunch: { status: "flexible", note: "", restaurants: [] },
+                dinner: { status: "options", note: "", restaurants: [] }
             },
-            "route": null,
-            "warnings": [],
-            "gems": []
+            route: null, warnings: [], gems: []
         },
         {
-            "dayNumber": 2,
-            "date": "Aug 16",
-            "dayOfWeek": "Sat",
-            "title": "Uluwatu + Kecak",
-            "location": "Seminyak & Uluwatu",
-            "backgroundImage": "https://images.unsplash.com/photo-1583649014236-89bb85bb24af?w=800",
-            "flight": null,
-            "hotel": {
-                "name": "Courtyard by Marriott Bali Seminyak",
-                "status": "confirmed",
-                "note": "Aug 15-22",
-                "bookedBy": null,
-                "mapsUrl": null
-            },
-            "drive": null,
-            "activities": [
-                {
-                    "time": "Morning",
-                    "text": "Breakfast & tour pickup",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "Afternoon",
-                    "text": "Uluwatu Temple tour",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "18:00",
-                    "text": "Kecak Fire Dance",
-                    "subNote": "Clifftop views",
-                    "needsBooking": false
-                }
+            dayNumber: 6, date: "Aug 20", dayOfWeek: "Wed", title: "Workation", location: "Seminyak",
+            backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
+            flight: null,
+            hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Aug 15-22", bookedBy: null, mapsUrl: null },
+            drive: null,
+            activities: [
+                { time: "08:00", text: "Work from hotel", subNote: "14:00-21:00 Dubai time", needsBooking: false },
+                { time: "12:00", text: "Lunch break", subNote: "Local cafe", needsBooking: false },
+                { time: "Evening", text: "Explore Seminyak", subNote: "Street food & local bars", needsBooking: false }
             ],
-            "meals": {
-                "breakfast": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "lunch": {
-                    "status": "included",
-                    "note": "",
-                    "restaurants": []
-                },
-                "dinner": {
-                    "status": "options",
-                    "note": "",
-                    "restaurants": [
-                        {
-                            "name": "Single Fin",
-                            "desc": "Clifftop",
-                            "rating": "4.6\u2605",
-                            "mapsUrl": "maps.google.com/?q=Single+Fin+Uluwatu"
-                        }
-                    ]
-                }
+            meals: {
+                breakfast: { status: "included", note: "Hotel", restaurants: [] },
+                lunch: { status: "flexible", note: "", restaurants: [] },
+                dinner: { status: "options", note: "", restaurants: [] }
             },
-            "route": null,
-            "warnings": [
-                "Macaques snatch items"
-            ],
-            "gems": [
-                "Clifftop walk south of temple"
-            ]
+            route: null, warnings: [], gems: []
         },
         {
-            "dayNumber": 3,
-            "date": "Aug 17",
-            "dayOfWeek": "Mon",
-            "title": "Work Day",
-            "location": "Seminyak",
-            "backgroundImage": "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
-            "flight": null,
-            "hotel": {
-                "name": "Courtyard by Marriott Bali Seminyak",
-                "status": "confirmed",
-                "note": "Aug 15-22",
-                "bookedBy": null,
-                "mapsUrl": null
-            },
-            "drive": null,
-            "activities": [
-                {
-                    "time": "Morning",
-                    "text": "Free until 13:30",
-                    "subNote": "Beach, yoga, spa",
-                    "needsBooking": false
-                },
-                {
-                    "time": "14:00",
-                    "text": "Work 14:00-21:00 Dubai time",
-                    "subNote": "",
-                    "needsBooking": false
-                }
+            dayNumber: 7, date: "Aug 21", dayOfWeek: "Thu", title: "Workation", location: "Seminyak",
+            backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
+            flight: null,
+            hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Aug 15-22", bookedBy: null, mapsUrl: null },
+            drive: null,
+            activities: [
+                { time: "08:00", text: "Work from hotel", subNote: "14:00-21:00 Dubai time", needsBooking: false },
+                { time: "12:00", text: "Lunch break", subNote: "Local cafe", needsBooking: false },
+                { time: "Evening", text: "Prepare for flight", subNote: "Pack & rest", needsBooking: false }
             ],
-            "meals": {
-                "breakfast": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "lunch": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "dinner": {
-                    "status": "options",
-                    "note": "",
-                    "restaurants": []
-                }
+            meals: {
+                breakfast: { status: "included", note: "Hotel", restaurants: [] },
+                lunch: { status: "flexible", note: "", restaurants: [] },
+                dinner: { status: "options", note: "", restaurants: [] }
             },
-            "route": null,
-            "warnings": [],
-            "gems": []
+            route: null, warnings: [], gems: []
         },
         {
-            "dayNumber": 4,
-            "date": "Aug 18",
-            "dayOfWeek": "Tue",
-            "title": "Work Day",
-            "location": "Seminyak",
-            "backgroundImage": "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
-            "flight": null,
-            "hotel": {
-                "name": "Courtyard by Marriott Bali Seminyak",
-                "status": "confirmed",
-                "note": "Aug 15-22",
-                "bookedBy": null,
-                "mapsUrl": null
-            },
-            "drive": null,
-            "activities": [
-                {
-                    "time": "Morning",
-                    "text": "Free morning",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "14:00",
-                    "text": "Work 14:00-21:00",
-                    "subNote": "",
-                    "needsBooking": false
-                }
+            dayNumber: 8, date: "Aug 22", dayOfWeek: "Fri", title: "Komodo Adventure", location: "Labuan Bajo",
+            backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+            flight: { date: "Aug 22", dayOfWeek: "Sat", airline: "AirAsia", from: "DPS", to: "LBJ", departTime: "07:10", arriveTime: "08:15", terminal: "T1" },
+            hotel: { name: "Liveaboard Cabin", status: "confirmed", note: "Aug 22-23", bookedBy: null, mapsUrl: null },
+            drive: null,
+            activities: [
+                { time: "07:10", text: "Flight to Labuan Bajo", subNote: "1 hour flight from Bali", needsBooking: false },
+                { time: "09:00", text: "Board liveaboard", subNote: "Safety briefing & lunch", needsBooking: false },
+                { time: "Afternoon", text: "First dive site", subNote: "Coral reef exploration", needsBooking: false },
+                { time: "Evening", text: "Sunset on deck", subNote: "Dinner onboard", needsBooking: false }
             ],
-            "meals": {
-                "breakfast": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "lunch": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "dinner": {
-                    "status": "options",
-                    "note": "",
-                    "restaurants": []
-                }
+            meals: {
+                breakfast: { status: "included", note: "In-flight", restaurants: [] },
+                lunch: { status: "included", note: "Liveaboard", restaurants: [] },
+                dinner: { status: "included", note: "Liveaboard", restaurants: [] }
             },
-            "route": null,
-            "warnings": [],
-            "gems": []
+            route: null, warnings: ["Liveaboard is all-inclusive"], gems: ["Komodo diving is world-class"]
         },
         {
-            "dayNumber": 5,
-            "date": "Aug 19",
-            "dayOfWeek": "Wed",
-            "title": "Work Day",
-            "location": "Seminyak",
-            "backgroundImage": "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
-            "flight": null,
-            "hotel": {
-                "name": "Courtyard by Marriott Bali Seminyak",
-                "status": "confirmed",
-                "note": "Aug 15-22",
-                "bookedBy": null,
-                "mapsUrl": null
-            },
-            "drive": null,
-            "activities": [
-                {
-                    "time": "Morning",
-                    "text": "Free morning",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "14:00",
-                    "text": "Work",
-                    "subNote": "",
-                    "needsBooking": false
-                }
+            dayNumber: 9, date: "Aug 23", dayOfWeek: "Sat", title: "Komodo Dragons & Pink Beach", location: "Komodo National Park",
+            backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+            flight: null,
+            hotel: { name: "Oh!Julia Hotel Komodo", status: "confirmed", note: "Aug 23-24", bookedBy: null, mapsUrl: null },
+            drive: null,
+            activities: [
+                { time: "Morning", text: "Komodo dragon trek", subNote: "Rinca Island · guided trek with ranger", needsBooking: true },
+                { time: "Afternoon", text: "Pink Beach snorkeling", subNote: "Unique pink sand · amazing corals", needsBooking: false },
+                { time: "Sunset", text: "Boat ride back to Labuan Bajo", subNote: "", needsBooking: false },
+                { time: "Evening", text: "Dinner at hotel", subNote: "", needsBooking: false }
             ],
-            "meals": {
-                "breakfast": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "lunch": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "dinner": {
-                    "status": "options",
-                    "note": "",
-                    "restaurants": []
-                }
+            meals: {
+                breakfast: { status: "included", note: "Liveaboard departure", restaurants: [] },
+                lunch: { status: "included", note: "On boat", restaurants: [] },
+                dinner: { status: "included", note: "Hotel", restaurants: [] }
             },
-            "route": null,
-            "warnings": [],
-            "gems": []
+            route: null, warnings: ["Bring sun protection for the boat"], gems: ["Pink Beach is magical"]
         },
         {
-            "dayNumber": 6,
-            "date": "Aug 20",
-            "dayOfWeek": "Thu",
-            "title": "Work Day",
-            "location": "Seminyak",
-            "backgroundImage": "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
-            "flight": null,
-            "hotel": {
-                "name": "Courtyard by Marriott Bali Seminyak",
-                "status": "confirmed",
-                "note": "Aug 15-22",
-                "bookedBy": null,
-                "mapsUrl": null
-            },
-            "drive": null,
-            "activities": [
-                {
-                    "time": "Morning",
-                    "text": "Free morning",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "14:00",
-                    "text": "Work",
-                    "subNote": "",
-                    "needsBooking": false
-                }
+            dayNumber: 10, date: "Aug 24", dayOfWeek: "Sun", title: "Explore Labuan Bajo", location: "Labuan Bajo",
+            backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+            flight: null,
+            hotel: { name: "Oh!Julia Hotel Komodo", status: "confirmed", note: "Aug 23-24 (checkout)", bookedBy: null, mapsUrl: null },
+            drive: null,
+            activities: [
+                { time: "Morning", text: "Rangko Cave exploration", subNote: "Freshwater cave with stalactites", needsBooking: false },
+                { time: "Afternoon", text: "Sylvia Hill sunset", subNote: "Panoramic views of Labuan Bajo", needsBooking: false },
+                { time: "Evening", text: "Local market & dinner", subNote: "Street food experience", needsBooking: false }
             ],
-            "meals": {
-                "breakfast": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "lunch": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "dinner": {
-                    "status": "options",
-                    "note": "",
-                    "restaurants": []
-                }
+            meals: {
+                breakfast: { status: "included", note: "Hotel", restaurants: [] },
+                lunch: { status: "flexible", note: "", restaurants: [] },
+                dinner: { status: "options", note: "", restaurants: [] }
             },
-            "route": null,
-            "warnings": [],
-            "gems": []
+            route: null, warnings: [], gems: ["Rangko Cave is a hidden gem"]
         },
         {
-            "dayNumber": 7,
-            "date": "Aug 21",
-            "dayOfWeek": "Fri",
-            "title": "Work Day",
-            "location": "Seminyak",
-            "backgroundImage": "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
-            "flight": null,
-            "hotel": {
-                "name": "Courtyard by Marriott Bali Seminyak",
-                "status": "confirmed",
-                "note": "Check-out Aug 22",
-                "bookedBy": null,
-                "mapsUrl": null
-            },
-            "drive": null,
-            "activities": [
-                {
-                    "time": "Morning",
-                    "text": "Beach morning",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "Evening",
-                    "text": "Pack for flight",
-                    "subNote": "7am flight",
-                    "needsBooking": false
-                }
+            dayNumber: 11, date: "Aug 25", dayOfWeek: "Mon", title: "Return to Bali", location: "Seminyak",
+            backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
+            flight: { date: "Aug 25", dayOfWeek: "Tue", airline: "AirAsia", from: "LBJ", to: "DPS", departTime: "10:35", arriveTime: "11:45", terminal: "T1" },
+            hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Aug 25-28", bookedBy: null, mapsUrl: null },
+            drive: null,
+            activities: [
+                { time: "10:35", text: "Flight back to Bali", subNote: "1 hour flight", needsBooking: false },
+                { time: "13:00", text: "Arrive Bali DPS", subNote: "Transfer to Seminyak", needsBooking: false },
+                { time: "Afternoon", text: "Rest & relax", subNote: "Hotel pool", needsBooking: false },
+                { time: "Evening", text: "Dinner on beach", subNote: "", needsBooking: false }
             ],
-            "meals": {
-                "breakfast": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "lunch": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "dinner": {
-                    "status": "options",
-                    "note": "",
-                    "restaurants": []
-                }
+            meals: {
+                breakfast: { status: "included", note: "Hotel checkout", restaurants: [] },
+                lunch: { status: "flexible", note: "", restaurants: [] },
+                dinner: { status: "options", note: "", restaurants: [] }
             },
-            "route": null,
-            "warnings": [
-                "Pack tonight"
-            ],
-            "gems": []
+            route: null, warnings: [], gems: []
         },
         {
-            "dayNumber": 8,
-            "date": "Aug 22",
-            "dayOfWeek": "Sat",
-            "title": "Komodo Liveaboard",
-            "location": "Labuan Bajo",
-            "backgroundImage": "https://images.unsplash.com/photo-1511321334288-a01a3f06d711?w=800",
-            "flight": {
-                "date": "Aug 22",
-                "dayOfWeek": "Sat",
-                "airline": "AirAsia",
-                "from": "DPS",
-                "to": "LBJ",
-                "departTime": "07:10",
-                "arriveTime": "08:15",
-                "terminal": "T1"
-            },
-            "hotel": {
-                "name": "Liveaboard Cabin",
-                "status": "confirmed",
-                "note": "2D1N boat",
-                "bookedBy": null,
-                "mapsUrl": null
-            },
-            "drive": null,
-            "activities": [
-                {
-                    "time": "07:10",
-                    "text": "Flight to Labuan Bajo",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "10:30",
-                    "text": "Board liveaboard",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "Afternoon",
-                    "text": "Manjarite Island snorkel",
-                    "subNote": "",
-                    "needsBooking": false
-                }
+            dayNumber: 12, date: "Aug 26", dayOfWeek: "Tue", title: "Nusa Penida (Juan solo)", location: "Nusa Penida",
+            backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
+            flight: null,
+            hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Aug 25-28", bookedBy: null, mapsUrl: null },
+            drive: null,
+            activities: [
+                { time: "Morning", text: "Boat to Nusa Penida", subNote: "Fast boat from Sanur", needsBooking: true },
+                { time: "Afternoon", text: "Manta Ray snorkeling", subNote: "Manta Point · world-class experience", needsBooking: true },
+                { time: "Late Afternoon", text: "Kelingking Beach viewpoint", subNote: "Dramatic cliffs · sunset photos", needsBooking: false },
+                { time: "Evening", text: "Return to Bali", subNote: "", needsBooking: false }
             ],
-            "meals": {
-                "breakfast": {
-                    "status": "included",
-                    "note": "On boat",
-                    "restaurants": []
-                },
-                "lunch": {
-                    "status": "included",
-                    "note": "On boat",
-                    "restaurants": []
-                },
-                "dinner": {
-                    "status": "included",
-                    "note": "On boat",
-                    "restaurants": []
-                }
+            meals: {
+                breakfast: { status: "included", note: "Hotel", restaurants: [] },
+                lunch: { status: "flexible", note: "On boat or Nusa Penida", restaurants: [] },
+                dinner: { status: "options", note: "", restaurants: [] }
             },
-            "route": null,
-            "warnings": [
-                "Motion sickness tablet"
-            ],
-            "gems": []
+            route: null, warnings: ["Maria stays in Bali this day"], gems: ["Manta rays are incredible"]
         },
         {
-            "dayNumber": 9,
-            "date": "Aug 23",
-            "dayOfWeek": "Sun",
-            "title": "Dragons & Pink Beach",
-            "location": "Komodo",
-            "backgroundImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800",
-            "flight": null,
-            "hotel": {
-                "name": "Oh!Julia Hotel Komodo",
-                "status": "confirmed",
-                "note": "Night 1 of 2",
-                "bookedBy": null,
-                "mapsUrl": null
-            },
-            "drive": null,
-            "activities": [
-                {
-                    "time": "05:00",
-                    "text": "Padar Island sunrise",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "Morning",
-                    "text": "Pink Beach swim",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "Afternoon",
-                    "text": "Komodo dragon trek",
-                    "subNote": "",
-                    "needsBooking": false
-                }
+            dayNumber: 13, date: "Aug 27", dayOfWeek: "Wed", title: "Ubud Day Trip (Juan solo)", location: "Ubud",
+            backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
+            flight: null,
+            hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Aug 25-28 (last night)", bookedBy: null, mapsUrl: null },
+            drive: { from: "Seminyak", to: "Ubud", duration: "2h", distance: "70 km" },
+            activities: [
+                { time: "07:00", text: "Depart for Ubud", subNote: "2 hour drive", needsBooking: false },
+                { time: "Morning", text: "Tegallalang Rice Terraces", subNote: "Iconic photos", needsBooking: false },
+                { time: "Noon", text: "Ubud Market exploration", subNote: "Local crafts & souvenirs", needsBooking: false },
+                { time: "Afternoon", text: "Monkey Forest", subNote: "Sacred sanctuary with monkeys", needsBooking: false },
+                { time: "Evening", text: "Ubud Palace & return to Seminyak", subNote: "Arrive hotel by 8pm", needsBooking: false }
             ],
-            "meals": {
-                "breakfast": {
-                    "status": "included",
-                    "note": "",
-                    "restaurants": []
-                },
-                "lunch": {
-                    "status": "included",
-                    "note": "",
-                    "restaurants": []
-                },
-                "dinner": {
-                    "status": "options",
-                    "note": "",
-                    "restaurants": []
-                }
+            meals: {
+                breakfast: { status: "included", note: "Hotel", restaurants: [] },
+                lunch: { status: "flexible", note: "Ubud restaurants", restaurants: [] },
+                dinner: { status: "flexible", note: "", restaurants: [] }
             },
-            "route": null,
-            "warnings": [],
-            "gems": []
+            route: null, warnings: ["Maria stays in Seminyak this day"], gems: ["Ubud is the cultural heart of Bali"]
         },
         {
-            "dayNumber": 10,
-            "date": "Aug 24",
-            "dayOfWeek": "Mon",
-            "title": "Caves & Sunset",
-            "location": "Labuan Bajo",
-            "backgroundImage": "https://images.unsplash.com/photo-1511379938547-c1f69b13d835?w=800",
-            "flight": null,
-            "hotel": {
-                "name": "Oh!Julia Hotel Komodo",
-                "status": "confirmed",
-                "note": "Night 2 of 2",
-                "bookedBy": null,
-                "mapsUrl": null
-            },
-            "drive": null,
-            "activities": [
-                {
-                    "time": "Morning",
-                    "text": "Sleep in",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "Morning",
-                    "text": "Rangko Cave",
-                    "subNote": "Underground lake",
-                    "needsBooking": false
-                },
-                {
-                    "time": "Sunset",
-                    "text": "Sylvia Hill",
-                    "subNote": "Sunset views",
-                    "needsBooking": false
-                }
+            dayNumber: 14, date: "Aug 28", dayOfWeek: "Fri", title: "Kuala Lumpur (Juan solo)", location: "Kuala Lumpur",
+            backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+            flight: { date: "Aug 28", dayOfWeek: "Fri", airline: "TBD", from: "DPS", to: "KUL", departTime: "11:15", arriveTime: "15:05", terminal: "T1" },
+            hotel: { name: "TBD Hotel KL", status: "pending", note: "Aug 28-30", bookedBy: null, mapsUrl: null },
+            drive: null,
+            activities: [
+                { time: "11:15", text: "Flight to Kuala Lumpur", subNote: "3.5h flight", needsBooking: false },
+                { time: "16:00", text: "Arrive Kuala Lumpur", subNote: "Check in hotel", needsBooking: false },
+                { time: "Evening", text: "KL Tower", subNote: "Sunset viewing & dinner", needsBooking: false }
             ],
-            "meals": {
-                "breakfast": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "lunch": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "dinner": {
-                    "status": "options",
-                    "note": "",
-                    "restaurants": []
-                }
+            meals: {
+                breakfast: { status: "included", note: "Hotel", restaurants: [] },
+                lunch: { status: "flexible", note: "On flight or airport", restaurants: [] },
+                dinner: { status: "options", note: "", restaurants: [{ name: "Tower Restaurant", desc: "Revolving · 360° views", rating: "4.4★", mapsUrl: "maps.google.com/?q=KL+Tower+Kuala+Lumpur" }] }
             },
-            "route": null,
-            "warnings": [],
-            "gems": []
+            route: null, warnings: ["Maria departs from Bali on Aug 28"], gems: []
         },
         {
-            "dayNumber": 11,
-            "date": "Aug 25",
-            "dayOfWeek": "Tue",
-            "title": "Back to Bali",
-            "location": "Labuan Bajo \u2192 Seminyak",
-            "backgroundImage": "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
-            "flight": {
-                "date": "Aug 25",
-                "dayOfWeek": "Tue",
-                "airline": "AirAsia",
-                "from": "LBJ",
-                "to": "DPS",
-                "departTime": "10:35",
-                "arriveTime": "11:45",
-                "terminal": "T1"
-            },
-            "hotel": {
-                "name": "Courtyard by Marriott Bali Seminyak",
-                "status": "confirmed",
-                "note": "Aug 25-28",
-                "bookedBy": null,
-                "mapsUrl": null
-            },
-            "drive": null,
-            "activities": [
-                {
-                    "time": "10:35",
-                    "text": "Flight back to Bali",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "Afternoon",
-                    "text": "Pool & rest",
-                    "subNote": "",
-                    "needsBooking": false
-                }
+            dayNumber: 15, date: "Aug 29", dayOfWeek: "Sat", title: "Kuala Lumpur Exploration", location: "Kuala Lumpur",
+            backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+            flight: null,
+            hotel: { name: "TBD Hotel KL", status: "pending", note: "Aug 28-30", bookedBy: null, mapsUrl: null },
+            drive: null,
+            activities: [
+                { time: "Morning", text: "Petronas Twin Towers", subNote: "Iconic skyline landmark", needsBooking: true },
+                { time: "Afternoon", text: "Batu Caves", subNote: "Hindu temple in cave · 272 steps", needsBooking: false },
+                { time: "Evening", text: "Jalan Alor Street", subNote: "Street food & night market", needsBooking: false }
             ],
-            "meals": {
-                "breakfast": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "lunch": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "dinner": {
-                    "status": "options",
-                    "note": "",
-                    "restaurants": []
-                }
+            meals: {
+                breakfast: { status: "included", note: "Hotel", restaurants: [] },
+                lunch: { status: "flexible", note: "", restaurants: [] },
+                dinner: { status: "options", note: "", restaurants: [{ name: "Jalan Alor Stalls", desc: "Street food · Grilled seafood", rating: "4.3★", mapsUrl: "maps.google.com/?q=Jalan+Alor+Kuala+Lumpur" }] }
             },
-            "route": null,
-            "warnings": [],
-            "gems": []
+            route: null, warnings: [], gems: ["Batu Caves is fascinating"]
         },
         {
-            "dayNumber": 12,
-            "date": "Aug 26",
-            "dayOfWeek": "Wed",
-            "title": "Manta Rays (Juan)",
-            "location": "Nusa Penida",
-            "backgroundImage": "https://images.unsplash.com/photo-1495854484909-c894fdcc538d?w=800",
-            "flight": null,
-            "hotel": {
-                "name": "Courtyard by Marriott Bali Seminyak",
-                "status": "confirmed",
-                "note": "Aug 25-28",
-                "bookedBy": null,
-                "mapsUrl": null
-            },
-            "drive": null,
-            "activities": [
-                {
-                    "time": "06:00",
-                    "text": "Hotel pickup",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "Morning",
-                    "text": "Manta Point snorkel",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "Afternoon",
-                    "text": "Kelingking Beach",
-                    "subNote": "",
-                    "needsBooking": false
-                }
+            dayNumber: 16, date: "Aug 30", dayOfWeek: "Sun", title: "Fly Home", location: "Dubai",
+            backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+            flight: { date: "Aug 30", dayOfWeek: "Sun", airline: "TBD", from: "KUL", to: "DXB", departTime: "19:10", arriveTime: "22:10", terminal: "T1" },
+            hotel: null,
+            drive: null,
+            activities: [
+                { time: "Morning", text: "Last-minute shopping", subNote: "KL markets & malls", needsBooking: false },
+                { time: "Afternoon", text: "Lunch & airport transfer", subNote: "", needsBooking: false },
+                { time: "19:10", text: "Depart Kuala Lumpur", subNote: "Evening flight to Dubai", needsBooking: false },
+                { time: "22:10", text: "Arrive Dubai", subNote: "Trip complete", needsBooking: false }
             ],
-            "meals": {
-                "breakfast": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "lunch": {
-                    "status": "included",
-                    "note": "",
-                    "restaurants": []
-                },
-                "dinner": {
-                    "status": "options",
-                    "note": "",
-                    "restaurants": []
-                }
+            meals: {
+                breakfast: { status: "included", note: "Hotel", restaurants: [] },
+                lunch: { status: "options", note: "", restaurants: [] },
+                dinner: { status: "included", note: "In-flight", restaurants: [] }
             },
-            "route": null,
-            "warnings": [
-                "Wear wetsuit"
-            ],
-            "gems": []
-        },
-        {
-            "dayNumber": 13,
-            "date": "Aug 27",
-            "dayOfWeek": "Thu",
-            "title": "Ubud (Juan)",
-            "location": "Ubud",
-            "backgroundImage": "https://images.unsplash.com/photo-1511379938547-c1f69b13d835?w=800",
-            "flight": null,
-            "hotel": {
-                "name": "Courtyard by Marriott Bali Seminyak",
-                "status": "confirmed",
-                "note": "Aug 25-28",
-                "bookedBy": null,
-                "mapsUrl": null
-            },
-            "drive": {
-                "from": "Seminyak",
-                "to": "Ubud",
-                "duration": "1.5h",
-                "distance": "~70 km"
-            },
-            "activities": [
-                {
-                    "time": "Morning",
-                    "text": "Pickup to Ubud",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "Afternoon",
-                    "text": "Rice terraces",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "Afternoon",
-                    "text": "Monkey Forest",
-                    "subNote": "",
-                    "needsBooking": false
-                }
-            ],
-            "meals": {
-                "breakfast": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "lunch": {
-                    "status": "included",
-                    "note": "",
-                    "restaurants": []
-                },
-                "dinner": {
-                    "status": "options",
-                    "note": "",
-                    "restaurants": []
-                }
-            },
-            "route": null,
-            "warnings": [],
-            "gems": []
-        },
-        {
-            "dayNumber": 14,
-            "date": "Aug 28",
-            "dayOfWeek": "Fri",
-            "title": "To KL (Juan)",
-            "location": "Bali \u2192 Kuala Lumpur",
-            "backgroundImage": "https://images.unsplash.com/photo-1508784185304-5e037fde9237?w=800",
-            "flight": {
-                "date": "Aug 28",
-                "dayOfWeek": "Fri",
-                "airline": "TBD",
-                "from": "DPS",
-                "to": "KUL",
-                "departTime": "11:15",
-                "arriveTime": "15:05",
-                "terminal": "T1"
-            },
-            "hotel": {
-                "name": "TBD KL",
-                "status": "to-book",
-                "note": "28-30 Aug",
-                "bookedBy": null,
-                "mapsUrl": null
-            },
-            "drive": null,
-            "activities": [
-                {
-                    "time": "08:30",
-                    "text": "Checkout Seminyak",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "11:15",
-                    "text": "Flight to KL",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "Evening",
-                    "text": "Jalan Alor night food street",
-                    "subNote": "",
-                    "needsBooking": false
-                }
-            ],
-            "meals": {
-                "breakfast": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "lunch": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "dinner": {
-                    "status": "options",
-                    "note": "",
-                    "restaurants": []
-                }
-            },
-            "route": null,
-            "warnings": [],
-            "gems": []
-        },
-        {
-            "dayNumber": 15,
-            "date": "Aug 29",
-            "dayOfWeek": "Sat",
-            "title": "KL Highlights",
-            "location": "Kuala Lumpur",
-            "backgroundImage": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800",
-            "flight": null,
-            "hotel": {
-                "name": "TBD",
-                "status": "to-book",
-                "note": "Aug 28-30",
-                "bookedBy": null,
-                "mapsUrl": null
-            },
-            "drive": null,
-            "activities": [
-                {
-                    "time": "06:00",
-                    "text": "Batu Caves",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "10:00",
-                    "text": "Petronas Twin Towers",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "Afternoon",
-                    "text": "Chinatown & markets",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "Sunset",
-                    "text": "Rooftop cocktails",
-                    "subNote": "",
-                    "needsBooking": false
-                }
-            ],
-            "meals": {
-                "breakfast": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "lunch": {
-                    "status": "options",
-                    "note": "",
-                    "restaurants": []
-                },
-                "dinner": {
-                    "status": "options",
-                    "note": "",
-                    "restaurants": []
-                }
-            },
-            "route": null,
-            "warnings": [],
-            "gems": []
-        },
-        {
-            "dayNumber": 16,
-            "date": "Aug 30",
-            "dayOfWeek": "Sun",
-            "title": "Fly Home",
-            "location": "KL \u2192 Dubai",
-            "backgroundImage": "https://images.unsplash.com/photo-1512207736139-d983b3f2b4c5?w=800",
-            "flight": {
-                "date": "Aug 30",
-                "dayOfWeek": "Sun",
-                "airline": "TBD",
-                "from": "KUL",
-                "to": "DXB",
-                "departTime": "19:10",
-                "arriveTime": "22:10",
-                "terminal": "T1"
-            },
-            "hotel": null,
-            "drive": null,
-            "activities": [
-                {
-                    "time": "Morning",
-                    "text": "Brunch & shopping",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "15:30",
-                    "text": "Leave for airport",
-                    "subNote": "",
-                    "needsBooking": false
-                },
-                {
-                    "time": "19:10",
-                    "text": "Flight home",
-                    "subNote": "",
-                    "needsBooking": false
-                }
-            ],
-            "meals": {
-                "breakfast": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "lunch": {
-                    "status": "flexible",
-                    "note": "",
-                    "restaurants": []
-                },
-                "dinner": {
-                    "status": "flexible",
-                    "note": "On flight",
-                    "restaurants": []
-                }
-            },
-            "route": null,
-            "warnings": [],
-            "gems": []
+            route: null, warnings: [], gems: []
         }
     ]
 };
-
 
         // ============================================================
         // DAY_WEATHER — Add coordinates per day to enable forecasts
         // Uses Open-Meteo (free, no API key required)
         // ============================================================
-        const DAY_WEATHER = {"1": {"lat": -8.65, "lon": 115.2167, "isoDate": "2026-08-15"}, "2": {"lat": -8.7395, "lon": 115.1689, "isoDate": "2026-08-16"}, "3": {"lat": -8.65, "lon": 115.2167, "isoDate": "2026-08-17"}, "4": {"lat": -8.65, "lon": 115.2167, "isoDate": "2026-08-18"}, "5": {"lat": -8.65, "lon": 115.2167, "isoDate": "2026-08-19"}, "6": {"lat": -8.65, "lon": 115.2167, "isoDate": "2026-08-20"}, "7": {"lat": -8.65, "lon": 115.2167, "isoDate": "2026-08-21"}, "8": {"lat": -8.45, "lon": 119.8822, "isoDate": "2026-08-22"}, "9": {"lat": -8.3742, "lon": 119.4025, "isoDate": "2026-08-23"}, "10": {"lat": -8.45, "lon": 119.8822, "isoDate": "2026-08-24"}, "11": {"lat": -8.65, "lon": 115.2167, "isoDate": "2026-08-25"}, "12": {"lat": -8.7, "lon": 115.5, "isoDate": "2026-08-26"}, "13": {"lat": -8.5069, "lon": 115.2625, "isoDate": "2026-08-27"}, "14": {"lat": 3.139, "lon": 101.6869, "isoDate": "2026-08-28"}, "15": {"lat": 3.139, "lon": 101.6869, "isoDate": "2026-08-29"}, "16": {"lat": 3.139, "lon": 101.6869, "isoDate": "2026-08-30"}};
+        const DAY_WEATHER = {
+            1: { lat: -8.65, lon: 115.2167, isoDate: "2026-08-15" },
+            2: { lat: -8.7395, lon: 115.1689, isoDate: "2026-08-16" },
+            3: { lat: -8.65, lon: 115.2167, isoDate: "2026-08-17" },
+            4: { lat: -8.65, lon: 115.2167, isoDate: "2026-08-18" },
+            5: { lat: -8.65, lon: 115.2167, isoDate: "2026-08-19" },
+            6: { lat: -8.65, lon: 115.2167, isoDate: "2026-08-20" },
+            7: { lat: -8.65, lon: 115.2167, isoDate: "2026-08-21" },
+            8: { lat: -8.45, lon: 119.8822, isoDate: "2026-08-22" },
+            9: { lat: -8.3742, lon: 119.4025, isoDate: "2026-08-23" },
+            10: { lat: -8.45, lon: 119.8822, isoDate: "2026-08-24" },
+            11: { lat: -8.65, lon: 115.2167, isoDate: "2026-08-25" },
+            12: { lat: -8.7, lon: 115.5, isoDate: "2026-08-26" },
+            13: { lat: -8.5069, lon: 115.2625, isoDate: "2026-08-27" },
+            14: { lat: 3.139, lon: 101.6869, isoDate: "2026-08-28" },
+            15: { lat: 3.139, lon: 101.6869, isoDate: "2026-08-29" },
+            16: { lat: 3.139, lon: 101.6869, isoDate: "2026-08-30" }
+        };
 
-
+        // ============================================================
+        // COST_DATA
+        // ============================================================
         // ============================================================
         // COST_DATA — Update with actual amounts as bookings are made
         // ============================================================
         const COST_DATA = {
-            disclaimer: "All figures are estimates. Update with confirmed prices as bookings are made.",
+            disclaimer: "Estimates only · actual costs may vary",
             summary: [
-                { cat: "✈️ Flights",               amount: 0, note: "X pax · round-trip" },
-                { cat: "🏨 Accommodation",           amount: 0, note: "X nights · X rooms" },
-                { cat: "🚗 Car Rental",              amount: 0, note: "If applicable" },
-                { cat: "🗺️ Activities & Tours",      amount: 0, note: "Tours, entrance fees, etc." },
-                { cat: "🍽️ Food & Drinks",           amount: 0, note: "Meals not included in stays" },
-                { cat: "⛽ Fuel",                    amount: 0, note: "If self-driving" },
-                { cat: "💡 Tips, Souvenirs & Misc",  amount: 0, note: "Personal expenses" },
+                { cat: "Flights", amount: 1200, note: "Emirates + AirAsia" },
+                { cat: "Hotels", amount: 1800, note: "Marriott, Liveaboard, Oh Julia, TBD KL" },
+                { cat: "Activities", amount: 400, note: "Kecak, dragon trek, snorkeling, tours" },
+                { cat: "Food", amount: 600, note: "Mix of included & dining" }
             ],
             days: {
-                // 1: { hotel: 0, activities: 0, food: 0, other: 0 },
+                1: { hotel: 120, activities: 0, food: 50, other: 0 },
+                2: { hotel: 120, activities: 80, food: 60, other: 0 },
+                3: { hotel: 120, activities: 0, food: 50, other: 0 },
+                4: { hotel: 120, activities: 30, food: 50, other: 0 },
+                5: { hotel: 120, activities: 30, food: 50, other: 0 },
+                6: { hotel: 120, activities: 0, food: 50, other: 0 },
+                7: { hotel: 120, activities: 0, food: 50, other: 0 },
+                8: { hotel: 200, activities: 100, food: 60, other: 0 },
+                9: { hotel: 80, activities: 120, food: 60, other: 0 },
+                10: { hotel: 80, activities: 40, food: 40, other: 0 },
+                11: { hotel: 120, activities: 0, food: 50, other: 0 },
+                12: { hotel: 120, activities: 80, food: 50, other: 0 },
+                13: { hotel: 120, activities: 40, food: 50, other: 0 },
+                14: { hotel: 100, activities: 60, food: 50, other: 0 },
+                15: { hotel: 100, activities: 40, food: 50, other: 0 },
+                16: { hotel: 0, activities: 0, food: 40, other: 0 }
             }
         };
     </script>
