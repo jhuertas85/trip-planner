@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bali · Komodo · Kuala Lumpur — August 2026</title>
+    <link rel="icon" href="../favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="../favicon.png" />
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Bali Trip">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0D0B08">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #0D0B08;
+            --bg-secondary: #211C16;
+            --bg-tertiary: #2a241a;
+            --border-color: #352D22;
+            --text-primary: #EDE4D3;
+            --text-secondary: #7A6E5E;
+            --text-muted: #8A7E6E;
+            --accent-gold: #C9966A;
+            --accent-terracotta: #C4511A;
+            --transition: all 0.3s ease;
+        }
+
+        body { background-color: var(--bg-primary); color: var(--text-primary); font-family: 'DM Sans', sans-serif; line-height: 1.6; }
+
+        body.light-mode {
+            --bg-primary: #F5F0E8;
+            --bg-secondary: #FFFFFF;
+            --bg-tertiary: #F9F5F0;
+            --border-color: #E0D5C5;
+            --text-primary: #2A2318;
+            --text-secondary: #8A7E6E;
+            --text-muted: #8A7E6E;
+        }
+
+        h1, h2, h3, h4, h5, h6 { font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+
+        .container { max-width: 640px; margin: 0 auto; padding: 0 16px; }
+
+        header {
+            position: sticky; top: 0;
+            border-bottom: 2px solid var(--border-color);
+            padding: 10px 0; z-index: 2000;
+            backdrop-filter: blur(8px);
+            background-color: rgba(33, 28, 22, 0.95);
+            transition: var(--transition);
+        }
+
+        body.light-mode header { background-color: rgba(255, 255, 255, 0.95); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+        .header-content {
+            max-width: 640px; margin: 0 auto; padding: 0 16px;
+            display: flex; justify-content: space-between; align-items: center; gap: 8px;
+        }
+
+        .header-title { font-size: 20px; font-weight: 700; color: var(--accent-gold); flex: 1; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        .overview-btn {
+            background: none; border: 1px solid var(--border-color); color: var(--text-secondary);
+            font-size: 12px; font-weight: 500; cursor: pointer; padding: 5px 8px;
+            border-radius: 4px; transition: var(--transition); white-space: nowrap; flex-shrink: 0;
+        }
+        .overview-btn:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
+
+        .theme-toggle {
+            background: none; border: none; color: var(--text-primary); font-size: 18px;
+            cursor: pointer; padding: 5px; display: flex; align-items: center; justify-content: center;
+            transition: var(--transition); border-radius: 4px; flex-shrink: 0;
+        }
+        .theme-toggle:hover { color: var(--accent-gold); transform: scale(1.1); }
+
+        .day-tabs { display: flex; overflow-x: auto; gap: 8px; padding-bottom: 8px; scroll-behavior: smooth; margin-top: 12px; }
+        .day-tabs::-webkit-scrollbar { height: 4px; }
+        .day-tabs::-webkit-scrollbar-track { background: var(--bg-tertiary); }
+        .day-tabs::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 2px; }
+
+        .day-tab {
+            padding: 8px 12px; background-color: var(--bg-tertiary); border: 2px solid var(--border-color);
+            border-radius: 6px; cursor: pointer; transition: var(--transition); white-space: nowrap;
+            font-size: 12px; color: var(--text-secondary); font-weight: 500; text-align: center; line-height: 1.3;
+        }
+        .day-tab:hover { border-color: var(--text-secondary); color: var(--accent-gold); }
+        .day-tab.active { background-color: var(--accent-gold); border-color: var(--accent-gold); color: var(--bg-primary); font-weight: 600; }
+        .day-tab.has-missing { border-color: #8A3A3A; }
+
+        main { padding: 24px 0; }
+        .day-view { display: none; animation: fadeIn 0.4s ease-in; }
+        .day-view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .hero {
+            padding: 16px 16px; border-radius: 12px; margin-bottom: 24px;
+            text-align: center; position: relative; overflow: hidden;
+            background-size: cover; background-position: center;
+        }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1; }
+        .hero-day-number {
+            font-size: 28px; font-weight: 700; color: var(--accent-gold); opacity: 0.7;
+            position: absolute; top: 10px; left: 14px; z-index: 2;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.9), 0 0 50px rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.4); padding: 2px 9px; border-radius: 6px; display: inline-block;
+        }
+        .hero-title { font-size: 22px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; position: relative; z-index: 2; }
+        .hero-location { font-size: 14px; color: var(--accent-gold); display: flex; align-items: center; justify-content: center; gap: 8px; position: relative; z-index: 2; }
+        .hero-location::before { content: '📍'; }
+
+        .card { background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; margin-bottom: 16px; transition: var(--transition); }
+        body.light-mode .card { box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+        .card:hover { border-color: var(--accent-gold); }
+        .card-title { font-size: 18px; font-weight: 600; color: var(--accent-gold); margin-bottom: 12px; }
+
+        .collapsible-section { margin-bottom: 16px; }
+        .section-header { display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 12px 16px; background-color: var(--bg-tertiary); border-radius: 6px 6px 0 0; transition: var(--transition); border-left: 3px solid transparent; }
+        .section-header:hover { background-color: rgba(201,150,106,0.1); }
+        .section-header h3 { flex: 1; font-size: 16px; color: var(--accent-gold); margin: 0; }
+        .chevron { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
+        .chevron::after { content: '▼'; font-size: 12px; color: var(--accent-gold); display: inline-block; transition: transform 0.3s ease; }
+        .section-header.collapsed .chevron::after { transform: rotate(-90deg); }
+        .section-content { max-height: 5000px; overflow: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; opacity: 1; padding: 0; border-radius: 0 0 6px 6px; }
+        .section-content.collapsed { max-height: 0; opacity: 0; }
+        .section-content > div { padding: 16px; }
+
+        .section-flight { background-color: rgba(30,60,100,0.25); border-left: 3px solid #4A8AB5; }
+        .section-flight .section-header { border-left: 3px solid #4A8AB5; }
+        .section-hotel { background-color: rgba(80,55,30,0.25); border-left: 3px solid #8B6D45; }
+        .section-hotel .section-header { border-left: 3px solid #8B6D45; }
+        .section-activities { background-color: rgba(60,75,40,0.2); border-left: 3px solid #7A8A50; }
+        .section-activities .section-header { border-left: 3px solid #7A8A50; }
+        .section-meals { background-color: rgba(55,65,45,0.25); border-left: 3px solid #7A8550; }
+        .section-meals .section-header { border-left: 3px solid #7A8550; }
+        .section-warnings { background-color: rgba(100,35,35,0.2); border-left: 3px solid #AA4444; }
+        .section-warnings .section-header { border-left: 3px solid #AA4444; }
+        .section-gems { background-color: rgba(100,80,30,0.2); border-left: 3px solid #B89030; }
+        .section-gems .section-header { border-left: 3px solid #B89030; }
+        .section-weather { background-color: rgba(20,45,70,0.2); }
+
+        body.light-mode .section-flight { background-color: rgba(74,138,181,0.15); }
+        body.light-mode .section-hotel { background-color: rgba(139,109,69,0.15); }
+        body.light-mode .section-activities { background-color: rgba(122,138,80,0.12); }
+        body.light-mode .section-meals { background-color: rgba(122,133,80,0.15); }
+        body.light-mode .section-warnings { background-color: rgba(170,68,68,0.12); }
+        body.light-mode .section-gems { background-color: rgba(184,144,48,0.12); }
+
+        .info-item { margin-bottom: 12px; }
+        .info-label { font-size: 12px; color: var(--text-secondary); text-transform: uppercase; font-weight: 600; }
+        .info-value { font-size: 15px; color: var(--text-primary); margin-top: 4px; }
+
+        .activity-item { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); }
+        .activity-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .activity-time { font-weight: 600; color: var(--accent-gold); font-size: 13px; }
+        .activity-text { color: var(--text-primary); margin-top: 4px; }
+        .activity-note { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+        .activity-maps-link { color: var(--accent-gold); text-decoration: none; }
+        .activity-maps-link:hover { text-decoration: underline; }
+
+        .meal-section { margin-bottom: 12px; }
+        .meal-status { font-size: 12px; color: var(--text-secondary); }
+        .meal-status.confirmed { color: #7A8A50; }
+        .meal-status.options { color: var(--accent-gold); }
+        .meal-status.flexible { color: #8A7E6E; }
+        .meal-status.pending { color: #C4511A; }
+
+        .restaurant-item { margin-top: 8px; margin-left: 12px; padding: 8px; background-color: var(--bg-tertiary); border-radius: 4px; border-left: 3px solid var(--accent-gold); }
+        .restaurant-name { font-weight: 600; color: var(--text-primary); }
+        .restaurant-desc { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+        .restaurant-rating { font-size: 12px; color: var(--accent-gold); margin-top: 4px; }
+
+        .warning-item, .gem-item { margin-bottom: 12px; padding: 12px; background-color: var(--bg-tertiary); border-radius: 6px; border-left: 3px solid; }
+        .warning-item { border-left-color: #AA4444; }
+        .gem-item { border-left-color: #B89030; }
+
+        .download-btn {
+            background: none; border: 1px solid var(--border-color); color: var(--text-secondary);
+            font-size: 13px; font-weight: 500; cursor: pointer; padding: 8px 12px;
+            border-radius: 4px; transition: var(--transition); white-space: nowrap;
+        }
+        .download-btn:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
+
+        .flight-info { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center; margin: 12px 0; }
+        .flight-endpoint { font-weight: 600; color: var(--accent-gold); }
+        .flight-arrow { color: var(--text-secondary); text-align: center; }
+
+        .hotel-status-badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 4px 8px; border-radius: 4px; margin-top: 8px; }
+        .hotel-status-badge.confirmed { background-color: rgba(122,138,80,0.3); color: #7A8A50; }
+        .hotel-status-badge.pending { background-color: rgba(196,81,26,0.3); color: #C4511A; }
+        .hotel-status-badge.missing { background-color: rgba(170,68,68,0.3); color: #AA4444; }
+
+        footer { text-align: center; padding: 20px; font-size: 12px; color: var(--text-secondary); margin-top: 40px; border-top: 1px solid var(--border-color); }
+
+        .missing-status { color: #C4511A; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <button class="overview-btn" onclick="showOverview()">📋 Overview</button>
+            <h1 class="header-title">Bali · Komodo · KL</h1>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
+        </div>
+        <div class="container">
+            <div class="day-tabs" id="dayTabs"></div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="overviewView" class="overview" style="display:none;">
+            <div class="card">
+                <h2 style="font-size: 24px; margin-bottom: 16px;">Bali · Komodo · Kuala Lumpur</h2>
+                <div class="info-item">
+                    <div class="info-label">📅 Dates</div>
+                    <div class="info-value">Aug 15–31, 2026 · 16 days</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">👥 Travelers</div>
+                    <div class="info-value">Juan Carlos, Maria (Juan solo for KL finish)</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">✈️ Route</div>
+                    <div class="info-value">Dubai → Bali → Komodo → Bali → Kuala Lumpur → Dubai</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="dayViewsContainer"></div>
+    </main>
+
+    <footer>
+        <p>📍 <a href="https://github.com/jhuertas85/trip-planner" target="_blank" style="color: var(--accent-gold);">View on GitHub</a></p>
+    </footer>
+
+    <script>
+        const TRIP_DATA = {
+            title: "Bali · Komodo · Kuala Lumpur",
+            travelers: ["Juan Carlos", "Maria"],
+            carRental: null,
+            spotifyPlaylist: null,
+            tricountUrl: null,
+            checkInUrl: null,
+            flights: [
+                { date: "Aug 15", dayOfWeek: "Fri", airline: "EK 0368", from: "DXB", to: "DPS", departTime: "03:10", arriveTime: "16:35", terminal: "DXB → DPS", passengers: ["Juan Carlos", "Maria"] },
+                { date: "Aug 22", dayOfWeek: "Sat", airline: "AirAsia", from: "DPS", to: "LBJ", departTime: "07:10", arriveTime: "08:15", terminal: "DPS → LBJ", passengers: ["Juan Carlos", "Maria"] },
+                { date: "Aug 25", dayOfWeek: "Tue", airline: "AirAsia", from: "LBJ", to: "DPS", departTime: "10:35", arriveTime: "11:45", terminal: "LBJ → DPS", passengers: ["Juan Carlos", "Maria"] },
+                { date: "Aug 28", dayOfWeek: "Fri", airline: "TBD", from: "DPS", to: "KUL", departTime: "11:15", arriveTime: "15:05", terminal: "DPS → KUL", passengers: ["Juan Carlos"] },
+                { date: "Aug 30", dayOfWeek: "Sun", airline: "TBD", from: "KUL", to: "DXB", departTime: "19:10", arriveTime: "22:10", terminal: "KUL → DXB", passengers: ["Juan Carlos"] }
+            ],
+            days: [
+                {
+                    dayNumber: 1, date: "Aug 15", dayOfWeek: "Fri", title: "Arrival", location: "Dubai → Bali",
+                    backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad2146c8e?w=800",
+                    flight: { airline: "EK 0368", from: "DXB", to: "DPS", departTime: "03:10", arriveTime: "16:35", terminal: "DXB → DPS" },
+                    hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Aug 15–22", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Courtyard+Marriott+Bali+Seminyak" },
+                    drive: null,
+                    activities: [
+                        { time: "03:10", text: "✈️ Emirates EK0368 — Dubai → Bali", subNote: "9.5-hour flight. Depart DXB 03:10, arrive DPS 16:35.", needsBooking: false },
+                        { time: "16:35", text: "Land at Bali Airport (DPS)", subNote: "Transfer to Seminyak ~45 min by Grab (IDR 150-250k). Grab a local SIM/eSIM at the airport.", needsBooking: false, mapsUrl: "maps.google.com/?q=Bali+Airport+Terminal" },
+                        { time: "17:30", text: "Check in at Courtyard Marriott Seminyak", subNote: "Settle in, freshen up. Low-key evening ahead.", needsBooking: false, mapsUrl: "maps.google.com/?q=Courtyard+Marriott+Bali+Seminyak" },
+                        { time: "Evening", text: "Sunset walk + dinner", subNote: "Beach walk if energy allows. Dinner on Jl. Kayu Aya (Eat Street) — casual options everywhere.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "On board or at DXB", restaurants: [] },
+                        lunch: { status: "flexible", note: "In-flight", restaurants: [] },
+                        dinner: { status: "flexible", note: "Casual dinner on Eat Street, Seminyak", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: ["Get local SIM/eSIM at airport", "Withdraw IDR cash for tips and park fees"],
+                    gems: ["Dry season — ~28°C on landing, breezy and cooler by evening"]
+                },
+
+                {
+                    dayNumber: 2, date: "Aug 16", dayOfWeek: "Sat", title: "Uluwatu & Kecak Fire Dance", location: "Seminyak",
+                    backgroundImage: "https://images.unsplash.com/photo-1512453266006-80e02b5eda63?w=800",
+                    flight: null,
+                    hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Continuing stay", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Courtyard+Marriott+Bali+Seminyak" },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Slow breakfast at hotel", subNote: "Prepare for full-day tour.", needsBooking: false },
+                        { time: "TBD", text: "🎫 Uluwatu Highlights + Kecak Fire Dance tour", subNote: "⏳ To book — 4.7★, 1,068 reviews, ~$22. Full-day tour, ~8–9 hrs with hotel pickup.", needsBooking: true },
+                        { time: "Afternoon", text: "Water Blow, GWK Cultural Park, Melasti Beach", subNote: "Tour includes multiple Uluwatu area highlights.", needsBooking: false, mapsUrl: "maps.google.com/?q=Uluwatu+Temple+Bali" },
+                        { time: "18:00", text: "🔥 Kecak Fire Dance at Uluwatu Temple", subNote: "Sunset clifftop performance overlooking the Indian Ocean. Arrive early for good seating. Sarongs provided for dress code.", needsBooking: false, mapsUrl: "maps.google.com/?q=Uluwatu+Temple+Bali" },
+                        { time: "Evening", text: "Dinner at clifftop restaurant or back in Seminyak", subNote: "Single Fin (clifftop), La Plancha (beanbags on sand), or Potato Head Beach Club.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Hotel breakfast", restaurants: [] },
+                        lunch: { status: "included", note: "Tour includes lunch", restaurants: [] },
+                        dinner: { status: "options", note: "Clifftop dining or Seminyak", restaurants: [
+                            { name: "Single Fin", desc: "Clifftop restaurant with views", rating: "4.5★", mapsUrl: "maps.google.com/?q=Single+Fin+Uluwatu" },
+                            { name: "La Plancha", desc: "Beanbags on the sand", rating: "4.4★", mapsUrl: "maps.google.com/?q=La+Plancha+Seminyak" }
+                        ]}
+                    },
+                    route: null,
+                    warnings: ["⚠️ Hold sunglasses/hats — macaques snatch things", "Arrive early for Kecak seating"],
+                    gems: ["Clifftop walk south of temple — quieter photos before crowds build", "Kecak is unmissable — only do this on a non-work day"]
+                },
+
+                {
+                    dayNumber: 3, date: "Aug 17", dayOfWeek: "Sun", title: "Work Day 1 — Free morning, work 14:00-21:00", location: "Seminyak",
+                    backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad2146c8e?w=800",
+                    flight: null,
+                    hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Continuing stay", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Courtyard+Marriott+Bali+Seminyak" },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Beach + breakfast at Seminyak café", subNote: "Free until ~13:30. Gym, yoga, or massage (Bali's best-value luxury).", needsBooking: false },
+                        { time: "14:00", text: "🖥️ Work (Dubai hours: 10:00-17:00 = Bali 14:00-21:00)", subNote: "Courtyard's 24-hr business hub available if room WiFi wobbles.", needsBooking: false },
+                        { time: "21:00", text: "Late dinner after work", subNote: "Sarong, Mama San, Merah Putih (modern Indonesian), or Motel Mexicola.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Seminyak café", restaurants: [] },
+                        lunch: { status: "flexible", note: "Light lunch before work", restaurants: [] },
+                        dinner: { status: "options", note: "After 21:00", restaurants: [
+                            { name: "Sarong", desc: "Modern Southeast Asian", rating: "4.5★", mapsUrl: "maps.google.com/?q=Sarong+Seminyak" },
+                            { name: "Mama San", desc: "Pan-Asian", rating: "4.4★", mapsUrl: "maps.google.com/?q=Mama+San+Seminyak" }
+                        ]}
+                    },
+                    route: null,
+                    warnings: ["Timezone: Dubai 10:00-17:00 = Bali 14:00-21:00 (4 hrs ahead)", "Test video call on Day 1 of work"],
+                    gems: ["Mornings free until 13:30 — book a 90-min massage as pre-work reset"]
+                },
+
+                {
+                    dayNumber: 4, date: "Aug 18", dayOfWeek: "Mon", title: "Work Day 2 — Indonesian Independence Day", location: "Seminyak",
+                    backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad2146c8e?w=800",
+                    flight: null,
+                    hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Continuing stay", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Courtyard+Marriott+Bali+Seminyak" },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Hari Kemerdekaan (Indonesian Independence Day) — Morning flag ceremonies", subNote: "Catch morning buzz in local neighbourhoods — panjat pinang (greased-pole climbing), sack races. Ask hotel front desk for nearest celebration.", needsBooking: false },
+                        { time: "14:00", text: "🖥️ Work (Dubai hours)", subNote: "Continue work schedule.", needsBooking: false },
+                        { time: "Evening", text: "Dinner + drinks", subNote: "Sunset drinks at Potato Head, La Plancha, or Ku De Ta before/after work.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Seminyak café", restaurants: [] },
+                        lunch: { status: "flexible", note: "Casual", restaurants: [] },
+                        dinner: { status: "flexible", note: "After work", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: ["One of the most joyful, authentic days to be on the island"],
+                    gems: ["Independence Day village games — real local culture, ask the hotel"]
+                },
+
+                {
+                    dayNumber: 5, date: "Aug 19", dayOfWeek: "Tue", title: "Work Day 3", location: "Seminyak",
+                    backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad2146c8e?w=800",
+                    flight: null,
+                    hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Continuing stay", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Courtyard+Marriott+Bali+Seminyak" },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Beach time or yoga", subNote: "Free morning routine", needsBooking: false },
+                        { time: "14:00", text: "🖥️ Work", subNote: "Continue work schedule", needsBooking: false },
+                        { time: "Evening", text: "Dinner + drinks", subNote: "Explore Canggu (~25 min Grab) for different café scene: Crate, Milk & Madu", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Morning café", restaurants: [] },
+                        lunch: { status: "flexible", note: "Light", restaurants: [] },
+                        dinner: { status: "flexible", note: "Explore Canggu or stay in Seminyak", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: ["Canggu has a different café scene if you want a change of pace"]
+                },
+
+                {
+                    dayNumber: 6, date: "Aug 20", dayOfWeek: "Wed", title: "Work Day 4", location: "Seminyak",
+                    backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad2146c8e?w=800",
+                    flight: null,
+                    hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Continuing stay", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Courtyard+Marriott+Bali+Seminyak" },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Beach club before noon (quieter, cheaper)", subNote: "Free morning", needsBooking: false },
+                        { time: "14:00", text: "🖥️ Work", subNote: "Work schedule", needsBooking: false },
+                        { time: "Evening", text: "Dinner & drinks", subNote: "Evening routine", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Morning", restaurants: [] },
+                        lunch: { status: "flexible", note: "Light lunch", restaurants: [] },
+                        dinner: { status: "flexible", note: "Evening", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: [],
+                    gems: []
+                },
+
+                {
+                    dayNumber: 7, date: "Aug 21", dayOfWeek: "Thu", title: "Work Day 5 — Last Bali work day", location: "Seminyak",
+                    backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad2146c8e?w=800",
+                    flight: null,
+                    hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Last night — check out tomorrow", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Courtyard+Marriott+Bali+Seminyak" },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Free morning", subNote: "Final beach/spa morning in Seminyak", needsBooking: false },
+                        { time: "14:00", text: "🖥️ Work (last day)", subNote: "Final work session", needsBooking: false },
+                        { time: "Evening", text: "Pack + final dinner", subNote: "⚠️ Pack bag for Komodo boat tomorrow. Early night — flight 07:10.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Morning", restaurants: [] },
+                        lunch: { status: "flexible", note: "Light", restaurants: [] },
+                        dinner: { status: "flexible", note: "Final Seminyak dinner", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: ["⚠️ Pack bag for Komodo liveaboard", "Early night — flight 07:10 tomorrow"],
+                    gems: []
+                },
+
+                {
+                    dayNumber: 8, date: "Aug 22", dayOfWeek: "Sat", title: "Komodo Liveaboard Day 1", location: "Labuan Bajo",
+                    backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+                    flight: { airline: "AirAsia", from: "DPS", to: "LBJ", departTime: "07:10", arriveTime: "08:15", terminal: "DPS → LBJ" },
+                    hotel: { name: "Liveaboard boat", status: "confirmed", note: "2D1N Komodo boat — sleep on board", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Labuan+Bajo+Marina" },
+                    drive: null,
+                    activities: [
+                        { time: "07:10", text: "✈️ AirAsia — Bali → Labuan Bajo", subNote: "Seat 5A or 7A (left window) for volcano views. Agung after takeoff, Rinjani ~20 min in.", needsBooking: false },
+                        { time: "08:15", text: "Land Labuan Bajo (LBJ)", subNote: "Airport pickup 08:30–10:00. Check out Courtyard, leave bags at bell desk or take to boat.", needsBooking: false },
+                        { time: "10:00", text: "Board the liveaboard", subNote: "Settle in cabin, safety briefing, get comfortable.", needsBooking: false, mapsUrl: "maps.google.com/?q=Labuan+Bajo+Marina" },
+                        { time: "Afternoon", text: "🏝️ Kelor Island — relax, island views", subNote: "First stop, easy day to acclimate.", needsBooking: false },
+                        { time: "Afternoon", text: "🤿 Manjarite Island snorkel", subNote: "Clear water, coral reefs. Reef-safe sunscreen essential.", needsBooking: false },
+                        { time: "Sunset", text: "🦇 Kalong Island — flying foxes launch at dusk", subNote: "Thousands of bats launching at sunset. One of the most spectacular nature moments on the trip.", needsBooking: false, mapsUrl: "maps.google.com/?q=Kalong+Island+Komodo" },
+                        { time: "Evening", text: "Dinner on board + sleep in cabin", subNote: "Overnight on the boat. Light layer for sleeping on deck.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Quick breakfast before flight", restaurants: [] },
+                        lunch: { status: "included", note: "On board", restaurants: [] },
+                        dinner: { status: "included", note: "On board", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: ["⚠️ Motion-sickness tablet before boarding", "Reef-safe sunscreen, hat, dry bag", "Light layer for boat + sleeping on deck"],
+                    gems: ["Kalong Island at sunset — thousands of flying foxes launching — unmissable nature moment"]
+                },
+
+                {
+                    dayNumber: 9, date: "Aug 23", dayOfWeek: "Sun", title: "Komodo Dragons & Pink Beach", location: "Komodo Island",
+                    backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+                    flight: null,
+                    hotel: { name: "Oh!Julia Hotel Komodo, Labuan Bajo", status: "confirmed", note: "Night 1 of 2", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Oh+Julia+Hotel+Komodo+Labuan+Bajo" },
+                    drive: null,
+                    activities: [
+                        { time: "05:00", text: "🌅 Wake up early — Padar Island sunrise", subNote: "Iconic ridgeline viewpoint. 20-min steep climb. Light layer for cool pre-dawn. Iconic photo spot.", needsBooking: false, mapsUrl: "maps.google.com/?q=Padar+Island+Komodo" },
+                        { time: "Breakfast", text: "Breakfast on board", subNote: "Fueling up for the day.", needsBooking: false },
+                        { time: "Morning", text: "🏖️ Pink Beach swim/relax", subNote: "Pink sand, crystal water, sea turtles. Snorkel if conditions allow.", needsBooking: false, mapsUrl: "maps.google.com/?q=Pink+Beach+Komodo" },
+                        { time: "Lunch", text: "Lunch on board", subNote: "Midday meal", needsBooking: false },
+                        { time: "Afternoon", text: "🐲 Komodo Island dragon trek", subNote: "Guided ranger walk to observe dragons from safe distance. Stay close to ranger.", needsBooking: false, mapsUrl: "maps.google.com/?q=Komodo+Island+Dragons" },
+                        { time: "Afternoon", text: "🤿 Manta Point snorkel (on-season August)", subNote: "Sea conditions permitting. August is on-season for mantas — good chance to see them.", needsBooking: false },
+                        { time: "17:00", text: "Return to Labuan Bajo", subNote: "Check in at Oh!Julia Hotel. Shower, decompress.", needsBooking: false, mapsUrl: "maps.google.com/?q=Labuan+Bajo+City+Centre" },
+                        { time: "Evening", text: "🍷 Rooftop pool sunset drink at hotel", subNote: "Harbour views. Decompress after intense day.", needsBooking: false },
+                        { time: "Dinner", text: "🍽️ Kampung Ujung harbourside — grilled fish", subNote: "Pick your catch at this night market stall. Cheap and excellent — the local move.", needsBooking: false, mapsUrl: "maps.google.com/?q=Kampung+Ujung+Labuan+Bajo" }
+                    ],
+                    meals: {
+                        breakfast: { status: "included", note: "On board", restaurants: [] },
+                        lunch: { status: "included", note: "On board", restaurants: [] },
+                        dinner: { status: "options", note: "Kampung Ujung night market — grilled fish stalls", restaurants: [
+                            { name: "Kampung Ujung", desc: "Harbourside grilled-fish night market. Pick your catch. Local favourite.", rating: "4.3★", mapsUrl: "maps.google.com/?q=Kampung+Ujung+Labuan+Bajo" }
+                        ]}
+                    },
+                    route: null,
+                    warnings: ["Stay close to ranger on dragon trek", "High UV — reef-safe sunscreen essential"],
+                    gems: ["Padar Island sunrise — one of Indonesia's most iconic views", "Manta Point (August) — peak season for manta rays", "Kampung Ujung is the local move — better and cheaper than tourist restaurants"]
+                },
+
+                {
+                    dayNumber: 10, date: "Aug 24", dayOfWeek: "Mon", title: "Rangko Cave, Batu Cermin, Sylvia Hill", location: "Labuan Bajo",
+                    backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+                    flight: null,
+                    hotel: { name: "Oh!Julia Hotel Komodo, Labuan Bajo", status: "confirmed", note: "Night 2 of 2 — last night", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Oh+Julia+Hotel+Komodo+Labuan+Bajo" },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Sleep in after boat days", subNote: "Late breakfast at hotel", needsBooking: false },
+                        { time: "TBD", text: "🎫 Rangko Cave + Batu Cermin + Sylvia Hill combo", subNote: "⏳ To confirm — half-day private driver + boat. Hotel pickup, ~7 hrs total. ~$55-60.", needsBooking: true },
+                        { time: "Noon-ish", text: "🏔️ Rangko Cave — underground lake in limestone cavern", subNote: "Crystal-clear turquoise water that sparkles in midday light. Swim inside the cave. HIDDEN GEM — most visitors only do boats, miss this entirely.", needsBooking: false, mapsUrl: "maps.google.com/?q=Rangko+Cave+Labuan+Bajo" },
+                        { time: "Afternoon", text: "⛏️ Batu Cermin (Mirror Stone Cave)", subNote: "Limestone tunnel system, hard hats provided. Walls glitter when light hits them. Quirky experience.", needsBooking: false, mapsUrl: "maps.google.com/?q=Batu+Cermin+Cave+Labuan+Bajo" },
+                        { time: "Afternoon", text: "🏊 Hotel rooftop pool", subNote: "Return to hotel for final afternoon swim.", needsBooking: false },
+                        { time: "Sunset", text: "🌅 Sylvia Hill (Bukit Sylvia) viewpoint", subNote: "Mostly-undiscovered hilltop with views over 'Teletubbies hills,' sea, and scattered islands. Steep/sandy — regular shoes, not sandals.", needsBooking: false, mapsUrl: "maps.google.com/?q=Sylvia+Hill+Labuan+Bajo" },
+                        { time: "Evening", text: "Farewell dinner", subNote: "Harbour-view restaurant or Kampung Ujung again. Early night — flight 10:35 tomorrow.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Hotel breakfast", restaurants: [] },
+                        lunch: { status: "included", note: "During tour", restaurants: [] },
+                        dinner: { status: "flexible", note: "Farewell dinner in Labuan Bajo", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: ["⚠️ Rangko Cave best ~midday when light enters", "Bring water shoes for cave approach", "Early night — flight 10:35 tomorrow"],
+                    gems: ["Rangko Cave — one of the best experiences in the region, most visitors miss it entirely", "Sylvia Hill — undiscovered viewpoint with Teletubbies-like landscape"]
+                },
+
+                {
+                    dayNumber: 11, date: "Aug 25", dayOfWeek: "Tue", title: "Komodo → Bali", location: "Bali",
+                    backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad2146c8e?w=800",
+                    flight: { airline: "AirAsia", from: "LBJ", to: "DPS", departTime: "10:35", arriveTime: "11:45", terminal: "LBJ → DPS" },
+                    hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Aug 25–28 (3 nights)", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Courtyard+Marriott+Bali+Seminyak" },
+                    drive: null,
+                    activities: [
+                        { time: "08:30", text: "Check out Oh!Julia — drive to airport", subNote: "~10 min to LBJ", needsBooking: false },
+                        { time: "10:35", text: "✈️ AirAsia — Labuan Bajo → Bali", subNote: "Seat F (right side) — same volcano views, sun behind you on return.", needsBooking: false },
+                        { time: "11:45", text: "Land Bali (DPS)", subNote: "Transfer to Courtyard (~45 min from DPS)", needsBooking: false },
+                        { time: "Afternoon", text: "Check in, pool, rest", subNote: "Decompress. Light day before manta trip tomorrow.", needsBooking: false, mapsUrl: "maps.google.com/?q=Courtyard+Marriott+Bali+Seminyak" },
+                        { time: "Evening", text: "Easy dinner in Seminyak", subNote: "Sunset at La Plancha or Potato Head. Haven't seen Seminyak sunset in 4 days.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Before flight", restaurants: [] },
+                        lunch: { status: "flexible", note: "In-flight", restaurants: [] },
+                        dinner: { status: "flexible", note: "Casual in Seminyak", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: ["Book manta trip for tomorrow now if not already done", "Confirm wetsuit and hotel pickup from Seminyak"],
+                    gems: []
+                },
+
+                {
+                    dayNumber: 12, date: "Aug 26", dayOfWeek: "Wed", title: "Nusa Penida Manta Rays", location: "Nusa Penida (Juan solo — Maria working)",
+                    backgroundImage: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800",
+                    flight: null,
+                    hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Continuing stay", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Courtyard+Marriott+Bali+Seminyak" },
+                    drive: null,
+                    activities: [
+                        { time: "06:00", text: "Hotel pickup in Seminyak", subNote: "Early start (~30-40 min vs Sanur pickup). Transfer to Sanur port.", needsBooking: false },
+                        { time: "TBD", text: "🎫 Nusa Penida Private Snorkeling + Manta Rays + Land Tour", subNote: "⏳ To book — 4.9★, 2,565 reviews, ~$90pp, private, includes Kelingking. Hotel pickup.", needsBooking: true },
+                        { time: "Morning", text: "🤿 Manta Point / Manta Bay snorkel FIRST (calmest, best early)", subNote: "Fast boat to Nusa Penida. Mantas ride near surface (upwelling season) — good for snorkelers. Motion-sickness tablet 30 min before.", needsBooking: false, mapsUrl: "maps.google.com/?q=Manta+Point+Nusa+Penida" },
+                        { time: "Afternoon", text: "🏖️ Kelingking Beach viewpoint", subNote: "Iconic T-shaped cliff with turquoise water. Broken Beach, Angel's Billabong, Crystal Bay. Lunch included.", needsBooking: false, mapsUrl: "maps.google.com/?q=Kelingking+Beach+Nusa+Penida" },
+                        { time: "Late afternoon", text: "Fast boat back to Sanur", subNote: "Mid-late afternoon return. Grab back to Seminyak.", needsBooking: false },
+                        { time: "Evening", text: "Celebrate the mantas — dinner in Seminyak", subNote: "You'll have seen manta rays. That deserves a proper dinner.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Light before 06:00 pickup", restaurants: [] },
+                        lunch: { status: "included", note: "On tour", restaurants: [] },
+                        dinner: { status: "flexible", note: "Celebration dinner in Seminyak", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: ["⚠️ Motion-sickness tablet 30 min before", "WEAR the wetsuit — August water ~22-26°C, you run cold", "Badung Strait can be choppy — early start = calmest crossing", "~9-10 hr day"],
+                    gems: ["Mantas ride near surface (August upwelling season) — excellent for snorkelers", "Gamat Bay — ask to include if time allows, overlooked coral spot"]
+                },
+
+                {
+                    dayNumber: 13, date: "Aug 27", dayOfWeek: "Thu", title: "Best of Ubud Day Trip", location: "Ubud (Juan solo — Maria working)",
+                    backgroundImage: "https://images.unsplash.com/photo-1537225228614-b4fad2146c8e?w=800",
+                    flight: null,
+                    hotel: { name: "Courtyard by Marriott Bali Seminyak", status: "confirmed", note: "Continuing stay", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Courtyard+Marriott+Bali+Seminyak" },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Hotel pickup to Ubud", subNote: "~1-1.5 hrs drive.", needsBooking: false },
+                        { time: "TBD", text: "🎫 Best of Ubud with Saraswati Temple & Monkey Forest", subNote: "⏳ To book — 4.9★, 378 reviews, ~$20. Full-day tour.", needsBooking: true },
+                        { time: "Morning-Afternoon", text: "🌾 Rice terraces, waterfall, local sights", subNote: "Green cultural contrast to the coast. Tegallalang rice terraces quieter northern end.", needsBooking: false, mapsUrl: "maps.google.com/?q=Tegallalang+Rice+Terraces+Ubud" },
+                        { time: "Afternoon", text: "🐒 Sacred Monkey Forest", subNote: "No loose items — macaques grab sunglasses/bottles. Morning visit best.", needsBooking: false, mapsUrl: "maps.google.com/?q=Sacred+Monkey+Forest+Ubud" },
+                        { time: "Afternoon", text: "✨ Saraswati Temple", subNote: "Iconic temple with lily ponds.", needsBooking: false, mapsUrl: "maps.google.com/?q=Saraswati+Temple+Ubud" },
+                        { time: "Afternoon", text: "🛍️ Ubud Market / town centre", subNote: "Browse local crafts, textiles, art.", needsBooking: false },
+                        { time: "Evening", text: "Back to Seminyak for dinner", subNote: "Return drive ~1.5 hrs", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Before pickup", restaurants: [] },
+                        lunch: { status: "included", note: "During tour", restaurants: [] },
+                        dinner: { status: "flexible", note: "Seminyak evening", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: ["No loose items in Monkey Forest — macaques snatch things", "Ubud can get afternoon showers even in dry season"],
+                    gems: ["Tegallalang rice terraces quieter northern end — tour buses skip it", "Alternative: Gates of Heaven (Lempuyang) — stunning but 10-11 hrs, far east, long photo queues"]
+                },
+
+                {
+                    dayNumber: 14, date: "Aug 28", dayOfWeek: "Fri", title: "Bali → Kuala Lumpur", location: "Kuala Lumpur (Juan solo)",
+                    backgroundImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800",
+                    flight: { airline: "TBD", from: "DPS", to: "KUL", departTime: "11:15", arriveTime: "15:05", terminal: "DPS → KUL (⏳ to confirm nonstop)" },
+                    hotel: { name: "TBD — Traders / Platinum 2 / PARKROYAL", status: "pending", note: "2 nights (28–30 Aug)", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Traders+Hotel+KLCC" },
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Checkout Courtyard", subNote: "Pack. Transfer to DPS (~45 min). Leave ~08:30.", needsBooking: false },
+                        { time: "11:15", text: "✈️ Midday flight to Kuala Lumpur", subNote: "⏳ To book — nonstop, ~3h50. Land ~15:05.", needsBooking: true },
+                        { time: "15:05", text: "Land KL", subNote: "Transfer to hotel (~45-60 min by Grab or KLIA Ekspres train ~30 min + Grab).", needsBooking: false },
+                        { time: "Evening", text: "🍜 Jalan Alor night food street", subNote: "Satay, grilled seafood, noodles. Buzzing after dark — opening move of KL.", needsBooking: false, mapsUrl: "maps.google.com/?q=Jalan+Alor+Kuala+Lumpur" },
+                        { time: "Evening", text: "🍷 Rooftop drink: SkyBar or Heli Lounge Bar", subNote: "Petronas views or helipad views. First KL night vibe.", needsBooking: false, mapsUrl: "maps.google.com/?q=SkyBar+Traders+Hotel+KLCC" }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Before flight", restaurants: [] },
+                        lunch: { status: "flexible", note: "In-flight or airport", restaurants: [] },
+                        dinner: { status: "options", note: "Jalan Alor night street food", restaurants: [
+                            { name: "Jalan Alor", desc: "Hawker street with satay, grilled seafood, noodles. Atmospheric after dark.", rating: "4.3★", mapsUrl: "maps.google.com/?q=Jalan+Alor+Kuala+Lumpur" }
+                        ]}
+                    },
+                    route: null,
+                    warnings: ["⏳ CRITICAL: Confirm DPS→KUL flight is nonstop", "Malls open 10:00, not 09:00", "Afternoon storms often ~17:30-18:00"],
+                    gems: ["Merdeka markets Aug 29-Sep 1 (National Month) — Central Market Merdeka market + flags citywide", "Heli Lounge Bar — drinks on an actual helipad"]
+                },
+
+                {
+                    dayNumber: 15, date: "Aug 29", dayOfWeek: "Sat", title: "Kuala Lumpur — Towers, Caves, Markets", location: "Kuala Lumpur",
+                    backgroundImage: "https://images.unsplash.com/photo-1512453266006-80e02b5eda63?w=800",
+                    flight: null,
+                    hotel: { name: "TBD — Traders / Platinum 2 / PARKROYAL", status: "pending", note: "Continuing stay", bookedBy: "Juan Carlos", mapsUrl: "maps.google.com/?q=Traders+Hotel+KLCC" },
+                    drive: null,
+                    activities: [
+                        { time: "Early morning", text: "🦇 Batu Caves — rainbow steps, limestone caverns", subNote: "Go first thing (beat heat + crowds). ~30 min by Grab from hotel.", needsBooking: false, mapsUrl: "maps.google.com/?q=Batu+Caves+Kuala+Lumpur" },
+                        { time: "Afternoon", text: "🏢 Petronas Twin Towers — observation deck", subNote: "⏳ Book online ahead. Skip queues. KLCC Park views. Suria KLCC lunch.", needsBooking: true, mapsUrl: "maps.google.com/?q=Petronas+Twin+Towers+KLCC" },
+                        { time: "Afternoon", text: "🗼 Merdeka 118 — 'The View' (world's 2nd tallest building)", subNote: "Observation deck. Alternative to Petronas if time allows.", needsBooking: false, mapsUrl: "maps.google.com/?q=Merdeka+118+KL" },
+                        { time: "Afternoon", text: "🏮 Central Market + Chinatown / Petaling Street", subNote: "Merdeka markets (National Month) at Central Market. Crafts, food, live performances.", needsBooking: false, mapsUrl: "maps.google.com/?q=Central+Market+Kuala+Lumpur" },
+                        { time: "Evening", text: "🍷 Rooftop sundowners", subNote: "SkyBar (Traders), Vertigo (Banyan Tree), Mesa on 51, or Heli Lounge Bar.", needsBooking: false },
+                        { time: "Night", text: "🍴 Dinner + nightlife — Changkat Bukit Bintang", subNote: "Nightlife strip with bars, restaurants, live music.", needsBooking: false, mapsUrl: "maps.google.com/?q=Changkat+Bukit+Bintang+Kuala+Lumpur" }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Before Batu Caves", restaurants: [] },
+                        lunch: { status: "flexible", note: "Suria KLCC or Chinatown", restaurants: [] },
+                        dinner: { status: "options", note: "Changkat Bukit Bintang or rooftop dining", restaurants: [
+                            { name: "Changkat Bukit Bintang", desc: "Nightlife strip with diverse dining/bar options", rating: "4.2★", mapsUrl: "maps.google.com/?q=Changkat+Bukit+Bintang" }
+                        ]}
+                    },
+                    route: null,
+                    warnings: ["Book Petronas deck online to skip lines", "August storms often ~17:30 — don't book rooftop sunset for 17:00", "Don't walk Bukit Bintang ↔ Chinatown midday — hot, humid, 1.5 km feels like 5"],
+                    gems: ["Kampung Baru — Malay village in shadow of skyscrapers. Cheap traditional food, striking old-meets-new photos", "Merdeka markets at Central Market — food, crafts, live performances in National Month", "Heli Lounge Bar — one of KL's best skyline views for the price of a cocktail"]
+                },
+
+                {
+                    dayNumber: 16, date: "Aug 30", dayOfWeek: "Sun", title: "Half-day KL → Fly Home", location: "Kuala Lumpur → Dubai",
+                    backgroundImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800",
+                    flight: { airline: "TBD", from: "KUL", to: "DXB", departTime: "19:10", arriveTime: "22:10", terminal: "KUL → DXB (⏳ to confirm)" },
+                    hotel: null,
+                    drive: null,
+                    activities: [
+                        { time: "Morning", text: "Brunch in KL", subNote: "Easy morning. Last KLCC shopping or Merdeka market wander if energy allows.", needsBooking: false },
+                        { time: "Afternoon", text: "Leave for KLIA", subNote: "Check out. Leave ~15:30-16:00. KUL flight 19:10 → 22:10 (nonstop, ~7h).", needsBooking: false },
+                        { time: "19:10", text: "✈️ Evening flight to Dubai", subNote: "⏳ To book. Emirates or Batik. Arrive home 22:10, ready for Monday work.", needsBooking: true },
+                        { time: "22:10", text: "Arrive Dubai 22:10", subNote: "Back home. Ready for Monday.", needsBooking: false }
+                    ],
+                    meals: {
+                        breakfast: { status: "flexible", note: "Brunch", restaurants: [] },
+                        lunch: { status: "flexible", note: "Last KL meal", restaurants: [] },
+                        dinner: { status: "flexible", note: "In-flight", restaurants: [] }
+                    },
+                    route: null,
+                    warnings: ["Merdeka peak is Aug 30 night (KL Tower fireworks) and Aug 31 parade — you fly out before the fireworks. Catch the build-up; it's a trade-off.", "Leave by 15:30-16:00 for 19:10 flight"],
+                    gems: ["You catch Merdeka festive build-up before flying out. Peak fireworks and parade are Aug 30 night + Aug 31, but Aug 30 afternoon is already electric"]
+                }
+            ]
+        };
+
+        const DAY_WEATHER = {
+            1: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-15" },
+            2: { lat: -8.7270, lon: 115.1650, isoDate: "2026-08-16" },
+            3: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-17" },
+            4: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-18" },
+            5: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-19" },
+            6: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-20" },
+            7: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-21" },
+            8: { lat: -8.4833, lon: 123.5667, isoDate: "2026-08-22" },
+            9: { lat: -8.4833, lon: 123.5667, isoDate: "2026-08-23" },
+            10: { lat: -8.4833, lon: 123.5667, isoDate: "2026-08-24" },
+            11: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-25" },
+            12: { lat: -8.7270, lon: 115.5000, isoDate: "2026-08-26" },
+            13: { lat: -8.5069, lon: 115.2625, isoDate: "2026-08-27" },
+            14: { lat: 3.1390, lon: 101.6869, isoDate: "2026-08-28" },
+            15: { lat: 3.1390, lon: 101.6869, isoDate: "2026-08-29" },
+            16: { lat: 3.1390, lon: 101.6869, isoDate: "2026-08-30" }
+        };
+
+        const COST_DATA = {
+            disclaimer: "Budget tracking — costs will be filled in as bookings are confirmed",
+            summary: [
+                { cat: "Flights", amount: 0, note: "Emirates + AirAsia + TBD return" },
+                { cat: "Hotels", amount: 0, note: "Marriott Bali + Liveaboard + Komodo hotel + KL hotel" },
+                { cat: "Activities & Tours", amount: 0, note: "Kecak + Manta + Ubud + Caves + tours" },
+                { cat: "Food & Dining", amount: 0, note: "Meals + dinners throughout" }
+            ],
+            days: {
+                1: { hotel: 0, activities: 0, food: 0, other: 0 },
+                2: { hotel: 0, activities: 22, food: 0, other: 0 },
+                3: { hotel: 0, activities: 0, food: 0, other: 0 },
+                4: { hotel: 0, activities: 0, food: 0, other: 0 },
+                5: { hotel: 0, activities: 0, food: 0, other: 0 },
+                6: { hotel: 0, activities: 0, food: 0, other: 0 },
+                7: { hotel: 0, activities: 0, food: 0, other: 0 },
+                8: { hotel: 0, activities: 0, food: 0, other: 0 },
+                9: { hotel: 0, activities: 0, food: 0, other: 0 },
+                10: { hotel: 0, activities: 0, food: 0, other: 0 },
+                11: { hotel: 0, activities: 0, food: 0, other: 0 },
+                12: { hotel: 0, activities: 90, food: 0, other: 0 },
+                13: { hotel: 0, activities: 20, food: 0, other: 0 },
+                14: { hotel: 0, activities: 0, food: 0, other: 0 },
+                15: { hotel: 0, activities: 0, food: 0, other: 0 },
+                16: { hotel: 0, activities: 0, food: 0, other: 0 }
+            }
+        };
+
+        function showOverview() {
+            document.getElementById('overviewView').style.display = 'block';
+            document.getElementById('dayViewsContainer').innerHTML = '';
+            document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+        }
+
+        function showDay(dayNum) {
+            document.getElementById('overviewView').style.display = 'none';
+            const container = document.getElementById('dayViewsContainer');
+            const day = TRIP_DATA.days[dayNum - 1];
+            container.innerHTML = renderDayView(day);
+            document.querySelectorAll('.day-tab').forEach((t, i) => {
+                t.classList.toggle('active', i === dayNum - 1);
+            });
+        }
+
+        function renderDayView(day) {
+            let html = `<div class="day-view active">`;
+
+            // Hero
+            html += `<div class="hero" style="background-image: url('${day.backgroundImage}')">
+                <div class="hero-day-number">Day ${day.dayNumber}</div>
+                <h2 class="hero-title">${day.title}</h2>
+                <p class="hero-location">${day.location}</p>
+            </div>`;
+
+            // Flight section
+            if (day.flight) {
+                html += `<div class="collapsible-section section-flight">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h3>✈️ Flight</h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content">
+                        <div>
+                            <div class="info-item">
+                                <div class="info-label">Flight</div>
+                                <div class="info-value">${day.flight.airline}</div>
+                            </div>
+                            <div class="flight-info">
+                                <div class="flight-endpoint">${day.flight.from}</div>
+                                <div class="flight-arrow">→</div>
+                                <div class="flight-endpoint">${day.flight.to}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Departure</div>
+                                <div class="info-value">${day.flight.departTime}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Arrival</div>
+                                <div class="info-value">${day.flight.arriveTime}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Terminal</div>
+                                <div class="info-value">${day.flight.terminal}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            }
+
+            // Hotel section
+            if (day.hotel) {
+                html += `<div class="collapsible-section section-hotel">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h3>🏨 Hotel</h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content">
+                        <div>
+                            <div class="info-item">
+                                <div class="info-label">Hotel</div>
+                                <div class="info-value">${day.hotel.name}</div>
+                                <div class="hotel-status-badge ${day.hotel.status}">${day.hotel.status}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Details</div>
+                                <div class="info-value">${day.hotel.note}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Booked by</div>
+                                <div class="info-value">${day.hotel.bookedBy}</div>
+                            </div>
+                            ${day.hotel.mapsUrl ? `<div class="info-item"><a href="https://${day.hotel.mapsUrl}" target="_blank" class="activity-maps-link">📍 View on Maps</a></div>` : ''}
+                        </div>
+                    </div>
+                </div>`;
+            }
+
+            // Activities section
+            if (day.activities && day.activities.length > 0) {
+                html += `<div class="collapsible-section section-activities">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h3>🗺️ Activities</h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content">
+                        <div>`;
+                day.activities.forEach(activity => {
+                    html += `<div class="activity-item">
+                        <div class="activity-time">${activity.time}</div>
+                        <div class="activity-text">${activity.text}${activity.needsBooking ? ' <span class="missing-status">⏳ to book</span>' : ''}</div>
+                        ${activity.subNote ? `<div class="activity-note">${activity.subNote}</div>` : ''}
+                    </div>`;
+                });
+                html += `</div></div></div>`;
+            }
+
+            // Meals section
+            if (day.meals) {
+                html += `<div class="collapsible-section section-meals">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h3>🍽️ Meals</h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content">
+                        <div>`;
+                ['breakfast', 'lunch', 'dinner'].forEach(meal => {
+                    if (day.meals[meal]) {
+                        html += `<div class="meal-section">
+                            <div class="info-label">${meal.charAt(0).toUpperCase() + meal.slice(1)}</div>
+                            <div class="meal-status ${day.meals[meal].status}">${day.meals[meal].status}</div>
+                            ${day.meals[meal].note ? `<div class="info-value" style="margin-top:4px">${day.meals[meal].note}</div>` : ''}`;
+                        if (day.meals[meal].restaurants && day.meals[meal].restaurants.length > 0) {
+                            day.meals[meal].restaurants.forEach(rest => {
+                                html += `<div class="restaurant-item">
+                                    <div class="restaurant-name">${rest.name}</div>
+                                    <div class="restaurant-desc">${rest.desc}</div>
+                                    <div class="restaurant-rating">${rest.rating}</div>
+                                    ${rest.mapsUrl ? `<div><a href="https://${rest.mapsUrl}" target="_blank" class="activity-maps-link">📍 View on Maps</a></div>` : ''}
+                                </div>`;
+                            });
+                        }
+                        html += `</div>`;
+                    }
+                });
+                html += `</div></div></div>`;
+            }
+
+            // Warnings
+            if (day.warnings && day.warnings.length > 0) {
+                html += `<div class="collapsible-section section-warnings">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h3>⚠️ Warnings</h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content">
+                        <div>`;
+                day.warnings.forEach(w => {
+                    html += `<div class="warning-item">${w}</div>`;
+                });
+                html += `</div></div></div>`;
+            }
+
+            // Gems
+            if (day.gems && day.gems.length > 0) {
+                html += `<div class="collapsible-section section-gems">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h3>✨ Gems</h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content">
+                        <div>`;
+                day.gems.forEach(g => {
+                    html += `<div class="gem-item">${g}</div>`;
+                });
+                html += `</div></div></div>`;
+            }
+
+            html += `</div>`;
+            return html;
+        }
+
+        function toggleSection(header) {
+            header.classList.toggle('collapsed');
+            header.nextElementSibling.classList.toggle('collapsed');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        }
+
+        function initTabs() {
+            const container = document.getElementById('dayTabs');
+            TRIP_DATA.days.forEach((day, i) => {
+                const tab = document.createElement('button');
+                tab.className = 'day-tab' + (i === 0 ? ' active' : '');
+                tab.textContent = `Day ${day.dayNumber}\n${day.date.split(' ')[1]}`;
+                tab.onclick = () => showDay(day.dayNumber);
+                container.appendChild(tab);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.classList.add('light-mode');
+            }
+            initTabs();
+            showDay(1);
+        });
+    </script>
+</body>
+</html>
