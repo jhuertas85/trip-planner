@@ -24,10 +24,8 @@ trip-planner/
 │   └── index.html             # Germany · Switzerland · Madrid July 2026 (Juan Carlos)
 ├── 2026-07-puerto-rico/
 │   └── index.html             # Puerto Rico Jul 2026 (10 people · Luquillo · Jul 8–12)
-├── 2026-07-marias-trip/
-│   └── index.html             # Maria's Trip July–Aug 2026 (Dubai · Madrid · Puerto Rico · Kraków · London)
-└── 2026-08-bali-komodo-kuala-lumpur/
-    └── index.html             # Bali · Komodo · Kuala Lumpur Aug 2026 (Juan Carlos & Maria · Aug 15–31)
+└── 2026-07-marias-trip/
+    └── index.html             # Maria's Trip July–Aug 2026 (Dubai · Madrid · Puerto Rico · Kraków · London)
 ```
 
 Each trip is a self-contained single HTML file. All trip data lives in a `TRIP_DATA` JavaScript object near the top of the rendering script. The rendering engine reads from that object — **only edit `TRIP_DATA`, `DAY_WEATHER`, and `COST_DATA` for content changes**, not the rendering code.
@@ -149,12 +147,3 @@ Whenever a new trip folder is created or an existing one is significantly update
 - **Activities:** Old San Juan, El Yunque Rainforest, Hacienda Carabalí, Bioluminescent Bay, Remote work in Madrid/London, Time with Alex in Kraków
 - **Work locations:** Nomia office (Kurniki 9, Kraków), Nomia office (10 York Road, London)
 - **Trains:** Kraków–Warsaw (Jul 18), Warsaw–Kraków (Jul 24)
-
-## Bali · Komodo · Kuala Lumpur 2026 trip summary
-- **Travellers:** Juan Carlos, Maria (Juan solo finish in KL)
-- **Dates:** Aug 15–31, 2026 (16 days · Fri–Sun)
-- **Route:** Dubai → Bali (Seminyak 7 nights) → Komodo (liveaboard 1 night + Labuan Bajo 2 nights) → Bali (3 nights) → Kuala Lumpur (2 nights) → Dubai
-- **Flights:** Emirates EK0368 (DXB→DPS Aug 15), AirAsia (DPS→LBJ Aug 22, LBJ→DPS Aug 25), TBD (DPS→KUL Aug 28, KUL→DXB Aug 30)
-- **Hotels:** Courtyard by Marriott Bali Seminyak (Aug 15–22, 25–28), Liveaboard cabin (Aug 22–23), Oh!Julia Hotel Komodo (Aug 23–24), TBD KL (Aug 28–30)
-- **Key activities:** Uluwatu + Kecak (Day 2), Work from home mornings (Days 3–7, 14:00–21:00 Dubai time), Komodo dragon trek + Pink Beach + mantas, Rangko Cave + Sylvia Hill sunset, Nusa Penida manta snorkeling (Day 12, Juan solo), Ubud day trip (Day 13, Juan solo), KL towers + Batu Caves + Jalan Alor (Days 14–16, Juan solo)
-- **Special notes:** Dry season · August = peak windy season · bring light jacket · work-from-home week (mornings free · dinners after 21:00) · Maria stays in Bali after Day 13
