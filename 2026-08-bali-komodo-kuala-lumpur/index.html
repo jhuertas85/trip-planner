@@ -1876,34 +1876,6 @@
     ],
     days: {}
 };
-
-        // ============================================================
-        // DAY_WEATHER — Add coordinates per day to enable forecasts
-        // Uses Open-Meteo (free, no API key required)
-        // ============================================================
-        const DAY_WEATHER = {
-            // Add coords per day: dayNumber: { lat: 0.0, lon: 0.0, isoDate: "YYYY-MM-DD" }
-            // Example: 1: { lat: 48.8566, lon: 2.3522, isoDate: "2027-01-01" },
-        };
-
-        // ============================================================
-        // COST_DATA — Update with actual amounts as bookings are made
-        // ============================================================
-        const COST_DATA = {
-            disclaimer: "All figures are estimates. Update with confirmed prices as bookings are made.",
-            summary: [
-                { cat: "✈️ Flights",               amount: 0, note: "X pax · round-trip" },
-                { cat: "🏨 Accommodation",           amount: 0, note: "X nights · X rooms" },
-                { cat: "🚗 Car Rental",              amount: 0, note: "If applicable" },
-                { cat: "🗺️ Activities & Tours",      amount: 0, note: "Tours, entrance fees, etc." },
-                { cat: "🍽️ Food & Drinks",           amount: 0, note: "Meals not included in stays" },
-                { cat: "⛽ Fuel",                    amount: 0, note: "If self-driving" },
-                { cat: "💡 Tips, Souvenirs & Misc",  amount: 0, note: "Personal expenses" },
-            ],
-            days: {
-                // 1: { hotel: 0, activities: 0, food: 0, other: 0 },
-            }
-        };
     </script>
 
     <header>
