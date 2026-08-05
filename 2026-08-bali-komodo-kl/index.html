@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bali · Komodo · Kuala Lumpur — August 2026</title>
+    <title>Trip Planner</title>
     <link rel="icon" href="../favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="../favicon.png" />
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Bali Trip">
+    <meta name="apple-mobile-web-app-title" content="Trip">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#0D0B08">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         :root {
             --bg-primary: #0D0B08;
@@ -29,7 +33,12 @@
             --transition: all 0.3s ease;
         }
 
-        body { background-color: var(--bg-primary); color: var(--text-primary); font-family: 'DM Sans', sans-serif; line-height: 1.6; }
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.6;
+        }
 
         body.light-mode {
             --bg-primary: #F5F0E8;
@@ -41,232 +50,1135 @@
             --text-muted: #8A7E6E;
         }
 
-        h1, h2, h3, h4, h5, h6 { font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
 
-        .container { max-width: 640px; margin: 0 auto; padding: 0 16px; }
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
 
+        /* HEADER */
         header {
-            position: sticky; top: 0;
+            position: sticky;
+            top: 0;
             border-bottom: 2px solid var(--border-color);
-            padding: 10px 0; z-index: 2000;
+            padding: 10px 0;
+            z-index: 2000;
             backdrop-filter: blur(8px);
             background-color: rgba(33, 28, 22, 0.95);
             transition: var(--transition);
         }
 
-        body.light-mode header { background-color: rgba(255, 255, 255, 0.95); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        body.light-mode header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
 
         .header-content {
-            max-width: 640px; margin: 0 auto; padding: 0 16px;
-            display: flex; justify-content: space-between; align-items: center; gap: 8px;
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
         }
 
-        .header-title { font-size: 20px; font-weight: 700; color: var(--accent-gold); flex: 1; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .header-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            flex: 1;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
         .overview-btn {
-            background: none; border: 1px solid var(--border-color); color: var(--text-secondary);
-            font-size: 12px; font-weight: 500; cursor: pointer; padding: 5px 8px;
-            border-radius: 4px; transition: var(--transition); white-space: nowrap; flex-shrink: 0;
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 5px 8px;
+            border-radius: 4px;
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
         }
-        .overview-btn:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
+
+        .overview-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
 
         .theme-toggle {
-            background: none; border: none; color: var(--text-primary); font-size: 18px;
-            cursor: pointer; padding: 5px; display: flex; align-items: center; justify-content: center;
-            transition: var(--transition); border-radius: 4px; flex-shrink: 0;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            border-radius: 4px;
+            flex-shrink: 0;
         }
-        .theme-toggle:hover { color: var(--accent-gold); transform: scale(1.1); }
 
-        .day-tabs { display: flex; overflow-x: auto; gap: 8px; padding-bottom: 8px; scroll-behavior: smooth; margin-top: 12px; }
-        .day-tabs::-webkit-scrollbar { height: 4px; }
-        .day-tabs::-webkit-scrollbar-track { background: var(--bg-tertiary); }
-        .day-tabs::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 2px; }
+        .theme-toggle:hover {
+            color: var(--accent-gold);
+            transform: scale(1.1);
+        }
+
+        .day-tabs {
+            display: flex;
+            overflow-x: auto;
+            gap: 8px;
+            padding-bottom: 8px;
+            scroll-behavior: smooth;
+            margin-top: 12px;
+        }
+
+        .day-tabs::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .day-tabs::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+
+        .day-tabs::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+            border-radius: 2px;
+        }
 
         .day-tab {
-            padding: 8px 12px; background-color: var(--bg-tertiary); border: 2px solid var(--border-color);
-            border-radius: 6px; cursor: pointer; transition: var(--transition); white-space: nowrap;
-            font-size: 12px; color: var(--text-secondary); font-weight: 500; text-align: center; line-height: 1.3;
+            padding: 8px 12px;
+            background-color: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.3;
         }
-        .day-tab:hover { border-color: var(--text-secondary); color: var(--accent-gold); }
-        .day-tab.active { background-color: var(--accent-gold); border-color: var(--accent-gold); color: var(--bg-primary); font-weight: 600; }
-        .day-tab.has-missing { border-color: #8A3A3A; }
 
-        main { padding: 24px 0; }
-        .day-view { display: none; animation: fadeIn 0.4s ease-in; }
-        .day-view.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .day-tab:hover {
+            border-color: var(--text-secondary);
+            color: var(--accent-gold);
+        }
 
+        .day-tab.active {
+            background-color: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: var(--bg-primary);
+            font-weight: 600;
+        }
+
+        .day-tab.has-missing {
+            border-color: #8A3A3A;
+        }
+
+        .day-tab.today:not(.active) {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            background: rgba(201,150,106,0.08);
+        }
+
+        /* MAIN CONTENT */
+        main {
+            padding: 24px 0;
+        }
+
+        .day-view {
+            display: none;
+            animation: fadeIn 0.4s ease-in;
+        }
+
+        .day-view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* HERO SECTION */
         .hero {
-            padding: 16px 16px; border-radius: 12px; margin-bottom: 24px;
-            text-align: center; position: relative; overflow: hidden;
-            background-size: cover; background-position: center;
+            padding: 16px 16px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
         }
-        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1; }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
         .hero-day-number {
-            font-size: 28px; font-weight: 700; color: var(--accent-gold); opacity: 0.7;
-            position: absolute; top: 10px; left: 14px; z-index: 2;
-            text-shadow: 0 2px 15px rgba(0,0,0,0.9), 0 0 50px rgba(0,0,0,0.7);
-            background: rgba(0,0,0,0.4); padding: 2px 9px; border-radius: 6px; display: inline-block;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            opacity: 0.7;
+            position: absolute;
+            top: 10px;
+            left: 14px;
+            z-index: 2;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9), 0 0 50px rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2px 9px;
+            border-radius: 6px;
+            display: inline-block;
         }
-        .hero-title { font-size: 22px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; position: relative; z-index: 2; }
-        .hero-location { font-size: 14px; color: var(--accent-gold); display: flex; align-items: center; justify-content: center; gap: 8px; position: relative; z-index: 2; }
-        .hero-location::before { content: '📍'; }
 
-        .card { background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; margin-bottom: 16px; transition: var(--transition); }
-        body.light-mode .card { box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-        .card:hover { border-color: var(--accent-gold); }
-        .card-title { font-size: 18px; font-weight: 600; color: var(--accent-gold); margin-bottom: 12px; }
+        .hero-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            position: relative;
+            z-index: 2;
+        }
 
-        .collapsible-section { margin-bottom: 16px; }
-        .section-header { display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 12px 16px; background-color: var(--bg-tertiary); border-radius: 6px 6px 0 0; transition: var(--transition); border-left: 3px solid transparent; }
-        .section-header:hover { background-color: rgba(201,150,106,0.1); }
-        .section-header h3 { flex: 1; font-size: 16px; color: var(--accent-gold); margin: 0; }
-        .chevron { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
-        .chevron::after { content: '▼'; font-size: 12px; color: var(--accent-gold); display: inline-block; transition: transform 0.3s ease; }
-        .section-header.collapsed .chevron::after { transform: rotate(-90deg); }
-        .section-content { max-height: 5000px; overflow: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; opacity: 1; padding: 0; border-radius: 0 0 6px 6px; }
-        .section-content.collapsed { max-height: 0; opacity: 0; }
-        .section-content > div { padding: 16px; }
+        .hero-location {
+            font-size: 14px;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            z-index: 2;
+        }
 
-        .section-flight { background-color: rgba(30,60,100,0.25); border-left: 3px solid #4A8AB5; }
-        .section-flight .section-header { border-left: 3px solid #4A8AB5; }
-        .section-hotel { background-color: rgba(80,55,30,0.25); border-left: 3px solid #8B6D45; }
-        .section-hotel .section-header { border-left: 3px solid #8B6D45; }
-        .section-activities { background-color: rgba(60,75,40,0.2); border-left: 3px solid #7A8A50; }
-        .section-activities .section-header { border-left: 3px solid #7A8A50; }
-        .section-meals { background-color: rgba(55,65,45,0.25); border-left: 3px solid #7A8550; }
-        .section-meals .section-header { border-left: 3px solid #7A8550; }
-        .section-warnings { background-color: rgba(100,35,35,0.2); border-left: 3px solid #AA4444; }
-        .section-warnings .section-header { border-left: 3px solid #AA4444; }
-        .section-gems { background-color: rgba(100,80,30,0.2); border-left: 3px solid #B89030; }
-        .section-gems .section-header { border-left: 3px solid #B89030; }
-        .section-weather { background-color: rgba(20,45,70,0.2); }
+        .hero-location::before {
+            content: '📍';
+        }
 
-        body.light-mode .section-flight { background-color: rgba(74,138,181,0.15); }
-        body.light-mode .section-hotel { background-color: rgba(139,109,69,0.15); }
-        body.light-mode .section-activities { background-color: rgba(122,138,80,0.12); }
-        body.light-mode .section-meals { background-color: rgba(122,133,80,0.15); }
-        body.light-mode .section-warnings { background-color: rgba(170,68,68,0.12); }
-        body.light-mode .section-gems { background-color: rgba(184,144,48,0.12); }
-        body.light-mode .section-weather { background-color: rgba(74,138,181,0.08); }
+        /* CARDS */
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: var(--transition);
+        }
 
-        .expand-all-container { display: flex; gap: 8px; margin-bottom: 16px; }
-        .btn-expand-all, .btn-collapse-all { flex: 1; padding: 6px 10px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-secondary); cursor: pointer; font-size: 11px; font-weight: 500; transition: var(--transition); }
-        .btn-expand-all:hover, .btn-collapse-all:hover { background-color: rgba(201,150,106,0.1); border-color: var(--accent-gold); color: var(--accent-gold); }
+        body.light-mode .card {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
 
-        .badge { display: inline-block; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-right: 8px; margin-bottom: 8px; transition: var(--transition); }
-        .badge.ready { background-color: #4A8050; color: #8DC87E; }
-        .badge.missing { background-color: #8A3A3A; color: #FF6B6B; }
-        .badge.need-booking { background-color: #9A7A30; color: #E8C66E; }
-        .badge.confirmed { background-color: #4A8050; color: #8DC87E; }
-        .badge.pending { background-color: #9A7A30; color: #E8C66E; }
-        .badge.to-book { background-color: #C4511A; color: #FFB366; }
-        .badge.included { background-color: #3A6878; color: #7FBFD4; }
-        .badge.options { background-color: #4a4440; color: #9A8E7E; }
+        .card:hover {
+            border-color: var(--accent-gold);
+        }
 
-        .drive-banner { background-color: var(--bg-tertiary); border-left: 4px solid var(--accent-gold); padding: 16px; margin-bottom: 16px; border-radius: 4px; display: flex; align-items: center; gap: 12px; transition: var(--transition); }
-        .drive-banner::before { content: '🚗'; font-size: 20px; flex-shrink: 0; }
-        .drive-info { flex: 1; }
-        .drive-route { font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
-        .drive-duration { font-size: 13px; color: var(--text-secondary); }
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+        }
 
-        .flight-banner { background-color: var(--bg-tertiary); border-left: 4px solid #3A7DA0; padding: 16px; margin-bottom: 16px; border-radius: 4px; display: flex; align-items: center; gap: 12px; }
-        .flight-banner::before { content: '✈️'; font-size: 20px; flex-shrink: 0; }
+        .card-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
 
-        .timeline { position: relative; padding-left: 20px; border-left: 2px solid var(--border-color); }
-        .timeline-item { padding-bottom: 16px; padding-left: 20px; margin-left: -20px; }
-        .timeline-time-group-header { font-weight: 600; color: var(--accent-gold); font-size: 15px; margin-bottom: 8px; margin-top: 12px; margin-left: -20px; padding-left: 20px; }
-        .timeline-item-bullet { padding-bottom: 8px; margin-left: -20px; padding-left: 20px; }
-        .timeline-item-bullet::before { content: '•'; margin-right: 8px; color: var(--accent-gold); }
-        .timeline-time { font-weight: 600; color: var(--accent-gold); font-size: 14px; }
-        .timeline-text { color: var(--text-primary); margin-top: 4px; font-size: 14px; }
-        .timeline-note { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
-        .timeline-tag { display: inline-block; background-color: #8A3A3A; color: #FF9999; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: 600; margin-top: 6px; }
+        /* SECTION COLLAPSIBLE */
+        .collapsible-section {
+            margin-bottom: 16px;
+        }
 
-        .meals-section { margin-bottom: 24px; padding: 0; }
-        .meal-type { font-weight: 600; color: var(--accent-gold); font-size: 15px; margin-bottom: 8px; margin-top: 16px; display: flex; align-items: center; gap: 8px; }
-        .meal-type::before { content: '•'; }
-        .meal-type:first-child { margin-top: 0; }
-        .meal-note { font-size: 14px; color: var(--text-primary); margin-bottom: 12px; padding-left: 16px; }
-        .restaurant-cards { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; margin-bottom: 12px; padding-left: 16px; }
-        .restaurant-card { background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; cursor: pointer; transition: var(--transition); }
-        .restaurant-card:hover { border-color: var(--text-secondary); background-color: rgba(201,150,106,0.05); }
-        .restaurant-card.selected { background-color: #4A8050; border-color: #7FB06F; }
-        .restaurant-name { font-weight: 600; color: var(--text-primary); font-size: 14px; }
-        .restaurant-card.selected .restaurant-name { color: #8DC87E; }
-        .restaurant-desc { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
-        .restaurant-card.selected .restaurant-desc { color: #B8D5AF; }
-        .restaurant-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 12px; }
-        .restaurant-rating { color: var(--accent-gold); font-weight: 600; }
-        .restaurant-buttons { display: flex; gap: 6px; margin-top: 8px; }
-        .btn-select, .btn-maps { flex: 1; padding: 6px 8px; border: 1px solid var(--border-color); background-color: transparent; color: var(--accent-gold); border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: 600; transition: var(--transition); }
-        .btn-select { background-color: var(--bg-tertiary); }
-        .btn-select:hover { background-color: rgba(201,150,106,0.1); border-color: var(--text-secondary); }
-        .restaurant-card.selected .btn-select { background-color: #7FB06F; color: var(--bg-primary); border-color: #7FB06F; }
-        .btn-maps:hover { border-color: var(--text-secondary); color: #E8C66E; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 12px 16px;
+            background-color: var(--bg-tertiary);
+            border-radius: 6px 6px 0 0;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
 
-        .warning { background-color: #3a2020; border: 1px solid #6a3a3a; border-left: 4px solid #8A3A3A; border-radius: 6px; padding: 12px; margin-bottom: 12px; font-size: 13px; color: #FFB3B3; }
-        .gem { background-color: #3a3020; border: 1px solid #6a5a3a; border-left: 4px solid var(--accent-gold); border-radius: 6px; padding: 12px; margin-bottom: 12px; font-size: 13px; color: #E8C66E; }
+        .section-header:hover {
+            background-color: rgba(201, 150, 106, 0.1);
+        }
 
-        .hotel-info { background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 6px; padding: 14px; margin-bottom: 8px; transition: var(--transition); }
-        .hotel-name { font-weight: 600; color: var(--text-primary); margin-bottom: 6px; font-size: 15px; }
-        .hotel-note { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; line-height: 1.5; }
-        .hotel-status-badges { display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
-        .hotel-buttons { display: flex; gap: 8px; margin-top: 10px; }
-        .btn-maps { padding: 6px 12px; font-size: 12px; }
+        .section-header h3 {
+            flex: 1;
+            font-size: 16px;
+            color: var(--accent-gold);
+            margin: 0;
+        }
 
-        .no-hotel-card { background-color: rgba(201,150,106,0.1); border: 1px solid var(--border-color); border-radius: 6px; padding: 16px; color: var(--text-secondary); font-size: 13px; text-align: center; margin-bottom: 16px; }
+        .chevron {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
 
-        .accommodation-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        .accommodation-table th { background-color: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 10px; text-align: left; font-weight: 600; color: var(--accent-gold); }
-        .accommodation-table td { border: 1px solid var(--border-color); padding: 10px; color: var(--text-primary); }
-        .accommodation-table tr:nth-child(even) { background-color: rgba(50,40,30,0.3); }
-        body.light-mode .accommodation-table tr:nth-child(even) { background-color: rgba(201,150,106,0.03); }
-        .accommodation-table tr[data-day] { cursor: pointer; transition: background-color 0.2s ease; }
-        .accommodation-table tr[data-day]:hover { background-color: rgba(201,150,106,0.15) !important; }
+        .chevron::after {
+            content: '▼';
+            font-size: 12px;
+            color: var(--accent-gold);
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
 
-        .flights-scroll { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 24px; }
-        .flights-scroll::-webkit-scrollbar { height: 4px; }
-        .flights-scroll::-webkit-scrollbar-track { background: var(--bg-tertiary); }
-        .flights-scroll::-webkit-scrollbar-thumb { background: var(--text-muted); }
-        .flight-card { flex-shrink: 0; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 8px; padding: 14px; min-width: 240px; font-size: 13px; transition: var(--transition); }
-        .flight-card:hover { border-color: #3A7DA0; }
-        .flight-day { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; font-weight: 500; }
-        .flight-route { font-weight: 600; color: #3A7DA0; margin-bottom: 8px; font-size: 15px; }
-        .flight-times { color: var(--text-primary); margin-bottom: 6px; }
-        .flight-terminal { color: var(--text-secondary); font-size: 12px; margin-bottom: 8px; }
-        .flight-checkin { margin-top: 8px; }
-        .flight-checkin a { display: inline-block; padding: 6px 10px; background-color: #3A7DA0; color: var(--text-primary); border-radius: 4px; text-decoration: none; font-size: 11px; font-weight: 600; transition: var(--transition); }
-        .flight-checkin a:hover { background-color: #4a9dc0; }
+        .section-header.collapsed .chevron::after {
+            transform: rotate(-90deg);
+        }
 
-        .travelers-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-        .traveler-chip { background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 4px; padding: 6px 12px; font-size: 13px; color: var(--text-primary); transition: var(--transition); }
-        .traveler-chip:hover { border-color: var(--accent-gold); background-color: rgba(201,150,106,0.05); }
-        .car-rental-info { background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+        .section-content {
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 1;
+            padding: 0;
+            border-radius: 0 0 6px 6px;
+        }
 
-        .spotify-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background-color: #1DB954; color: white; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 13px; transition: var(--transition); }
-        .spotify-link:hover { background-color: #1ed760; transform: scale(1.05); }
-        .tricount-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background-color: #4A90D9; color: white; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 13px; transition: var(--transition); }
-        .tricount-link:hover { background-color: #5DA0E9; transform: scale(1.05); }
-        .overview-links { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
-        .download-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); color: var(--text-secondary); border-radius: 20px; font-weight: 600; font-size: 13px; cursor: pointer; transition: var(--transition); font-family: 'DM Sans', sans-serif; }
-        .download-btn:hover { border-color: var(--accent-gold); color: var(--accent-gold); background-color: rgba(201,150,106,0.08); }
+        .section-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+            padding: 0;
+        }
 
-        footer { padding: 32px 0; text-align: center; color: var(--text-secondary); font-size: 12px; border-top: 1px solid var(--border-color); margin-top: 40px; }
+        .section-content > div {
+            padding: 16px;
+        }
 
-        .weather-sun-row { display: flex; gap: 16px; align-items: center; font-size: 12px; color: var(--text-secondary); margin-bottom: 12px; flex-wrap: wrap; }
+        .section-flight {
+            background-color: rgba(30, 60, 100, 0.25);
+            border-left: 3px solid #4A8AB5;
+        }
+
+        .section-flight .section-header {
+            border-left: 3px solid #4A8AB5;
+        }
+
+        .section-hotel {
+            background-color: rgba(80, 55, 30, 0.25);
+            border-left: 3px solid #8B6D45;
+        }
+
+        .section-hotel .section-header {
+            border-left: 3px solid #8B6D45;
+        }
+
+        .section-activities {
+            background-color: rgba(60, 75, 40, 0.2);
+            border-left: 3px solid #7A8A50;
+        }
+
+        .section-activities .section-header {
+            border-left: 3px solid #7A8A50;
+        }
+
+        .section-meals {
+            background-color: rgba(55, 65, 45, 0.25);
+            border-left: 3px solid #7A8550;
+        }
+
+        .section-meals .section-header {
+            border-left: 3px solid #7A8550;
+        }
+
+        .section-warnings {
+            background-color: rgba(100, 35, 35, 0.2);
+            border-left: 3px solid #AA4444;
+        }
+
+        .section-warnings .section-header {
+            border-left: 3px solid #AA4444;
+        }
+
+        .section-gems {
+            background-color: rgba(100, 80, 30, 0.2);
+            border-left: 3px solid #B89030;
+        }
+
+        .section-gems .section-header {
+            border-left: 3px solid #B89030;
+        }
+
+        body.light-mode .section-flight {
+            background-color: rgba(74, 138, 181, 0.15);
+        }
+
+        body.light-mode .section-hotel {
+            background-color: rgba(139, 109, 69, 0.15);
+        }
+
+        body.light-mode .section-activities {
+            background-color: rgba(122, 138, 80, 0.12);
+        }
+
+        body.light-mode .section-meals {
+            background-color: rgba(122, 133, 80, 0.15);
+        }
+
+        body.light-mode .section-warnings {
+            background-color: rgba(170, 68, 68, 0.12);
+        }
+
+        body.light-mode .section-gems {
+            background-color: rgba(184, 144, 48, 0.12);
+        }
+
+        .expand-all-container {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .btn-expand-all, .btn-collapse-all {
+            flex: 1;
+            padding: 6px 10px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-expand-all:hover, .btn-collapse-all:hover {
+            background-color: rgba(201, 150, 106, 0.1);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        /* BADGES */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            transition: var(--transition);
+        }
+
+        .badge.ready {
+            background-color: #4A8050;
+            color: #8DC87E;
+        }
+
+        .badge.missing {
+            background-color: #8A3A3A;
+            color: #FF6B6B;
+        }
+
+        .badge.need-booking {
+            background-color: #9A7A30;
+            color: #E8C66E;
+        }
+
+        .badge.confirmed {
+            background-color: #4A8050;
+            color: #8DC87E;
+        }
+
+        .badge.pending {
+            background-color: #9A7A30;
+            color: #E8C66E;
+        }
+
+        .badge.to-book {
+            background-color: #C4511A;
+            color: #FFB366;
+        }
+
+        .badge.included {
+            background-color: #3A6878;
+            color: #7FBFD4;
+        }
+
+        .badge.options {
+            background-color: #4a4440;
+            color: #9A8E7E;
+        }
+
+        /* DRIVE BANNER */
+        .drive-banner {
+            background-color: var(--bg-tertiary);
+            border-left: 4px solid var(--accent-gold);
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .drive-banner::before {
+            content: '🚗';
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .drive-info {
+            flex: 1;
+        }
+
+        .drive-route {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .drive-duration {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* FLIGHT BANNER */
+        .flight-banner {
+            background-color: var(--bg-tertiary);
+            border-left: 4px solid #3A7DA0;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .flight-banner::before {
+            content: '✈️';
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .flight-info {
+            flex: 1;
+        }
+
+        .flight-route {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .flight-details {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid var(--border-color);
+        }
+
+        .timeline-item {
+            padding-bottom: 16px;
+            padding-left: 20px;
+            margin-left: -20px;
+        }
+
+        .timeline-time-group-header {
+            font-weight: 600;
+            color: var(--accent-gold);
+            font-size: 15px;
+            margin-bottom: 8px;
+            margin-top: 12px;
+            margin-left: -20px;
+            padding-left: 20px;
+        }
+
+        .timeline-item-bullet {
+            padding-bottom: 8px;
+            margin-left: -20px;
+            padding-left: 20px;
+        }
+
+        .timeline-item-bullet::before {
+            content: '•';
+            margin-right: 8px;
+            color: var(--accent-gold);
+        }
+
+        .timeline-time {
+            font-weight: 600;
+            color: var(--accent-gold);
+            font-size: 14px;
+        }
+
+        .timeline-text {
+            color: var(--text-primary);
+            margin-top: 4px;
+            font-size: 14px;
+        }
+
+        .timeline-note {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .timeline-tag {
+            display: inline-block;
+            background-color: #8A3A3A;
+            color: #FF9999;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        /* MEALS SECTION */
+        .meals-section {
+            margin-bottom: 24px;
+            padding: 0;
+        }
+
+        .meal-type {
+            font-weight: 600;
+            color: var(--accent-gold);
+            font-size: 15px;
+            margin-bottom: 8px;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meal-type::before {
+            content: '•';
+        }
+
+        .meal-type:first-child {
+            margin-top: 0;
+        }
+
+        .meal-note {
+            font-size: 14px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            padding-left: 16px;
+        }
+
+        .restaurant-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+            margin-bottom: 12px;
+            padding-left: 16px;
+        }
+
+        .restaurant-card {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .restaurant-card:hover {
+            border-color: var(--text-secondary);
+            background-color: rgba(201, 150, 106, 0.05);
+        }
+
+        .restaurant-card.selected {
+            background-color: #4A8050;
+            border-color: #7FB06F;
+        }
+
+        .restaurant-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .restaurant-card.selected .restaurant-name {
+            color: #8DC87E;
+        }
+
+        .restaurant-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .restaurant-card.selected .restaurant-desc {
+            color: #B8D5AF;
+        }
+
+        .restaurant-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        .restaurant-rating {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .restaurant-buttons {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .btn-select, .btn-maps {
+            flex: 1;
+            padding: 6px 8px;
+            border: 1px solid var(--border-color);
+            background-color: transparent;
+            color: var(--accent-gold);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-select {
+            background-color: var(--bg-tertiary);
+        }
+
+        .btn-select:hover {
+            background-color: rgba(201, 150, 106, 0.1);
+            border-color: var(--text-secondary);
+        }
+
+        .restaurant-card.selected .btn-select {
+            background-color: #7FB06F;
+            color: var(--bg-primary);
+            border-color: #7FB06F;
+        }
+
+        .btn-maps:hover {
+            border-color: var(--text-secondary);
+            color: #E8C66E;
+        }
+
+        /* WARNINGS & GEMS */
+        .warnings-title, .gems-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+            margin-top: 12px;
+        }
+
+        .warning {
+            background-color: #3a2020;
+            border: 1px solid #6a3a3a;
+            border-left: 4px solid #8A3A3A;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #FFB3B3;
+        }
+
+        .gem {
+            background-color: #3a3020;
+            border: 1px solid #6a5a3a;
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #E8C66E;
+        }
+
+        /* HOTEL INFO */
+        .hotel-info {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 14px;
+            margin-bottom: 8px;
+            transition: var(--transition);
+        }
+
+        .hotel-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+
+        .hotel-note {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .hotel-status-badges {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .hotel-meta {
+            display: flex;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .hotel-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn-maps {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        /* NO HOTEL CARD */
+        .no-hotel-card {
+            background-color: rgba(201, 150, 106, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        /* ACCOMMODATION TABLE */
+        .accommodation-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .accommodation-table th {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+
+        .accommodation-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            color: var(--text-primary);
+        }
+
+        .accommodation-table tr:nth-child(even) {
+            background-color: rgba(50, 40, 30, 0.3);
+        }
+
+        body.light-mode .accommodation-table tr:nth-child(even) {
+            background-color: rgba(201, 150, 106, 0.03);
+        }
+
+        /* FLIGHTS SECTION */
+        .flights-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+
+        .flights-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .flights-scroll::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+
+        .flights-scroll::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+        }
+
+        .flight-card {
+            flex-shrink: 0;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+            min-width: 240px;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .flight-card:hover {
+            border-color: #3A7DA0;
+        }
+
+        .flight-day {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .flight-route {
+            font-weight: 600;
+            color: #3A7DA0;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .flight-times {
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .flight-terminal {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .flight-checkin {
+            margin-top: 8px;
+        }
+
+        .flight-checkin a {
+            display: inline-block;
+            padding: 6px 10px;
+            background-color: #3A7DA0;
+            color: var(--text-primary);
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .flight-checkin a:hover {
+            background-color: #4a9dc0;
+        }
+
+        /* TRAVELERS & CAR RENTAL */
+        .travelers-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .traveler-chip {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-size: 13px;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .traveler-chip:hover {
+            border-color: var(--accent-gold);
+            background-color: rgba(201, 150, 106, 0.05);
+        }
+
+        .car-rental-info {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* SPOTIFY / TRICOUNT LINKS IN OVERVIEW */
+        .spotify-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #1DB954;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .spotify-link:hover {
+            background-color: #1ed760;
+            transform: scale(1.05);
+        }
+
+        .spotify-icon {
+            font-size: 16px;
+        }
+
+        .overview-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .tricount-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #4A90D9;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .tricount-link:hover {
+            background-color: #5DA0E9;
+            transform: scale(1.05);
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .download-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            background-color: rgba(201, 150, 106, 0.08);
+        }
+
+        .accommodation-table tr[data-day] {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .accommodation-table tr[data-day]:hover {
+            background-color: rgba(201, 150, 106, 0.15) !important;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 32px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 12px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        /* WEATHER WIDGET */
+        .section-weather {
+            background-color: rgba(20, 45, 70, 0.2);
+        }
+
+        body.light-mode .section-weather {
+            background-color: rgba(74, 138, 181, 0.08);
+        }
+
+        .weather-sun-row {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
         .weather-chart-container { width: 100%; }
-        .weather-loading, .weather-error { text-align: center; color: var(--text-secondary); font-size: 12px; padding: 16px 0; }
+
+        .weather-loading, .weather-error {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 12px;
+            padding: 16px 0;
+        }
+
         .weather-chart-container svg .wx-temp { fill: var(--text-primary); }
-        .weather-chart-container svg .wx-time { fill: var(--text-secondary); }
-        .weather-refresh { background: none; border: none; color: var(--text-muted); font-size: 14px; cursor: pointer; margin-left: auto; padding: 2px 6px; border-radius: 3px; transition: var(--transition); }
+        .weather-chart-container svg .wx-time  { fill: var(--text-secondary); }
+
+        .weather-refresh {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 14px;
+            cursor: pointer;
+            margin-left: auto;
+            padding: 2px 6px;
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
         .weather-refresh:hover { color: var(--accent-gold); }
 
-        .activity-maps-link { font-size: 13px; text-decoration: none; opacity: 0.6; margin-left: 4px; vertical-align: middle; transition: opacity 0.2s; }
+        .activity-maps-link {
+            font-size: 13px;
+            text-decoration: none;
+            opacity: 0.6;
+            margin-left: 4px;
+            vertical-align: middle;
+            transition: opacity 0.2s;
+        }
         .activity-maps-link:hover { opacity: 1; }
 
-        .wx-preview { font-size: 12px; font-weight: 400; color: var(--text-secondary); margin-left: 8px; }
-        .section-header:not(.collapsed) .wx-preview { display: none; }
         .wx-condition-row { display: flex; align-items: center; gap: 10px; }
         .wx-condition-icon { font-size: 22px; }
         .wx-condition-label { font-size: 14px; font-weight: 600; color: var(--text-primary); }
@@ -280,14 +1192,17 @@
         .wx-prob-val.rain { color: #7FBFD4; }
         .wx-prob-val.heavy { color: #B39DDB; }
         .wx-prob-val.storm { color: #FF8A80; }
-
-        /* today tab highlight */
-        .day-tab.today:not(.active) { border-color: var(--accent-gold); color: var(--accent-gold); background: rgba(201,150,106,0.08); }
-
-        /* per-day currency section */
         .section-calc { background-color: rgba(50,40,20,0.2); }
         .section-calc .section-header { border-left: 3px solid var(--accent-gold); }
         body.light-mode .section-calc { background-color: rgba(201,150,106,0.06); }
+
+        .wx-preview {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-left: 8px;
+        }
+        .section-header:not(.collapsed) .wx-preview { display: none; }
 
         /* CURRENCY CALCULATOR */
         .calc-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
@@ -295,33 +1210,142 @@
         .calc-label { width: 110px; flex-shrink: 0; }
         .calc-label-code { font-size: 13px; font-weight: 600; color: var(--text-primary); }
         .calc-label-name { font-size: 10px; color: var(--text-secondary); margin-top: 1px; }
-        .calc-input { flex: 1; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 6px; padding: 9px 12px; color: var(--text-primary); font-size: 15px; font-family: inherit; outline: none; transition: border-color 0.2s; }
+        .calc-input {
+            flex: 1;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 9px 12px;
+            color: var(--text-primary);
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
         .calc-input:focus { border-color: var(--accent-gold); }
-        .calc-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border-color); }
+        .calc-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
         .calc-rates-note { font-size: 10px; color: var(--text-secondary); }
         .calc-refresh { font-size: 11px; color: var(--accent-gold); cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; }
 
-        .day-cost-bar { display: flex; align-items: center; gap: 10px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-left: 3px solid #7A6E5E; border-radius: 6px; padding: 10px 14px; margin-bottom: 16px; flex-wrap: wrap; }
-        .day-cost-label { font-size: 11px; color: var(--text-muted); font-weight: 500; white-space: nowrap; }
-        .day-cost-items { font-size: 11px; color: var(--text-secondary); flex: 1; }
-        .day-cost-total { font-size: 14px; font-weight: 700; color: var(--accent-gold); white-space: nowrap; margin-left: auto; }
+        /* BUDGET */
+        .day-cost-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid #7A6E5E;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
 
-        .budget-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 8px; }
-        .budget-table td { padding: 9px 10px; border-bottom: 1px solid var(--border-color); vertical-align: top; }
+        .day-cost-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .day-cost-items {
+            font-size: 11px;
+            color: var(--text-secondary);
+            flex: 1;
+        }
+
+        .day-cost-total {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            white-space: nowrap;
+            margin-left: auto;
+        }
+
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .budget-table td {
+            padding: 9px 10px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
         .budget-table tr:last-child td { border-bottom: none; }
-        .budget-amount { text-align: right; font-weight: 600; color: var(--accent-gold); white-space: nowrap; }
-        .budget-note { font-size: 11px; color: var(--text-secondary); padding-top: 2px; }
-        .budget-total-row td { font-weight: 700; font-size: 14px; border-top: 2px solid var(--border-color) !important; border-bottom: none !important; }
-        .budget-perperson { font-size: 12px; color: var(--text-secondary); text-align: right; margin-bottom: 10px; }
-        .budget-disclaimer { font-size: 11px; color: var(--text-muted); font-style: italic; text-align: center; padding-top: 8px; border-top: 1px solid var(--border-color); }
 
+        .budget-amount {
+            text-align: right;
+            font-weight: 600;
+            color: var(--accent-gold);
+            white-space: nowrap;
+        }
+
+        .budget-note {
+            font-size: 11px;
+            color: var(--text-secondary);
+            padding-top: 2px;
+        }
+
+        .budget-total-row td {
+            font-weight: 700;
+            font-size: 14px;
+            border-top: 2px solid var(--border-color) !important;
+            border-bottom: none !important;
+        }
+
+        .budget-perperson {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        .budget-disclaimer {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-style: italic;
+            text-align: center;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* MOBILE */
         @media (max-width: 640px) {
-            .container { padding: 0 12px; }
-            .hero { padding: 14px 16px; }
-            .hero-title { font-size: 20px; }
-            .card { padding: 16px; }
-            .header-title { font-size: 18px; }
-            .day-tab { padding: 6px 10px; font-size: 11px; }
+            .container {
+                padding: 0 12px;
+            }
+
+            .hero {
+                padding: 14px 16px;
+            }
+
+            .hero-title {
+                font-size: 20px;
+            }
+
+            .card {
+                padding: 16px;
+            }
+
+            .header-title {
+                font-size: 18px;
+            }
+
+            .day-tab {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
         }
         .map-day-marker {
             background: #C9966A; color: #111; font-weight: 700; font-size: 10px;
@@ -337,7 +1361,7 @@
 <body>
     <script>
         // ============================================================
-        // TRIP_DATA
+        // TRIP_DATA — Edit this section to customise your trip
         // ============================================================
         const TRIP_DATA = {
             title: "Bali · Komodo · Kuala Lumpur",
@@ -353,7 +1377,7 @@
                 { date: "Aug 28", dayOfWeek: "Thu", airline: "IW 0301", from: "DPS", to: "KUL", departTime: "TBD", arriveTime: "TBD", terminal: "DPS → KUL", passengers: ["Juan Carlos", "Maria"] },
                 { date: "Aug 30", dayOfWeek: "Sat", airline: "EK 0351", from: "KUL", to: "DXB", departTime: "TBD", arriveTime: "TBD", terminal: "KUL → DXB", passengers: ["Juan Carlos", "Maria"] }
             ],
-            days: [
+                        days: [
                 // ── DAY 1 ── Aug 15 Fri ── Departure: Dubai → Bali ──
                 {
                     dayNumber: 1, date: "Aug 15", dayOfWeek: "Fri",
@@ -769,40 +1793,44 @@
             ]
         };
 
+        };
+
         // ============================================================
-        // DAY_WEATHER — Open-Meteo (free, no API key required)
+        // DAY_WEATHER — Add coordinates per day to enable forecasts
+        // Uses Open-Meteo (free, no API key required)
         // ============================================================
         const DAY_WEATHER = {
-            1:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-15" }, // Bali (in-flight)
-            2:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-16" }, // Seminyak
-            3:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-17" }, // Seminyak
-            4:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-18" }, // Seminyak
-            5:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-19" }, // Seminyak
-            6:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-20" }, // Seminyak
-            7:  { lat: -8.8325, lon: 115.2631, isoDate: "2026-08-21" }, // Uluwatu
-            8:  { lat: -8.4833, lon: 123.5667, isoDate: "2026-08-22" }, // Komodo
-            9:  { lat: -8.4833, lon: 123.5667, isoDate: "2026-08-23" }, // Komodo
-            10: { lat: -8.4833, lon: 123.5667, isoDate: "2026-08-24" }, // Komodo
-            11: { lat: -8.7270, lon: 115.5000, isoDate: "2026-08-25" }, // Nusa Penida
-            12: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-26" }, // Seminyak
-            13: { lat: -8.5069, lon: 115.2625, isoDate: "2026-08-27" }, // Ubud
+            1:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-15" }, // Bali - Seminyak
+            2:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-16" }, // Bali - Seminyak
+            3:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-17" }, // Bali - Seminyak
+            4:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-18" }, // Bali - Seminyak
+            5:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-19" }, // Bali - Seminyak
+            6:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-20" }, // Bali - Seminyak
+            7:  { lat: -8.7270, lon: 115.2390, isoDate: "2026-08-21" }, // Bali - Uluwatu
+            8:  { lat: -8.3100, lon: 119.6750, isoDate: "2026-08-22" }, // Komodo National Park
+            9:  { lat: -8.3100, lon: 119.6750, isoDate: "2026-08-23" }, // Komodo National Park
+            10: { lat: -8.3100, lon: 119.6750, isoDate: "2026-08-24" }, // Komodo National Park
+            11: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-25" }, // Bali - Seminyak
+            12: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-26" }, // Bali - Seminyak
+            13: { lat: -8.5069, lon: 115.2625, isoDate: "2026-08-27" }, // Bali - Ubud
             14: { lat:  3.1390, lon: 101.6869, isoDate: "2026-08-28" }, // Kuala Lumpur
             15: { lat:  3.1390, lon: 101.6869, isoDate: "2026-08-29" }, // Kuala Lumpur
             16: { lat:  3.1390, lon: 101.6869, isoDate: "2026-08-30" }, // Kuala Lumpur
         };
 
         // ============================================================
-        // COST_DATA — All figures in AED
+        // COST_DATA — Update with actual amounts as bookings are made
         // ============================================================
         const COST_DATA = {
-            disclaimer: "All figures in AED. Update with confirmed prices as bookings are made.",
+            disclaimer: "All figures in USD. Update with confirmed prices as bookings are made.",
             summary: [
-                { cat: "✈️ Flights",           amount: 0, note: "EK0368 DXB→DPS · IW 7309 DPS→LBJ · IW 7314 LBJ→DPS · IW 0301 DPS→KUL · EK 0351 KUL→DXB (pending)" },
-                { cat: "🏨 Accommodation",      amount: 0, note: "Courtyard Marriott Bali (8 nights) · Liveaboard boat (1 night) · Oh!Julia Komodo (2 nights) · KL hotel (2 nights)" },
-                { cat: "🎟️ Activities & Tours",   amount: 0, note: "Uluwatu Temple & Kecak · Komodo dragons · Manta snorkel · Ubud tours · Petronas towers · Batu Caves" },
-                { cat: "🍽️ Food & Drinks",      amount: 0, note: "16 days in SE Asia · Includes some meals on boat/hotels" },
-                { cat: "🚗 Transport & Local",  amount: 0, note: "Airport transfers · Local tours · Taxis · Boats" },
-                { cat: "💡 Misc & Souvenirs",   amount: 0, note: "Tips, souvenirs, etc." },
+                { cat: "✈️ International Flights", amount: 0, note: "DXB→DPS + KUL→DXB (confirm pricing)" },
+                { cat: "✈️ Domestic Flights",      amount: 250, note: "DPS→LBJ + LBJ→DPS + DPS→KUL" },
+                { cat: "🏨 Accommodation",         amount: 1600, note: "Courtyard Marriott Bali (7N) + Liveaboard (1N) + Oh!Julia Komodo (2N) + KL hotel (2N)" },
+                { cat: "🎟️ Activities & Tours",   amount: 800, note: "Kecak Fire Dance, Komodo, Manta snorkel, Ubud, Petronas, Caves" },
+                { cat: "🍽️ Food & Drinks",        amount: 600, note: "Meals across 16 days in SE Asia" },
+                { cat: "🚗 Transport & Transfers", amount: 300, note: "Airport transfers and local transport" },
+                { cat: "💡 Misc & Souvenirs",      amount: 200, note: "Tips, souvenirs, contingency" },
             ],
             days: {}
         };
@@ -818,7 +1846,9 @@
     </header>
 
     <main class="container">
+        <!-- OVERVIEW TAB -->
         <div class="day-view active" id="overview">
+
             <!-- Currency Calculator — collapsed by default -->
             <div class="collapsible-section section-calc" id="overviewCalcSection">
                 <div class="section-header collapsed" id="overviewCalcHeader">
@@ -863,6 +1893,9 @@
                 </div>
             </div>
 
+            <!-- TRIP-SPECIFIC SECTIONS: add here (e.g. route maps) -->
+
+            <!-- Weather for today's location — collapsed by default, shown only during the trip -->
             <div class="collapsible-section" id="overviewWeatherSection" style="display:none;">
                 <div class="section-header collapsed" id="overview-wx-header">
                     <h3>🌤 Weather<span class="wx-preview" id="wx-preview-overview"></span></h3>
@@ -874,6 +1907,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Itinerary — expanded by default -->
             <div class="collapsible-section">
                 <div class="section-header">
                     <h3>📋 Itinerary</h3>
@@ -888,7 +1923,8 @@
                     </div>
                 </div>
             </div>
-            <!-- Maps — expanded by default -->
+
+            <!-- Maps — add map div(s) here with id="mapXxx", then implement renderXxxMap() below -->
             <div class="collapsible-section">
                 <div class="section-header">
                     <h3>🗺️ Maps</h3>
@@ -896,30 +1932,12 @@
                 </div>
                 <div class="section-content">
                     <div>
-                        <div style="font-size:13px;font-weight:600;color:var(--accent-gold);margin-bottom:6px;">🇩🇪 Munich — Days 1–3</div>
-                        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">
-                            <span style="color:#7BAFD4;font-weight:600;">✈</span> Airport &nbsp;
-                            <span style="color:#C9966A;font-weight:600;">——</span> Day 1 city walk &nbsp;
-                            <span style="color:#E0956A;font-weight:600;">——</span> Day 2 walk &nbsp;
-                            <span style="color:#A8C56A;font-weight:600;">- -</span> Day 3 options
-                        </div>
-                        <div id="mapMunich" style="height:340px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);margin-bottom:20px;"></div>
-                        <div style="font-size:13px;font-weight:600;color:var(--accent-gold);margin-bottom:6px;">🇨🇭 Switzerland — Days 4–7</div>
-                        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">
-                            <span style="color:#5B9BD5;font-weight:600;">——</span> Train route &nbsp;
-                            <span style="color:#C9966A;font-weight:600;">- -</span> Day trips from Bern
-                        </div>
-                        <div id="mapSwitzerland" style="height:400px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);margin-bottom:20px;"></div>
-                        <div style="font-size:13px;font-weight:600;color:var(--accent-gold);margin-bottom:6px;">🇪🇸 Madrid & Pamplona — Days 8–12</div>
-                        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">
-                            <span style="color:#E05C5C;font-weight:600;">——</span> Madrid → Pamplona &nbsp;
-                            <span style="color:#E0956A;font-weight:600;">——</span> Return
-                        </div>
-                        <div id="mapMadrid" style="height:340px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);"></div>
+                        <!-- Example: <div id="mapMain" style="height:400px;border-radius:6px;overflow:hidden;background:var(--bg-tertiary);"></div> -->
                     </div>
                 </div>
             </div>
 
+            <!-- Flights — expanded by default -->
             <div class="collapsible-section">
                 <div class="section-header">
                     <h3>✈️ Flights</h3>
@@ -929,6 +1947,8 @@
                     <div class="flights-scroll" id="flightsList"></div>
                 </div>
             </div>
+
+            <!-- Car Rental — expanded by default, hidden if TRIP_DATA.carRental is null -->
             <div class="collapsible-section" id="carRentalSection" style="display:none;">
                 <div class="section-header">
                     <h3>🚗 Car Rental</h3>
@@ -938,6 +1958,8 @@
                     <div class="car-rental-info" id="carRentalInfo"></div>
                 </div>
             </div>
+
+            <!-- Relevant Links — expanded by default -->
             <div class="collapsible-section">
                 <div class="section-header">
                     <h3>🔗 Relevant Links</h3>
@@ -947,6 +1969,8 @@
                     <div class="overview-links" id="overviewLinksContent"></div>
                 </div>
             </div>
+
+            <!-- Budget — expanded by default -->
             <div class="collapsible-section">
                 <div class="section-header">
                     <h3>💰 Budget</h3>
@@ -956,6 +1980,8 @@
                     <div id="budgetCard"></div>
                 </div>
             </div>
+
+            <!-- Travellers — expanded by default, moved to end -->
             <div class="collapsible-section">
                 <div class="section-header">
                     <h3>👥 Travellers</h3>
@@ -968,7 +1994,10 @@
             <div style="text-align:center;padding:20px 0 8px;">
                 <a href="../" style="color:var(--accent-gold);text-decoration:none;font-size:13px;opacity:0.75;">← All trips</a>
             </div>
+
         </div>
+
+        <!-- DAY VIEWS -->
         <div id="dayViewsContainer"></div>
     </main>
 
@@ -983,33 +2012,46 @@
 
         const STATUS_STYLES = {
             confirmed: { badge: "confirmed", label: "Confirmed" },
-            pending:   { badge: "pending",   label: "Pending"   },
-            missing:   { badge: "missing",   label: "Missing"   },
-            "to-book": { badge: "to-book",   label: "To Book"   },
-            included:  { badge: "included",  label: "Included"  },
-            flexible:  { badge: "options",   label: "Flexible"  },
-            options:   { badge: "options",   label: "Options"   }
+            pending: { badge: "pending", label: "Pending" },
+            missing: { badge: "missing", label: "Missing" },
+            "to-book": { badge: "to-book", label: "To Book" },
+            included: { badge: "included", label: "Included" },
+            flexible: { badge: "options", label: "Flexible" },
+            options: { badge: "options", label: "Options" }
         };
 
+        // Session storage for restaurant selections
         const getSelectedRestaurants = (dayNum, mealType) => {
-            return JSON.parse(sessionStorage.getItem(`selected_${dayNum}_${mealType}`) || "[]");
+            const key = `selected_${dayNum}_${mealType}`;
+            return JSON.parse(sessionStorage.getItem(key) || "[]");
         };
 
         const setSelectedRestaurant = (dayNum, mealType, restaurantName) => {
             const key = `selected_${dayNum}_${mealType}`;
             const selected = getSelectedRestaurants(dayNum, mealType);
             const index = selected.indexOf(restaurantName);
-            if (index > -1) selected.splice(index, 1); else selected.push(restaurantName);
+            if (index > -1) {
+                selected.splice(index, 1);
+            } else {
+                selected.push(restaurantName);
+            }
             sessionStorage.setItem(key, JSON.stringify(selected));
         };
 
-        const isRestaurantSelected = (dayNum, mealType, restaurantName) =>
-            getSelectedRestaurants(dayNum, mealType).includes(restaurantName);
+        const isRestaurantSelected = (dayNum, mealType, restaurantName) => {
+            return getSelectedRestaurants(dayNum, mealType).includes(restaurantName);
+        };
 
+        // Theme management
         function initializeTheme() {
             const saved = localStorage.getItem('theme-mode');
-            if (saved === 'light') { document.body.classList.add('light-mode'); document.getElementById('themeToggle').textContent = '☀️'; }
-            else { document.body.classList.remove('light-mode'); document.getElementById('themeToggle').textContent = '🌙'; }
+            if (saved === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('themeToggle').textContent = '☀️';
+            } else {
+                document.body.classList.remove('light-mode');
+                document.getElementById('themeToggle').textContent = '🌙';
+            }
         }
 
         function toggleTheme() {
@@ -1027,6 +2069,7 @@
             renderDayTabs();
             renderDayViews();
 
+            // Auto-open today's day if within the trip; also load overview weather
             const today = new Date().toISOString().split('T')[0];
             for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
                 if (w.isoDate === today) {
@@ -1039,25 +2082,38 @@
 
         function renderOverviewTab() {
             // Flights
-            document.getElementById("flightsList").innerHTML = TRIP_DATA.flights.map(f => `
-                <div class="flight-card">
-                    <div class="flight-day">${f.dayOfWeek} ${f.date}</div>
-                    <div class="flight-route">${f.airline}</div>
-                    <div class="flight-times">${f.from} → ${f.to}</div>
-                    <div class="flight-times">${f.departTime}–${f.arriveTime}</div>
-                    <div class="flight-terminal">${f.terminal}</div>
-                    ${TRIP_DATA.checkInUrl ? `<div class="flight-checkin"><a href="${TRIP_DATA.checkInUrl}" target="_blank">Online Check-in</a></div>` : ''}
-                </div>`).join("");
+            const flightsList = document.getElementById("flightsList");
+            flightsList.innerHTML = TRIP_DATA.flights
+                .map(f => `
+                    <div class="flight-card">
+                        <div class="flight-day">${f.dayOfWeek} ${f.date}</div>
+                        <div class="flight-route">${f.airline}</div>
+                        <div class="flight-times">${f.from} → ${f.to}</div>
+                        <div class="flight-times">${f.departTime}–${f.arriveTime}</div>
+                        <div class="flight-terminal">${f.terminal}</div>
+                        ${TRIP_DATA.checkInUrl ? `
+                        <div class="flight-checkin">
+                            <a href="${TRIP_DATA.checkInUrl}" target="_blank">Online Check-in</a>
+                        </div>` : ''}
+                    </div>
+                `)
+                .join("");
 
             // Travellers
-            document.getElementById("travelersListView").innerHTML = TRIP_DATA.travelers
-                .map(t => `<div class="traveler-chip">${t}</div>`).join("");
+            const travelersView = document.getElementById("travelersListView");
+            travelersView.innerHTML = TRIP_DATA.travelers
+                .map(t => `<div class="traveler-chip">${t}</div>`)
+                .join("");
 
             // Car rental (conditional — show/hide entire section)
             const carRentalSection = document.getElementById("carRentalSection");
             const carRentalInfo = document.getElementById("carRentalInfo");
             if (TRIP_DATA.carRental) {
-                carRentalInfo.innerHTML = `<strong>${TRIP_DATA.carRental.company}</strong><br>📞 ${TRIP_DATA.carRental.phone}<br>🌐 ${TRIP_DATA.carRental.website}`;
+                carRentalInfo.innerHTML = `
+                    <strong>${TRIP_DATA.carRental.company}</strong><br>
+                    📞 ${TRIP_DATA.carRental.phone}<br>
+                    🌐 ${TRIP_DATA.carRental.website}
+                `;
                 carRentalSection.style.display = '';
             }
 
@@ -1065,29 +2121,45 @@
             const linksContent = document.getElementById('overviewLinksContent');
             const links = [];
             if (TRIP_DATA.spotifyPlaylist) links.push(`<a href="${TRIP_DATA.spotifyPlaylist}" target="_blank" class="spotify-link"><span class="spotify-icon">♪</span><span>Trip Playlist</span></a>`);
-            if (TRIP_DATA.tricountUrl)     links.push(`<a href="${TRIP_DATA.tricountUrl}"     target="_blank" class="tricount-link"><span>💰</span><span>Trip Expenses</span></a>`);
-            linksContent.innerHTML = `${links.join('')}<button class="download-btn" onclick="downloadPage()">⬇ Download Offline</button>`;
+            if (TRIP_DATA.tricountUrl) links.push(`<a href="${TRIP_DATA.tricountUrl}" target="_blank" class="tricount-link"><span>💰</span><span>Trip Expenses</span></a>`);
+            linksContent.innerHTML = `
+                ${links.join('')}
+                <button class="download-btn" onclick="downloadPage()">⬇ Download Offline</button>
+            `;
 
-            // Itinerary table (4 cols)
-            let tableHTML = `<tr><th>Day</th><th>Date</th><th>Plan</th><th>Status</th></tr>`;
-            TRIP_DATA.days.forEach(day => {
+            // Accommodation / itinerary table
+            const accTable = document.getElementById("accommodationTable");
+            let tableHTML = `
+                <tr>
+                    <th>Day</th>
+                    <th>Date</th>
+                    <th>Plan</th>
+                    <th>Status</th>
+                </tr>
+            `;
+
+            TRIP_DATA.days.forEach((day, i) => {
                 const hotelBadge = day.hotel.status === 'confirmed' ? 'ready' : day.hotel.status === 'missing' ? 'missing' : 'need-booking';
-                const hasToBook  = day.activities && day.activities.some(a => a.needsBooking);
-                const actBadge   = hasToBook ? 'need-booking' : (day.activities && day.activities.length > 0 ? 'ready' : 'missing');
-                tableHTML += `<tr data-day="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">
-                    <td>${day.dayNumber}</td>
-                    <td style="white-space: nowrap; font-size: 12px;">${day.dayOfWeek} ${day.date.split(' ')[1] || ''} ${day.date.split(' ')[0]}</td>
-                    <td>
-                        <div style="font-weight:600;color:var(--accent-gold);font-size:13px;">${day.title}</div>
-                        <div style="font-size:11px;color:var(--text-secondary);margin-top:2px;">${day.location}</div>
-                    </td>
-                    <td>
-                        <span class="badge ${hotelBadge}" style="font-size:10px;padding:2px 6px;margin:0 0 4px 0;display:block;text-align:center;">🏨 ${hotelBadge==='ready'?'✓':'✗'}</span>
-                        <span class="badge ${actBadge}"   style="font-size:10px;padding:2px 6px;margin:0;display:block;text-align:center;">📋 ${actBadge==='ready'?'✓':'!'}</span>
-                    </td>
-                </tr>`;
+                const hasToBook = day.activities && day.activities.some(a => a.needsBooking);
+                const actBadge = hasToBook ? 'need-booking' : (day.activities && day.activities.length > 0 ? 'ready' : 'missing');
+
+                tableHTML += `
+                    <tr data-day="day${day.dayNumber}" onclick="switchView('day${day.dayNumber}')">
+                        <td>${day.dayNumber}</td>
+                        <td style="white-space: nowrap; font-size: 12px;">${day.dayOfWeek} ${day.date.split(' ')[1] || ''} ${day.date.split(' ')[0]}</td>
+                        <td>
+                            <div style="font-weight: 600; color: var(--accent-gold); font-size: 13px;">${day.title}</div>
+                            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">${day.location}</div>
+                        </td>
+                        <td>
+                            <span class="badge ${hotelBadge}" style="font-size: 10px; padding: 2px 6px; margin: 0 0 4px 0; display: block; text-align: center;">🏨 ${hotelBadge === 'ready' ? '✓' : '✗'}</span>
+                            <span class="badge ${actBadge}" style="font-size: 10px; padding: 2px 6px; margin: 0; display: block; text-align: center;">📋 ${actBadge === 'ready' ? '✓' : '!'}</span>
+                        </td>
+                    </tr>
+                `;
             });
-            document.getElementById("accommodationTable").innerHTML = tableHTML;
+
+            accTable.innerHTML = tableHTML;
         }
 
         function renderDayTabs() {
@@ -1107,8 +2179,10 @@
         }
 
         function renderDayViews() {
-            document.getElementById("dayViewsContainer").innerHTML = TRIP_DATA.days
-                .map(day => `<div class="day-view" id="day${day.dayNumber}">${renderDayContent(day)}</div>`).join("");
+            const container = document.getElementById("dayViewsContainer");
+            container.innerHTML = TRIP_DATA.days
+                .map(day => `<div class="day-view" id="day${day.dayNumber}">${renderDayContent(day)}</div>`)
+                .join("");
             attachCollapsibleHandlers();
             TRIP_DATA.days.forEach(day => loadWeatherWidget(day.dayNumber));
         }
@@ -1154,7 +2228,7 @@
 
         function renderDayContent(day) {
             let html = `
-                <div class="hero" style="background-image:url('${day.backgroundImage}')">
+                <div class="hero" style="background-image: url('${day.backgroundImage}')">
                     <div class="hero-day-number">${day.dayNumber}</div>
                     <div class="hero-title">${day.title}</div>
                     <div class="hero-location">${day.location}</div>
@@ -1162,12 +2236,13 @@
                 <div class="expand-all-container">
                     <button class="btn-expand-all">Expand All</button>
                     <button class="btn-collapse-all">Collapse All</button>
-                </div>`;
+                </div>
+            `;
 
             // Currency — collapsed by default
             html += renderCalcSection(day.dayNumber);
 
-            // Weather — first section, collapsed by default
+            // Weather — collapsed by default
             if (DAY_WEATHER[day.dayNumber]) {
                 html += `<div class="collapsible-section">
                     <div class="section-header collapsed" id="wx-header-${day.dayNumber}" data-wx-day="${day.dayNumber}">
@@ -1182,52 +2257,90 @@
                 </div>`;
             }
 
+            // Flight section on flight days
             if (day.flight) {
-                html += `<div class="collapsible-section">
-                    <div class="section-header"><h3>✈️ Flight</h3><div class="chevron"></div></div>
-                    <div class="section-content section-flight"><div>
-                        <div style="font-weight:600;color:var(--accent-gold);font-size:15px;margin-bottom:8px;">${day.flight.airline}</div>
-                        <div style="color:var(--text-primary);margin-bottom:4px;"><strong>${day.flight.from} → ${day.flight.to}</strong></div>
-                        <div style="color:var(--text-secondary);font-size:13px;margin-bottom:6px;">Depart: ${day.flight.departTime} · Arrive: ${day.flight.arriveTime}</div>
-                        <div style="color:var(--text-secondary);font-size:12px;margin-bottom:12px;">${day.flight.terminal}</div>
-                        ${TRIP_DATA.checkInUrl ? `<a href="${TRIP_DATA.checkInUrl}" target="_blank" style="display:inline-block;padding:8px 14px;background-color:#3A7DA0;color:white;border-radius:4px;text-decoration:none;font-size:12px;font-weight:600;">Online Check-in</a>` : ''}
-                    </div></div></div>`;
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header">
+                            <h3>✈️ Flight</h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-flight">
+                            <div>
+                                <div style="margin-bottom: 12px;">
+                                    <div style="font-weight: 600; color: var(--accent-gold); font-size: 15px; margin-bottom: 8px;">${day.flight.airline}</div>
+                                    <div style="color: var(--text-primary); margin-bottom: 4px;"><strong>${day.flight.from} → ${day.flight.to}</strong></div>
+                                    <div style="color: var(--text-secondary); font-size: 13px; margin-bottom: 6px;">Depart: ${day.flight.departTime} · Arrive: ${day.flight.arriveTime}</div>
+                                    <div style="color: var(--text-secondary); font-size: 12px; margin-bottom: 12px;">${day.flight.terminal}</div>
+                                    ${TRIP_DATA.checkInUrl ? `<a href="${TRIP_DATA.checkInUrl}" target="_blank" style="display: inline-block; padding: 8px 14px; background-color: #3A7DA0; color: white; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; transition: var(--transition);" onmouseover="this.style.backgroundColor='#4a9dc0'" onmouseout="this.style.backgroundColor='#3A7DA0'">Online Check-in</a>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
             }
 
             if (day.drive) {
-                html += `<div class="drive-banner">
-                    <div class="drive-info">
-                        <div class="drive-route">${day.drive.from} → ${day.drive.to}</div>
-                        <div class="drive-duration">${day.drive.duration} · ${day.drive.distance}</div>
-                    </div></div>`;
+                html += `
+                    <div class="drive-banner">
+                        <div class="drive-info">
+                            <div class="drive-route">${day.drive.from} → ${day.drive.to}</div>
+                            <div class="drive-duration">${day.drive.duration} · ${day.drive.distance}</div>
+                        </div>
+                    </div>
+                `;
             }
 
             html += renderHotelCard(day);
 
-            if (day.activities.length > 0) html += renderActivitiesSection(day);
+            if (day.activities.length > 0) {
+                html += renderActivitiesSection(day);
+            }
 
             if (Object.values(day.meals).some(m => m.restaurants.length > 0 || m.status !== 'flexible')) {
                 html += renderMealsSection(day);
             }
 
             if (day.route) {
-                html += `<div class="card"><a href="https://${day.route}" target="_blank" style="color:var(--accent-gold);text-decoration:none;">📍 View Route on Google Maps →</a></div>`;
+                html += `
+                    <div class="card">
+                        <a href="https://${day.route}" target="_blank" style="color: var(--accent-gold); text-decoration: none;">
+                            📍 View Route on Google Maps →
+                        </a>
+                    </div>
+                `;
             }
 
             if (day.warnings.length > 0) {
-                html += `<div class="collapsible-section">
-                    <div class="section-header"><h3>⚠️ Warnings</h3><div class="chevron"></div></div>
-                    <div class="section-content section-warnings"><div style="padding:16px;">
-                        ${day.warnings.map(w => `<div class="warning">${w}</div>`).join("")}
-                    </div></div></div>`;
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header">
+                            <h3>⚠️ Warnings</h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-warnings">
+                            <div style="padding: 16px;">
+                                ${day.warnings.map(w => `<div class="warning" style="margin-bottom: 12px; display: block;">${w}</div>`).join("")}
+                            </div>
+                        </div>
+                    </div>
+                `;
             }
 
             if (day.gems.length > 0) {
-                html += `<div class="collapsible-section">
-                    <div class="section-header"><h3>💎 Hidden Gems</h3><div class="chevron"></div></div>
-                    <div class="section-content section-gems"><div style="padding:16px;">
-                        ${day.gems.map(g => `<div class="gem">${g}</div>`).join("")}
-                    </div></div></div>`;
+                html += `
+                    <div class="collapsible-section">
+                        <div class="section-header">
+                            <h3>💎 Hidden Gems</h3>
+                            <div class="chevron"></div>
+                        </div>
+                        <div class="section-content section-gems">
+                            <div style="padding: 16px;">
+                                ${day.gems.map(g => `<div class="gem" style="margin-bottom: 12px; display: block;">${g}</div>`).join("")}
+                            </div>
+                        </div>
+                    </div>
+                `;
             }
 
             const dc = COST_DATA.days[day.dayNumber];
@@ -1239,7 +2352,7 @@
                 if (dc.food)       parts.push(`🍽️ AED ${dc.food}`);
                 if (dc.other)      parts.push(`⛽ AED ${dc.other}`);
                 html += `<div class="day-cost-bar">
-                    <span class="day-cost-label">💰 Est. cost${day.flight?' · excl. flights':''}</span>
+                    <span class="day-cost-label">💰 Est. cost${day.flight ? ' · excl. flights' : ''}</span>
                     <span class="day-cost-items">${parts.join(' · ')}</span>
                     <span class="day-cost-total">~AED ${total}</span>
                 </div>`;
@@ -1249,46 +2362,73 @@
         }
 
         function renderActivitiesSection(day) {
-            const grouped = {}, order = [];
+            // Group activities by time
+            const groupedActivities = {};
+            const activityOrder = [];
+
             day.activities.forEach(a => {
-                if (!grouped[a.time]) { grouped[a.time] = []; order.push(a.time); }
-                grouped[a.time].push(a);
+                if (!groupedActivities[a.time]) {
+                    groupedActivities[a.time] = [];
+                    activityOrder.push(a.time);
+                }
+                groupedActivities[a.time].push(a);
             });
 
-            let html = `<div class="collapsible-section">
-                <div class="section-header"><h3>Activities</h3><div class="chevron"></div></div>
-                <div class="section-content section-activities"><div style="padding:16px;"><div class="timeline">`;
+            let html = `
+                <div class="collapsible-section">
+                    <div class="section-header">
+                        <h3>Activities</h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content section-activities">
+                        <div style="padding: 16px;">
+                            <div class="timeline">
+            `;
 
-            order.forEach(timeLabel => {
-                const acts = grouped[timeLabel];
+            activityOrder.forEach(timeLabel => {
+                const activities = groupedActivities[timeLabel];
+
+                // Check if this is a specific time (HH:MM format) or a period (Morning, Afternoon, etc.)
                 const isSpecificTime = /^\d{1,2}:\d{2}/.test(timeLabel);
+
                 if (!isSpecificTime) {
+                    // Time period (Morning, Afternoon, etc.)
                     html += `<div class="timeline-time-group-header">${timeLabel}</div>`;
-                    acts.forEach(a => {
+                    activities.forEach(a => {
                         const isAlternative = a.time.toLowerCase() === 'alt' || (a.text && a.text.toLowerCase().includes('instead of')) || (a.text && a.text.toLowerCase().includes('alternative'));
                         const mapsUrl = a.mapsUrl ? `https://${a.mapsUrl}` : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.text + ' ' + day.location)}`;
-                        html += `<div class="timeline-item-bullet ${isAlternative ? 'alternative' : ''}">
-                            <span${isAlternative ? ' style="color: #E8C66E;"' : ''}>${a.text}</span>
-                            <a href="${mapsUrl}" target="_blank" class="activity-maps-link">📍</a>
-                            ${a.subNote ? `<div class="timeline-note">${a.subNote}</div>` : ""}
-                            ${a.needsBooking ? '<div class="timeline-tag">⚠ Book in advance</div>' : ""}
-                        </div>`;
+                        html += `
+                            <div class="timeline-item-bullet ${isAlternative ? 'alternative' : ''}">
+                                <span${isAlternative ? ' style="color: #E8C66E;"' : ''}>${a.text}</span>
+                                <a href="${mapsUrl}" target="_blank" class="activity-maps-link">📍</a>
+                                ${a.subNote ? `<div class="timeline-note">${a.subNote}</div>` : ""}
+                                ${a.needsBooking ? '<div class="timeline-tag">⚠ Book in advance</div>' : ""}
+                            </div>
+                        `;
                     });
                 } else {
-                    acts.forEach(a => {
+                    // Specific time
+                    activities.forEach(a => {
                         const isAlternative = a.text && a.text.toLowerCase().includes('alternative');
                         const mapsUrl = a.mapsUrl ? `https://${a.mapsUrl}` : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.text + ' ' + day.location)}`;
-                        html += `<div class="timeline-item">
-                            <div class="timeline-time">${timeLabel}</div>
-                            <div class="timeline-text">${a.text} <a href="${mapsUrl}" target="_blank" class="activity-maps-link">📍</a></div>
-                            ${a.subNote ? `<div class="timeline-note">${a.subNote}</div>` : ""}
-                            ${a.needsBooking ? '<div class="timeline-tag">⚠ Book in advance</div>' : ""}
-                        </div>`;
+                        html += `
+                            <div class="timeline-item">
+                                <div class="timeline-time">${timeLabel}</div>
+                                <div class="timeline-text">${a.text} <a href="${mapsUrl}" target="_blank" class="activity-maps-link">📍</a></div>
+                                ${a.subNote ? `<div class="timeline-note">${a.subNote}</div>` : ""}
+                                ${a.needsBooking ? '<div class="timeline-tag">⚠ Book in advance</div>' : ""}
+                            </div>
+                        `;
                     });
                 }
             });
 
-            html += `</div></div></div></div>`;
+            html += `
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
             return html;
         }
 
@@ -1330,49 +2470,88 @@
         }
 
         function renderMealsSection(day) {
-            let html = `<div class="collapsible-section">
-                <div class="section-header"><h3>Meals</h3><div class="chevron"></div></div>
-                <div class="section-content section-meals"><div class="meals-section">`;
+            let html = `
+                <div class="collapsible-section">
+                    <div class="section-header">
+                        <h3>Meals</h3>
+                        <div class="chevron"></div>
+                    </div>
+                    <div class="section-content section-meals">
+                        <div class="meals-section">
+            `;
 
-            ['breakfast','lunch','dinner'].forEach((mealType, idx) => {
+            const mealTypes = ['breakfast', 'lunch', 'dinner'];
+            const mealLabels = { breakfast: 'Breakfast', lunch: 'Lunch', dinner: 'Dinner' };
+
+            mealTypes.forEach((mealType, idx) => {
                 const meal = day.meals[mealType];
                 const statusData = STATUS_STYLES[meal.status];
-                html += `<div style="margin-bottom:16px;padding-bottom:12px;${idx<2?'border-bottom:1px solid var(--border-color);':''}">
-                    <div class="meal-type">${{breakfast:'Breakfast',lunch:'Lunch',dinner:'Dinner'}[mealType]}</div>
-                    <span class="badge ${statusData.badge}">${statusData.label}</span>`;
-                if (meal.note) html += `<div class="meal-note">${meal.note}</div>`;
+
+                html += `
+                    <div style="margin-bottom: 16px; padding-bottom: 12px; ${idx < mealTypes.length - 1 ? 'border-bottom: 1px solid var(--border-color);' : ''}">
+                        <div class="meal-type">${mealLabels[mealType]}</div>
+                        <span class="badge ${statusData.badge}">${statusData.label}</span>
+                `;
+
+                if (meal.note) {
+                    html += `<div class="meal-note">${meal.note}</div>`;
+                }
+
                 if (meal.restaurants.length > 0) {
                     html += `<div class="restaurant-cards">`;
                     meal.restaurants.forEach(rest => {
-                        const isSel = isRestaurantSelected(day.dayNumber, mealType, rest.name);
-                        html += `<div class="restaurant-card ${isSel?'selected':''}">
-                            <div class="restaurant-name">${rest.name}</div>
-                            <div class="restaurant-desc">${rest.desc}</div>
-                            <div class="restaurant-meta"><span class="restaurant-rating">${rest.rating}</span></div>
-                            <div class="restaurant-buttons">
-                                <button class="btn-select" onclick="toggleRestaurant(${day.dayNumber},'${mealType}','${rest.name.replace(/'/g,"\\'")}')">
-                                    ${isSel?'✓ Selected':'Select'}
-                                </button>
-                                <a href="https://${rest.mapsUrl}" target="_blank" class="btn-maps">Maps</a>
-                            </div></div>`;
+                        const isSelected = isRestaurantSelected(day.dayNumber, mealType, rest.name);
+                        html += `
+                            <div class="restaurant-card ${isSelected ? 'selected' : ''}">
+                                <div class="restaurant-name">${rest.name}</div>
+                                <div class="restaurant-desc">${rest.desc}</div>
+                                <div class="restaurant-meta">
+                                    <span class="restaurant-rating">${rest.rating}</span>
+                                </div>
+                                <div class="restaurant-buttons">
+                                    <button class="btn-select" onclick="toggleRestaurant(${day.dayNumber}, '${mealType}', '${rest.name.replace(/'/g, "\\'")}')">
+                                        ${isSelected ? '✓ Selected' : 'Select'}
+                                    </button>
+                                    <a href="https://${rest.mapsUrl}" target="_blank" class="btn-maps">Maps</a>
+                                </div>
+                            </div>
+                        `;
                     });
                     html += `</div>`;
                 }
+
                 html += `</div>`;
             });
 
-            html += `</div></div></div>`;
+            html += `
+                        </div>
+                    </div>
+                </div>
+            `;
             return html;
+        }
+
+        function goToToday() {
+            const today = new Date().toISOString().split('T')[0];
+            for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
+                if (w.isoDate === today) { switchView(`day${dayNum}`); return; }
+            }
+            switchView('overview');
         }
 
         function switchView(viewId) {
             document.querySelectorAll('.day-view').forEach(v => v.classList.remove('active'));
             document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+
             document.getElementById(viewId).classList.add('active');
             document.querySelector(`[data-view="${viewId}"]`).classList.add('active');
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
             const activeTab = document.querySelector(`[data-view="${viewId}"]`);
-            if (activeTab) activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            if (activeTab) {
+                activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
         }
 
         function toggleRestaurant(dayNum, mealType, restaurantName) {
@@ -1386,8 +2565,10 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = (TRIP_DATA.title || 'trip').toLowerCase().replace(/\s+/g,'-') + '-itinerary.html';
-            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            a.download = (TRIP_DATA.title || 'trip').toLowerCase().replace(/\s+/g, '-') + '-itinerary.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
 
@@ -1420,6 +2601,7 @@
 
         // ============================================================
         // WEATHER — Open-Meteo (free, no API key required)
+        // Populate DAY_WEATHER above with lat/lon per day number
         // ============================================================
 
         const WX_CACHE_TTL = 3 * 60 * 60 * 1000;
@@ -1453,10 +2635,8 @@
                 const getPP = h => { const idx = times.indexOf(`${info.isoDate}T${String(h).padStart(2,'0')}:00`); return idx !== -1 ? (pp[idx] ?? null) : null; };
                 const nowHour = new Date().getHours();
                 const isToday = info.isoDate === todayStr;
-                // Find max precipitation probability across all hours and which hours are rainy
                 const allPP = times.map((t, i) => t.startsWith(info.isoDate) ? (pp[i] ?? 0) : 0);
                 const maxPP = allPP.length ? Math.max(...allPP) : 0;
-                // Build rain windows: consecutive hours with PP >= 30%
                 const rainHours = times.reduce((acc, t, i) => {
                     if (t.startsWith(info.isoDate) && (pp[i] ?? 0) >= 30) {
                         const h = parseInt(t.split('T')[1]);
@@ -1480,19 +2660,24 @@
         }
 
         function weatherChartSVG(t8, t13, t20, dayNum) {
-            const vals = [t8, t13, t20], labs = ['8 AM', '1 PM', '8 PM'];
+            const vals = [t8, t13, t20];
+            const labs = ['8 AM', '1 PM', '8 PM'];
             const W = 300, pL = 16, pR = 16, pT = 28, pB = 22, cH = 50;
             const tH = pT + cH + pB, cW = W - pL - pR;
             const minV = Math.min(...vals) - 2, maxV = Math.max(...vals) + 2;
             const toY = v => pT + cH - ((v - minV) / (maxV - minV)) * cH;
             const xs = [pL, pL + cW / 2, pL + cW];
             const pts = vals.map((v, i) => ({ x: xs[i], y: toY(v) }));
-            const ext = [{ x: 2*pts[0].x-pts[1].x, y: 2*pts[0].y-pts[1].y }, ...pts, { x: 2*pts[2].x-pts[1].x, y: 2*pts[2].y-pts[1].y }];
+            const ext = [
+                { x: 2*pts[0].x - pts[1].x, y: 2*pts[0].y - pts[1].y },
+                ...pts,
+                { x: 2*pts[2].x - pts[1].x, y: 2*pts[2].y - pts[1].y }
+            ];
             let curve = `M ${pts[0].x},${pts[0].y.toFixed(1)}`;
             for (let i = 1; i < 3; i++) {
-                const [p0,p1,p2,p3] = [ext[i-1],ext[i],ext[i+1],ext[i+2]];
-                const cp1 = { x: p1.x+(p2.x-p0.x)/6, y: p1.y+(p2.y-p0.y)/6 };
-                const cp2 = { x: p2.x-(p3.x-p1.x)/6, y: p2.y-(p3.y-p1.y)/6 };
+                const [p0, p1, p2, p3] = [ext[i-1], ext[i], ext[i+1], ext[i+2]];
+                const cp1 = { x: p1.x + (p2.x-p0.x)/6, y: p1.y + (p2.y-p0.y)/6 };
+                const cp2 = { x: p2.x - (p3.x-p1.x)/6, y: p2.y - (p3.y-p1.y)/6 };
                 curve += ` C ${cp1.x.toFixed(1)},${cp1.y.toFixed(1)} ${cp2.x.toFixed(1)},${cp2.y.toFixed(1)} ${p2.x},${p2.y.toFixed(1)}`;
             }
             const fillPath = `${curve} L ${pts[2].x},${pT+cH} L ${pts[0].x},${pT+cH} Z`;
@@ -1504,7 +2689,7 @@
                 </linearGradient></defs>
                 <path d="${fillPath}" fill="url(#${gid})"/>
                 <path d="${curve}" fill="none" stroke="#C9966A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                ${pts.map((p,i) => `
+                ${pts.map((p, i) => `
                     <circle cx="${p.x}" cy="${p.y.toFixed(1)}" r="4" fill="#C9966A" stroke="var(--bg-secondary)" stroke-width="1.5"/>
                     <text class="wx-temp" x="${p.x}" y="${(p.y-10).toFixed(1)}" text-anchor="middle" font-size="11" font-weight="600" font-family="DM Sans,sans-serif">${Math.round(vals[i])}°C</text>
                     <text class="wx-time" x="${p.x}" y="${pT+cH+16}" text-anchor="middle" font-size="10" font-family="DM Sans,sans-serif">${labs[i]}</text>
@@ -1536,35 +2721,22 @@
             if (!data) return html;
             const maxPP = data.maxPP || 0;
             const rainHours = data.rainHours || [];
-            // Check for thunderstorm in day's wcode or rain hours
             const hasStorm = wx.severity >= 4 || rainHours.some(r => r.code >= 95);
             const hasHeavy = wx.severity >= 3 || rainHours.some(r => r.code >= 65 && r.code < 95);
             const hasRain  = wx.severity >= 1 || maxPP >= 30;
-
             if (hasStorm) {
                 html += `<div class="wx-rain-alert wx-storm">⚡ Thunderstorm expected`;
-                if (rainHours.length) {
-                    const peak = rainHours.reduce((a, b) => b.pp > a.pp ? b : a);
-                    html += ` around ${peak.h}:00`;
-                }
+                if (rainHours.length) { const peak = rainHours.reduce((a, b) => b.pp > a.pp ? b : a); html += ` around ${peak.h}:00`; }
                 html += `</div>`;
             } else if (hasHeavy || maxPP >= 60) {
                 html += `<div class="wx-rain-alert wx-rain-heavy">🌧 Heavy rain possible`;
-                if (rainHours.length) {
-                    const hrs = rainHours.map(r => `${r.h}:00`);
-                    html += ` — ${hrs[0]}${hrs.length > 1 ? '–' + hrs[hrs.length-1] : ''}`;
-                }
+                if (rainHours.length) { const hrs = rainHours.map(r => `${r.h}:00`); html += ` — ${hrs[0]}${hrs.length > 1 ? '–' + hrs[hrs.length-1] : ''}`; }
                 html += ` (up to ${maxPP}%)</div>`;
             } else if (hasRain && maxPP >= 30) {
                 html += `<div class="wx-rain-alert wx-rain-light">🌦 Rain possible`;
-                if (rainHours.length) {
-                    const hrs = rainHours.map(r => `${r.h}:00`);
-                    html += ` — ${hrs[0]}${hrs.length > 1 ? '–' + hrs[hrs.length-1] : ''}`;
-                }
+                if (rainHours.length) { const hrs = rainHours.map(r => `${r.h}:00`); html += ` — ${hrs[0]}${hrs.length > 1 ? '–' + hrs[hrs.length-1] : ''}`; }
                 html += ` (up to ${maxPP}%)</div>`;
             }
-
-            // Probability bar for 3 key times
             const pp8 = data.pp8, pp13 = data.pp13, pp20 = data.pp20;
             if (pp8 !== null || pp13 !== null || pp20 !== null) {
                 const ppClass = p => p >= 70 ? 'storm' : p >= 40 ? 'heavy' : p >= 20 ? 'rain' : '';
@@ -1625,6 +2797,7 @@
             const el = document.getElementById('wx-overview');
             if (!el || !DAY_WEATHER[dayNumber]) return;
             const w = DAY_WEATHER[dayNumber];
+            // Show the section and update header with location
             const section = document.getElementById('overviewWeatherSection');
             if (section) section.style.display = '';
             const day = TRIP_DATA.days.find(d => d.dayNumber === dayNumber);
@@ -1678,33 +2851,17 @@
             loadOverviewWeather(dayNumber);
         }
 
-        function goToToday() {
-            const today = new Date().toISOString().split('T')[0];
-            for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
-                if (w.isoDate === today) { switchView(`day${dayNum}`); return; }
-            }
-            switchView('overview');
-        }
-
         // ============================================================
         // CURRENCY CALCULATOR
         // DAY_CURRENCY: map day number → { code, name, symbol } for the
         // local currency on that day. The calculator always shows
-        // local currency / AED / USD.
+        // local currency / AED / USD. Update per trip.
         // ============================================================
         const DAY_CURRENCY = {
-            1:  { code: 'EUR', name: 'Euro', symbol: '€' }, // Munich
-            2:  { code: 'EUR', name: 'Euro', symbol: '€' },
-            3:  { code: 'EUR', name: 'Euro', symbol: '€' },
-            4:  { code: 'CHF', name: 'Swiss Franc', symbol: 'Fr' }, // Zurich
-            5:  { code: 'CHF', name: 'Swiss Franc', symbol: 'Fr' },
-            6:  { code: 'CHF', name: 'Swiss Franc', symbol: 'Fr' },
-            7:  { code: 'CHF', name: 'Swiss Franc', symbol: 'Fr' },
-            8:  { code: 'EUR', name: 'Euro', symbol: '€' }, // Madrid
-            9:  { code: 'EUR', name: 'Euro', symbol: '€' },
-            10: { code: 'EUR', name: 'Euro', symbol: '€' },
-            11: { code: 'EUR', name: 'Euro', symbol: '€' },
-            12: { code: 'EUR', name: 'Euro', symbol: '€' },
+            // Map day number to local currency for that day.
+            // The calculator always shows AED / USD / EUR, plus a 4th row for local currency
+            // when it differs from those three. Example:
+            // 1: { code: 'JPY', name: 'Japanese Yen', symbol: '¥' },
         };
 
         let calcRates = null;
@@ -1738,7 +2895,7 @@
                 });
                 localStorage.setItem(cacheKey, JSON.stringify({ data: calcRates, ts: Date.now() }));
             } catch {
-                calcRates = { usd: 1, aed: 3.6725, eur: 0.92, chf: 0.89 };
+                calcRates = { usd: 1, aed: 3.6725, eur: 0.92 };
                 document.getElementById('calcRatesNote').textContent = 'Offline rates (approx)';
                 return;
             }
@@ -1795,7 +2952,7 @@
         // PER-DAY CURRENCY CALCULATOR
         // ============================================================
         function renderCalcSection(dayNum) {
-            const cur = DAY_CURRENCY[dayNum] || { code: 'EUR', name: 'Euro', symbol: '€' };
+            const cur = DAY_CURRENCY[dayNum] || Object.values(DAY_CURRENCY)[0] || { code: 'EUR', name: 'Euro', symbol: '€' };
             const baseCodes = ['AED', 'USD', 'EUR'];
             const showLocal = !baseCodes.includes(cur.code);
             const currencies = [
@@ -1833,7 +2990,7 @@
 
         function dcConvert(dayNum, sourceIdx, count) {
             if (!calcRates) { fetchCalcRates(false).then(() => dcConvert(dayNum, sourceIdx, count)); return; }
-            const cur = DAY_CURRENCY[dayNum] || { code: 'EUR', name: 'Euro', symbol: '€' };
+            const cur = DAY_CURRENCY[dayNum] || Object.values(DAY_CURRENCY)[0] || { code: 'EUR', name: 'Euro', symbol: '€' };
             const baseCodes = ['AED', 'USD', 'EUR'];
             const showLocal = !baseCodes.includes(cur.code);
             const codes = ['aed', 'usd', 'eur'];
@@ -1893,140 +3050,10 @@
             L.polyline(pts, { color: color || '#C9966A', weight: 3, opacity: 0.9, dashArray: dash || null, lineJoin: 'round' }).addTo(map);
         }
 
-        async function renderMunichMap() {
-            const el = document.getElementById('mapMunich');
-            if (!el || el._leaflet_id) return;
-            const map = L.map('mapMunich', { scrollWheelZoom: false });
-            makeTile(map);
+        // TODO: implement renderXxxMap() for each map div, then call them in the onload below
+        // async function renderMainMap() { ... }
 
-            // Day 1: Hotel → Viktualienmarkt → Marienplatz → Hofbräuhaus
-            const d1 = [
-                [48.1293, 11.5590],  // myMINGA4 Hotel
-                [48.1355, 11.5756],  // Viktualienmarkt
-                [48.1374, 11.5755],  // Marienplatz
-                [48.1375, 11.5799],  // Hofbräuhaus
-            ];
-            // Day 2: Hotel → Asamkirche → English Garden → Chinesischer Turm → Augustiner
-            const d2 = [
-                [48.1293, 11.5590],  // Hotel
-                [48.1345, 11.5697],  // Asamkirche
-                [48.1430, 11.5905],  // Eisbach surfers
-                [48.1634, 11.6030],  // Chinesischer Turm
-                [48.1374, 11.5689],  // Augustiner Klosterwirt
-            ];
-            // Day 3 options: Nymphenburg and Dachau
-            const nymphenburg = [[48.1293, 11.5590], [48.1583, 11.5033]];
-            const dachau      = [[48.1293, 11.5590], [48.2703, 11.4343]];
-
-            const [r1, r2, rN, rD] = await Promise.all([
-                osrmRoute(d1), osrmRoute(d2), osrmRoute(nymphenburg), osrmRoute(dachau)
-            ]);
-            drawRoute(map, r1 || d1, '#C9966A');
-            drawRoute(map, r2 || d2, '#E0956A');
-            drawRoute(map, rN || nymphenburg, '#A8C56A', '6 4');
-            drawRoute(map, rD || dachau,      '#A8C56A', '6 4');
-
-            [
-                { pos:[48.3537,11.7860], label:'✈', title:'MUC Airport', color:'#7BAFD4' },
-                { pos:[48.1293,11.5590], label:'H',  title:'myMINGA4 Hotel' },
-                { pos:[48.1355,11.5756], label:'1',  title:'Viktualienmarkt' },
-                { pos:[48.1374,11.5755], label:'2',  title:'Marienplatz' },
-                { pos:[48.1375,11.5799], label:'3',  title:'Hofbräuhaus' },
-                { pos:[48.1345,11.5697], label:'4',  title:'Asamkirche', color:'#E0956A' },
-                { pos:[48.1430,11.5905], label:'5',  title:'Eisbach River Surfers', color:'#E0956A' },
-                { pos:[48.1634,11.6030], label:'6',  title:'Chinesischer Turm Beer Garden', color:'#E0956A' },
-                { pos:[48.1583,11.5033], label:'N',  title:'Day 3 option: Nymphenburg Palace', color:'#A8C56A' },
-                { pos:[48.2703,11.4343], label:'D',  title:'Day 3 option: Dachau Memorial', color:'#A8C56A' },
-            ].forEach(m => L.marker(m.pos, { icon: pin(m.label, m.color) }).bindPopup('<strong>' + m.title + '</strong>').addTo(map));
-
-            map.invalidateSize();
-            map.fitBounds(L.latLngBounds([...d1, ...d2, [48.3537,11.7860], [48.2703,11.4343], [48.1583,11.5033]]), { padding: [28, 28], maxZoom: 12 });
-        }
-
-        async function renderSwitzerlandMap() {
-            const el = document.getElementById('mapSwitzerland');
-            if (!el || el._leaflet_id) return;
-            const map = L.map('mapSwitzerland', { scrollWheelZoom: false });
-            makeTile(map);
-
-            // Main train route: Munich → Zurich → (Bern) → Geneva Airport
-            const trainMain = [
-                [48.1402, 11.5580],  // Munich Hbf
-                [47.3779,  8.5400],  // Zurich HB
-                [47.1410,  9.5215],  // Vaduz, Liechtenstein (detour)
-                [46.9481,  7.4474],  // Bern
-                [46.2370,  6.1089],  // Geneva Airport
-            ];
-            // Day trips from Bern
-            const toLucerne    = [[46.9481,7.4474], [47.0502,8.3093]];
-            const toInterlaken = [[46.9481,7.4474], [46.6863,7.8632]];
-
-            const [rMain, rLuc, rInt] = await Promise.all([
-                osrmRoute(trainMain.slice(0,2).concat([trainMain[3], trainMain[4]])), // Munich→Zurich→Bern→Geneva
-                osrmRoute(toLucerne),
-                osrmRoute(toInterlaken)
-            ]);
-            drawRoute(map, rMain || trainMain, '#5B9BD5');
-            drawRoute(map, rLuc  || toLucerne,    '#C9966A', '6 4');
-            drawRoute(map, rInt  || toInterlaken, '#C9966A', '6 4');
-
-            // Vaduz straight line (train+bus, OSRM won't route across Liechtenstein well)
-            L.polyline([[47.3779,8.5400],[47.1410,9.5215],[46.9481,7.4474]], { color:'#5B9BD5', weight:2, opacity:0.6, dashArray:'4 4' }).addTo(map);
-
-            [
-                { pos:[48.1402,11.5580], label:'D1', title:'Days 1-3 — Munich' },
-                { pos:[47.3779, 8.5400], label:'D4', title:'Day 4 — Zurich + Linkin Park' },
-                { pos:[47.3796, 8.5087], label:'🎸', title:'Stadion Letzigrund', color:'#E05C5C' },
-                { pos:[47.1410, 9.5215], label:'D5', title:'Day 5 — Vaduz, Liechtenstein' },
-                { pos:[46.9481, 7.4474], label:'D5', title:'Days 5-7 base — Bern', color:'#E0956A' },
-                { pos:[47.0502, 8.3093], label:'D6', title:'Day 6 day trip — Lucerne', color:'#C9966A' },
-                { pos:[46.9789, 8.2543], label:'⛰',  title:'Mt Pilatus option', color:'#A8C56A' },
-                { pos:[46.6863, 7.8632], label:'D7', title:'Day 7 day trip — Interlaken', color:'#C9966A' },
-                { pos:[46.2370, 6.1089], label:'✈',  title:'Day 8 — Geneva Airport → Madrid', color:'#7BAFD4' },
-            ].forEach(m => L.marker(m.pos, { icon: pin(m.label, m.color) }).bindPopup('<strong>' + m.title + '</strong>').addTo(map));
-
-            map.invalidateSize();
-            const allPts = [...trainMain, ...toLucerne, ...toInterlaken];
-            map.fitBounds(L.latLngBounds(allPts), { padding: [28, 28], maxZoom: 8 });
-        }
-
-        async function renderMadridMap() {
-            const el = document.getElementById('mapMadrid');
-            if (!el || el._leaflet_id) return;
-            const map = L.map('mapMadrid', { scrollWheelZoom: false });
-            makeTile(map);
-
-            const towardsPamplona = [
-                [40.4058, -3.6894],  // Madrid Atocha
-                [42.8188, -1.6440],  // Pamplona
-            ];
-            const returnMadrid = [
-                [42.8188, -1.6440],  // Pamplona
-                [40.4168, -3.7038],  // Madrid
-            ];
-
-            const [rOut, rRet] = await Promise.all([
-                osrmRoute(towardsPamplona),
-                osrmRoute(returnMadrid)
-            ]);
-            drawRoute(map, rOut || towardsPamplona, '#E05C5C');
-            drawRoute(map, rRet || returnMadrid,    '#E0956A');
-
-            [
-                { pos:[40.4168,-3.7038], label:'D8',  title:'Days 8 & 11-12 — Madrid' },
-                { pos:[40.4058,-3.6894], label:'🚆',  title:'Madrid Atocha station', color:'#7BAFD4' },
-                { pos:[40.4153,-3.7073], label:'M',   title:'Plaza Mayor' },
-                { pos:[40.4138,-3.6923], label:'P',   title:'Museo del Prado', color:'#E0956A' },
-                { pos:[40.4153,-3.6844], label:'R',   title:'Retiro Park', color:'#A8C56A' },
-                { pos:[42.8188,-1.6440], label:'D9',  title:'Days 9-10 — Pamplona · San Fermín', color:'#E05C5C' },
-                { pos:[42.8224,-1.6386], label:'🐂',  title:'Calle de la Estafeta — Bull Run', color:'#E05C5C' },
-            ].forEach(m => L.marker(m.pos, { icon: pin(m.label, m.color) }).bindPopup('<strong>' + m.title + '</strong>').addTo(map));
-
-            map.invalidateSize();
-            map.fitBounds(L.latLngBounds([...towardsPamplona, ...returnMadrid]), { padding: [32, 32], maxZoom: 9 });
-        }
-
-        // Load Leaflet then render all maps
+        // Load Leaflet then render maps
         (function() {
             const link = document.createElement('link');
             link.rel = 'stylesheet';
@@ -2034,7 +3061,7 @@
             document.head.appendChild(link);
             const s = document.createElement('script');
             s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-            s.onload = function() { setTimeout(function() { renderMunichMap(); renderSwitzerlandMap(); renderMadridMap(); }, 300); };
+            s.onload = function() { setTimeout(function() { /* renderMainMap(); */ }, 300); };
             document.head.appendChild(s);
         })();
 
