@@ -338,8 +338,7 @@
     <script>
         // ============================================================
         // TRIP_DATA
-        // ============================================================
-        const TRIP_DATA = {
+        // ===========================================        const TRIP_DATA = {
             title: "Bali · Komodo · Kuala Lumpur",
             travelers: ["Juan Carlos", "Maria"],
             carRental: null,
@@ -353,7 +352,6 @@
                 { date: "Aug 28", dayOfWeek: "Thu", airline: "IW 0301", from: "DPS", to: "KUL", departTime: "TBD", arriveTime: "TBD", terminal: "DPS → KUL", passengers: ["Juan Carlos", "Maria"] },
                 { date: "Aug 30", dayOfWeek: "Sat", airline: "EK 0351", from: "KUL", to: "DXB", departTime: "TBD", arriveTime: "TBD", terminal: "KUL → DXB", passengers: ["Juan Carlos", "Maria"] }
             ],
-            days: [
                 // ── DAY 1 ── Aug 15 Fri ── Departure: Dubai → Bali ──
                 {
                     dayNumber: 1, date: "Aug 15", dayOfWeek: "Fri",
@@ -767,43 +765,43 @@
                     gems: ["End of an amazing 16-day adventure across three countries!"]
                 }
             ]
-            ]
         };
 
         // ============================================================
         // DAY_WEATHER — Open-Meteo (free, no API key required)
         // ============================================================
         const DAY_WEATHER = {
-            1:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-15" }, // Bali (in-flight)
-            2:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-16" }, // Seminyak
-            3:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-17" }, // Seminyak
-            4:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-18" }, // Seminyak
-            5:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-19" }, // Seminyak
-            6:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-20" }, // Seminyak
-            7:  { lat: -8.8325, lon: 115.2631, isoDate: "2026-08-21" }, // Uluwatu
-            8:  { lat: -8.4833, lon: 123.5667, isoDate: "2026-08-22" }, // Komodo
-            9:  { lat: -8.4833, lon: 123.5667, isoDate: "2026-08-23" }, // Komodo
-            10: { lat: -8.4833, lon: 123.5667, isoDate: "2026-08-24" }, // Komodo
-            11: { lat: -8.7270, lon: 115.5000, isoDate: "2026-08-25" }, // Nusa Penida
-            12: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-26" }, // Seminyak
-            13: { lat: -8.5069, lon: 115.2625, isoDate: "2026-08-27" }, // Ubud
+            1:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-15" }, // Bali - Seminyak
+            2:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-16" }, // Bali - Seminyak
+            3:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-17" }, // Bali - Seminyak
+            4:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-18" }, // Bali - Seminyak
+            5:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-19" }, // Bali - Seminyak
+            6:  { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-20" }, // Bali - Seminyak
+            7:  { lat: -8.7270, lon: 115.2390, isoDate: "2026-08-21" }, // Bali - Uluwatu
+            8:  { lat: -8.3100, lon: 119.6750, isoDate: "2026-08-22" }, // Komodo National Park
+            9:  { lat: -8.3100, lon: 119.6750, isoDate: "2026-08-23" }, // Komodo National Park
+            10: { lat: -8.3100, lon: 119.6750, isoDate: "2026-08-24" }, // Komodo National Park
+            11: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-25" }, // Bali - Seminyak
+            12: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-26" }, // Bali - Seminyak
+            13: { lat: -8.5069, lon: 115.2625, isoDate: "2026-08-27" }, // Bali - Ubud
             14: { lat:  3.1390, lon: 101.6869, isoDate: "2026-08-28" }, // Kuala Lumpur
             15: { lat:  3.1390, lon: 101.6869, isoDate: "2026-08-29" }, // Kuala Lumpur
             16: { lat:  3.1390, lon: 101.6869, isoDate: "2026-08-30" }, // Kuala Lumpur
         };
 
         // ============================================================
-        // COST_DATA — All figures in AED
+        // COST_DATA — All figures in USD
         // ============================================================
         const COST_DATA = {
-            disclaimer: "All figures in AED. Update with confirmed prices as bookings are made.",
+            disclaimer: "All figures in USD. Update with confirmed prices as bookings are made.",
             summary: [
-                { cat: "✈️ Flights",           amount: 0, note: "EK0368 DXB→DPS · IW 7309 DPS→LBJ · IW 7314 LBJ→DPS · IW 0301 DPS→KUL · EK 0351 KUL→DXB (pending)" },
-                { cat: "🏨 Accommodation",      amount: 0, note: "Courtyard Marriott Bali (8 nights) · Liveaboard boat (1 night) · Oh!Julia Komodo (2 nights) · KL hotel (2 nights)" },
-                { cat: "🎟️ Activities & Tours",   amount: 0, note: "Uluwatu Temple & Kecak · Komodo dragons · Manta snorkel · Ubud tours · Petronas towers · Batu Caves" },
-                { cat: "🍽️ Food & Drinks",      amount: 0, note: "16 days in SE Asia · Includes some meals on boat/hotels" },
-                { cat: "🚗 Transport & Local",  amount: 0, note: "Airport transfers · Local tours · Taxis · Boats" },
-                { cat: "💡 Misc & Souvenirs",   amount: 0, note: "Tips, souvenirs, etc." },
+                { cat: "✈️ International Flights", amount: 0, note: "DXB→DPS + KUL→DXB (to be updated)" },
+                { cat: "✈️ Domestic Flights",      amount: 250, note: "DPS→LBJ (07:10–08:15) + LBJ→DPS (10:35–11:45) + DPS→KUL" },
+                { cat: "🏨 Accommodation",         amount: 1600, note: "Courtyard Marriott Bali x7 nights + Liveaboard Komodo 1N + Oh!Julia Komodo x1 + KL hotel x3N" },
+                { cat: "🎟️ Activities & Tours",   amount: 800, note: "Kecak Fire Dance + Komodo dragons + Padar sunrise + Manta snorkel + Nusa Penida + Ubud" },
+                { cat: "🍽️ Food & Drinks",        amount: 600, note: "16 days · meals in Bali/Komodo/KL" },
+                { cat: "🚗 Transport & Transfers", amount: 300, note: "Airport transfers + local transport in each city" },
+                { cat: "💡 Misc & Souvenirs",      amount: 200, note: "Tips, souvenirs, contingency" },
             ],
             days: {}
         };
