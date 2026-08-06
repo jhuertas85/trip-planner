@@ -31,7 +31,7 @@ trip-planner/
 Each trip is a self-contained single HTML file. All trip data lives in four JavaScript objects near the top of the rendering script. The rendering engine reads from those objects — **only edit `TRIP_DATA`, `DAY_WEATHER`, `COST_DATA`, and `DAY_CURRENCY` for content changes**, not the rendering code.
 
 ## Template-first rule
-**Any new feature or structural improvement added to one trip must also be applied to `template.html` immediately.** When creating a new trip, always copy `template.html` — never copy an existing trip file.
+**Any new feature or structural improvement added to one trip must also be applied to `template.html` immediately.** When creating a new trip, always copy `template.html` — **NEVER copy an existing trip file** (e.g. the Switzerland trip has custom Leaflet maps, specific route code, and old rendering — copying it will silently break the new trip with Germany maps and wrong layouts).
 
 ## How to push changes
 **Always commit and push directly to `main`.** Never leave changes on a feature branch — the live site only serves from `main`, so changes on other branches are invisible.
@@ -71,7 +71,13 @@ const TRIP_DATA = {
 ## TRIP_DATA structure (per day)
 ```js
 {
-  dayNumber, date, dayOfWeek, title, location, backgroundImage,
+  dayNumber,          // integer, starts at 1 — NEVER use the itinerary's own day number
+  date,               // "Aug 15" format ONLY — abbreviated month + space + day (no year, no comma)
+  dayOfWeek,          // "Mon" / "Tue" / "Wed" / "Thu" / "Fri" / "Sat" / "Sun" — NEVER empty
+  title,              // short label e.g. "Arrival" or "Uluwatu & Seminyak"
+  location,           // city/region e.g. "Bali, Indonesia"
+  backgroundImage,    // Unsplash URL: "https://images.unsplash.com/photo-XXXXX?w=800"
+                      // Keep the template default if unsure — a repeated image is fine, a broken URL shows black
   flight: { airline, from, to, departTime, arriveTime, terminal } | null,
   hotel: { name, status, note, bookedBy, mapsUrl, altHotel? },
   drive: { from, to, duration, distance } | null,

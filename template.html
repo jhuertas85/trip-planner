@@ -1676,13 +1676,19 @@
                 showErrors(['TRIP_DATA is not defined — the data &lt;script&gt; block has a JavaScript syntax error. Open DevTools → Console to see the exact line.']);
                 throw new Error('TRIP_DATA undefined');
             }
+            if (!TRIP_DATA.title || TRIP_DATA.title === 'Trip Name 2027' || TRIP_DATA.title === 'Trip Planner')
+                errors.push('TRIP_DATA.title is still the template default — set a real trip name');
             if (!Array.isArray(TRIP_DATA.days))      errors.push('TRIP_DATA.days must be an array (got ' + typeof TRIP_DATA.days + ')');
             if (!Array.isArray(TRIP_DATA.flights))   errors.push('TRIP_DATA.flights must be an array — use [] if no flights');
             if (!Array.isArray(TRIP_DATA.travelers)) errors.push('TRIP_DATA.travelers must be an array — use ["Name"] minimum');
             (TRIP_DATA.days || []).forEach(function(d, i) {
                 var label = d.dayNumber ? 'Day ' + d.dayNumber : 'Day at index ' + i;
-                if (!d.dayNumber) errors.push(label + ': missing dayNumber (must start at 1, increment by 1)');
-                if (!d.meals)     errors.push(label + ': missing meals object');
+                if (!d.dayNumber)  errors.push(label + ': missing dayNumber (must start at 1, increment by 1)');
+                if (!d.dayOfWeek)  errors.push(label + ': missing dayOfWeek — use "Mon" / "Tue" / "Wed" / "Thu" / "Fri" / "Sat" / "Sun"');
+                if (!d.date)       errors.push(label + ': missing date — use "Aug 15" format (abbreviated month + space + day, no year)');
+                else if (!/^[A-Z][a-z]{2} \d{1,2}$/.test(d.date))
+                    errors.push(label + ': date "' + d.date + '" has wrong format — use "Aug 15" (e.g. Jan, Feb, Mar … Dec)');
+                if (!d.meals)      errors.push(label + ': missing meals object');
                 else ['breakfast','lunch','dinner'].forEach(function(m) {
                     if (!d.meals[m]) errors.push(label + ': missing meals.' + m + ' — add { status: "flexible", note: "", restaurants: [] }');
                 });
