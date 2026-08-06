@@ -2164,11 +2164,32 @@
 
         function renderDayViews() {
             const container = document.getElementById("dayViewsContainer");
-            container.innerHTML = TRIP_DATA.days
-                .map(day => `<div class="day-view" id="day${day.dayNumber}">${renderDayContent(day)}</div>`)
-                .join("");
-            attachCollapsibleHandlers();
-            TRIP_DATA.days.forEach(day => loadWeatherWidget(day.dayNumber));
+            if (!container) {
+                console.error('renderDayViews: dayViewsContainer not found');
+                return;
+            }
+            try {
+                const dayHTML = TRIP_DATA.days.map(day => {
+                    try {
+                        return `<div class="day-view" id="day${day.dayNumber}">${renderDayContent(day)}</div>`;
+                    } catch (e) {
+                        console.error(`Error rendering day ${day.dayNumber}:`, e);
+                        return '';
+                    }
+                }).join("");
+                container.innerHTML = dayHTML;
+                console.log('renderDayViews: Created ' + TRIP_DATA.days.length + ' days');
+                attachCollapsibleHandlers();
+                TRIP_DATA.days.forEach(day => {
+                    try {
+                        loadWeatherWidget(day.dayNumber);
+                    } catch (e) {
+                        console.error(`Error loading weather for day ${day.dayNumber}:`, e);
+                    }
+                });
+            } catch (e) {
+                console.error('renderDayViews error:', e);
+            }
         }
 
         function attachCollapsibleHandlers() {
