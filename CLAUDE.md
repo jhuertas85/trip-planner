@@ -34,12 +34,21 @@ Each trip is a self-contained single HTML file. All trip data lives in four Java
 **Any new feature or structural improvement added to one trip must also be applied to `template.html` immediately.** When creating a new trip, always copy `template.html` — never copy an existing trip file.
 
 ## How to push changes
+**Always commit and push directly to `main`.** Never leave changes on a feature branch — the live site only serves from `main`, so changes on other branches are invisible.
+
 Git push via the local proxy returns 403. Use a GitHub Personal Access Token (classic, `repo` scope):
 
 ```bash
 git add <file> && git commit -m "description"
 git push https://jhuertas85:TOKEN@github.com/jhuertas85/trip-planner.git main
 git fetch https://jhuertas85:TOKEN@github.com/jhuertas85/trip-planner.git main:refs/remotes/origin/main
+```
+
+If working on a branch (e.g. assigned by the session), merge it into main before finishing:
+```bash
+git checkout main
+git merge --ff-only <branch-name>
+git push origin main
 ```
 
 ## TRIP_DATA structure (top-level)
