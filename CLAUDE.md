@@ -143,6 +143,79 @@ Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes
 - **Update a hotel:** find the day by `dayNumber` in `TRIP_DATA.days`, edit the `hotel` object
 - **Add/change activity:** find the day, edit the `activities` array
 
+## Day View Rendering Reference
+**renderDayContent(day) MUST include these sections in order:**
+1. Hero section (background image, day number, title, location)
+2. Expand All / Collapse All buttons
+3. Currency calculator (renderCalcSection) — even if collapsed
+4. Weather widget (if DAY_WEATHER[dayNumber] exists) — even if collapsed
+5. Flight details (if day.flight exists)
+6. Drive banner (if day.drive exists)
+7. Hotel card (renderHotelCard with null guard)
+8. Activities section (renderActivitiesSection)
+9. Meals section (renderMealsSection)
+10. Route link (if day.route exists) — use `https://${day.route}` format
+11. Warnings section (if day.warnings.length > 0)
+12. Hidden Gems section (if day.gems.length > 0)
+13. Daily cost bar (if COST_DATA.days[dayNumber] exists)
+
+**If ANY of these are missing from renderDayContent, day views will be incomplete.** Compare your trip's renderDayContent against the template.html version to ensure parity.
+
+## Critical CSS Classes That Must Exist
+**Day view sections require these CSS class definitions — verify they exist in `<style>` before pushing:**
+
+**For weather widget:**
+- `.section-weather` — wrapper styling
+- `.weather-sun-row` — sunrise/sunset display
+- `.weather-loading`, `.weather-error` — loading states
+- `.weather-chart-container` — SVG chart container
+- `.weather-refresh` — refresh button
+- `.wx-condition-row`, `.wx-condition-icon`, `.wx-condition-label` — condition display
+- `.wx-rain-alert`, `.wx-rain-light`, `.wx-rain-heavy`, `.wx-storm` — rain alerts
+- `.wx-prob-row`, `.wx-prob-item`, `.wx-prob-val` — probability displays
+- `.wx-preview` — collapsed preview text
+
+**For currency calculator:**
+- `.section-calc` — wrapper styling
+- `.calc-row` — input row layout
+- `.calc-label`, `.calc-label-code`, `.calc-label-name` — labels
+- `.calc-input` — input field styling
+- `.calc-footer` — footer with rates note and refresh button
+- `.calc-rates-note`, `.calc-refresh` — rate display/refresh
+
+**For buttons:**
+- `.expand-all-container` — button row wrapper
+- `.btn-expand-all`, `.btn-collapse-all` — button styling
+
+**Missing CSS = sections render but look broken/unstyled.** Grep for `.section-weather` and `.section-calc` in the CSS to verify they exist before pushing.
+
+## Critical JavaScript Functions That Must Exist
+**These functions are required for day view interactivity — grep for them before pushing:**
+
+**For currency calculator to work:**
+- `renderCalcSection(dayNum)` — generates calculator HTML
+- `dcConvert(dayNum, sourceIdx, count)` — handles currency conversions on input
+- `dcRefresh(dayNum)` — refreshes exchange rates for a day
+- `dcUpdateNote(dayNum)` — updates the "last updated" timestamp
+- `fetchCalcRates(force)` — fetches rates from API or cache
+
+**For weather widget to work:**
+- `loadWeatherWidget(dayNumber)` — loads forecast data and renders widget
+- `refreshWeather(dayNumber)` — refreshes forecast on demand
+- `fetchWeather(dayNumber)` — fetches actual weather data (helper)
+- `wmoIcon(code)` — returns weather icon/label for WMO code (helper)
+- `buildRainAlert(data, wx)` — builds rain alert HTML (helper)
+- `weatherChartSVG(t8, t13, t20, dayNumber)` — generates temp chart (helper)
+
+**For day view interaction to work:**
+- `attachCollapsibleHandlers()` — must include handlers for `.btn-expand-all` and `.btn-collapse-all`
+- `renderDayContent(day)` — must return complete HTML with all sections
+- `renderHotelCard(day)` — must guard against `day.hotel === null`
+- `renderActivitiesSection(day)` — groups activities by time
+- `renderMealsSection(day)` — renders meals with restaurant selector
+
+**Stub functions (showplaces but don't work) will cause silent failures.** Always implement, never leave as placeholders.
+
 ## New trip creation checklist
 
 **Before starting:** Always get the complete, detailed itinerary from the user with:
