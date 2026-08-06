@@ -171,6 +171,12 @@ Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes
 - [ ] **Meal restaurants:** Include `name`, `desc`, `rating` (e.g., 4.5), and `mapsUrl` (without https:// prefix). If status is "options", populate the restaurants array; if "flexible", can leave empty.
 - [ ] **Warnings & gems:** Every day should have at least one warning (safety, timing, logistics) and one gem (hidden spot, local tip, or must-do). Keep them specific: "Macaques grab sunglasses" beats "Be careful."
 - [ ] **Special blocks (work weeks, multi-country):** Document explicitly in activities or day title. Example: `title: "Work From Home · Day 2"` + activity with "Work 14:00–21:00 (Dubai hours: 10:00–17:00)".
+- [ ] **renderDayContent completeness:** Verify the function includes sections for: weather, currency, flight, drive, hotel, activities, meals, route, warnings, gems, daily costs. Check that day views render all sections (not just overview).
+- [ ] **CSS for day-view sections:** Confirm .section-weather, .section-calc, .expand-all-container, .calc-row, .weather-sun-row, and related styles exist (search for "section-weather" and "section-calc" in CSS).
+- [ ] **Currency calculator functions:** Verify dcConvert(), dcRefresh(), dcUpdateNote() exist. Check renderCalcSection() generates working HTML with input fields (not a stub).
+- [ ] **Expand All/Collapse All handlers:** In attachCollapsibleHandlers(), check for addEventListener handlers on .btn-expand-all and .btn-collapse-all (buttons must actually toggle sections).
+- [ ] **Unsplash photo URLs:** Test a sample of backgroundImage URLs before finalizing—load the page and inspect image network requests for 404s. Prefer popular/stable photo IDs or use local images if Unsplash IDs continue to fail.
+- [ ] **Weather widget implementation:** loadWeatherWidget() must call fetchWeather(), wmoIcon(), buildRainAlert(), weatherChartSVG()—not just return a stub. Check helpers exist (can copy from Switzerland trip).
 
 **Before pushing:**
 1. Validate JS syntax:
@@ -182,7 +188,13 @@ Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes
    catch(e) { console.error('✗ Syntax error:', e.message); process.exit(1); }
    "
    ```
-2. Spot-check one day's rendering in a browser (inspect network for any 404 images, verify day tab navigation works).
+2. Spot-check one day's rendering in a browser:
+   - Click through day tabs to verify each day view renders (not just overview)
+   - Inspect network tab for 404 images (broken Unsplash URLs)
+   - Verify day tabs are clickable and switching works
+   - Check that individual day views show ALL sections: weather, currency, activities, meals, warnings, gems, route
+   - Click Expand All/Collapse All buttons and verify sections toggle (not just render as visible)
+   - Test currency calculator by entering a value and verifying conversions work
 3. Commit + push to `main` immediately — never leave on a feature branch.
 
 **After any edit:** commit + push using standard git flow.
@@ -201,6 +213,12 @@ Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes
 10. **No dayOfWeek or wrong dayOfWeek:** Always include exact day of week ("Fri", "Sat", etc.). If dayOfWeek doesn't match the date, travelers get confused. Verify: Aug 15, 2026 = Friday.
 11. **Not validating JS syntax before push:** Syntax errors in the script tag don't show in browser console—page just fails silently. Always run node validation.
 12. **Feature branch instead of main:** Live site only serves from main. Changes on feature branches are invisible. Always push to main immediately.
+13. **Incomplete renderDayContent function:** Day view rendering must include ALL sections: currency calculator, weather widget, flight, hotel, activities, meals, route maps, warnings, hidden gems, daily cost bar. Template renderDayContent() was incomplete (only flight/hotel/activities/meals). Copy the complete version from Switzerland trip.
+14. **Missing CSS for day-view sections:** Weather (`.section-weather`, `.weather-sun-row`, `.weather-loading`, etc.) and currency (`.section-calc`, `.calc-row`, `.calc-input`, `.calc-footer`, etc.) sections need complete CSS. Don't assume these are in the template—verify or add them. Also add `.expand-all-container` and button styles.
+15. **Currency calculator must be functional:** `renderCalcSection()` cannot be a stub. Must generate HTML with input fields and wire them to `dcConvert()`, `dcRefresh()`, `dcUpdateNote()` functions. Also ensure `fetchCalcRates()` exists and runs before page load.
+16. **Expand All/Collapse All button handlers missing:** `attachCollapsibleHandlers()` must include handlers for `.btn-expand-all` and `.btn-collapse-all`. Without them, the buttons render but do nothing. Handlers must find parent `.day-view` and toggle all `.section-header` and `.section-content` elements.
+17. **Unsplash photo IDs can break:** Specific photo IDs (`photo-XXXXXXX`) may become unavailable. Test a sample of URLs before finalizing; use popular/stable photos. Consider storing images locally if IDs continue to fail, or use generic Unsplash search URLs (less ideal but more stable).
+18. **Weather widget requires full implementation:** `loadWeatherWidget()` cannot be a stub. Needs `fetchWeather()`, `wmoIcon()`, `buildRainAlert()`, `weatherChartSVG()`, and `refreshWeather()` helpers. Copy from Switzerland trip if building from template.
 
 ## Puerto Rico 2026 trip summary
 - **Travellers:** Mamá (76), Papá (81), Giova, Ari (23), Coki, Liz, Emma (8), Matías (16), JC, Maria — 10 total
