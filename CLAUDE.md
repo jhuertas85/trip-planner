@@ -30,18 +30,27 @@ trip-planner/
     └── index.html             # Bali · Komodo · Kuala Lumpur Aug 2026 (Juan Carlos, Maria)
 ```
 
-Each trip is a self-contained single HTML file. All trip data lives in a `TRIP_DATA` JavaScript object near the top of the rendering script. The rendering engine reads from that object — **only edit `TRIP_DATA`, `DAY_WEATHER`, and `COST_DATA` for content changes**, not the rendering code.
+Each trip is a self-contained single HTML file. All trip data lives in four JavaScript objects near the top of the rendering script. The rendering engine reads from those objects — **only edit `TRIP_DATA`, `DAY_WEATHER`, `COST_DATA`, and `DAY_CURRENCY` for content changes**, not the rendering code.
 
 ## Template-first rule
 **Any new feature or structural improvement added to one trip must also be applied to `template.html` immediately.** When creating a new trip, always copy `template.html` — never copy an existing trip file.
 
 ## How to push changes
+**Always commit and push directly to `main`.** Never leave changes on a feature branch — the live site only serves from `main`, so changes on other branches are invisible.
+
 Git push via the local proxy returns 403. Use a GitHub Personal Access Token (classic, `repo` scope):
 
 ```bash
 git add <file> && git commit -m "description"
 git push https://jhuertas85:TOKEN@github.com/jhuertas85/trip-planner.git main
 git fetch https://jhuertas85:TOKEN@github.com/jhuertas85/trip-planner.git main:refs/remotes/origin/main
+```
+
+If working on a branch (e.g. assigned by the session), merge it into main before finishing:
+```bash
+git checkout main
+git merge --ff-only <branch-name>
+git push origin main
 ```
 
 ## TRIP_DATA structure (top-level)
@@ -103,19 +112,40 @@ const COST_DATA = {
 ```
 Set all amounts to 0 and fill in as bookings are confirmed.
 
+## DAY_CURRENCY structure
+Defined separately. Maps day number → local currency for that day. The calculator always shows AED / USD / EUR, plus a 4th row for the local currency when it differs from those three.
+```js
+const DAY_CURRENCY = {
+  1: { code: 'CHF', name: 'Swiss Franc', symbol: 'CHF' },
+  // Same entry can repeat for consecutive days in the same country
+};
+```
+Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes (JPY, THB, GBP, etc.).
+
 ## Features in every trip (all come from template)
-- **Day tabs** — scrollable horizontal tab strip with missing-status indicator
-- **Collapsible sections** — Flight, Hotel, Activities, Meals, Warnings, Gems, Weather, per day
-- **Live weather** — sunrise/sunset + temperature curve (8am/1pm/8pm) via Open-Meteo
-- **Estimated budget** — overview card + daily cost bar (🏨 hotel · 🗺️ activities · 🍽️ food · ⛽ fuel)
+- **Day tabs** — scrollable horizontal tab strip with missing-status indicator; today's tab is highlighted in gold
+- **Collapsible sections** — Flight, Hotel, Activities, Meals, Warnings, Gems, Weather, Currency, per day
+- **Live weather** — sunrise/sunset + temperature curve (8am/1pm/8pm) + rain probability via Open-Meteo; dual cache (30 min for current days, 3h for future)
+- **Currency calculator** — AED / USD / EUR always shown; 4th row added automatically for local currency (set via `DAY_CURRENCY`); live rates from open API with offline fallback
+- **Estimated budget** — overview card + daily cost bar (🏨 hotel · 🗺️ activities · 🍽️ food · ⛽ fuel); amounts in AED
 - **Restaurant selector** — tap to select restaurants per meal, persisted in sessionStorage
 - **Download offline** — ⬇ button captures full page as a self-contained HTML file
 - **Dark/light mode** — toggle in header, saved to localStorage
+- **PWA support** — manifest.json + service worker for "Add to Home Screen" (copy `sw.js` + `manifest.json` from an existing trip folder into the new trip folder, then update `manifest.json` with the trip name)
 
 ## Common tasks
 - **Update a hotel:** find the day by `dayNumber` in `TRIP_DATA.days`, edit the `hotel` object
 - **Add/change activity:** find the day, edit the `activities` array
-- **New trip:** copy `template.html` into a new folder e.g. `2027-03-japan/index.html`, then fill in `TRIP_DATA`, `DAY_WEATHER`, and `COST_DATA`, **and update the File structure section in this CLAUDE.md** with the new folder name, dates, and travelers
+- **New trip:**
+  1. Copy `template.html` verbatim into a new folder e.g. `2027-03-japan/index.html`
+  2. **ONLY edit the first `<script>` block** — the one that starts right after `<body>` and ends with `// END OF DATA — DO NOT EDIT BELOW THIS LINE`. Everything after that marker is the rendering engine; never touch it.
+  3. In that first `<script>`, fill in all four data objects: `TRIP_DATA`, `DAY_WEATHER`, `COST_DATA`, `DAY_CURRENCY`
+  4. **`dayNumber` must start at 1 and increment by 1** for each day — never use the trip itinerary's own day numbering (e.g. if the itinerary says "Day 8: Munich" but it's the first day of this trip file, set `dayNumber: 1`)
+  5. **`TRIP_DATA.flights` must be an array** — use `[]` if no flights yet, never `null`
+  6. **`TRIP_DATA.travelers` must be an array** — use `["Traveler"]` as minimum, never `null`
+  7. **Every day must have all three meal types** (`breakfast`, `lunch`, `dinner`) in `day.meals`, even if just `{ status: "flexible", note: "", restaurants: [] }` — omitting any one crashes the page
+  8. Update the **File structure section** in this CLAUDE.md with the new folder name, dates, and travelers
+  9. Add a trip summary section at the bottom of this CLAUDE.md
 - **After any edit:** commit + push using the token pattern above
 
 ## Rule: keep this file current

@@ -1470,6 +1470,24 @@
                 // 1: { hotel: 0, activities: 0, food: 0, other: 0 },
             }
         };
+
+        // ============================================================
+        // DAY_CURRENCY — Local currency per day for the calculator
+        // The calculator always shows AED / USD / EUR, plus a 4th row
+        // for the local currency when it differs from those three.
+        // Leave as {} if the trip uses only AED / USD / EUR.
+        // ============================================================
+        const DAY_CURRENCY = {
+            // Example: 1: { code: 'CHF', name: 'Swiss Franc', symbol: 'CHF' },
+            // Use ISO 4217 codes: JPY, THB, GBP, CHF, etc.
+            // Repeat the same entry for consecutive days in the same country.
+        };
+
+        // ============================================================
+        // END OF DATA — DO NOT EDIT BELOW THIS LINE
+        // The rendering engine reads from the four objects above.
+        // All page features are automatic — no other changes needed.
+        // ============================================================
     </script>
 
     <header>
@@ -1719,7 +1737,7 @@
         function renderOverviewTab() {
             // Flights
             const flightsList = document.getElementById("flightsList");
-            flightsList.innerHTML = TRIP_DATA.flights
+            flightsList.innerHTML = (TRIP_DATA.flights || [])
                 .map(f => `
                     <div class="flight-card">
                         <div class="flight-day">${f.dayOfWeek} ${f.date}</div>
@@ -1737,7 +1755,7 @@
 
             // Travellers
             const travelersView = document.getElementById("travelersListView");
-            travelersView.innerHTML = TRIP_DATA.travelers
+            travelersView.innerHTML = (TRIP_DATA.travelers || [])
                 .map(t => `<div class="traveler-chip">${t}</div>`)
                 .join("");
 
@@ -1775,7 +1793,7 @@
             `;
 
             TRIP_DATA.days.forEach((day, i) => {
-                const hotelBadge = day.hotel.status === 'confirmed' ? 'ready' : day.hotel.status === 'missing' ? 'missing' : 'need-booking';
+                const hotelBadge = day.hotel?.status === 'confirmed' ? 'ready' : day.hotel?.status === 'missing' ? 'missing' : 'need-booking';
                 const hasToBook = day.activities && day.activities.some(a => a.needsBooking);
                 const actBadge = hasToBook ? 'need-booking' : (day.activities && day.activities.length > 0 ? 'ready' : 'missing');
 
@@ -1802,10 +1820,10 @@
             const todayISO = new Date().toISOString().split('T')[0];
             let tabsHTML = '<div class="day-tab active" data-view="overview" onclick="switchView(\'overview\')">Overview</div>';
             TRIP_DATA.days.forEach(day => {
-                const hasMissing = day.hotel.status === "missing" ||
-                    day.meals.breakfast.status === "missing" ||
-                    day.meals.lunch.status === "missing" ||
-                    day.meals.dinner.status === "missing";
+                const hasMissing = day.hotel?.status === "missing" ||
+                    day.meals?.breakfast?.status === "missing" ||
+                    day.meals?.lunch?.status === "missing" ||
+                    day.meals?.dinner?.status === "missing";
                 const isToday = DAY_WEATHER[day.dayNumber]?.isoDate === todayISO;
                 const className = `day-tab ${hasMissing ? 'has-missing' : ''} ${isToday ? 'today' : ''}`.trim();
                 const datePartials = day.date.split(' ');
@@ -1929,11 +1947,11 @@
 
             html += renderHotelCard(day);
 
-            if (day.activities.length > 0) {
+            if ((day.activities || []).length > 0) {
                 html += renderActivitiesSection(day);
             }
 
-            if (Object.values(day.meals).some(m => m.restaurants.length > 0 || m.status !== 'flexible')) {
+            if (day.meals && Object.values(day.meals).some(m => m && ((m.restaurants || []).length > 0 || m.status !== 'flexible'))) {
                 html += renderMealsSection(day);
             }
 
@@ -1947,7 +1965,7 @@
                 `;
             }
 
-            if (day.warnings.length > 0) {
+            if ((day.warnings || []).length > 0) {
                 html += `
                     <div class="collapsible-section">
                         <div class="section-header">
@@ -1956,14 +1974,14 @@
                         </div>
                         <div class="section-content section-warnings">
                             <div style="padding: 16px;">
-                                ${day.warnings.map(w => `<div class="warning" style="margin-bottom: 12px; display: block;">${w}</div>`).join("")}
+                                ${(day.warnings || []).map(w => `<div class="warning" style="margin-bottom: 12px; display: block;">${w}</div>`).join("")}
                             </div>
                         </div>
                     </div>
                 `;
             }
 
-            if (day.gems.length > 0) {
+            if ((day.gems || []).length > 0) {
                 html += `
                     <div class="collapsible-section">
                         <div class="section-header">
@@ -1972,7 +1990,7 @@
                         </div>
                         <div class="section-content section-gems">
                             <div style="padding: 16px;">
-                                ${day.gems.map(g => `<div class="gem" style="margin-bottom: 12px; display: block;">${g}</div>`).join("")}
+                                ${(day.gems || []).map(g => `<div class="gem" style="margin-bottom: 12px; display: block;">${g}</div>`).join("")}
                             </div>
                         </div>
                     </div>
@@ -2121,7 +2139,8 @@
 
             mealTypes.forEach((mealType, idx) => {
                 const meal = day.meals[mealType];
-                const statusData = STATUS_STYLES[meal.status];
+                if (!meal) return;
+                const statusData = STATUS_STYLES[meal.status] || STATUS_STYLES['flexible'];
 
                 html += `
                     <div style="margin-bottom: 16px; padding-bottom: 12px; ${idx < mealTypes.length - 1 ? 'border-bottom: 1px solid var(--border-color);' : ''}">
@@ -2133,9 +2152,9 @@
                     html += `<div class="meal-note">${meal.note}</div>`;
                 }
 
-                if (meal.restaurants.length > 0) {
+                if ((meal.restaurants || []).length > 0) {
                     html += `<div class="restaurant-cards">`;
-                    meal.restaurants.forEach(rest => {
+                    (meal.restaurants || []).forEach(rest => {
                         const isSelected = isRestaurantSelected(day.dayNumber, mealType, rest.name);
                         html += `
                             <div class="restaurant-card ${isSelected ? 'selected' : ''}">
@@ -2489,17 +2508,8 @@
 
         // ============================================================
         // CURRENCY CALCULATOR
-        // DAY_CURRENCY: map day number → { code, name, symbol } for the
-        // local currency on that day. The calculator always shows
-        // local currency / AED / USD. Update per trip.
+        // DAY_CURRENCY is defined in the data <script> block above.
         // ============================================================
-        const DAY_CURRENCY = {
-            // Map day number to local currency for that day.
-            // The calculator always shows AED / USD / EUR, plus a 4th row for local currency
-            // when it differs from those three. Example:
-            // 1: { code: 'JPY', name: 'Japanese Yen', symbol: '¥' },
-        };
-
         let calcRates = null;
         let calcPrimary = { code: 'EUR', name: 'Euro', symbol: '€' };
 
