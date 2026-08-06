@@ -292,6 +292,9 @@ Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes
 16. **Expand All/Collapse All button handlers missing:** `attachCollapsibleHandlers()` must include handlers for `.btn-expand-all` and `.btn-collapse-all`. Without them, the buttons render but do nothing. Handlers must find parent `.day-view` and toggle all `.section-header` and `.section-content` elements.
 17. **Unsplash photo IDs can break:** Specific photo IDs (`photo-XXXXXXX`) may become unavailable. Test a sample of URLs before finalizing; use popular/stable photos. Consider storing images locally if IDs continue to fail, or use generic Unsplash search URLs (less ideal but more stable).
 18. **Weather widget requires full implementation:** `loadWeatherWidget()` cannot be a stub. Needs `fetchWeather()`, `wmoIcon()`, `buildRainAlert()`, `weatherChartSVG()`, and `refreshWeather()` helpers. Copy from Switzerland trip if building from template.
+19. **Wrong day-of-week for flight dates:** Always verify dayOfWeek matches the calendar date before data entry. Example: assumed Aug 15 was Friday when it was actually Saturday. Cross-check against a real calendar (e.g., https://calendar.google.com) or verify each date. Misaligned dayOfWeek cascades through day tabs and confuses travelers.
+20. **Meals section UI too verbose:** The renderMealsSection() function was rendering restaurant cards with Select/Maps buttons, taking up too much space. Updated template now renders meals compactly: status badge inline with meal type name (breakfast/lunch/dinner on same line), restaurant cards show only name + description + star rating + map icon (no buttons). This was applied to template.html.
+21. **Missing meal emojis in section headers:** Added 🍽️ emoji to meals section header for visual consistency with other sections. Template updated to include this.
 
 ## Puerto Rico 2026 trip summary
 - **Travellers:** Mamá (76), Papá (81), Giova, Ari (23), Coki, Liz, Emma (8), Matías (16), JC, Maria — 10 total
@@ -324,7 +327,7 @@ Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes
 
 ## Bali → Komodo → Kuala Lumpur Aug 2026 trip summary
 - **Travellers:** Juan Carlos, Maria (through Day 13); Juan Carlos solo (Days 14–16)
-- **Dates:** Aug 15–30, 2026 (16 days · Fri–Sat)
+- **Dates:** Aug 15–30, 2026 (16 days · Sat–Sun)
 - **Flights:**
   - Emirates EK0368: DXB → DPS Aug 15 (03:10–16:35, both)
   - AirAsia: DPS → LBJ Aug 22 (07:10–08:15, both)

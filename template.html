@@ -2163,7 +2163,7 @@
             let html = `
                 <div class="collapsible-section">
                     <div class="section-header">
-                        <h3>Meals</h3>
+                        <h3>🍽️ Meals</h3>
                         <div class="chevron"></div>
                     </div>
                     <div class="section-content section-meals">
@@ -2180,35 +2180,28 @@
 
                 html += `
                     <div style="margin-bottom: 16px; padding-bottom: 12px; ${idx < mealTypes.length - 1 ? 'border-bottom: 1px solid var(--border-color);' : ''}">
-                        <div class="meal-type">${mealLabels[mealType]}</div>
-                        <span class="badge ${statusData.badge}">${statusData.label}</span>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                            <div style="font-weight: 600; color: var(--text-primary);">${mealLabels[mealType]}</div>
+                            <span class="badge ${statusData.badge}" style="font-size: 10px; padding: 2px 6px;">${statusData.label}</span>
+                        </div>
                 `;
 
                 if (meal.note) {
-                    html += `<div class="meal-note">${meal.note}</div>`;
+                    html += `<div class="meal-note" style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">${meal.note}</div>`;
                 }
 
                 if ((meal.restaurants || []).length > 0) {
-                    html += `<div class="restaurant-cards">`;
                     (meal.restaurants || []).forEach(rest => {
-                        const isSelected = isRestaurantSelected(day.dayNumber, mealType, rest.name);
+                        const stars = rest.rating ? '★'.repeat(Math.floor(rest.rating)) : '';
+                        const mapLink = rest.mapsUrl ? `<a href="https://${rest.mapsUrl}" target="_blank" style="color: var(--accent-gold); text-decoration: none; margin-left: 4px;">📍</a>` : '';
                         html += `
-                            <div class="restaurant-card ${isSelected ? 'selected' : ''}">
-                                <div class="restaurant-name">${rest.name}</div>
-                                <div class="restaurant-desc">${rest.desc}</div>
-                                <div class="restaurant-meta">
-                                    <span class="restaurant-rating">${rest.rating}</span>
-                                </div>
-                                <div class="restaurant-buttons">
-                                    <button class="btn-select" onclick="toggleRestaurant(${day.dayNumber}, '${mealType}', '${rest.name.replace(/'/g, "\\'")}')">
-                                        ${isSelected ? '✓ Selected' : 'Select'}
-                                    </button>
-                                    <a href="https://${rest.mapsUrl}" target="_blank" class="btn-maps">Maps</a>
-                                </div>
+                            <div style="background: var(--bg-tertiary); border-radius: 4px; padding: 8px 12px; margin-bottom: 8px; font-size: 12px;">
+                                <div style="font-weight: 500; color: var(--text-primary); margin-bottom: 2px;">${rest.name}${mapLink}</div>
+                                <div style="color: var(--text-secondary); font-size: 11px; margin-bottom: 2px;">${rest.desc || ''}</div>
+                                ${rest.rating ? `<div style="color: var(--accent-gold); font-size: 11px;">${stars} ${rest.rating}</div>` : ''}
                             </div>
                         `;
                     });
-                    html += `</div>`;
                 }
 
                 html += `</div>`;
