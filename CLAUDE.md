@@ -144,6 +144,16 @@ Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes
   7. **Every day must have all three meal types** (`breakfast`, `lunch`, `dinner`) in `day.meals`, even if just `{ status: "flexible", note: "", restaurants: [] }` — omitting any one crashes the page
   8. Update the **File structure section** in this CLAUDE.md with the new folder name, dates, and travelers
   9. Add a trip summary section at the bottom of this CLAUDE.md
+- **After writing a new trip file, validate JS syntax before pushing** — run this from the repo root (replace the path with the actual file):
+  ```bash
+  node -e "
+  const c = require('fs').readFileSync('2027-03-japan/index.html','utf8');
+  const m = c.match(/<script>([\s\S]*?)<\/script>/);
+  try { new Function(m[1]); console.log('✓ Syntax OK'); }
+  catch(e) { console.error('✗ Syntax error:', e.message); process.exit(1); }
+  "
+  ```
+  Fix any error before pushing. Never push a file with a syntax error — the PWA won't show error details.
 - **After any edit:** commit + push using the token pattern above
 
 ## Rule: keep this file current

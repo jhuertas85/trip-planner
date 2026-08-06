@@ -1669,7 +1669,7 @@
                 document.body.style.cssText = 'background:#1a0a0a;color:#f8d7da;font-family:monospace;padding:24px;';
                 document.body.innerHTML = '<h2 style="color:#ff6b6b;margin-bottom:16px;">⚠️ Trip data error — page cannot render</h2>'
                     + errs.map(function(e) { return '<div style="background:#2a0a0a;border-left:3px solid #ff6b6b;padding:8px 12px;margin-bottom:8px;border-radius:0 4px 4px 0;">' + e + '</div>'; }).join('')
-                    + '<p style="margin-top:20px;color:#aaa;font-size:12px;">Fix the issue in the first &lt;script&gt; block (TRIP_DATA section), then reload. Open browser DevTools console for more detail.</p>';
+                    + '<p style="margin-top:20px;color:#aaa;font-size:12px;">Fix the issue in the first &lt;script&gt; block (TRIP_DATA section), then reload.</p>';
             };
             // If TRIP_DATA is undefined the first script had a syntax error
             if (typeof TRIP_DATA === 'undefined') {
