@@ -1365,7 +1365,7 @@
         // ============================================================
         const TRIP_DATA = {
             title: "Bali to Kuala Lumpur Aug 2026",
-            travelers: ["Traveler"],
+            travelers: ["Juan Carlos", "Maria"],
 
             // Optional sections — set to null to hide
             carRental: null,
@@ -1373,278 +1373,347 @@
             tricountUrl: null,
             checkInUrl: null,
 
-            flights: [],
+            flights: [
+                { date: "Aug 15", dayOfWeek: "Sat", airline: "Emirates", from: "Dubai", to: "Bali", departTime: "12:05", arriveTime: "22:40 (+1)", terminal: null, passengers: ["Juan Carlos", "Maria"] },
+                { date: "Aug 22", dayOfWeek: "Sat", airline: "Batik Air", from: "Bali", to: "Labuan Bajo", departTime: "13:35", arriveTime: "17:15", terminal: null, passengers: ["Juan Carlos", "Maria"] },
+                { date: "Aug 23", dayOfWeek: "Sun", airline: "Batik Air", from: "Labuan Bajo", to: "Bali", departTime: "07:00", arriveTime: "11:30", terminal: null, passengers: ["Juan Carlos", "Maria"] },
+                { date: "Aug 28", dayOfWeek: "Fri", airline: "Emirates", from: "Bali", to: "Kuala Lumpur", departTime: "11:40", arriveTime: "16:10", terminal: null, passengers: ["Juan Carlos", "Maria"] },
+                { date: "Aug 30", dayOfWeek: "Sun", airline: "Emirates", from: "Kuala Lumpur", to: "Dubai", departTime: "07:30", arriveTime: "09:45", terminal: null, passengers: ["Juan Carlos", "Maria"] }
+            ],
             days: [
                 {
                     dayNumber: 1, date: "Aug 15", dayOfWeek: "Sat",
                     title: "Arrival", location: "Bali, Indonesia",
                     backgroundImage: "https://images.unsplash.com/photo-1537996202348-803cfdf4548f?w=800",
-                    flight: null,
-                    hotel: { name: "Hotel", status: "pending", note: "", bookedBy: null, mapsUrl: null },
+                    flight: { airline: "Emirates", from: "Dubai", to: "Bali", departTime: "12:05", arriveTime: "22:40 (+1)", terminal: null },
+                    hotel: { name: "Tamarind Resort", status: "confirmed", note: "Nusa Dua", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Tamarind+Resort+Nusa+Dua" },
                     drive: null,
-                    activities: [],
+                    activities: [
+                        { time: "Evening", text: "Arrive at Denpasar Airport, transfer to hotel", subNote: "Flight lands 22:40, expect 1hr transfer", needsBooking: false }
+                    ],
                     meals: {
                         breakfast: { status: "flexible", note: "", restaurants: [] },
                         lunch: { status: "flexible", note: "", restaurants: [] },
-                        dinner: { status: "flexible", note: "", restaurants: [] }
+                        dinner: { status: "flexible", note: "Light meal at airport or hotel", restaurants: [] }
                     },
                     route: null,
-                    warnings: [],
+                    warnings: ["Check-in late evening after long flight"],
                     gems: []
                 },
                 {
                     dayNumber: 2, date: "Aug 16", dayOfWeek: "Sun",
-                    title: "Day 2", location: "Bali, Indonesia",
+                    title: "Rest & Relax", location: "Nusa Dua, Bali",
                     backgroundImage: "https://images.unsplash.com/photo-1537996202348-803cfdf4548f?w=800",
                     flight: null,
-                    hotel: { name: "Hotel", status: "pending", note: "", bookedBy: null, mapsUrl: null },
+                    hotel: { name: "Tamarind Resort", status: "confirmed", note: "Nusa Dua", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Tamarind+Resort+Nusa+Dua" },
                     drive: null,
-                    activities: [],
+                    activities: [
+                        { time: "Morning", text: "Sleep in, breakfast at hotel", subNote: "Recover from flight", needsBooking: false },
+                        { time: "Afternoon", text: "Beach time or pool at resort", subNote: "Relax before work week", needsBooking: false },
+                        { time: "Evening", text: "Dinner at beachfront restaurant", subNote: "Sunset views", needsBooking: false }
+                    ],
                     meals: {
-                        breakfast: { status: "flexible", note: "", restaurants: [] },
-                        lunch: { status: "flexible", note: "", restaurants: [] },
-                        dinner: { status: "flexible", note: "", restaurants: [] }
+                        breakfast: { status: "included", note: "Hotel breakfast", restaurants: [] },
+                        lunch: { status: "flexible", note: "Resort or nearby", restaurants: [] },
+                        dinner: { status: "options", note: "Beachfront dining", restaurants: [] }
                     },
                     route: null,
                     warnings: [],
-                    gems: []
+                    gems: ["Tamarind private beach access", "Sunset views from the resort"]
                 },
                 {
                     dayNumber: 3, date: "Aug 17", dayOfWeek: "Mon",
-                    title: "Day 3", location: "Bali, Indonesia",
+                    title: "Move to Ubud – Work Week Begins", location: "Ubud, Bali",
                     backgroundImage: "https://images.unsplash.com/photo-1537996202348-803cfdf4548f?w=800",
                     flight: null,
-                    hotel: { name: "Hotel", status: "pending", note: "", bookedBy: null, mapsUrl: null },
-                    drive: null,
-                    activities: [],
+                    hotel: { name: "Alaya Resort", status: "confirmed", note: "Ubud cultural heart", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Alaya+Resort+Ubud" },
+                    drive: { from: "Nusa Dua", to: "Ubud", duration: "1.5 hours", distance: "65 km" },
+                    activities: [
+                        { time: "Morning", text: "Drive from Nusa Dua to Ubud", subNote: "Scenic rice terraces route", needsBooking: false },
+                        { time: "Afternoon", text: "Check in, explore Ubud center & markets", subNote: "Orientation walk", needsBooking: false },
+                        { time: "Evening", text: "Work session (4-5pm) + Dinner", subNote: "Start work routine", needsBooking: false }
+                    ],
                     meals: {
-                        breakfast: { status: "flexible", note: "", restaurants: [] },
-                        lunch: { status: "flexible", note: "", restaurants: [] },
-                        dinner: { status: "flexible", note: "", restaurants: [] }
+                        breakfast: { status: "included", note: "Hotel", restaurants: [] },
+                        lunch: { status: "flexible", note: "En route or Ubud", restaurants: [] },
+                        dinner: { status: "options", note: "Local Ubud restaurants", restaurants: [] }
                     },
                     route: null,
-                    warnings: [],
-                    gems: []
+                    warnings: ["Traffic from Nusa Dua can be heavy"],
+                    gems: ["Ubud market", "Traditional rice paddies", "Cultural atmosphere"]
                 },
                 {
                     dayNumber: 4, date: "Aug 18", dayOfWeek: "Tue",
-                    title: "Day 4", location: "Bali, Indonesia",
+                    title: "Work & Explore", location: "Ubud, Bali",
                     backgroundImage: "https://images.unsplash.com/photo-1537996202348-803cfdf4548f?w=800",
                     flight: null,
-                    hotel: { name: "Hotel", status: "pending", note: "", bookedBy: null, mapsUrl: null },
+                    hotel: { name: "Alaya Resort", status: "confirmed", note: "Ubud cultural heart", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Alaya+Resort+Ubud" },
                     drive: null,
-                    activities: [],
+                    activities: [
+                        { time: "Morning-Midday", text: "Work session (work block)", subNote: "Flexible time management", needsBooking: false },
+                        { time: "Afternoon", text: "Activity rotation: Uluwatu & Kecak fire dance", subNote: "Recommended tour – book in advance", needsBooking: true, mapsUrl: "https://maps.google.com/?q=Uluwatu+Temple+Kecak" },
+                        { time: "Evening", text: "Return for dinner", subNote: "", needsBooking: false }
+                    ],
                     meals: {
-                        breakfast: { status: "flexible", note: "", restaurants: [] },
-                        lunch: { status: "flexible", note: "", restaurants: [] },
-                        dinner: { status: "flexible", note: "", restaurants: [] }
+                        breakfast: { status: "included", note: "Hotel", restaurants: [] },
+                        lunch: { status: "flexible", note: "Before activity", restaurants: [] },
+                        dinner: { status: "options", note: "After activities", restaurants: [] }
                     },
                     route: null,
                     warnings: [],
-                    gems: []
+                    gems: ["Uluwatu Temple clifftop views", "Kecak fire dance (5:30pm or 6:45pm)", "Sunset views"]
                 },
                 {
                     dayNumber: 5, date: "Aug 19", dayOfWeek: "Wed",
-                    title: "Day 5", location: "Bali, Indonesia",
+                    title: "Work & Explore", location: "Ubud, Bali",
                     backgroundImage: "https://images.unsplash.com/photo-1537996202348-803cfdf4548f?w=800",
                     flight: null,
-                    hotel: { name: "Hotel", status: "pending", note: "", bookedBy: null, mapsUrl: null },
+                    hotel: { name: "Alaya Resort", status: "confirmed", note: "Ubud cultural heart", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Alaya+Resort+Ubud" },
                     drive: null,
-                    activities: [],
+                    activities: [
+                        { time: "Morning-Midday", text: "Work session", subNote: "Flexible work block", needsBooking: false },
+                        { time: "Afternoon", text: "Activity rotation: Tegallalang Rice Terraces + Monkey Forest", subNote: "Walk the terraces, interact with monkeys", needsBooking: false, mapsUrl: "https://maps.google.com/?q=Tegallalang+Rice+Terraces" },
+                        { time: "Evening", text: "Dinner & relaxation", subNote: "", needsBooking: false }
+                    ],
                     meals: {
-                        breakfast: { status: "flexible", note: "", restaurants: [] },
-                        lunch: { status: "flexible", note: "", restaurants: [] },
-                        dinner: { status: "flexible", note: "", restaurants: [] }
+                        breakfast: { status: "included", note: "Hotel", restaurants: [] },
+                        lunch: { status: "flexible", note: "On activity route", restaurants: [] },
+                        dinner: { status: "options", note: "Local restaurants", restaurants: [] }
                     },
                     route: null,
-                    warnings: [],
-                    gems: []
+                    warnings: ["Monkeys can be mischievous – secure valuables", "Wear comfortable shoes for rice terrace walks"],
+                    gems: ["Tegallalang rice paddies", "Ubud Monkey Forest", "Classic Bali experience"]
                 },
                 {
                     dayNumber: 6, date: "Aug 20", dayOfWeek: "Thu",
-                    title: "Day 6", location: "Bali, Indonesia",
+                    title: "Work & Explore", location: "Ubud, Bali",
                     backgroundImage: "https://images.unsplash.com/photo-1537996202348-803cfdf4548f?w=800",
                     flight: null,
-                    hotel: { name: "Hotel", status: "pending", note: "", bookedBy: null, mapsUrl: null },
+                    hotel: { name: "Alaya Resort", status: "confirmed", note: "Ubud cultural heart", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Alaya+Resort+Ubud" },
                     drive: null,
-                    activities: [],
+                    activities: [
+                        { time: "Morning-Midday", text: "Work session", subNote: "Flexible work block", needsBooking: false },
+                        { time: "Afternoon", text: "Activity rotation: Tegenungan Waterfall + Natural pools", subNote: "Swimming & waterfall photos", needsBooking: false, mapsUrl: "https://maps.google.com/?q=Tegenungan+Waterfall" },
+                        { time: "Evening", text: "Dinner", subNote: "", needsBooking: false }
+                    ],
                     meals: {
-                        breakfast: { status: "flexible", note: "", restaurants: [] },
-                        lunch: { status: "flexible", note: "", restaurants: [] },
-                        dinner: { status: "flexible", note: "", restaurants: [] }
+                        breakfast: { status: "included", note: "Hotel", restaurants: [] },
+                        lunch: { status: "flexible", note: "Waterfall area", restaurants: [] },
+                        dinner: { status: "options", note: "Local Ubud dining", restaurants: [] }
                     },
                     route: null,
-                    warnings: [],
-                    gems: []
+                    warnings: ["Bring towel & dry clothes", "Waterfall can be slippery"],
+                    gems: ["Tegenungan Waterfall", "Natural swimming pools", "Lush jungle scenery"]
                 },
                 {
                     dayNumber: 7, date: "Aug 21", dayOfWeek: "Fri",
-                    title: "Day 7", location: "Bali, Indonesia",
+                    title: "Work & Explore", location: "Ubud, Bali",
                     backgroundImage: "https://images.unsplash.com/photo-1537996202348-803cfdf4548f?w=800",
                     flight: null,
-                    hotel: { name: "Hotel", status: "pending", note: "", bookedBy: null, mapsUrl: null },
+                    hotel: { name: "Alaya Resort", status: "confirmed", note: "Ubud cultural heart", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Alaya+Resort+Ubud" },
                     drive: null,
-                    activities: [],
+                    activities: [
+                        { time: "Morning-Midday", text: "Work session", subNote: "Flexible work block", needsBooking: false },
+                        { time: "Afternoon", text: "Activity rotation: Ubud Palace + Art galleries", subNote: "Cultural exploration", needsBooking: false, mapsUrl: "https://maps.google.com/?q=Ubud+Palace" },
+                        { time: "Evening", text: "Relax after work week", subNote: "Early rest before Komodo", needsBooking: false }
+                    ],
                     meals: {
-                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        breakfast: { status: "included", note: "Hotel", restaurants: [] },
                         lunch: { status: "flexible", note: "", restaurants: [] },
-                        dinner: { status: "flexible", note: "", restaurants: [] }
+                        dinner: { status: "options", note: "Quiet dinner", restaurants: [] }
                     },
                     route: null,
                     warnings: [],
-                    gems: []
+                    gems: ["Ubud Palace architecture", "Local art galleries", "Cultural insight"]
                 },
                 {
                     dayNumber: 8, date: "Aug 22", dayOfWeek: "Sat",
-                    title: "Transfer to KL", location: "Bali to Kuala Lumpur",
+                    title: "Transfer to Komodo", location: "Labuan Bajo, Indonesia",
                     backgroundImage: "https://images.unsplash.com/photo-1511721776486-a01980e01a18?w=800",
-                    flight: null,
-                    hotel: { name: "Hotel", status: "pending", note: "", bookedBy: null, mapsUrl: null },
-                    drive: null,
-                    activities: [],
+                    flight: { airline: "Batik Air", from: "Bali", to: "Labuan Bajo", departTime: "13:35", arriveTime: "17:15", terminal: null },
+                    hotel: { name: "Plataran Komodo Resort & Spa", status: "confirmed", note: "Labuan Bajo", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Plataran+Komodo+Resort" },
+                    drive: { from: "Ubud", to: "Denpasar Airport", duration: "1.5 hours", distance: "65 km" },
+                    activities: [
+                        { time: "Morning", text: "Drive to Denpasar Airport", subNote: "Allow 2 hours for travel", needsBooking: false },
+                        { time: "Afternoon", text: "Flight to Labuan Bajo", subNote: "2h flight", needsBooking: false },
+                        { time: "Evening", text: "Check in, dinner at resort", subNote: "Sunset at Labuan Bajo", needsBooking: false }
+                    ],
                     meals: {
-                        breakfast: { status: "flexible", note: "", restaurants: [] },
-                        lunch: { status: "flexible", note: "", restaurants: [] },
-                        dinner: { status: "flexible", note: "", restaurants: [] }
+                        breakfast: { status: "included", note: "Hotel before departure", restaurants: [] },
+                        lunch: { status: "options", note: "Airport or en route", restaurants: [] },
+                        dinner: { status: "included", note: "Resort", restaurants: [] }
                     },
                     route: null,
-                    warnings: [],
-                    gems: []
+                    warnings: ["Flight departure at 1:35pm – leave early from Ubud"],
+                    gems: ["Komodo region gateway", "Sunset over Labuan Bajo harbor"]
                 },
                 {
                     dayNumber: 9, date: "Aug 23", dayOfWeek: "Sun",
-                    title: "Day 9", location: "Kuala Lumpur, Malaysia",
+                    title: "Komodo Adventure", location: "Komodo Island, Indonesia",
                     backgroundImage: "https://images.unsplash.com/photo-1511721776486-a01980e01a18?w=800",
-                    flight: null,
-                    hotel: { name: "Hotel", status: "pending", note: "", bookedBy: null, mapsUrl: null },
+                    flight: { airline: "Batik Air", from: "Labuan Bajo", to: "Bali", departTime: "07:00", arriveTime: "11:30", terminal: null },
+                    hotel: { name: "Plataran Komodo Resort & Spa", status: "confirmed", note: "Labuan Bajo", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Plataran+Komodo+Resort" },
                     drive: null,
-                    activities: [],
+                    activities: [
+                        { time: "Early Morning", text: "Komodo Island guided tour", subNote: "Ranger-led dragon safari + hiking", needsBooking: true, mapsUrl: "https://maps.google.com/?q=Komodo+National+Park" },
+                        { time: "Morning", text: "Return to airport for flight back to Bali", subNote: "7am flight from Labuan Bajo", needsBooking: false },
+                        { time: "Afternoon", text: "Arrive Bali, transfer to Ubud", subNote: "Back at Alaya Resort by evening", needsBooking: false }
+                    ],
                     meals: {
-                        breakfast: { status: "flexible", note: "", restaurants: [] },
-                        lunch: { status: "flexible", note: "", restaurants: [] },
-                        dinner: { status: "flexible", note: "", restaurants: [] }
+                        breakfast: { status: "pending", note: "Resort before early tour", restaurants: [] },
+                        lunch: { status: "flexible", note: "En route", restaurants: [] },
+                        dinner: { status: "flexible", note: "Back in Ubud", restaurants: [] }
                     },
                     route: null,
-                    warnings: [],
-                    gems: []
+                    warnings: ["Early morning – 4:30am breakfast", "Bring plenty of water & sun protection", "Hiking can be strenuous"],
+                    gems: ["Komodo dragons", "Pink sand beach", "World-class hiking"]
                 },
                 {
                     dayNumber: 10, date: "Aug 24", dayOfWeek: "Mon",
-                    title: "Day 10", location: "Kuala Lumpur, Malaysia",
-                    backgroundImage: "https://images.unsplash.com/photo-1511721776486-a01980e01a18?w=800",
+                    title: "Back in Bali – Work Week Continues", location: "Ubud, Bali",
+                    backgroundImage: "https://images.unsplash.com/photo-1537996202348-803cfdf4548f?w=800",
                     flight: null,
-                    hotel: { name: "Hotel", status: "pending", note: "", bookedBy: null, mapsUrl: null },
+                    hotel: { name: "Alaya Resort", status: "confirmed", note: "Ubud", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Alaya+Resort+Ubud" },
                     drive: null,
-                    activities: [],
+                    activities: [
+                        { time: "Morning", text: "Rest & recover from Komodo tour", subNote: "Light activity day", needsBooking: false },
+                        { time: "Afternoon", text: "Work session", subNote: "Catch up after travel", needsBooking: false },
+                        { time: "Evening", text: "Dinner & relaxation", subNote: "", needsBooking: false }
+                    ],
                     meals: {
-                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        breakfast: { status: "included", note: "Hotel", restaurants: [] },
                         lunch: { status: "flexible", note: "", restaurants: [] },
-                        dinner: { status: "flexible", note: "", restaurants: [] }
+                        dinner: { status: "options", note: "Local restaurants", restaurants: [] }
                     },
                     route: null,
-                    warnings: [],
-                    gems: []
+                    warnings: ["Jet lag from Komodo tour – take it easy"],
+                    gems: ["Rest day after adventure"]
                 },
                 {
                     dayNumber: 11, date: "Aug 25", dayOfWeek: "Tue",
-                    title: "Day 11", location: "Kuala Lumpur, Malaysia",
-                    backgroundImage: "https://images.unsplash.com/photo-1511721776486-a01980e01a18?w=800",
+                    title: "Work & Explore", location: "Ubud, Bali",
+                    backgroundImage: "https://images.unsplash.com/photo-1537996202348-803cfdf4548f?w=800",
                     flight: null,
-                    hotel: { name: "Hotel", status: "pending", note: "", bookedBy: null, mapsUrl: null },
+                    hotel: { name: "Alaya Resort", status: "confirmed", note: "Ubud", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Alaya+Resort+Ubud" },
                     drive: null,
-                    activities: [],
+                    activities: [
+                        { time: "Morning-Midday", text: "Work session", subNote: "Flexible work block", needsBooking: false },
+                        { time: "Afternoon", text: "Activity rotation: Catur Eka Pada – one-legged temple", subNote: "Cliff-perched temple visit", needsBooking: false, mapsUrl: "https://maps.google.com/?q=Catur+Eka+Pada+Temple" },
+                        { time: "Evening", text: "Dinner", subNote: "", needsBooking: false }
+                    ],
                     meals: {
-                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        breakfast: { status: "included", note: "Hotel", restaurants: [] },
                         lunch: { status: "flexible", note: "", restaurants: [] },
-                        dinner: { status: "flexible", note: "", restaurants: [] }
+                        dinner: { status: "options", note: "Local dining", restaurants: [] }
                     },
                     route: null,
                     warnings: [],
-                    gems: []
+                    gems: ["Dramatic cliff temple", "Panoramic views", "Peaceful location"]
                 },
                 {
                     dayNumber: 12, date: "Aug 26", dayOfWeek: "Wed",
-                    title: "Day 12", location: "Kuala Lumpur, Malaysia",
-                    backgroundImage: "https://images.unsplash.com/photo-1511721776486-a01980e01a18?w=800",
+                    title: "Work & Explore", location: "Ubud, Bali",
+                    backgroundImage: "https://images.unsplash.com/photo-1537996202348-803cfdf4548f?w=800",
                     flight: null,
-                    hotel: { name: "Hotel", status: "pending", note: "", bookedBy: null, mapsUrl: null },
+                    hotel: { name: "Alaya Resort", status: "confirmed", note: "Ubud", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Alaya+Resort+Ubud" },
                     drive: null,
-                    activities: [],
+                    activities: [
+                        { time: "Morning-Midday", text: "Work session", subNote: "Flexible work block", needsBooking: false },
+                        { time: "Afternoon", text: "Activity rotation: Tirta Empul temple & water blessing ritual", subNote: "Sacred spring water pools", needsBooking: false, mapsUrl: "https://maps.google.com/?q=Tirta+Empul+Temple" },
+                        { time: "Evening", text: "Dinner", subNote: "", needsBooking: false }
+                    ],
                     meals: {
-                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        breakfast: { status: "included", note: "Hotel", restaurants: [] },
                         lunch: { status: "flexible", note: "", restaurants: [] },
-                        dinner: { status: "flexible", note: "", restaurants: [] }
+                        dinner: { status: "options", note: "Local restaurants", restaurants: [] }
                     },
                     route: null,
-                    warnings: [],
-                    gems: []
+                    warnings: ["Dress respectfully for temple visit", "Bring sarong"],
+                    gems: ["Tirta Empul sacred pools", "Spiritual cleansing ritual", "Balinese water temple"]
                 },
                 {
                     dayNumber: 13, date: "Aug 27", dayOfWeek: "Thu",
-                    title: "Day 13", location: "Kuala Lumpur, Malaysia",
-                    backgroundImage: "https://images.unsplash.com/photo-1511721776486-a01980e01a18?w=800",
+                    title: "Final Day in Bali – Maria Departs", location: "Ubud, Bali",
+                    backgroundImage: "https://images.unsplash.com/photo-1537996202348-803cfdf4548f?w=800",
                     flight: null,
-                    hotel: { name: "Hotel", status: "pending", note: "", bookedBy: null, mapsUrl: null },
+                    hotel: { name: "Alaya Resort", status: "confirmed", note: "Ubud", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Alaya+Resort+Ubud" },
                     drive: null,
-                    activities: [],
+                    activities: [
+                        { time: "Morning-Midday", text: "Work session", subNote: "Final work day in Ubud", needsBooking: false },
+                        { time: "Afternoon", text: "Activity rotation: Goa Gajah (Elephant Cave) temple exploration", subNote: "Mystical cave temple complex", needsBooking: false, mapsUrl: "https://maps.google.com/?q=Goa+Gajah+Elephant+Cave" },
+                        { time: "Evening", text: "Special dinner together", subNote: "Farewell meal before Maria's departure", needsBooking: false }
+                    ],
                     meals: {
-                        breakfast: { status: "flexible", note: "", restaurants: [] },
+                        breakfast: { status: "included", note: "Hotel", restaurants: [] },
                         lunch: { status: "flexible", note: "", restaurants: [] },
-                        dinner: { status: "flexible", note: "", restaurants: [] }
+                        dinner: { status: "options", note: "Special farewell dinner", restaurants: [] }
                     },
                     route: null,
-                    warnings: [],
-                    gems: []
+                    warnings: ["Maria's last day – prepare for her departure tomorrow"],
+                    gems: ["Goa Gajah carved entrance", "Mystical cave atmosphere", "Spiritual experience"]
                 },
                 {
                     dayNumber: 14, date: "Aug 28", dayOfWeek: "Fri",
-                    title: "Day 14", location: "Kuala Lumpur, Malaysia",
+                    title: "Transfer to Kuala Lumpur – Juan Solo", location: "Kuala Lumpur, Malaysia",
                     backgroundImage: "https://images.unsplash.com/photo-1511721776486-a01980e01a18?w=800",
-                    flight: null,
-                    hotel: { name: "Hotel", status: "pending", note: "", bookedBy: null, mapsUrl: null },
-                    drive: null,
-                    activities: [],
+                    flight: { airline: "Emirates", from: "Bali", to: "Kuala Lumpur", departTime: "11:40", arriveTime: "16:10", terminal: null },
+                    hotel: { name: "Oasia Suites Kuala Lumpur", status: "confirmed", note: "KLCC area", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Oasia+Suites+Kuala+Lumpur" },
+                    drive: { from: "Ubud", to: "Denpasar Airport", duration: "1.5 hours", distance: "65 km" },
+                    activities: [
+                        { time: "Morning", text: "Depart Ubud, drive to airport", subNote: "Maria's departure flight", needsBooking: false },
+                        { time: "Afternoon", text: "Flight to Kuala Lumpur (Juan continues solo)", subNote: "3h flight", needsBooking: false },
+                        { time: "Late Afternoon", text: "Check in to hotel", subNote: "Arrive 4:10pm", needsBooking: false },
+                        { time: "Evening", text: "Explore KLCC, dinner", subNote: "Solo adventure begins", needsBooking: false }
+                    ],
                     meals: {
-                        breakfast: { status: "flexible", note: "", restaurants: [] },
-                        lunch: { status: "flexible", note: "", restaurants: [] },
-                        dinner: { status: "flexible", note: "", restaurants: [] }
+                        breakfast: { status: "included", note: "Hotel", restaurants: [] },
+                        lunch: { status: "options", note: "Airport or flight", restaurants: [] },
+                        dinner: { status: "flexible", note: "KLCC area", restaurants: [] }
                     },
                     route: null,
-                    warnings: [],
-                    gems: []
+                    warnings: ["Maria departs after checkout", "Juan continues solo"],
+                    gems: ["KLCC skyline", "Modern urban exploration", "Solo travel adventure"]
                 },
                 {
                     dayNumber: 15, date: "Aug 29", dayOfWeek: "Sat",
-                    title: "Day 15", location: "Kuala Lumpur, Malaysia",
+                    title: "Kuala Lumpur Exploration", location: "Kuala Lumpur, Malaysia",
                     backgroundImage: "https://images.unsplash.com/photo-1511721776486-a01980e01a18?w=800",
                     flight: null,
-                    hotel: { name: "Hotel", status: "pending", note: "", bookedBy: null, mapsUrl: null },
+                    hotel: { name: "Oasia Suites Kuala Lumpur", status: "confirmed", note: "KLCC area", bookedBy: null, mapsUrl: "https://maps.google.com/?q=Oasia+Suites+Kuala+Lumpur" },
                     drive: null,
-                    activities: [],
+                    activities: [
+                        { time: "Morning", text: "Sleep in, hotel breakfast", subNote: "Settle into KL", needsBooking: false },
+                        { time: "Afternoon", text: "Petronas Twin Towers observation deck or shopping mall exploration", subNote: "KLCC Park views", needsBooking: false, mapsUrl: "https://maps.google.com/?q=Petronas+Twin+Towers" },
+                        { time: "Evening", text: "Dinner at local restaurant or street food market", subNote: "Malaysian culinary experience", needsBooking: false }
+                    ],
                     meals: {
-                        breakfast: { status: "flexible", note: "", restaurants: [] },
-                        lunch: { status: "flexible", note: "", restaurants: [] },
-                        dinner: { status: "flexible", note: "", restaurants: [] }
+                        breakfast: { status: "included", note: "Hotel", restaurants: [] },
+                        lunch: { status: "flexible", note: "KLCC area", restaurants: [] },
+                        dinner: { status: "options", note: "Local Malaysian cuisine", restaurants: [] }
                     },
                     route: null,
                     warnings: [],
-                    gems: []
+                    gems: ["Petronas Twin Towers iconic views", "KLCC Park", "Modern KL skyline", "Malaysian food culture"]
                 },
                 {
                     dayNumber: 16, date: "Aug 30", dayOfWeek: "Sun",
-                    title: "Departure", location: "Kuala Lumpur, Malaysia",
+                    title: "Departure", location: "Dubai",
                     backgroundImage: "https://images.unsplash.com/photo-1511721776486-a01980e01a18?w=800",
-                    flight: null,
-                    hotel: { name: "Hotel", status: "pending", note: "", bookedBy: null, mapsUrl: null },
+                    flight: { airline: "Emirates", from: "Kuala Lumpur", to: "Dubai", departTime: "07:30", arriveTime: "09:45", terminal: null },
+                    hotel: null,
                     drive: null,
-                    activities: [],
+                    activities: [
+                        { time: "Early Morning", text: "Hotel checkout, transfer to airport", subNote: "Early departure at 7:30am", needsBooking: false },
+                        { time: "Morning", text: "Flight to Dubai", subNote: "3.5h flight", needsBooking: false },
+                        { time: "Late Morning", text: "Arrive Dubai", subNote: "End of trip", needsBooking: false }
+                    ],
                     meals: {
-                        breakfast: { status: "flexible", note: "", restaurants: [] },
-                        lunch: { status: "flexible", note: "", restaurants: [] },
-                        dinner: { status: "flexible", note: "", restaurants: [] }
+                        breakfast: { status: "pending", note: "Early hotel breakfast or airport", restaurants: [] },
+                        lunch: { status: "flexible", note: "Post-flight", restaurants: [] },
+                        dinner: { status: "missing", note: "", restaurants: [] }
                     },
                     route: null,
-                    warnings: [],
+                    warnings: ["Early checkout – 5:30am"],
                     gems: []
                 }
             ]
@@ -1654,7 +1723,24 @@
         // DAY_WEATHER — Add coordinates per day to enable forecasts
         // Uses Open-Meteo (free, no API key required)
         // ============================================================
-        const DAY_WEATHER = {};
+        const DAY_WEATHER = {
+            1: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-15" },
+            2: { lat: -8.6500, lon: 115.2167, isoDate: "2026-08-16" },
+            3: { lat: -8.5069, lon: 115.2625, isoDate: "2026-08-17" },
+            4: { lat: -8.5069, lon: 115.2625, isoDate: "2026-08-18" },
+            5: { lat: -8.5069, lon: 115.2625, isoDate: "2026-08-19" },
+            6: { lat: -8.5069, lon: 115.2625, isoDate: "2026-08-20" },
+            7: { lat: -8.5069, lon: 115.2625, isoDate: "2026-08-21" },
+            8: { lat: -8.4347, lon: 123.7977, isoDate: "2026-08-22" },
+            9: { lat: -8.4347, lon: 123.7977, isoDate: "2026-08-23" },
+            10: { lat: -8.5069, lon: 115.2625, isoDate: "2026-08-24" },
+            11: { lat: -8.5069, lon: 115.2625, isoDate: "2026-08-25" },
+            12: { lat: -8.5069, lon: 115.2625, isoDate: "2026-08-26" },
+            13: { lat: -8.5069, lon: 115.2625, isoDate: "2026-08-27" },
+            14: { lat: 3.1390, lon: 101.6869, isoDate: "2026-08-28" },
+            15: { lat: 3.1390, lon: 101.6869, isoDate: "2026-08-29" },
+            16: { lat: 3.1390, lon: 101.6869, isoDate: "2026-08-30" }
+        };
 
         // ============================================================
         // COST_DATA — Update with actual amounts as bookings are made
@@ -1687,12 +1773,12 @@
             5: { code: 'IDR', name: 'Indonesian Rupiah', symbol: 'IDR' },
             6: { code: 'IDR', name: 'Indonesian Rupiah', symbol: 'IDR' },
             7: { code: 'IDR', name: 'Indonesian Rupiah', symbol: 'IDR' },
-            8: { code: 'MYR', name: 'Malaysian Ringgit', symbol: 'MYR' },
-            9: { code: 'MYR', name: 'Malaysian Ringgit', symbol: 'MYR' },
-            10: { code: 'MYR', name: 'Malaysian Ringgit', symbol: 'MYR' },
-            11: { code: 'MYR', name: 'Malaysian Ringgit', symbol: 'MYR' },
-            12: { code: 'MYR', name: 'Malaysian Ringgit', symbol: 'MYR' },
-            13: { code: 'MYR', name: 'Malaysian Ringgit', symbol: 'MYR' },
+            8: { code: 'IDR', name: 'Indonesian Rupiah', symbol: 'IDR' },
+            9: { code: 'IDR', name: 'Indonesian Rupiah', symbol: 'IDR' },
+            10: { code: 'IDR', name: 'Indonesian Rupiah', symbol: 'IDR' },
+            11: { code: 'IDR', name: 'Indonesian Rupiah', symbol: 'IDR' },
+            12: { code: 'IDR', name: 'Indonesian Rupiah', symbol: 'IDR' },
+            13: { code: 'IDR', name: 'Indonesian Rupiah', symbol: 'IDR' },
             14: { code: 'MYR', name: 'Malaysian Ringgit', symbol: 'MYR' },
             15: { code: 'MYR', name: 'Malaysian Ringgit', symbol: 'MYR' },
             16: { code: 'MYR', name: 'Malaysian Ringgit', symbol: 'MYR' }
