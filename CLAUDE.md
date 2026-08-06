@@ -142,30 +142,65 @@ Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes
 ## Common tasks
 - **Update a hotel:** find the day by `dayNumber` in `TRIP_DATA.days`, edit the `hotel` object
 - **Add/change activity:** find the day, edit the `activities` array
-- **New trip:**
-  1. Copy `template.html` verbatim into a new folder e.g. `2027-03-japan/index.html`
-  2. **ONLY edit the first `<script>` block** — the one that starts right after `<body>` and ends with `// END OF DATA — DO NOT EDIT BELOW THIS LINE`. Everything after that marker is the rendering engine; never touch it.
-  3. In that first `<script>`, fill in all four data objects: `TRIP_DATA`, `DAY_WEATHER`, `COST_DATA`, `DAY_CURRENCY`
-  4. **`dayNumber` must start at 1 and increment by 1** for each day — never use the trip itinerary's own day numbering (e.g. if the itinerary says "Day 8: Munich" but it's the first day of this trip file, set `dayNumber: 1`)
-  5. **`TRIP_DATA.flights` must be an array** — use `[]` if no flights yet, never `null`
-  6. **`TRIP_DATA.travelers` must be an array** — use `["Traveler"]` as minimum, never `null`
-  7. **Every day must have all three meal types** (`breakfast`, `lunch`, `dinner`) in `day.meals`, even if just `{ status: "flexible", note: "", restaurants: [] }` — omitting any one crashes the page
-  8. Update the **File structure section** in this CLAUDE.md with the new folder name, dates, and travelers
-  9. Add a trip summary section at the bottom of this CLAUDE.md
-- **After writing a new trip file, validate JS syntax before pushing** — run this from the repo root (replace the path with the actual file):
-  ```bash
-  node -e "
-  const c = require('fs').readFileSync('2027-03-japan/index.html','utf8');
-  const m = c.match(/<script>([\s\S]*?)<\/script>/);
-  try { new Function(m[1]); console.log('✓ Syntax OK'); }
-  catch(e) { console.error('✗ Syntax error:', e.message); process.exit(1); }
-  "
-  ```
-  Fix any error before pushing. Never push a file with a syntax error — the PWA won't show error details.
-- **After any edit:** commit + push using the token pattern above
 
-## Rule: keep this file current
-Whenever a new trip folder is created or an existing one is significantly updated (travelers, dates, route), update the **File structure** section above and add or revise the matching trip summary section at the bottom of this file. This ensures every Claude session starts with accurate context without needing to scan the repo.
+## New trip creation checklist
+
+**Before starting:** Always get the complete, detailed itinerary from the user with:
+- [ ] Exact flight dates, times, airlines, and flight numbers
+- [ ] Confirmed hotel names, check-in/check-out dates, and locations
+- [ ] Day-by-day breakdown with location, title, and activities
+- [ ] Who travels on which legs (multi-person trips: specify per flight/hotel)
+- [ ] Any special schedule blocks (e.g., work-from-home weeks, timezone info)
+
+**While building:**
+1. Copy `template.html` verbatim into a new folder e.g. `2027-03-japan/index.html`
+2. **ONLY edit the first `<script>` block** — the one that starts right after `<body>` and ends with `// END OF DATA — DO NOT EDIT BELOW THIS LINE`. Everything after that marker is the rendering engine; never touch it.
+3. In that first `<script>`, fill in all four data objects: `TRIP_DATA`, `DAY_WEATHER`, `COST_DATA`, `DAY_CURRENCY`
+
+**Critical validation rules:**
+- [ ] **Flights:** Double-check dates (MM-DD), times (HH:MM format), and airport codes against confirmation email. Example: `{ date: "Aug 15", dayOfWeek: "Fri", airline: "Emirates", from: "Dubai", to: "Bali", departTime: "03:10", arriveTime: "16:35 (+1)" }`
+- [ ] **Hotels:** Verify check-in date matches arrival flight day, check-out date matches departure/transfer day. Map each day to the correct hotel by matching dates. If a day has no hotel (e.g., last day departure), set `hotel: null` and ensure `renderHotelCard()` handles it with a null guard.
+- [ ] **Day splits:** Align day boundaries with flight/hotel changes. If traveler1 leaves on Day 14 but traveler2 stays, the days before Day 14 are joint; Day 14 onward is solo. Mark solo days clearly in title.
+- [ ] **dayNumber:** Must start at 1 and increment by 1. Never use itinerary's own day numbering (e.g., if itinerary says "Day 8: Munich" but it's the first day of your trip file, set `dayNumber: 1`).
+- [ ] **Travelers array:** Must always be an array. Example: `travelers: ["Person 1", "Person 2"]`. Never `null` or a single string.
+- [ ] **Flights array:** Must always be an array. Use `[]` if no flights yet, never `null`.
+- [ ] **All three meals:** Every day MUST have `breakfast`, `lunch`, `dinner` in `day.meals`, even if just `{ status: "flexible", note: "", restaurants: [] }`. Omitting any crashes the page.
+- [ ] **Activity times:** Use specific times (e.g., "14:00–21:00") not vague labels ("afternoon"). Include subNote for logistics/context.
+- [ ] **Map URLs:** Do NOT include `https://` prefix in data. Store as `maps.google.com/?q=place+name`. The renderer prepends `https://` automatically. Using `https://https://` breaks links.
+- [ ] **Weather coordinates:** Verify lat/lon for each location. Test with a maps lookup if unsure (e.g., "Seminyak Bali" → -8.6500, 115.2167).
+- [ ] **Meal restaurants:** Include `name`, `desc`, `rating` (e.g., 4.5), and `mapsUrl` (without https:// prefix). If status is "options", populate the restaurants array; if "flexible", can leave empty.
+- [ ] **Warnings & gems:** Every day should have at least one warning (safety, timing, logistics) and one gem (hidden spot, local tip, or must-do). Keep them specific: "Macaques grab sunglasses" beats "Be careful."
+- [ ] **Special blocks (work weeks, multi-country):** Document explicitly in activities or day title. Example: `title: "Work From Home · Day 2"` + activity with "Work 14:00–21:00 (Dubai hours: 10:00–17:00)".
+
+**Before pushing:**
+1. Validate JS syntax:
+   ```bash
+   node -e "
+   const c = require('fs').readFileSync('2027-03-japan/index.html','utf8');
+   const m = c.match(/<script>([\s\S]*?)<\/script>/);
+   try { new Function(m[1]); console.log('✓ Syntax OK'); }
+   catch(e) { console.error('✗ Syntax error:', e.message); process.exit(1); }
+   "
+   ```
+2. Spot-check one day's rendering in a browser (inspect network for any 404 images, verify day tab navigation works).
+3. Commit + push to `main` immediately — never leave on a feature branch.
+
+**After any edit:** commit + push using standard git flow.
+
+## Common pitfalls (learned from Bali-KL trip)
+
+1. **Wrong flight times/dates:** Always verify against booking confirmation, not assumptions. Example: assumed 12:05 departure when it was actually 03:10.
+2. **Hotel dates misaligned:** Hotel check-in must match arrival flight day; check-out must match departure day. Misalignment cascades to day descriptions.
+3. **Multi-person trip splits not tracked:** When travelers separate (e.g., Maria stays, Juan leaves on Day 14), mark the split clearly in day titles ("Juan solo") and `passengers` array in flights.
+4. **Work-week timezone confusion:** "Work 14:00–21:00 Bali" needs explicit conversion: "Dubai 10:00–17:00 = Bali 14:00–21:00" in activity subNote. Include in day title if it spans multiple days.
+5. **Bare activities:** "Visit temple" is useless. Specify: "08:00 Padar Island sunrise trek, 20-min steep climb, bring light layer (run cold at dawn)."
+6. **Days without hotels:** Departure days often have `hotel: null`. Rendering code must guard against null (`if (!day.hotel) return ''`). Don't assume every day has a hotel.
+7. **Maps URLs with double protocol:** Store as `maps.google.com/?q=...`, NOT `https://maps.google.com/...`. Renderer adds `https://` automatically.
+8. **Missing warnings or gems:** Every day needs context for travelers. Warnings = logistics/safety; gems = insider tips or beautiful spots. Both should be specific, not generic.
+9. **Incomplete meal data:** If `meals.dinner` is missing (not just empty), page crashes. Always include all three meal types in day.meals, even if { status: "flexible", note: "", restaurants: [] }.
+10. **No dayOfWeek or wrong dayOfWeek:** Always include exact day of week ("Fri", "Sat", etc.). If dayOfWeek doesn't match the date, travelers get confused. Verify: Aug 15, 2026 = Friday.
+11. **Not validating JS syntax before push:** Syntax errors in the script tag don't show in browser console—page just fails silently. Always run node validation.
+12. **Feature branch instead of main:** Live site only serves from main. Changes on feature branches are invisible. Always push to main immediately.
 
 ## Puerto Rico 2026 trip summary
 - **Travellers:** Mamá (76), Papá (81), Giova, Ari (23), Coki, Liz, Emma (8), Matías (16), JC, Maria — 10 total
