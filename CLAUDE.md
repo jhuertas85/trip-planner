@@ -126,11 +126,15 @@ Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes
 - **Update a hotel:** find the day by `dayNumber` in `TRIP_DATA.days`, edit the `hotel` object
 - **Add/change activity:** find the day, edit the `activities` array
 - **New trip:**
-  1. Copy `template.html` into a new folder e.g. `2027-03-japan/index.html`
-  2. Fill in `TRIP_DATA`, `DAY_WEATHER`, `COST_DATA`, and `DAY_CURRENCY` (the four data objects at the top of the `<script>` in `<body>`)
-  3. **Every day must have all three meal types** (`breakfast`, `lunch`, `dinner`) in `day.meals`, even if just `{ status: "flexible", note: "", restaurants: [] }` — omitting a meal type crashes the page
-  4. Update the **File structure section** in this CLAUDE.md with the new folder name, dates, and travelers
-  5. Add a trip summary section at the bottom of this CLAUDE.md
+  1. Copy `template.html` verbatim into a new folder e.g. `2027-03-japan/index.html`
+  2. **ONLY edit the first `<script>` block** — the one that starts right after `<body>` and ends with `// END OF DATA — DO NOT EDIT BELOW THIS LINE`. Everything after that marker is the rendering engine; never touch it.
+  3. In that first `<script>`, fill in all four data objects: `TRIP_DATA`, `DAY_WEATHER`, `COST_DATA`, `DAY_CURRENCY`
+  4. **`dayNumber` must start at 1 and increment by 1** for each day — never use the trip itinerary's own day numbering (e.g. if the itinerary says "Day 8: Munich" but it's the first day of this trip file, set `dayNumber: 1`)
+  5. **`TRIP_DATA.flights` must be an array** — use `[]` if no flights yet, never `null`
+  6. **`TRIP_DATA.travelers` must be an array** — use `["Traveler"]` as minimum, never `null`
+  7. **Every day must have all three meal types** (`breakfast`, `lunch`, `dinner`) in `day.meals`, even if just `{ status: "flexible", note: "", restaurants: [] }` — omitting any one crashes the page
+  8. Update the **File structure section** in this CLAUDE.md with the new folder name, dates, and travelers
+  9. Add a trip summary section at the bottom of this CLAUDE.md
 - **After any edit:** commit + push using the token pattern above
 
 ## Rule: keep this file current
