@@ -24,10 +24,8 @@ trip-planner/
 │   └── index.html             # Germany · Switzerland · Madrid July 2026 (Juan Carlos)
 ├── 2026-07-puerto-rico/
 │   └── index.html             # Puerto Rico Jul 2026 (10 people · Luquillo · Jul 8–12)
-├── 2026-07-marias-trip/
-│   └── index.html             # Maria's Trip July–Aug 2026 (Dubai · Madrid · Puerto Rico · Kraków · London)
-└── 2026-08-bali-komodo-kl/
-    └── index.html             # Bali · Komodo · Kuala Lumpur Aug 2026 (Juan Carlos, Maria)
+└── 2026-07-marias-trip/
+    └── index.html             # Maria's Trip July–Aug 2026 (Dubai · Madrid · Puerto Rico · Kraków · London)
 ```
 
 Each trip is a self-contained single HTML file. All trip data lives in four JavaScript objects near the top of the rendering script. The rendering engine reads from those objects — **only edit `TRIP_DATA`, `DAY_WEATHER`, `COST_DATA`, and `DAY_CURRENCY` for content changes**, not the rendering code.
@@ -179,12 +177,3 @@ Whenever a new trip folder is created or an existing one is significantly update
 - **Activities:** Old San Juan, El Yunque Rainforest, Hacienda Carabalí, Bioluminescent Bay, Remote work in Madrid/London, Time with Alex in Kraków
 - **Work locations:** Nomia office (Kurniki 9, Kraków), Nomia office (10 York Road, London)
 - **Trains:** Kraków–Warsaw (Jul 18), Warsaw–Kraków (Jul 24)
-
-## Bali · Komodo · Kuala Lumpur 2026 trip summary
-- **Travellers:** Juan Carlos, Maria (Juan solo for KL finish)
-- **Dates:** Aug 15–31, 2026 (16 days · Fri–Sun)
-- **Route:** Dubai → Bali (work 5 days) → Komodo liveaboard (2D1N) → Bali (tours) → Kuala Lumpur (3 days) → Dubai
-- **Flights:** Emirates EK0368 DXB→DPS Aug 15 (03:10–16:35) · AirAsia DPS→LBJ Aug 22 (07:10–08:15) · AirAsia LBJ→DPS Aug 25 (10:35–11:45) · ⏳ DPS→KUL Aug 28 · ⏳ KUL→DXB Aug 30
-- **Hotels:** Courtyard Marriott Bali Seminyak (Aug 15–22, 25–28) · Liveaboard boat (Aug 22, 1 night) · Oh!Julia Hotel Komodo (Aug 23–24) · ⏳ KL hotel (Aug 28–30)
-- **Key activities:** Uluwatu Temple + Kecak fire dance (Aug 16) · WFH mornings (Aug 17–21, Dubai 10:00–17:00 = Bali 14:00–21:00) · Komodo dragons + Padar sunrise + Manta Point (Aug 22–25) · Nusa Penida manta snorkel (Aug 26, Juan) · Ubud day trip (Aug 27, Juan) · Kuala Lumpur towers, caves, markets (Aug 29)
-- **Bookings status:** ✅ Flights DXB/DPS/LBJ · ✅ Hotels Bali + Komodo · ✅ Liveaboard · ⏳ Tours (Kecak, Manta, Ubud, Caves) · ⏳ DPS→KUL flight · ⏳ KL hotel
