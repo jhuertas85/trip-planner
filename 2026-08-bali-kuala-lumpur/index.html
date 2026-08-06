@@ -2149,6 +2149,20 @@ const DAY_CURRENCY = {
                     this.nextElementSibling.classList.toggle('collapsed');
                 });
             });
+            document.querySelectorAll('.btn-expand-all').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const dv = this.closest('.day-view');
+                    dv.querySelectorAll('.section-header').forEach(h => h.classList.remove('collapsed'));
+                    dv.querySelectorAll('.section-content').forEach(c => c.classList.remove('collapsed'));
+                });
+            });
+            document.querySelectorAll('.btn-collapse-all').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const dv = this.closest('.day-view');
+                    dv.querySelectorAll('.section-header').forEach(h => h.classList.add('collapsed'));
+                    dv.querySelectorAll('.section-content').forEach(c => c.classList.add('collapsed'));
+                });
+            });
         }
 
         function renderDayContent(day) {
