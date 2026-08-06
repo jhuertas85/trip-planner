@@ -2289,6 +2289,10 @@
         }
 
         function renderHotelCard(day) {
+            if (!day.hotel) {
+                return '';
+            }
+
             let html = `<div class="collapsible-section">
                 <div class="section-header"><h3>🏨 Hotel</h3><div class="chevron"></div></div>
                 <div class="section-content section-hotel"><div style="padding:16px;">`;
