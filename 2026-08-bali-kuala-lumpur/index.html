@@ -2054,12 +2054,18 @@
             renderDayViews();
 
             const today = new Date().toISOString().split('T')[0];
+            let dayFound = false;
             for (const [dayNum, w] of Object.entries(DAY_WEATHER)) {
                 if (w.isoDate === today) {
                     switchView(`day${dayNum}`);
                     loadOverviewWeather(parseInt(dayNum));
+                    dayFound = true;
                     break;
                 }
+            }
+            // Default to first day if today's date doesn't match any trip day
+            if (!dayFound && TRIP_DATA.days.length > 0) {
+                switchView('day1');
             }
         }
 
