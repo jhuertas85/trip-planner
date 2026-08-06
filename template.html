@@ -1661,6 +1661,36 @@
 
     <script>
         // ============================================================
+        // DATA VALIDATION — runs before the rendering engine
+        // ============================================================
+        (function validateData() {
+            const errors = [];
+            const showErrors = function(errs) {
+                document.body.style.cssText = 'background:#1a0a0a;color:#f8d7da;font-family:monospace;padding:24px;';
+                document.body.innerHTML = '<h2 style="color:#ff6b6b;margin-bottom:16px;">⚠️ Trip data error — page cannot render</h2>'
+                    + errs.map(function(e) { return '<div style="background:#2a0a0a;border-left:3px solid #ff6b6b;padding:8px 12px;margin-bottom:8px;border-radius:0 4px 4px 0;">' + e + '</div>'; }).join('')
+                    + '<p style="margin-top:20px;color:#aaa;font-size:12px;">Fix the issue in the first &lt;script&gt; block (TRIP_DATA section), then reload. Open browser DevTools console for more detail.</p>';
+            };
+            // If TRIP_DATA is undefined the first script had a syntax error
+            if (typeof TRIP_DATA === 'undefined') {
+                showErrors(['TRIP_DATA is not defined — the data &lt;script&gt; block has a JavaScript syntax error. Open DevTools → Console to see the exact line.']);
+                throw new Error('TRIP_DATA undefined');
+            }
+            if (!Array.isArray(TRIP_DATA.days))      errors.push('TRIP_DATA.days must be an array (got ' + typeof TRIP_DATA.days + ')');
+            if (!Array.isArray(TRIP_DATA.flights))   errors.push('TRIP_DATA.flights must be an array — use [] if no flights');
+            if (!Array.isArray(TRIP_DATA.travelers)) errors.push('TRIP_DATA.travelers must be an array — use ["Name"] minimum');
+            (TRIP_DATA.days || []).forEach(function(d, i) {
+                var label = d.dayNumber ? 'Day ' + d.dayNumber : 'Day at index ' + i;
+                if (!d.dayNumber) errors.push(label + ': missing dayNumber (must start at 1, increment by 1)');
+                if (!d.meals)     errors.push(label + ': missing meals object');
+                else ['breakfast','lunch','dinner'].forEach(function(m) {
+                    if (!d.meals[m]) errors.push(label + ': missing meals.' + m + ' — add { status: "flexible", note: "", restaurants: [] }');
+                });
+            });
+            if (errors.length) { showErrors(errors); throw new Error('Validation failed'); }
+        })();
+
+        // ============================================================
         // RENDERING ENGINE
         // ============================================================
 
