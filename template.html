@@ -2570,7 +2570,7 @@
                 });
                 localStorage.setItem(cacheKey, JSON.stringify({ data: calcRates, ts: Date.now() }));
             } catch {
-                calcRates = { usd: 1, aed: 3.6725, eur: 0.92 };
+                calcRates = { usd: 1, aed: 3.6725, eur: 0.92, idr: 15500, myr: 4.3 };
                 document.getElementById('calcRatesNote').textContent = 'Offline rates (approx)';
                 return;
             }
