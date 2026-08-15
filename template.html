@@ -2672,13 +2672,13 @@
             if (showLocal) codes.push(cur.code.toLowerCase());
             const n = showLocal ? 4 : 3;
             const inputs = Array.from({ length: n }, (_, i) => document.getElementById(`dc${dayNum}-${i}`));
-            const val = parseFloat(inputs[sourceIdx]?.value);
+            const val = parseFloat(inputs[sourceIdx]?.value.replace(/,/g, ''));
             if (isNaN(val)) { inputs.forEach((inp, i) => { if (i !== sourceIdx && inp) inp.value = ''; }); return; }
             const sourceRate = calcRates[codes[sourceIdx]] || 1;
             const valInUsd = val / sourceRate;
             inputs.forEach((inp, i) => {
                 if (i === sourceIdx || !inp) return;
-                inp.value = (valInUsd * (calcRates[codes[i]] || 1)).toFixed(2);
+                inp.value = (valInUsd * (calcRates[codes[i]] || 1)).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             });
         }
 
