@@ -2643,7 +2643,7 @@
                         <div class="calc-label-code">${c.code}</div>
                         <div class="calc-label-name">${c.name}</div>
                     </div>
-                    <input class="calc-input" id="dc${dayNum}-${i}" type="number" placeholder="0" oninput="dcConvert(${dayNum}, ${i}, ${currencies.length})">
+                    <input class="calc-input" id="dc${dayNum}-${i}" type="text" inputmode="decimal" placeholder="0" oninput="dcConvert(${dayNum}, ${i}, ${currencies.length})">
                 </div>`).join('');
             return `
                 <div class="collapsible-section section-calc" data-calc-day="${dayNum}">
