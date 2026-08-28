@@ -2495,10 +2495,10 @@ const DAY_CURRENCY = {
             try {
                 const res = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json');
                 const json = await res.json();
-                calcRates = { usd: 1, aed: json.usd.aed, eur: json.usd.eur, idr: json.usd.idr };
+                calcRates = { usd: 1, aed: json.usd.aed, eur: json.usd.eur, idr: json.usd.idr, myr: json.usd.myr };
                 localStorage.setItem(cacheKey, JSON.stringify({ data: calcRates, ts: Date.now() }));
             } catch {
-                calcRates = { usd: 1, aed: 3.6725, eur: 0.92, idr: 15500 };
+                calcRates = { usd: 1, aed: 3.6725, eur: 0.92, idr: 15500, myr: 4.3 };
             }
         }
 

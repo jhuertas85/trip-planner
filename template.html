@@ -2563,7 +2563,7 @@
             try {
                 const res = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json');
                 const json = await res.json();
-                calcRates = { usd: 1, aed: json.usd.aed, eur: json.usd.eur };
+                calcRates = { usd: 1, aed: json.usd.aed, eur: json.usd.eur, idr: json.usd.idr, myr: json.usd.myr };
                 Object.values(DAY_CURRENCY).forEach(c => {
                     const k = c.code.toLowerCase();
                     if (json.usd[k]) calcRates[k] = json.usd[k];
