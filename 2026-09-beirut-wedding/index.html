@@ -6,7 +6,6 @@
     <title>Beirut Wedding Weekend 2026</title>
     <link rel="icon" href="../favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="../favicon.png" />
-    <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Trip">
@@ -2192,6 +2191,8 @@
         }
 
         function renderHotelCard(day) {
+            if (!day.hotel) return '';
+
             let html = `<div class="collapsible-section">
                 <div class="section-header"><h3>🏨 Hotel</h3><div class="chevron"></div></div>
                 <div class="section-content section-hotel"><div style="padding:16px;">`;

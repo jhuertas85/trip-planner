@@ -276,7 +276,7 @@ Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes
 
 **Data validation (check every trip before pushing):**
 1. **Flight dates/times:** Verify against booking confirmation. Use airport codes (DXB, BEY, etc.), not city names. Use HH:MM format (03:10, not 3:10am).
-2. **Hotel dates:** Check-in must match arrival day; check-out must match departure day. Use `hotel: null` for days without hotels (renderer guards against it).
+2. **Hotel days with null:** Days without hotels MUST have `hotel: null` (e.g., departure days). The renderer checks for null before accessing hotel properties. Setting `hotel: {}` instead crashes rendering.
 3. **All three meals required:** Every day MUST have `breakfast`, `lunch`, `dinner` in `day.meals`. Even if status is "flexible", include the object: `{ status: "flexible", note: "", restaurants: [] }`. Missing any meal crashes the page.
 4. **dayNumber starts at 1:** Increment by 1. Don't use itinerary's own numbering ("Day 8 in itinerary" → `dayNumber: 1` in data if it's the first day of the trip file).
 5. **dayOfWeek must match calendar date:** Verify "Aug 15, 2026 = Friday" before entering data. Mismatched dayOfWeek confuses travelers.
