@@ -81,7 +81,7 @@ const TRIP_DATA = {
   backgroundImage,    // Unsplash URL: "https://images.unsplash.com/photo-XXXXX?w=800"
                       // Keep the template default if unsure — a repeated image is fine, a broken URL shows black
   flight: { airline, from, to, departTime, arriveTime, terminal } | null,
-  hotel: { name, status, note, bookedBy, mapsUrl, altHotel? },
+  hotel: { name, status, note, bookedBy, mapsUrl, altHotel? } | null,
   drive: { from, to, duration, distance } | null,
   activities: [{ time, text, subNote, needsBooking, mapsUrl? }],  // mapsUrl optional; auto-fallback searches "text + location"
   meals: {
@@ -92,6 +92,18 @@ const TRIP_DATA = {
   gems: [...strings]
 }
 ```
+
+**Hotel patterns (for `hotel` field):**
+- **Single night (stay):** `{ name: "Hotel A", status: "confirmed", note: "...", mapsUrl: "..." }`
+- **Checkout only (departure day):** `{ name: "Hotel A", status: "confirmed", note: "Checkout by 11:00", mapsUrl: "..." }`
+- **Checkout + Check-in same day (transit day):** Use `altHotel` for the second:
+  ```js
+  hotel: {
+    name: "Hotel A", status: "confirmed", note: "Checkout by 11:00", mapsUrl: "...",
+    altHotel: { name: "Hotel B", status: "confirmed", note: "Check-in 16:00", mapsUrl: "..." }
+  }
+  ```
+- **No hotel (rare):** `hotel: null` — renderer guards against it
 
 **Hotel status values:** `confirmed` | `pending` | `missing`
 **Meal status values:** `confirmed` | `included` | `options` | `pending` | `flexible` | `missing`
@@ -234,7 +246,11 @@ Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes
 
 **Critical validation rules:**
 - [ ] **Flights:** Double-check dates (MM-DD), times (HH:MM format), and airport codes against confirmation email. Example: `{ date: "Aug 15", dayOfWeek: "Fri", airline: "Emirates", from: "Dubai", to: "Bali", departTime: "03:10", arriveTime: "16:35 (+1)" }`
-- [ ] **Hotels:** Verify check-in date matches arrival flight day, check-out date matches departure/transfer day. Map each day to the correct hotel by matching dates. If a day has no hotel (e.g., last day departure), set `hotel: null` and ensure `renderHotelCard()` handles it with a null guard.
+- [ ] **Hotels:** Verify check-in date matches arrival flight day, check-out date matches departure/transfer day. Map each day to the correct hotel by matching dates.
+  - For **checkout + check-in same day** (transit days): Use `altHotel` field for second hotel (not separate day)
+  - For **checkout only** (departure day): Keep single hotel with checkout note + mapsUrl
+  - For **no hotel** (rare): Use `hotel: null` only if truly no hotel that day
+  - **Always add mapsUrl** to each hotel so travelers can click map pin 📍
 - [ ] **Day splits:** Align day boundaries with flight/hotel changes. If traveler1 leaves on Day 14 but traveler2 stays, the days before Day 14 are joint; Day 14 onward is solo. Mark solo days clearly in title.
 - [ ] **dayNumber:** Must start at 1 and increment by 1. Never use itinerary's own day numbering (e.g., if itinerary says "Day 8: Munich" but it's the first day of your trip file, set `dayNumber: 1`).
 - [ ] **Travelers array:** Must always be an array. Example: `travelers: ["Person 1", "Person 2"]`. Never `null` or a single string.
@@ -276,11 +292,17 @@ Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes
 
 **Data validation (check every trip before pushing):**
 1. **Flight dates/times:** Verify against booking confirmation. Use airport codes (DXB, BEY, etc.), not city names. Use HH:MM format (03:10, not 3:10am).
-2. **Hotel days with null:** Days without hotels MUST have `hotel: null` (e.g., departure days). The renderer checks for null before accessing hotel properties. Setting `hotel: {}` instead crashes rendering.
+2. **Hotel days patterns:**
+   - **Stay day:** Show the hotel with status & note (checkin/staying/checkout) + mapsUrl for map pin
+   - **Checkout + Check-in same day:** Use `altHotel` field for the second hotel (e.g., checkout Hotel A morning, checkin Hotel B afternoon)
+   - **No hotel at all:** Use `hotel: null` (rare, renderer guards against it)
+   - **Always include mapsUrl:** Helps travelers see location instantly (format: `"maps.google.com/?q=Hotel+Name+City"`)
 3. **All three meals required:** Every day MUST have `breakfast`, `lunch`, `dinner` in `day.meals`. Even if status is "flexible", include the object: `{ status: "flexible", note: "", restaurants: [] }`. Missing any meal crashes the page.
 4. **dayNumber starts at 1:** Increment by 1. Don't use itinerary's own numbering ("Day 8 in itinerary" → `dayNumber: 1` in data if it's the first day of the trip file).
 5. **dayOfWeek must match calendar date:** Verify "Aug 15, 2026 = Friday" before entering data. Mismatched dayOfWeek confuses travelers.
 6. **Map URLs format:** Store as `maps.google.com/?q=place+name` (no `https://`). Renderer adds it automatically; using `https://https://` breaks links.
+   - **Hotels:** Always include mapsUrl so travelers can click pin 📍 icon to see location (format: `"maps.google.com/?q=Hotel+Name+City"`)
+   - **Activities/restaurants:** Optional; auto-fallback searches "activity name + day location" if not provided
 7. **Activity times specific:** Use "14:00–17:30", not "afternoon" or "TBD". Include subNote for logistics/timezone info.
 
 **Code validation (run before pushing):**
