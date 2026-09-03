@@ -1,0 +1,11 @@
+{
+  "name": "Beirut Wedding Weekend 2026",
+  "short_name": "Beirut Trip",
+  "display": "standalone",
+  "start_url": "./",
+  "background_color": "#0D0B08",
+  "theme_color": "#C9966A",
+  "icons": [
+    { "src": "../favicon.png", "sizes": "any", "type": "image/png" }
+  ]
+}
