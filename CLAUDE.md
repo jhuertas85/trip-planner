@@ -129,6 +129,7 @@ const DAY_CURRENCY = {
 Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes (JPY, THB, GBP, etc.).
 
 ## Features in every trip (all come from template)
+- **Instagram story highlights** — Optional links at the top of overview page with Instagram gradient styling; displays trip regions or photos with emoji and label
 - **Day tabs** — scrollable horizontal tab strip with missing-status indicator; today's tab is highlighted in gold
 - **Collapsible sections** — Flight, Hotel, Activities, Meals, Warnings, Gems, Weather, Currency, per day
 - **Live weather** — sunrise/sunset + temperature curve (8am/1pm/8pm) + rain probability via Open-Meteo; dual cache (30 min for current days, 3h for future)
@@ -295,6 +296,8 @@ Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes
 19. **Wrong day-of-week for flight dates:** Always verify dayOfWeek matches the calendar date before data entry. Example: assumed Aug 15 was Friday when it was actually Saturday. Cross-check against a real calendar (e.g., https://calendar.google.com) or verify each date. Misaligned dayOfWeek cascades through day tabs and confuses travelers.
 20. **Meals section UI too verbose:** The renderMealsSection() function was rendering restaurant cards with Select/Maps buttons, taking up too much space. Updated template now renders meals compactly: status badge inline with meal type name (breakfast/lunch/dinner on same line), restaurant cards show only name + description + star rating + map icon (no buttons). This was applied to template.html.
 21. **Missing meal emojis in section headers:** Added 🍽️ emoji to meals section header for visual consistency with other sections. Template updated to include this.
+22. **Hero section needs image fallback:** The `.hero` section must include `background-color`, `min-height`, `display: flex`, and `flex-direction: column` so it renders gracefully if the background image fails to load (Unsplash photo IDs can break). Updated template now has this fallback styling.
+23. **Instagram highlights not added to overview:** Optional feature: add Instagram story highlight links at the top of the overview page. Links have gradient Instagram styling (linear-gradient: #833ab4, #fd1d1d, #fcb045), camera emoji, region/photo name, and description. If not applicable to a trip, simply omit — no placeholder needed. Format: `<a href="https://www.instagram.com/stories/highlights/[ID]/?hl=en" target="_blank" style="display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);border-radius:10px;padding:14px 18px;margin-bottom:16px;text-decoration:none;color:#fff;"><span style="font-size:28px;line-height:1;">📸</span><div><div style="font-weight:700;font-size:15px;">Region Name</div><div style="font-size:11px;opacity:0.85;margin-top:2px;">Instagram Story · Days X–Y</div></div><span style="margin-left:auto;font-size:18px;opacity:0.8;">↗</span></a>`
 
 ## Puerto Rico 2026 trip summary
 - **Travellers:** Mamá (76), Papá (81), Giova, Ari (23), Coki, Liz, Emma (8), Matías (16), JC, Maria — 10 total
