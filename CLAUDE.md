@@ -227,9 +227,10 @@ Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes
 - [ ] Any special schedule blocks (e.g., work-from-home weeks, timezone info)
 
 **While building:**
-1. Copy `template.html` verbatim into a new folder e.g. `2027-03-japan/index.html`
-2. **ONLY edit the first `<script>` block** — the one that starts right after `<body>` and ends with `// END OF DATA — DO NOT EDIT BELOW THIS LINE`. Everything after that marker is the rendering engine; never touch it.
-3. In that first `<script>`, fill in all four data objects: `TRIP_DATA`, `DAY_WEATHER`, `COST_DATA`, `DAY_CURRENCY`
+1. Create new folder e.g. `2027-03-japan/` and copy `template.html` verbatim into it as `index.html`
+2. **Edit ONLY the first `<script>` block** (ends with `// END OF DATA — DO NOT EDIT BELOW THIS LINE`). Never edit code below that marker.
+3. Fill in four data objects in that first script: `TRIP_DATA`, `DAY_WEATHER`, `COST_DATA`, `DAY_CURRENCY`
+4. **Do NOT copy PWA files** (manifest.json, sw.js). Those belong only at the root level for the main index.html. Individual trip folders don't need them.
 
 **Critical validation rules:**
 - [ ] **Flights:** Double-check dates (MM-DD), times (HH:MM format), and airport codes against confirmation email. Example: `{ date: "Aug 15", dayOfWeek: "Fri", airline: "Emirates", from: "Dubai", to: "Bali", departTime: "03:10", arriveTime: "16:35 (+1)" }`
@@ -253,51 +254,48 @@ Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes
 - [ ] **Weather widget implementation:** loadWeatherWidget() must call fetchWeather(), wmoIcon(), buildRainAlert(), weatherChartSVG()—not just return a stub. Check helpers exist (can copy from Switzerland trip).
 
 **Before pushing:**
-1. Validate JS syntax:
+1. **Validate JavaScript syntax:**
    ```bash
-   node -e "
-   const c = require('fs').readFileSync('2027-03-japan/index.html','utf8');
-   const m = c.match(/<script>([\s\S]*?)<\/script>/);
-   try { new Function(m[1]); console.log('✓ Syntax OK'); }
-   catch(e) { console.error('✗ Syntax error:', e.message); process.exit(1); }
-   "
+   node -e "const c = require('fs').readFileSync('FOLDER/index.html','utf8'); const m = c.match(/<script>([\s\S]*?)<\/script>/); try { new Function(m[1]); console.log('✓ Syntax OK'); } catch(e) { console.error('✗ Syntax error:', e.message); process.exit(1); }"
    ```
-2. Spot-check one day's rendering in a browser:
-   - Click through day tabs to verify each day view renders (not just overview)
-   - Inspect network tab for 404 images (broken Unsplash URLs)
-   - Verify day tabs are clickable and switching works
-   - Check that individual day views show ALL sections: weather, currency, activities, meals, warnings, gems, route
-   - Click Expand All/Collapse All buttons and verify sections toggle (not just render as visible)
-   - Test currency calculator by entering a value and verifying conversions work
-3. Commit + push to `main` immediately — never leave on a feature branch.
+2. **Browser spot-check:** Load the trip page and verify:
+   - Day tabs are clickable and render each day view (not just overview)
+   - Currency calculator has input fields and converts values when you type
+   - Weather widget shows data (or "loading" if no DAY_WEATHER defined)
+   - Meals, activities, warnings, and gems display correctly
+   - Expand All/Collapse All buttons toggle sections
+   - No broken images (inspect Network tab for 404s)
+3. **Commit + push to main immediately:**
+   ```bash
+   git add 2027-03-japan/
+   git commit -m "Add Japan trip 2027"
+   git push origin main
+   ```
 
-**After any edit:** commit + push using standard git flow.
+## Critical issues to avoid
 
-## Common pitfalls (learned from Bali-KL trip)
+**Data validation (check every trip before pushing):**
+1. **Flight dates/times:** Verify against booking confirmation. Use airport codes (DXB, BEY, etc.), not city names. Use HH:MM format (03:10, not 3:10am).
+2. **Hotel dates:** Check-in must match arrival day; check-out must match departure day. Use `hotel: null` for days without hotels (renderer guards against it).
+3. **All three meals required:** Every day MUST have `breakfast`, `lunch`, `dinner` in `day.meals`. Even if status is "flexible", include the object: `{ status: "flexible", note: "", restaurants: [] }`. Missing any meal crashes the page.
+4. **dayNumber starts at 1:** Increment by 1. Don't use itinerary's own numbering ("Day 8 in itinerary" → `dayNumber: 1` in data if it's the first day of the trip file).
+5. **dayOfWeek must match calendar date:** Verify "Aug 15, 2026 = Friday" before entering data. Mismatched dayOfWeek confuses travelers.
+6. **Map URLs format:** Store as `maps.google.com/?q=place+name` (no `https://`). Renderer adds it automatically; using `https://https://` breaks links.
+7. **Activity times specific:** Use "14:00–17:30", not "afternoon" or "TBD". Include subNote for logistics/timezone info.
 
-1. **Wrong flight times/dates:** Always verify against booking confirmation, not assumptions. Example: assumed 12:05 departure when it was actually 03:10.
-2. **Hotel dates misaligned:** Hotel check-in must match arrival flight day; check-out must match departure day. Misalignment cascades to day descriptions.
-3. **Multi-person trip splits not tracked:** When travelers separate (e.g., Maria stays, Juan leaves on Day 14), mark the split clearly in day titles ("Juan solo") and `passengers` array in flights.
-4. **Work-week timezone confusion:** "Work 14:00–21:00 Bali" needs explicit conversion: "Dubai 10:00–17:00 = Bali 14:00–21:00" in activity subNote. Include in day title if it spans multiple days.
-5. **Bare activities:** "Visit temple" is useless. Specify: "08:00 Padar Island sunrise trek, 20-min steep climb, bring light layer (run cold at dawn)."
-6. **Days without hotels:** Departure days often have `hotel: null`. Rendering code must guard against null (`if (!day.hotel) return ''`). Don't assume every day has a hotel.
-7. **Maps URLs with double protocol:** Store as `maps.google.com/?q=...`, NOT `https://maps.google.com/...`. Renderer adds `https://` automatically.
-8. **Missing warnings or gems:** Every day needs context for travelers. Warnings = logistics/safety; gems = insider tips or beautiful spots. Both should be specific, not generic.
-9. **Incomplete meal data:** If `meals.dinner` is missing (not just empty), page crashes. Always include all three meal types in day.meals, even if { status: "flexible", note: "", restaurants: [] }.
-10. **No dayOfWeek or wrong dayOfWeek:** Always include exact day of week ("Fri", "Sat", etc.). If dayOfWeek doesn't match the date, travelers get confused. Verify: Aug 15, 2026 = Friday.
-11. **Not validating JS syntax before push:** Syntax errors in the script tag don't show in browser console—page just fails silently. Always run node validation.
-12. **Feature branch instead of main:** Live site only serves from main. Changes on feature branches are invisible. Always push to main immediately.
-13. **Incomplete renderDayContent function:** Day view rendering must include ALL sections: currency calculator, weather widget, flight, hotel, activities, meals, route maps, warnings, hidden gems, daily cost bar. Template renderDayContent() was incomplete (only flight/hotel/activities/meals). Copy the complete version from Switzerland trip.
-14. **Missing CSS for day-view sections:** Weather (`.section-weather`, `.weather-sun-row`, `.weather-loading`, etc.) and currency (`.section-calc`, `.calc-row`, `.calc-input`, `.calc-footer`, etc.) sections need complete CSS. Don't assume these are in the template—verify or add them. Also add `.expand-all-container` and button styles.
-15. **Currency calculator must be functional:** `renderCalcSection()` cannot be a stub. Must generate HTML with input fields and wire them to `dcConvert()`, `dcRefresh()`, `dcUpdateNote()` functions. Also ensure `fetchCalcRates()` exists and runs before page load.
-16. **Expand All/Collapse All button handlers missing:** `attachCollapsibleHandlers()` must include handlers for `.btn-expand-all` and `.btn-collapse-all`. Without them, the buttons render but do nothing. Handlers must find parent `.day-view` and toggle all `.section-header` and `.section-content` elements.
-17. **Unsplash photo IDs can break:** Specific photo IDs (`photo-XXXXXXX`) may become unavailable. Test a sample of URLs before finalizing; use popular/stable photos. Consider storing images locally if IDs continue to fail, or use generic Unsplash search URLs (less ideal but more stable).
-18. **Weather widget requires full implementation:** `loadWeatherWidget()` cannot be a stub. Needs `fetchWeather()`, `wmoIcon()`, `buildRainAlert()`, `weatherChartSVG()`, and `refreshWeather()` helpers. Copy from Switzerland trip if building from template.
-19. **Wrong day-of-week for flight dates:** Always verify dayOfWeek matches the calendar date before data entry. Example: assumed Aug 15 was Friday when it was actually Saturday. Cross-check against a real calendar (e.g., https://calendar.google.com) or verify each date. Misaligned dayOfWeek cascades through day tabs and confuses travelers.
-20. **Meals section UI too verbose:** The renderMealsSection() function was rendering restaurant cards with Select/Maps buttons, taking up too much space. Updated template now renders meals compactly: status badge inline with meal type name (breakfast/lunch/dinner on same line), restaurant cards show only name + description + star rating + map icon (no buttons). This was applied to template.html.
-21. **Missing meal emojis in section headers:** Added 🍽️ emoji to meals section header for visual consistency with other sections. Template updated to include this.
-22. **Hero section needs image fallback:** The `.hero` section must include `background-color`, `min-height`, `display: flex`, and `flex-direction: column` so it renders gracefully if the background image fails to load (Unsplash photo IDs can break). Updated template now has this fallback styling.
-23. **Instagram highlights not added to overview:** Optional feature: add Instagram story highlight links at the top of the overview page. Links have gradient Instagram styling (linear-gradient: #833ab4, #fd1d1d, #fcb045), camera emoji, region/photo name, and description. If not applicable to a trip, simply omit — no placeholder needed. Format: `<a href="https://www.instagram.com/stories/highlights/[ID]/?hl=en" target="_blank" style="display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);border-radius:10px;padding:14px 18px;margin-bottom:16px;text-decoration:none;color:#fff;"><span style="font-size:28px;line-height:1;">📸</span><div><div style="font-weight:700;font-size:15px;">Region Name</div><div style="font-size:11px;opacity:0.85;margin-top:2px;">Instagram Story · Days X–Y</div></div><span style="margin-left:auto;font-size:18px;opacity:0.8;">↗</span></a>`
+**Code validation (run before pushing):**
+1. **JavaScript syntax:** Run node validation as shown in "Before pushing" section above. Silent failures occur if syntax is wrong.
+2. **Browser test:** Load page, click day tabs, test calculator, verify all sections render (weather, currency, activities, meals, warnings, gems).
+3. **Unsplash photos:** Test a sample of backgroundImage URLs. Specific photo IDs can break; use popular/stable photos or local images.
+
+**Multi-traveler trips:**
+- Track who travels on which legs using `passengers` array in flights.
+- Mark traveler splits clearly in day titles: "Juan solo" when one traveler leaves.
+- For work weeks with timezone changes, show conversion: "Work 14:00–21:00 Bali (Dubai 10:00–17:00)" in activity subNote.
+
+**Don't add to individual trip folders:**
+- PWA files (manifest.json, sw.js) — only needed at root level for main index.html
+- Instagram highlights are optional — omit if not applicable, don't add placeholder
 
 ## Puerto Rico 2026 trip summary
 - **Travellers:** Mamá (76), Papá (81), Giova, Ari (23), Coki, Liz, Emma (8), Matías (16), JC, Maria — 10 total
