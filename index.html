@@ -156,6 +156,9 @@
       position: relative;
       height: 160px;
       overflow: hidden;
+      background-color: var(--bg-tertiary);
+      background-size: cover;
+      background-position: center;
     }
     .trip-cover img {
       width: 100%;
@@ -163,6 +166,7 @@
       object-fit: cover;
       display: block;
       transition: transform 0.4s ease;
+      background-color: transparent;
     }
     .trip-card:hover .trip-cover img { transform: scale(1.05); }
     .trip-cover-overlay {
