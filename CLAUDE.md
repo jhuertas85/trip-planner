@@ -26,8 +26,10 @@ trip-planner/
 │   └── index.html             # Puerto Rico Jul 2026 (10 people · Luquillo · Jul 8–12)
 ├── 2026-07-marias-trip/
 │   └── index.html             # Maria's Trip July–Aug 2026 (Dubai · Madrid · Puerto Rico · Kraków · London)
-└── 2026-08-bali-kuala-lumpur/
-    └── index.html             # Bali → Komodo → Kuala Lumpur Aug 2026 (Juan Carlos & Maria, then Juan solo)
+├── 2026-08-bali-kuala-lumpur/
+│   └── index.html             # Bali → Komodo → Kuala Lumpur Aug 2026 (Juan Carlos & Maria, then Juan solo)
+└── 2026-10-thailand/
+    └── index.html             # Thailand Oct 31 – Nov 8 2026 (Juan Carlos & Maria · Bangkok → Chiang Mai → Chiang Rai)
 ```
 
 Each trip is a self-contained single HTML file. All trip data lives in four JavaScript objects near the top of the rendering script. The rendering engine reads from those objects — **only edit `TRIP_DATA`, `DAY_WEATHER`, `COST_DATA`, and `DAY_CURRENCY` for content changes**, not the rendering code.
@@ -379,3 +381,10 @@ Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes
 - **Currencies:** IDR (Bali/Komodo, days 1–13) · MYR (Kuala Lumpur, days 14–16)
 - **Bookings pending:** Uluwatu tour, Rangko Cave + Batu Cermin, Nusa Penida manta tour, Ubud tour, Petronas Towers deck tickets
 - **Key features:** Work-life balance (mornings free, work afternoons Dubai time), Komodo liveaboard adventure, solo travel finale in KL, rich restaurant scene notes, hidden gems listed daily
+
+## Thailand Oct–Nov 2026 trip summary
+- **Travellers:** Juan Carlos, Maria
+- **Dates:** Oct 31 – Nov 8, 2026 (9 days · Sat–Sun)
+- **Flights:** arrive DMK Oct 31 10:05 · DMK→CNX Nov 2 09:05–10:20 · CEI→Bangkok Nov 6 10:25–11:45 · Bangkok→DXB Nov 8 early (airlines/numbers TBC)
+- **Hotels:** Four Points Sukhumvit 22 (Oct 31–Nov 2, Nov 6–8) · Baan Huenphen, Chiang Mai (Nov 2–4) · Le Méridien Chiang Rai (Nov 4–6)
+- **Currency:** THB all days
