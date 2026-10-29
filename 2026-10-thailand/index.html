@@ -1378,21 +1378,21 @@
             checkInUrl: null,
 
             flights: [
-                { date: "Oct 31", dayOfWeek: "Sat", airline: "TBC", from: "DXB", to: "DMK", departTime: "TBC", arriveTime: "10:05", terminal: "Don Mueang (DMK)", passengers: ["Juan Carlos", "Maria"] },
-                { date: "Nov 2", dayOfWeek: "Mon", airline: "TBC (confirmed)", from: "DMK", to: "CNX", departTime: "09:05", arriveTime: "10:20", terminal: "Don Mueang (DMK)", passengers: ["Juan Carlos", "Maria"] },
-                { date: "Nov 6", dayOfWeek: "Fri", airline: "TBC (confirmed)", from: "CEI", to: "BKK", departTime: "10:25", arriveTime: "11:45", terminal: "Confirm Bangkok airport (DMK or BKK)", passengers: ["Juan Carlos", "Maria"] },
-                { date: "Nov 8", dayOfWeek: "Sun", airline: "TBC", from: "BKK", to: "DXB", departTime: "TBC (early morning)", arriveTime: "TBC", terminal: "Confirm departure airport", passengers: ["Juan Carlos", "Maria"] }
+                { date: "Oct 31", dayOfWeek: "Sat", airline: "flydubai FZ 1583 · Business", from: "DXB", to: "DMK", departTime: "00:50", arriveTime: "10:05", terminal: "DXB Terminal 3", passengers: ["Juan Carlos", "Maria"] },
+                { date: "Nov 2", dayOfWeek: "Mon", airline: "AirAsia FD 3443 · Booking WBB88C", from: "DMK", to: "CNX", departTime: "10:10", arriveTime: "11:20", terminal: "Don Mueang (DMK) · rescheduled", passengers: ["Juan Carlos", "Maria"] },
+                { date: "Nov 6", dayOfWeek: "Fri", airline: "AirAsia FD 3204 · Booking IY87RF", from: "CEI", to: "DMK", departTime: "10:05", arriveTime: "11:25", terminal: "Lands Don Mueang (DMK) · rescheduled", passengers: ["Juan Carlos", "Maria"] },
+                { date: "Nov 8", dayOfWeek: "Sun", airline: "flydubai FZ 1584 · Economy Lite", from: "DMK", to: "DXB", departTime: "11:10", arriveTime: "15:30", terminal: "Arrives DXB Terminal 3", passengers: ["Juan Carlos", "Maria"] },
             ],
             days: [
                 {
                     dayNumber: 1, date: "Oct 31", dayOfWeek: "Sat",
                     title: "Arrival · Grand Palace, Wat Pho & Chinatown", location: "Bangkok, Thailand",
                     backgroundImage: "https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=800",
-                    flight: { airline: "TBC", from: "DXB", to: "DMK", departTime: "TBC", arriveTime: "10:05", terminal: "Don Mueang (DMK)" },
+                    flight: { airline: "flydubai FZ 1583 · Business", from: "DXB", to: "DMK", departTime: "00:50", arriveTime: "10:05", terminal: "DXB Terminal 3 → Don Mueang" },
                     hotel: { name: "Four Points by Sheraton Bangkok, Sukhumvit 22", status: "confirmed", note: "Check-in · drop luggage if room not ready (Oct 31 – Nov 2)", bookedBy: null, mapsUrl: "maps.google.com/?q=Four+Points+by+Sheraton+Bangkok+Sukhumvit+22" },
                     drive: null,
                     activities: [
-                        { time: "10:05", text: "Arrive at Don Mueang Airport (DMK) from Dubai", subNote: "Immigration, baggage & transfer into Bangkok — allow 45–90 min or more depending on traffic. Drop luggage at the hotel if the room isn't ready.", needsBooking: false, mapsUrl: "maps.google.com/?q=Don+Mueang+International+Airport" },
+                        { time: "10:05", text: "Arrive at Don Mueang Airport (DMK) — FZ 1583 from Dubai", subNote: "Departs DXB T3 00:50 (overnight, Business). Immigration, baggage & transfer into Bangkok — allow 45–90 min or more depending on traffic. Drop luggage at the hotel if the room isn't ready.", needsBooking: false, mapsUrl: "maps.google.com/?q=Don+Mueang+International+Airport" },
                         { time: "12:00–14:15", text: "Grand Palace & Wat Phra Kaew", subNote: "~THB 500 per adult · ticket sales usually end 15:30. Keep timing flexible — if delayed, move it to another morning rather than rushing.", needsBooking: false, mapsUrl: "maps.google.com/?q=Grand+Palace+Bangkok" },
                         { time: "14:15–15:00", text: "Late lunch at The Sixth", subNote: "Casual Thai near Wat Pho", needsBooking: false, mapsUrl: "maps.google.com/?q=The+Sixth+Restaurant+Bangkok" },
                         { time: "15:00–16:15", text: "Wat Pho — Reclining Buddha & temple grounds", subNote: "~THB 300 per adult", needsBooking: false, mapsUrl: "maps.google.com/?q=Wat+Pho+Bangkok" },
@@ -1461,18 +1461,18 @@
                     dayNumber: 3, date: "Nov 2", dayOfWeek: "Mon",
                     title: "Fly to Chiang Mai · Doi Suthep, Old City & Muay Thai", location: "Chiang Mai, Thailand",
                     backgroundImage: "https://images.unsplash.com/photo-1528181304800-259b08848526?w=800",
-                    flight: { airline: "TBC (confirmed)", from: "DMK", to: "CNX", departTime: "09:05", arriveTime: "10:20", terminal: "Don Mueang (DMK)" },
+                    flight: { airline: "AirAsia FD 3443 · Booking WBB88C", from: "DMK", to: "CNX", departTime: "10:10", arriveTime: "11:20", terminal: "Don Mueang (DMK) · rescheduled from 09:45" },
                     hotel: {
                         name: "Four Points by Sheraton Bangkok, Sukhumvit 22", status: "confirmed", note: "Early checkout before the airport transfer", bookedBy: null, mapsUrl: "maps.google.com/?q=Four+Points+by+Sheraton+Bangkok+Sukhumvit+22",
                         altHotel: { name: "Baan Huenphen, Chiang Mai Old City", status: "confirmed", note: "Check-in ~14:30 (Nov 2 – 4)", mapsUrl: "maps.google.com/?q=Baan+Huenphen+Chiang+Mai" }
                     },
                     drive: null,
                     activities: [
-                        { time: "06:45", text: "Check out & transfer to Don Mueang (DMK)", subNote: "Flight DMK → CNX 09:05–10:20", needsBooking: false },
-                        { time: "10:20", text: "Arrive Chiang Mai — private driver meets you", subNote: "Pre-booked driver straight to Doi Suthep with luggage in the vehicle — confirm luggage can stay safely in the car", needsBooking: true },
-                        { time: "11:45–13:00", text: "Wat Phra That Doi Suthep", subNote: "Hilltop temple with city views · 300+ steps or the funicular", needsBooking: false, mapsUrl: "maps.google.com/?q=Wat+Phra+That+Doi+Suthep" },
-                        { time: "13:00–13:45", text: "Lunch on the way back to the Old City", subNote: "", needsBooking: false },
-                        { time: "14:30", text: "Check in at Baan Huenphen · short break", subNote: "", needsBooking: false },
+                        { time: "07:30", text: "Check out & transfer to Don Mueang (DMK)", subNote: "AirAsia FD 3443 now 10:10–11:20 (rescheduled) · booking WBB88C", needsBooking: false },
+                        { time: "11:20", text: "Arrive Chiang Mai — private driver meets you", subNote: "Pre-booked driver straight to Doi Suthep with luggage in the vehicle — confirm luggage can stay safely in the car. Tell the driver the new 11:20 arrival.", needsBooking: true },
+                        { time: "12:15–13:30", text: "Wat Phra That Doi Suthep", subNote: "Hilltop temple with city views · 300+ steps or the funicular", needsBooking: false, mapsUrl: "maps.google.com/?q=Wat+Phra+That+Doi+Suthep" },
+                        { time: "13:30–14:15", text: "Lunch on the way back to the Old City", subNote: "", needsBooking: false },
+                        { time: "14:45", text: "Check in at Baan Huenphen · short break", subNote: "", needsBooking: false },
                         { time: "15:30–17:00", text: "Old City stroll — Wat Chedi Luang & Wat Phra Singh", subNote: "Relaxed pace · Wat Phra Singh if time permits · lanes, cafés, Lanna architecture", needsBooking: false, mapsUrl: "maps.google.com/?q=Wat+Chedi+Luang+Chiang+Mai" },
                         { time: "17:15–18:15", text: "Sunset drinks at SALT & FIRE Rooftop Bar", subNote: "", needsBooking: false, mapsUrl: "maps.google.com/?q=SALT+%26+FIRE+Rooftop+Bar+Chiang+Mai" },
                         { time: "18:30–20:00", text: "Dinner in the Old City", subNote: "", needsBooking: false },
@@ -1577,15 +1577,15 @@
                         { time: "08:30–10:00", text: "Wat Rong Khun (White Temple)", subNote: "Private driver for the day (or Grab — TBD) · arrive early to beat the crowds", needsBooking: true, mapsUrl: "maps.google.com/?q=Wat+Rong+Khun" },
                         { time: "10:15–11:00", text: "Wat Rong Suea Ten (Blue Temple)", subNote: "", needsBooking: false, mapsUrl: "maps.google.com/?q=Wat+Rong+Suea+Ten" },
                         { time: "11:15–12:15", text: "Baan Dam Museum (Black House) — optional", subNote: "", needsBooking: false, mapsUrl: "maps.google.com/?q=Baan+Dam+Museum" },
-                        { time: "12:15–13:15", text: "Lunch (saved spot)", subNote: "Pin from your list", needsBooking: false, mapsUrl: "maps.app.goo.gl/Juy3gyFnQpijVkhKA" },
+                        { time: "12:15–13:15", text: "Lunch at Chivit Thamma Da Coffee House, Bistro & Bar", subNote: "ชีวิตธรรมดา คอฟฟี่เฮาส์ บิสโทร บาร์ · riverside colonial-style house", needsBooking: false, mapsUrl: "maps.app.goo.gl/Juy3gyFnQpijVkhKA" },
                         { time: "13:15", text: "Spa at Riva Vista — walk from lunch", subNote: "Then walk back to Le Méridien", needsBooking: true, mapsUrl: "maps.app.goo.gl/6T8DyNDwPc82ecyN9" },
                         { time: "14:00–16:00", text: "Choui Fong Tea Plantation — optional", subNote: "Only if you want a fuller day and the drive works (~1h north) — it conflicts with the spa", needsBooking: false, mapsUrl: "maps.google.com/?q=Choui+Fong+Tea+Plantation" },
                         { time: "Evening", text: "Relax at Le Méridien, or Night Bazaar & Clock Tower in town", subNote: "", needsBooking: false, mapsUrl: "maps.google.com/?q=Chiang+Rai+Clock+Tower" }
                     ],
                     meals: {
                         breakfast: { status: "included", note: "At the resort (confirm)", restaurants: [] },
-                        lunch: { status: "confirmed", note: "Saved spot near Riva Vista", restaurants: [
-                            { name: "Lunch spot (your saved pin)", desc: "Walking distance to the Riva Vista spa", rating: "", mapsUrl: "maps.app.goo.gl/Juy3gyFnQpijVkhKA" }
+                        lunch: { status: "confirmed", note: "Chivit Thamma Da — walk to Riva Vista spa afterwards", restaurants: [
+                            { name: "Chivit Thamma Da Coffee House, Bistro & Bar", desc: "ชีวิตธรรมดา · Thai & Western in a riverside garden house · walking distance to Riva Vista", rating: "4.5★", mapsUrl: "maps.app.goo.gl/Juy3gyFnQpijVkhKA" }
                         ]},
                         dinner: { status: "flexible", note: "Resort, Night Bazaar or town", restaurants: [] }
                     },
@@ -1603,15 +1603,15 @@
                     dayNumber: 7, date: "Nov 6", dayOfWeek: "Fri",
                     title: "Fly to Bangkok · Easy Afternoon & Rooftops", location: "Bangkok, Thailand",
                     backgroundImage: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=800",
-                    flight: { airline: "TBC (confirmed)", from: "CEI", to: "BKK", departTime: "10:25", arriveTime: "11:45", terminal: "Confirm Bangkok airport (DMK or BKK)" },
+                    flight: { airline: "AirAsia FD 3204 · Booking IY87RF", from: "CEI", to: "DMK", departTime: "10:05", arriveTime: "11:25", terminal: "Lands Don Mueang (DMK) · rescheduled from 10:25" },
                     hotel: {
-                        name: "Le Méridien Chiang Rai Resort", status: "confirmed", note: "Checkout · leave ~08:30–08:45", bookedBy: null, mapsUrl: "maps.google.com/?q=Le+Meridien+Chiang+Rai+Resort",
+                        name: "Le Méridien Chiang Rai Resort", status: "confirmed", note: "Checkout · leave ~08:15", bookedBy: null, mapsUrl: "maps.google.com/?q=Le+Meridien+Chiang+Rai+Resort",
                         altHotel: { name: "Four Points by Sheraton Bangkok, Sukhumvit 22", status: "confirmed", note: "Check-in / drop luggage if room not ready (Nov 6 – 8)", mapsUrl: "maps.google.com/?q=Four+Points+by+Sheraton+Bangkok+Sukhumvit+22" }
                     },
                     drive: null,
                     activities: [
-                        { time: "08:30–08:45", text: "Leave the resort for Chiang Rai Airport", subNote: "Reconfirm the airport transfer the day before · flight CEI → Bangkok 10:25–11:45", needsBooking: true },
-                        { time: "12:45", text: "Transfer to Four Points Sukhumvit 22 · drop luggage or check in", subNote: "", needsBooking: false },
+                        { time: "08:15", text: "Leave the resort for Chiang Rai Airport", subNote: "AirAsia FD 3204 now 10:05–11:25 (rescheduled 20 min earlier) · booking IY87RF · reconfirm the transfer the day before", needsBooking: true },
+                        { time: "12:30", text: "Transfer DMK → Four Points Sukhumvit 22 · drop luggage or check in", subNote: "Allow 45–90 min from Don Mueang depending on traffic", needsBooking: false },
                         { time: "Afternoon", text: "Keep it flexible: hotel pool, or Emporium · EmQuartier · EmSphere", subNote: "All on Sukhumvit, close to the hotel", needsBooking: false, mapsUrl: "maps.google.com/?q=EmQuartier+Bangkok" },
                         { time: "Afternoon", text: "Alternative: ICONSIAM riverside shopping", subNote: "Allow time for the journey · SookSiam for regional Thai food", needsBooking: false, mapsUrl: "maps.google.com/?q=ICONSIAM+Bangkok" },
                         { time: "Evening", text: "Rooftop drink & relaxed dinner", subNote: "Octave · ABar · The Speakeasy", needsBooking: false, mapsUrl: "maps.google.com/?q=ABar+Rooftop+Bangkok" },
@@ -1624,7 +1624,7 @@
                     },
                     route: null,
                     warnings: [
-                        "⚠️ Confirm whether the flight lands at DMK or BKK — it changes the transfer time",
+                        "⚠️ Flight was moved 20 min earlier (10:05) — don't leave the resort late",
                         "⚠️ Friday evening traffic is heavy — use the BTS on Sukhumvit"
                     ],
                     gems: [
@@ -1637,13 +1637,13 @@
                     title: "Ancient Siam (Muang Boran) & Final Evening", location: "Samut Prakan / Bangkok, Thailand",
                     backgroundImage: "https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=800",
                     flight: null,
-                    hotel: { name: "Four Points by Sheraton Bangkok, Sukhumvit 22", status: "confirmed", note: "Final night · pack for early flight", bookedBy: null, mapsUrl: "maps.google.com/?q=Four+Points+by+Sheraton+Bangkok+Sukhumvit+22" },
+                    hotel: { name: "Four Points by Sheraton Bangkok, Sukhumvit 22", status: "confirmed", note: "Final night · pack for tomorrow's 11:10 flight", bookedBy: null, mapsUrl: "maps.google.com/?q=Four+Points+by+Sheraton+Bangkok+Sukhumvit+22" },
                     drive: { from: "Bangkok", to: "Ancient Siam, Samut Prakan", duration: "45–75 min each way", distance: "~35 km" },
                     activities: [
                         { time: "08:30–09:00", text: "Depart Bangkok", subNote: "Grab or private driver · 45–75 min depending on traffic", needsBooking: false },
                         { time: "10:00–15:30", text: "Explore Ancient Siam (Muang Boran)", subNote: "Huge open-air museum of Thai landmarks · plan 4–5 h · rent an electric cart or bike · listed hours 09:00–19:00, foreign adult ~THB 800 — verify before going", needsBooking: false, mapsUrl: "maps.google.com/?q=Ancient+Siam+Muang+Boran" },
                         { time: "15:30–17:00", text: "Return to Bangkok", subNote: "", needsBooking: false },
-                        { time: "Evening", text: "Final dinner & rooftop drink", subNote: "Back to the hotel and pack for the early flight", needsBooking: false }
+                        { time: "Evening", text: "Final dinner & rooftop drink", subNote: "Back to the hotel and pack — flight home tomorrow 11:10 from DMK", needsBooking: false }
                     ],
                     meals: {
                         breakfast: { status: "included", note: "At the hotel", restaurants: [] },
@@ -1667,20 +1667,22 @@
                     dayNumber: 9, date: "Nov 8", dayOfWeek: "Sun",
                     title: "Departure to Dubai", location: "Bangkok, Thailand",
                     backgroundImage: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=800",
-                    flight: { airline: "TBC", from: "BKK", to: "DXB", departTime: "TBC (early morning)", arriveTime: "TBC", terminal: "Confirm departure airport" },
-                    hotel: { name: "Four Points by Sheraton Bangkok, Sukhumvit 22", status: "confirmed", note: "Early checkout", bookedBy: null, mapsUrl: "maps.google.com/?q=Four+Points+by+Sheraton+Bangkok+Sukhumvit+22" },
+                    flight: { airline: "flydubai FZ 1584 · Economy Lite", from: "DMK", to: "DXB", departTime: "11:10", arriveTime: "15:30", terminal: "Don Mueang → DXB Terminal 3" },
+                    hotel: { name: "Four Points by Sheraton Bangkok, Sukhumvit 22", status: "confirmed", note: "Checkout ~08:00", bookedBy: null, mapsUrl: "maps.google.com/?q=Four+Points+by+Sheraton+Bangkok+Sukhumvit+22" },
                     drive: null,
                     activities: [
-                        { time: "Early morning", text: "Check out & pre-arranged airport transfer", subNote: "Before leaving: reconfirm departure airport, terminal & check-in time · allow a generous buffer", needsBooking: true }
+                        { time: "07:30", text: "Breakfast at the hotel", subNote: "", needsBooking: false },
+                        { time: "08:00", text: "Check out & transfer to Don Mueang (DMK)", subNote: "Allow 45–90 min in traffic · aim to arrive ~3 h before departure", needsBooking: true },
+                        { time: "11:10", text: "Fly home — flydubai FZ 1584 DMK → DXB", subNote: "Economy Lite · arrives Dubai Terminal 3 at 15:30", needsBooking: false }
                     ],
                     meals: {
-                        breakfast: { status: "flexible", note: "Airport", restaurants: [] },
+                        breakfast: { status: "included", note: "At the hotel before checkout", restaurants: [] },
                         lunch: { status: "flexible", note: "On board / Dubai", restaurants: [] },
                         dinner: { status: "flexible", note: "Home", restaurants: [] }
                     },
                     route: null,
                     warnings: [
-                        "⚠️ Arrange the transfer in advance — Grab availability at dawn can be patchy"
+                        "⚠️ Economy Lite = no checked bag by default — check baggage allowance before packing market shopping"
                     ],
                     gems: [
                         "💡 Spend leftover Baht at the airport — Thai snacks and dried mango make good gifts"
