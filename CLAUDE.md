@@ -387,4 +387,5 @@ Leave as `{}` if the trip uses only AED / USD / EUR. Use ISO 4217 currency codes
 - **Dates:** Oct 31 – Nov 8, 2026 (9 days · Sat–Sun)
 - **Flights:** arrive DMK Oct 31 10:05 · DMK→CNX Nov 2 09:05–10:20 · CEI→Bangkok Nov 6 10:25–11:45 · Bangkok→DXB Nov 8 early (airlines/numbers TBC)
 - **Hotels:** Four Points Sukhumvit 22 (Oct 31–Nov 2, Nov 6–8) · Baan Huenphen, Chiang Mai (Nov 2–4) · Le Méridien Chiang Rai (Nov 4–6)
+- **Key days:** D1 Grand Palace + Wat Pho + massage · D2 riverside tour + Supanniga lunch + Wat Arun · D6 Chiang Rai temples + Riva Vista spa · D8 Ancient Siam (Muang Boran)
 - **Currency:** THB all days

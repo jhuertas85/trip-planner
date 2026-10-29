@@ -1379,30 +1379,35 @@
 
             flights: [
                 { date: "Oct 31", dayOfWeek: "Sat", airline: "TBC", from: "DXB", to: "DMK", departTime: "TBC", arriveTime: "10:05", terminal: "Don Mueang (DMK)", passengers: ["Juan Carlos", "Maria"] },
-                { date: "Nov 2", dayOfWeek: "Mon", airline: "TBC", from: "DMK", to: "CNX", departTime: "09:05", arriveTime: "10:20", terminal: "Don Mueang (DMK)", passengers: ["Juan Carlos", "Maria"] },
-                { date: "Nov 6", dayOfWeek: "Fri", airline: "TBC", from: "CEI", to: "BKK", departTime: "10:25", arriveTime: "11:45", terminal: "Confirm Bangkok airport (DMK or BKK)", passengers: ["Juan Carlos", "Maria"] },
+                { date: "Nov 2", dayOfWeek: "Mon", airline: "TBC (confirmed)", from: "DMK", to: "CNX", departTime: "09:05", arriveTime: "10:20", terminal: "Don Mueang (DMK)", passengers: ["Juan Carlos", "Maria"] },
+                { date: "Nov 6", dayOfWeek: "Fri", airline: "TBC (confirmed)", from: "CEI", to: "BKK", departTime: "10:25", arriveTime: "11:45", terminal: "Confirm Bangkok airport (DMK or BKK)", passengers: ["Juan Carlos", "Maria"] },
                 { date: "Nov 8", dayOfWeek: "Sun", airline: "TBC", from: "BKK", to: "DXB", departTime: "TBC (early morning)", arriveTime: "TBC", terminal: "Confirm departure airport", passengers: ["Juan Carlos", "Maria"] }
             ],
             days: [
                 {
                     dayNumber: 1, date: "Oct 31", dayOfWeek: "Sat",
-                    title: "Arrival · Grand Palace, Walking Tour & Chinatown", location: "Bangkok, Thailand",
+                    title: "Arrival · Grand Palace, Wat Pho & Chinatown", location: "Bangkok, Thailand",
                     backgroundImage: "https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=800",
                     flight: { airline: "TBC", from: "DXB", to: "DMK", departTime: "TBC", arriveTime: "10:05", terminal: "Don Mueang (DMK)" },
-                    hotel: { name: "Four Points by Sheraton Bangkok, Sukhumvit 22", status: "confirmed", note: "Check-in · drop luggage on arrival (Oct 31 – Nov 2)", bookedBy: null, mapsUrl: "maps.google.com/?q=Four+Points+by+Sheraton+Bangkok+Sukhumvit+22" },
+                    hotel: { name: "Four Points by Sheraton Bangkok, Sukhumvit 22", status: "confirmed", note: "Check-in · drop luggage if room not ready (Oct 31 – Nov 2)", bookedBy: null, mapsUrl: "maps.google.com/?q=Four+Points+by+Sheraton+Bangkok+Sukhumvit+22" },
                     drive: null,
                     activities: [
-                        { time: "10:05", text: "Arrive at Don Mueang Airport (DMK)", subNote: "Transfer to Four Points Sukhumvit 22 · drop luggage, freshen up, quick lunch", needsBooking: false, mapsUrl: "maps.google.com/?q=Don+Mueang+International+Airport" },
-                        { time: "12:30–14:15", text: "Grand Palace & Wat Phra Kaew (optional)", subNote: "Only if the flight is on time and transfer is quick. Allow time for security & tickets. Leave by ~14:15 for the tour. If delayed, skip and prioritise the 15:00 tour.", needsBooking: false, mapsUrl: "maps.google.com/?q=Grand+Palace+Bangkok" },
-                        { time: "15:00", text: "GetYourGuide walking tour — meet at MRT Sanam Chai (BL31), Exit 3", subNote: "Street level, guide at Exit 3. Stops: Wat Pho Pier (views of Wat Arun) → Wat Pho (outside) → tunnel to Grand Palace (outside) → City Pillar Shrine (San Lak Mueang). Arrive 15–20 min early.", needsBooking: true, mapsUrl: "maps.google.com/?q=MRT+Sanam+Chai+Station+Exit+3" },
-                        { time: "After tour", text: "Wat Pho — Reclining Buddha", subNote: "Enter only if the tour ends early enough — check closing time in advance. Grab a street-food snack nearby.", needsBooking: false, mapsUrl: "maps.google.com/?q=Wat+Pho+Bangkok" },
-                        { time: "Evening", text: "Chinatown (Yaowarat) — street food & neon", subNote: "Optional drinks in Soi Nana Chinatown: Teens of Thailand or Ba Hao. Return to hotel when ready.", needsBooking: false, mapsUrl: "maps.google.com/?q=Yaowarat+Road+Bangkok" }
+                        { time: "10:05", text: "Arrive at Don Mueang Airport (DMK) from Dubai", subNote: "Immigration, baggage & transfer into Bangkok — allow 45–90 min or more depending on traffic. Drop luggage at the hotel if the room isn't ready.", needsBooking: false, mapsUrl: "maps.google.com/?q=Don+Mueang+International+Airport" },
+                        { time: "12:00–14:15", text: "Grand Palace & Wat Phra Kaew", subNote: "~THB 500 per adult · ticket sales usually end 15:30. Keep timing flexible — if delayed, move it to another morning rather than rushing.", needsBooking: false, mapsUrl: "maps.google.com/?q=Grand+Palace+Bangkok" },
+                        { time: "14:15–15:00", text: "Late lunch at The Sixth", subNote: "Casual Thai near Wat Pho", needsBooking: false, mapsUrl: "maps.google.com/?q=The+Sixth+Restaurant+Bangkok" },
+                        { time: "15:00–16:15", text: "Wat Pho — Reclining Buddha & temple grounds", subNote: "~THB 300 per adult", needsBooking: false, mapsUrl: "maps.google.com/?q=Wat+Pho+Bangkok" },
+                        { time: "16:15–17:15", text: "Traditional Thai massage — Wat Pho Thai Traditional Medical School", subNote: "~THB 340 (30 min) · ~THB 520 (60 min) — check current rates & last appointments on site", needsBooking: false, mapsUrl: "maps.google.com/?q=Wat+Pho+Thai+Traditional+Medical+and+Massage+School" },
+                        { time: "17:15–18:00", text: "Riverside walk", subNote: "Along the Chao Phraya by Tha Tien — views of Wat Arun", needsBooking: false, mapsUrl: "maps.google.com/?q=Tha+Tien+Pier+Bangkok" },
+                        { time: "Evening", text: "Option A: Yaowarat (Chinatown) street food", subNote: "Lively evening atmosphere · optional drinks at Teens of Thailand or Ba Hao (Soi Nana)", needsBooking: false, mapsUrl: "maps.google.com/?q=Yaowarat+Road+Bangkok" },
+                        { time: "Evening", text: "Option B: Hotel shower & rest, dinner nearby", subNote: "Choose according to energy", needsBooking: false }
                     ],
                     meals: {
                         breakfast: { status: "flexible", note: "On the plane / airport", restaurants: [] },
-                        lunch: { status: "flexible", note: "Quick lunch near the hotel before heading out", restaurants: [] },
-                        dinner: { status: "options", note: "Chinatown street food crawl", restaurants: [
-                            { name: "Nai Ek Roll Noodle", desc: "First choice · peppery rolled-noodle soup & crispy pork", rating: "4.4★", mapsUrl: "maps.google.com/?q=Nai+Ek+Roll+Noodle+Bangkok" },
+                        lunch: { status: "options", note: "Late lunch between Grand Palace and Wat Pho", restaurants: [
+                            { name: "The Sixth", desc: "Casual Thai · a few minutes from Wat Pho", rating: "4.5★", mapsUrl: "maps.google.com/?q=The+Sixth+Restaurant+Bangkok" }
+                        ]},
+                        dinner: { status: "options", note: "Chinatown (Option A) or near the hotel (Option B)", restaurants: [
+                            { name: "Nai Ek Roll Noodle", desc: "Peppery rolled-noodle soup & crispy pork", rating: "4.4★", mapsUrl: "maps.google.com/?q=Nai+Ek+Roll+Noodle+Bangkok" },
                             { name: "T&K Seafood", desc: "Iconic green-shirt seafood corner on Yaowarat", rating: "4.2★", mapsUrl: "maps.google.com/?q=T%26K+Seafood+Yaowarat" },
                             { name: "Guay Jub Ouan Pochana", desc: "Michelin Bib · peppery rolled noodles", rating: "4.4★", mapsUrl: "maps.google.com/?q=Guay+Jub+Ouan+Pochana" },
                             { name: "Jay Fai", desc: "Michelin-star crab omelette · only if open & queue is manageable", rating: "4.4★", mapsUrl: "maps.google.com/?q=Jay+Fai+Bangkok" }
@@ -1410,53 +1415,53 @@
                     },
                     route: null,
                     warnings: [
+                        "⚠️ Ambitious day — if immigration or traffic delays you, don't rush the Grand Palace; move it to another morning",
                         "⚠️ Grand Palace dress code is strict: shoulders and knees covered, no ripped trousers — they will turn you away",
                         "⚠️ Ignore strangers near the Grand Palace saying it's 'closed today' — classic tuk-tuk gem scam"
                     ],
                     gems: [
-                        "💡 Wat Pho Pier at golden hour gives the best free view of Wat Arun across the river",
+                        "💡 The Wat Pho massage school is where Thai massage is taught — cheaper and more authentic than spa chains",
                         "💡 Teens of Thailand is a tiny gin bar hidden behind an old wooden door on Soi Nana"
                     ]
                 },
                 {
                     dayNumber: 2, date: "Nov 1", dayOfWeek: "Sun",
-                    title: "Riverside Walking Tour, Temples & Rooftops", location: "Bangkok, Thailand",
+                    title: "Riverside Walking Tour, Thai Lunch & Wat Arun", location: "Bangkok, Thailand",
                     backgroundImage: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=800",
                     flight: null,
                     hotel: { name: "Four Points by Sheraton Bangkok, Sukhumvit 22", status: "confirmed", note: "Night 2 of 2", bookedBy: null, mapsUrl: "maps.google.com/?q=Four+Points+by+Sheraton+Bangkok+Sukhumvit+22" },
                     drive: null,
                     activities: [
-                        { time: "08:15–08:30", text: "Breakfast at the hotel, then head to MRT Sanam Chai, Exit 5", subNote: "Follow the route towards Rajini Pier", needsBooking: false },
-                        { time: "09:00", text: "GetYourGuide riverside walking tour — MRT Sanam Chai, Exit 5", subNote: "Stops: Wat Prayurawongsawat → Santacruz Church → Kudi Chin community → Wat Kalayanamitr → Wat Arun (outside) → Wichai Prasit Fort → Kian Un Keng Shrine → ends at Pak Khlong Talat Flower Market. Confirm expected finish time.", needsBooking: true, mapsUrl: "maps.google.com/?q=MRT+Sanam+Chai+Station+Exit+5" },
-                        { time: "After tour", text: "Pak Khlong Talat Flower Market + remaining temples", subNote: "If you skipped the Grand Palace & Wat Phra Kaew yesterday, prioritise them today. If you missed Wat Pho, visit before closing.", needsBooking: false, mapsUrl: "maps.google.com/?q=Pak+Khlong+Talat+Bangkok" },
-                        { time: "Afternoon", text: "Hotel break — rest & freshen up", subNote: "Four Points Sukhumvit 22", needsBooking: false },
-                        { time: "Sunset", text: "Rooftop drinks", subNote: "Choose one: ABar Rooftop (closest to hotel) · Octave Rooftop (panoramic) · The Speakeasy Rooftop (intimate)", needsBooking: false, mapsUrl: "maps.google.com/?q=Octave+Rooftop+Lounge+Bangkok" },
-                        { time: "Late evening", text: "Nana Plaza, Sukhumvit Soi 4", subNote: "Bangkok nightlife, then back to the hotel", needsBooking: false, mapsUrl: "maps.google.com/?q=Nana+Plaza+Bangkok" }
+                        { time: "09:00–11:30", text: "Guided riverside walking tour — MRT Sanam Chai, Exit 5", subNote: "Wat Prayurawongsawat → Santa Cruz Church → Kudi Chin → Wat Kalayanamitr → Wat Arun views → Wichai Prasit Fort → Kian Un Keng Shrine → Flower Market. Reconfirm meeting point & start time on Saturday; arrive 15–20 min early.", needsBooking: true, mapsUrl: "maps.google.com/?q=MRT+Sanam+Chai+Station+Exit+5" },
+                        { time: "11:30–12:00", text: "Pak Khlong Talat Flower Market", subNote: "", needsBooking: false, mapsUrl: "maps.google.com/?q=Pak+Khlong+Talat+Bangkok" },
+                        { time: "12:00–13:00", text: "Lunch by the river — Supanniga Eating Room Tha Tien", subNote: "Reserve and request a Wat Arun view table · alternative: The Deck by Arun Residence", needsBooking: true, mapsUrl: "maps.google.com/?q=Supanniga+Eating+Room+Tha+Tien" },
+                        { time: "13:00–15:00", text: "Wat Arun", subNote: "Ferry from Tha Tien Pier (N8) to Wat Arun Pier — a few minutes, allow for queues · ~THB 200 per adult · check opening hours", needsBooking: false, mapsUrl: "maps.google.com/?q=Wat+Arun+Bangkok" },
+                        { time: "15:00", text: "Hotel break & free time", subNote: "Four Points Sukhumvit 22", needsBooking: false },
+                        { time: "Evening", text: "Rooftop drinks, then relaxed dinner near the hotel", subNote: "Choose one: Octave Rooftop · ABar Rooftop · The Speakeasy. If you skipped Chinatown yesterday, go to Yaowarat tonight.", needsBooking: false, mapsUrl: "maps.google.com/?q=Octave+Rooftop+Lounge+Bangkok" }
                     ],
                     meals: {
                         breakfast: { status: "included", note: "At the hotel", restaurants: [] },
-                        lunch: { status: "options", note: "Depending on where the tour leaves you", restaurants: [
-                            { name: "Supanniga Eating Room (Tha Tien)", desc: "Thai home cooking · river views", rating: "4.4★", mapsUrl: "maps.google.com/?q=Supanniga+Eating+Room+Tha+Tien" },
-                            { name: "The Deck", desc: "Riverside terrace facing Wat Arun", rating: "4.3★", mapsUrl: "maps.google.com/?q=The+Deck+Arun+Residence+Bangkok" },
-                            { name: "Chom Arun", desc: "Riverside Thai with Wat Arun views", rating: "4.3★", mapsUrl: "maps.google.com/?q=Chom+Arun+Bangkok" }
+                        lunch: { status: "options", note: "Book Supanniga — ask for a river-view table", restaurants: [
+                            { name: "Supanniga Eating Room (Tha Tien)", desc: "Preferred · regional Thai, stylish riverside · supannigaeatingroom.com", rating: "4.4★", mapsUrl: "maps.google.com/?q=Supanniga+Eating+Room+Tha+Tien" },
+                            { name: "The Deck by Arun Residence", desc: "Alternative · directly opposite Wat Arun · arunresidence.com", rating: "4.3★", mapsUrl: "maps.google.com/?q=The+Deck+Arun+Residence+Bangkok" }
                         ]},
-                        dinner: { status: "flexible", note: "Around Sukhumvit / rooftop area", restaurants: [] }
+                        dinner: { status: "flexible", note: "Relaxed, near the hotel", restaurants: [] }
                     },
                     route: null,
                     warnings: [
-                        "⚠️ Grand Palace last entry is around 15:30 — if you need it today, go straight after the tour",
-                        "⚠️ Bangkok traffic is brutal on Sukhumvit at sunset — use the BTS/MRT where possible, Grab adds time"
+                        "⚠️ Wat Arun's steep central prang steps need covered shoulders & knees — sarongs available to rent",
+                        "⚠️ Bangkok traffic is brutal on Sukhumvit at sunset — use BTS/MRT where possible"
                     ],
                     gems: [
-                        "💡 In Kudi Chin, try khanom farang kudi chin — a Portuguese-style cake sold by the old family bakeries",
-                        "💡 The Flower Market is most alive early morning and late night — great photos of marigold garlands"
+                        "💡 In Kudi Chin, try khanom farang kudi chin — a Portuguese-style cake from the old family bakeries",
+                        "💡 Wat Arun is at its best from the river side — keep a few minutes for photos from the ferry"
                     ]
                 },
                 {
                     dayNumber: 3, date: "Nov 2", dayOfWeek: "Mon",
                     title: "Fly to Chiang Mai · Doi Suthep, Old City & Muay Thai", location: "Chiang Mai, Thailand",
                     backgroundImage: "https://images.unsplash.com/photo-1528181304800-259b08848526?w=800",
-                    flight: { airline: "TBC", from: "DMK", to: "CNX", departTime: "09:05", arriveTime: "10:20", terminal: "Don Mueang (DMK)" },
+                    flight: { airline: "TBC (confirmed)", from: "DMK", to: "CNX", departTime: "09:05", arriveTime: "10:20", terminal: "Don Mueang (DMK)" },
                     hotel: {
                         name: "Four Points by Sheraton Bangkok, Sukhumvit 22", status: "confirmed", note: "Early checkout before the airport transfer", bookedBy: null, mapsUrl: "maps.google.com/?q=Four+Points+by+Sheraton+Bangkok+Sukhumvit+22",
                         altHotel: { name: "Baan Huenphen, Chiang Mai Old City", status: "confirmed", note: "Check-in ~14:30 (Nov 2 – 4)", mapsUrl: "maps.google.com/?q=Baan+Huenphen+Chiang+Mai" }
@@ -1471,7 +1476,7 @@
                         { time: "15:30–17:00", text: "Old City stroll — Wat Chedi Luang & Wat Phra Singh", subNote: "Relaxed pace · Wat Phra Singh if time permits · lanes, cafés, Lanna architecture", needsBooking: false, mapsUrl: "maps.google.com/?q=Wat+Chedi+Luang+Chiang+Mai" },
                         { time: "17:15–18:15", text: "Sunset drinks at SALT & FIRE Rooftop Bar", subNote: "", needsBooking: false, mapsUrl: "maps.google.com/?q=SALT+%26+FIRE+Rooftop+Bar+Chiang+Mai" },
                         { time: "18:30–20:00", text: "Dinner in the Old City", subNote: "", needsBooking: false },
-                        { time: "21:00–23:30", text: "Muay Thai at Thapae Boxing Stadium", subNote: "Tickets & schedule: muaythaistadium.com/thapae-stadium", needsBooking: true, mapsUrl: "maps.google.com/?q=Thapae+Boxing+Stadium+Chiang+Mai" }
+                        { time: "21:00–23:00", text: "Muay Thai at Thapae Boxing Stadium", subNote: "Subject to fight schedule — check exact start time & book in advance · muaythaistadium.com/thapae-stadium", needsBooking: true, mapsUrl: "maps.google.com/?q=Thapae+Boxing+Stadium+Chiang+Mai" }
                     ],
                     meals: {
                         breakfast: { status: "flexible", note: "Grab something at DMK", restaurants: [] },
@@ -1502,7 +1507,7 @@
                     hotel: { name: "Baan Huenphen, Chiang Mai Old City", status: "confirmed", note: "Night 2 of 2", bookedBy: null, mapsUrl: "maps.google.com/?q=Baan+Huenphen+Chiang+Mai" },
                     drive: { from: "Chiang Mai", to: "Doi Inthanon", duration: "~1h45 each way", distance: "~110 km" },
                     activities: [
-                        { time: "08:30", text: "Private driver pickup — full day at Doi Inthanon", subNote: "", needsBooking: true },
+                        { time: "08:00–08:30", text: "Depart with private driver — full day at Doi Inthanon", subNote: "", needsBooking: true },
                         { time: "10:15", text: "Thailand's highest point & Ang Ka Nature Trail", subNote: "Short, easy boardwalk through cloud forest", needsBooking: false, mapsUrl: "maps.google.com/?q=Doi+Inthanon+Summit" },
                         { time: "11:15", text: "King & Queen Pagodas (Naphamethinidon & Naphaphonphumisiri)", subNote: "Gardens and views — national park fee payable at the gate", needsBooking: false, mapsUrl: "maps.google.com/?q=Phra+Mahathat+Naphamethanidon" },
                         { time: "12:30", text: "Lunch in the park", subNote: "", needsBooking: false },
@@ -1526,7 +1531,7 @@
                     gems: [
                         "💡 Go to the summit first, before clouds roll in, then work your way down to the waterfalls",
                         "💡 The Hmong market at the foot of the pagodas sells strawberries and local coffee",
-                        "🤔 Optional ideas still to decide (2 or 3 Nov): King Kong Zipline or Elephant Nature Park — check transfers, timings and welfare practices before adding"
+                        "🤔 Still to decide: King Kong Zipline or Elephant Nature Park — either would need to replace or shorten another activity"
                     ]
                 },
                 {
@@ -1563,32 +1568,31 @@
                 },
                 {
                     dayNumber: 6, date: "Nov 5", dayOfWeek: "Thu",
-                    title: "White Temple, Blue Temple & Black House", location: "Chiang Rai, Thailand",
+                    title: "White Temple, Blue Temple & Riverside Spa", location: "Chiang Rai, Thailand",
                     backgroundImage: "https://images.unsplash.com/photo-1528181304800-259b08848526?w=800",
                     flight: null,
                     hotel: { name: "Le Méridien Chiang Rai Resort", status: "confirmed", note: "Night 2 of 2", bookedBy: null, mapsUrl: "maps.google.com/?q=Le+Meridien+Chiang+Rai+Resort" },
                     drive: null,
                     activities: [
-                        { time: "08:30", text: "Private driver pickup", subNote: "", needsBooking: true },
-                        { time: "08:30–10:00", text: "Wat Rong Khun (White Temple)", subNote: "Arrive early to beat the crowds", needsBooking: false, mapsUrl: "maps.google.com/?q=Wat+Rong+Khun" },
+                        { time: "08:30–10:00", text: "Wat Rong Khun (White Temple)", subNote: "Private driver for the day (or Grab — TBD) · arrive early to beat the crowds", needsBooking: true, mapsUrl: "maps.google.com/?q=Wat+Rong+Khun" },
                         { time: "10:15–11:00", text: "Wat Rong Suea Ten (Blue Temple)", subNote: "", needsBooking: false, mapsUrl: "maps.google.com/?q=Wat+Rong+Suea+Ten" },
-                        { time: "11:15–12:15", text: "Baan Dam Museum (Black House)", subNote: "", needsBooking: false, mapsUrl: "maps.google.com/?q=Baan+Dam+Museum" },
-                        { time: "12:15–13:15", text: "Lunch locally", subNote: "", needsBooking: false },
-                        { time: "14:00–16:00", text: "Choui Fong Tea Plantation (optional)", subNote: "Views, tea & café stop · confirm drive time & opening hours with driver", needsBooking: false, mapsUrl: "maps.google.com/?q=Choui+Fong+Tea+Plantation" },
-                        { time: "Evening", text: "Resort dinner, Night Bazaar or Clock Tower stroll", subNote: "Keep flexible depending on the tea plantation", needsBooking: false, mapsUrl: "maps.google.com/?q=Chiang+Rai+Clock+Tower" }
+                        { time: "11:15–12:15", text: "Baan Dam Museum (Black House) — optional", subNote: "", needsBooking: false, mapsUrl: "maps.google.com/?q=Baan+Dam+Museum" },
+                        { time: "12:15–13:15", text: "Lunch (saved spot)", subNote: "Pin from your list", needsBooking: false, mapsUrl: "maps.app.goo.gl/Juy3gyFnQpijVkhKA" },
+                        { time: "13:15", text: "Spa at Riva Vista — walk from lunch", subNote: "Then walk back to Le Méridien", needsBooking: true, mapsUrl: "maps.app.goo.gl/6T8DyNDwPc82ecyN9" },
+                        { time: "14:00–16:00", text: "Choui Fong Tea Plantation — optional", subNote: "Only if you want a fuller day and the drive works (~1h north) — it conflicts with the spa", needsBooking: false, mapsUrl: "maps.google.com/?q=Choui+Fong+Tea+Plantation" },
+                        { time: "Evening", text: "Relax at Le Méridien, or Night Bazaar & Clock Tower in town", subNote: "", needsBooking: false, mapsUrl: "maps.google.com/?q=Chiang+Rai+Clock+Tower" }
                     ],
                     meals: {
                         breakfast: { status: "included", note: "At the resort (confirm)", restaurants: [] },
-                        lunch: { status: "options", note: "", restaurants: [
-                            { name: "Lu Lam Restaurant", desc: "Local Thai near the Black House", rating: "4.3★", mapsUrl: "maps.google.com/?q=Lu+Lam+Restaurant+Chiang+Rai" },
-                            { name: "Khao Soi Phor Jai", desc: "Famous khao soi in town", rating: "4.4★", mapsUrl: "maps.google.com/?q=Khao+Soi+Phor+Jai+Chiang+Rai" }
+                        lunch: { status: "confirmed", note: "Saved spot near Riva Vista", restaurants: [
+                            { name: "Lunch spot (your saved pin)", desc: "Walking distance to the Riva Vista spa", rating: "", mapsUrl: "maps.app.goo.gl/Juy3gyFnQpijVkhKA" }
                         ]},
                         dinner: { status: "flexible", note: "Resort, Night Bazaar or town", restaurants: [] }
                     },
                     route: "www.google.com/maps/dir/Le+Meridien+Chiang+Rai+Resort/Wat+Rong+Khun/Wat+Rong+Suea+Ten/Baan+Dam+Museum/Le+Meridien+Chiang+Rai+Resort",
                     warnings: [
                         "⚠️ White Temple: no shoes inside, no photos inside the ubosot, shoulders & knees covered",
-                        "⚠️ Choui Fong is ~1h north — only worth it if you want a slow afternoon"
+                        "⚠️ Decide driver vs Grab in advance — Grab exists in Chiang Rai but cars near the White Temple can be scarce"
                     ],
                     gems: [
                         "💡 Look closely at the White Temple murals — Superman, Neo and Michael Jackson are hidden in them",
@@ -1597,66 +1601,66 @@
                 },
                 {
                     dayNumber: 7, date: "Nov 6", dayOfWeek: "Fri",
-                    title: "Fly to Bangkok · ICONSIAM & Rooftops", location: "Bangkok, Thailand",
+                    title: "Fly to Bangkok · Easy Afternoon & Rooftops", location: "Bangkok, Thailand",
                     backgroundImage: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=800",
-                    flight: { airline: "TBC", from: "CEI", to: "BKK", departTime: "10:25", arriveTime: "11:45", terminal: "Confirm Bangkok airport (DMK or BKK)" },
+                    flight: { airline: "TBC (confirmed)", from: "CEI", to: "BKK", departTime: "10:25", arriveTime: "11:45", terminal: "Confirm Bangkok airport (DMK or BKK)" },
                     hotel: {
                         name: "Le Méridien Chiang Rai Resort", status: "confirmed", note: "Checkout · leave ~08:30–08:45", bookedBy: null, mapsUrl: "maps.google.com/?q=Le+Meridien+Chiang+Rai+Resort",
                         altHotel: { name: "Four Points by Sheraton Bangkok, Sukhumvit 22", status: "confirmed", note: "Check-in / drop luggage if room not ready (Nov 6 – 8)", mapsUrl: "maps.google.com/?q=Four+Points+by+Sheraton+Bangkok+Sukhumvit+22" }
                     },
                     drive: null,
                     activities: [
-                        { time: "08:30–08:45", text: "Breakfast, check out & airport transfer", subNote: "Flight CEI → Bangkok 10:25–11:45", needsBooking: true },
-                        { time: "12:45", text: "Hotel — drop luggage at Four Points Sukhumvit 22", subNote: "", needsBooking: false },
-                        { time: "13:30–17:00", text: "ICONSIAM — SookSiam, shopping & riverfront", subNote: "SookSiam for regional Thai food · air-conditioned break · walk along the Chao Phraya", needsBooking: false, mapsUrl: "maps.google.com/?q=ICONSIAM+Bangkok" },
-                        { time: "Evening", text: "Rooftop drinks, then dinner", subNote: "Choose one: Octave Rooftop · ABar Rooftop · The Speakeasy Rooftop", needsBooking: false, mapsUrl: "maps.google.com/?q=ABar+Rooftop+Bangkok" }
+                        { time: "08:30–08:45", text: "Leave the resort for Chiang Rai Airport", subNote: "Reconfirm the airport transfer the day before · flight CEI → Bangkok 10:25–11:45", needsBooking: true },
+                        { time: "12:45", text: "Transfer to Four Points Sukhumvit 22 · drop luggage or check in", subNote: "", needsBooking: false },
+                        { time: "Afternoon", text: "Keep it flexible: hotel pool, or Emporium · EmQuartier · EmSphere", subNote: "All on Sukhumvit, close to the hotel", needsBooking: false, mapsUrl: "maps.google.com/?q=EmQuartier+Bangkok" },
+                        { time: "Afternoon", text: "Alternative: ICONSIAM riverside shopping", subNote: "Allow time for the journey · SookSiam for regional Thai food", needsBooking: false, mapsUrl: "maps.google.com/?q=ICONSIAM+Bangkok" },
+                        { time: "Evening", text: "Rooftop drink & relaxed dinner", subNote: "Octave · ABar · The Speakeasy", needsBooking: false, mapsUrl: "maps.google.com/?q=ABar+Rooftop+Bangkok" },
+                        { time: "Evening", text: "Rajadamnern Stadium — Muay Thai (optional)", subNote: "Check fight schedule — historic stadium, fights most evenings", needsBooking: false, mapsUrl: "maps.google.com/?q=Rajadamnern+Stadium+Bangkok" }
                     ],
                     meals: {
                         breakfast: { status: "included", note: "At the resort", restaurants: [] },
-                        lunch: { status: "options", note: "", restaurants: [
-                            { name: "SookSiam (ICONSIAM G floor)", desc: "Indoor floating market · street food from all regions", rating: "4.5★", mapsUrl: "maps.google.com/?q=SookSiam+ICONSIAM" }
-                        ]},
-                        dinner: { status: "flexible", note: "City or near the hotel after rooftop drinks", restaurants: [] }
+                        lunch: { status: "flexible", note: "Near the hotel or in the malls", restaurants: [] },
+                        dinner: { status: "flexible", note: "Relaxed, after rooftop drinks", restaurants: [] }
                     },
                     route: null,
                     warnings: [
                         "⚠️ Confirm whether the flight lands at DMK or BKK — it changes the transfer time",
-                        "⚠️ Friday evening traffic to ICONSIAM is heavy — the free shuttle boat from Saphan Taksin pier is faster"
+                        "⚠️ Friday evening traffic is heavy — use the BTS on Sukhumvit"
                     ],
                     gems: [
-                        "💡 Take the BTS to Saphan Taksin, then the free ICONSIAM shuttle boat across the river",
-                        "💡 ICONSIAM's riverside terrace has a fountain show in the evenings"
+                        "💡 EmQuartier's top-floor garden walkway has good skyline views and plenty of food",
+                        "💡 Rajadamnern is Bangkok's oldest Muay Thai stadium — ringside is pricey, the upper tiers have more atmosphere"
                     ]
                 },
                 {
                     dayNumber: 8, date: "Nov 7", dayOfWeek: "Sat",
-                    title: "Chatuchak, Shopping & Final Evening", location: "Bangkok, Thailand",
+                    title: "Ancient Siam (Muang Boran) & Final Evening", location: "Samut Prakan / Bangkok, Thailand",
                     backgroundImage: "https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=800",
                     flight: null,
                     hotel: { name: "Four Points by Sheraton Bangkok, Sukhumvit 22", status: "confirmed", note: "Final night · pack for early flight", bookedBy: null, mapsUrl: "maps.google.com/?q=Four+Points+by+Sheraton+Bangkok+Sukhumvit+22" },
-                    drive: null,
+                    drive: { from: "Bangkok", to: "Ancient Siam, Samut Prakan", duration: "45–75 min each way", distance: "~35 km" },
                     activities: [
-                        { time: "09:00–12:30", text: "Chatuchak Weekend Market", subNote: "Clothing, handicrafts, souvenirs, homeware, snacks — go early while it's cooler", needsBooking: false, mapsUrl: "maps.google.com/?q=Chatuchak+Weekend+Market" },
-                        { time: "12:30", text: "Lunch at Chatuchak or Ari", subNote: "", needsBooking: false },
-                        { time: "Afternoon", text: "Relax (pool, massage) or Sukhumvit malls", subNote: "Emporium · EmQuartier · EmSphere", needsBooking: false, mapsUrl: "maps.google.com/?q=EmQuartier+Bangkok" },
-                        { time: "Evening", text: "Final rooftop drink & Thai dinner", subNote: "Keep it relaxed — pack and prepare for the early flight", needsBooking: false }
+                        { time: "08:30–09:00", text: "Depart Bangkok", subNote: "Grab or private driver · 45–75 min depending on traffic", needsBooking: false },
+                        { time: "10:00–15:30", text: "Explore Ancient Siam (Muang Boran)", subNote: "Huge open-air museum of Thai landmarks · plan 4–5 h · rent an electric cart or bike · listed hours 09:00–19:00, foreign adult ~THB 800 — verify before going", needsBooking: false, mapsUrl: "maps.google.com/?q=Ancient+Siam+Muang+Boran" },
+                        { time: "15:30–17:00", text: "Return to Bangkok", subNote: "", needsBooking: false },
+                        { time: "Evening", text: "Final dinner & rooftop drink", subNote: "Back to the hotel and pack for the early flight", needsBooking: false }
                     ],
                     meals: {
                         breakfast: { status: "included", note: "At the hotel", restaurants: [] },
-                        lunch: { status: "flexible", note: "Chatuchak food stalls or Ari cafés", restaurants: [] },
+                        lunch: { status: "flexible", note: "Restaurants and food stalls inside Ancient Siam", restaurants: [] },
                         dinner: { status: "options", note: "Farewell Thai dinner", restaurants: [
                             { name: "Baan Ice", desc: "Southern Thai home cooking · Sukhumvit", rating: "4.4★", mapsUrl: "maps.google.com/?q=Baan+Ice+Bangkok" },
                             { name: "Err Urban Rustic Thai", desc: "Thai drinking food & craft cocktails", rating: "4.4★", mapsUrl: "maps.google.com/?q=Err+Urban+Rustic+Thai+Bangkok" }
                         ]}
                     },
-                    route: null,
+                    route: "www.google.com/maps/dir/Four+Points+by+Sheraton+Bangkok+Sukhumvit+22/Ancient+Siam+Muang+Boran",
                     warnings: [
-                        "⚠️ Chatuchak gets very hot by midday — bring water, cash and a small bag",
-                        "⚠️ Book tomorrow's airport transfer tonight at the latest"
+                        "⚠️ Ancient Siam is very spread out and exposed — sun hat, sunscreen and water; don't try to walk it all",
+                        "⚠️ Book tomorrow's early airport transfer tonight at the latest"
                     ],
                     gems: [
-                        "💡 Coconut ice cream served in a coconut shell at Chatuchak is a must",
-                        "💡 Ari neighbourhood is full of good cafés — a calm contrast to the market"
+                        "💡 Don't miss the Sanphet Prasat Palace replica and the floating market section inside the park",
+                        "💡 Arrive close to opening — mornings are cooler and quieter"
                     ]
                 },
                 {
@@ -1667,7 +1671,7 @@
                     hotel: { name: "Four Points by Sheraton Bangkok, Sukhumvit 22", status: "confirmed", note: "Early checkout", bookedBy: null, mapsUrl: "maps.google.com/?q=Four+Points+by+Sheraton+Bangkok+Sukhumvit+22" },
                     drive: null,
                     activities: [
-                        { time: "Early morning", text: "Check out & pre-arranged airport transfer", subNote: "Allow plenty of time for the early flight to Dubai", needsBooking: true }
+                        { time: "Early morning", text: "Check out & pre-arranged airport transfer", subNote: "Before leaving: reconfirm departure airport, terminal & check-in time · allow a generous buffer", needsBooking: true }
                     ],
                     meals: {
                         breakfast: { status: "flexible", note: "Airport", restaurants: [] },
@@ -1697,7 +1701,7 @@
             5: { lat: 19.9105, lon: 99.8406, isoDate: "2026-11-04" },
             6: { lat: 19.9105, lon: 99.8406, isoDate: "2026-11-05" },
             7: { lat: 13.7563, lon: 100.5018, isoDate: "2026-11-06" },
-            8: { lat: 13.7563, lon: 100.5018, isoDate: "2026-11-07" },
+            8: { lat: 13.5411, lon: 100.6197, isoDate: "2026-11-07" },
             9: { lat: 13.7563, lon: 100.5018, isoDate: "2026-11-08" },
         };
 
@@ -1710,7 +1714,7 @@
                 { cat: "✈️ Flights",               amount: 0, note: "2 pax · DXB↔BKK + 2 domestic" },
                 { cat: "🏨 Accommodation",           amount: 0, note: "8 nights · 3 hotels" },
                 { cat: "🚗 Private Drivers",         amount: 0, note: "Doi Suthep · Doi Inthanon · Mae Kampong · Chiang Rai" },
-                { cat: "🗺️ Activities & Tours",      amount: 0, note: "GetYourGuide tours, temples, Muay Thai" },
+                { cat: "🗺️ Activities & Tours",      amount: 0, note: "Riverside tour, temples (~THB 1,000 pp), Muay Thai, Ancient Siam (~THB 800 pp), massage & spa" },
                 { cat: "🍽️ Food & Drinks",           amount: 0, note: "Meals & rooftop bars" },
                 { cat: "💡 Tips, Souvenirs & Misc",  amount: 0, note: "Grab, markets, massages" },
             ],
